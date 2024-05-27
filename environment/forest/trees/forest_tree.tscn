@@ -33,6 +33,7 @@ y_sort_enabled = true
 position = Vector2(353, 131)
 
 [node name="collision" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(-0.5, -4)
 shape = SubResource("CircleShape2D_785ak")
@@ -43,6 +44,7 @@ position = Vector2(0, -6)
 texture = ExtResource("1_fpte0")
 
 [node name="trunk_shadow" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_yrn7o")
 position = Vector2(0, -5)
 texture = ExtResource("3_io0x5")
@@ -60,6 +62,7 @@ transparency = 0.45
 tween_speed = 0.3
 
 [node name="player_collider" type="Area2D" parent="leaves"]
+visible = false
 collision_mask = 2
 
 [node name="shape" type="CollisionShape2D" parent="leaves/player_collider"]

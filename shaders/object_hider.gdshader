@@ -6,8 +6,8 @@ global uniform vec2 player_position;
 uniform float intensity: hint_range(0.0, 1.0, 0.05) = 0.0;
 
 group_uniforms player;
-uniform float player_influence: hint_range(0.0, 1.0, 0.05) = 0.15;
-uniform float radius: hint_range(0.0, 1.0, 0.05) = 0.15;
+uniform float player_influence: hint_range(0.0, 1.0, 0.05) = 0.60;
+uniform float radius: hint_range(0.0, 1.0, 0.05) = 0.05;
 
 // --- Constants --- //
 const mat4 THRESHOLD_MATRIX = mat4(

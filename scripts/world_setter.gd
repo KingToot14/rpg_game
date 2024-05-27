@@ -12,4 +12,5 @@ func _ready():
 	world_2d = viewport.world_2d
 	
 	# Remove visibility flags from main viewport
-	viewport.set_canvas_cull_mask_bit(visibility_layer - 1, false)
+	if visibility_layer > 0:
+		viewport.set_canvas_cull_mask_bit(visibility_layer - 1, false)
