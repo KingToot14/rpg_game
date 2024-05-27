@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://x3sh11ejtmsd"]
+
+[ext_resource type="Texture2D" uid="uid://d6smshem72ig" path="res://environment/forest/trees/tree_trunk.png" id="1_fpte0"]
+[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
+[ext_resource type="Texture2D" uid="uid://v6nu604f644m" path="res://environment/forest/trees/trunk_shadow.png" id="3_io0x5"]
+[ext_resource type="Script" path="res://scripts/object_revealer.gd" id="4_jcd0y"]
+[ext_resource type="Texture2D" uid="uid://g3yg1avfni52" path="res://environment/forest/trees/tree_top.png" id="5_laa4x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
+radius = 12.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrn7o"]
+resource_local_to_scene = true
+shader = ExtResource("2_tet37")
+shader_parameter/intensity = 0.0
+shader_parameter/player_influence = 0.15
+shader_parameter/radius = 0.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q41kw"]
+resource_local_to_scene = true
+shader = ExtResource("2_tet37")
+shader_parameter/intensity = 0.0
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btqaj"]
+radius = 31.0
+height = 80.0
+
+[node name="forest_tree" type="StaticBody2D"]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(353, 131)
+
+[node name="collision" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-0.5, -4)
+shape = SubResource("CircleShape2D_785ak")
+debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[node name="trunk" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_fpte0")
+
+[node name="trunk_shadow" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yrn7o")
+position = Vector2(0, -5)
+texture = ExtResource("3_io0x5")
+script = ExtResource("4_jcd0y")
+transparency = 1.0
+tween_speed = 0.3
+
+[node name="leaves" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_q41kw")
+position = Vector2(0, -38)
+texture = ExtResource("5_laa4x")
+script = ExtResource("4_jcd0y")
+transparency = 0.45
+tween_speed = 0.3
+
+[node name="player_collider" type="Area2D" parent="leaves"]
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="leaves/player_collider"]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_btqaj")
+debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[connection signal="body_entered" from="leaves/player_collider" to="trunk_shadow" method="set_visibility_state" binds= [false]]
+[connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]
+[connection signal="body_exited" from="leaves/player_collider" to="trunk_shadow" method="set_visibility_state" binds= [true]]
+[connection signal="body_exited" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [true]]

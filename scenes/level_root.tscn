@@ -1,15 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=22 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="1_r7g6b"]
+[ext_resource type="Shader" path="res://environment/grass/grass_wind.gdshader" id="2_6qsyb"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/grass/grass_tiles.tres" id="2_p5ycs"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_grass.tres" id="3_1imi4"]
 [ext_resource type="Shader" path="res://environment/grass/grass.gdshader" id="3_ya7am"]
-[ext_resource type="Texture2D" uid="uid://d6smshem72ig" path="res://environment/forest/tree_trunk.png" id="4_sqol2"]
-[ext_resource type="Texture2D" uid="uid://g3yg1avfni52" path="res://environment/forest/tree_top.png" id="5_1os4c"]
-[ext_resource type="Texture2D" uid="uid://v6nu604f644m" path="res://environment/forest/trunk_shadow.png" id="6_fn2ob"]
-[ext_resource type="Script" path="res://scripts/object_revealer.gd" id="7_p5yly"]
+[ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="6_ud6r8"]
 [ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="8_7p67f"]
-[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="8_8bjgy"]
 [ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/player.png" id="8_8rjbx"]
 [ext_resource type="Shader" path="res://environment/grass/grass_cover.gdshader" id="11_ifdd2"]
 
@@ -20,9 +17,17 @@ frequency = 0.1
 height = 1
 noise = SubResource("FastNoiseLite_qxnm8")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgccq"]
+shader = ExtResource("2_6qsyb")
+shader_parameter/wind_speed = 0.5
+shader_parameter/noise_size = Vector2(512, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_0ob3s")
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0ai87"]
 frequency = 0.0145
-fractal_type = 0
+fractal_octaves = 3
+fractal_lacunarity = 2.53
+fractal_gain = 0.305
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_koqp5"]
 width = 480
@@ -53,25 +58,6 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_0ob3s")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kyubb"]
 viewport_path = NodePath("environment/grass_viewport")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
-radius = 12.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrn7o"]
-shader = ExtResource("8_8bjgy")
-shader_parameter/intensity = 0.0
-shader_parameter/player_influence = 0.15
-shader_parameter/radius = 0.15
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q41kw"]
-shader = ExtResource("8_8bjgy")
-shader_parameter/intensity = 0.0
-shader_parameter/player_influence = 0.6
-shader_parameter/radius = 0.05
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btqaj"]
-radius = 31.0
-height = 80.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uwv52"]
 viewport_path = NodePath("environment/grass_viewport")
@@ -105,6 +91,7 @@ script = ExtResource("1_r7g6b")
 [node name="long_grass_tilemap" type="TileMap" parent="environment/grass_viewport"]
 visibility_layer = 2
 texture_filter = 1
+material = SubResource("ShaderMaterial_wgccq")
 position = Vector2(0, 5)
 rotation = -0.000235103
 tile_set = ExtResource("2_p5ycs")
@@ -123,46 +110,40 @@ material = SubResource("ShaderMaterial_ellcd")
 position = Vector2(240, 135)
 texture = SubResource("ViewportTexture_kyubb")
 
-[node name="forest_tree" type="StaticBody2D" parent="environment"]
-z_index = 100
-y_sort_enabled = true
-position = Vector2(353, 131)
+[node name="forest_tree" parent="environment" instance=ExtResource("6_ud6r8")]
 
-[node name="collision" type="CollisionShape2D" parent="environment/forest_tree"]
-z_index = 1
-position = Vector2(-0.5, -4)
-shape = SubResource("CircleShape2D_785ak")
-debug_color = Color(0, 0.596078, 0.701961, 0)
+[node name="forest_tree2" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(280, 54)
 
-[node name="trunk" type="Sprite2D" parent="environment/forest_tree"]
-position = Vector2(0, -6)
-texture = ExtResource("4_sqol2")
+[node name="forest_tree3" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(343, 69)
 
-[node name="trunk_shadow" type="Sprite2D" parent="environment/forest_tree"]
-material = SubResource("ShaderMaterial_yrn7o")
-position = Vector2(0, -5)
-texture = ExtResource("6_fn2ob")
-script = ExtResource("7_p5yly")
-transparency = 1.0
-tween_speed = 0.3
+[node name="forest_tree4" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(422, 49)
 
-[node name="leaves" type="Sprite2D" parent="environment/forest_tree"]
-z_index = 10
-material = SubResource("ShaderMaterial_q41kw")
-position = Vector2(0, -38)
-texture = ExtResource("5_1os4c")
-script = ExtResource("7_p5yly")
-transparency = 0.45
-tween_speed = 0.3
+[node name="forest_tree5" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(403, 100)
 
-[node name="player_collider" type="Area2D" parent="environment/forest_tree/leaves"]
-collision_mask = 2
+[node name="forest_tree6" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(284, 111)
 
-[node name="shape" type="CollisionShape2D" parent="environment/forest_tree/leaves/player_collider"]
-position = Vector2(0, 2)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_btqaj")
-debug_color = Color(0, 0.596078, 0.701961, 0)
+[node name="forest_tree7" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(445, 141)
+
+[node name="forest_tree8" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(48, 213)
+
+[node name="forest_tree9" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(117, 229)
+
+[node name="forest_tree10" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(23, 259)
+
+[node name="forest_tree11" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(81, 272)
+
+[node name="forest_tree12" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(148, 259)
 
 [node name="player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("position_marker")]
 z_index = 100
@@ -185,8 +166,3 @@ shape = SubResource("CircleShape2D_l0mef")
 
 [node name="position_marker" type="Marker2D" parent="player"]
 position = Vector2(-1, -5)
-
-[connection signal="body_entered" from="environment/forest_tree/leaves/player_collider" to="environment/forest_tree/trunk_shadow" method="set_visibility_state" binds= [false]]
-[connection signal="body_entered" from="environment/forest_tree/leaves/player_collider" to="environment/forest_tree/leaves" method="set_visibility_state" binds= [false]]
-[connection signal="body_exited" from="environment/forest_tree/leaves/player_collider" to="environment/forest_tree/trunk_shadow" method="set_visibility_state" binds= [true]]
-[connection signal="body_exited" from="environment/forest_tree/leaves/player_collider" to="environment/forest_tree/leaves" method="set_visibility_state" binds= [true]]
