@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
+uniform vec2 texture_size = vec2(480, 270);
+
 group_uniforms colors;
 uniform vec4 tip_color: source_color;
 uniform sampler2D side_gradient;
@@ -41,8 +43,7 @@ void fragment() {
 	// Hide roots
 	COLOR = mix(vec4(0.0), get_side_color(0.0), step(0.001, COLOR.g));
 	
-	// Small-scale wind
-	vec2 uv = round(UV / TEXTURE_PIXEL_SIZE - (UV - 0.5)) * TEXTURE_PIXEL_SIZE;
+	vec2 uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
 	
 	// Draw blade
 	for (float dist = 1.0; dist < MAX_GRASS_LENGTH; dist++) {

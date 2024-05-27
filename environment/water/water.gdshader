@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
+uniform vec2 texture_size = vec2(480, 270);
+
 group_uniforms reflections;
 uniform sampler2D reflection_texture: filter_nearest;
 uniform float reflection_intensity: hint_range(0.0, 1.0, 0.05) = 0.25;
@@ -43,7 +45,7 @@ float get_dirt(vec2 _uv) {
 }
 
 void fragment() {
-	vec2 uv = floor(UV / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE;
+	vec2 uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
 	uv -= vec2(0.0, COLOR.b * 255.0 * TEXTURE_PIXEL_SIZE.y);
 	
 	// Set Base Water Color
