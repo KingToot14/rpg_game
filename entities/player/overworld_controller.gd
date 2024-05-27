@@ -10,7 +10,7 @@ extends CharacterBody2D
 
 # --- Functions --- #
 func _process(delta) -> void:
-	velocity = get_input() * movement_speed
+	velocity = get_input().normalized() * movement_speed
 	move_and_slide()
 	
 	RenderingServer.global_shader_parameter_set('player_position', position_marker.global_position / overworld_size)

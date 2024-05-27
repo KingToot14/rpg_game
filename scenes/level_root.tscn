@@ -1,15 +1,17 @@
-[gd_scene load_steps=27 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=34 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Shader" path="res://environment/grass/grass_wind.gdshader" id="2_6qsyb"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/grass/grass_tiles.tres" id="2_p5ycs"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_grass.tres" id="3_1imi4"]
 [ext_resource type="Shader" path="res://environment/grass/grass.gdshader" id="3_ya7am"]
+[ext_resource type="Script" path="res://scripts/world_setter.gd" id="4_6xt3p"]
 [ext_resource type="TileSet" uid="uid://ciq6olswrcdfy" path="res://environment/water/water.tres" id="4_17t3f"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="6_ud6r8"]
 [ext_resource type="Shader" path="res://environment/water/water.gdshader" id="7_4j0ym"]
 [ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="8_7p67f"]
 [ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/player.png" id="8_8rjbx"]
 [ext_resource type="Shader" path="res://environment/grass/grass_cover.gdshader" id="11_ifdd2"]
+[ext_resource type="Script" path="res://scripts/reflection_texture.gd" id="12_hl60j"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qxnm8"]
 frequency = 0.1
@@ -63,25 +65,55 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_0ob3s")
 [sub_resource type="ViewportTexture" id="ViewportTexture_kyubb"]
 viewport_path = NodePath("environment/grass_viewport")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_l305r"]
-frequency = 0.0145
-fractal_type = 3
-fractal_octaves = 2
-fractal_lacunarity = 2.18
-fractal_gain = 0.305
-domain_warp_amplitude = 10.0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mu5cx"]
+frequency = 0.122
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_707g8"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_mu5cx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gs2do"]
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_icnh7"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_gs2do")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d3tve"]
+frequency = 0.0395
+fractal_octaves = 3
+fractal_lacunarity = 2.21
+domain_warp_type = 1
+domain_warp_amplitude = 5.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hdj20"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_l305r")
+noise = SubResource("FastNoiseLite_d3tve")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gnavs"]
+viewport_path = NodePath("environment/reflection_viewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybkr0"]
+resource_local_to_scene = true
 shader = ExtResource("7_4j0ym")
+shader_parameter/reflection_intensity = 0.25
+shader_parameter/reflection_texture = SubResource("ViewportTexture_gnavs")
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
-shader_parameter/dark_color = Color(0.364706, 0.729412, 0.909804, 1)
-shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
+shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_hdj20")
+shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/dirt_darkness = 0.05
+shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/wind_speed = -0.5
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_707g8")
+shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
+shader_parameter/foam_speed = -0.25
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_icnh7")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_u4t1i"]
 viewport_path = NodePath("environment/water_viewport")
@@ -99,7 +131,7 @@ shader_parameter/grass_texture = SubResource("ViewportTexture_uwv52")
 radius = 6.0
 
 [node name="level_root" type="Node2D"]
-visibility_layer = 3
+visibility_layer = 7
 y_sort_enabled = true
 
 [node name="environment" type="Node2D" parent="."]
@@ -112,7 +144,6 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 canvas_cull_mask = 4294966274
 size = Vector2i(480, 270)
-render_target_update_mode = 4
 
 [node name="long_grass_tilemap" type="TileMap" parent="environment/grass_viewport"]
 visibility_layer = 2
@@ -132,7 +163,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 canvas_cull_mask = 4294966274
 size = Vector2i(480, 270)
-render_target_update_mode = 4
+render_target_update_mode = 1
 
 [node name="water_tilemap" type="TileMap" parent="environment/water_viewport"]
 visibility_layer = 2
@@ -142,7 +173,16 @@ rotation = -0.000235103
 tile_set = ExtResource("4_17t3f")
 format = 2
 layer_0/z_index = 500
-layer_0/tile_data = PackedInt32Array(655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 720908, 0, 0, 655373, 0, 0, 720909, 0, 0, 655374, 0, 0, 720910, 0, 0, 655375, 0, 0, 720911, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 720912, 0, 0, 786448, 0, 0, 589836, 0, 0, 589837, 0, 0)
+layer_0/tile_data = PackedInt32Array(655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 720908, 0, 0, 655373, 0, 0, 720909, 0, 0, 655374, 0, 0, 720910, 0, 0, 655375, 0, 0, 720911, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 720912, 0, 0, 786448, 0, 0, 589836, 0, 0, 589837, 0, 0, 655376, 0, 0, 655377, 0, 0, 589841, 0, 0, 589840, 0, 0, 589842, 0, 0, 524306, 0, 0, 524305, 0, 0, 524304, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 524307, 0, 0, 589843, 0, 0, 589839, 0, 0, 655378, 0, 0, 720913, 0, 0, 655379, 0, 0, 720914, 0, 0, 655380, 0, 0, 655381, 0, 0, 589844, 0, 0, 524308, 0, 0, 524309, 0, 0, 589845, 0, 0, 589846, 0, 0, 524310, 0, 0, 524303, 0, 0, 589838, 0, 0, 524302, 0, 0)
+
+[node name="reflection_viewport" type="SubViewport" parent="environment"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966276
+size = Vector2i(480, 270)
+script = ExtResource("4_6xt3p")
+visibility_layer = 3
 
 [node name="grass_tilemap" type="TileMap" parent="environment"]
 position = Vector2(0, 5)
@@ -196,9 +236,10 @@ position = Vector2(81, 272)
 position = Vector2(148, 259)
 
 [node name="player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("position_marker")]
+visibility_layer = 5
 z_index = 100
 y_sort_enabled = true
-position = Vector2(143, 83)
+position = Vector2(212, 146)
 collision_layer = 3
 script = ExtResource("8_7p67f")
 movement_speed = 50.0
@@ -211,8 +252,22 @@ position = Vector2(0, -6)
 texture = ExtResource("8_8rjbx")
 
 [node name="collision" type="CollisionShape2D" parent="player"]
+visible = false
 position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_l0mef")
 
 [node name="position_marker" type="Marker2D" parent="player"]
+visible = false
 position = Vector2(-1, -5)
+
+[node name="bottom_marker" type="Marker2D" parent="player"]
+position = Vector2(0, 5)
+
+[node name="reflection" type="Sprite2D" parent="player" node_paths=PackedStringArray("bottom_pos", "sprites")]
+visibility_layer = 4
+position = Vector2(-212, -146)
+flip_v = true
+script = ExtResource("12_hl60j")
+image_size = Vector2(32, 32)
+bottom_pos = NodePath("../bottom_marker")
+sprites = [NodePath("../sprite")]

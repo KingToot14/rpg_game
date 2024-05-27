@@ -12,5 +12,5 @@ float get_noise(vec2 uv, vec2 texture_pixel_size, float offset) {
 }
 
 void fragment() {
-	COLOR.g += get_noise(UV, TEXTURE_PIXEL_SIZE, 0.05 * TIME * wind_speed) / 255.0;
+	COLOR.g += get_noise(UV, TEXTURE_PIXEL_SIZE, -0.05 * TIME * wind_speed) / 255.0;
 }

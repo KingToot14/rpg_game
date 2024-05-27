@@ -58,12 +58,16 @@ overworld_right={
 
 [layer_names]
 
+2d_render/layer_1="Default"
+2d_render/layer_2="Shader"
+2d_render/layer_3="Reflection"
 2d_physics/layer_1="Default"
 2d_physics/layer_2="Player"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
 
 [shader_globals]
 

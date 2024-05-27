@@ -42,8 +42,7 @@ void fragment() {
 	COLOR = mix(vec4(0.0), get_side_color(0.0), step(0.001, COLOR.g));
 	
 	// Small-scale wind
-	//vec2 uv = UV + vec2(0.0, TEXTURE_PIXEL_SIZE.y * get_noise(UV, TEXTURE_PIXEL_SIZE, 0.05 * TIME * wind_speed));
-	vec2 uv = UV;
+	vec2 uv = round(UV / TEXTURE_PIXEL_SIZE - (UV - 0.5)) * TEXTURE_PIXEL_SIZE;
 	
 	// Draw blade
 	for (float dist = 1.0; dist < MAX_GRASS_LENGTH; dist++) {
