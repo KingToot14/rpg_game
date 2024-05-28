@@ -26,7 +26,8 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://entities/": "orange",
 "res://environment/": "green",
-"res://scripts/": "blue"
+"res://scripts/": "blue",
+"res://shaders/": "pink"
 }
 
 [input]

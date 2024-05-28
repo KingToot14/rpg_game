@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=37 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Shader" path="res://environment/grass/grass_wind.gdshader" id="2_6qsyb"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/grass/grass_tiles.tres" id="2_p5ycs"]
@@ -10,6 +10,8 @@
 [ext_resource type="Shader" path="res://environment/water/water.gdshader" id="7_4j0ym"]
 [ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="8_7p67f"]
 [ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/player.png" id="8_8rjbx"]
+[ext_resource type="Texture2D" uid="uid://ca6hfd2re1j2o" path="res://environment/forest/plants/swirl_plant.png" id="9_d683x"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wind.gdshader" id="9_jr5lm"]
 [ext_resource type="Shader" path="res://environment/grass/grass_cover.gdshader" id="11_ifdd2"]
 [ext_resource type="Script" path="res://scripts/reflection_texture.gd" id="12_hl60j"]
 
@@ -120,6 +122,17 @@ shader_parameter/foam_noise = SubResource("NoiseTexture2D_icnh7")
 [sub_resource type="ViewportTexture" id="ViewportTexture_u4t1i"]
 viewport_path = NodePath("environment/water_viewport")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brpry"]
+resource_local_to_scene = true
+shader = ExtResource("9_jr5lm")
+shader_parameter/transparency = 0.0
+shader_parameter/amplitude = 0.5
+shader_parameter/vert_influence = 2.0
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_falloff = 1.0
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_uwv52"]
 viewport_path = NodePath("environment/grass_viewport")
 
@@ -175,7 +188,7 @@ rotation = -0.000235103
 tile_set = ExtResource("4_17t3f")
 format = 2
 layer_0/z_index = 500
-layer_0/tile_data = PackedInt32Array(655371, 0, 0, 720907, 0, 0, 655372, 0, 0, 720908, 0, 0, 655373, 0, 0, 720909, 0, 0, 655374, 0, 0, 720910, 0, 0, 655375, 0, 0, 720911, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 720912, 0, 0, 786448, 0, 0, 589836, 0, 0, 589837, 0, 0, 655376, 0, 0, 655377, 0, 0, 589841, 0, 0, 589840, 0, 0, 589842, 0, 0, 524306, 0, 0, 524305, 0, 0, 524304, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 524307, 0, 0, 589843, 0, 0, 589839, 0, 0, 655378, 0, 0, 720913, 0, 0, 655379, 0, 0, 720914, 0, 0, 655380, 0, 0, 655381, 0, 0, 589844, 0, 0, 524308, 0, 0, 524309, 0, 0, 589845, 0, 0, 589846, 0, 0, 524310, 0, 0, 524303, 0, 0, 589838, 0, 0, 524302, 0, 0)
+layer_0/tile_data = PackedInt32Array(655371, 65536, 0, 720907, 65536, 1, 655374, 0, 0, 786444, 65536, 1, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 720912, 0, 0, 786448, 131072, 1, 589836, 65536, 0, 655377, 0, 0, 589841, 0, 0, 589840, 0, 0, 589842, 0, 0, 524306, 0, 0, 524305, 0, 0, 524304, 0, 0, 458768, 65536, 0, 458769, 0, 0, 458770, 131072, 0, 524307, 0, 0, 589843, 0, 0, 655378, 0, 0, 720913, 0, 0, 655379, 0, 0, 720914, 131072, 1, 655380, 0, 0, 655381, 131072, 1, 589844, 0, 0, 524308, 0, 0, 524309, 0, 0, 589845, 0, 0, 589846, 131072, 1, 524310, 131072, 0, 524303, 0, 0, 524302, 65536, 0, 655372, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 655375, 0, 0, 589839, 0, 0, 589838, 0, 0, 589837, 0, 0, 655373, 0, 0, 655376, 0, 0)
 
 [node name="reflection_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
@@ -203,6 +216,7 @@ position = Vector2(240, 135)
 texture = SubResource("ViewportTexture_u4t1i")
 
 [node name="forest_tree" parent="environment" instance=ExtResource("6_ud6r8")]
+position = Vector2(348, 130)
 
 [node name="forest_tree2" parent="environment" instance=ExtResource("6_ud6r8")]
 position = Vector2(280, 54)
@@ -236,6 +250,16 @@ position = Vector2(81, 272)
 
 [node name="forest_tree12" parent="environment" instance=ExtResource("6_ud6r8")]
 position = Vector2(148, 259)
+
+[node name="swirl_plant" type="Node2D" parent="environment"]
+z_index = 100
+position = Vector2(272, 123)
+metadata/_edit_group_ = true
+
+[node name="sprite" type="Sprite2D" parent="environment/swirl_plant"]
+material = SubResource("ShaderMaterial_brpry")
+position = Vector2(0, -4)
+texture = ExtResource("9_d683x")
 
 [node name="player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("position_marker")]
 visibility_layer = 5
