@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 // --- Uniforms --- //
 global uniform vec2 player_position;
+global uniform float wind_position;
 
 uniform float transparency: hint_range(0.0, 1.0, 0.05) = 0.0;
 
@@ -35,7 +36,7 @@ void fragment() {
 	// Wind
 	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
 	vec2 wind_uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
-	float wind = sine_wave(TWO_PI, amplitude * TEXTURE_PIXEL_SIZE.x, vert_influence * SCREEN_UV.y + TIME * wind_speed, vec2(-1, 0), wind_uv);
+	float wind = sine_wave(TWO_PI, amplitude * TEXTURE_PIXEL_SIZE.x, vert_influence * SCREEN_UV.y + wind_position * wind_speed, vec2(-1, 0), wind_uv);
 	wind_uv -= vec2((amplitude * TEXTURE_PIXEL_SIZE.x - wind) * (1.0 - UV.y * wind_falloff), 0.0);
 	
 	COLOR = texture(TEXTURE, wind_uv);

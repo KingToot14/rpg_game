@@ -6,20 +6,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_brpry"]
 resource_local_to_scene = true
 shader = ExtResource("1_d6b6r")
-shader_parameter/transparency = 0.0
 shader_parameter/amplitude = 1.5
 shader_parameter/wind_size = 0.2
 shader_parameter/wind_direction = Vector2(-1, 0)
 shader_parameter/wind_speed = 2.0
 shader_parameter/wind_falloff = 1.0
-shader_parameter/player_influence = 0.6
-shader_parameter/radius = 0.05
 
 [node name="swirl_plant" type="Node2D"]
 z_index = 100
 y_sort_enabled = true
 position = Vector2(272, 123)
-metadata/_edit_group_ = true
 
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_brpry")

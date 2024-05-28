@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
+global uniform float wind_position;
+
 uniform vec2 texture_size = vec2(480, 270);
 
 group_uniforms reflections;
@@ -49,7 +51,7 @@ void fragment() {
 	uv -= vec2(0.0, COLOR.b * 255.0 * TEXTURE_PIXEL_SIZE.y);
 	
 	// Set Base Water Color
-	vec2 water_uv = uv + vec2(sine_wave(TWO_PI, 2.0 * TEXTURE_PIXEL_SIZE.x, 40.0 * uv.y + TIME, vec2(-1, 0), uv), 0.0);
+	vec2 water_uv = uv + vec2(sine_wave(TWO_PI, 2.0 * TEXTURE_PIXEL_SIZE.x, 40.0 * uv.y + wind_position, vec2(-1, 0), uv), 0.0);
 	COLOR.rgb = mix(water_color.rgb, dark_color.rgb, get_patch(water_uv));
 	
 	// Calculate Reflection
@@ -69,8 +71,8 @@ void fragment() {
 	COLOR.rgb = mix(COLOR.rgb, dirt_color.rgb - dirt * dirt_darkness, 1.0 - step(0.01, texture(TEXTURE, uv + vec2(0.0, dirt / 270.0)).a));
 	
 	// Grass Fringe
-	float wind_vert = get_noise(uv + vec2(0.0, TIME * wind_speed * 0.05));
-	float wind_horz = get_noise(uv + vec2(TIME * wind_speed * 0.05, 0.0));
+	float wind_vert = get_noise(uv + vec2(0.0, wind_position * wind_speed * 0.05));
+	float wind_horz = get_noise(uv + vec2(wind_position * wind_speed * 0.05, 0.0));
 	
 	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
 	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));

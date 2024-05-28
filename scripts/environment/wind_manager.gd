@@ -7,6 +7,9 @@ extends Node2D
 var wind_position := 0.0
 
 # --- Functions --- #
+func _ready():
+	wind_position = 0.0
+
 func _process(delta):
 	wind_position += wind_speed * delta;
 	RenderingServer.global_shader_parameter_set('wind_position', wind_position)

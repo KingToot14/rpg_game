@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
+global uniform float wind_position;
+
 uniform float wind_speed = 0.5;
 
 uniform sampler2D noise_texture: repeat_enable, filter_nearest;
@@ -12,5 +14,5 @@ float get_noise(vec2 uv, vec2 texture_pixel_size, float offset) {
 }
 
 void fragment() {
-	COLOR.g += get_noise(UV, TEXTURE_PIXEL_SIZE, -0.05 * TIME * wind_speed) / 255.0;
+	COLOR.g += get_noise(UV, TEXTURE_PIXEL_SIZE, -0.05 * wind_position * wind_speed) / 255.0;
 }
