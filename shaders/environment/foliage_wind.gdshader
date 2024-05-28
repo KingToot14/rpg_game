@@ -41,7 +41,7 @@ void fragment() {
 	// Wind
 	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
 	vec2 wind_uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
-	wind_uv.x -= amplitude * get_wind(wind_uv / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE.x * (1.0 - wind_uv.y * wind_falloff);
+	wind_uv.x -= amplitude * get_wind(FRAGCOORD.xy) * TEXTURE_PIXEL_SIZE.x * (1.0 - wind_uv.y * wind_falloff);
 	
 	COLOR = texture(TEXTURE, wind_uv);
 	

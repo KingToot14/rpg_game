@@ -20,4 +20,4 @@ func set_visibility_state(_body: Node2D, state: bool) -> void:
 		tween.tween_method(set_transparency, 0.1, transparency, tween_speed).set_trans(Tween.TRANS_LINEAR)
 
 func set_transparency(value: float) -> void:
-	material.set_shader_parameter('intensity', value)
+	material.set_shader_parameter('transparency', value)

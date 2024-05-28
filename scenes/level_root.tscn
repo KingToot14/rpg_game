@@ -1,5 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=36 format=3 uid="uid://byb0hxqtbhtrv"]
 
+[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="1_hb3h7"]
 [ext_resource type="Shader" path="res://environment/grass/grass_wind.gdshader" id="2_6qsyb"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/grass/grass_tiles.tres" id="2_p5ycs"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_grass.tres" id="3_1imi4"]
@@ -59,10 +60,9 @@ shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
 shader_parameter/patch_intensity = 0.05
 shader_parameter/side_gradient = SubResource("GradientTexture1D_408jn")
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_qygkk")
+shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
-shader_parameter/noise_size = Vector2(512, 1)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_0ob3s")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kyubb"]
 viewport_path = NodePath("environment/grass_viewport")
@@ -139,6 +139,9 @@ y_sort_enabled = true
 
 [node name="environment" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="wind_manager" type="Node2D" parent="environment"]
+script = ExtResource("1_hb3h7")
 
 [node name="grass_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
@@ -296,7 +299,6 @@ position = Vector2(0, -6)
 texture = ExtResource("8_8rjbx")
 
 [node name="collision" type="CollisionShape2D" parent="player"]
-visible = false
 position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_l0mef")
 

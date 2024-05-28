@@ -68,7 +68,6 @@ transparency = 0.45
 tween_speed = 0.3
 
 [node name="player_collider" type="Area2D" parent="leaves"]
-visible = false
 collision_mask = 2
 
 [node name="shape" type="CollisionShape2D" parent="leaves/player_collider"]
