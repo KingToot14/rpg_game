@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=35 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Shader" path="res://environment/grass/grass_wind.gdshader" id="2_6qsyb"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/grass/grass_tiles.tres" id="2_p5ycs"]
@@ -10,8 +10,7 @@
 [ext_resource type="Shader" path="res://environment/water/water.gdshader" id="7_4j0ym"]
 [ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="8_7p67f"]
 [ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/player.png" id="8_8rjbx"]
-[ext_resource type="Texture2D" uid="uid://ca6hfd2re1j2o" path="res://environment/forest/plants/swirl_plant.png" id="9_d683x"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wind.gdshader" id="9_jr5lm"]
+[ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="9_f2kir"]
 [ext_resource type="Shader" path="res://environment/grass/grass_cover.gdshader" id="11_ifdd2"]
 [ext_resource type="Script" path="res://scripts/reflection_texture.gd" id="12_hl60j"]
 
@@ -121,17 +120,6 @@ shader_parameter/foam_noise = SubResource("NoiseTexture2D_icnh7")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_u4t1i"]
 viewport_path = NodePath("environment/water_viewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_brpry"]
-resource_local_to_scene = true
-shader = ExtResource("9_jr5lm")
-shader_parameter/transparency = 0.0
-shader_parameter/amplitude = 0.5
-shader_parameter/vert_influence = 2.0
-shader_parameter/wind_speed = 2.0
-shader_parameter/wind_falloff = 1.0
-shader_parameter/player_influence = 0.6
-shader_parameter/radius = 0.05
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uwv52"]
 viewport_path = NodePath("environment/grass_viewport")
@@ -251,15 +239,46 @@ position = Vector2(81, 272)
 [node name="forest_tree12" parent="environment" instance=ExtResource("6_ud6r8")]
 position = Vector2(148, 259)
 
-[node name="swirl_plant" type="Node2D" parent="environment"]
-z_index = 100
-position = Vector2(272, 123)
-metadata/_edit_group_ = true
+[node name="swirl_plant" parent="environment" instance=ExtResource("9_f2kir")]
 
-[node name="sprite" type="Sprite2D" parent="environment/swirl_plant"]
-material = SubResource("ShaderMaterial_brpry")
-position = Vector2(0, -4)
-texture = ExtResource("9_d683x")
+[node name="swirl_plant2" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(293, 125)
+
+[node name="swirl_plant3" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(357, 142)
+
+[node name="swirl_plant4" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(397, 112)
+
+[node name="swirl_plant5" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(139, 269)
+
+[node name="swirl_plant6" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(85, 282)
+
+[node name="swirl_plant7" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(13, 271)
+
+[node name="swirl_plant8" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(37, 266)
+
+[node name="swirl_plant9" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(389, 227)
+
+[node name="swirl_plant10" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(454, 206)
+
+[node name="swirl_plant11" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(231, 248)
+
+[node name="swirl_plant12" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(276, 183)
+
+[node name="swirl_plant13" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(395, 158)
+
+[node name="swirl_plant14" parent="environment" instance=ExtResource("9_f2kir")]
+position = Vector2(420, 163)
 
 [node name="player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("position_marker")]
 visibility_layer = 5
@@ -270,7 +289,6 @@ collision_layer = 3
 script = ExtResource("8_7p67f")
 movement_speed = 50.0
 position_marker = NodePath("position_marker")
-metadata/_edit_group_ = true
 
 [node name="sprite" type="Sprite2D" parent="player"]
 material = SubResource("ShaderMaterial_0vwcf")
@@ -287,6 +305,7 @@ visible = false
 position = Vector2(-1, -5)
 
 [node name="bottom_marker" type="Marker2D" parent="player"]
+visible = false
 position = Vector2(0, 5)
 
 [node name="reflection" type="Sprite2D" parent="player" node_paths=PackedStringArray("bottom_pos", "sprites")]

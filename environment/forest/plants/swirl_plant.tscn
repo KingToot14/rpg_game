@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckqt2ygfqjr4q"]
+
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wind.gdshader" id="1_d6b6r"]
+[ext_resource type="Texture2D" uid="uid://ca6hfd2re1j2o" path="res://environment/forest/plants/swirl_plant.png" id="2_8ugcm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brpry"]
+resource_local_to_scene = true
+shader = ExtResource("1_d6b6r")
+shader_parameter/transparency = 0.0
+shader_parameter/amplitude = 1.5
+shader_parameter/wind_size = 0.2
+shader_parameter/wind_direction = Vector2(-1, 0)
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_falloff = 1.0
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
+[node name="swirl_plant" type="Node2D"]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(272, 123)
+metadata/_edit_group_ = true
+
+[node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_brpry")
+position = Vector2(0, -4)
+texture = ExtResource("2_8ugcm")
