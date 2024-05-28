@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
+global uniform float wind_position;
+
 uniform vec2 texture_size = vec2(480, 270);
 
 group_uniforms colors;
@@ -29,7 +31,7 @@ float sine_wave(float _period, float _amp, float _phase, vec2 _dir, vec2 _pos) {
 }
 
 float get_wind(vec2 _uv) {
-	float wind = sine_wave(500.0, 0.25, wind_speed * TIME, wind_direction, _uv);
+	float wind = sine_wave(500.0, 0.25, wind_speed * wind_position, wind_direction, _uv);
 	return step(0.0, wind) * step(0.8, 1.0 - wind);
 }
 

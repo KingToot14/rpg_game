@@ -1,3 +1,4 @@
+@tool
 class_name WindManager
 extends Node2D
 
