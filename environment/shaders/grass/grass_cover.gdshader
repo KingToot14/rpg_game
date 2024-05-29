@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
-uniform sampler2D grass_texture: filter_nearest;
+global uniform sampler2D overworld_shader_texture;
 uniform vec2 grass_size = vec2(480.0, 270.0);
 
 // --- Constants --- //
@@ -17,7 +17,7 @@ void fragment() {
 	for (float dist = 1.0; dist < MAX_GRASS_LENGTH; dist++) {
 		uv.y += SCREEN_PIXEL_SIZE.y * (1.0 / SCREEN_PIXEL_SIZE.y / grass_size.y);
 		
-		float blade_len = texture(grass_texture, uv).g * 255.0;
+		float blade_len = texture(overworld_shader_texture, uv).g * 255.0;
 		
 		COLOR *= step(blade_len, height);
 		

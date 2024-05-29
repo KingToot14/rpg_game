@@ -15,16 +15,16 @@ func _ready():
 
 func generate_texture():
 	texture = ImageTexture.new()
-	var image := Image.create(image_size.x, image_size.y, false, Image.FORMAT_RGBA8)
+	var image := Image.create(int(image_size.x), int(image_size.y), false, Image.FORMAT_RGBA8)
 	
 	# Combine sprites
 	for sprite in sprites:
 		var sprite_pos = bottom_pos.global_position - sprite.global_position
-		var position = Vector2(image_size.x / 2.0 - sprite_pos.x, image_size.y - sprite_pos.y)
+		var pos = Vector2(image_size.x / 2.0 - sprite_pos.x, image_size.y - sprite_pos.y)
 		var sprite_size = sprite.texture.get_size()
-		position -= sprite_size / 2.0
+		pos -= sprite_size / 2.0
 		
-		image.blend_rect(sprite.texture.get_image(), Rect2(Vector2.ZERO, sprite_size), position)
+		image.blend_rect(sprite.texture.get_image(), Rect2(Vector2.ZERO, sprite_size), pos)
 	
 	position = bottom_pos.position + Vector2(0.0, image_size.y / 2.0 - reflection_offset)
 	

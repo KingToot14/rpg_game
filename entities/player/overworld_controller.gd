@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var position_marker: Node2D
 
 # --- Functions --- #
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	velocity = get_input().normalized() * movement_speed
 	move_and_slide()
 	
@@ -20,6 +20,9 @@ func _process(delta) -> void:
 
 func get_input() -> Vector2:
 	return Vector2(Input.get_axis('overworld_left', 'overworld_right'), Input.get_axis('overworld_up', 'overworld_down'))
+
+func load_position() -> void:
+	global_position = Globals.player_area_pos
 
 func prepare_transition(direction: String) -> void:
 	match direction:

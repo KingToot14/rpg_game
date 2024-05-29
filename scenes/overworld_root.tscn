@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl5a17q4ye86x"]
+
+[ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
+[ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
+[ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/player.tscn" id="3_u28xe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
+size = Vector2(500, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5tb6"]
+size = Vector2(10, 270)
+
+[node name="overworld_root" type="Node2D"]
+visibility_layer = 7
+y_sort_enabled = true
+script = ExtResource("1_36e4g")
+
+[node name="bounds" type="Node2D" parent="."]
+position = Vector2(240, 135)
+
+[node name="top" type="Area2D" parent="bounds"]
+collision_mask = 2
+script = ExtResource("1_j1v7d")
+direction = "top"
+
+[node name="shape" type="CollisionShape2D" parent="bounds/top"]
+position = Vector2(0, -140)
+shape = SubResource("RectangleShape2D_y8866")
+
+[node name="bottom" type="Area2D" parent="bounds"]
+collision_mask = 2
+script = ExtResource("1_j1v7d")
+direction = "bottom"
+
+[node name="shape" type="CollisionShape2D" parent="bounds/bottom"]
+position = Vector2(0, 140)
+shape = SubResource("RectangleShape2D_y8866")
+
+[node name="left" type="Area2D" parent="bounds"]
+collision_mask = 2
+script = ExtResource("1_j1v7d")
+direction = "left"
+
+[node name="shape" type="CollisionShape2D" parent="bounds/left"]
+position = Vector2(-245, 0)
+shape = SubResource("RectangleShape2D_o5tb6")
+
+[node name="right" type="Area2D" parent="bounds"]
+collision_mask = 2
+script = ExtResource("1_j1v7d")
+direction = "right"
+
+[node name="shape" type="CollisionShape2D" parent="bounds/right"]
+position = Vector2(245, 0)
+shape = SubResource("RectangleShape2D_o5tb6")
+
+[node name="player" parent="." instance=ExtResource("3_u28xe")]
+position = Vector2(213, 129)
+
+[connection signal="area_loaded" from="." to="player" method="load_position"]
+[connection signal="transition_reached" from="bounds/top" to="." method="load_direction"]
+[connection signal="transition_reached" from="bounds/bottom" to="." method="load_direction"]
+[connection signal="transition_reached" from="bounds/left" to="." method="load_direction"]
+[connection signal="transition_reached" from="bounds/right" to="." method="load_direction"]
