@@ -11,16 +11,7 @@ extends CharacterBody2D
 @export var overworld_size: Vector2 = Vector2(480, 270)
 @export var position_marker: Node2D
 
-# --- Constants --- #
-
-
 # --- Functions --- #
-func _ready():
-	if Globals.player_area_pos.x < -50:
-		return
-	
-	global_position = Globals.player_area_pos
-
 func _process(delta) -> void:
 	velocity = get_input().normalized() * movement_speed
 	move_and_slide()

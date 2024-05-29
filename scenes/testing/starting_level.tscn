@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_manager.gd" id="1_kjdap"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="2_0pt42"]
+[ext_resource type="Script" path="res://systems/scene_loading/player_spawner.gd" id="2_7j4yh"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="3_3kur4"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_wind.gdshader" id="4_mlxpl"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/shaders/grass/grass_tiles.tres" id="5_oho5w"]
@@ -19,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://c50i2fe4sv0xd" path="res://environment/objects/chest.tscn" id="17_qqmoi"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="18_y17dm"]
 [ext_resource type="PackedScene" uid="uid://cur7d1tqtfkvy" path="res://environment/objects/sign.tscn" id="19_sjput"]
-[ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/player.tscn" id="20_n2qla"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bnow"]
 size = Vector2(500, 10)
@@ -164,6 +164,14 @@ y_sort_enabled = true
 [node name="area_manager" type="Node2D" parent="."]
 script = ExtResource("1_kjdap")
 right_area = "res://scenes/testing/starting_right.tscn"
+
+[node name="player_spawner" type="Node2D" parent="." node_paths=PackedStringArray("starting_position")]
+script = ExtResource("2_7j4yh")
+starting_position = NodePath("marker")
+player_path = "res://entities/player/player.tscn"
+
+[node name="marker" type="Marker2D" parent="player_spawner"]
+position = Vector2(212, 146)
 
 [node name="bounds" type="Node2D" parent="."]
 position = Vector2(240, 135)
@@ -396,9 +404,6 @@ position = Vector2(109, 154)
 
 [node name="sign" parent="environment" instance=ExtResource("19_sjput")]
 position = Vector2(201, 129)
-
-[node name="player" parent="." instance=ExtResource("20_n2qla")]
-position = Vector2(212, 146)
 
 [connection signal="transition_reached" from="bounds/top" to="area_manager" method="load_direction"]
 [connection signal="transition_reached" from="bounds/bottom" to="area_manager" method="load_direction"]
