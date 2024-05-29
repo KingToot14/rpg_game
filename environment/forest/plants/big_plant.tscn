@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch0ye1a575y33"]
+
+[ext_resource type="Texture2D" uid="uid://t71u0gbn2g24" path="res://environment/forest/plants/big_plant.png" id="1_wjmag"]
+
+[node name="big_plant" type="Node2D"]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(258, 145)
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("1_wjmag")

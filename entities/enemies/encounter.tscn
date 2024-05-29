@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://db74y02nf5ra6"]
+
+[ext_resource type="Script" path="res://scripts/interactable_objects/encounter.gd" id="1_yddec"]
+[ext_resource type="Texture2D" uid="uid://d4cnm1xeeewdm" path="res://entities/enemies/slime/slime.png" id="2_305qa"]
+[ext_resource type="Texture2D" uid="uid://cryvcxcpswi2e" path="res://ui/interactions/fight_icon.png" id="2_anhye"]
+[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/interactions/interaction_box.tscn" id="3_bq8o8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ool5m"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkomd"]
+
+[node name="encounter" type="Area2D"]
+z_index = 100
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_yddec")
+encounter_path = "test_slime"
+box_offset = 17.0
+icon = ExtResource("2_anhye")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_305qa")
+flip_h = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ool5m")
+
+[node name="blocker" type="StaticBody2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="blocker"]
+shape = SubResource("RectangleShape2D_mkomd")
+
+[node name="interaction_box" parent="." instance=ExtResource("3_bq8o8")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0

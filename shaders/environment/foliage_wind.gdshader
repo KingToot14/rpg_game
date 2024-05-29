@@ -8,7 +8,7 @@ uniform float amplitude: hint_range(0.0, 5.0, 0.5) = 1.0;
 uniform float wind_size: hint_range(0.0, 1.0, 0.05) = 0.20;
 uniform vec2 wind_direction = vec2(-1.0);
 uniform float wind_speed: hint_range(0.0, 5.0, 0.10) = 2.0;
-uniform float wind_falloff: hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float wind_falloff: hint_range(0.0, 1.0, 0.05) = 0.0;
 
 // --- Constants --- //
 const float TWO_PI = 6.28318530718;
@@ -29,7 +29,7 @@ void fragment() {
 	// Wind
 	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
 	vec2 wind_uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
-	wind_uv.x -= amplitude * get_wind(SCREEN_UV / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE.x * (1.0 - wind_uv.y * wind_falloff);
+	wind_uv += wind_direction * amplitude * get_wind(SCREEN_UV / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE * (1.0 - wind_uv.y * wind_falloff);
 	
 	COLOR = texture(TEXTURE, wind_uv);
 }

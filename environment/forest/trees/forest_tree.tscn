@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://d6smshem72ig" path="res://environment/forest/trees/tree_trunk.png" id="1_fpte0"]
 [ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
 [ext_resource type="Texture2D" uid="uid://v6nu604f644m" path="res://environment/forest/trees/trunk_shadow.png" id="3_io0x5"]
-[ext_resource type="Script" path="res://scripts/object_revealer.gd" id="4_jcd0y"]
+[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="4_jcd0y"]
 [ext_resource type="Texture2D" uid="uid://g3yg1avfni52" path="res://environment/forest/trees/tree_top.png" id="5_laa4x"]
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="5_qdvdd"]
-[ext_resource type="Script" path="res://scripts/reflection_texture.gd" id="6_gbmmx"]
+[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="6_gbmmx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 12.5

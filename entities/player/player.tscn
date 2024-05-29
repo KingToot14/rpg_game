@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsd56x7sbosdr"]
+
+[ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="1_a5lqh"]
+[ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
+[ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/player.png" id="3_qkulj"]
+[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="4_5t1er"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uwv52"]
+viewport_path = NodePath("environment/shader_viewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vwcf"]
+resource_local_to_scene = true
+shader = ExtResource("2_6y3vp")
+shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/grass_texture = SubResource("ViewportTexture_uwv52")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0mef"]
+radius = 6.0
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("position_marker")]
+visibility_layer = 5
+z_index = 100
+y_sort_enabled = true
+collision_layer = 3
+script = ExtResource("1_a5lqh")
+movement_speed = 75.0
+position_marker = NodePath("position_marker")
+
+[node name="sprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_0vwcf")
+position = Vector2(0, -6)
+texture = ExtResource("3_qkulj")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_l0mef")
+
+[node name="position_marker" type="Marker2D" parent="."]
+visible = false
+position = Vector2(-1, -5)
+
+[node name="bottom_marker" type="Marker2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+
+[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
+visibility_layer = 4
+position = Vector2(-212, -146)
+flip_v = true
+script = ExtResource("4_5t1er")
+image_size = Vector2(32, 32)
+bottom_pos = NodePath("../bottom_marker")
+sprites = [NodePath("../sprite")]
