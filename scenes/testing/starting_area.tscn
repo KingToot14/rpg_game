@@ -331,10 +331,10 @@ position = Vector2(231, 248)
 position = Vector2(276, 183)
 
 [node name="swirl_plant15" parent="lake" instance=ExtResource("16_1uwdf")]
-position = Vector2(411, 241)
+position = Vector2(442, 238)
 
 [node name="big_plant" parent="lake" instance=ExtResource("17_s2cr4")]
-position = Vector2(430, 236)
+position = Vector2(464, 235)
 
 [node name="chest3" parent="lake" instance=ExtResource("18_rn7lt")]
 position = Vector2(361, 248)
@@ -356,6 +356,7 @@ position = Vector2(130, 116)
 
 [node name="encounter" parent="." instance=ExtResource("19_uc2wy")]
 position = Vector2(109, 154)
+encounter_path = "res://encounters/test/test_encounter.tres"
 
 [node name="sign" parent="." instance=ExtResource("20_2u6ib")]
 position = Vector2(201, 129)

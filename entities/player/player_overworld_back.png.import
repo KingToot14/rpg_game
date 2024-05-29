@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4cnm1xeeewdm"
-path="res://.godot/imported/slime.png-10067cffbeef234bbb849531118eff06.ctex"
+uid="uid://c30hxa3woqcy0"
+path="res://.godot/imported/player_overworld_back.png-a6b8006d140f8f2ec669c162f7b06f8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/slime/slime.png"
-dest_files=["res://.godot/imported/slime.png-10067cffbeef234bbb849531118eff06.ctex"]
+source_file="res://entities/player/player_overworld_back.png"
+dest_files=["res://.godot/imported/player_overworld_back.png-a6b8006d140f8f2ec669c162f7b06f8e.ctex"]
 
 [params]
 

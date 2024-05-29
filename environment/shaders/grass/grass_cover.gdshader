@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 // --- Uniforms --- //
-global uniform sampler2D overworld_shader_texture;
+global uniform sampler2D overworld_shader_texture: filter_nearest;
 uniform vec2 grass_size = vec2(480.0, 270.0);
 
 // --- Constants --- //

@@ -12,7 +12,9 @@ var current_area: AreaInformation
 
 # --- Functions --- #
 func _ready() -> void:
-	AsyncLoader.new(Globals.overworld_area_path, add_area)
+	Globals.overworld_manager = self
+	
+	AsyncLoader.new(Globals.overworld_area, add_area)
 
 func load_direction(direction: String) -> void:
 	var path: String = ""
@@ -34,7 +36,13 @@ func load_direction(direction: String) -> void:
 		player.prepare_transition(direction)
 		AsyncLoader.new(path, add_area)
 
+func load_battle(battle_path: String) -> void:
+	player.prepare_battle()
+	SceneManager.load_scene(battle_path)
+
 func add_area(scene: PackedScene):
+	Globals.overworld_area = scene.resource_path
+	
 	if current_area:
 		current_area.queue_free()
 	current_area = scene.instantiate()
