@@ -1,16 +1,75 @@
-[gd_scene load_steps=5 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=9 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/battle_manager.gd" id="1_qxbbg"]
+[ext_resource type="Script" path="res://systems/battles/battle_fsm/battle_fsm.gd" id="2_eejpv"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_tiles.tres" id="2_j2t4l"]
 [ext_resource type="PackedScene" uid="uid://cr0frogmee5t6" path="res://entities/player/character_battle.tscn" id="3_eaehr"]
+[ext_resource type="Script" path="res://systems/battles/battle_fsm/player_state.gd" id="3_ntjl1"]
+[ext_resource type="Script" path="res://systems/battles/battle_fsm/enemy_state.gd" id="4_7xy13"]
 [ext_resource type="PackedScene" uid="uid://ty0c8f0laa02" path="res://entities/enemies/slimes/green_slime/green_slime.tscn" id="4_mcgku"]
+[ext_resource type="Script" path="res://systems/battles/battle_action_manager.gd" id="5_hg5dv"]
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("players", "enemy_positions")]
 script = ExtResource("1_qxbbg")
 players = [NodePath("character_battle"), NodePath("character_battle2"), NodePath("character_battle3"), NodePath("character_battle4")]
 enemy_positions = [NodePath("enemy_positions/marker"), NodePath("enemy_positions/marker2"), NodePath("enemy_positions/marker3"), NodePath("enemy_positions/marker4"), NodePath("enemy_positions/marker5")]
 
+[node name="state_machine" type="Node2D" parent="."]
+script = ExtResource("2_eejpv")
+
+[node name="player_state" type="Node2D" parent="state_machine"]
+script = ExtResource("3_ntjl1")
+
+[node name="enemy_state" type="Node2D" parent="state_machine"]
+script = ExtResource("4_7xy13")
+
+[node name="action_manager" type="Node2D" parent="." node_paths=PackedStringArray("action_bar")]
+script = ExtResource("5_hg5dv")
+action_bar = NodePath("../ui/action_bar")
+
 [node name="ui" type="CanvasLayer" parent="."]
+
+[node name="action_button" type="Button" parent="ui"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -39.0
+offset_right = 63.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Perform Action"
+
+[node name="action_bar" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="backing" type="ColorRect" parent="ui/action_bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="environment" type="Node2D" parent="."]
 
@@ -39,19 +98,19 @@ position = Vector2(420, 185)
 
 [node name="character_battle" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(60, 105)
-max_hp = 0.0
 
 [node name="character_battle2" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(100, 125)
-max_hp = 0.0
 
 [node name="character_battle3" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(100, 165)
-max_hp = 0.0
 
 [node name="character_battle4" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(60, 185)
-max_hp = 0.0
 
 [node name="slime" parent="." instance=ExtResource("4_mcgku")]
 max_hp = 0.0
+
+[connection signal="state_changed" from="state_machine" to="action_manager" method="_on_state_changed"]
+[connection signal="action_performed" from="action_manager" to="state_machine" method="action_performed"]
+[connection signal="pressed" from="ui/action_button" to="action_manager" method="perform_action"]

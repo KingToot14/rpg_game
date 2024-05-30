@@ -12,8 +12,8 @@ var encounter: Encounter
 var curr_wave: int = 0
 var wave_count: int = 0
 
-# - State Info - #
-var state
+# --- References --- #
+@onready var state_machine = $"state_machine" as BattleFsm
 
 # --- Functions --- #
 func _ready():
@@ -31,6 +31,9 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	# Setup waves
 	wave_count = len(encounter.waves)
 	load_wave(encounter.waves[curr_wave])
+	
+	# Start state machine
+	state_machine.set_state('player')
 
 func load_wave(wave: Wave) -> void:
 	for i in range(len(wave.enemies)):
