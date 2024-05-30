@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d150qke6mhk3j"
-path="res://.godot/imported/slime_overworld.png-e8a465902d5686574eebbc8eb92e52cd.ctex"
+path="res://.godot/imported/slime_overworld.png-924045121bcb4379c71d8aac838df157.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/slime/slime_overworld.png"
-dest_files=["res://.godot/imported/slime_overworld.png-e8a465902d5686574eebbc8eb92e52cd.ctex"]
+source_file="res://entities/enemies/slimes/green_slime/slime_overworld.png"
+dest_files=["res://.godot/imported/slime_overworld.png-924045121bcb4379c71d8aac838df157.ctex"]
 
 [params]
 

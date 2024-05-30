@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ty0c8f0laa02"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
+[ext_resource type="Texture2D" uid="uid://d150qke6mhk3j" path="res://entities/enemies/slimes/green_slime/slime_overworld.png" id="1_rv35j"]
+[ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/jump_and_back.tres" id="2_uucff"]
+[ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/slime_fling.tres" id="3_8qkmm"]
+
+[node name="slime" type="Node2D"]
+z_index = 100
+script = ExtResource("1_gt34u")
+max_hp = 54.0
+p_attack = 4.0
+p_defense = 4.0
+m_attack = 4.0
+m_defense = 4.0
+accuracy = 4.0
+evasion = 3.0
+default_attack = ExtResource("2_uucff")
+attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_rv35j")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 5.0
+offset_bottom = -11.0
+
+[connection signal="died" from="." to="." method="kill"]
+[connection signal="pressed" from="Button" to="." method="take_damage" binds= [100]]

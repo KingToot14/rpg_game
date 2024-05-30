@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr0frogmee5t6"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
+[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/player_overworld_side_front.png" id="2_kjl5i"]
+
+[node name="character_battle" type="Node2D"]
+z_index = 100
+script = ExtResource("1_xrkk6")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_kjl5i")
+flip_h = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 5.0
+offset_bottom = -11.0
+
+[connection signal="died" from="." to="." method="kill"]
+[connection signal="pressed" from="Button" to="." method="take_damage" binds= [100]]

@@ -9,6 +9,11 @@ var path: String
 
 # --- Functions --- #
 func _init(load_path: String, callback: Callable):
+	if load_path == "":
+		callback.call(null)
+		queue_free()
+		return
+	
 	SceneManager.add_child(self)
 	
 	path = load_path

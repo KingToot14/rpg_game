@@ -36,7 +36,6 @@ position = Vector2(0, -6)
 texture = ExtResource("4_wabot")
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_l0mef")
 
 [node name="position_marker" type="Marker2D" parent="."]
@@ -44,7 +43,7 @@ visible = false
 position = Vector2(-1, -5)
 
 [node name="bottom_marker" type="Marker2D" parent="."]
-position = Vector2(0, 9)
+position = Vector2(0, 6)
 
 [node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
 visibility_layer = 4
