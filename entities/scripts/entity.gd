@@ -12,6 +12,7 @@ signal special_full()
 @export var is_player := false
 @export var use_special := false
 var alive: bool = true
+var spawn_index: int
 
 @export_group("Stats")
 @export var max_hp: float
@@ -31,8 +32,9 @@ var special_charge: float = 0
 @export var attack_pool: Array[Attack]
 
 # --- Functions --- #
-func setup_hp():
+func setup(index: int):
 	hp = max_hp
+	spawn_index = index
 
 # - HP - #
 func take_damage(dmg: int):
@@ -40,7 +42,7 @@ func take_damage(dmg: int):
 	lost_health.emit(dmg, self)
 	
 	if use_special:
-		special_charge = min(special_charge + dmg, 100)
+		special_charge = min(special_charge + dmg / 20.0, 100)
 		special_increased.emit(self)
 	
 	if hp <= 0:
@@ -51,7 +53,7 @@ func get_hp_percent() -> float:
 	return hp / max_hp
 
 func kill() -> void:
-	get_parent().remove_from_battle(self)
+	get_parent().remove_from_battle(self, spawn_index)
 	queue_free()
 
 # - Actions - #

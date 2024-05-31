@@ -51,9 +51,13 @@ func load_next_wave() -> bool:
 	return false
 
 func load_wave(wave: Wave) -> void:
+	ui_manager.update_wave_counter(curr_wave + 1, wave_count)
+	
 	for i in range(len(wave.enemies)):
 		if wave.enemies[i] != "":
 			AsyncLoader.new(wave.enemies[i], setup_enemy.bind(i))
+		else:
+			ui_manager.setup_enemy_hp(null, i)
 
 # - Entity Management - #
 func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
@@ -61,13 +65,15 @@ func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	enemy.died.connect(check_state)
 	enemy.global_position = enemy_positions[spawn_index].global_position
 	enemies.append(enemy)
+	ui_manager.setup_enemy_hp(enemy, spawn_index)
 	
 	add_child(enemy)
 
-func remove_from_battle(entity: Entity) -> void:
+func remove_from_battle(entity: Entity, index: int) -> void:
 	players.erase(entity)
 	enemies.erase(entity)
 	
+	ui_manager.setup_enemy_hp(null, index)
 	state_machine.entity_removed(entity)
 
 # - Battle State - #

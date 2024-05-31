@@ -52,10 +52,12 @@ script = ExtResource("6_s453a")
 script = ExtResource("5_hg5dv")
 action_bar = NodePath("../ui/action_bar")
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
+wave_label = NodePath("encounter_info/wave_panel/label")
+condition_label = NodePath("encounter_info/condition_panel/label")
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -948,6 +950,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="encounter_info" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="panel" type="NinePatchRect" parent="ui/encounter_info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_hl1jg")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="wave_panel" type="NinePatchRect" parent="ui/encounter_info"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 2.0
+offset_right = 48.5
+offset_bottom = 12.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="label" type="Label" parent="ui/encounter_info/wave_panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 95.0
+offset_bottom = 12.0
+theme = ExtResource("6_66gh2")
+text = "Wave: 1/2"
+
+[node name="condition_panel" type="NinePatchRect" parent="ui/encounter_info"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 13.0
+offset_right = 48.5
+offset_bottom = 23.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="label" type="Label" parent="ui/encounter_info/condition_panel"]
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 95.0
+offset_bottom = 12.0
+theme = ExtResource("6_66gh2")
+text = "Condition: Normal"
 
 [node name="environment" type="Node2D" parent="."]
 
