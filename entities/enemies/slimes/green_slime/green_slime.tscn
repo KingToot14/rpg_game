@@ -1,13 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=10 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Texture2D" uid="uid://d150qke6mhk3j" path="res://entities/enemies/slimes/green_slime/slime_overworld.png" id="1_rv35j"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/jump_and_back.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/slime_fling.tres" id="3_8qkmm"]
+[ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="4_i27sh"]
+[ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
+[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2ut"]
+resource_local_to_scene = true
+shader = ExtResource("5_317s2")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6kg0"]
 
-[node name="slime" type="Area2D"]
+[node name="slime" type="Area2D" node_paths=PackedStringArray("marker_pos")]
 z_index = 100
 script = ExtResource("1_gt34u")
 max_hp = 54.0
@@ -19,13 +28,26 @@ accuracy = 4.0
 evasion = 3.0
 default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
+marker_pos = NodePath("marker")
+
+[node name="brain" type="Node2D" parent="."]
+script = ExtResource("4_xr6bx")
+
+[node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_i27sh")
+sprite = NodePath("../sprite")
 
 [node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ju2ut")
 texture = ExtResource("1_rv35j")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r6kg0")
 
+[node name="marker" type="Marker2D" parent="."]
+position = Vector2(23, 0)
+
 [connection signal="died" from="." to="." method="kill"]
+[connection signal="lost_health" from="." to="flash_manager" method="_on_lost_health"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

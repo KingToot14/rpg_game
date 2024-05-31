@@ -14,9 +14,6 @@ extends CanvasLayer
 @export var action_bar: Control
 @export var attack_menu: Control
 
-@export_group("Effects")
-@export var damage_marker: DamageMarker
-
 # --- Functions --- #
 func _ready():
 	set_attack_menu(false)
@@ -48,6 +45,7 @@ func setup_player_special(player: Entity, index: int):
 	player_hp_bars[index].update_special(player)
 
 func _on_state_changed(state: String) -> void:
+	print("New state: ", state)
 	set_action_bar(state == 'player')
 
 func _on_action_changed(state: String) -> void:
@@ -64,13 +62,3 @@ func update_wave_counter(curr: int, wave_count: int) -> void:
 
 func update_condition(condition: String) -> void:
 	condition_label.text = "Condition: Normal"
-
-# - Damage Marker - #
-func on_damage_taken(dmg: int, entity: Entity) -> void:
-	show_damage_marker(entity.global_position, dmg)
-
-func show_damage_marker(position: Vector2, dmg: int) -> void:
-	damage_marker.visible = true
-	damage_marker.global_position = position
-	damage_marker.set_text(dmg, 0)
-	damage_marker.start_fade()

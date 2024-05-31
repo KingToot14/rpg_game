@@ -9,13 +9,13 @@ var target: Entity
 
 # --- Functions --- #
 func state_entered() -> void:
-	print("state entered")
+	pass
 
 func perform_action() -> void:
-	print("action performed")
+	pass
 
 func entity_selected(entity: Entity) -> void:
-	print("entity selected: ", entity)
+	pass
 
 func highlight_targets() -> void:
-	print("targetting highlights")
+	pass

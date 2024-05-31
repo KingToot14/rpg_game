@@ -34,7 +34,6 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 		# Signals
 		player.died.connect(check_state)
 		player.selected.connect(action_fsm.entity_selected)
-		player.lost_health.connect(ui_manager.on_damage_taken)
 		
 		# Player UI
 		ui_manager.setup_player_hp(player, i)
@@ -68,14 +67,16 @@ func load_wave(wave: Wave) -> void:
 # - Entity Management - #
 func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	var enemy: Entity = enemy_scene.instantiate() as Entity
-	enemy.died.connect(check_state)
 	enemy.global_position = enemy_positions[spawn_index].global_position
 	enemies.append(enemy)
+	enemy.root = self
 	
 	# Signals
-	ui_manager.setup_enemy_hp(enemy, spawn_index)
+	enemy.died.connect(check_state)
 	enemy.selected.connect(action_fsm.entity_selected)
-	enemy.lost_health.connect(ui_manager.on_damage_taken)
+	
+	# UI
+	ui_manager.setup_enemy_hp(enemy, spawn_index)
 	
 	add_child(enemy)
 
@@ -85,6 +86,12 @@ func remove_from_battle(entity: Entity, index: int) -> void:
 	
 	ui_manager.setup_enemy_hp(null, index)
 	state_machine.entity_removed(entity)
+
+func get_random_player() -> Entity:
+	return players[randi_range(0, len(players) - 1)]
+
+func get_random_enemy() -> Entity:
+	return enemies[randi_range(0, len(enemies) - 1)]
 
 # - Battle State - #
 func check_state() -> void:

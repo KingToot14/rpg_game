@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=7 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
+[ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="2_hdvll"]
 [ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/player_overworld_side_front.png" id="2_kjl5i"]
+[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
+resource_local_to_scene = true
+shader = ExtResource("3_ts5ou")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 
-[node name="character_battle" type="Area2D"]
+[node name="character_battle" type="Area2D" node_paths=PackedStringArray("marker_pos")]
 z_index = 100
 script = ExtResource("1_xrkk6")
 is_player = true
@@ -17,14 +25,24 @@ m_attack = 6.2
 m_defense = 5.0
 accuracy = 4.0
 evasion = 4.0
+marker_pos = NodePath("marker")
+
+[node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_hdvll")
+sprite = NodePath("../sprite")
 
 [node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_utwch")
 texture = ExtResource("2_kjl5i")
 flip_h = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_syoe4")
 
+[node name="marker" type="Marker2D" parent="."]
+position = Vector2(-21, 0)
+
 [connection signal="died" from="." to="." method="kill"]
+[connection signal="lost_health" from="." to="flash_manager" method="_on_lost_health"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

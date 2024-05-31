@@ -1,5 +1,8 @@
 extends Node2D
 
+# --- General --- #
+var object_pool: ObjectPool
+
 # --- Player --- #
 var player_area_pos: Vector2 = Vector2(240, 135)
 

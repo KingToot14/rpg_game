@@ -7,10 +7,10 @@ extends Node2D
 
 # --- Functions --- #
 func state_entered() -> void:
-	print("state entered")
+	pass
 
 func entity_removed(entity: Entity) -> void:
-	print("entity removed: ", entity)
+	pass
 
 func action_performed() -> void:
-	print("action performed")
+	pass

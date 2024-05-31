@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu.gd" id="17_rqhok"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="18_wdhfm"]
-[ext_resource type="Script" path="res://ui/battles/damage_marker/damage_marker.gd" id="25_xuw4h"]
+[ext_resource type="Script" path="res://scripts/object_pool.gd" id="25_a1wgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glmrl"]
 atlas = ExtResource("6_a4ney")
@@ -63,7 +63,7 @@ script = ExtResource("8_u1m5v")
 [node name="attack_state" type="Node2D" parent="action_manager"]
 script = ExtResource("9_5pcwq")
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu", "damage_marker")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
@@ -71,7 +71,6 @@ wave_label = NodePath("encounter_info/wave_panel/label")
 condition_label = NodePath("encounter_info/condition_panel/label")
 action_bar = NodePath("action_bar")
 attack_menu = NodePath("attack_menu")
-damage_marker = NodePath("damage_marker")
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -1143,31 +1142,6 @@ offset_bottom = 12.0
 theme = ExtResource("6_66gh2")
 text = "Condition: Normal"
 
-[node name="damage_marker" type="Control" parent="ui"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("25_xuw4h")
-
-[node name="dmg_label" type="Label" parent="ui/damage_marker"]
-offset_left = -40.0
-offset_top = -12.0
-offset_right = 40.0
-offset_bottom = 12.0
-text = "75"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="crit_label" type="Label" parent="ui/damage_marker"]
-offset_left = -40.0
-offset_top = -12.0
-offset_right = 40.0
-offset_bottom = 12.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="environment" type="Node2D" parent="."]
 
 [node name="ground" type="TileMap" parent="environment"]
@@ -1204,6 +1178,10 @@ position = Vector2(100, 165)
 
 [node name="character_battle4" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(60, 185)
+
+[node name="object_pool" type="Node2D" parent="."]
+script = ExtResource("25_a1wgc")
+inital_items = Array[String](["damage_marker|10|res://ui/battles/damage_marker/damage_marker.tscn"])
 
 [connection signal="state_changed" from="state_machine" to="ui" method="_on_state_changed"]
 [connection signal="action_changed" from="action_manager" to="ui" method="_on_action_changed"]

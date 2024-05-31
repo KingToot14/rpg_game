@@ -27,7 +27,9 @@ func action_performed() -> void:
 func find_next_turn() -> void:
 	root.curr_entity = get_next_entity()
 	
-	if not root.curr_entity:
+	if root.curr_entity:
+		root.curr_entity.take_turn()
+	else:
 		fsm.set_state(next_state)
 
 func get_next_entity() -> Entity:
