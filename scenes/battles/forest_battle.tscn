@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=28 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/battle_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/battle_fsm.gd" id="2_eejpv"]
@@ -9,16 +9,22 @@
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/win_state.gd" id="5_1or2o"]
 [ext_resource type="Script" path="res://systems/battles/battle_action_manager.gd" id="5_hg5dv"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_66gh2"]
-[ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_button.png" id="6_a4ney"]
+[ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_menu/action_button.png" id="6_a4ney"]
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/lose_state.gd" id="6_s453a"]
-[ext_resource type="Script" path="res://ui/battles/battle_action_button.gd" id="7_3w10q"]
-[ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/attack_melee.png" id="7_bd1i3"]
+[ext_resource type="Script" path="res://ui/battles/action_menu/battle_action_button.gd" id="7_3w10q"]
+[ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/action_menu/attack_melee.png" id="7_bd1i3"]
 [ext_resource type="Script" path="res://ui/battles/battle_ui_manager.gd" id="8_ex6oy"]
-[ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/block_melee.png" id="9_gvg6k"]
-[ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/tactics_melee.png" id="10_qg1o5"]
+[ext_resource type="Script" path="res://systems/battles/action_fsm/action_state.gd" id="8_u1m5v"]
+[ext_resource type="Script" path="res://systems/battles/action_fsm/attack_action_state.gd" id="9_5pcwq"]
+[ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/action_menu/block_melee.png" id="9_gvg6k"]
+[ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/tactics_melee.png" id="10_qg1o5"]
 [ext_resource type="Texture2D" uid="uid://dudecax1kui7x" path="res://ui/panel.png" id="14_hl1jg"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="16_efyqi"]
+[ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
+[ext_resource type="Script" path="res://systems/battles/menu/action_menu.gd" id="17_rqhok"]
+[ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="18_wdhfm"]
+[ext_resource type="Script" path="res://ui/battles/damage_marker/damage_marker.gd" id="25_xuw4h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glmrl"]
 atlas = ExtResource("6_a4ney")
@@ -48,16 +54,24 @@ script = ExtResource("5_1or2o")
 [node name="lose_state" type="Node2D" parent="state_machine"]
 script = ExtResource("6_s453a")
 
-[node name="action_manager" type="Node2D" parent="." node_paths=PackedStringArray("action_bar")]
+[node name="action_manager" type="Node2D" parent="."]
 script = ExtResource("5_hg5dv")
-action_bar = NodePath("../ui/action_bar")
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label")]
+[node name="blank_state" type="Node2D" parent="action_manager"]
+script = ExtResource("8_u1m5v")
+
+[node name="attack_state" type="Node2D" parent="action_manager"]
+script = ExtResource("9_5pcwq")
+
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu", "damage_marker")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
 wave_label = NodePath("encounter_info/wave_panel/label")
 condition_label = NodePath("encounter_info/condition_panel/label")
+action_bar = NodePath("action_bar")
+attack_menu = NodePath("attack_menu")
+damage_marker = NodePath("damage_marker")
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -388,6 +402,109 @@ text = "Tactics"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="attack_menu" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 142.0
+offset_top = 183.0
+offset_right = 201.0
+offset_bottom = 234.0
+script = ExtResource("17_rqhok")
+
+[node name="menu_button" type="BaseButton" parent="ui/attack_menu"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = -17.0
+offset_right = 29.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("17_f6win")
+item = ExtResource("18_wdhfm")
+
+[node name="backing" type="ColorRect" parent="ui/attack_menu/menu_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="label" type="Label" parent="ui/attack_menu/menu_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Normal Attack"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="player_hp" type="Control" parent="ui"]
 layout_mode = 3
@@ -1018,12 +1135,38 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 
 [node name="label" type="Label" parent="ui/encounter_info/condition_panel"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -2.0
 offset_right = 95.0
 offset_bottom = 12.0
 theme = ExtResource("6_66gh2")
 text = "Condition: Normal"
+
+[node name="damage_marker" type="Control" parent="ui"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("25_xuw4h")
+
+[node name="dmg_label" type="Label" parent="ui/damage_marker"]
+offset_left = -40.0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 12.0
+text = "75"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="crit_label" type="Label" parent="ui/damage_marker"]
+offset_left = -40.0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 12.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="environment" type="Node2D" parent="."]
 
@@ -1062,12 +1205,14 @@ position = Vector2(100, 165)
 [node name="character_battle4" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(60, 185)
 
-[connection signal="state_changed" from="state_machine" to="action_manager" method="_on_state_changed"]
+[connection signal="state_changed" from="state_machine" to="ui" method="_on_state_changed"]
+[connection signal="action_changed" from="action_manager" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_manager" to="state_machine" method="action_performed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
-[connection signal="pressed" from="ui/action_bar/attack_button" to="action_manager" method="perform_action"]
+[connection signal="pressed" from="ui/action_bar/attack_button" to="action_manager" method="set_state" binds= ["attack"]]
 [connection signal="mouse_entered" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_exited"]
+[connection signal="item_selected" from="ui/attack_menu" to="action_manager" method="set_item"]

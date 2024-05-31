@@ -8,6 +8,8 @@ signal died()
 signal special_increased(entity: Entity)
 signal special_full()
 
+signal selected(entity: Entity)
+
 # --- Variables --- #
 @export var is_player := false
 @export var use_special := false
@@ -31,10 +33,26 @@ var special_charge: float = 0
 @export var default_attack: Attack
 @export var attack_pool: Array[Attack]
 
+var is_mouse_over: bool = false
+
 # --- Functions --- #
 func setup(index: int):
 	hp = max_hp
 	spawn_index = index
+
+func _on_mouse_entered():
+	is_mouse_over = true
+
+func _on_mouse_exited():
+	is_mouse_over = false
+
+func _input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT:
+		return
+	if not (event.pressed and is_mouse_over):
+		return
+	
+	selected.emit(self)
 
 # - HP - #
 func take_damage(dmg: int):
@@ -65,3 +83,10 @@ func decrement_action() -> void:
 
 func can_act() -> bool:
 	return alive and action_count > 0
+
+# - Stats - #
+func get_attack(use_magic: bool) -> float:
+	return m_attack if use_magic else p_attack
+
+func get_defense(use_magic: bool) -> float:
+	return m_defense if use_magic else p_defense

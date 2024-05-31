@@ -5,6 +5,8 @@ extends Node2D
 @export var players: Array[Entity]
 var enemies: Array[Entity]
 
+var curr_entity: Entity
+
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 # - Encounter Info - #
@@ -14,6 +16,7 @@ var wave_count: int = 0
 
 # --- References --- #
 @onready var state_machine = $"state_machine" as BattleFsm
+@onready var action_fsm = $"action_manager" as BattleActionManager
 @onready var ui_manager = $"ui" as BattleUiManager
 
 # --- Functions --- #
@@ -28,9 +31,12 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	# TODO: Enable/Disable players based on party, load correct sprites into party
 	for i in range(len(players)):
 		var player = players[i]
+		# Signals
 		player.died.connect(check_state)
+		player.selected.connect(action_fsm.entity_selected)
+		player.lost_health.connect(ui_manager.on_damage_taken)
 		
-		# Player ui
+		# Player UI
 		ui_manager.setup_player_hp(player, i)
 		ui_manager.setup_player_special(player, i)
 	
@@ -65,7 +71,11 @@ func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	enemy.died.connect(check_state)
 	enemy.global_position = enemy_positions[spawn_index].global_position
 	enemies.append(enemy)
+	
+	# Signals
 	ui_manager.setup_enemy_hp(enemy, spawn_index)
+	enemy.selected.connect(action_fsm.entity_selected)
+	enemy.lost_health.connect(ui_manager.on_damage_taken)
 	
 	add_child(enemy)
 

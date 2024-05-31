@@ -5,8 +5,6 @@ extends BattleState
 var group: Array[Entity]
 var next_state: String
 
-var curr_entity: Entity
-
 # --- Functions --- #
 func state_entered() -> void:
 	# Replenish turns
@@ -17,22 +15,19 @@ func state_entered() -> void:
 	find_next_turn()
 
 func entity_removed(entity: Entity) -> void:
-	if entity == curr_entity:
+	if entity == root.curr_entity:
 		find_next_turn()
 
 func action_performed() -> void:
-	if is_instance_valid(curr_entity):
-		curr_entity.decrement_action()
+	if is_instance_valid(root.curr_entity):
+		root.curr_entity.decrement_action()
 	find_next_turn()
 
 # - Helper Functions - #
 func find_next_turn() -> void:
-	curr_entity = get_next_entity()
+	root.curr_entity = get_next_entity()
 	
-	if curr_entity:
-		print("Turn: ", curr_entity.name)
-	
-	if not curr_entity:
+	if not root.curr_entity:
 		fsm.set_state(next_state)
 
 func get_next_entity() -> Entity:

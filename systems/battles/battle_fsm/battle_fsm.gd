@@ -9,9 +9,6 @@ var curr_state: BattleState
 
 # --- Functions --- #
 func set_state(state: String) -> void:
-	if curr_state:
-		curr_state.state_exited()
-	
 	if not has_node(state + "_state"):
 		return
 	

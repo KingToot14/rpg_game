@@ -14,6 +14,3 @@ func entity_removed(entity: Entity) -> void:
 
 func action_performed() -> void:
 	print("action performed")
-
-func state_exited() -> void:
-	print("state exited")
