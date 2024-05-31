@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=22 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/battle_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/battle_fsm.gd" id="2_eejpv"]
@@ -6,8 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://cr0frogmee5t6" path="res://entities/player/character_battle.tscn" id="3_eaehr"]
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/player_state.gd" id="3_ntjl1"]
 [ext_resource type="Script" path="res://systems/battles/battle_fsm/enemy_state.gd" id="4_7xy13"]
-[ext_resource type="PackedScene" uid="uid://ty0c8f0laa02" path="res://entities/enemies/slimes/green_slime/green_slime.tscn" id="4_mcgku"]
+[ext_resource type="Script" path="res://systems/battles/battle_fsm/win_state.gd" id="5_1or2o"]
 [ext_resource type="Script" path="res://systems/battles/battle_action_manager.gd" id="5_hg5dv"]
+[ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_66gh2"]
+[ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_button.png" id="6_a4ney"]
+[ext_resource type="Script" path="res://systems/battles/battle_fsm/lose_state.gd" id="6_s453a"]
+[ext_resource type="Script" path="res://ui/battles/battle_action_button.gd" id="7_3w10q"]
+[ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/attack_melee.png" id="7_bd1i3"]
+[ext_resource type="Script" path="res://ui/battles/battle_ui_manager.gd" id="8_ex6oy"]
+[ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/block_melee.png" id="9_gvg6k"]
+[ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/tactics_melee.png" id="10_qg1o5"]
+[ext_resource type="Texture2D" uid="uid://dudecax1kui7x" path="res://ui/panel.png" id="14_hl1jg"]
+[ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
+[ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="16_efyqi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glmrl"]
+atlas = ExtResource("6_a4ney")
+region = Rect2(0, 0, 62, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kplc7"]
+atlas = ExtResource("6_a4ney")
+region = Rect2(0, 22, 62, 22)
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("players", "enemy_positions")]
 script = ExtResource("1_qxbbg")
@@ -23,25 +42,20 @@ script = ExtResource("3_ntjl1")
 [node name="enemy_state" type="Node2D" parent="state_machine"]
 script = ExtResource("4_7xy13")
 
+[node name="win_state" type="Node2D" parent="state_machine"]
+script = ExtResource("5_1or2o")
+
+[node name="lose_state" type="Node2D" parent="state_machine"]
+script = ExtResource("6_s453a")
+
 [node name="action_manager" type="Node2D" parent="." node_paths=PackedStringArray("action_bar")]
 script = ExtResource("5_hg5dv")
 action_bar = NodePath("../ui/action_bar")
 
-[node name="ui" type="CanvasLayer" parent="."]
-
-[node name="action_button" type="Button" parent="ui"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -63.0
-offset_top = -39.0
-offset_right = 63.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Perform Action"
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars")]
+script = ExtResource("8_ex6oy")
+player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
+enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -50,26 +64,890 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -90.0
-offset_right = 100.0
-offset_bottom = -50.0
+offset_left = -101.0
+offset_top = -32.0
+offset_right = 101.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("6_66gh2")
 
-[node name="backing" type="ColorRect" parent="ui/action_bar"]
+[node name="attack_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = -11.0
+offset_right = 62.0
+offset_bottom = 11.0
+grow_horizontal = 1
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_3w10q")
+normal_texture = SubResource("AtlasTexture_glmrl")
+hovered_texture = SubResource("AtlasTexture_kplc7")
+backing_rect = NodePath("backing")
+
+[node name="backing" type="TextureRect" parent="ui/action_bar/attack_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_glmrl")
+
+[node name="icon" type="TextureRect" parent="ui/action_bar/attack_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 22.0
+offset_bottom = 11.0
+grow_vertical = 2
+texture = ExtResource("7_bd1i3")
+
+[node name="action_name" type="Label" parent="ui/action_bar/attack_button"]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 59.0
+offset_bottom = 23.0
+theme_type_variation = &"AttackButton"
+text = "Attack"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="block_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -20.0
-offset_right = 100.0
-offset_bottom = 20.0
+offset_left = -31.0
+offset_top = -11.0
+offset_right = 31.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_3w10q")
+normal_texture = SubResource("AtlasTexture_glmrl")
+hovered_texture = SubResource("AtlasTexture_kplc7")
+backing_rect = NodePath("backing")
+
+[node name="backing" type="TextureRect" parent="ui/action_bar/block_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_glmrl")
+
+[node name="icon" type="TextureRect" parent="ui/action_bar/block_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 22.0
+offset_bottom = 11.0
+grow_vertical = 2
+texture = ExtResource("9_gvg6k")
+
+[node name="action_name" type="Label" parent="ui/action_bar/block_button"]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 59.0
+offset_bottom = 23.0
+theme_type_variation = &"BlockButton"
+text = "Block"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="tactics_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -11.0
+offset_right = 0.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_3w10q")
+normal_texture = SubResource("AtlasTexture_glmrl")
+hovered_texture = SubResource("AtlasTexture_kplc7")
+backing_rect = NodePath("backing")
+
+[node name="backing" type="TextureRect" parent="ui/action_bar/tactics_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_glmrl")
+
+[node name="icon" type="TextureRect" parent="ui/action_bar/tactics_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 22.0
+offset_bottom = 11.0
+grow_vertical = 2
+texture = ExtResource("10_qg1o5")
+
+[node name="action_name" type="Label" parent="ui/action_bar/tactics_button"]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 59.0
+offset_bottom = 23.0
+theme_type_variation = &"TacticsButton"
+text = "Tactics"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="player_hp" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -54.0
+offset_right = 100.0
+offset_bottom = 1.0
+grow_vertical = 0
+theme = ExtResource("6_66gh2")
+
+[node name="panel" type="NinePatchRect" parent="ui/player_hp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_hl1jg")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="hp_section" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 2.0
+offset_right = 48.5
+offset_bottom = 14.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+special_label = NodePath("special_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/player_hp/hp_section"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 74.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="special_value" type="Label" parent="ui/player_hp/hp_section"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"SpecialLabel"
+text = "67%"
+horizontal_alignment = 2
+
+[node name="hp_section2" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 15.0
+offset_right = 48.5
+offset_bottom = 27.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+special_label = NodePath("special_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/player_hp/hp_section2"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 74.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section2/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="special_value" type="Label" parent="ui/player_hp/hp_section2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"SpecialLabel"
+text = "67%"
+horizontal_alignment = 2
+
+[node name="hp_section3" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 28.0
+offset_right = 48.5
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+special_label = NodePath("special_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/player_hp/hp_section3"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section3"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 74.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section3/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="special_value" type="Label" parent="ui/player_hp/hp_section3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"SpecialLabel"
+text = "67%"
+horizontal_alignment = 2
+
+[node name="hp_section4" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 41.0
+offset_right = 48.5
+offset_bottom = 53.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+special_label = NodePath("special_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/player_hp/hp_section4"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section4"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 74.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section4/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="special_value" type="Label" parent="ui/player_hp/hp_section4"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -7.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_type_variation = &"SpecialLabel"
+text = "67%"
+horizontal_alignment = 2
+
+[node name="enemy_hp" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -67.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("6_66gh2")
+
+[node name="panel" type="NinePatchRect" parent="ui/enemy_hp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_hl1jg")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="hp_section" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 2.0
+offset_right = 48.5
+offset_bottom = 14.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 95.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="hp_section2" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 15.0
+offset_right = 48.5
+offset_bottom = 27.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section2"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 95.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section2/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="hp_section3" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 28.0
+offset_right = 48.5
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section3"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section3"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 95.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section3/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="hp_section4" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 41.0
+offset_right = 48.5
+offset_bottom = 53.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section4"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section4"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 95.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section4/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="hp_section5" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_top = 54.0
+offset_right = 48.5
+offset_bottom = 66.0
+grow_horizontal = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+script = ExtResource("16_efyqi")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+metadata/_edit_group_ = true
+
+[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section5"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 74.0
+offset_bottom = 14.0
+theme_type_variation = &"HpLabel"
+text = "12345/67890"
+
+[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section5"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 95.0
+offset_bottom = -1.0
+grow_vertical = 0
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section5/hp_fill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
 
 [node name="environment" type="Node2D" parent="."]
 
@@ -108,9 +986,12 @@ position = Vector2(100, 165)
 [node name="character_battle4" parent="." instance=ExtResource("3_eaehr")]
 position = Vector2(60, 185)
 
-[node name="slime" parent="." instance=ExtResource("4_mcgku")]
-max_hp = 0.0
-
 [connection signal="state_changed" from="state_machine" to="action_manager" method="_on_state_changed"]
 [connection signal="action_performed" from="action_manager" to="state_machine" method="action_performed"]
-[connection signal="pressed" from="ui/action_button" to="action_manager" method="perform_action"]
+[connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
+[connection signal="pressed" from="ui/action_bar/attack_button" to="action_manager" method="perform_action"]
+[connection signal="mouse_entered" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_exited"]

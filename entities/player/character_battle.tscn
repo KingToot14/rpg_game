@@ -6,6 +6,15 @@
 [node name="character_battle" type="Node2D"]
 z_index = 100
 script = ExtResource("1_xrkk6")
+is_player = true
+use_special = true
+max_hp = 210.0
+p_attack = 6.6
+p_defense = 5.4
+m_attack = 6.2
+m_defense = 5.0
+accuracy = 4.0
+evasion = 4.0
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_kjl5i")

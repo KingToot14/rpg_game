@@ -20,5 +20,8 @@ func set_state(state: String) -> void:
 	
 	state_changed.emit(state)
 
-func action_performed():
+func entity_removed(entity: Entity) -> void:
+	curr_state.entity_removed(entity)
+
+func action_performed() -> void:
 	curr_state.action_performed()

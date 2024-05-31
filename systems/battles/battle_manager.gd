@@ -14,6 +14,7 @@ var wave_count: int = 0
 
 # --- References --- #
 @onready var state_machine = $"state_machine" as BattleFsm
+@onready var ui_manager = $"ui" as BattleUiManager
 
 # --- Functions --- #
 func _ready():
@@ -25,8 +26,13 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	
 	# Setup players
 	# TODO: Enable/Disable players based on party, load correct sprites into party
-	for player in players:
+	for i in range(len(players)):
+		var player = players[i]
 		player.died.connect(check_state)
+		
+		# Player ui
+		ui_manager.setup_player_hp(player, i)
+		ui_manager.setup_player_special(player, i)
 	
 	# Setup waves
 	wave_count = len(encounter.waves)
@@ -35,11 +41,21 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	# Start state machine
 	state_machine.set_state('player')
 
+# - Wave Loading - #
+func load_next_wave() -> bool:
+	curr_wave += 1
+	
+	if curr_wave < wave_count:
+		load_wave(encounter.waves[curr_wave])
+		return true
+	return false
+
 func load_wave(wave: Wave) -> void:
 	for i in range(len(wave.enemies)):
 		if wave.enemies[i] != "":
 			AsyncLoader.new(wave.enemies[i], setup_enemy.bind(i))
 
+# - Entity Management - #
 func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	var enemy: Entity = enemy_scene.instantiate() as Entity
 	enemy.died.connect(check_state)
@@ -48,17 +64,23 @@ func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	
 	add_child(enemy)
 
+func remove_from_battle(entity: Entity) -> void:
+	players.erase(entity)
+	enemies.erase(entity)
+	
+	state_machine.entity_removed(entity)
+
 # - Battle State - #
 func check_state() -> void:
 	var state = evaluate_state()
 	
 	match state:
-		-1:
-			print("Loss :()")
-			load_overworld()
-		1:
-			print("Victory :)")
-			load_overworld()
+		-1:			# Loss
+			state_machine.set_state('lose')
+		1:			# Enemies cleared
+			print("Enemies cleared!")
+			if not load_next_wave():
+				state_machine.set_state('win')
 
 func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	var all_dead = true

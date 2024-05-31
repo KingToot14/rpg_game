@@ -35,10 +35,11 @@ folder_colors={
 "res://environment/": "green",
 "res://environment/shaders/trail/": "red",
 "res://environment/shaders/water/": "blue",
+"res://resources/": "teal",
 "res://scenes/": "yellow",
 "res://scripts/": "blue",
 "res://shaders/": "purple",
-"res://systems/": "teal",
+"res://systems/": "gray",
 "res://ui/": "pink"
 }
 
