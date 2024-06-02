@@ -45,7 +45,6 @@ func setup_player_special(player: Entity, index: int):
 	player_hp_bars[index].update_special(player)
 
 func _on_state_changed(state: String) -> void:
-	print("New state: ", state)
 	set_action_bar(state == 'player')
 
 func _on_action_changed(state: String) -> void:

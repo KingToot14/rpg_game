@@ -1,9 +1,9 @@
-class_name BattleState
+class_name TurnState
 extends Node2D
 
 # --- References --- #
-@onready var fsm: BattleFsm = $".."
-@onready var root: BattleManager = $"../.."
+@onready var fsm: TurnFSM = $".."
+@onready var root: EncounterManager = $"../.."
 
 # --- Functions --- #
 func state_entered() -> void:

@@ -1,4 +1,4 @@
-class_name BattleActionManager
+class_name ActionFSM
 extends Node2D
 
 # --- Signals --- #
@@ -8,10 +8,10 @@ signal action_changed(state: String)
 
 # --- Variables --- #
 var curr_state: ActionState
-var menu_selection
 
 # --- Functions --- #
 func _ready():
+	Globals.action_fsm = self
 	set_state('blank')
 
 func set_state(state: String) -> void:
@@ -23,12 +23,9 @@ func set_state(state: String) -> void:
 	curr_state.highlight_targets()
 	
 	# Reset selection
-	menu_selection = null
+	Globals.curr_item = null
 	
 	action_changed.emit(state)
-
-func set_item(item: Resource):
-	menu_selection = item
 
 func perform_action() -> void:
 	action_performed.emit()

@@ -1,9 +1,9 @@
-class_name EnemyState
+class_name PlayerState
 extends EntityTurnState
 
 # --- Functions --- #
 func state_entered():
 	# Setup state
-	group = root.enemies
-	next_state = 'player'
+	group_name = &'player'
+	next_state = 'enemy'
 	super()

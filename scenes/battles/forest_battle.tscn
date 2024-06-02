@@ -1,28 +1,28 @@
 [gd_scene load_steps=28 format=3 uid="uid://i4fdaoyskv5o"]
 
-[ext_resource type="Script" path="res://systems/battles/battle_manager.gd" id="1_qxbbg"]
-[ext_resource type="Script" path="res://systems/battles/battle_fsm/battle_fsm.gd" id="2_eejpv"]
+[ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_tiles.tres" id="2_j2t4l"]
 [ext_resource type="PackedScene" uid="uid://cr0frogmee5t6" path="res://entities/player/character_battle.tscn" id="3_eaehr"]
-[ext_resource type="Script" path="res://systems/battles/battle_fsm/player_state.gd" id="3_ntjl1"]
-[ext_resource type="Script" path="res://systems/battles/battle_fsm/enemy_state.gd" id="4_7xy13"]
-[ext_resource type="Script" path="res://systems/battles/battle_fsm/win_state.gd" id="5_1or2o"]
-[ext_resource type="Script" path="res://systems/battles/battle_action_manager.gd" id="5_hg5dv"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/player_state.gd" id="3_ntjl1"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/enemy_state.gd" id="4_7xy13"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/win_state.gd" id="5_1or2o"]
+[ext_resource type="Script" path="res://systems/battles/action_fsm/action_fsm.gd" id="5_hg5dv"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_66gh2"]
 [ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_menu/action_button.png" id="6_a4ney"]
-[ext_resource type="Script" path="res://systems/battles/battle_fsm/lose_state.gd" id="6_s453a"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/lose_state.gd" id="6_s453a"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/battle_action_button.gd" id="7_3w10q"]
 [ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/action_menu/attack_melee.png" id="7_bd1i3"]
 [ext_resource type="Script" path="res://ui/battles/battle_ui_manager.gd" id="8_ex6oy"]
 [ext_resource type="Script" path="res://systems/battles/action_fsm/action_state.gd" id="8_u1m5v"]
 [ext_resource type="Script" path="res://systems/battles/action_fsm/attack_action_state.gd" id="9_5pcwq"]
 [ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/action_menu/block_melee.png" id="9_gvg6k"]
+[ext_resource type="Script" path="res://systems/battles/attack_manager.gd" id="10_1kl6y"]
 [ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/tactics_melee.png" id="10_qg1o5"]
 [ext_resource type="Texture2D" uid="uid://dudecax1kui7x" path="res://ui/panel.png" id="14_hl1jg"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="16_efyqi"]
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
-[ext_resource type="Script" path="res://systems/battles/menu/action_menu.gd" id="17_rqhok"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="18_wdhfm"]
 [ext_resource type="Script" path="res://scripts/object_pool.gd" id="25_a1wgc"]
 
@@ -34,34 +34,36 @@ region = Rect2(0, 0, 62, 22)
 atlas = ExtResource("6_a4ney")
 region = Rect2(0, 22, 62, 22)
 
-[node name="battle_root" type="Node2D" node_paths=PackedStringArray("players", "enemy_positions")]
+[node name="battle_root" type="Node2D" node_paths=PackedStringArray("enemy_positions")]
 script = ExtResource("1_qxbbg")
-players = [NodePath("character_battle"), NodePath("character_battle2"), NodePath("character_battle3"), NodePath("character_battle4")]
 enemy_positions = [NodePath("enemy_positions/marker"), NodePath("enemy_positions/marker2"), NodePath("enemy_positions/marker3"), NodePath("enemy_positions/marker4"), NodePath("enemy_positions/marker5")]
 
-[node name="state_machine" type="Node2D" parent="."]
+[node name="turn_fsm" type="Node2D" parent="."]
 script = ExtResource("2_eejpv")
 
-[node name="player_state" type="Node2D" parent="state_machine"]
+[node name="player_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("3_ntjl1")
 
-[node name="enemy_state" type="Node2D" parent="state_machine"]
+[node name="enemy_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("4_7xy13")
 
-[node name="win_state" type="Node2D" parent="state_machine"]
+[node name="win_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("5_1or2o")
 
-[node name="lose_state" type="Node2D" parent="state_machine"]
+[node name="lose_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("6_s453a")
 
-[node name="action_manager" type="Node2D" parent="."]
+[node name="action_fsm" type="Node2D" parent="."]
 script = ExtResource("5_hg5dv")
 
-[node name="blank_state" type="Node2D" parent="action_manager"]
+[node name="blank_state" type="Node2D" parent="action_fsm"]
 script = ExtResource("8_u1m5v")
 
-[node name="attack_state" type="Node2D" parent="action_manager"]
+[node name="attack_state" type="Node2D" parent="action_fsm"]
 script = ExtResource("9_5pcwq")
+
+[node name="attack_manager" type="Node2D" parent="."]
+script = ExtResource("10_1kl6y")
 
 [node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu")]
 script = ExtResource("8_ex6oy")
@@ -409,7 +411,6 @@ offset_left = 142.0
 offset_top = 183.0
 offset_right = 201.0
 offset_bottom = 234.0
-script = ExtResource("17_rqhok")
 
 [node name="menu_button" type="BaseButton" parent="ui/attack_menu"]
 _import_path = NodePath("")
@@ -1183,14 +1184,13 @@ position = Vector2(60, 185)
 script = ExtResource("25_a1wgc")
 inital_items = Array[String](["damage_marker|10|res://ui/battles/damage_marker/damage_marker.tscn"])
 
-[connection signal="state_changed" from="state_machine" to="ui" method="_on_state_changed"]
-[connection signal="action_changed" from="action_manager" to="ui" method="_on_action_changed"]
-[connection signal="action_performed" from="action_manager" to="state_machine" method="action_performed"]
+[connection signal="state_changed" from="turn_fsm" to="ui" method="_on_state_changed"]
+[connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
+[connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
-[connection signal="pressed" from="ui/action_bar/attack_button" to="action_manager" method="set_state" binds= ["attack"]]
+[connection signal="pressed" from="ui/action_bar/attack_button" to="action_fsm" method="set_state" binds= ["attack"]]
 [connection signal="mouse_entered" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_exited"]
-[connection signal="item_selected" from="ui/attack_menu" to="action_manager" method="set_item"]

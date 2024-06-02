@@ -6,10 +6,10 @@ extends EntityBrain
 
 # --- Functions --- #
 func select_action() -> void:
-	parent.root.action_fsm.set_state('attack')
+	Globals.action_fsm.set_state('attack')
 
 func select_attack() -> void:
-	parent.root.action_fsm.set_item(parent.default_attack)
+	Globals.curr_item = parent.default_attack
 
 func select_target() -> void:
-	parent.root.get_random_player().select()
+	TargetingHelper.get_random_entity(&'player').select()

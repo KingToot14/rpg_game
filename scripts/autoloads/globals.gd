@@ -14,3 +14,11 @@ var overworld_area: String = "res://scenes/testing/starting_area.tscn"
 
 # --- Encounters --- #
 var encounter_resource: String
+
+var curr_entity: Entity
+var curr_targets: Array[Entity] = [null, null, null, null, null]
+
+var curr_item: Resource
+
+var action_fsm: ActionFSM
+var attack_manager: AttackManager

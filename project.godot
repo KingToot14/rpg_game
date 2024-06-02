@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://scripts/autoloads/scene_manager.gd"
 Globals="*res://scripts/autoloads/globals.gd"
+TargetingHelper="*res://scripts/autoloads/targeting_helper.gd"
 
 [display]
 

@@ -16,7 +16,7 @@ shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6kg0"]
 
-[node name="slime" type="Area2D" node_paths=PackedStringArray("marker_pos")]
+[node name="slime" type="Area2D" node_paths=PackedStringArray("marker_pos") groups=["enemy"]]
 z_index = 100
 script = ExtResource("1_gt34u")
 max_hp = 54.0
@@ -45,6 +45,7 @@ texture = ExtResource("1_rv35j")
 shape = SubResource("RectangleShape2D_r6kg0")
 
 [node name="marker" type="Marker2D" parent="."]
+visible = false
 position = Vector2(23, 0)
 
 [connection signal="died" from="." to="." method="kill"]

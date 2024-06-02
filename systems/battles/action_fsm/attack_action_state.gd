@@ -3,7 +3,7 @@ extends ActionState
 
 # --- Functions --- # 
 func entity_selected(entity: Entity) -> void:
-	var attack = fsm.menu_selection
+	var attack = Globals.curr_item
 	if not (attack and attack is Attack):
 		print("No attack selected")
 		return
@@ -15,15 +15,12 @@ func entity_selected(entity: Entity) -> void:
 	if not entity.is_player and attack.side == Attack.TargetSide.PLAYER:
 		return
 	
-	target = entity
+	Globals.curr_targets[0] = entity
 	
 	perform_action()
 
 func perform_action() -> void:
-	var attack = fsm.menu_selection as Attack
-	
-	var dmg = round(attack.calculate_damage(root.curr_entity, target))
-	
-	target.take_damage(dmg)
+	# TODO: Play animation on curr_entity
+	Globals.attack_manager.do_damage()
 	
 	fsm.perform_action()

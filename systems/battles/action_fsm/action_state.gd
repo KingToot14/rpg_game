@@ -2,10 +2,7 @@ class_name ActionState
 extends Node2D
 
 # --- Variables --- #
-@onready var fsm = $".." as BattleActionManager
-@onready var root = $'../..' as BattleManager
-
-var target: Entity
+@onready var fsm = $".." as ActionFSM
 
 # --- Functions --- #
 func state_entered() -> void:

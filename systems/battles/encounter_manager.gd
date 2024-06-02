@@ -1,12 +1,7 @@
-class_name BattleManager
+class_name EncounterManager
 extends Node2D
 
 # --- Variables --- #
-@export var players: Array[Entity]
-var enemies: Array[Entity]
-
-var curr_entity: Entity
-
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 # - Encounter Info - #
@@ -15,8 +10,8 @@ var curr_wave: int = 0
 var wave_count: int = 0
 
 # --- References --- #
-@onready var state_machine = $"state_machine" as BattleFsm
-@onready var action_fsm = $"action_manager" as BattleActionManager
+@onready var turn_fsm = $"turn_fsm" as TurnFSM
+@onready var action_fsm = $"action_fsm" as ActionFSM
 @onready var ui_manager = $"ui" as BattleUiManager
 
 # --- Functions --- #
@@ -29,8 +24,9 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	
 	# Setup players
 	# TODO: Enable/Disable players based on party, load correct sprites into party
+	var players = TargetingHelper.get_entities(&'player')
 	for i in range(len(players)):
-		var player = players[i]
+		var player: Entity = players[i]
 		# Signals
 		player.died.connect(check_state)
 		player.selected.connect(action_fsm.entity_selected)
@@ -44,7 +40,7 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	load_wave(encounter.waves[curr_wave])
 	
 	# Start state machine
-	state_machine.set_state('player')
+	turn_fsm.set_state('player')
 
 # - Wave Loading - #
 func load_next_wave() -> bool:
@@ -68,8 +64,7 @@ func load_wave(wave: Wave) -> void:
 func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	var enemy: Entity = enemy_scene.instantiate() as Entity
 	enemy.global_position = enemy_positions[spawn_index].global_position
-	enemies.append(enemy)
-	enemy.root = self
+	#enemies.append(enemy)
 	
 	# Signals
 	enemy.died.connect(check_state)
@@ -81,17 +76,8 @@ func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	add_child(enemy)
 
 func remove_from_battle(entity: Entity, index: int) -> void:
-	players.erase(entity)
-	enemies.erase(entity)
-	
 	ui_manager.setup_enemy_hp(null, index)
-	state_machine.entity_removed(entity)
-
-func get_random_player() -> Entity:
-	return players[randi_range(0, len(players) - 1)]
-
-func get_random_enemy() -> Entity:
-	return enemies[randi_range(0, len(enemies) - 1)]
+	turn_fsm.entity_removed(entity)
 
 # - Battle State - #
 func check_state() -> void:
@@ -99,20 +85,19 @@ func check_state() -> void:
 	
 	match state:
 		-1:			# Loss
-			state_machine.set_state('lose')
+			turn_fsm.set_state('lose')
 		1:			# Enemies cleared
 			print("Enemies cleared!")
 			if not load_next_wave():
-				state_machine.set_state('win')
+				turn_fsm.set_state('win')
 
 func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	var all_dead = true
 	
 	# Check if all players are dead
-	for player in players:
-		if not player:
-			continue
-		if player.alive:
+	var players = TargetingHelper.get_entities(&'player')
+	for player: Entity in players:
+		if player and player.alive:
 			all_dead = false
 			break
 	
@@ -121,10 +106,9 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	
 	# Check if all enemies are dead
 	all_dead = true
-	for enemy in enemies:
-		if not enemy:
-			continue
-		if enemy.alive:
+	var enemies = TargetingHelper.get_entities(&'enemy')
+	for enemy: Entity in enemies:
+		if enemy and enemy.alive:
 			all_dead = false
 	
 	return 1 if all_dead else 0

@@ -23,4 +23,4 @@ func update_health(dmg: float, entity: Entity) -> void:
 	hp_label.text = str(entity.hp) + "/" + str(entity.max_hp)
 
 func update_special(entity: Entity) -> void:
-	special_label.text = str(entity.special_charge) + "%"
+	special_label.text = str(floor(entity.special_charge)) + "%"

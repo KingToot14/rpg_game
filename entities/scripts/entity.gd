@@ -40,7 +40,6 @@ var special_charge: float = 0
 var is_mouse_over: bool = false
 
 # --- References --- #
-var root: BattleManager
 var brain: EntityBrain
 
 # --- Functions --- #

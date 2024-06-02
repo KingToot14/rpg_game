@@ -1,9 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=10 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="2_hdvll"]
 [ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/player_overworld_side_front.png" id="2_kjl5i"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
+
+[sub_resource type="Animation" id="Animation_0888u"]
+resource_name = "test"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Hello!"],
+"method": &"print_method"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7f1ak"]
+_data = {
+"test": SubResource("Animation_0888u")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
 resource_local_to_scene = true
@@ -13,7 +37,7 @@ shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 
-[node name="character_battle" type="Area2D" node_paths=PackedStringArray("marker_pos")]
+[node name="character_battle" type="Area2D" node_paths=PackedStringArray("marker_pos") groups=["player"]]
 z_index = 100
 script = ExtResource("1_xrkk6")
 is_player = true
@@ -26,6 +50,12 @@ m_defense = 5.0
 accuracy = 4.0
 evasion = 4.0
 marker_pos = NodePath("marker")
+
+[node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7f1ak")
+}
+script = ExtResource("2_xdhph")
 
 [node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_hdvll")
@@ -40,6 +70,7 @@ flip_h = true
 shape = SubResource("RectangleShape2D_syoe4")
 
 [node name="marker" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-21, 0)
 
 [connection signal="died" from="." to="." method="kill"]

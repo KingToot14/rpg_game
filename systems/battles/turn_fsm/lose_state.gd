@@ -1,5 +1,5 @@
 class_name LoseState
-extends BattleState
+extends TurnState
 
 # --- Functions --- #
 func state_entered() -> void:

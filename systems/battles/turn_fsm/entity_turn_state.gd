@@ -1,13 +1,14 @@
 class_name EntityTurnState
-extends BattleState
+extends TurnState
 
 # --- Variables --- #
-var group: Array[Entity]
+var group_name: StringName
 var next_state: String
 
 # --- Functions --- #
 func state_entered() -> void:
 	# Replenish turns
+	var group = TargetingHelper.get_entities(group_name)
 	for entity in group:
 		if is_instance_valid(entity):
 			entity.replenish_actions()
@@ -15,25 +16,26 @@ func state_entered() -> void:
 	find_next_turn()
 
 func entity_removed(entity: Entity) -> void:
-	if entity == root.curr_entity:
+	if entity == Globals.curr_entity:
 		find_next_turn()
 
 func action_performed() -> void:
-	if is_instance_valid(root.curr_entity):
-		root.curr_entity.decrement_action()
+	if is_instance_valid(Globals.curr_entity):
+		Globals.curr_entity.decrement_action()
 	find_next_turn()
 
 # - Helper Functions - #
 func find_next_turn() -> void:
-	root.curr_entity = get_next_entity()
+	Globals.curr_entity = get_next_entity()
 	
-	if root.curr_entity:
-		root.curr_entity.take_turn()
+	if Globals.curr_entity:
+		Globals.curr_entity.take_turn()
 	else:
 		fsm.set_state(next_state)
 
 func get_next_entity() -> Entity:
 	var i = 0
+	var group = TargetingHelper.get_entities(group_name)
 	var group_size = len(group)
 	
 	if group_size <= 0:
