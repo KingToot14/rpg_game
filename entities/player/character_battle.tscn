@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
 
-[sub_resource type="Animation" id="Animation_0888u"]
+[sub_resource type="Animation" id="Animation_iyisr"]
 resource_name = "test"
 step = 0.05
 tracks/0/type = "method"
@@ -16,17 +16,20 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.75, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": ["Hello!"],
-"method": &"print_method"
+"args": [],
+"method": &"timed_input"
+}, {
+"args": [],
+"method": &"do_damage"
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7f1ak"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
-"test": SubResource("Animation_0888u")
+"test": SubResource("Animation_iyisr")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
@@ -53,7 +56,7 @@ marker_pos = NodePath("marker")
 
 [node name="animator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7f1ak")
+"": SubResource("AnimationLibrary_xm32f")
 }
 script = ExtResource("2_xdhph")
 

@@ -40,7 +40,8 @@ var special_charge: float = 0
 var is_mouse_over: bool = false
 
 # --- References --- #
-var brain: EntityBrain
+@onready var brain: EntityBrain
+@onready var animator := $"animator" as AttackAnimator
 
 # --- Functions --- #
 func _ready() -> void:
@@ -113,10 +114,33 @@ func get_defense(use_magic: bool) -> float:
 	return m_defense if use_magic else p_defense
 
 # - Effects - #
-func show_damage_marker(dmg: int, entity: Entity) -> void:
+func show_damage_marker(dmg: int, _entity: Entity) -> void:
 	var damage_marker = Globals.object_pool.get_item('damage_marker') as DamageMarker
 	
 	damage_marker.visible = true
 	damage_marker.global_position = marker_pos.global_position
 	damage_marker.set_text(dmg, 0)
 	damage_marker.start_fade()
+
+# - Attacks - #
+func perform_attack(attack_name: StringName) -> void:
+	animator.play(attack_name)
+	animator.animation_finished.connect(action_ended, CONNECT_ONE_SHOT)
+
+func action_ended(_s: String) -> void:
+	Globals.action_fsm.perform_action()
+
+func get_timed_inputs(attack_name: StringName) -> Array[float]:
+	var attack_anim = animator.get_animation(attack_name)
+	if not attack_anim:
+		return []
+	
+	var track_id = attack_anim.find_track(^'animator', Animation.TYPE_METHOD)
+	var key_count = attack_anim.track_get_key_count(track_id)
+	
+	var locations: Array[float] = []
+	for i in range(key_count):
+		if attack_anim.track_get_key_value(track_id, i)['method'] == &'timed_input':
+			locations.append(attack_anim.track_get_key_time(track_id, i))
+	
+	return locations

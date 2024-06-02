@@ -29,6 +29,7 @@ func find_next_turn() -> void:
 	Globals.curr_entity = get_next_entity()
 	
 	if Globals.curr_entity:
+		fsm.start_turn()
 		Globals.curr_entity.take_turn()
 	else:
 		fsm.set_state(next_state)

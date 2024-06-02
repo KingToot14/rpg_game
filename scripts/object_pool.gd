@@ -18,7 +18,7 @@ func add_new_item(item_path: String, count: int, key: String) -> void:
 	AsyncLoader.new(item_path, populate_pool.bind(count, key))
 
 func populate_pool(item_scene: PackedScene, count: int, key: String) -> void:
-	var array: Array[Node]
+	var array: Array[Node] = []
 	
 	for i in range(count):
 		var scene := item_scene.instantiate() as Node

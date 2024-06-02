@@ -8,8 +8,18 @@ extends Node2D
 func _ready() -> void:
 	Globals.attack_manager = self
 
+func setup_attack() -> void:
+	Globals.timing_mods = []
+	Globals.ui_manager.show_timing()
+	
+	print(Globals.curr_entity.get_timed_inputs(&'test'))
+	Globals.curr_entity.perform_attack(&'test')
+
 func do_damage() -> void:
 	var attack = Globals.curr_item as Attack
 	var dmg = round(attack.calculate_damage(Globals.curr_entity, Globals.curr_targets[0]))
+	
+	if len(Globals.timing_mods) > 0:
+		dmg *= Globals.timing_mods.pop_front()
 	
 	Globals.curr_targets[0].take_damage(dmg)

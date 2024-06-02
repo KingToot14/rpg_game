@@ -12,7 +12,7 @@ var cover_size: float
 func _ready() -> void:
 	cover_size = cover_rect.size.x
 
-func update_health(dmg: float, entity: Entity) -> void:
+func update_health(_dmg: float, entity: Entity) -> void:
 	if not entity:
 		visible = false
 		return

@@ -2,6 +2,7 @@ extends Node2D
 
 # --- General --- #
 var object_pool: ObjectPool
+var ui_manager: CanvasLayer
 
 # --- Player --- #
 var player_area_pos: Vector2 = Vector2(240, 135)
@@ -19,6 +20,8 @@ var curr_entity: Entity
 var curr_targets: Array[Entity] = [null, null, null, null, null]
 
 var curr_item: Resource
+
+var timing_mods: Array[float] = []
 
 var action_fsm: ActionFSM
 var attack_manager: AttackManager

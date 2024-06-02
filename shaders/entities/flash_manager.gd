@@ -10,7 +10,7 @@ extends Node2D
 func set_flash_intensity(intensity: float) -> void:
 	sprite.material.set_shader_parameter('intensity', intensity)
 
-func _on_lost_health(dmg: int, entity: Entity) -> void:
+func _on_lost_health(_dmg: int, _entity: Entity) -> void:
 	do_hit_flash()
 
 func do_hit_flash() -> void:

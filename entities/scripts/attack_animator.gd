@@ -5,5 +5,5 @@ extends AnimationPlayer
 
 
 # --- Functions --- #
-func print_method(msg: String) -> void:
-	print(msg)
+func do_damage() -> void:
+	Globals.attack_manager.do_damage()

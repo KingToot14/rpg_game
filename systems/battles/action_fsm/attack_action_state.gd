@@ -20,7 +20,5 @@ func entity_selected(entity: Entity) -> void:
 	perform_action()
 
 func perform_action() -> void:
-	# TODO: Play animation on curr_entity
-	Globals.attack_manager.do_damage()
-	
-	fsm.perform_action()
+	fsm.start_action()
+	Globals.attack_manager.setup_attack()

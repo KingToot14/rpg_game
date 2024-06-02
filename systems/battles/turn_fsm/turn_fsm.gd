@@ -2,6 +2,8 @@ class_name TurnFSM
 extends Node2D
 
 # --- Signals --- #
+signal turn_started()
+
 signal state_changed(state: String)
 
 # --- Variables --- #
@@ -16,6 +18,9 @@ func set_state(state: String) -> void:
 	curr_state.state_entered()
 	
 	state_changed.emit(state)
+
+func start_turn() -> void:
+	turn_started.emit()
 
 func entity_removed(entity: Entity) -> void:
 	curr_state.entity_removed(entity)

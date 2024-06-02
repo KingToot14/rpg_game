@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=29 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="16_efyqi"]
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="18_wdhfm"]
+[ext_resource type="PackedScene" uid="uid://4ws5v52gxy05" path="res://ui/battles/timed_attacks/timed_single_hit.tscn" id="23_n5437"]
 [ext_resource type="Script" path="res://scripts/object_pool.gd" id="25_a1wgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glmrl"]
@@ -1143,6 +1144,8 @@ offset_bottom = 12.0
 theme = ExtResource("6_66gh2")
 text = "Condition: Normal"
 
+[node name="timed_single_hit" parent="ui" instance=ExtResource("23_n5437")]
+
 [node name="environment" type="Node2D" parent="."]
 
 [node name="ground" type="TileMap" parent="environment"]
@@ -1185,8 +1188,11 @@ script = ExtResource("25_a1wgc")
 inital_items = Array[String](["damage_marker|10|res://ui/battles/damage_marker/damage_marker.tscn"])
 
 [connection signal="state_changed" from="turn_fsm" to="ui" method="_on_state_changed"]
+[connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
+[connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="ui/action_bar/attack_button" to="action_fsm" method="set_state" binds= ["attack"]]

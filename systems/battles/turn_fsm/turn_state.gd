@@ -9,7 +9,7 @@ extends Node2D
 func state_entered() -> void:
 	pass
 
-func entity_removed(entity: Entity) -> void:
+func entity_removed(_entity: Entity) -> void:
 	pass
 
 func action_performed() -> void:

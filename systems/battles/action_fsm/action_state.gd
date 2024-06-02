@@ -11,7 +11,7 @@ func state_entered() -> void:
 func perform_action() -> void:
 	pass
 
-func entity_selected(entity: Entity) -> void:
+func entity_selected(_entity: Entity) -> void:
 	pass
 
 func highlight_targets() -> void:

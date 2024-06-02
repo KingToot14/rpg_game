@@ -1,12 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=13 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Texture2D" uid="uid://d150qke6mhk3j" path="res://entities/enemies/slimes/green_slime/slime_overworld.png" id="1_rv35j"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/jump_and_back.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/slime_fling.tres" id="3_8qkmm"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
 [ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="4_i27sh"]
 [ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
+
+[sub_resource type="Animation" id="Animation_cqehk"]
+resource_name = "test"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.75, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"timed_input"
+}, {
+"args": [],
+"method": &"do_damage"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
+_data = {
+"test": SubResource("Animation_cqehk")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2ut"]
 resource_local_to_scene = true
@@ -30,8 +57,15 @@ default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
 marker_pos = NodePath("marker")
 
+[node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_25d6s")
+}
+script = ExtResource("4_h60i5")
+
 [node name="brain" type="Node2D" parent="."]
 script = ExtResource("4_xr6bx")
+action_delay = 0.0
 
 [node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_i27sh")
