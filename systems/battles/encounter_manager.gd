@@ -2,6 +2,7 @@ class_name EncounterManager
 extends Node2D
 
 # --- Variables --- #
+@export var player_count: int = 1
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 # - Encounter Info - #
@@ -26,6 +27,11 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	# TODO: Enable/Disable players based on party, load correct sprites into party
 	var players = TargetingHelper.get_entities(&'player')
 	for i in range(len(players)):
+		if i >= player_count:
+			players[i].queue_free()
+			ui_manager.setup_player_hp(null, i)
+			continue
+		
 		var player: Entity = players[i]
 		# Signals
 		player.died.connect(check_state)

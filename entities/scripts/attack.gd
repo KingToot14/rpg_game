@@ -8,6 +8,7 @@ enum DamageType { PHYSICAL, MAGICAL }
 
 # --- Variables --- #
 @export var name: String
+@export var animation_name: StringName
 
 @export var power: float
 @export var side: TargetSide = TargetSide.PLAYER

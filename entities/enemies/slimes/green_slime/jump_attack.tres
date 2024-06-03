@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bfpawiqlpgd8f"]
 
-[ext_resource type="Script" path="res://entities/scripts/attack.gd" id="1_48oel"]
+[ext_resource type="Script" path="res://entities/scripts/attack.gd" id="1_bbh54"]
 
 [resource]
-script = ExtResource("1_48oel")
-name = "Jump and back"
+script = ExtResource("1_bbh54")
+name = "Jump Attack"
+animation_name = &"jump_attack"
 power = 13.0
+side = 0
 targeting = 0
 damage_type = 0
 accuracy = 100.0

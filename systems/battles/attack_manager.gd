@@ -15,7 +15,7 @@ func setup_attack() -> void:
 		Globals.ui_manager.show_timing(&"single_hit", Globals.curr_entity.get_timed_inputs(&'test'))
 		print(Globals.curr_entity.get_timed_inputs(&'test'))
 	
-	Globals.curr_entity.perform_attack(&'test')
+	Globals.curr_entity.perform_attack(Globals.curr_item.animation_name)
 
 func do_damage() -> void:
 	var attack = Globals.curr_item as Attack
