@@ -26,6 +26,29 @@ tracks/0/keys = {
 "method": &"do_damage"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("animator")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
@@ -70,6 +93,7 @@ texture = ExtResource("2_kjl5i")
 flip_h = true
 
 [node name="shape" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_syoe4")
 
 [node name="marker" type="Marker2D" parent="."]

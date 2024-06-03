@@ -16,7 +16,7 @@ var is_player_turn := false
 @export var attack_menu: Control
 
 @export_group("Timings")
-@export var single_hit: Control
+@export var single_hit: TimedSingleHit
 
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"

@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -420.0
+offset_bottom = -238.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -16,12 +18,14 @@ needles = [NodePath("pivot")]
 
 [node name="indicator" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 60.0
-offset_bottom = 32.0
+offset_left = -30.0
+offset_top = -15.0
+offset_right = 30.0
+offset_bottom = 17.0
 texture = ExtResource("1_2nnw5")
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(30, 31)
+position = Vector2(0, 16)
 
 [node name="needle" type="ColorRect" parent="pivot"]
 offset_left = -1.0

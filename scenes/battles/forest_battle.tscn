@@ -66,7 +66,7 @@ script = ExtResource("9_5pcwq")
 [node name="attack_manager" type="Node2D" parent="."]
 script = ExtResource("10_1kl6y")
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu", "single_hit")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
@@ -74,6 +74,7 @@ wave_label = NodePath("encounter_info/wave_panel/label")
 condition_label = NodePath("encounter_info/condition_panel/label")
 action_bar = NodePath("action_bar")
 attack_menu = NodePath("attack_menu")
+single_hit = NodePath("timed_single_hit")
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -1145,6 +1146,14 @@ theme = ExtResource("6_66gh2")
 text = "Condition: Normal"
 
 [node name="timed_single_hit" parent="ui" instance=ExtResource("23_n5437")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_top = 32.0
+offset_right = 0.0
+offset_bottom = 32.0
+grow_vertical = 1
 
 [node name="environment" type="Node2D" parent="."]
 

@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func setup_attack() -> void:
 	Globals.timing_mods = []
-	Globals.ui_manager.show_timing()
+	Globals.ui_manager.show_timing(&"single_hit", Globals.curr_entity.get_timed_inputs(&'test'))
 	
 	print(Globals.curr_entity.get_timed_inputs(&'test'))
 	Globals.curr_entity.perform_attack(&'test')
