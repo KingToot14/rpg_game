@@ -129,6 +129,7 @@ func perform_attack(attack_name: StringName) -> void:
 
 func action_ended(_s: String) -> void:
 	Globals.action_fsm.perform_action()
+	Globals.ui_manager.show_timing('none', null)
 
 func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	var attack_anim = animator.get_animation(attack_name)

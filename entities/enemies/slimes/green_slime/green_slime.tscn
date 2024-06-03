@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=20 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
-[ext_resource type="Texture2D" uid="uid://d150qke6mhk3j" path="res://entities/enemies/slimes/green_slime/slime_overworld.png" id="1_rv35j"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/jump_and_back.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/slime_fling.tres" id="3_8qkmm"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
 [ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="4_i27sh"]
 [ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
+[ext_resource type="Texture2D" uid="uid://v3vpfe1gmp8g" path="res://entities/enemies/slimes/green_slime/green_battle.png" id="8_qwy3a"]
+[ext_resource type="Texture2D" uid="uid://wwwrofwbdxni" path="res://entities/enemies/slimes/green_slime/decorations.png" id="9_3hgmi"]
+[ext_resource type="Script" path="res://scripts/textures/texture_randomizer.gd" id="10_rxi4p"]
 
 [sub_resource type="Animation" id="Animation_cqehk"]
 resource_name = "test"
@@ -41,7 +43,29 @@ shader = ExtResource("5_317s2")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6kg0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0mr0"]
+atlas = ExtResource("9_3hgmi")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jidx"]
+atlas = ExtResource("9_3hgmi")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1syyo"]
+atlas = ExtResource("9_3hgmi")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfn72"]
+atlas = ExtResource("9_3hgmi")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsn6e"]
+atlas = ExtResource("9_3hgmi")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ldi4s"]
+radius = 12.0
+height = 34.0
 
 [node name="slime" type="Area2D" node_paths=PackedStringArray("marker_pos") groups=["enemy"]]
 z_index = 100
@@ -73,10 +97,19 @@ sprite = NodePath("../sprite")
 
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ju2ut")
-texture = ExtResource("1_rv35j")
+texture = ExtResource("8_qwy3a")
+
+[node name="decoration" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ju2ut")
+position = Vector2(0, -20)
+texture = SubResource("AtlasTexture_d0mr0")
+script = ExtResource("10_rxi4p")
+textures = Array[Texture2D]([SubResource("AtlasTexture_1jidx"), SubResource("AtlasTexture_1syyo"), SubResource("AtlasTexture_tfn72"), SubResource("AtlasTexture_fsn6e")])
 
 [node name="shape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_r6kg0")
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ldi4s")
 
 [node name="marker" type="Marker2D" parent="."]
 visible = false
