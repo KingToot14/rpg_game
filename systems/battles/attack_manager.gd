@@ -9,15 +9,17 @@ func _ready() -> void:
 	Globals.attack_manager = self
 
 func setup_attack() -> bool:
-	if not Globals.curr_entity.contains_attack(Globals.curr_item.animation_name):
+	var anim_name = Globals.curr_item.animation_name
+	
+	if not Globals.curr_entity.contains_attack(anim_name):
 		return false
 	
 	Globals.timing_mods = []
 	
 	if Globals.curr_entity.is_player:
-		Globals.ui_manager.show_timing(&"single_hit", Globals.curr_entity.get_timed_inputs(&'test'))
+		Globals.ui_manager.show_timing(&"single_hit", Globals.curr_entity.get_timed_inputs(anim_name))
 	
-	Globals.curr_entity.perform_attack(Globals.curr_item.animation_name)
+	Globals.curr_entity.perform_attack(anim_name)
 	
 	return true
 

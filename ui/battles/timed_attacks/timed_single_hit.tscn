@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://4ws5v52gxy05"]
+[gd_scene load_steps=5 format=3 uid="uid://4ws5v52gxy05"]
 
 [ext_resource type="Texture2D" uid="uid://c0qey3o7klpvt" path="res://ui/battles/timed_attacks/single_hit.png" id="1_2nnw5"]
 [ext_resource type="Script" path="res://ui/battles/timed_attacks/timed_single_hit.gd" id="1_qq41b"]
+[ext_resource type="Shader" path="res://ui/battles/timed_attacks/single_hit_backing.gdshader" id="2_hevfe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5060"]
+shader = ExtResource("2_hevfe")
+shader_parameter/threshold = 0.1
+shader_parameter/good_color = Color(0.254902, 0.937255, 0.164706, 1)
+shader_parameter/perf_color = Color(0.941176, 0.901961, 0.168627, 1)
 
 [node name="timed_single_hit" type="Control" node_paths=PackedStringArray("needles")]
 layout_mode = 3
@@ -17,6 +24,7 @@ script = ExtResource("1_qq41b")
 needles = [NodePath("pivot")]
 
 [node name="indicator" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5060")
 layout_mode = 0
 offset_left = -30.0
 offset_top = -15.0
@@ -25,7 +33,7 @@ offset_bottom = 17.0
 texture = ExtResource("1_2nnw5")
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(0, 16)
+position = Vector2(0, 15)
 
 [node name="needle" type="ColorRect" parent="pivot"]
 offset_left = -1.0
