@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_v52e1")
 name = "Normal Attack"
-animation_name = &"test"
+animation_name = &"normal_attack"
 power = 40.0
 side = 1
 targeting = 0

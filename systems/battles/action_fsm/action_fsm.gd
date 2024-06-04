@@ -26,8 +26,8 @@ func set_state(state: String) -> void:
 	action_changed.emit(state)
 
 func start_action() -> void:
-	action_started.emit()
 	set_state('blank')
+	action_started.emit()
 
 func perform_action() -> void:
 	action_performed.emit()

@@ -25,6 +25,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/decoration:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-20.0]
+}
 
 [sub_resource type="Animation" id="Animation_yw2to"]
 resource_name = "jump_attack"
@@ -37,11 +61,17 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.35, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": ["target", 0.65],
+"method": &"move_towards"
+}, {
 "args": [],
 "method": &"do_damage"
+}, {
+"args": ["home", 0.65],
+"method": &"move_towards"
 }]
 }
 tracks/1/type = "value"
@@ -55,6 +85,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0, 3, 4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7, 0, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:position:y")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.35, 0.4, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -25.0, -25.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/decoration:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.25, 0.3, 0.35, 0.95, 1, 1.05, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-20.0, -18.0, -15.0, -20.0, -23.0, -24.0, -20.0, -15.0, -18.0, -20.0]
 }
 
 [sub_resource type="Animation" id="Animation_cqehk"]
@@ -95,7 +149,7 @@ shader_parameter/intensity = 0.0
 radius = 12.0
 height = 34.0
 
-[node name="slime" type="Area2D" node_paths=PackedStringArray("marker_pos") groups=["enemy"]]
+[node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos") groups=["enemy"]]
 z_index = 100
 script = ExtResource("1_gt34u")
 max_hp = 54.0
@@ -107,7 +161,8 @@ accuracy = 4.0
 evasion = 3.0
 default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
-marker_pos = NodePath("marker")
+front_marker = NodePath("front_marker")
+marker_pos = NodePath("damage_marker")
 
 [node name="animator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -129,8 +184,7 @@ texture = ExtResource("8_qwy3a")
 hframes = 4
 vframes = 2
 
-[node name="decoration" type="Sprite2D" parent="."]
-visible = false
+[node name="decoration" type="Sprite2D" parent="sprite"]
 material = SubResource("ShaderMaterial_ju2ut")
 position = Vector2(0, -20)
 texture = ExtResource("9_3hgmi")
@@ -144,9 +198,12 @@ position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ldi4s")
 
-[node name="marker" type="Marker2D" parent="."]
+[node name="damage_marker" type="Marker2D" parent="."]
 visible = false
 position = Vector2(23, 0)
+
+[node name="front_marker" type="Marker2D" parent="."]
+position = Vector2(-40, 0)
 
 [connection signal="died" from="." to="." method="kill"]
 [connection signal="lost_health" from="." to="flash_manager" method="_on_lost_health"]

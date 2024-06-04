@@ -20,5 +20,5 @@ func entity_selected(entity: Entity) -> void:
 	perform_action()
 
 func perform_action() -> void:
-	fsm.start_action()
-	Globals.attack_manager.setup_attack()
+	if Globals.attack_manager.setup_attack():
+		fsm.start_action()

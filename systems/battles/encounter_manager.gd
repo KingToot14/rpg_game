@@ -33,6 +33,7 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 			continue
 		
 		var player: Entity = players[i]
+		
 		# Signals
 		player.died.connect(check_state)
 		player.selected.connect(action_fsm.entity_selected)
@@ -70,7 +71,6 @@ func load_wave(wave: Wave) -> void:
 func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
 	var enemy: Entity = enemy_scene.instantiate() as Entity
 	enemy.global_position = enemy_positions[spawn_index].global_position
-	#enemies.append(enemy)
 	
 	# Signals
 	enemy.died.connect(check_state)

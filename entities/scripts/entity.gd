@@ -15,6 +15,8 @@ signal selected(entity: Entity)
 @export var use_special := false
 var alive: bool = true
 var spawn_index: int
+var home_position: Vector2
+var performing: bool = false
 
 @export_group("Stats")
 @export var max_hp: float
@@ -32,6 +34,9 @@ var special_charge: float = 0
 @export_group("Attacks")
 @export var default_attack: Attack
 @export var attack_pool: Array[Attack]
+var valid_attacks: Array[StringName] = []
+
+@export var front_marker: Node2D
 
 @export_group("Effects")
 @export var marker_pos: Node2D
@@ -45,6 +50,9 @@ var is_mouse_over: bool = false
 
 # --- Functions --- #
 func _ready() -> void:
+	for attack in attack_pool:
+		valid_attacks.append(attack.animation_name)
+	
 	lost_health.connect(show_damage_marker)
 	
 	if not is_player:
@@ -53,6 +61,7 @@ func _ready() -> void:
 func setup(index: int):
 	hp = max_hp
 	spawn_index = index
+	home_position = global_position
 
 func _on_mouse_entered():
 	is_mouse_over = true
@@ -124,12 +133,23 @@ func show_damage_marker(dmg: int, _entity: Entity) -> void:
 
 # - Attacks - #
 func perform_attack(attack_name: StringName) -> void:
+	if performing:
+		print("Already performing")
+		return
+	
+	performing = true
+	
 	animator.play(attack_name)
 	animator.animation_finished.connect(action_ended, CONNECT_ONE_SHOT)
 
 func action_ended(_s: String) -> void:
+	performing = false
+	
 	Globals.action_fsm.perform_action()
 	Globals.ui_manager.show_timing('none', null)
+
+func contains_attack(attack_name: StringName) -> bool:
+	return attack_name in valid_attacks
 
 func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	var attack_anim = animator.get_animation(attack_name)
@@ -145,3 +165,7 @@ func get_timed_inputs(attack_name: StringName) -> Array[float]:
 			locations.append(attack_anim.track_get_key_time(track_id, i))
 	
 	return locations
+
+# - Positioning - #
+func get_front_pos() -> Vector2:
+	return front_marker.global_position

@@ -8,14 +8,18 @@ extends Node2D
 func _ready() -> void:
 	Globals.attack_manager = self
 
-func setup_attack() -> void:
+func setup_attack() -> bool:
+	if not Globals.curr_entity.contains_attack(Globals.curr_item.animation_name):
+		return false
+	
 	Globals.timing_mods = []
 	
 	if Globals.curr_entity.is_player:
 		Globals.ui_manager.show_timing(&"single_hit", Globals.curr_entity.get_timed_inputs(&'test'))
-		print(Globals.curr_entity.get_timed_inputs(&'test'))
 	
 	Globals.curr_entity.perform_attack(Globals.curr_item.animation_name)
+	
+	return true
 
 func do_damage() -> void:
 	var attack = Globals.curr_item as Attack

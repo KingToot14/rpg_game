@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ui/battles/damage_marker/damage_marker.gd" id="1_tbwek"]
 
 [node name="damage_marker" type="Node2D" node_paths=PackedStringArray("dmg_label", "crit_label")]
+z_index = 1000
 script = ExtResource("1_tbwek")
 dmg_label = NodePath("dmg_label")
 crit_label = NodePath("crit_label")
