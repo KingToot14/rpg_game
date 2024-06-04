@@ -22,6 +22,7 @@ var is_player_turn := false
 @export var good_color := Color.WHITE;
 @export var perf_color := Color.WHITE;
 @export var poor_color := Color.WHITE;
+var result_color: Color
 
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"
@@ -87,10 +88,27 @@ func show_timing(version: StringName, target: Variant) -> void:
 		single_hit.setup_timing(target)
 
 func show_timing_result(key: StringName) -> void:
+	result_label.visible = true
+	
 	match key:
 		&'perfect':
 			result_label.text = "Perfect!"
+			result_color = perf_color
 		&'good':
 			result_label.text = "Good"
+			result_color = good_color
 		&'poor':
 			result_label.text = "Poor"
+			result_color = poor_color
+	
+	set_result_text_alpha(1.0)
+	
+	var tween = create_tween()
+	
+	tween.tween_interval(0.5)
+	tween.tween_method(set_result_text_alpha, 1.0, 0.0, 0.5)
+	tween.finished.connect(result_label.hide)
+
+func set_result_text_alpha(alpha: float):
+	result_color.a = alpha
+	result_label.add_theme_color_override('font_color', result_color)

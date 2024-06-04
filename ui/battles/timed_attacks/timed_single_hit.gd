@@ -23,14 +23,15 @@ func _process(delta):
 	
 	needles[0].rotation_degrees = 90 - 180 * needle_pos * rotation_speed
 	if visible and needles[0].rotation_degrees > 90:
-		set_result(&'poor')
+		if needles[0].visible:
+			set_result(&'poor')
 
 func _input(event):
 	if not (visible and event is InputEventKey and event.is_pressed()):
 		return
 	
 	if needle_pos < PERF_THRESHOLD:
-		set_result(&'perf')
+		set_result(&'perfect')
 	elif needle_pos > 0:
 		set_result(&'good')
 	else:
@@ -53,4 +54,4 @@ func set_result(result: StringName) -> void:
 			Globals.timing_mods.append(POOR_MULT)
 	
 	Globals.ui_manager.show_timing_result(result)
-	visible = false 
+	visible = false

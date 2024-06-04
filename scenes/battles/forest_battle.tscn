@@ -315,7 +315,7 @@ position = Vector2(423, 308)
 [node name="forest_tree17" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
 position = Vector2(359, 301)
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu", "single_hit")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "action_bar", "attack_menu", "single_hit", "result_label")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
@@ -324,6 +324,10 @@ condition_label = NodePath("encounter_info/condition_panel/label")
 action_bar = NodePath("action_bar")
 attack_menu = NodePath("attack_menu")
 single_hit = NodePath("timed_single_hit")
+result_label = NodePath("results_label")
+good_color = Color(0.254902, 0.937255, 0.164706, 1)
+perf_color = Color(0.941176, 0.901961, 0.168627, 1)
+poor_color = Color(0.941176, 0.168627, 0.168627, 1)
 
 [node name="action_bar" type="Control" parent="ui"]
 layout_mode = 3
@@ -1400,10 +1404,24 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
-offset_top = 32.0
+offset_top = 25.0
 offset_right = 0.0
-offset_bottom = 32.0
+offset_bottom = 25.0
 grow_vertical = 1
+
+[node name="results_label" type="Label" parent="ui"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = 44.0
+offset_right = 45.0
+offset_bottom = 67.0
+grow_horizontal = 2
+text = "Perfect!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="enemy_positions" type="Node2D" parent="."]
 
