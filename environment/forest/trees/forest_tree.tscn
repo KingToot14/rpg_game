@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://x3sh11ejtmsd"]
+[gd_scene load_steps=14 format=3 uid="uid://x3sh11ejtmsd"]
 
 [ext_resource type="Texture2D" uid="uid://d6smshem72ig" path="res://environment/forest/trees/tree_trunk.png" id="1_fpte0"]
 [ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
@@ -18,14 +18,22 @@ shader_parameter/intensity = 0.0
 shader_parameter/player_influence = 0.15
 shader_parameter/radius = 0.15
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tp4f"]
+frequency = 0.0553
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t32mv"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_5tp4f")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4ale"]
 resource_local_to_scene = true
 shader = ExtResource("5_qdvdd")
 shader_parameter/transparency = 0.0
-shader_parameter/amplitude = 1.0
-shader_parameter/vert_influence = 8.0
 shader_parameter/wind_speed = 2.0
-shader_parameter/wind_falloff = 0.5
+shader_parameter/wind_threshold = 0.6
+shader_parameter/wave_count = 3.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_t32mv")
 shader_parameter/player_influence = 0.6
 shader_parameter/radius = 0.05
 

@@ -22,24 +22,19 @@ func _process(delta):
 	needle_pos -= delta
 	
 	needles[0].rotation_degrees = 90 - 180 * needle_pos * rotation_speed
-	if needles[0].rotation_degrees > 90:
-		if needles[0].visible:
-			Globals.timing_mods.append(POOR_MULT)
-		needles[0].visible = false
+	if visible and needles[0].rotation_degrees > 90:
+		set_result(&'poor')
 
 func _input(event):
 	if not (visible and event is InputEventKey and event.is_pressed()):
 		return
 	
 	if needle_pos < PERF_THRESHOLD:
-		Globals.timing_mods.append(PERF_MULT)
-		needles[0].visible = false
+		set_result(&'perf')
 	elif needle_pos > 0:
-		Globals.timing_mods.append(GOOD_MULT)
-		needles[0].visible = false
+		set_result(&'good')
 	else:
-		Globals.timing_mods.append(POOR_MULT)
-		needles[0].visible = false
+		set_result(&'poor')
 
 func setup_timing(timings: Array[float]) -> void:
 	backing.material.set_shader_parameter('threshold', PERF_THRESHOLD * rotation_speed)
@@ -47,3 +42,15 @@ func setup_timing(timings: Array[float]) -> void:
 	needle_pos = timings[0]
 	needles[0].rotation_degrees = 90 - 180 * needle_pos * rotation_speed
 	needles[0].visible = true
+
+func set_result(result: StringName) -> void:
+	match result:
+		&'perfect':
+			Globals.timing_mods.append(PERF_MULT)
+		&'good':
+			Globals.timing_mods.append(GOOD_MULT)
+		&'poor':
+			Globals.timing_mods.append(POOR_MULT)
+	
+	Globals.ui_manager.show_timing_result(result)
+	visible = false 

@@ -2,8 +2,7 @@ shader_type canvas_item;
 
 // --- Uniforms --- //
 global uniform float wind_position;
-
-uniform vec2 texture_size = vec2(480, 270);
+global uniform vec2 screen_size;
 
 group_uniforms colors;
 uniform vec4 tip_color: source_color;
@@ -35,28 +34,34 @@ float get_wind(vec2 _uv) {
 	return step(0.0, wind) * step(0.8, 1.0 - wind);
 }
 
+float get_patch(vec2 _uv) {
+	return texture(patch_noise, _uv).g;
+}
+
 void fragment() {
 	// Hide roots
 	COLOR = mix(vec4(0.0), get_side_color(0.0), step(0.001, COLOR.g));
 	
-	vec2 uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
+	vec2 uv = round(UV * (screen_size + 1.0) - (UV - 0.5)) / (screen_size + 1.0);
 	
 	// Draw blade
 	for (float dist = 1.0; dist < MAX_GRASS_LENGTH; dist++) {
 		uv.y += TEXTURE_PIXEL_SIZE.y;
 		
 		float blade_len = texture(TEXTURE, uv).g * 255.0;
-		blade_len += step(0.50, texture(patch_noise, uv).g) * step(0.1, blade_len);
-		float curr_wind = get_wind(uv / TEXTURE_PIXEL_SIZE);
+		//blade_len += step(0.50, texture(patch_noise, uv).g) * step(0.1, blade_len);
+		//float curr_wind = get_wind(uv / TEXTURE_PIXEL_SIZE);
 		
 		// Large-scale wind
-		blade_len -= curr_wind;
-		curr_wind *= wind_intensity;
+		//blade_len -= curr_wind;
+		//curr_wind *= wind_intensity;
 		
 		// Color side if distance < blade length
 		COLOR = mix(COLOR, get_side_color(dist / 8.0), step(dist, blade_len));
 		// Color tip if distance == blade length
-		COLOR = mix(COLOR, tip_color + 0.1 * curr_wind + step(0.50, texture(patch_noise, uv)) * patch_intensity, 
+		//COLOR = mix(COLOR, tip_color + 0.1 * curr_wind + step(0.50, get_patch(uv)) * patch_intensity, 
+				//1.0 - step(0.1, abs(dist - blade_len)));
+		COLOR = mix(COLOR, tip_color + step(0.50, get_patch(uv)) * patch_intensity, 
 				1.0 - step(0.1, abs(dist - blade_len)));
 	}
   }

@@ -24,8 +24,6 @@ float get_wind(vec2 _uv) {
 }
 
 void fragment() {
-	vec2 uv = UV / TEXTURE_PIXEL_SIZE;
-	
 	// Wind
 	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
 	vec2 wind_uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);

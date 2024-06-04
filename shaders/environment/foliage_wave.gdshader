@@ -1,16 +1,20 @@
 shader_type canvas_item;
 
+// --- Includes --- //
+#include "res://shaders/general_methods.gdshaderinc"
+
 // --- Uniforms --- //
 global uniform vec2 player_position;
 global uniform float wind_position;
+global uniform vec2 screen_size;
 
 uniform float transparency: hint_range(0.0, 1.0, 0.05) = 0.0;
 
 group_uniforms wind;
-uniform float amplitude: hint_range(0.0, 5.0, 0.5) = 1.0;
-uniform float vert_influence: hint_range(0.0, 20.0, 0.5) = 8.0;
 uniform float wind_speed: hint_range(-5.0, 5.0, 0.05) = 2.0;
-uniform float wind_falloff: hint_range(0.0, 1.0, 0.05) = 0.0;
+uniform float wind_threshold: hint_range(-1.0, 1.0, 0.05) = 0.75;
+uniform float wave_count: hint_range(1.0, 10.0) = 3.0;
+uniform sampler2D wind_noise: filter_nearest, repeat_enable;
 
 group_uniforms player;
 uniform float player_influence: hint_range(0.0, 1.0, 0.05) = 0.60;
@@ -26,22 +30,28 @@ const mat4 THRESHOLD_MATRIX = mat4(
 		vec4(16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0));
 
 // --- Functions --- //
-float sine_wave(float _period, float _amp, float _phase, vec2 _dir, vec2 _pos) {
-  return _amp * sin(TWO_PI / _period * dot(_dir, _pos) + _phase);
+float get_wind(float _height) {
+	return step(wind_threshold, sin((2.0 * PI * wave_count * _height) / screen_size.y));
+}
+
+float get_noise(vec2 _uv) {
+	return step(0.5, texture(wind_noise, _uv).g);
 }
 
 void fragment() {
-	vec2 uv = UV / TEXTURE_PIXEL_SIZE;
+	vec2 pos = pixelize(1.0 - SCREEN_UV, screen_size) * screen_size;
 	
-	// Wind
-	vec2 texture_size = vec2(textureSize(TEXTURE, 0));
-	vec2 wind_uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
-	float wind = sine_wave(TWO_PI, amplitude * TEXTURE_PIXEL_SIZE.x, vert_influence * SCREEN_UV.y + wind_position * wind_speed, vec2(-1, 0), wind_uv);
-	wind_uv -= vec2((amplitude * TEXTURE_PIXEL_SIZE.x - wind) * (1.0 - UV.y * wind_falloff), 0.0);
+	pos.y += get_noise(pixelize(UV, vec2(textureSize(TEXTURE, 0))));
+	float wind = get_wind(pos.y - 10.0 * wind_position * wind_speed);
 	
-	COLOR = texture(TEXTURE, wind_uv);
+	vec2 uv = UV;
+	uv.x -= TEXTURE_PIXEL_SIZE.x * wind;
+	
+	COLOR = texture(TEXTURE, uv);
 	
 	// Transparency
+	uv = UV / TEXTURE_PIXEL_SIZE;
+	
 	float player_dist = (clamp(1.0 - distance(SCREEN_UV / SCREEN_PIXEL_SIZE, player_position / SCREEN_PIXEL_SIZE) * SCREEN_PIXEL_SIZE.x / radius, 0.0, 1.0)) * player_influence * step(0.01, transparency);
 	COLOR.a *= step(0.0, THRESHOLD_MATRIX[int(uv.x) % 4][int(uv.y) % 4] - transparency - player_dist);
 }

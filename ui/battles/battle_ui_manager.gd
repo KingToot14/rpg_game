@@ -18,6 +18,11 @@ var is_player_turn := false
 @export_group("Timings")
 @export var single_hit: TimedSingleHit
 
+@export var result_label: Label
+@export var good_color := Color.WHITE;
+@export var perf_color := Color.WHITE;
+@export var poor_color := Color.WHITE;
+
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"
 
@@ -75,7 +80,17 @@ func update_wave_counter(curr: int, wave_count: int) -> void:
 func update_condition(condition: String) -> void:
 	condition_label.text = "Condition: " + condition
 
+# - Timing - #
 func show_timing(version: StringName, target: Variant) -> void:
 	single_hit.visible = version == SINGLE_HIT_NAME
 	if version == SINGLE_HIT_NAME:
 		single_hit.setup_timing(target)
+
+func show_timing_result(key: StringName) -> void:
+	match key:
+		&'perfect':
+			result_label.text = "Perfect!"
+		&'good':
+			result_label.text = "Good"
+		&'poor':
+			result_label.text = "Poor"
