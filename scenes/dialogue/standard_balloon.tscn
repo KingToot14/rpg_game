@@ -1,0 +1,195 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsgjeltgr4wl4"]
+
+[ext_resource type="Script" path="res://scenes/dialogue/standard_balloon.gd" id="1_fqa6c"]
+[ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="2_203ak"]
+[ext_resource type="Texture2D" uid="uid://dudecax1kui7x" path="res://ui/panel.png" id="3_mvv74"]
+[ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="4_0j1t1"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="5_53xaa"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="6_frked"]
+
+[node name="standard_balloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_fqa6c")
+next_action = null
+skip_action = null
+
+[node name="balloon" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_203ak")
+
+[node name="dialogue_panel" type="NinePatchRect" parent="balloon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -55.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_mvv74")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="backing" type="NinePatchRect" parent="balloon/dialogue_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0j1t1")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="dialogue_label" parent="balloon/dialogue_panel" instance=ExtResource("5_53xaa")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = -4.0
+grow_vertical = 2
+size_flags_vertical = 3
+text = "Dialogue...
+Dialogue...
+Dialogue...
+Dialogue..."
+
+[node name="character_panel" type="NinePatchRect" parent="balloon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -61.0
+offset_right = 61.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture = ExtResource("3_mvv74")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="backing" type="NinePatchRect" parent="balloon/character_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0j1t1")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="portrait" type="TextureRect" parent="balloon/character_panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name_panel" type="NinePatchRect" parent="balloon/character_panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_right = 54.0
+offset_bottom = -61.0
+grow_vertical = 0
+texture = ExtResource("3_mvv74")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_group_ = true
+
+[node name="backing" type="NinePatchRect" parent="balloon/character_panel/name_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0j1t1")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="character_label" type="RichTextLabel" parent="balloon/character_panel/name_panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="response_container" type="MarginContainer" parent="balloon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 137.0
+offset_top = -103.0
+offset_right = 237.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="response_menu" type="VBoxContainer" parent="balloon/response_container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+script = ExtResource("6_frked")
+
+[connection signal="gui_input" from="balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="balloon/response_container/response_menu" to="." method="_on_responses_menu_response_selected"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=46 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_q8wvw"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="4_gslc6"]
@@ -16,8 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="16_1uwdf"]
 [ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="17_s2cr4"]
 [ext_resource type="PackedScene" uid="uid://c50i2fe4sv0xd" path="res://environment/objects/chest.tscn" id="18_rn7lt"]
+[ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="19_ckuiq"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="19_uc2wy"]
 [ext_resource type="PackedScene" uid="uid://cur7d1tqtfkvy" path="res://environment/objects/sign.tscn" id="20_2u6ib"]
+[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/interactions/read_icon.png" id="20_c610j"]
+[ext_resource type="Texture2D" uid="uid://0col8d4bm7li" path="res://entities/npcs/testing/overworld.png" id="21_egxev"]
+[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/interactions/interaction_box.tscn" id="22_aeits"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hdym8"]
 viewport_path = NodePath("environment/shader_viewport")
@@ -147,6 +151,8 @@ shader_parameter/shadow_color = Color(0.85098, 0.635294, 0.372549, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_icnh7")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tvvny"]
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
@@ -358,4 +364,30 @@ position = Vector2(109, 154)
 encounter_path = "res://encounters/test/test_encounter.tres"
 
 [node name="sign" parent="." instance=ExtResource("20_2u6ib")]
-position = Vector2(201, 129)
+position = Vector2(173, 129)
+dialogue_path = "res://scenes/dialogue/testing.dialogue"
+
+[node name="npc" type="Area2D" parent="."]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(227, 129)
+collision_mask = 2
+script = ExtResource("19_ckuiq")
+npc_info_path = "res://entities/npcs/testing/testing.tres"
+dialogue_path = "res://scenes/dialogue/testing.dialogue"
+bubble_path = "sign"
+box_offset = 19.0
+icon = ExtResource("20_c610j")
+
+[node name="sprite" type="Sprite2D" parent="npc"]
+texture = ExtResource("21_egxev")
+
+[node name="shape" type="CollisionShape2D" parent="npc"]
+visible = false
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_tvvny")
+
+[node name="interaction_box" parent="npc" instance=ExtResource("22_aeits")]
+visible = false
+offset_top = -28.0
+offset_bottom = -10.0

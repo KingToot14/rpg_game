@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcInformation" load_steps=4 format=3 uid="uid://d73vobupj7g5"]
+
+[ext_resource type="Script" path="res://entities/scripts/npc_information.gd" id="1_0vdb6"]
+[ext_resource type="Texture2D" uid="uid://0col8d4bm7li" path="res://entities/npcs/testing/overworld.png" id="1_xbttj"]
+[ext_resource type="Texture2D" uid="uid://cloctqkwms1oo" path="res://entities/npcs/testing/portrait.png" id="2_brsc7"]
+
+[resource]
+script = ExtResource("1_0vdb6")
+name = "Testing"
+color = Color(0.8, 0.666667, 0.894118, 1)
+form = "Cat"
+overworld_texture = ExtResource("1_xbttj")
+portrait_texture = ExtResource("2_brsc7")
