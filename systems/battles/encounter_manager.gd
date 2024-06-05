@@ -1,8 +1,16 @@
 class_name EncounterManager
 extends Node2D
 
+# --- Signals --- #
+signal encounter_victory()
+
 # --- Variables --- #
-@export var player_count: int = 1
+@export_file("*.tscn") var melee_path: String
+@export_file("*.tscn") var ranged_path: String
+@export_file("*.tscn") var healer_path: String
+@export_file("*.tscn") var magic_path: String
+
+@export var player_positions: Array[Node2D] = [null, null, null, null]
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 # - Encounter Info - #
@@ -17,30 +25,28 @@ var wave_count: int = 0
 
 # --- Functions --- #
 func _ready():
+	Globals.encounter_manager = self
+	
 	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
 
 # - Encounters - #
 func setup_encounter(loaded_encounter: Encounter) -> void:
 	encounter = loaded_encounter
+	encounter_victory.connect(encounter.handle_victory)
 	
 	# Setup players
-	# TODO: Enable/Disable players based on party, load correct sprites into party
-	var players = TargetingHelper.get_entities(&'player')
-	for i in range(len(players)):
-		if i >= player_count:
-			players[i].queue_free()
-			ui_manager.setup_player_hp(null, i)
-			continue
-		
-		var player: Entity = players[i]
-		
-		# Signals
-		player.died.connect(check_state)
-		player.selected.connect(action_fsm.entity_selected)
-		
-		# Player UI
-		ui_manager.setup_player_hp(player, i)
-		ui_manager.setup_player_special(player, i)
+	for i in range(4):
+		match DataManager.players[i].role:
+			PlayerDataChunk.PlayerRole.NONE:
+				ui_manager.setup_player_hp(null, i)
+			PlayerDataChunk.PlayerRole.MELEE:
+				AsyncLoader.new(melee_path, setup_entity.bind(i))
+			PlayerDataChunk.PlayerRole.RANGED:
+				AsyncLoader.new(ranged_path, setup_entity.bind(i))
+			PlayerDataChunk.PlayerRole.HEALER:
+				AsyncLoader.new(healer_path, setup_entity.bind(i))
+			PlayerDataChunk.PlayerRole.MAGIC:
+				AsyncLoader.new(magic_path, setup_entity.bind(i))
 	
 	# Setup waves
 	wave_count = len(encounter.waves)
@@ -63,23 +69,29 @@ func load_wave(wave: Wave) -> void:
 	
 	for i in range(len(wave.enemies)):
 		if wave.enemies[i] != "":
-			AsyncLoader.new(wave.enemies[i], setup_enemy.bind(i))
+			AsyncLoader.new(wave.enemies[i], setup_entity.bind(i))
 		else:
 			ui_manager.setup_enemy_hp(null, i)
 
 # - Entity Management - #
-func setup_enemy(enemy_scene: PackedScene, spawn_index: int) -> void:
-	var enemy: Entity = enemy_scene.instantiate() as Entity
-	enemy.global_position = enemy_positions[spawn_index].global_position
+func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
+	var entity := entity_scene.instantiate() as Entity
 	
 	# Signals
-	enemy.died.connect(check_state)
-	enemy.selected.connect(action_fsm.entity_selected)
+	entity.died.connect(check_state)
+	entity.selected.connect(action_fsm.entity_selected)
 	
 	# UI
-	ui_manager.setup_enemy_hp(enemy, spawn_index)
+	if entity.is_player:
+		encounter_victory.connect(entity.store_data)
+		entity.global_position = player_positions[spawn_index].global_position
+		ui_manager.setup_player_hp(entity, spawn_index)
+		ui_manager.setup_player_special(entity, spawn_index)
+	else:
+		entity.global_position = enemy_positions[spawn_index].global_position
+		ui_manager.setup_enemy_hp(entity, spawn_index)
 	
-	add_child(enemy)
+	add_child(entity)
 
 func remove_from_battle(entity: Entity, index: int) -> void:
 	ui_manager.setup_enemy_hp(null, index)
@@ -118,6 +130,9 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 			all_dead = false
 	
 	return 1 if all_dead else 0
+
+func handle_victory() -> void:
+	encounter_victory.emit()
 
 # - Scene Management - #
 func load_overworld() -> void:

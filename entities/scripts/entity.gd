@@ -19,6 +19,7 @@ var home_position: Vector2
 var performing: bool = false
 
 @export_group("Stats")
+@export var stats: EntityStats
 @export var max_hp: float
 @export var p_attack: float
 @export var p_defense: float
@@ -59,7 +60,12 @@ func _ready() -> void:
 		brain = $"brain" as EntityBrain
 
 func setup(index: int):
-	hp = max_hp
+	if is_player:
+		var player_chunk = DataManager.players[index]
+		hp = round(player_chunk.curr_hp)
+		stats = player_chunk.stats
+	else:
+		hp = max_hp
 	spawn_index = index
 	home_position = global_position
 
@@ -169,3 +175,7 @@ func get_timed_inputs(attack_name: StringName) -> Array[float]:
 # - Positioning - #
 func get_front_pos() -> Vector2:
 	return front_marker.global_position
+
+# - Data Saving - #
+func store_data() -> void:
+	DataManager.players[spawn_index].store_hp(hp)

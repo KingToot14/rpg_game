@@ -4,9 +4,6 @@ extends Node2D
 var object_pool: ObjectPool
 var ui_manager: CanvasLayer
 
-# --- Player --- #
-var player_area_pos: Vector2 = Vector2(240, 135)
-
 # --- Overworld --- #
 const OVERWORLD_SCENE: String = "res://scenes/overworld_root.tscn"
 
@@ -14,6 +11,7 @@ var overworld_manager: OverworldManager
 var overworld_area: String = "res://scenes/testing/starting_area.tscn"
 
 # --- Encounters --- #
+var encounter_manager: EncounterManager
 var encounter_resource: String
 
 var curr_entity: Entity

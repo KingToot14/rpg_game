@@ -3,6 +3,7 @@ extends Node2D
 
 # --- Signals --- #
 signal area_loaded()
+signal area_changed()
 
 # --- Variables --- #
 var current_area: AreaInformation
@@ -13,6 +14,7 @@ var current_area: AreaInformation
 # --- Functions --- #
 func _ready() -> void:
 	Globals.overworld_manager = self
+	area_changed.connect(DataManager.clear_local_area)
 	
 	AsyncLoader.new(Globals.overworld_area, add_area)
 
@@ -33,6 +35,7 @@ func load_direction(direction: String) -> void:
 			return
 	
 	if path != "":
+		area_changed.emit()
 		player.prepare_transition(direction)
 		AsyncLoader.new(path, add_area)
 

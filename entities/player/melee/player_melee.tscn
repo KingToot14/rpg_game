@@ -119,7 +119,7 @@ shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 
-[node name="character_battle" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos") groups=["player"]]
+[node name="player_melee" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos") groups=["player"]]
 z_index = 100
 script = ExtResource("1_xrkk6")
 is_player = true

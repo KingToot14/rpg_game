@@ -56,18 +56,18 @@ func update_texture() -> void:
 		texture_direction = tex_dir
 
 func load_position() -> void:
-	global_position = Globals.player_area_pos
+	global_position = DataManager.local_area.player_position
 
 func prepare_transition(dir: String) -> void:
 	match dir:
 		'top':
-			Globals.player_area_pos = Vector2(global_position.x, upper_area_pos.y)
+			DataManager.local_area.player_position = Vector2(global_position.x, upper_area_pos.y)
 		'bottom':
-			Globals.player_area_pos = Vector2(global_position.x, lower_area_pos.y)
+			DataManager.local_area.player_position = Vector2(global_position.x, lower_area_pos.y)
 		'left':
-			Globals.player_area_pos = Vector2(upper_area_pos.x, global_position.y)
+			DataManager.local_area.player_position = Vector2(upper_area_pos.x, global_position.y)
 		'right':
-			Globals.player_area_pos = Vector2(lower_area_pos.x, global_position.y)
+			DataManager.local_area.player_position = Vector2(lower_area_pos.x, global_position.y)
 
 func prepare_battle() -> void:
-	Globals.player_area_pos = global_position
+	DataManager.local_area.player_position = global_position
