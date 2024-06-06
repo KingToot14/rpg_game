@@ -1,9 +1,6 @@
 class_name AttackManager
 extends Node2D
 
-# --- Variables --- #
-
-
 # --- Functions --- #
 func _ready() -> void:
 	Globals.attack_manager = self

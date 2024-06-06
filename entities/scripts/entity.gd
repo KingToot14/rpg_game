@@ -48,6 +48,8 @@ func _ready() -> void:
 	for attack in attack_pool:
 		valid_attacks.append(attack.animation_name)
 	
+	animator.play(&'idle')
+	
 	lost_health.connect(show_damage_marker)
 	
 	if not is_player:
@@ -145,6 +147,8 @@ func perform_attack(attack_name: StringName) -> void:
 
 func action_ended(_s: String) -> void:
 	performing = false
+	
+	animator.play(&'idle')
 	
 	Globals.action_fsm.perform_action()
 	Globals.ui_manager.show_timing('none', null)

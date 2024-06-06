@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=14 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="2_bmr2h"]
@@ -105,8 +105,12 @@ tracks/1/keys = {
 "values": []
 }
 
+[sub_resource type="Animation" id="Animation_1n7su"]
+resource_name = "idle"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
+"idle": SubResource("Animation_1n7su"),
 "normal_attack": SubResource("Animation_1ymxq"),
 "test": SubResource("Animation_iyisr")
 }
