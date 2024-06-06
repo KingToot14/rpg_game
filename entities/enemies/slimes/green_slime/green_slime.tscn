@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=24 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -250,29 +250,88 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_b23y5"]
 resource_name = "take_damage"
 step = 0.05
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
+tracks/0/path = NodePath("flash_manager")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_hit_flash"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.35, 0.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 10.0, 10.0, 0.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:position:y")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:position:y")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.35, 0.4, 0.5, 0.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -5.0, -5.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [12, 0]
+}
+
+[sub_resource type="Animation" id="Animation_iyow3"]
+resource_name = "death"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flash_manager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_hit_flash"
+}, {
+"args": [0.25],
+"method": &"do_flash"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -281,15 +340,33 @@ tracks/2/path = NodePath("sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [11, 0]
+"values": [13]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"do_death"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
 "RESET": SubResource("Animation_wwx0v"),
+"death": SubResource("Animation_iyow3"),
 "enter_battle": SubResource("Animation_rbvcc"),
 "idle": SubResource("Animation_6cwo8"),
 "jump_attack": SubResource("Animation_yw2to"),
@@ -320,7 +397,6 @@ default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
 front_marker = NodePath("front_marker")
 marker_pos = NodePath("damage_marker")
-death_delay = 2.0
 animator = NodePath("animator")
 
 [node name="animator" type="AnimationPlayer" parent="."]
@@ -347,7 +423,7 @@ texture = ExtResource("13_lq1o0")
 material = SubResource("ShaderMaterial_ju2ut")
 texture = ExtResource("8_qwy3a")
 hframes = 4
-vframes = 3
+vframes = 4
 
 [node name="decoration" type="Sprite2D" parent="sprite"]
 material = SubResource("ShaderMaterial_ju2ut")
@@ -371,7 +447,5 @@ position = Vector2(23, 0)
 [node name="front_marker" type="Marker2D" parent="."]
 position = Vector2(-40, 0)
 
-[connection signal="died" from="." to="." method="kill"]
-[connection signal="lost_health" from="." to="flash_manager" method="_on_lost_health"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

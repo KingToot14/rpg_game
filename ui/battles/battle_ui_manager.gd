@@ -33,27 +33,19 @@ func _ready():
 	
 	set_attack_menu(false)
 
-func setup_player_hp(player: Entity, index: int):
-	if not player:
-		player_hp_bars[index].visible = false
+func setup_entity_hp(hp_bar, entity: Entity) -> void:
+	hp_bar.visible = not not entity
+	if not entity:
 		return
-	else:
-		player_hp_bars[index].visible = true
 	
-	player.lost_health.connect(player_hp_bars[index].update_health)
-	player.setup(index)
-	player_hp_bars[index].update_health(0, player)
+	entity.lost_health.connect(hp_bar.update_health)
+	hp_bar.update_health(0, entity)
+
+func setup_player_hp(player: Entity, index: int) -> void:
+	setup_entity_hp(player_hp_bars[index], player)
 
 func setup_enemy_hp(enemy: Entity, index: int):
-	if not enemy:
-		enemy_hp_bars[index].visible = false
-		return
-	else:
-		enemy_hp_bars[index].visible = true
-	
-	enemy.lost_health.connect(enemy_hp_bars[index].update_health)
-	enemy.setup(index)
-	enemy_hp_bars[index].update_health(0, enemy)
+	setup_entity_hp(enemy_hp_bars[index], enemy)
 
 func setup_player_special(player: Entity, index: int):
 	player.special_increased.connect(player_hp_bars[index].update_special)

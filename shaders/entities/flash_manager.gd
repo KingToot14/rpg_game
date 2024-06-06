@@ -13,7 +13,10 @@ func set_flash_intensity(intensity: float) -> void:
 func _on_lost_health(_dmg: int, _entity: Entity) -> void:
 	do_hit_flash()
 
-func do_hit_flash() -> void:
+func do_flash(time: float = 0.1) -> void:
 	set_flash_intensity(1.0)
-	await get_tree().create_timer(hit_flash_time).timeout
+	await get_tree().create_timer(time).timeout
 	set_flash_intensity(0.0)
+
+func do_hit_flash() -> void:
+	do_flash(hit_flash_time)

@@ -16,7 +16,7 @@ signal encounter_victory()
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 @export_group("Timing")
-@export var spawn_delay: float = 0.1
+@export var wave_delay: float = 0.25
 
 # - Encounter Info - #
 var encounter: Encounter
@@ -70,6 +70,8 @@ func load_next_wave() -> bool:
 	return false
 
 func load_wave(wave: Wave) -> void:
+	await get_tree().create_timer(wave_delay).timeout
+	
 	ui_manager.update_wave_counter(curr_wave + 1, wave_count)
 	
 	for i in range(len(wave.enemies)):
@@ -82,6 +84,7 @@ func load_wave(wave: Wave) -> void:
 func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
 	entity.visible = false
+	entity.setup(spawn_index)
 	
 	# Signals
 	entity.died.connect(check_state)

@@ -15,7 +15,6 @@ signal selected(entity: Entity)
 @export var use_special := false
 var alive: bool = true
 var spawn_index: int
-var home_position: Vector2
 var performing: bool = false
 
 # - Stats - #
@@ -35,7 +34,6 @@ var valid_attacks: Array[StringName] = []
 
 @export_group("Effects")
 @export var marker_pos: Node2D
-@export var death_delay: float = 0.25
 
 var is_mouse_over: bool = false
 
@@ -63,7 +61,6 @@ func setup(index: int):
 	else:
 		hp = stats.max_hp
 	spawn_index = index
-	home_position = global_position
 	
 	animator.play(&'enter_battle')
 	animator.queue(&'idle')
@@ -88,7 +85,6 @@ func select() -> void:
 # - HP - #
 func take_damage(dmg: int):
 	hp = max(hp - dmg, 0)
-	lost_health.emit(dmg, self)
 	
 	if use_special:
 		special_charge = min(special_charge + dmg / 20.0, 100)
@@ -96,18 +92,26 @@ func take_damage(dmg: int):
 	
 	if hp <= 0:
 		alive = false
-		died.emit()
+		#died.emit()
+	
+	lost_health.emit(dmg, self)
+
+func do_death() -> void:
+	died.emit()
+	queue_free()
 
 func play_damage_anim(_dmg: int, _entity: Entity) -> void:
-	animator.play(&'take_damage')
+	if alive:
+		animator.play(&'take_damage')
+	else:
+		remove_from_battle()
+		animator.play(&'death')
 
 func get_hp_percent() -> float:
 	return hp / stats.max_hp
 
-func kill() -> void:
+func remove_from_battle() -> void:
 	Globals.encounter_manager.remove_from_battle(self, spawn_index)
-	await get_tree().create_timer(death_delay).timeout
-	queue_free()
 
 # - Actions - #
 func take_turn() -> void:

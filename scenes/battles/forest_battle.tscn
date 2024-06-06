@@ -136,6 +136,7 @@ script = ExtResource("1_qxbbg")
 melee_path = "res://entities/player/melee/player_melee.tscn"
 player_positions = [NodePath("player_positions/marker"), NodePath("player_positions/marker2"), NodePath("player_positions/marker3"), NodePath("player_positions/marker4")]
 enemy_positions = [NodePath("enemy_positions/marker"), NodePath("enemy_positions/marker2"), NodePath("enemy_positions/marker3"), NodePath("enemy_positions/marker4"), NodePath("enemy_positions/marker5")]
+wave_delay = 0.0
 
 [node name="turn_fsm" type="Node2D" parent="."]
 script = ExtResource("2_eejpv")
@@ -323,7 +324,7 @@ enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2
 wave_label = NodePath("encounter_info/wave_panel/label")
 condition_label = NodePath("encounter_info/condition_panel/label")
 action_bar = NodePath("action_bar")
-attack_menu = NodePath("attack_menu")
+attack_menu = NodePath("action_bar/attack_menu")
 single_hit = NodePath("timed_single_hit")
 result_label = NodePath("results_label")
 good_color = Color(0.254902, 0.937255, 0.164706, 1)
@@ -660,15 +661,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="attack_menu" type="Control" parent="ui"]
+[node name="attack_menu" type="Control" parent="ui/action_bar"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 142.0
-offset_top = 183.0
-offset_right = 201.0
-offset_bottom = 234.0
+offset_left = 3.0
+offset_top = -55.0
+offset_right = 62.0
+offset_bottom = -4.0
 
-[node name="menu_button" type="BaseButton" parent="ui/attack_menu"]
+[node name="menu_button" type="BaseButton" parent="ui/action_bar/attack_menu"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -740,7 +741,7 @@ shortcut_in_tooltip = true
 script = ExtResource("17_f6win")
 item = ExtResource("18_wdhfm")
 
-[node name="backing" type="ColorRect" parent="ui/attack_menu/menu_button"]
+[node name="backing" type="ColorRect" parent="ui/action_bar/attack_menu/menu_button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -749,7 +750,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="label" type="Label" parent="ui/attack_menu/menu_button"]
+[node name="label" type="Label" parent="ui/action_bar/attack_menu/menu_button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
