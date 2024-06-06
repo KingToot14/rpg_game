@@ -18,20 +18,14 @@ var spawn_index: int
 var home_position: Vector2
 var performing: bool = false
 
-@export_group("Stats")
+# - Stats - #
 @export var stats: EntityStats
-@export var max_hp: float
-@export var p_attack: float
-@export var p_defense: float
-@export var m_attack: float
-@export var m_defense: float
-@export var accuracy: float
-@export var evasion: float
-
 var hp: float
-var action_count: int = 0
 var special_charge: float = 0
 
+var action_count: int = 0
+
+# - Attacks - #
 @export_group("Attacks")
 @export var default_attack: Attack
 @export var attack_pool: Array[Attack]
@@ -63,9 +57,10 @@ func setup(index: int):
 	if is_player:
 		var player_chunk = DataManager.players[index]
 		hp = round(player_chunk.curr_hp)
+		special_charge = player_chunk.curr_special
 		stats = player_chunk.stats
 	else:
-		hp = max_hp
+		hp = stats.max_hp
 	spawn_index = index
 	home_position = global_position
 
@@ -100,7 +95,7 @@ func take_damage(dmg: int):
 		died.emit()
 
 func get_hp_percent() -> float:
-	return hp / max_hp
+	return hp / stats.max_hp
 
 func kill() -> void:
 	get_parent().remove_from_battle(self, spawn_index)
@@ -123,10 +118,10 @@ func can_act() -> bool:
 
 # - Stats - #
 func get_attack(use_magic: bool) -> float:
-	return m_attack if use_magic else p_attack
+	return stats.m_attack if use_magic else stats.p_attack
 
 func get_defense(use_magic: bool) -> float:
-	return m_defense if use_magic else p_defense
+	return stats.m_defense if use_magic else stats.p_defense
 
 # - Effects - #
 func show_damage_marker(dmg: int, _entity: Entity) -> void:

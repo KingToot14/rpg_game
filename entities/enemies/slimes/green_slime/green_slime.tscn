@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=18 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
+[ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/jump_attack.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/slime_fling.tres" id="3_8qkmm"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
@@ -152,13 +153,7 @@ height = 34.0
 [node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos") groups=["enemy"]]
 z_index = 100
 script = ExtResource("1_gt34u")
-max_hp = 54.0
-p_attack = 4.0
-p_defense = 4.0
-m_attack = 4.0
-m_defense = 4.0
-accuracy = 4.0
-evasion = 3.0
+stats = ExtResource("2_egcos")
 default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
 front_marker = NodePath("front_marker")

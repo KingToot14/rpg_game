@@ -52,3 +52,4 @@ func add_area(scene: PackedScene):
 	add_child(current_area)
 	
 	area_loaded.emit()
+	DataManager.set_local_path(scene.resource_path)

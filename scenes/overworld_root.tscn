@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
-[ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/player_overworld.tscn" id="3_u28xe"]
+[ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/overworld/player_overworld.tscn" id="3_u28xe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)

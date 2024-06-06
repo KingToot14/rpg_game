@@ -10,8 +10,6 @@
 [node name="standard_balloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_fqa6c")
-next_action = null
-skip_action = null
 
 [node name="balloon" type="Control" parent="."]
 unique_name_in_owner = true

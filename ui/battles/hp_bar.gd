@@ -20,7 +20,7 @@ func update_health(_dmg: float, entity: Entity) -> void:
 		visible = true
 	
 	cover_rect.size.x = cover_size * clamp(entity.get_hp_percent(), 0, 1)
-	hp_label.text = str(entity.hp) + "/" + str(entity.max_hp)
+	hp_label.text = str(entity.hp) + "/" + str(entity.stats.max_hp)
 
 func update_special(entity: Entity) -> void:
 	special_label.text = str(floor(entity.special_charge)) + "%"

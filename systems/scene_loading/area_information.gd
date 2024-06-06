@@ -22,5 +22,4 @@ func _process(delta) -> void:
 	for i in range(4):
 		var player = DataManager.players[i]
 		if player.role != PlayerDataChunk.PlayerRole.NONE:
-			#TODO: Change this
-			player.heal(heal_rate * 20 * delta)
+			player.heal(heal_rate * delta)

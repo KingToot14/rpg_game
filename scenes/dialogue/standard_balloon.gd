@@ -85,6 +85,11 @@ var dialogue_line: DialogueLine:
 
 # --- Functions --- #
 func _ready() -> void:
+	Globals.curr_dialogue = self
+	
+	if Globals.overworld_manager:
+		Globals.overworld_manager.player.set_state('dialogue')
+	
 	dialogue_width = dialogue_panel.size.x
 	frame_width = character_panel.size.x - 1
 	
@@ -113,6 +118,9 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource
 	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
+
+func close() -> void:
+	queue_free()
 
 ## Go to the next line
 func next(next_id: String) -> void:

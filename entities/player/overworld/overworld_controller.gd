@@ -2,7 +2,6 @@ class_name OverworldController
 extends CharacterBody2D
 
 # --- Variables --- #
-@export var movement_speed: float = 20.0
 var direction: Vector2
 
 @export var lower_area_pos: Vector2 = Vector2(20, 20)
@@ -24,14 +23,24 @@ var texture_direction: int = 0
 @onready var sprite: Sprite2D = $"sprite"
 @onready var reflection_sprite: ReflectionTexture = $"reflection"
 
+var curr_state: PlayerControlState
+
 # --- Functions --- #
+func _ready() -> void:
+	set_state('moving')
+
 func _physics_process(_delta) -> void:
 	get_direction()
-	velocity = direction * movement_speed
-	move_and_slide()
-	update_texture()
+	
+	curr_state.handle_process()
 	
 	RenderingServer.global_shader_parameter_set('player_position', position_marker.global_position / overworld_size)
+
+func set_state(state: String) -> void:
+	if not has_node(state + "_state"):
+		return
+	
+	curr_state = get_node(state + "_state") as PlayerControlState
 
 func get_direction() -> void:
 	direction = Vector2(Input.get_axis('overworld_left', 'overworld_right'), Input.get_axis('overworld_up', 'overworld_down')).normalized()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="2_bmr2h"]
 [ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="2_hdvll"]
-[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/player_overworld_side_front.png" id="2_kjl5i"]
+[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/overworld/player_overworld_side_front.png" id="2_kjl5i"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
@@ -124,13 +124,6 @@ z_index = 100
 script = ExtResource("1_xrkk6")
 is_player = true
 use_special = true
-max_hp = 210.0
-p_attack = 6.6
-p_defense = 5.4
-m_attack = 6.2
-m_defense = 5.0
-accuracy = 4.0
-evasion = 4.0
 default_attack = ExtResource("2_bmr2h")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_bmr2h")])
 front_marker = NodePath("front_marker")

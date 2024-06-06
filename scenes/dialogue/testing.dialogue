@@ -1,21 +1,21 @@
 ~ introduction
 
-NPC: Welcome to the forest! My name is Test_NPC.
-NPC: There isn't too much to do right now, but I can give you some busy work if you want
+Isaac: Welcome to the forest! My name is Isaac :3
+Isaac: There isn't too much to do right now, but I can give you some busy work if you want
 - Sure!
-	NPC: Awesome! If you could just gather a few sticks for me, that'd be great!
+	Isaac: Awesome! If you could just gather a few sticks for me, that'd be great!
 	# TODO: Add quest logic
 - No thanks!
-	NPC: Alright, just let me know if you change your mind!
+	Isaac: Alright, just let me know if you change your mind!
 
 => END
 
 ~ post_intro
 
-NPC: Hey there again, have you changed your mind?
+Isaac: Hey there again, have you changed your mind?
 - I'm ready!
-	NPC: Awesome! If you could just gather a few sticks for me, that'd be great!
+	Isaac: Awesome! If you could just gather a few sticks for me, that'd be great!
 - Not yet
-	NPC: Alright, just let me know if you change your mind!
+	Isaac: Alright, just let me know if you change your mind!
 
 => END

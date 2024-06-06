@@ -16,7 +16,6 @@ func instantiate_scene(scn: PackedScene) -> Node2D:
 	var node = scn.instantiate()
 	add_node(node)
 	return node
-	
 
 func load_scene(path: String, callback: Callable = change_root_scene):
 	AsyncLoader.new(path, callback)

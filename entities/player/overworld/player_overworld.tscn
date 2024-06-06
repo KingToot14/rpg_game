@@ -1,12 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsd56x7sbosdr"]
+[gd_scene load_steps=13 format=3 uid="uid://dsd56x7sbosdr"]
 
-[ext_resource type="Script" path="res://entities/player/overworld_controller.gd" id="1_a5lqh"]
+[ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
-[ext_resource type="Texture2D" uid="uid://c30hxa3woqcy0" path="res://entities/player/player_overworld_back.png" id="3_57qdc"]
+[ext_resource type="Texture2D" uid="uid://c30hxa3woqcy0" path="res://entities/player/overworld/player_overworld_back.png" id="3_57qdc"]
 [ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="4_5t1er"]
-[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/player_overworld_side_front.png" id="4_lem34"]
-[ext_resource type="Texture2D" uid="uid://cm7iqv4h0pmh8" path="res://entities/player/player_overworld_front.png" id="4_wabot"]
-[ext_resource type="Texture2D" uid="uid://4oor142brwul" path="res://entities/player/player_overworld_side_back.png" id="5_2gp6v"]
+[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/overworld/player_overworld_side_front.png" id="4_lem34"]
+[ext_resource type="Texture2D" uid="uid://cm7iqv4h0pmh8" path="res://entities/player/overworld/player_overworld_front.png" id="4_wabot"]
+[ext_resource type="Texture2D" uid="uid://4oor142brwul" path="res://entities/player/overworld/player_overworld_side_back.png" id="5_2gp6v"]
+[ext_resource type="Script" path="res://entities/player/overworld/fsm/player_control_state.gd" id="6_t3gle"]
+[ext_resource type="Script" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
+[ext_resource type="Script" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0vwcf"]
 resource_local_to_scene = true
@@ -22,12 +25,21 @@ z_index = 100
 y_sort_enabled = true
 collision_layer = 3
 script = ExtResource("1_a5lqh")
-movement_speed = 75.0
 texture_front = ExtResource("4_wabot")
 texture_back = ExtResource("3_57qdc")
 texture_side_front = ExtResource("4_lem34")
 texture_side_back = ExtResource("5_2gp6v")
 position_marker = NodePath("position_marker")
+
+[node name="idle_state" type="Node2D" parent="."]
+script = ExtResource("6_t3gle")
+
+[node name="moving_state" type="Node2D" parent="."]
+script = ExtResource("7_2n4je")
+movement_speed = 75.0
+
+[node name="dialogue_state" type="Node2D" parent="."]
+script = ExtResource("8_tra4j")
 
 [node name="sprite" type="Sprite2D" parent="."]
 y_sort_enabled = true

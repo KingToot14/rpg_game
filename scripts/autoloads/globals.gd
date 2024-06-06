@@ -4,6 +4,8 @@ extends Node2D
 var object_pool: ObjectPool
 var ui_manager: CanvasLayer
 
+var curr_dialogue
+
 # --- Overworld --- #
 const OVERWORLD_SCENE: String = "res://scenes/overworld_root.tscn"
 
