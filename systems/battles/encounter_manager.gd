@@ -5,13 +5,18 @@ extends Node2D
 signal encounter_victory()
 
 # --- Variables --- #
+@export_group("Player Paths")
 @export_file("*.tscn") var melee_path: String
 @export_file("*.tscn") var ranged_path: String
 @export_file("*.tscn") var healer_path: String
 @export_file("*.tscn") var magic_path: String
 
+@export_group("Spawn Positions")
 @export var player_positions: Array[Node2D] = [null, null, null, null]
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
+
+@export_group("Timing")
+@export var spawn_delay: float = 0.1
 
 # - Encounter Info - #
 var encounter: Encounter
@@ -76,22 +81,24 @@ func load_wave(wave: Wave) -> void:
 # - Entity Management - #
 func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
+	entity.visible = false
 	
 	# Signals
 	entity.died.connect(check_state)
 	entity.selected.connect(action_fsm.entity_selected)
 	
-	# UI
+	var spawn_pos: Node2D
 	if entity.is_player:
 		encounter_victory.connect(entity.store_data)
-		entity.global_position = player_positions[spawn_index].global_position
+		spawn_pos = player_positions[spawn_index]
 		ui_manager.setup_player_hp(entity, spawn_index)
 		ui_manager.setup_player_special(entity, spawn_index)
 	else:
-		entity.global_position = enemy_positions[spawn_index].global_position
+		spawn_pos = enemy_positions[spawn_index]
 		ui_manager.setup_enemy_hp(entity, spawn_index)
 	
-	add_child(entity)
+	spawn_pos.add_child(entity)
+	entity.position = Vector2.ZERO
 
 func remove_from_battle(entity: Entity, index: int) -> void:
 	ui_manager.setup_enemy_hp(null, index)

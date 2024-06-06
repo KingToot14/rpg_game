@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=23 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://v3vpfe1gmp8g" path="res://entities/enemies/slimes/green_slime/green_battle.png" id="8_qwy3a"]
 [ext_resource type="Texture2D" uid="uid://wwwrofwbdxni" path="res://entities/enemies/slimes/green_slime/decorations.png" id="9_3hgmi"]
 [ext_resource type="Script" path="res://scripts/textures/texture_randomizer.gd" id="10_rxi4p"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="12_8s6gd"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="13_lq1o0"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
 resource_name = "RESET"
@@ -29,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:position:y")
+tracks/1/path = NodePath("sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -49,6 +51,139 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-20.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("shadow:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rbvcc"]
+resource_name = "enter_battle"
+length = 0.65
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_visible"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [150.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:position:y")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -25.0, -25.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 0.55, 0.6, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 1, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/decoration:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.55, 0.6, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-20.0, -15.0, -18.0, -20.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shadow:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.965936, 1),
+"update": 0,
+"values": [150.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6cwo8"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 0, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite/decoration:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-19.0, -20.0, -19.0, -20.0]
 }
 
 [sub_resource type="Animation" id="Animation_yw2to"]
@@ -112,64 +247,60 @@ tracks/3/keys = {
 "values": [-20.0, -18.0, -15.0, -20.0, -23.0, -24.0, -20.0, -15.0, -18.0, -20.0]
 }
 
-[sub_resource type="Animation" id="Animation_cqehk"]
-resource_name = "test"
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.75, 1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [],
-"method": &"do_damage"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_6cwo8"]
-resource_name = "idle"
-length = 1.6
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_b23y5"]
+resource_name = "take_damage"
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 0, 8, 9, 10, 11]
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 10.0, 10.0, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/decoration:position:y")
-tracks/1/interp = 1
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"times": PackedFloat32Array(0.35, 0.4, 0.5, 0.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -5.0, -5.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [-19.0, -20.0, -19.0, -20.0]
+"values": [11, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
 "RESET": SubResource("Animation_wwx0v"),
+"enter_battle": SubResource("Animation_rbvcc"),
 "idle": SubResource("Animation_6cwo8"),
 "jump_attack": SubResource("Animation_yw2to"),
-"test": SubResource("Animation_cqehk")
+"take_damage": SubResource("Animation_b23y5")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrj3q"]
+shader = ExtResource("12_8s6gd")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.15
+shader_parameter/squash_factor = Vector2(1, 2.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2ut"]
 resource_local_to_scene = true
@@ -181,7 +312,7 @@ shader_parameter/intensity = 0.0
 radius = 12.0
 height = 34.0
 
-[node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos") groups=["enemy"]]
+[node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["enemy"]]
 z_index = 100
 script = ExtResource("1_gt34u")
 stats = ExtResource("2_egcos")
@@ -189,6 +320,8 @@ default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
 front_marker = NodePath("front_marker")
 marker_pos = NodePath("damage_marker")
+death_delay = 2.0
+animator = NodePath("animator")
 
 [node name="animator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -204,6 +337,11 @@ action_delay = 0.0
 [node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_i27sh")
 sprite = NodePath("../sprite")
+
+[node name="shadow" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hrj3q")
+position = Vector2(0, 5)
+texture = ExtResource("13_lq1o0")
 
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ju2ut")

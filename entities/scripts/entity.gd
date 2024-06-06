@@ -41,16 +41,15 @@ var is_mouse_over: bool = false
 
 # --- References --- #
 @onready var brain: EntityBrain
-@onready var animator := $"animator" as AttackAnimator
+@export var animator: AttackAnimator
 
 # --- Functions --- #
 func _ready() -> void:
 	for attack in attack_pool:
 		valid_attacks.append(attack.animation_name)
 	
-	animator.play(&'idle')
-	
 	lost_health.connect(show_damage_marker)
+	lost_health.connect(play_damage_anim)
 	
 	if not is_player:
 		brain = $"brain" as EntityBrain
@@ -65,6 +64,9 @@ func setup(index: int):
 		hp = stats.max_hp
 	spawn_index = index
 	home_position = global_position
+	
+	animator.play(&'enter_battle')
+	animator.queue(&'idle')
 
 func _on_mouse_entered():
 	is_mouse_over = true
@@ -96,11 +98,14 @@ func take_damage(dmg: int):
 		alive = false
 		died.emit()
 
+func play_damage_anim(_dmg: int, _entity: Entity) -> void:
+	animator.play(&'take_damage')
+
 func get_hp_percent() -> float:
 	return hp / stats.max_hp
 
 func kill() -> void:
-	get_parent().remove_from_battle(self, spawn_index)
+	Globals.encounter_manager.remove_from_battle(self, spawn_index)
 	await get_tree().create_timer(death_delay).timeout
 	queue_free()
 
