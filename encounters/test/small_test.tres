@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=4 format=3 uid="uid://cgmwqt0bgssvs"]
+
+[ext_resource type="Script" path="res://encounters/encounter.gd" id="1_a0lvn"]
+[ext_resource type="Script" path="res://encounters/wave.gd" id="2_ahmps"]
+
+[sub_resource type="Resource" id="Resource_2qkh1"]
+script = ExtResource("2_ahmps")
+enemies = Array[String](["", "res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn", ""])
+
+[resource]
+script = ExtResource("1_a0lvn")
+encounter_key = &""
+respawn = true
+waves = Array[ExtResource("2_ahmps")]([SubResource("Resource_2qkh1")])

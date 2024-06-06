@@ -45,6 +45,7 @@ func load_battle(battle_path: String) -> void:
 
 func add_area(scene: PackedScene):
 	Globals.overworld_area = scene.resource_path
+	DataManager.set_local_path(scene.resource_path)
 	
 	if current_area:
 		current_area.queue_free()
@@ -52,4 +53,3 @@ func add_area(scene: PackedScene):
 	add_child(current_area)
 	
 	area_loaded.emit()
-	DataManager.set_local_path(scene.resource_path)

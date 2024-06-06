@@ -11,3 +11,5 @@ extends Resource
 func handle_victory() -> void:
 	if respawn:
 		DataManager.local_area.add_victory(encounter_key)
+	else:
+		DataManager.add_victory(encounter_key)

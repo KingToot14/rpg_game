@@ -13,7 +13,8 @@ func _ready() -> void:
 	interacted_with.connect(start_encounter)
 
 func check_encounter(encounter: Encounter) -> void:
-	if DataManager.local_area.is_defeated(encounter.encounter_key):
+	var key = encounter.encounter_key
+	if DataManager.is_defeated(key) or DataManager.local_area.is_defeated(key):
 		queue_free()
 
 func start_encounter() -> void:
@@ -23,4 +24,3 @@ func start_encounter() -> void:
 	Globals.overworld_manager.load_battle(battle_path)
 	
 	interactable = false
-	queue_free()

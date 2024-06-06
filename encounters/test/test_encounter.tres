@@ -14,4 +14,5 @@ enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.
 [resource]
 script = ExtResource("1_ldqpt")
 encounter_key = &"test_encounter"
+respawn = false
 waves = Array[ExtResource("2_cwe8q")]([SubResource("Resource_ptpoa"), SubResource("Resource_sny1s")])
