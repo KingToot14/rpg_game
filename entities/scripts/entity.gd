@@ -92,7 +92,6 @@ func take_damage(dmg: int):
 	
 	if hp <= 0:
 		alive = false
-		#died.emit()
 	
 	lost_health.emit(dmg, self)
 

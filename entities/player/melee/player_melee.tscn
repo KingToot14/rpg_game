@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=21 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="2_bmr2h"]
-[ext_resource type="Script" path="res://shaders/entities/flash_manager.gd" id="2_hdvll"]
-[ext_resource type="Texture2D" uid="uid://c31pjhbitr0kp" path="res://entities/player/overworld/player_overworld_side_front.png" id="2_kjl5i"]
+[ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="2_hdvll"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
+[ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
+[ext_resource type="Texture2D" uid="uid://boirb4wurj37t" path="res://entities/player/melee/paw.png" id="9_q2yg6"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -34,11 +35,86 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-13.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/pivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_gphxx"]
+resource_name = "death"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("effect_manager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.1],
+"method": &"do_flash"
+}, {
+"args": [0.25],
+"method": &"do_flash"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -10.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"do_death"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
 }
 
 [sub_resource type="Animation" id="Animation_djre5"]
 resource_name = "enter_battle"
+length = 0.6
 step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -47,16 +123,94 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.05),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": ["home", 0.5, Vector2(-150, 0)],
+"method": &"move_from"
+}, {
 "args": [true],
 "method": &"set_visible"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-13.0, -38.0, -38.0, -13.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/pivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(9, 6), Vector2(9, 6), Vector2(4, 13), Vector2(4, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/pivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.436462, -0.436462, 0.174533, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_1n7su"]
 resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 0, 2, 3, 4, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite/pivot:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11.0, 12.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("sprite/pivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.174533]
+}
 
 [sub_resource type="Animation" id="Animation_1ymxq"]
 resource_name = "normal_attack"
@@ -85,48 +239,138 @@ tracks/0/keys = {
 "method": &"move_towards"
 }]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/pivot:rotation")
-tracks/1/interp = 2
+tracks/1/path = NodePath("effect_manager")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0.05, 0.6),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -2.35619]
+"values": [{
+"args": [0.08],
+"method": &"set_shadow_radius"
+}, {
+"args": [0.12],
+"method": &"set_shadow_radius"
+}]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("sprite/pivot:rotation")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.55, 0.6, 0.65, 0.7, 0.75, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 3.14159, 3.40339, 3.14159, 3.14159, 2.35619]
+"values": [0.0, -2.00713]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:position:y")
-tracks/3/interp = 2
+tracks/3/path = NodePath("sprite/pivot:rotation")
+tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0.55, 0.6, 0.65, 0.7, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.79253, 3.05433, 2.79253, 2.79253, 2.00713]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:position:y")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.55, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -25.0, -25.0, 0.0]
+"values": [-13.0, -38.0, -38.0, -13.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite/pivot:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.55, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 12), Vector2(-4, 7), Vector2(-4, 7), Vector2(10, 12.8249), Vector2(10, 12.8249), Vector2(4, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_rrl67"]
 resource_name = "take_damage"
-
-[sub_resource type="Animation" id="Animation_gphxx"]
-resource_name = "death"
+length = 0.6
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("effect_manager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_hit_flash"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, -10.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:position:y")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.35, 0.4, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-13.0, -18.0, -18.0, -13.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/pivot:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, -0.523599, 0.174533, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
@@ -141,7 +385,7 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_no6yo"]
 shader = ExtResource("5_218u3")
 shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
-shader_parameter/radius = 0.1
+shader_parameter/radius = 0.12
 shader_parameter/squash_factor = Vector2(1, 2.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
@@ -169,22 +413,29 @@ libraries = {
 }
 script = ExtResource("2_xdhph")
 
-[node name="flash_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+[node name="effect_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "shadow_sprite")]
 script = ExtResource("2_hdvll")
 sprite = NodePath("../sprite")
+shadow_sprite = NodePath("../shadow")
 
 [node name="shadow" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_no6yo")
-position = Vector2(0, 9)
+position = Vector2(0, 3)
+scale = Vector2(1.00249, 0.988495)
 texture = ExtResource("6_ac2aa")
 
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_utwch")
-texture = ExtResource("2_kjl5i")
-flip_h = true
+position = Vector2(0, -13)
+texture = ExtResource("8_3jq5f")
+hframes = 5
+vframes = 2
+frame = 5
 
-[node name="pivot" type="Node2D" parent="sprite"]
-position = Vector2(2, 7)
+[node name="pivot" type="Sprite2D" parent="sprite"]
+y_sort_enabled = true
+position = Vector2(4, 12)
+texture = ExtResource("9_q2yg6")
 metadata/_edit_group_ = true
 
 [node name="sword" type="Sprite2D" parent="sprite/pivot"]
@@ -203,7 +454,5 @@ position = Vector2(-21, 0)
 visible = false
 position = Vector2(40, 0)
 
-[connection signal="died" from="." to="." method="kill"]
-[connection signal="lost_health" from="." to="flash_manager" method="_on_lost_health"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

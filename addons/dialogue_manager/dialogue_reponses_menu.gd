@@ -16,7 +16,7 @@ signal response_selected(response)
 @export var next_action: StringName = &""
 
 # --- Reference --- #
-var response_scene = preload("res://scenes/dialogue/response_button.tscn")
+var response_scene = preload("res://scenes/dialogue/components/response_button.tscn")
 
 ## The list of dialogue responses.
 var responses: Array = []:

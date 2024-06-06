@@ -400,7 +400,9 @@ encounter_path = "res://encounters/test/small_test.tres"
 
 [node name="sign" parent="." instance=ExtResource("20_2u6ib")]
 position = Vector2(173, 129)
-dialogue_path = "res://scenes/dialogue/testing.dialogue"
+scale = Vector2(1, 0.993383)
+dialogue_path = "res://resources/dialogue/sign_text.dialogue"
+bubble_path = "res://scenes/dialogue/sign_balloon.tscn"
 
 [node name="npc" type="Area2D" parent="."]
 z_index = 100
@@ -409,8 +411,8 @@ position = Vector2(227, 129)
 collision_mask = 2
 script = ExtResource("19_ckuiq")
 npc_info_path = "res://entities/npcs/testing/testing.tres"
-dialogue_path = "res://scenes/dialogue/testing.dialogue"
-bubble_path = "sign"
+dialogue_path = "res://scenes/testing/testing.dialogue"
+bubble_path = "res://scenes/dialogue/standard_balloon.tscn"
 box_offset = 19.0
 icon = ExtResource("20_c610j")
 

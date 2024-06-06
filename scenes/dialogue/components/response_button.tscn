@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dka6sdlieeto3"]
 
-[ext_resource type="Script" path="res://scenes/dialogue/response_button.gd" id="1_td51a"]
+[ext_resource type="Script" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="2_tuld0"]
 
 [node name="response_example" type="BaseButton" node_paths=PackedStringArray("label", "outline_rect")]

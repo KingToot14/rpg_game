@@ -28,7 +28,10 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 			target = Globals.curr_targets[0].get_front_pos()
 	
 	if offset != Vector2.ZERO:
-		parent.global_position = target + offset
+		if global:
+			parent.global_position = target + offset
+		else:
+			parent.position = target + offset
 	
 	var tween = create_tween()
 	if global:
