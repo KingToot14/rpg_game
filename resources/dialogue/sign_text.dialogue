@@ -1,7 +1,7 @@
 ~ starting_area_sign
 
 [center]Welcome to the forest!
-	Please take caution when walking the paths as
-	there has been a recent infestation of forest slimes[/center]
+	! Warning !
+	Please use caution when walking the paths, an infestation of forest slimes has been spotted[/center]
 
 => END

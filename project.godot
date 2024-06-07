@@ -27,6 +27,7 @@ DataManager="*res://systems/data_saving/data_manager.gd"
 [dialogue_manager]
 
 general/balloon_path="res://scenes/dialogue/standard_balloon.tscn"
+general/wrap_lines=true
 
 [display]
 

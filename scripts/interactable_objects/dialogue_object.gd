@@ -4,7 +4,8 @@ extends Interactable
 # --- Variables --- #
 @export_file("*.tres") var npc_info_path: String
 @export_file("*.dialogue") var dialogue_path: String
-@export_file var bubble_path: String
+@export var dialogue_title: String
+@export_file("*.tscn") var balloon_path: String
 
 # --- References --- #
 var dialogue: DialogueResource
@@ -22,4 +23,7 @@ func _ready():
 
 func show_dialogue():
 	PortraitManager.set_portrait(npc_resource, "happy")
-	DialogueManager.show_dialogue_balloon(dialogue)
+	if balloon_path.is_empty():
+		DialogueManager.show_dialogue_balloon(dialogue, dialogue_title)
+	else:
+		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, dialogue_title)
