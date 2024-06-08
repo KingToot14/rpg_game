@@ -3,7 +3,7 @@ extends Interactable
 
 # --- Variables --- #
 @export var loot_key: String
-@export var loot: Array[LootItem]
+@export var loot: Array[InventoryItem]
 
 @export_group("Sprites")
 @export var collected_sprite: Texture2D
@@ -23,7 +23,7 @@ func check_loot() -> void:
 func collect_loot() -> void:
 	# Load loot
 	for item in loot:
-		print("Sent \'", item.item_key, "\' (x", item.quantity, ") to \'", item.inventory, "\'")
+		DataManager.add_to_inventory(item)
 	
 	# Set flag
 	DataManager.open_chest(loot_key)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://3x8i4r07nnch"]
+
+[ext_resource type="Script" path="res://resources/scripts/quest.gd" id="1_5kfx2"]
+[ext_resource type="Script" path="res://resources/scripts/inventory_item.gd" id="1_tteug"]
+
+[sub_resource type="Resource" id="Resource_4vqf5"]
+script = ExtResource("1_tteug")
+inventory = &"item"
+item_key = &"twig"
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_eoyea"]
+script = ExtResource("1_tteug")
+inventory = &"armor"
+item_key = &"fancy hat"
+quantity = 1
+
+[resource]
+script = ExtResource("1_5kfx2")
+requirements = Array[ExtResource("1_tteug")]([SubResource("Resource_4vqf5")])
+reward = Array[ExtResource("1_tteug")]([SubResource("Resource_eoyea")])

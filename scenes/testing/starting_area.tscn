@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://byb0hxqtbhtrv"]
+[gd_scene load_steps=52 format=3 uid="uid://byb0hxqtbhtrv"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_q8wvw"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="4_gslc6"]
@@ -14,7 +14,7 @@
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="12_ybstl"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="15_dn1g2"]
 [ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="16_1uwdf"]
-[ext_resource type="Script" path="res://resources/scripts/loot_item.gd" id="17_5h66u"]
+[ext_resource type="Script" path="res://resources/scripts/inventory_item.gd" id="17_5h66u"]
 [ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="17_s2cr4"]
 [ext_resource type="PackedScene" uid="uid://c50i2fe4sv0xd" path="res://environment/objects/chest.tscn" id="18_rn7lt"]
 [ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="19_ckuiq"]
@@ -155,27 +155,33 @@ shader_parameter/wind_noise = SubResource("NoiseTexture2D_icnh7")
 
 [sub_resource type="Resource" id="Resource_iquka"]
 script = ExtResource("17_5h66u")
-inventory = &"items"
 item_key = &"leaf"
 quantity = 5
+inventory = &"item"
+
+[sub_resource type="Resource" id="Resource_74k1b"]
+script = ExtResource("17_5h66u")
+item_key = &"twig"
+quantity = 2
+inventory = &"item"
 
 [sub_resource type="Resource" id="Resource_ptuiv"]
 script = ExtResource("17_5h66u")
-inventory = &"armor"
 item_key = &"golden_crown"
 quantity = 1
+inventory = &"armor"
 
 [sub_resource type="Resource" id="Resource_1rhxd"]
 script = ExtResource("17_5h66u")
-inventory = &"items"
-item_key = &"twigs"
+item_key = &"twig"
 quantity = 3
+inventory = &"item"
 
 [sub_resource type="Resource" id="Resource_rfqum"]
 script = ExtResource("17_5h66u")
-inventory = &"armor"
 item_key = &"shrub_hat"
 quantity = 1
+inventory = &"armor"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tvvny"]
 
@@ -312,7 +318,7 @@ position = Vector2(450, 153)
 [node name="chest2" parent="tree_cluster" instance=ExtResource("18_rn7lt")]
 position = Vector2(305, 59)
 loot_key = "tree_chest"
-loot = Array[ExtResource("17_5h66u")]([SubResource("Resource_iquka")])
+loot = Array[ExtResource("17_5h66u")]([SubResource("Resource_iquka"), SubResource("Resource_74k1b")])
 
 [node name="tree_cluster2" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -402,6 +408,7 @@ encounter_path = "res://encounters/test/small_test.tres"
 position = Vector2(173, 129)
 scale = Vector2(1, 0.993383)
 dialogue_path = "res://resources/dialogue/sign_text.dialogue"
+dialogue_title = "starting_area_sign"
 balloon_path = "res://scenes/dialogue/sign_balloon.tscn"
 
 [node name="npc" type="Area2D" parent="."]
@@ -410,8 +417,9 @@ y_sort_enabled = true
 position = Vector2(227, 129)
 collision_mask = 2
 script = ExtResource("19_ckuiq")
+npc_name = "isaac"
 npc_info_path = "res://entities/npcs/testing/testing.tres"
-dialogue_path = "res://scenes/testing/testing.dialogue"
+dialogue_path = "res://entities/npcs/testing/isaac.dialogue"
 box_offset = 19.0
 icon = ExtResource("20_c610j")
 

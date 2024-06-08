@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bufxbxlbrg64o"
+path="res://.godot/imported/isaac.dialogue-aa7c197fa16c438349d17e13168f52f3.tres"
+
+[deps]
+
+source_file="res://entities/npcs/testing/isaac.dialogue"
+dest_files=["res://.godot/imported/isaac.dialogue-aa7c197fa16c438349d17e13168f52f3.tres"]
+
+[params]
+
+defaults=true

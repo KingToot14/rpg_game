@@ -1,0 +1,41 @@
+
+
+~ introduction
+
+Isaac: Welcome to the forest! My name is Isaac :3
+Isaac: There isn't too much to do right now, but I can give you some busy work if you want
+- Sure! => accept_quest
+- No thanks!
+	Isaac: Alright, just let me know if you change your mind!
+
+do DataManager.set_dialogue_state("isaac", "post_intro")
+
+=> END
+
+~ post_intro
+
+Isaac: Hey there again! You able to lend a hand?
+- I'm ready! => accept_quest
+- Not yet
+	Isaac: Alright, just let me know if you change your mind!
+
+=> END
+
+~ accept_quest
+
+Isaac: Awesome! If you could just gather a few twigs for me, that'd be great!
+# TODO: Add quest logic
+
+do DataManager.set_dialogue_state("isaac", "quest_accepted")
+do DataManager.start_quest("isaac_quest", "res://entities/npcs/testing/quest.tres")
+
+=> END
+
+~ quest_accepted
+
+Isaac: Did you get those sticks for me?
+ - Here they are! [if false]
+	Isaac: Thanks so much! Here's a little reward for you :)
+	#TODO: Give reward
+ - Not yet
+	Isaac: That's alright! Just let me know when you do
