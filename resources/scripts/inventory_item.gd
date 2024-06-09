@@ -7,7 +7,7 @@ extends Resource
 @export var inventory: StringName
 
 # --- Functions --- #
-func _init(key: StringName, quant: int, inv: StringName) -> void:
+func _init(key: StringName = &"no_name", quant: int = 1, inv: StringName = &"item") -> void:
 	item_key = key
 	quantity = quant
 	inventory = inv

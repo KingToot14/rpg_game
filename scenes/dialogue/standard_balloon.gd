@@ -7,15 +7,14 @@ extends CanvasLayer
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
 
-@onready var balloon: Control = %balloon
-@onready var character_label: RichTextLabel = %character_label
-@onready var character_panel: Control = %character_panel
-@onready var portrait_rect: TextureRect = %portrait
-@onready var dialogue_label: DialogueLabel = %dialogue_label
-@onready var dialogue_panel: Control = %dialogue_panel
-@onready var responses_menu: DialogueResponsesMenu = %response_menu
-var dialogue_width: float
-var frame_width: float
+@onready var balloon := %balloon as Control
+@onready var character_label := %character_label as RichTextLabel
+@onready var character_panel := %character_panel as Control
+@onready var portrait_rect := %portrait as TextureRect
+@onready var dialogue_label := %dialogue_label as DialogueLabel
+@onready var dialogue_panel := %dialogue_panel as Control
+@onready var responses_menu := %response_menu as DialogueResponsesMenu
+@onready var quest_container := %quest_container as QuestContainer
 
 var resource: DialogueResource
 var temporary_game_states: Array = []
@@ -42,23 +41,29 @@ var dialogue_line: DialogueLine:
 		
 		var from_character = not dialogue_line.character.is_empty()
 		
+		# set character
 		character_panel.visible = from_character
 		character_label.text = tr(dialogue_line.character, "dialogue")
 		
-		dialogue_panel.size.x = dialogue_width
-		dialogue_panel.position.x = -1
+		portrait_rect.texture = PortraitManager.curr_portrait
 		
-		if from_character:
-			dialogue_panel.size.x -= frame_width
-			dialogue_panel.position.x += frame_width
-			portrait_rect.texture = PortraitManager.curr_portrait
-		
+		# set dialogue
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
-
+		
+		# show response menu
 		responses_menu.hide()
 		responses_menu.set_responses(dialogue_line.responses)
-
+		
+		# display quest
+		var quest = dialogue_line.get_tag_value('quest')
+		
+		if not quest.is_empty():
+			quest_container.visible = true
+			quest_container.load_items(quest)
+		else:
+			quest_container.visible = false
+		
 		# Show our balloon
 		balloon.show()
 		will_hide_balloon = false
@@ -89,9 +94,6 @@ func _ready() -> void:
 	
 	if Globals.overworld_manager:
 		Globals.overworld_manager.player.set_state('dialogue')
-	
-	dialogue_width = dialogue_panel.size.x
-	frame_width = character_panel.size.x - 1
 	
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)

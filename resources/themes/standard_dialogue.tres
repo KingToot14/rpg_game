@@ -1,4 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://fq773hj8ga33"]
 
 [resource]
+HBoxContainer/constants/separation = -1
+QuestContainer/base_type = &"HBoxContainer"
+QuestContainer/constants/separation = 0
 RichTextLabel/font_sizes/normal_font_size = 9
