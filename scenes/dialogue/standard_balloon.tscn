@@ -231,5 +231,35 @@ grow_vertical = 2
 theme_type_variation = &"QuestContainer"
 alignment = 1
 
+[node name="tooltip" type="NinePatchRect" parent="balloon/quest_container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = -1.0
+grow_horizontal = 2
+texture = ExtResource("4_0j1t1")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="balloon/quest_container/tooltip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Hiiii"
+scroll_active = false
+
 [connection signal="gui_input" from="balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="balloon/response_container/response_menu" to="." method="_on_responses_menu_response_selected"]

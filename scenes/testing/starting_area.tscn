@@ -155,7 +155,7 @@ shader_parameter/wind_noise = SubResource("NoiseTexture2D_icnh7")
 
 [sub_resource type="Resource" id="Resource_iquka"]
 script = ExtResource("17_5h66u")
-item_key = &"leaf"
+item_key = &"petal"
 quantity = 5
 inventory = &"item"
 

@@ -3,9 +3,10 @@ extends Control
 
 # --- Variables --- #
 @onready var icon_container := $"icon_container" as HBoxContainer
+@onready var tooltip_rect := $"tooltip" as Control
 
 # --- References --- #
-var quest_info_scene = preload("res://scenes/dialogue/components/quest_info.tscn")
+var quest_info_scene = preload("res://scenes/dialogue/components/item_info.tscn")
 
 # --- Functions --- #
 func load_items(tag: StringName) -> void:
@@ -26,6 +27,7 @@ func load_items(tag: StringName) -> void:
 		if inventory_item:
 			curr_count = clamp(inventory_item.quantity, 0, item.quantity)
 		
+		quest_info.get_node("icon").texture = inventory_item.icon
 		quest_info.get_node("count").text = "[center]" + str(curr_count) + "/" + str(item.quantity)
 		
 		icon_container.add_child(quest_info)

@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbasqqwej8pvy"]
+
+[ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="1_hknxx"]
+[ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="1_so7n1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ladmy"]
+atlas = ExtResource("1_hknxx")
+region = Rect2(0, 0, 20, 20)
+
+[node name="item_info" type="Control"]
+custom_minimum_size = Vector2(28, 32)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 4
+theme = ExtResource("1_so7n1")
+
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -10.0
+offset_top = 2.0
+offset_right = 10.0
+offset_bottom = 22.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_ladmy")
+expand_mode = 1
+
+[node name="count" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center]10/10[/center]"
+scroll_active = false
