@@ -23,6 +23,7 @@ TargetingHelper="*res://scripts/autoloads/targeting_helper.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PortraitManager="*res://scripts/autoloads/portrait_manager.gd"
 DataManager="*res://systems/data_saving/data_manager.tscn"
+TransitionManager="*res://ui/transitions/transition_manager.tscn"
 
 [dialogue_manager]
 

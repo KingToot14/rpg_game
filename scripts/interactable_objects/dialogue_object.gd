@@ -7,6 +7,7 @@ extends Interactable
 @export_file("*.tres") var npc_info_path: String
 @export_file("*.dialogue") var dialogue_path: String
 @export var dialogue_title: String
+var curr_title: String
 @export_file("*.tscn") var balloon_path: String
 
 # --- References --- #
@@ -28,12 +29,13 @@ func show_dialogue():
 	get_title()
 	
 	if balloon_path.is_empty():
-		DialogueManager.show_dialogue_balloon(dialogue, dialogue_title)
+		DialogueManager.show_dialogue_balloon(dialogue, curr_title)
 	else:
-		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, dialogue_title)
+		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, curr_title)
 
 func get_title() -> void:
 	if not dialogue_title.is_empty():
+		curr_title = dialogue_title
 		return
 	
-	dialogue_title = DataManager.get_dialogue_state(npc_name)
+	curr_title = DataManager.get_dialogue_state(npc_name)

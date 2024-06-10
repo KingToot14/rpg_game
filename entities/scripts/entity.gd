@@ -102,6 +102,7 @@ func do_death() -> void:
 func play_damage_anim(_dmg: int, _entity: Entity) -> void:
 	if alive:
 		animator.play(&'take_damage')
+		animator.queue(&'idle')
 	else:
 		remove_from_battle()
 		animator.play(&'death')

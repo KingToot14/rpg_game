@@ -1425,6 +1425,10 @@ text = "Perfect!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="targeting_arrow" type="Line2D" parent="ui"]
+points = PackedVector2Array(172, 215, 172, 139, 320, 139)
+joint_mode = 2
+
 [node name="enemy_positions" type="Node2D" parent="."]
 
 [node name="marker" type="Marker2D" parent="enemy_positions"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxqjhvbkjmvos"]
+
+[ext_resource type="Script" path="res://ui/transitions/transition_manager.gd" id="1_08xaj"]
+[ext_resource type="Shader" path="res://ui/transitions/swipe.gdshader" id="2_bpy3a"]
+[ext_resource type="Shader" path="res://ui/transitions/circle_fade.gdshader" id="3_wvn0k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3htce"]
+shader = ExtResource("2_bpy3a")
+shader_parameter/offset = Vector2(0.425, 0)
+shader_parameter/separation = Vector2(1, 1)
+shader_parameter/fade_length = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjvof"]
+shader = ExtResource("3_wvn0k")
+shader_parameter/cutoff = 0.0
+shader_parameter/fade_length = 0.1
+
+[node name="transition_manager" type="CanvasLayer"]
+script = ExtResource("1_08xaj")
+swipe_time = 0.4
+circle_time = 0.5
+
+[node name="fade_rect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="swipe_rect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3htce")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="circle_rect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vjvof")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -105.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)

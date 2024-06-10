@@ -35,10 +35,12 @@ Isaac: [#quest=isaac_quest] Did you get those sticks for me?
  - Not yet
 	Isaac: That's alright! Just let me know when you do
 
+=> END
+
 ~ collect_reward
 
-do DataManager.set_quest_status("isaac_quest", true)
 do DataManager.set_dialogue_state("isaac", "post_quest")
+do DataManager.set_quest_status("isaac_quest", true)
 
 Isaac: Thanks so much! Here's a little reward for you :)
 

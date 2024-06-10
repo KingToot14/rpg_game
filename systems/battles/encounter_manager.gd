@@ -33,6 +33,10 @@ func _ready():
 	Globals.encounter_manager = self
 	
 	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
+	
+	# Reveal battle
+	TransitionManager.reset_all()
+	TransitionManager.end_split()
 
 # - Encounters - #
 func setup_encounter(loaded_encounter: Encounter) -> void:
