@@ -25,3 +25,12 @@ var timing_mods: Array[float] = []
 
 var action_fsm: ActionFSM
 var attack_manager: AttackManager
+
+# --- Icons --- #
+var item_icons: Array[StringName] = [
+	&'twig', &'flower', &'thread', &'red_gem', &'green_gem', &'purple_gem', &'blue_gem', &'diamond',
+	&'copper', &'silver', &'gold'
+]
+
+func get_item_frame(key: StringName) -> int:
+	return max(item_icons.find(key), 0)
