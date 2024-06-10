@@ -9,4 +9,4 @@ func _ready() -> void:
 	pressed.connect(set_item)
 
 func set_item() -> void:
-	Globals.curr_item = item
+	Globals.set_item(item)

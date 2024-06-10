@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=25 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/textures/texture_randomizer.gd" id="10_rxi4p"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="12_8s6gd"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="13_lq1o0"]
+[ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="14_0nx2n"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
 resource_name = "RESET"
@@ -378,7 +379,7 @@ shader_parameter/intensity = 0.0
 radius = 12.0
 height = 34.0
 
-[node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["enemy"]]
+[node name="slime" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["enemy", "entity"]]
 z_index = 100
 script = ExtResource("1_gt34u")
 stats = ExtResource("2_egcos")
@@ -436,7 +437,15 @@ visible = false
 position = Vector2(23, 0)
 
 [node name="front_marker" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-40, 0)
+
+[node name="targeting_marker" type="Sprite2D" parent="."]
+visible = false
+z_index = 200
+position = Vector2(-1, -23)
+texture = ExtResource("14_0nx2n")
+vframes = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

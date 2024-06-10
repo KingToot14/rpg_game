@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=22 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="2_bmr2h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
 [ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
 [ext_resource type="Texture2D" uid="uid://boirb4wurj37t" path="res://entities/player/melee/paw.png" id="9_q2yg6"]
+[ext_resource type="Texture2D" uid="uid://bdefpfoeurbdn" path="res://ui/battles/indicators/player_targeting.png" id="11_cdc8h"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -48,6 +49,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(4, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_gphxx"]
@@ -396,7 +409,7 @@ shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 
-[node name="player_melee" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["player"]]
+[node name="player_melee" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["entity", "player"]]
 z_index = 100
 script = ExtResource("1_xrkk6")
 is_player = true
@@ -430,7 +443,6 @@ position = Vector2(0, -13)
 texture = ExtResource("8_3jq5f")
 hframes = 5
 vframes = 2
-frame = 5
 
 [node name="pivot" type="Sprite2D" parent="sprite"]
 y_sort_enabled = true
@@ -453,6 +465,13 @@ position = Vector2(-21, 0)
 [node name="front_marker" type="Marker2D" parent="."]
 visible = false
 position = Vector2(40, 0)
+
+[node name="targeting_marker" type="Sprite2D" parent="."]
+visible = false
+z_index = 200
+position = Vector2(2, -33)
+texture = ExtResource("11_cdc8h")
+vframes = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

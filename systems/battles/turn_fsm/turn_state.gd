@@ -9,7 +9,13 @@ extends Node2D
 func state_entered() -> void:
 	pass
 
+func state_exited() -> void:
+	pass
+
 func entity_removed(_entity: Entity) -> void:
+	pass
+
+func item_set() -> void:
 	pass
 
 func action_performed() -> void:

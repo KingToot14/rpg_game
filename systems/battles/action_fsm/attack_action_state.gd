@@ -15,7 +15,10 @@ func entity_selected(entity: Entity) -> void:
 	if not entity.is_player and attack.side == Attack.TargetSide.PLAYER:
 		return
 	
-	Globals.curr_targets[0] = entity
+	Globals.curr_target = entity
+	
+	# Disable highlighting
+	TargetingHelper.disable_highlights()
 	
 	perform_action()
 

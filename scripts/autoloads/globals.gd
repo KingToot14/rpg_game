@@ -1,5 +1,8 @@
 extends Node2D
 
+# --- Signals --- #
+signal item_set()
+
 # --- General --- #
 var object_pool: ObjectPool
 var ui_manager: CanvasLayer
@@ -17,20 +20,14 @@ var encounter_manager: EncounterManager
 var encounter_resource: String
 
 var curr_entity: Entity
-var curr_targets: Array[Entity] = [null, null, null, null, null]
+var curr_target: Entity
 
 var curr_item: Resource
+func set_item(item: Resource) -> void:
+	curr_item = item
+	item_set.emit()
 
 var timing_mods: Array[float] = []
 
 var action_fsm: ActionFSM
 var attack_manager: AttackManager
-
-# --- Icons --- #
-var item_icons: Array[StringName] = [
-	&'twig', &'flower', &'thread', &'red_gem', &'green_gem', &'purple_gem', &'blue_gem', &'diamond',
-	&'copper', &'silver', &'gold'
-]
-
-func get_item_frame(key: StringName) -> int:
-	return max(item_icons.find(key), 0)

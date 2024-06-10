@@ -22,9 +22,9 @@ func setup_attack() -> bool:
 
 func do_damage() -> void:
 	var attack = Globals.curr_item as Attack
-	var dmg = round(attack.calculate_damage(Globals.curr_entity, Globals.curr_targets[0]))
+	var dmg = round(attack.calculate_damage(Globals.curr_entity, Globals.curr_target))
 	
 	if len(Globals.timing_mods) > 0:
 		dmg *= Globals.timing_mods.pop_front()
 	
-	Globals.curr_targets[0].take_damage(dmg)
+	Globals.curr_target.take_damage(dmg)

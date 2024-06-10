@@ -36,10 +36,13 @@ var valid_attacks: Array[StringName] = []
 @export var marker_pos: Node2D
 
 var is_mouse_over: bool = false
+var targetable: bool = false
 
 # --- References --- #
 @onready var brain: EntityBrain
 @export var animator: AttackAnimator
+
+@onready var targeting_marker := $"targeting_marker" as Sprite2D
 
 # --- Functions --- #
 func _ready() -> void:
@@ -65,11 +68,17 @@ func setup(index: int):
 	animator.play(&'enter_battle')
 	animator.queue(&'idle')
 
+func set_targetable(val: bool) -> void:
+	targetable = val
+	targeting_marker.visible = targetable
+
 func _on_mouse_entered():
 	is_mouse_over = true
+	targeting_marker.frame = 1
 
 func _on_mouse_exited():
 	is_mouse_over = false
+	targeting_marker.frame = 0
 
 func _input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT:

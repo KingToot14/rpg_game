@@ -19,10 +19,17 @@ enum DamageType { PHYSICAL, MAGICAL }
 @export var randomness: float = 10
 
 # --- Functions --- #
-func calculate_damage(attacker: Entity, target: Entity):
+func calculate_damage(attacker: Entity, target: Entity) -> float:
 	# Formula: (Power * Attack/Defense) * TODO: Elemental Mod
 	var use_magic = damage_type == DamageType.MAGICAL
 	var dmg = power * (attacker.get_attack(use_magic) / target.get_defense(use_magic))
 	dmg *= randf_range(100 - randomness / 2, 100 + randomness / 2) / 100
 	
 	return dmg
+
+func highlight_targets() -> void:
+	if side == TargetSide.ENEMY:
+		var enemies = TargetingHelper.get_entities(&'enemy')
+		
+		for enemy in enemies:
+			enemy.set_targetable(true)

@@ -12,11 +12,17 @@ var curr_state: TurnState
 @export var turn_switch_delay: float = 0.0
 
 # --- Functions --- #
+func _ready() -> void:
+	Globals.item_set.connect(item_set)
+
 func set_state(state: String) -> void:
 	if not has_node(state + "_state"):
 		return
 	
 	await get_tree().create_timer(turn_switch_delay).timeout
+	
+	if curr_state:
+		curr_state.state_exited()
 	
 	curr_state = get_node(state + "_state") as TurnState
 	curr_state.state_entered()
@@ -25,6 +31,9 @@ func set_state(state: String) -> void:
 
 func start_turn() -> void:
 	turn_started.emit()
+
+func item_set() -> void:
+	curr_state.item_set()
 
 func entity_removed(entity: Entity) -> void:
 	curr_state.entity_removed(entity)
