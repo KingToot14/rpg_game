@@ -21,7 +21,6 @@ script = ExtResource("2_byne6")
 cover_rect = NodePath("hp_fill/hp_cover")
 hp_label = NodePath("hp_value")
 special_label = NodePath("special_value")
-metadata/_edit_group_ = true
 
 [node name="hp_value" type="Label" parent="."]
 layout_mode = 0

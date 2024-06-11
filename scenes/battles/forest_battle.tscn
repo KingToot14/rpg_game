@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=58 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -10,14 +10,14 @@
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_66gh2"]
 [ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_menu/action_button.png" id="6_a4ney"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/lose_state.gd" id="6_s453a"]
-[ext_resource type="Script" path="res://ui/battles/action_menu/battle_action_button.gd" id="7_3w10q"]
-[ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/action_menu/attack_melee.png" id="7_bd1i3"]
+[ext_resource type="Script" path="res://ui/battles/action_menu/melee_icons/battle_action_button.gd" id="7_3w10q"]
+[ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/action_menu/melee_icons/attack_melee.png" id="7_bd1i3"]
 [ext_resource type="Script" path="res://ui/battles/battle_ui_manager.gd" id="8_ex6oy"]
 [ext_resource type="Script" path="res://systems/battles/action_fsm/action_state.gd" id="8_u1m5v"]
 [ext_resource type="Script" path="res://systems/battles/action_fsm/attack_action_state.gd" id="9_5pcwq"]
-[ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/action_menu/block_melee.png" id="9_gvg6k"]
+[ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/action_menu/melee_icons/block_melee.png" id="9_gvg6k"]
 [ext_resource type="Script" path="res://systems/battles/attack_manager.gd" id="10_1kl6y"]
-[ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/tactics_melee.png" id="10_qg1o5"]
+[ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/melee_icons/tactics_melee.png" id="10_qg1o5"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="11_562by"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_wind.gdshader" id="12_xdqal"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/shaders/grass/grass_tiles.tres" id="13_qg7l5"]
@@ -25,14 +25,17 @@
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail_patch.gdshader" id="15_lujwf"]
 [ext_resource type="TileSet" uid="uid://thbxl7l3cgo2" path="res://environment/shaders/trail/trail_tiles.tres" id="16_vjmj5"]
-[ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="17_ty8w6"]
-[ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="18_wdhfm"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="19_ok23t"]
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="19_tppcg"]
 [ext_resource type="PackedScene" uid="uid://4ws5v52gxy05" path="res://ui/battles/timed_attacks/timed_single_hit.tscn" id="23_n5437"]
 [ext_resource type="Script" path="res://scripts/object_pool.gd" id="25_a1wgc"]
+[ext_resource type="PackedScene" uid="uid://bk0wwacwjncj7" path="res://ui/battles/action_menu/menu_button.tscn" id="27_2rlq4"]
+[ext_resource type="Script" path="res://ui/battles/action_menu/attack_menu.gd" id="27_53322"]
+[ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="27_e31mb"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="29_7enty"]
 [ext_resource type="PackedScene" uid="uid://d2wjs7ohttbr2" path="res://ui/battles/health/player_hp.tscn" id="30_308vx"]
+[ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="30_xb3b8"]
 [ext_resource type="PackedScene" uid="uid://dyfr5rkicstsv" path="res://ui/battles/health/enemy_hp.tscn" id="31_gv80f"]
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 
@@ -131,6 +134,10 @@ region = Rect2(0, 0, 62, 22)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kplc7"]
 atlas = ExtResource("6_a4ney")
 region = Rect2(0, 22, 62, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trvi3"]
+atlas = ExtResource("30_xb3b8")
+margin = Rect2(0, 0, 20, 20)
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("player_positions", "enemy_positions")]
 y_sort_enabled = true
@@ -666,106 +673,247 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="attack_menu" type="Control" parent="ui/action_bar"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 3.0
-offset_top = -55.0
-offset_right = 62.0
-offset_bottom = -4.0
-
-[node name="menu_button" type="BaseButton" parent="ui/action_bar/attack_menu"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 0)
-layout_direction = 0
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -29.5
-offset_top = -17.0
-offset_right = 29.5
-offset_bottom = 0.0
+offset_left = -107.0
+offset_top = -137.0
+offset_right = 107.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
-rotation = 0.0
-scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-auto_translate = true
-localize_numeral_system = true
-tooltip_text = ""
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-theme = null
-theme_type_variation = &""
-disabled = false
-toggle_mode = false
-button_pressed = false
-action_mode = 1
-button_mask = 1
-keep_pressed_outside = false
-button_group = null
-shortcut = null
-shortcut_feedback = true
-shortcut_in_tooltip = true
-script = ExtResource("17_f6win")
-item = ExtResource("18_wdhfm")
+script = ExtResource("27_53322")
 
-[node name="backing" type="ColorRect" parent="ui/action_bar/attack_menu/menu_button"]
+[node name="grid_backing" parent="ui/action_bar/attack_menu" instance=ExtResource("27_e31mb")]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 124.0
+
+[node name="panel_inner" parent="ui/action_bar/attack_menu/grid_backing" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="attack_grid" type="VBoxContainer" parent="ui/action_bar/attack_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -98.0
+offset_right = 122.0
+offset_bottom = -2.0
+grow_vertical = 0
+alignment = 2
+
+[node name="attack_row4" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
+layout_mode = 2
+
+[node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_row3" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
+layout_mode = 2
+
+[node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_row2" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
+layout_mode = 2
+
+[node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_row" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
+layout_mode = 2
+
+[node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_info" parent="ui/action_bar/attack_menu" instance=ExtResource("27_e31mb")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -47.0
+offset_right = 0.0
+offset_bottom = 53.0
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="title" parent="ui/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -86.0
+
+[node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/title"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+text = "Attack Name"
+scroll_active = false
 
-[node name="label" type="Label" parent="ui/action_bar/attack_menu/menu_button"]
+[node name="power" parent="ui/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 15.0
+offset_right = -2.0
+offset_bottom = -61.0
+metadata/_edit_group_ = true
+
+[node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/power"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "Normal Attack"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "O100 O100
+O100 O100"
+scroll_active = false
+
+[node name="icon_frame" parent="ui/action_bar/attack_menu/attack_info/power" instance=ExtResource("29_7enty")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -65.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/power/icon_frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_trvi3")
+expand_mode = 1
+
+[node name="description" parent="ui/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 40.0
+offset_right = -2.0
+offset_bottom = -2.0
+metadata/_edit_group_ = true
+
+[node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Description"
+text = "Description"
+scroll_active = false
+
+[node name="select_panel" parent="ui/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
+visible = false
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/select_panel"]
+custom_minimum_size = Vector2(87, 38)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -14.0
+offset_right = 43.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Hover over an attack to view information"
+scroll_active = false
 
 [node name="player_hp" type="Control" parent="ui"]
 layout_mode = 3

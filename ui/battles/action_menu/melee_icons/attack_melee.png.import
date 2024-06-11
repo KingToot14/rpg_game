@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdv1yvsfr6l2u"
-path="res://.godot/imported/tactics_melee.png-7a24e726c1aec73520784e18e897c93c.ctex"
+uid="uid://c77wdap622yi1"
+path="res://.godot/imported/attack_melee.png-f2067855a1c3824d95ac1eedc1d2cac0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/battles/action_menu/tactics_melee.png"
-dest_files=["res://.godot/imported/tactics_melee.png-7a24e726c1aec73520784e18e897c93c.ctex"]
+source_file="res://ui/battles/action_menu/melee_icons/attack_melee.png"
+dest_files=["res://.godot/imported/attack_melee.png-f2067855a1c3824d95ac1eedc1d2cac0.ctex"]
 
 [params]
 

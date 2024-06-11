@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3htce"]
 shader = ExtResource("2_bpy3a")
-shader_parameter/offset = Vector2(0.425, 0)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/separation = Vector2(1, 1)
 shader_parameter/fade_length = 0.25
 
