@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=54 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://dudecax1kui7x" path="res://ui/panel.png" id="14_hl1jg"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail_patch.gdshader" id="15_lujwf"]
-[ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="16_efyqi"]
 [ext_resource type="TileSet" uid="uid://thbxl7l3cgo2" path="res://environment/shaders/trail/trail_tiles.tres" id="16_vjmj5"]
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="17_f6win"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="17_ty8w6"]
@@ -33,6 +32,8 @@
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="19_tppcg"]
 [ext_resource type="PackedScene" uid="uid://4ws5v52gxy05" path="res://ui/battles/timed_attacks/timed_single_hit.tscn" id="23_n5437"]
 [ext_resource type="Script" path="res://scripts/object_pool.gd" id="25_a1wgc"]
+[ext_resource type="PackedScene" uid="uid://d2wjs7ohttbr2" path="res://ui/battles/health/player_hp.tscn" id="30_308vx"]
+[ext_resource type="PackedScene" uid="uid://dyfr5rkicstsv" path="res://ui/battles/health/enemy_hp.tscn" id="31_gv80f"]
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pb2rm"]
@@ -318,13 +319,14 @@ position = Vector2(423, 308)
 [node name="forest_tree17" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
 position = Vector2(359, 301)
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "victory_panel", "action_bar", "attack_menu", "single_hit", "result_label")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "victory_panel", "loss_panel", "action_bar", "attack_menu", "single_hit", "result_label")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
 wave_label = NodePath("encounter_info/wave_panel/label")
 condition_label = NodePath("encounter_info/condition_panel/label")
 victory_panel = NodePath("victory_panel")
+loss_panel = NodePath("loss_panel")
 action_bar = NodePath("action_bar")
 attack_menu = NodePath("action_bar/attack_menu")
 single_hit = NodePath("timed_single_hit")
@@ -790,269 +792,37 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 
-[node name="hp_section" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
-offset_top = 2.0
-offset_right = 48.5
-offset_bottom = 14.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-special_label = NodePath("special_value")
-metadata/_edit_group_ = true
-
-[node name="hp_value" type="Label" parent="ui/player_hp/hp_section"]
+[node name="hp_section" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
 offset_left = 2.0
-offset_right = 74.0
+offset_top = 2.0
+offset_right = 99.0
 offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
+grow_horizontal = 1
 
-[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section"]
+[node name="hp_section2" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 74.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="special_value" type="Label" parent="ui/player_hp/hp_section"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -7.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_type_variation = &"SpecialLabel"
-text = "67%"
-horizontal_alignment = 2
-
-[node name="hp_section2" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
 offset_left = -48.5
 offset_top = 15.0
 offset_right = 48.5
 offset_bottom = 27.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-special_label = NodePath("special_value")
-metadata/_edit_group_ = true
 
-[node name="hp_value" type="Label" parent="ui/player_hp/hp_section2"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section2"]
+[node name="hp_section3" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 74.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section2/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="special_value" type="Label" parent="ui/player_hp/hp_section2"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -7.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_type_variation = &"SpecialLabel"
-text = "67%"
-horizontal_alignment = 2
-
-[node name="hp_section3" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
 offset_left = -48.5
 offset_top = 28.0
 offset_right = 48.5
 offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-special_label = NodePath("special_value")
-metadata/_edit_group_ = true
 
-[node name="hp_value" type="Label" parent="ui/player_hp/hp_section3"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section3"]
+[node name="hp_section4" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 74.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section3/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="special_value" type="Label" parent="ui/player_hp/hp_section3"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -7.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_type_variation = &"SpecialLabel"
-text = "67%"
-horizontal_alignment = 2
-
-[node name="hp_section4" type="NinePatchRect" parent="ui/player_hp" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = -49.0
 offset_top = 41.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 53.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-special_label = NodePath("special_value")
-metadata/_edit_group_ = true
-
-[node name="hp_value" type="Label" parent="ui/player_hp/hp_section4"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/player_hp/hp_section4"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 74.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/player_hp/hp_section4/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="special_value" type="Label" parent="ui/player_hp/hp_section4"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -7.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_type_variation = &"SpecialLabel"
-text = "67%"
-horizontal_alignment = 2
 
 [node name="enemy_hp" type="Control" parent="ui"]
 layout_mode = 3
@@ -1082,250 +852,44 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 
-[node name="hp_section" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+[node name="hp_section" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 2.0
 offset_top = 2.0
-offset_right = 48.5
+offset_right = 99.0
 offset_bottom = 14.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-metadata/_edit_group_ = true
+grow_horizontal = 1
 
-[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section"]
+[node name="hp_section2" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 95.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="hp_section2" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = -49.0
 offset_top = 15.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 27.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-metadata/_edit_group_ = true
 
-[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section2"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section2"]
+[node name="hp_section3" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 95.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section2/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="hp_section3" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
 offset_left = -48.5
 offset_top = 28.0
 offset_right = 48.5
 offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-metadata/_edit_group_ = true
 
-[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section3"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section3"]
+[node name="hp_section4" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 95.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section3/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="hp_section4" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = -49.0
 offset_top = 41.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 53.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-metadata/_edit_group_ = true
 
-[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section4"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section4"]
+[node name="hp_section5" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 95.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section4/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="hp_section5" type="NinePatchRect" parent="ui/enemy_hp" node_paths=PackedStringArray("cover_rect", "hp_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = -49.0
 offset_top = 54.0
-offset_right = 48.5
+offset_right = 48.0
 offset_bottom = 66.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("16_efyqi")
-cover_rect = NodePath("hp_fill/hp_cover")
-hp_label = NodePath("hp_value")
-metadata/_edit_group_ = true
-
-[node name="hp_value" type="Label" parent="ui/enemy_hp/hp_section5"]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 74.0
-offset_bottom = 14.0
-theme_type_variation = &"HpLabel"
-text = "12345/67890"
-
-[node name="hp_fill" type="ColorRect" parent="ui/enemy_hp/hp_section5"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 95.0
-offset_bottom = -1.0
-grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
-
-[node name="hp_cover" type="ColorRect" parent="ui/enemy_hp/hp_section5/hp_fill"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
 
 [node name="encounter_info" type="Control" parent="ui"]
 layout_mode = 3
@@ -1353,6 +917,7 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 
 [node name="wave_panel" type="NinePatchRect" parent="ui/encounter_info"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1378,6 +943,7 @@ theme = ExtResource("6_66gh2")
 text = "Wave: 1/2"
 
 [node name="condition_panel" type="NinePatchRect" parent="ui/encounter_info"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1456,6 +1022,7 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 
 [node name="title_panel" type="NinePatchRect" parent="ui/victory_panel"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1486,6 +1053,7 @@ text = "[center]VICTORY[/center]"
 scroll_active = false
 
 [node name="rewards_panel" type="NinePatchRect" parent="ui/victory_panel"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1501,6 +1069,23 @@ patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
+
+[node name="xp_label" type="RichTextLabel" parent="ui/victory_panel/rewards_panel"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[center]XP +100k"
+scroll_active = false
+
+[node name="ap_label" type="RichTextLabel" parent="ui/victory_panel/rewards_panel"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 196.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[center]AP +37"
+scroll_active = false
 
 [node name="return_button" type="BaseButton" parent="ui/victory_panel"]
 _import_path = NodePath("")
@@ -1534,9 +1119,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 2.0
+offset_left = 51.0
 offset_top = 96.0
-offset_right = 198.0
+offset_right = 149.0
 offset_bottom = 118.0
 grow_horizontal = 1
 grow_vertical = 1
@@ -1575,6 +1160,7 @@ script = ExtResource("33_lna74")
 
 [node name="backing" type="NinePatchRect" parent="ui/victory_panel/return_button"]
 modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1589,6 +1175,167 @@ patch_margin_bottom = 1
 metadata/_edit_group_ = true
 
 [node name="label" type="RichTextLabel" parent="ui/victory_panel/return_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Continue[/center]"
+scroll_active = false
+
+[node name="loss_panel" type="Control" parent="ui"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -26.5
+offset_right = 100.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" type="NinePatchRect" parent="ui/loss_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_hl1jg")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="title_panel" type="NinePatchRect" parent="ui/loss_panel"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+metadata/_edit_group_ = true
+
+[node name="label" type="RichTextLabel" parent="ui/loss_panel/title_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = 25.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center]DEFEATED[/center]"
+scroll_active = false
+
+[node name="return_button" type="BaseButton" parent="ui/loss_panel"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 51.0
+offset_top = 29.0
+offset_right = 149.0
+offset_bottom = 51.0
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("33_lna74")
+metadata/_edit_group_ = true
+
+[node name="backing" type="NinePatchRect" parent="ui/loss_panel/return_button"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_cq36e")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="label" type="RichTextLabel" parent="ui/loss_panel/return_button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1635,7 +1382,7 @@ position = Vector2(60, 185)
 
 [node name="object_pool" type="Node2D" parent="."]
 script = ExtResource("25_a1wgc")
-inital_items = Array[String](["damage_marker|10|res://ui/battles/damage_marker/damage_marker.tscn"])
+inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_marker.tscn"])
 
 [connection signal="encounter_victory" from="." to="ui" method="set_victory_panel" binds= [true]]
 [connection signal="state_changed" from="turn_fsm" to="ui" method="_on_state_changed"]
@@ -1654,3 +1401,6 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/damage_marker/d
 [connection signal="mouse_entered" from="ui/victory_panel/return_button" to="ui/victory_panel/return_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/victory_panel/return_button" to="ui/victory_panel/return_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="ui/victory_panel/return_button" to="." method="load_overworld"]
+[connection signal="mouse_entered" from="ui/loss_panel/return_button" to="ui/loss_panel/return_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ui/loss_panel/return_button" to="ui/loss_panel/return_button" method="_on_mouse_exited"]
+[connection signal="pressed" from="ui/loss_panel/return_button" to="." method="load_overworld"]

@@ -43,6 +43,8 @@ func _ready():
 	action_bar.modulate.a = 0
 	
 	set_attack_menu(false)
+	set_victory_panel(false)
+	set_loss_panel(false)
 
 #region HP
 func setup_entity_hp(hp_bar, entity: Entity) -> void:

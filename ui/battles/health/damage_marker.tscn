@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bu8yreah8gela"]
 
-[ext_resource type="Script" path="res://ui/battles/damage_marker/damage_marker.gd" id="1_tbwek"]
+[ext_resource type="Script" path="res://ui/battles/health/damage_marker.gd" id="1_tbwek"]
 
 [node name="damage_marker" type="Node2D" node_paths=PackedStringArray("dmg_label", "crit_label")]
 z_index = 1000
