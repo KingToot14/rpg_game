@@ -91,7 +91,6 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	entity.setup(spawn_index)
 	
 	# Signals
-	entity.died.connect(check_state)
 	entity.selected.connect(action_fsm.entity_selected)
 	
 	var spawn_pos: Node2D
@@ -112,16 +111,6 @@ func remove_from_battle(entity: Entity, index: int) -> void:
 	turn_fsm.entity_removed(entity)
 
 # - Battle State - #
-func check_state() -> void:
-	var state = evaluate_state()
-	
-	match state:
-		-1:			# Loss
-			turn_fsm.set_state('lose')
-		1:			# Enemies cleared
-			if not load_next_wave():
-				turn_fsm.set_state('win')
-
 func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	var all_dead = true
 	

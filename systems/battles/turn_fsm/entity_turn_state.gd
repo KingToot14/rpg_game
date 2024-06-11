@@ -28,6 +28,16 @@ func action_performed() -> void:
 func find_next_turn() -> void:
 	Globals.curr_entity = get_next_entity()
 	
+	var battle_state = Globals.encounter_manager.evaluate_state()
+	
+	if battle_state == -1:
+		fsm.set_state('lose')
+		return
+	elif battle_state == 1:
+		if not Globals.encounter_manager.load_next_wave():
+			fsm.set_state('win')
+			return
+	
 	if Globals.curr_entity:
 		fsm.start_turn()
 		Globals.curr_entity.take_turn()
