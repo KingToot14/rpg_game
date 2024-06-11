@@ -16,6 +16,11 @@ func _ready() -> void:
 	Globals.overworld_manager = self
 	area_changed.connect(DataManager.clear_local_area)
 	
+	if Globals.from_battle:
+		Globals.from_battle = false
+		TransitionManager.reset_all()
+		TransitionManager.end_split()
+	
 	AsyncLoader.new(Globals.overworld_area, add_area)
 
 func load_direction(direction: String) -> void:

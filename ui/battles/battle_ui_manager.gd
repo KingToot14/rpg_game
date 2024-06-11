@@ -10,6 +10,10 @@ extends CanvasLayer
 @export var wave_label: Label
 @export var condition_label: Label
 
+@export_group("Panels")
+@export var victory_panel: Control
+@export var loss_panel: Control
+
 @export_group("Actions")
 var is_player_turn := false
 @export var action_bar: Control
@@ -40,6 +44,7 @@ func _ready():
 	
 	set_attack_menu(false)
 
+#region HP
 func setup_entity_hp(hp_bar, entity: Entity) -> void:
 	hp_bar.visible = not not entity
 	if not entity:
@@ -57,6 +62,7 @@ func setup_enemy_hp(enemy: Entity, index: int):
 func setup_player_special(player: Entity, index: int):
 	player.special_increased.connect(player_hp_bars[index].update_special)
 	player_hp_bars[index].update_special(player)
+#endregion
 
 func _on_state_changed(state: String) -> void:
 	is_player_turn = state == 'player'
@@ -65,6 +71,7 @@ func _on_state_changed(state: String) -> void:
 func _on_action_changed(state: String) -> void:
 	set_attack_menu(state == 'attack')
 
+#region Actions
 func try_set_action_bar(value: bool) -> void:
 	set_action_bar(is_player_turn and value)
 
@@ -87,6 +94,7 @@ func set_action_bar(value: bool) -> void:
 
 func set_attack_menu(value: bool) -> void:
 	attack_menu.visible = value
+#endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:
 	wave_label.text = "Wave: " + str(curr) + "/" + str(wave_count)
@@ -94,7 +102,15 @@ func update_wave_counter(curr: int, wave_count: int) -> void:
 func update_condition(condition: String) -> void:
 	condition_label.text = "Condition: " + condition
 
-# - Timing - #
+#region Panels
+func set_victory_panel(val: bool) -> void:
+	victory_panel.visible = val
+
+func set_loss_panel(val: bool) -> void:
+	loss_panel.visible = val
+#endregion
+
+#region Timing
 func show_timing(version: StringName, target: Variant) -> void:
 	single_hit.visible = version == SINGLE_HIT_NAME
 	if version == SINGLE_HIT_NAME:
@@ -125,3 +141,4 @@ func show_timing_result(key: StringName) -> void:
 func set_result_text_alpha(alpha: float):
 	result_color.a = alpha
 	result_label.add_theme_color_override('font_color', result_color)
+#endregion

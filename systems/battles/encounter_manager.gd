@@ -119,7 +119,6 @@ func check_state() -> void:
 		-1:			# Loss
 			turn_fsm.set_state('lose')
 		1:			# Enemies cleared
-			print("Enemies cleared!")
 			if not load_next_wave():
 				turn_fsm.set_state('win')
 
@@ -150,4 +149,7 @@ func handle_victory() -> void:
 
 # - Scene Management - #
 func load_overworld() -> void:
+	var wait_time = TransitionManager.play_split()
+	Globals.from_battle = true
+	await get_tree().create_timer(wait_time).timeout
 	SceneManager.load_scene(Globals.OVERWORLD_SCENE)

@@ -74,7 +74,7 @@ func set_cutoff(val: float) -> void:
 #endregion
 
 #region Split
-func play_split(horizontal: bool = false) -> int:
+func play_split(horizontal: bool = false) -> float:
 	var tween = create_tween()
 	var end = Vector2(1.0, 0.0)
 	

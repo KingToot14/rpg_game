@@ -16,6 +16,8 @@ var overworld_manager: OverworldManager
 var overworld_area: String = "res://scenes/testing/starting_area.tscn"
 
 # --- Encounters --- #
+var from_battle: bool = false
+
 var encounter_manager: EncounterManager
 var encounter_resource: String
 
