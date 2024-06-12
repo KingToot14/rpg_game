@@ -26,7 +26,9 @@ func hide_outline() -> void:
 func set_menu_item(new_item: Resource) -> void:
 	item = new_item
 	
-	if "icon" in item:
+	visible = not not item
+	
+	if item and "icon" in item:
 		icon_rect.texture = item.icon
 
 func set_item() -> void:

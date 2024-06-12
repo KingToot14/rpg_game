@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=9 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
 [ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/overworld/player_overworld.tscn" id="3_u28xe"]
+[ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="4_7u65r"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="5_7bpw0"]
+[ext_resource type="Script" path="res://ui/overworld/main_ui_panel.gd" id="5_olh6n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)
@@ -57,8 +60,51 @@ shape = SubResource("RectangleShape2D_o5tb6")
 [node name="player" parent="." instance=ExtResource("3_u28xe")]
 position = Vector2(213, 129)
 
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="panel" parent="ui" instance=ExtResource("4_7u65r")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -44.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("5_olh6n")
+
+[node name="top" parent="ui/panel" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -23.0
+
+[node name="bottom" parent="ui/panel" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 23.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="mouse_detection" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 226.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
 [connection signal="area_loaded" from="." to="player" method="load_position"]
 [connection signal="transition_reached" from="bounds/top" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/bottom" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/left" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/right" to="." method="load_direction"]
+[connection signal="mouse_entered" from="ui/mouse_detection" to="ui/panel" method="set_panel_visibility" binds= [true]]
+[connection signal="mouse_exited" from="ui/mouse_detection" to="ui/panel" method="set_panel_visibility" binds= [false]]

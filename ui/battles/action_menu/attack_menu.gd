@@ -7,6 +7,8 @@ extends Control
 var attack_grid: Control
 var rows: Array[Node]
 
+@onready var backing := $"grid_backing" as Control
+
 @onready var select_panel := $"attack_info/select_panel" as Control
 @onready var attack_name_label := $"attack_info/title/label" as RichTextLabel
 @onready var attack_power_label := $"attack_info/power/label" as RichTextLabel
@@ -39,3 +41,19 @@ func item_hovered(item: ActionMenuItem) -> void:
 	attack_name_label.text = attack.name
 	attack_power_label.text = "O" + str(attack.power)
 	attack_description_label.text = attack.description
+
+func load_items(items) -> void:
+	var index = 0
+	var item_count = len(items)
+	
+	for row in rows:
+		for child in row.get_children():
+			if index < item_count:
+				child.set_menu_item(items[index])
+			else:
+				child.set_menu_item(null)
+			
+			index += 1
+	
+	backing.size.y = 24 * (floor(item_count / 5) + 1) + 4
+	backing.position.y = 100 - backing.size.y + 6

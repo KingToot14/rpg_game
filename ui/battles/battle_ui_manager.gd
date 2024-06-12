@@ -110,6 +110,9 @@ func set_attack_menu(value: bool) -> void:
 
 func set_cancel_button(value: bool) -> void:
 	tween_action(cancel_button, value, action_bar_pos)
+
+func load_attacks() -> void:
+	attack_menu.load_items(Globals.curr_entity.attack_pool)
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:

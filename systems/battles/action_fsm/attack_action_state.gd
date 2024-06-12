@@ -2,6 +2,9 @@ class_name AttackActionState
 extends ActionState
 
 # --- Functions --- # 
+func state_entered() -> void:
+	Globals.ui_manager.load_attacks()
+
 func entity_selected(entity: Entity) -> void:
 	var attack = Globals.curr_item
 	if not (attack and attack is Attack):

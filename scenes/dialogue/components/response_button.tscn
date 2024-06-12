@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dka6sdlieeto3"]
 
 [ext_resource type="Script" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
-[ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="2_tuld0"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_56h58"]
 
 [node name="response_example" type="BaseButton" node_paths=PackedStringArray("label", "outline_rect")]
 _import_path = NodePath("")
@@ -89,22 +89,12 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.129412, 0.407843, 0.639216, 1)
 
-[node name="backing" type="NinePatchRect" parent="outline"]
+[node name="panel_inner" parent="outline" instance=ExtResource("2_56h58")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = -1.0
 offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_tuld0")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
 
 [node name="text" type="RichTextLabel" parent="."]
 layout_mode = 1
