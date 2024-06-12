@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=13 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
 [ext_resource type="PackedScene" uid="uid://dsd56x7sbosdr" path="res://entities/player/overworld/player_overworld.tscn" id="3_u28xe"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="4_7u65r"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="5_7bpw0"]
+[ext_resource type="Theme" uid="uid://fupny5sldap3" path="res://resources/themes/overworld.tres" id="5_nuo0b"]
 [ext_resource type="Script" path="res://ui/overworld/main_ui_panel.gd" id="5_olh6n"]
+[ext_resource type="Texture2D" uid="uid://ckjrk6gvf5h43" path="res://ui/overworld/icon/exit_icon.png" id="7_d1578"]
+[ext_resource type="Script" path="res://ui/overworld/overworld_button.gd" id="8_40l3n"]
+[ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="9_87ohi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)
@@ -73,7 +77,12 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 1
+theme = ExtResource("5_nuo0b")
 script = ExtResource("5_olh6n")
+mouse_threshold = 226.0
+tween_time = 0.15
+tween_offset = 4.0
 
 [node name="top" parent="ui/panel" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
@@ -89,22 +98,123 @@ offset_top = 23.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="mouse_detection" type="Control" parent="ui"]
-layout_mode = 3
+[node name="exit_button" type="BaseButton" parent="ui/panel/bottom"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -9.0
+offset_right = -1.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+
+[node name="backing" type="NinePatchRect" parent="ui/panel/bottom/exit_button"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = 226.0
-offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+texture = ExtResource("9_87ohi")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="icon" type="TextureRect" parent="ui/panel/bottom/exit_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -8.0
+offset_right = 18.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_d1578")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/panel/bottom/exit_button"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+text = "Exit"
+scroll_active = false
 
 [connection signal="area_loaded" from="." to="player" method="load_position"]
 [connection signal="transition_reached" from="bounds/top" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/bottom" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/left" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/right" to="." method="load_direction"]
-[connection signal="mouse_entered" from="ui/mouse_detection" to="ui/panel" method="set_panel_visibility" binds= [true]]
-[connection signal="mouse_exited" from="ui/mouse_detection" to="ui/panel" method="set_panel_visibility" binds= [false]]
+[connection signal="pressed" from="ui/panel/bottom/exit_button" to="ui/panel/bottom/exit_button" method="quit_game"]

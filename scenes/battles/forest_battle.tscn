@@ -719,6 +719,7 @@ alignment = 2
 
 [node name="attack_row4" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
+alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
@@ -737,6 +738,7 @@ layout_mode = 2
 
 [node name="attack_row3" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
+alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
@@ -755,6 +757,7 @@ layout_mode = 2
 
 [node name="attack_row2" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
+alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
@@ -773,6 +776,7 @@ layout_mode = 2
 
 [node name="attack_row" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
+alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
