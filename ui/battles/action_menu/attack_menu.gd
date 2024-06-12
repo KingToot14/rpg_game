@@ -18,8 +18,6 @@ func _ready() -> void:
 	# set references
 	attack_grid = $"attack_grid" as Control
 	
-	
-	
 	# find rows
 	rows = attack_grid.get_children()
 	rows.reverse()

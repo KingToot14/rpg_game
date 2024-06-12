@@ -18,10 +18,12 @@ extends CanvasLayer
 var is_player_turn := false
 @export var action_bar: Control
 @export var attack_menu: Control
+@export var cancel_button: Control
 
 @export var action_bar_tween_time: float = 0.15
 @export var action_bar_offset: float = 10
-var action_bar_pos: float
+var action_bar_pos: float = 238
+var attack_menu_pos: float = -115
 
 @export_group("Timings")
 @export var single_hit: TimedSingleHit
@@ -71,31 +73,43 @@ func _on_state_changed(state: String) -> void:
 	set_action_bar(is_player_turn)
 
 func _on_action_changed(state: String) -> void:
+	try_set_action_bar(state != 'targeting')
+	set_cancel_button(is_player_turn and state == 'targeting')
 	set_attack_menu(state == 'attack')
 
 #region Actions
 func try_set_action_bar(value: bool) -> void:
 	set_action_bar(is_player_turn and value)
 
-func set_action_bar(value: bool) -> void:
+func tween_action(control: Control, value: bool, pos: float) -> void:
+	if value and control.modulate.a > 0.0:
+		return
+	
 	var tween = create_tween().set_parallel()
+	
 	if value:
-		action_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+		control.mouse_filter = Control.MOUSE_FILTER_STOP
 		
-		action_bar.position.y = action_bar_pos + action_bar_offset
+		control.position.y = pos + action_bar_offset
 		
-		tween.tween_property(action_bar, 'modulate:a', 1.0, action_bar_tween_time)
-		tween.tween_property(action_bar, 'position:y', action_bar_pos, action_bar_tween_time)
+		tween.tween_property(control, 'modulate:a', 1.0, action_bar_tween_time)
+		tween.tween_property(control, 'position:y', pos, action_bar_tween_time)
 	else:
-		action_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
-		action_bar.position.y = action_bar_pos
+		control.position.y = pos
 		
-		tween.tween_property(action_bar, 'modulate:a', 0.0, action_bar_tween_time)
-		tween.tween_property(action_bar, 'position:y', action_bar_pos + action_bar_offset, action_bar_tween_time)
+		tween.tween_property(control, 'modulate:a', 0.0, action_bar_tween_time)
+		tween.tween_property(control, 'position:y', pos + action_bar_offset, action_bar_tween_time)
+
+func set_action_bar(value: bool) -> void:
+	tween_action(action_bar, value, action_bar_pos)
 
 func set_attack_menu(value: bool) -> void:
-	attack_menu.visible = value
+	tween_action(attack_menu, value, attack_menu_pos)
+
+func set_cancel_button(value: bool) -> void:
+	tween_action(cancel_button, value, action_bar_pos)
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:

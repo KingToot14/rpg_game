@@ -31,3 +31,4 @@ func set_menu_item(new_item: Resource) -> void:
 
 func set_item() -> void:
 	Globals.set_item(item)
+	release_focus()
