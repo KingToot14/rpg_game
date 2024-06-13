@@ -3,6 +3,7 @@ extends Node2D
 
 # --- Signals --- #
 signal encounter_victory()
+signal encounter_loss()
 
 # --- Variables --- #
 @export_group("Player Paths")
@@ -135,6 +136,9 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 
 func handle_victory() -> void:
 	encounter_victory.emit()
+
+func handle_loss() -> void:
+	encounter_loss.emit()
 
 # - Scene Management - #
 func load_overworld() -> void:

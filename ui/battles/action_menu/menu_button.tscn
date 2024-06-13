@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bk0wwacwjncj7"]
 
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="1_leqd4"]
-[ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/normal_attack.tres" id="2_p7gq2"]
+[ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_p7gq2"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_hjerr"]
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="4_dmxo8"]
 

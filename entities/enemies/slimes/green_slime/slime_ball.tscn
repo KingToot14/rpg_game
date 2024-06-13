@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmbq1u4yd64bw"]
+
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="1_4wrvq"]
+[ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_jhty8"]
+[ext_resource type="Texture2D" uid="uid://e66bllhh4l3o" path="res://entities/enemies/slimes/green_slime/slime_ball.png" id="2_t7ts4"]
+[ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="3_mtude"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="4_33dt4"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="5_sjqd0"]
+
+[sub_resource type="Animation" id="Animation_0vi6p"]
+resource_name = "do_fling"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [0.5],
+"method": &"do_damage"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -35.0, -35.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animator")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["target", 0.6],
+"method": &"move_towards"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bm884"]
+_data = {
+"do_fling": SubResource("Animation_0vi6p")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lxyo"]
+resource_local_to_scene = true
+shader = ExtResource("4_33dt4")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.06
+shader_parameter/squash_factor = Vector2(1, 2.5)
+
+[node name="slime_ball" type="Node2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("1_jhty8")
+animator = NodePath("animator")
+
+[node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bm884")
+}
+script = ExtResource("1_4wrvq")
+
+[node name="effect" type="Node2D" parent="." node_paths=PackedStringArray("shadow_sprite")]
+script = ExtResource("3_mtude")
+shadow_sprite = NodePath("../shadow")
+
+[node name="shadow" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2lxyo")
+position = Vector2(0, 6)
+texture = ExtResource("5_sjqd0")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_t7ts4")

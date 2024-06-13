@@ -47,7 +47,8 @@ func load_items(items) -> void:
 	var item_count = len(items)
 	
 	for row in rows:
-		for child in row.get_children():
+		var children = row.get_children()
+		for child in children:
 			if index < item_count:
 				child.set_menu_item(items[index])
 			else:

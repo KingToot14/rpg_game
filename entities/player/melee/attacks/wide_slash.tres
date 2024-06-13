@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://dlw0lggslkmg6"]
+
+[ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="1_kw3vj"]
+[ext_resource type="Script" path="res://entities/scripts/attack.gd" id="2_sdlyj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jitcr"]
+atlas = ExtResource("1_kw3vj")
+margin = Rect2(0, 0, 20, 20)
+
+[resource]
+script = ExtResource("2_sdlyj")
+name = "Wide Slash"
+animation_name = &"normal_attack"
+icon = SubResource("AtlasTexture_jitcr")
+description = "A wide slash
+ - Hits all enemies"
+power = 25.0
+side = 1
+targeting = 2
+damage_type = 0
+accuracy = 100.0
+crit_rate = 10.0
+randomness = 10.0

@@ -18,8 +18,6 @@ func check_encounter(encounter: Encounter) -> void:
 		queue_free()
 
 func start_encounter() -> void:
-	print("Started encounter with ", encounter_path, " on ", battle_path)
-	
 	Globals.encounter_resource = encounter_path
 	Globals.overworld_manager.load_battle(battle_path)
 	

@@ -33,7 +33,7 @@ func get_item(key: String) -> Node:
 	var array = items[key] as Array[Node]
 	
 	for item in array:
-		if item.visible:
+		if not item.visible:
 			return item
 	
 	return array[0]

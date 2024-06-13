@@ -74,6 +74,7 @@ func setup(index: int):
 	animator.play(&'enter_battle')
 	animator.queue(&'idle')
 
+#region Targeting
 func set_targetable(val: bool) -> void:
 	targetable = val
 	
@@ -103,6 +104,7 @@ func _on_mouse_exited():
 	if targeting_tween:
 		targeting_tween.stop()
 		targeting_marker.position.y = targeting_origin
+#endregion
 
 func _input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT:
@@ -115,7 +117,7 @@ func _input(event: InputEvent) -> void:
 func select() -> void:
 	selected.emit(self)
 
-# - HP - #
+#region HP
 func take_damage(dmg: int):
 	hp = max(hp - dmg, 0)
 	
@@ -134,6 +136,7 @@ func do_death() -> void:
 
 func play_damage_anim(_dmg: int, _entity: Entity) -> void:
 	if alive:
+		animator.stop()
 		animator.play(&'take_damage')
 		animator.queue(&'idle')
 	else:
@@ -145,8 +148,9 @@ func get_hp_percent() -> float:
 
 func remove_from_battle() -> void:
 	Globals.encounter_manager.remove_from_battle(self, spawn_index)
+#endregion
 
-# - Actions - #
+#region Actions
 func take_turn() -> void:
 	if not is_player:
 		brain.perform_turn()
@@ -159,13 +163,15 @@ func decrement_action() -> void:
 
 func can_act() -> bool:
 	return alive and action_count > 0
+#endregion
 
-# - Stats - #
+#region Stats
 func get_attack(use_magic: bool) -> float:
 	return stats.m_attack if use_magic else stats.p_attack
 
 func get_defense(use_magic: bool) -> float:
 	return stats.m_defense if use_magic else stats.p_defense
+#endregion
 
 # - Effects - #
 func show_damage_marker(dmg: int, _entity: Entity) -> void:

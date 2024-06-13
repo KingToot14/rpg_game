@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=27 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -14,6 +14,7 @@
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="12_8s6gd"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="13_lq1o0"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="14_0nx2n"]
+[ext_resource type="PackedScene" uid="uid://cmbq1u4yd64bw" path="res://entities/enemies/slimes/green_slime/slime_ball.tscn" id="15_8nkit"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
 resource_name = "RESET"
@@ -232,9 +233,12 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.35, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.35, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
+"args": [],
+"method": &"set_target"
+}, {
 "args": ["target", 0.65],
 "method": &"move_towards"
 }, {
@@ -353,6 +357,62 @@ tracks/3/keys = {
 "values": [12, 0]
 }
 
+[sub_resource type="Animation" id="Animation_dik6w"]
+resource_name = "slime_fling"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slime_ball:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slime_ball")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["do_fling"],
+"method": &"play_animation"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("slime_ball2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("slime_ball2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["do_fling"],
+"method": &"play_animation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
 "RESET": SubResource("Animation_wwx0v"),
@@ -360,6 +420,7 @@ _data = {
 "enter_battle": SubResource("Animation_rbvcc"),
 "idle": SubResource("Animation_6cwo8"),
 "jump_attack": SubResource("Animation_yw2to"),
+"slime_fling": SubResource("Animation_dik6w"),
 "take_damage": SubResource("Animation_b23y5")
 }
 
@@ -447,6 +508,12 @@ z_index = 200
 position = Vector2(-1, -23)
 texture = ExtResource("14_0nx2n")
 vframes = 2
+
+[node name="slime_ball" parent="." instance=ExtResource("15_8nkit")]
+visible = false
+
+[node name="slime_ball2" parent="." instance=ExtResource("15_8nkit")]
+visible = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
