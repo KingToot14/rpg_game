@@ -3,15 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="1_a620d"]
 [ext_resource type="Script" path="res://entities/scripts/attack.gd" id="2_yrjsm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jitcr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcxdd"]
 atlas = ExtResource("1_a620d")
-margin = Rect2(0, 0, 20, 20)
+region = Rect2(20, 0, 20, 20)
 
 [resource]
 script = ExtResource("2_yrjsm")
 name = "Heavy Slash"
 animation_name = &"heavy_attack"
-icon = SubResource("AtlasTexture_jitcr")
+icon = SubResource("AtlasTexture_fcxdd")
 description = "A heavy slash"
 power = 60.0
 side = 1

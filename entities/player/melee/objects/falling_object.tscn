@@ -1,0 +1,214 @@
+[gd_scene load_steps=11 format=3 uid="uid://cp08dhthrsm5i"]
+
+[ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_w4yh0"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_7kk3e"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_opcd4"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_o6rq4"]
+[ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_drd5y"]
+
+[sub_resource type="Animation" id="Animation_qgu7g"]
+resource_name = "fall_heavy"
+length = 0.65
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["target", 0.0],
+"method": &"move_towards"
+}, {
+"args": [1.5],
+"method": &"do_damage"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_pbbex"]
+resource_name = "fall_light"
+length = 0.65
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["target", 0.0],
+"method": &"move_towards"
+}, {
+"args": [0.5],
+"method": &"do_damage"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_n13et"]
+resource_name = "fall_normal"
+length = 0.65
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["target", 0.0],
+"method": &"move_towards"
+}, {
+"args": [1.0],
+"method": &"do_damage"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80f1w"]
+_data = {
+"fall_heavy": SubResource("Animation_qgu7g"),
+"fall_light": SubResource("Animation_pbbex"),
+"fall_normal": SubResource("Animation_n13et")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2c402"]
+resource_local_to_scene = true
+shader = ExtResource("3_opcd4")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.12
+shader_parameter/squash_factor = Vector2(1, 2.5)
+
+[node name="falling_object" type="Node2D" node_paths=PackedStringArray("animator", "sprite")]
+script = ExtResource("1_w4yh0")
+animator = NodePath("animator")
+sprite = NodePath("sprite")
+
+[node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_80f1w")
+}
+script = ExtResource("2_7kk3e")
+
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = -10
+material = SubResource("ShaderMaterial_2c402")
+position = Vector2(0, -1.19209e-07)
+texture = ExtResource("4_o6rq4")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -200)
+texture = ExtResource("5_drd5y")
+hframes = 3

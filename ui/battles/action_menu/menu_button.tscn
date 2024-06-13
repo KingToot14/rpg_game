@@ -7,7 +7,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bt148"]
 atlas = ExtResource("4_dmxo8")
-margin = Rect2(0, 0, 20, 20)
+region = Rect2(0, 0, 20, 20)
 
 [node name="menu_button" type="BaseButton"]
 _import_path = NodePath("")

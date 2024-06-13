@@ -7,8 +7,15 @@ var target = null
 
 # --- Functions --- #
 func do_damage(modifier: float = 1.0) -> void:
-	if is_instance_valid(target):
+	if target is Array:
+		for targ in target:
+			if is_instance_valid(targ):
+				Globals.attack_manager.do_damage(targ, modifier)
+	elif is_instance_valid(target):
 		Globals.attack_manager.do_damage(target, modifier)
+	
+	if len(Globals.timing_mods) > 0:
+		Globals.timing_mods.pop_front()
 
 func set_target() -> void:
 	var attack = Globals.curr_item as Attack

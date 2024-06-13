@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=28 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="2_hdvll"]
@@ -6,13 +6,15 @@
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Resource" uid="uid://qs1553avx8h3" path="res://entities/player/melee/attacks/normal_slash.tres" id="3_4gvet"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
-[ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/wide_slash.tres" id="4_opsxa"]
+[ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
 [ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
 [ext_resource type="Texture2D" uid="uid://boirb4wurj37t" path="res://entities/player/melee/paw.png" id="9_q2yg6"]
 [ext_resource type="Texture2D" uid="uid://bdefpfoeurbdn" path="res://ui/battles/indicators/player_targeting.png" id="11_cdc8h"]
+[ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
+[ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -183,6 +185,50 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-0.436462, -0.436462, 0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ym8gf"]
+resource_name = "falling_objects"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"timed_input"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("attack_objects")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_falling_object_targets"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/pivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
 }
 
 [sub_resource type="Animation" id="Animation_bgxww"]
@@ -513,6 +559,7 @@ _data = {
 "RESET": SubResource("Animation_ste4p"),
 "death": SubResource("Animation_gphxx"),
 "enter_battle": SubResource("Animation_djre5"),
+"falling_objects": SubResource("Animation_ym8gf"),
 "heavy_attack": SubResource("Animation_bgxww"),
 "idle": SubResource("Animation_1n7su"),
 "normal_attack": SubResource("Animation_1ymxq"),
@@ -557,6 +604,7 @@ sprite = NodePath("../sprite")
 shadow_sprite = NodePath("../shadow")
 
 [node name="shadow" type="Sprite2D" parent="."]
+z_index = -10
 material = SubResource("ShaderMaterial_no6yo")
 position = Vector2(0, 3)
 scale = Vector2(1.00249, 0.988495)
@@ -597,6 +645,25 @@ z_index = 200
 position = Vector2(2, -33)
 texture = ExtResource("11_cdc8h")
 vframes = 2
+
+[node name="attack_objects" type="Node2D" parent="." node_paths=PackedStringArray("falling_objects")]
+script = ExtResource("14_jx8ob")
+falling_objects = [NodePath("falling_objects"), NodePath("falling_objects2"), NodePath("falling_objects3"), NodePath("falling_objects4"), NodePath("falling_objects5")]
+
+[node name="falling_objects" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+visible = false
+
+[node name="falling_objects2" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+visible = false
+
+[node name="falling_objects3" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+visible = false
+
+[node name="falling_objects4" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+visible = false
+
+[node name="falling_objects5" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+visible = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

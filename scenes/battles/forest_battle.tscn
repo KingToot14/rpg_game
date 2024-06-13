@@ -138,7 +138,7 @@ region = Rect2(0, 22, 62, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trvi3"]
 atlas = ExtResource("30_xb3b8")
-margin = Rect2(0, 0, 20, 20)
+region = Rect2(0, 0, 20, 20)
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("player_positions", "enemy_positions")]
 y_sort_enabled = true
@@ -678,7 +678,6 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="attack_menu" type="Control" parent="ui/action_bar"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

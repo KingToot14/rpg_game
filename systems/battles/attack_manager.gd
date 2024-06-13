@@ -25,45 +25,21 @@ func do_damage(target, modifier: float = 1.0) -> void:
 	var dmg = round(attack.calculate_damage(Globals.curr_entity, target))
 	
 	if len(Globals.timing_mods) > 0:
-		dmg *= Globals.timing_mods.pop_front()
+		dmg *= Globals.timing_mods[0]
 	
 	dmg *= modifier
 	
 	# set target
-	if target:
-		if target is Array:
-			for targ in target:
-				targ.take_damage(dmg)
-		else:
-			target.take_damage(dmg)
-			if attack.targeting == Attack.TargetingMode.AOE:
-				var group = &'player'
-				
-				if attack.side == Attack.TargetSide.ENEMY:
-					group = &'enemy'
-				
-				var neighbors = TargetingHelper.get_neighbors(target.spawn_index, group)
-				
-				for neighbor in neighbors:
-					neighbor.take_damage(dmg * 0.5)
-		
-		return
+	target.take_damage(dmg)
 	
-	#match attack.targeting:
-		#Attack.TargetingMode.SINGLE:
-			#Globals.curr_target.take_damage(dmg)
-		#Attack.TargetingMode.AOE:
-			#Globals.curr_target.take_damage(dmg)
-			##TODO: add a percent of damage to surrounding entities
-		#Attack.TargetingMode.ALL:
-			#var targets: Array[Node]
-			#
-			#if attack.TargetSide == Attack.TargetSide.ENEMY:
-				#targets = TargetingHelper.get_entities(&'enemy')
-			#else:
-				#targets = TargetingHelper.get_entities(&'player')
-			#
-			#for target in targets:
-				#target.take_damage(dmg)
-		#Attack.TargetingMode.RANDOM:
-			#pass
+	if attack.targeting == Attack.TargetingMode.AOE:
+		var group = &'player'
+		
+		if attack.side == Attack.TargetSide.ENEMY:
+			group = &'enemy'
+		
+		var neighbors = TargetingHelper.get_neighbors(target.spawn_index, group)
+		
+		for neighbor in neighbors:
+			neighbor.take_damage(dmg * 0.5)
+	

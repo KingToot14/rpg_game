@@ -10,7 +10,9 @@ var rows: Array[Node]
 @onready var backing := $"grid_backing" as Control
 
 @onready var select_panel := $"attack_info/select_panel" as Control
+
 @onready var attack_name_label := $"attack_info/title/label" as RichTextLabel
+@onready var attack_icon_rect := $"attack_info/power/icon_frame/icon" as TextureRect
 @onready var attack_power_label := $"attack_info/power/label" as RichTextLabel
 @onready var attack_description_label := $"attack_info/description/label" as RichTextLabel
 
@@ -39,6 +41,7 @@ func item_hovered(item: ActionMenuItem) -> void:
 	var attack = item.item as Attack
 	
 	attack_name_label.text = attack.name
+	attack_icon_rect.texture = attack.icon
 	attack_power_label.text = "O" + str(attack.power)
 	attack_description_label.text = attack.description
 
