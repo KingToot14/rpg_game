@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=29 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="2_hdvll"]
@@ -21,7 +21,7 @@ resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/pivot:rotation")
+tracks/0/path = NodePath("sprite/group/pivot:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -45,7 +45,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/pivot:position")
+tracks/2/path = NodePath("sprite/group/pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -165,7 +165,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/pivot:position")
+tracks/2/path = NodePath("sprite/group/pivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -177,7 +177,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/pivot:rotation")
+tracks/3/path = NodePath("sprite/group/pivot:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -189,6 +189,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_ym8gf"]
 resource_name = "falling_objects"
+length = 1.05
 step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -197,7 +198,7 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -211,24 +212,47 @@ tracks/1/path = NodePath("attack_objects")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0.45),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"set_falling_object_targets"
 }]
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/pivot:rotation")
+tracks/2/path = NodePath("sprite:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-13, -0.25, 0, 0.25, 0, -23, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.15)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/group/pivot:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.45, 0.65, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 3.14159]
+"values": [Vector2(4, 12), Vector2(-1, -4), Vector2(-1, -4), Vector2(11, -3.71428), Vector2(17, 7), Vector2(17, 7), Vector2(17, -12), Vector2(17, -12), Vector2(4, 12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/group/pivot:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.45, 0.65, 0.75, 0.85, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, 0.785398, 2.35619, 2.35619, 2.35619, 2.35619, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_bgxww"]
@@ -292,7 +316,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/pivot:rotation")
+tracks/3/path = NodePath("sprite/group/pivot:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -304,7 +328,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/pivot:rotation")
+tracks/4/path = NodePath("sprite/group/pivot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -328,7 +352,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/pivot:position")
+tracks/6/path = NodePath("sprite/group/pivot:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -358,7 +382,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/pivot:position:y")
+tracks/1/path = NodePath("sprite/group/pivot:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -370,7 +394,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = false
-tracks/2/path = NodePath("sprite/pivot:rotation")
+tracks/2/path = NodePath("sprite/group/pivot:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -441,7 +465,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/pivot:rotation")
+tracks/3/path = NodePath("sprite/group/pivot:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -453,7 +477,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/pivot:rotation")
+tracks/4/path = NodePath("sprite/group/pivot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -465,26 +489,26 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite:position:y")
-tracks/5/interp = 2
+tracks/5/path = NodePath("sprite/group/pivot:position")
+tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.55, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-13.0, -38.0, -38.0, -13.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/pivot:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.55, 0.6, 0.75, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(4, 12), Vector2(-4, 7), Vector2(-4, 7), Vector2(10, 12.8249), Vector2(10, 12.8249), Vector2(4, 12)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:position:y")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.55, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-13.0, -38.0, -38.0, -13.0]
 }
 
 [sub_resource type="Animation" id="Animation_rrl67"]
@@ -544,7 +568,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/pivot:rotation")
+tracks/4/path = NodePath("sprite/group/pivot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -578,6 +602,9 @@ resource_local_to_scene = true
 shader = ExtResource("3_ts5ou")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v8ilj"]
+blend_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 
@@ -617,15 +644,23 @@ texture = ExtResource("8_3jq5f")
 hframes = 5
 vframes = 2
 
-[node name="pivot" type="Sprite2D" parent="sprite"]
+[node name="group" type="CanvasGroup" parent="sprite"]
+
+[node name="pivot" type="Sprite2D" parent="sprite/group"]
 y_sort_enabled = true
 position = Vector2(4, 12)
+scale = Vector2(1, 1)
 texture = ExtResource("9_q2yg6")
 metadata/_edit_group_ = true
 
-[node name="sword" type="Sprite2D" parent="sprite/pivot"]
+[node name="sword" type="Sprite2D" parent="sprite/group/pivot"]
 position = Vector2(9, -9)
 texture = ExtResource("7_tr6dd")
+
+[node name="mask" type="Sprite2D" parent="sprite/group"]
+material = SubResource("CanvasItemMaterial_v8ilj")
+position = Vector2(0, 86)
+texture = ExtResource("6_ac2aa")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
