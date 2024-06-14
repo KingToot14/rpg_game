@@ -76,8 +76,8 @@ void fragment() {
 	float wind_vert = get_noise(uv + vec2(0.0, wind_position * wind_speed * 0.05));
 	float wind_horz = get_noise(uv + vec2(wind_position * wind_speed * 0.05, 0.0));
 	
-	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, grass_color.rgb, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
 }

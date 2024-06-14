@@ -47,7 +47,7 @@ folder_colors={
 "res://entities/": "orange",
 "res://entities/enemies/": "red",
 "res://environment/": "green",
-"res://environment/shaders/trail/": "red",
+"res://environment/shaders/trail/": "orange",
 "res://environment/shaders/water/": "blue",
 "res://resources/": "teal",
 "res://scenes/": "yellow",

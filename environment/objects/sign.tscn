@@ -1,9 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cur7d1tqtfkvy"]
+[gd_scene load_steps=10 format=3 uid="uid://cur7d1tqtfkvy"]
 
 [ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="1_kd2yj"]
 [ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/interactions/read_icon.png" id="2_0mxqc"]
 [ext_resource type="Texture2D" uid="uid://cumi34awat1dy" path="res://environment/objects/object_tiles.png" id="2_wab3p"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/interactions/interaction_box.tscn" id="3_0hp87"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_nnbgu"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_2smeg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nn0o6"]
+shader = ExtResource("3_nnbgu")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.04
+shader_parameter/squash_factor = Vector2(1, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eew0e"]
 atlas = ExtResource("2_wab3p")
@@ -17,9 +25,15 @@ y_sort_enabled = true
 collision_mask = 2
 script = ExtResource("1_kd2yj")
 dialogue_path = "test_sign"
-bubble_path = "sign"
 box_offset = 19.0
 icon = ExtResource("2_0mxqc")
+
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = 25
+z_as_relative = false
+material = SubResource("ShaderMaterial_nn0o6")
+position = Vector2(0, 7)
+texture = ExtResource("4_2smeg")
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_eew0e")

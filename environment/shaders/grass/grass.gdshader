@@ -49,18 +49,10 @@ void fragment() {
 		uv.y += TEXTURE_PIXEL_SIZE.y;
 		
 		float blade_len = texture(TEXTURE, uv).g * 255.0;
-		//blade_len += step(0.50, texture(patch_noise, uv).g) * step(0.1, blade_len);
-		//float curr_wind = get_wind(uv / TEXTURE_PIXEL_SIZE);
-		
-		// Large-scale wind
-		//blade_len -= curr_wind;
-		//curr_wind *= wind_intensity;
 		
 		// Color side if distance < blade length
 		COLOR = mix(COLOR, get_side_color(dist / 8.0), step(dist, blade_len));
 		// Color tip if distance == blade length
-		//COLOR = mix(COLOR, tip_color + 0.1 * curr_wind + step(0.50, get_patch(uv)) * patch_intensity, 
-				//1.0 - step(0.1, abs(dist - blade_len)));
 		COLOR = mix(COLOR, tip_color + step(0.50, get_patch(uv)) * patch_intensity, 
 				1.0 - step(0.1, abs(dist - blade_len)));
 	}
