@@ -189,7 +189,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_ym8gf"]
 resource_name = "falling_objects"
-length = 1.05
+length = 1.2
 step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -198,7 +198,7 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.35),
+"times": PackedFloat32Array(0.45),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -208,27 +208,33 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("attack_objects")
+tracks/1/path = NodePath("effect_manager")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.45),
+"times": PackedFloat32Array(0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.09, 0.1],
+"method": &"tween_shadow_radius"
+}, {
+"args": [0.12, 0.1],
+"method": &"tween_shadow_radius"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("attack_objects")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.55),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"set_falling_object_targets"
 }]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-13, -0.25, 0, 0.25, 0, -23, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.15)
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -237,10 +243,10 @@ tracks/3/path = NodePath("sprite/group/pivot:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.45, 0.65, 0.75, 0.9, 1.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.4, 0.45, 0.5, 0.55, 0.75, 0.85, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(4, 12), Vector2(-1, -4), Vector2(-1, -4), Vector2(11, -3.71428), Vector2(17, 7), Vector2(17, 7), Vector2(17, -12), Vector2(17, -12), Vector2(4, 12)]
+"values": [Vector2(4, 12), Vector2(-1, -4), Vector2(-1, -4), Vector2(11, -3.71428), Vector2(17, 7), Vector2(17, 10), Vector2(17, 7), Vector2(17, 7), Vector2(17, -12), Vector2(17, -12), Vector2(4, 12)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -249,10 +255,34 @@ tracks/4/path = NodePath("sprite/group/pivot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.45, 0.65, 0.75, 0.85, 1.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.95, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.785398, 0.785398, 2.35619, 2.35619, 2.35619, 2.35619, 0.0]
+"values": [0.0, 0.785398, 0.785398, 2.35619, 2.35619, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:position:y")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-13.0, -33.0, -33.0, -13.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
 }
 
 [sub_resource type="Animation" id="Animation_bgxww"]
@@ -452,14 +482,14 @@ tracks/2/path = NodePath("effect_manager")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.05, 0.6),
+"times": PackedFloat32Array(0.05, 0.55),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [0.08],
-"method": &"set_shadow_radius"
+"args": [0.09, 0.15],
+"method": &"tween_shadow_radius"
 }, {
-"args": [0.12],
-"method": &"set_shadow_radius"
+"args": [0.12, 0.15],
+"method": &"tween_shadow_radius"
 }]
 }
 tracks/3/type = "value"
@@ -643,13 +673,13 @@ position = Vector2(0, -13)
 texture = ExtResource("8_3jq5f")
 hframes = 5
 vframes = 2
+metadata/_edit_group_ = true
 
 [node name="group" type="CanvasGroup" parent="sprite"]
 
 [node name="pivot" type="Sprite2D" parent="sprite/group"]
 y_sort_enabled = true
 position = Vector2(4, 12)
-scale = Vector2(1, 1)
 texture = ExtResource("9_q2yg6")
 metadata/_edit_group_ = true
 
