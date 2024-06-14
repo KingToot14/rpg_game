@@ -1,0 +1,152 @@
+[gd_scene load_steps=26 format=3 uid="uid://cthpngydpydqw"]
+
+[ext_resource type="Script" path="res://systems/data_saving/data_manager.gd" id="1_bh6xq"]
+[ext_resource type="Script" path="res://systems/data_saving/item_data_chunk.gd" id="2_1bh6r"]
+[ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="2_ql6q5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvmfr"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_wdjsp"]
+script = ExtResource("2_1bh6r")
+name = "Twig"
+key = &"twig"
+description = "Stick !!!!"
+inventory = &"item"
+icon = SubResource("AtlasTexture_mvmfr")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqfnw"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_ywjv4"]
+script = ExtResource("2_1bh6r")
+name = "Petal"
+key = &"petal"
+description = "Picked from an elegant flower"
+inventory = &"item"
+icon = SubResource("AtlasTexture_rqfnw")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wr7n"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_cfixh"]
+script = ExtResource("2_1bh6r")
+name = "Thread"
+key = &"thread"
+description = "Spun from the finest silk"
+inventory = &"item"
+icon = SubResource("AtlasTexture_7wr7n")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5ps6"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_h24sn"]
+script = ExtResource("2_1bh6r")
+name = "Red Gem"
+key = &"red_gem"
+description = "A fierce gem with a powerful aura"
+inventory = &"item"
+icon = SubResource("AtlasTexture_v5ps6")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfxj6"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_p8g5u"]
+script = ExtResource("2_1bh6r")
+name = "Green Gem"
+key = &"green_gem"
+description = "A sharp gem with a skillful aura"
+inventory = &"item"
+icon = SubResource("AtlasTexture_kfxj6")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1um80"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_27rko"]
+script = ExtResource("2_1bh6r")
+name = "Purple Gem"
+key = &"purple_gem"
+description = "A magical gem with an mystical aura"
+inventory = &"item"
+icon = SubResource("AtlasTexture_1um80")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ku8t"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_idt5s"]
+script = ExtResource("2_1bh6r")
+name = "Blue Gem"
+key = &"blue_gem"
+description = "A soothing gem with a resoring aura"
+inventory = &"item"
+icon = SubResource("AtlasTexture_3ku8t")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngfhy"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(140, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_5uqb3"]
+script = ExtResource("2_1bh6r")
+name = "Diamond"
+key = &"diamond"
+description = "A unique gem with a unifying aura"
+inventory = &"item"
+icon = SubResource("AtlasTexture_ngfhy")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nhnf"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(0, 20, 20, 20)
+
+[sub_resource type="Resource" id="Resource_p1bbr"]
+script = ExtResource("2_1bh6r")
+name = "Copper"
+key = &"copper"
+description = "An abandoned copper bracelet. Easily scrapped"
+inventory = &"item"
+icon = SubResource("AtlasTexture_0nhnf")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ybvo"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(20, 20, 20, 20)
+
+[sub_resource type="Resource" id="Resource_cynph"]
+script = ExtResource("2_1bh6r")
+name = "Silver"
+key = &"silver"
+description = "An elegant locket. Easily scrapped"
+inventory = &"item"
+icon = SubResource("AtlasTexture_1ybvo")
+quantity = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yrbe"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(40, 20, 20, 20)
+
+[sub_resource type="Resource" id="Resource_infet"]
+script = ExtResource("2_1bh6r")
+name = "Gold"
+key = &"gold"
+description = "A regal golden ring. Easily scrapped"
+inventory = &"item"
+icon = SubResource("AtlasTexture_3yrbe")
+quantity = 0
+
+[node name="data_manager" type="Node"]
+script = ExtResource("1_bh6xq")
+inventory = Array[ExtResource("2_1bh6r")]([SubResource("Resource_wdjsp"), SubResource("Resource_ywjv4"), SubResource("Resource_cfixh"), SubResource("Resource_h24sn"), SubResource("Resource_p8g5u"), SubResource("Resource_27rko"), SubResource("Resource_idt5s"), SubResource("Resource_5uqb3"), SubResource("Resource_p1bbr"), SubResource("Resource_cynph"), SubResource("Resource_infet")])
