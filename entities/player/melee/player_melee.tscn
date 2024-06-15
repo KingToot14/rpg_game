@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=31 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="2_hdvll"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
+[ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="5_k0j8f"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
 [ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
@@ -627,10 +628,29 @@ tracks/4/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_40of0"]
+resource_name = "defend"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_defense"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
 "RESET": SubResource("Animation_ste4p"),
 "death": SubResource("Animation_gphxx"),
+"defend": SubResource("Animation_40of0"),
 "enter_battle": SubResource("Animation_djre5"),
 "falling_objects": SubResource("Animation_ym8gf"),
 "heavy_attack": SubResource("Animation_bgxww"),
@@ -663,7 +683,8 @@ script = ExtResource("1_xrkk6")
 is_player = true
 use_special = true
 default_attack = ExtResource("3_4gvet")
-attack_pool = Array[Resource("res://entities/scripts/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa")])
+attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa")])
+defense_pool = Array[Resource("res://entities/scripts/actions/defense.gd")]([ExtResource("5_k0j8f")])
 front_marker = NodePath("front_marker")
 marker_pos = NodePath("damage_marker")
 animator = NodePath("animator")

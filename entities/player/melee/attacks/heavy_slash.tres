@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://bmn1f41l88x48"]
 
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="1_a620d"]
-[ext_resource type="Script" path="res://entities/scripts/attack.gd" id="2_yrjsm"]
+[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="2_yrjsm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcxdd"]
 atlas = ExtResource("1_a620d")
@@ -14,9 +14,12 @@ animation_name = &"heavy_attack"
 icon = SubResource("AtlasTexture_fcxdd")
 description = "A heavy slash"
 power = 60.0
+element = 0
+element_percent = 0.0
 side = 1
 targeting = 1
 damage_type = 0
 accuracy = 100.0
 crit_rate = 10.0
 randomness = 10.0
+cooldown = 1

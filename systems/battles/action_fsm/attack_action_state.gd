@@ -7,6 +7,7 @@ func state_entered() -> void:
 
 func entity_selected(entity: Entity) -> void:
 	var attack = Globals.curr_item
+	
 	if not (attack and attack is Attack):
 		print("No attack selected")
 		return

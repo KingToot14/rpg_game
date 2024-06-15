@@ -29,7 +29,7 @@ func set_state(state: String) -> void:
 	
 	state_changed.emit(state)
 
-func set_side(side: String) -> void:
+func set_side(_side: String) -> void:
 	pass
 
 func start_turn() -> void:

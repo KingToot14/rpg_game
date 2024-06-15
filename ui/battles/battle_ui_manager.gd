@@ -18,12 +18,13 @@ extends CanvasLayer
 var is_player_turn := false
 @export var action_bar: Control
 @export var attack_menu: Control
+@export var defense_menu: Control
 @export var cancel_button: Control
 
 @export var action_bar_tween_time: float = 0.15
 @export var action_bar_offset: float = 10
 var action_bar_pos: float = 238
-var attack_menu_pos: float = -115
+var menu_pos: float = -115
 
 @export_group("Timings")
 @export var single_hit: TimedSingleHit
@@ -45,6 +46,8 @@ func _ready():
 	action_bar.modulate.a = 0
 	
 	set_attack_menu(false)
+	set_defense_menu(false)
+	set_cancel_button(false)
 	set_victory_panel(false)
 	set_loss_panel(false)
 
@@ -73,9 +76,12 @@ func _on_state_changed(state: String) -> void:
 	set_action_bar(is_player_turn)
 
 func _on_action_changed(state: String) -> void:
-	try_set_action_bar(state != 'targeting')
-	set_cancel_button(is_player_turn and state == 'targeting')
 	set_attack_menu(state == 'attack')
+	set_defense_menu(state == 'defend')
+
+func _on_targeting_changed() -> void:
+	try_set_action_bar(not Globals.action_fsm.targeting)
+	set_cancel_button(is_player_turn and Globals.action_fsm.targeting)
 
 #region Actions
 func try_set_action_bar(value: bool) -> void:
@@ -88,6 +94,8 @@ func tween_action(control: Control, value: bool, pos: float) -> void:
 	var tween = create_tween().set_parallel()
 	
 	if value:
+		control.visible = true
+		
 		control.mouse_filter = Control.MOUSE_FILTER_STOP
 		
 		control.position.y = pos + action_bar_offset
@@ -95,6 +103,7 @@ func tween_action(control: Control, value: bool, pos: float) -> void:
 		tween.tween_property(control, 'modulate:a', 1.0, action_bar_tween_time)
 		tween.tween_property(control, 'position:y', pos, action_bar_tween_time)
 	else:
+		control.visible = false
 		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		control.position.y = pos
@@ -106,7 +115,10 @@ func set_action_bar(value: bool) -> void:
 	tween_action(action_bar, value, action_bar_pos)
 
 func set_attack_menu(value: bool) -> void:
-	tween_action(attack_menu, value, attack_menu_pos)
+	tween_action(attack_menu, value, menu_pos)
+
+func set_defense_menu(value: bool) -> void:
+	tween_action(defense_menu, value, menu_pos)
 
 func set_cancel_button(value: bool) -> void:
 	tween_action(cancel_button, value, action_bar_pos)

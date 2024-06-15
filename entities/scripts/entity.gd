@@ -31,7 +31,9 @@ var removal_queue: Array[StringName] = []
 @export_group("Attacks")
 @export var default_attack: Attack
 @export var attack_pool: Array[Attack]
+@export var defense_pool: Array[Defense]
 var valid_attacks: Array[StringName] = []
+var valid_defenses: Array[StringName] = []
 
 @export var front_marker: Node2D
 
@@ -53,6 +55,9 @@ var targeting_origin: float
 func _ready() -> void:
 	for attack in attack_pool:
 		valid_attacks.append(attack.animation_name)
+	
+	for defense in defense_pool:
+		valid_defenses.append(defense.animation_name)
 	
 	lost_health.connect(show_damage_marker)
 	lost_health.connect(play_damage_anim)
@@ -178,6 +183,10 @@ func decrement_action() -> void:
 	
 	remove_effects()
 	
+	# reduce cooldowns
+	for attack in attack_pool:
+		attack.decrement_cooldown()
+	
 	action_count -= 1
 
 func can_act() -> bool:
@@ -288,6 +297,9 @@ func action_ended(_s: String) -> void:
 
 func contains_attack(attack_name: StringName) -> bool:
 	return attack_name in valid_attacks
+
+func contains_defense(defense_name: StringName) -> bool:
+	return defense_name in valid_defenses
 
 func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	var attack_anim = animator.get_animation(attack_name)

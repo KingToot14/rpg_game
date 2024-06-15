@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Defense" load_steps=4 format=3 uid="uid://bapxo0eaeroh3"]
+
+[ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="1_sgodf"]
+[ext_resource type="Script" path="res://entities/scripts/actions/defense.gd" id="1_yh4pe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bv5w"]
+atlas = ExtResource("1_sgodf")
+region = Rect2(0, 0, 20, 20)
+
+[resource]
+script = ExtResource("1_yh4pe")
+name = "Defend"
+animation_name = &"defend"
+icon = SubResource("AtlasTexture_7bv5w")
+cooldown = 0
+description = "Prepare for incoming damage
+ - Take moderately reduced damage until next turn"
+defense_value = 0.5

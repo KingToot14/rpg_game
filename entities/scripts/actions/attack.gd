@@ -18,6 +18,9 @@ enum Element {
 @export var animation_name: StringName
 @export var icon: Texture2D
 
+@export var cooldown: int = 0
+var remaining_cooldown := 0
+
 @export_multiline var description: String
 
 @export var power: float
@@ -53,3 +56,20 @@ func highlight_targets() -> void:
 		
 		for enemy in enemies:
 			enemy.set_targetable(true)
+	if side == TargetSide.PLAYER:
+		var players = TargetingHelper.get_entities(&'player')
+		
+		for player in players:
+			player.set_targetable(true)
+
+func start_cooldown(val: int = -1) -> void:
+	if val < 0:
+		if cooldown > 0:
+			val = cooldown + 1
+		else:
+			val = 0
+	
+	remaining_cooldown = val
+
+func decrement_cooldown() -> void:
+	remaining_cooldown = max(remaining_cooldown - 1, 0)

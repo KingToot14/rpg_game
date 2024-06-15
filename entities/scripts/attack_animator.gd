@@ -17,6 +17,9 @@ func do_damage(modifier: float = 1.0) -> void:
 	if len(Globals.timing_mods) > 0:
 		Globals.timing_mods.pop_front()
 
+func do_defense() -> void:
+	Globals.curr_item.do_defense()
+
 func set_target() -> void:
 	var attack = Globals.curr_item as Attack
 	

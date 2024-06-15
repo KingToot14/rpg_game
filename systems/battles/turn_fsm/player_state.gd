@@ -13,8 +13,7 @@ func state_exited() -> void:
 
 func item_set() -> void:
 	# highlight targets
-	if not Globals.curr_item is Attack:
-		return
+	var item = Globals.curr_item
 	
-	var item = Globals.curr_item as Attack
-	item.highlight_targets()
+	if item:
+		item.highlight_targets()

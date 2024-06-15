@@ -82,5 +82,5 @@ func get_accuracy(accuracy: float) -> float:
 func get_evasion(evasion: float) -> float:
 	return evasion
 
-func get_resistance(resistance: Attack.Element, mod: float) -> float:
+func get_resistance(_resistance: Attack.Element, mod: float) -> float:
 	return mod

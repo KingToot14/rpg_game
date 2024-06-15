@@ -11,10 +11,10 @@ var rows: Array[Node]
 
 @onready var select_panel := $"attack_info/select_panel" as Control
 
-@onready var attack_name_label := $"attack_info/title/label" as RichTextLabel
-@onready var attack_icon_rect := $"attack_info/power/icon_frame/icon" as TextureRect
-@onready var attack_power_label := $"attack_info/power/label" as RichTextLabel
-@onready var attack_description_label := $"attack_info/description/label" as RichTextLabel
+@onready var name_label := $"attack_info/title/label" as RichTextLabel
+@onready var icon_rect := $"attack_info/power/icon_frame/icon" as TextureRect
+@onready var power_label := $"attack_info/power/label" as RichTextLabel
+@onready var description_label := $"attack_info/description/label" as RichTextLabel
 
 # --- Functions --- #
 #f8jc duke duke :3
@@ -40,10 +40,10 @@ func item_hovered(item: ActionMenuItem) -> void:
 	
 	var attack = item.item as Attack
 	
-	attack_name_label.text = attack.name
-	attack_icon_rect.texture = attack.icon
-	attack_power_label.text = "O" + str(attack.power)
-	attack_description_label.text = attack.description
+	name_label.text = attack.name
+	icon_rect.texture = attack.icon
+	power_label.text = "O" + str(attack.power)
+	description_label.text = attack.description
 
 func load_items(items) -> void:
 	var index = 0
@@ -59,5 +59,5 @@ func load_items(items) -> void:
 			
 			index += 1
 	
-	backing.size.y = 24 * (floor(item_count / 5) + 1) + 4
-	backing.position.y = 100 - backing.size.y + 6
+	backing.size.y = 24 * (floor(item_count / 5.0) + 1) + 4
+	backing.position.y = 94 - backing.size.y + 6

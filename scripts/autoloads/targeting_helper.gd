@@ -8,7 +8,7 @@ func get_entities(group_name: StringName = &'entity') -> Array[Node]:
 
 func get_alive_entities(group_name: StringName = &'entity') -> Array[Entity]:
 	var entities = get_entities(group_name)
-	var ret: Array[Entity]
+	var ret: Array[Entity] = []
 	
 	for entity in entities:
 		if entity.alive:
@@ -31,7 +31,7 @@ func get_random_entity(group_name: StringName = &'entity') -> Entity:
 
 func get_neighbors(index: int, group_name: StringName) -> Array[Entity]:
 	var entities = get_alive_entities(group_name)
-	var ret: Array[Entity]
+	var ret: Array[Entity] = []
 	
 	for entity in entities:
 		if entity.spawn_index == index - 1:
