@@ -16,7 +16,7 @@ func set_status_info() -> void:
 		name = "Burning"
 		dmg = 0.050
 	else:
-		name = "Scoarching"
+		name = "Scorching"
 		dmg = 0.065
 	key = &'burn'
 

@@ -63,8 +63,6 @@ func _ready() -> void:
 	
 	if not is_player:
 		brain = $"brain" as EntityBrain
-	else:
-		add_effect(&'burn', 10, 3)
 
 func setup(index: int):
 	if is_player:
@@ -232,6 +230,18 @@ func get_evasion() -> float:
 		evasion = effect.get_evasion(hp)
 	
 	return evasion
+
+func get_resistance(resistance: Attack.Element) -> float:
+	var mod := 0.0
+	
+	if resistance in stats.resistances:
+		mod = stats.resistances[resistance]
+	
+	for effect in status_effects.values():
+		mod = effect.get_resistance(resistance, mod)
+	
+	return mod
+	
 #endregion
 
 # - Effects - #
