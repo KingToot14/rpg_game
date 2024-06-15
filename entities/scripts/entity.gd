@@ -24,6 +24,9 @@ var special_charge: float = 0
 
 var action_count: int = 0
 
+@export var status_effects: Array[StatusEffect] = []
+var removal_queue: Array[StatusEffect] = []
+
 # - Attacks - #
 @export_group("Attacks")
 @export var default_attack: Attack
@@ -60,6 +63,8 @@ func _ready() -> void:
 	
 	if not is_player:
 		brain = $"brain" as EntityBrain
+	else:
+		status_effects.append(EmpowerStatus.new(self, 50))
 
 func setup(index: int):
 	if is_player:
@@ -68,7 +73,7 @@ func setup(index: int):
 		special_charge = player_chunk.curr_special
 		stats = player_chunk.stats
 	else:
-		hp = stats.max_hp
+		hp = get_max_hp()
 	spawn_index = index
 	
 	animator.play(&'enter_battle')
@@ -118,7 +123,13 @@ func select() -> void:
 	selected.emit(self)
 
 #region HP
-func take_damage(dmg: int):
+func take_damage(dmg: int, from_entity: bool = true):
+	if from_entity:
+		for effect in status_effects:
+			dmg = effect.take_damage(dmg)
+		
+		remove_effects()
+	
 	hp = max(hp - dmg, 0)
 	
 	if use_special:
@@ -144,7 +155,7 @@ func play_damage_anim(_dmg: int, _entity: Entity) -> void:
 		animator.play(&'death')
 
 func get_hp_percent() -> float:
-	return hp / stats.max_hp
+	return hp / get_max_hp()
 
 func remove_from_battle() -> void:
 	Globals.encounter_manager.remove_from_battle(self, spawn_index)
@@ -152,6 +163,11 @@ func remove_from_battle() -> void:
 
 #region Actions
 func take_turn() -> void:
+	for effect in status_effects:
+		effect.turn_started()
+	
+	remove_effects()
+	
 	if not is_player:
 		brain.perform_turn()
 
@@ -159,6 +175,11 @@ func replenish_actions() -> void:
 	action_count = 1
 
 func decrement_action() -> void:
+	for effect in status_effects:
+		effect.turn_ended()
+	
+	remove_effects()
+	
 	action_count -= 1
 
 func can_act() -> bool:
@@ -166,11 +187,51 @@ func can_act() -> bool:
 #endregion
 
 #region Stats
+func get_max_hp() -> float:
+	var max_hp = stats.max_hp
+	
+	for effect in status_effects:
+		max_hp = effect.get_max_hp(max_hp)
+	
+	return max_hp
+
 func get_attack(use_magic: bool) -> float:
-	return stats.m_attack if use_magic else stats.p_attack
+	var attack = stats.m_attack if use_magic else stats.p_attack
+	
+	for effect in status_effects:
+		if use_magic:
+			attack = effect.get_m_attack(attack)
+		else:
+			attack = effect.get_p_attack(attack)
+	
+	return attack
 
 func get_defense(use_magic: bool) -> float:
-	return stats.m_defense if use_magic else stats.p_defense
+	var defense = stats.m_defense if use_magic else stats.p_defense
+	
+	for effect in status_effects:
+		if use_magic:
+			defense = effect.get_m_defense(defense)
+		else:
+			defense = effect.get_p_defense(defense)
+	
+	return defense
+
+func get_accuracy() -> float:
+	var accuracy = stats.accuracy
+	
+	for effect in status_effects:
+		accuracy = effect.get_accuracy(accuracy)
+	
+	return accuracy
+
+func get_evasion() -> float:
+	var evasion = stats.max_hp
+	
+	for effect in status_effects:
+		evasion = effect.get_evasion(hp)
+	
+	return evasion
 #endregion
 
 # - Effects - #
@@ -181,6 +242,18 @@ func show_damage_marker(dmg: int, _entity: Entity) -> void:
 	damage_marker.global_position = marker_pos.global_position
 	damage_marker.set_text(dmg, 0)
 	damage_marker.start_fade()
+
+func add_effect(effect: StatusEffect) -> void:
+	pass
+
+func queue_removal(effect: StatusEffect) -> void:
+	removal_queue.append(effect)
+
+func remove_effects() -> void:
+	for effect in removal_queue:
+		if effect in status_effects:
+			print(effect.name, " removed")
+			status_effects.erase(effect)
 
 # - Attacks - #
 func perform_attack(attack_name: StringName) -> void:

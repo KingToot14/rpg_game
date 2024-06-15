@@ -30,7 +30,7 @@ viewport_path = NodePath("environment/shader_viewport")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_508sf"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f6q40"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bdnn0"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_508sf")
@@ -39,7 +39,7 @@ noise = SubResource("FastNoiseLite_508sf")
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0oyx"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mxrk6"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_hojrf")
@@ -49,8 +49,8 @@ shader = ExtResource("3_lvq5h")
 shader_parameter/wind_speed = -0.5
 shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_f6q40")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_o0oyx")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_bdnn0")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_mxrk6")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_18qqg"]
 frequency = 0.1
@@ -244,6 +244,8 @@ size = Vector2i(480, 270)
 
 [node name="long_grass_tilemap" type="TileMap" parent="environment/shader_viewport"]
 visibility_layer = 2
+z_index = -500
+z_as_relative = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_35rfn")
 position = Vector2(0, 5)
