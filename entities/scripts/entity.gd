@@ -24,8 +24,8 @@ var special_charge: float = 0
 
 var action_count: int = 0
 
-@export var status_effects: Array[StatusEffect] = []
-var removal_queue: Array[StatusEffect] = []
+@export var status_effects = {}
+var removal_queue: Array[StringName] = []
 
 # - Attacks - #
 @export_group("Attacks")
@@ -64,7 +64,7 @@ func _ready() -> void:
 	if not is_player:
 		brain = $"brain" as EntityBrain
 	else:
-		status_effects.append(EmpowerStatus.new(self, 50))
+		add_effect(&'burn', 10, 3)
 
 func setup(index: int):
 	if is_player:
@@ -125,7 +125,7 @@ func select() -> void:
 #region HP
 func take_damage(dmg: int, from_entity: bool = true):
 	if from_entity:
-		for effect in status_effects:
+		for effect in status_effects.values():
 			dmg = effect.take_damage(dmg)
 		
 		remove_effects()
@@ -163,7 +163,7 @@ func remove_from_battle() -> void:
 
 #region Actions
 func take_turn() -> void:
-	for effect in status_effects:
+	for effect in status_effects.values():
 		effect.turn_started()
 	
 	remove_effects()
@@ -175,7 +175,7 @@ func replenish_actions() -> void:
 	action_count = 1
 
 func decrement_action() -> void:
-	for effect in status_effects:
+	for effect in status_effects.values():
 		effect.turn_ended()
 	
 	remove_effects()
@@ -190,7 +190,7 @@ func can_act() -> bool:
 func get_max_hp() -> float:
 	var max_hp = stats.max_hp
 	
-	for effect in status_effects:
+	for effect in status_effects.values():
 		max_hp = effect.get_max_hp(max_hp)
 	
 	return max_hp
@@ -198,7 +198,7 @@ func get_max_hp() -> float:
 func get_attack(use_magic: bool) -> float:
 	var attack = stats.m_attack if use_magic else stats.p_attack
 	
-	for effect in status_effects:
+	for effect in status_effects.values():
 		if use_magic:
 			attack = effect.get_m_attack(attack)
 		else:
@@ -209,7 +209,7 @@ func get_attack(use_magic: bool) -> float:
 func get_defense(use_magic: bool) -> float:
 	var defense = stats.m_defense if use_magic else stats.p_defense
 	
-	for effect in status_effects:
+	for effect in status_effects.values():
 		if use_magic:
 			defense = effect.get_m_defense(defense)
 		else:
@@ -220,7 +220,7 @@ func get_defense(use_magic: bool) -> float:
 func get_accuracy() -> float:
 	var accuracy = stats.accuracy
 	
-	for effect in status_effects:
+	for effect in status_effects.values():
 		accuracy = effect.get_accuracy(accuracy)
 	
 	return accuracy
@@ -228,7 +228,7 @@ func get_accuracy() -> float:
 func get_evasion() -> float:
 	var evasion = stats.max_hp
 	
-	for effect in status_effects:
+	for effect in status_effects.values():
 		evasion = effect.get_evasion(hp)
 	
 	return evasion
@@ -243,16 +243,18 @@ func show_damage_marker(dmg: int, _entity: Entity) -> void:
 	damage_marker.set_text(dmg, 0)
 	damage_marker.start_fade()
 
-func add_effect(effect: StatusEffect) -> void:
-	pass
+func add_effect(key: StringName, stacks: int = 1, stage: int = 1) -> void:
+	if key in status_effects:
+		status_effects[key].add_stacks(stacks, stage)
+	else:
+		status_effects[key] = Globals.registered_effects[key].new(self, stacks, stage)
 
-func queue_removal(effect: StatusEffect) -> void:
+func queue_removal(effect: StringName) -> void:
 	removal_queue.append(effect)
 
 func remove_effects() -> void:
 	for effect in removal_queue:
 		if effect in status_effects:
-			print(effect.name, " removed")
 			status_effects.erase(effect)
 
 # - Attacks - #

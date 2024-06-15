@@ -5,9 +5,7 @@ extends StatusEffect
 
 
 # --- Functions --- #
-func _init(curr_entity: Entity = null, curr_stacks: int = 5) -> void:
-	super(curr_entity, curr_stacks)
-	
+func set_status_info() -> void:
 	name = "Empower"
 	key = &'empower'
 	

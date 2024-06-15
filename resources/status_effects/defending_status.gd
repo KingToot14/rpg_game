@@ -4,9 +4,7 @@ extends StatusEffect
 # --- Variables --- #
 
 # --- Functions --- #
-func _init(init_entity: Entity = null, curr_stacks: int = 1) -> void:
-	super(init_entity, curr_stacks)
-	
+func set_status_info() -> void:
 	name = "Defend"
 	key = &'defend'
 	

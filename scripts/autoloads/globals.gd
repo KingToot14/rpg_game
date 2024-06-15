@@ -3,6 +3,9 @@ extends Node2D
 # --- Signals --- #
 signal item_set()
 
+# --- Constants --- #
+var registered_effects = {}
+
 # --- General --- #
 var object_pool: ObjectPool
 var ui_manager: CanvasLayer
@@ -33,3 +36,25 @@ var timing_mods: Array[float] = []
 
 var action_fsm: ActionFSM
 var attack_manager: AttackManager
+
+# --- Functions --- #
+func _ready() -> void:
+	# Fill registered effects
+	find_status_effects("res://resources/status_effects/")
+
+func find_status_effects(path: String) -> void:
+	var dir = DirAccess.open(path)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				find_status_effects(dir.get_current_dir() + "/" + file_name)
+			else:
+				var effect_class = load(path + "/" + file_name)
+				registered_effects[effect_class.new().key] = effect_class
+			
+			file_name = dir.get_next()
+		
+		dir.list_dir_end()

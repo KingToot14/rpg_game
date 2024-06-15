@@ -16,10 +16,16 @@ var additive: bool = true
 var decrement_value: int = 1
 
 # --- Functions --- #
-func _init(init_entity: Entity = null, init_stacks: int = 1) -> void:
+func _init(init_entity: Entity = null, init_stacks: int = 1, init_stage: int = 1) -> void:
 	entity = init_entity
 	
 	stacks = init_stacks
+	stage = init_stage
+	
+	set_status_info()
+
+func set_status_info() -> void:
+	return
 
 func set_stacks(new_stacks: int) -> void:
 	stacks = clamp(new_stacks, 0, max_stack)
@@ -39,9 +45,11 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 	else:
 		if new_stacks > stacks:
 			set_stacks(new_stacks)
+	
+	set_status_info()
 
 func remove_status() -> void:
-	entity.queue_removal(self)
+	entity.queue_removal(key)
 
 # - Effects - #
 func turn_started() -> void:
