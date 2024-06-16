@@ -5,17 +5,13 @@ extends BaseButton
 @export var item: Resource
 
 # --- References --- #
-var icon_rect: TextureRect
+@onready var icon_rect := $"icon" as TextureRect
 @onready var backing := $"backing" as Control
+@onready var cooldown_label := $"cooldown_label" as RichTextLabel
 
 # --- Functions --- #
 func _ready() -> void:
-	icon_rect = $"icon" as TextureRect
-	
 	pressed.connect(set_item)
-	
-	if item:
-		set_menu_item(item)
 
 func show_outline() -> void:
 	backing.visible = true
@@ -30,6 +26,20 @@ func set_menu_item(new_item: Resource) -> void:
 	
 	if item and "icon" in item:
 		icon_rect.texture = item.icon
+	
+	# cooldown
+	if not (item and 'remaining_cooldown' in item):
+		return
+	
+	if item.remaining_cooldown > 0:
+		icon_rect.material.set_shader_parameter('intensity', 0.5)
+		cooldown_label.clear()
+		cooldown_label.push_outline_size(2)
+		cooldown_label.append_text(str(item.remaining_cooldown))
+		cooldown_label.pop()
+	else:
+		icon_rect.material.set_shader_parameter('intensity', 0.0)
+		cooldown_label.text = ""
 
 func set_item() -> void:
 	if item is Attack and item.remaining_cooldown > 0:

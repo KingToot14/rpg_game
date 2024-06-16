@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=77 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -45,6 +45,7 @@
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/stats/element_icons_small.png" id="34_oquq2"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
+[ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dtt10"]
 seed = 1220
@@ -185,6 +186,14 @@ region = Rect2(8, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trvi3"]
 atlas = ExtResource("30_xb3b8")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5po2"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e26k"]
+atlas = ExtResource("38_06ocl")
 region = Rect2(0, 0, 20, 20)
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("player_positions", "enemy_positions")]
@@ -1175,7 +1184,7 @@ offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Attack Name"
+text = "Defense Name"
 scroll_active = false
 
 [node name="info" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
@@ -1184,21 +1193,31 @@ offset_left = 2.0
 offset_top = 15.0
 offset_right = -2.0
 offset_bottom = -61.0
+
+[node name="defend_power" type="Control" parent="ui/action_bar/defense_menu/defense_info/info"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 16.0
 metadata/_edit_group_ = true
 
-[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info"]
+[node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_k5po2")
+
+[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = -1.0
-offset_right = -2.0
-offset_bottom = -1.0
+offset_left = 9.0
+offset_top = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "O100 O100
-O100 O100"
+text = "50"
 scroll_active = false
 
 [node name="icon_frame" parent="ui/action_bar/defense_menu/defense_info/info" instance=ExtResource("29_7enty")]
@@ -1222,7 +1241,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_trvi3")
+texture = SubResource("AtlasTexture_5e26k")
 expand_mode = 1
 
 [node name="description" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
@@ -1249,7 +1268,6 @@ text = "Description"
 scroll_active = false
 
 [node name="select_panel" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
-visible = false
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
@@ -1282,7 +1300,7 @@ process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
 editor_description = ""
-visible = true
+visible = false
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 1)
 show_behind_parent = false

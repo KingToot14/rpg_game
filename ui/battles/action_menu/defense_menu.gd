@@ -12,7 +12,7 @@ var defense_grid: Control
 
 @onready var name_label := $"defense_info/title/label" as RichTextLabel
 @onready var icon_rect := $"defense_info/info/icon_frame/icon" as TextureRect
-@onready var power_label := $"defense_info/info/label" as RichTextLabel
+@onready var power_label := $"defense_info/info/defend_power/label" as RichTextLabel
 @onready var description_label := $"defense_info/description/label" as RichTextLabel
 
 # --- Functions --- #
