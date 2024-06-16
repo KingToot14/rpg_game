@@ -3,7 +3,7 @@ extends ActionState
 
 # --- Functions --- #
 func state_entered() -> void:
-	Globals.ui_manager.load_attacks()
+	Globals.ui_manager.load_defenses()
 
 func entity_selected(entity: Entity) -> void:
 	var defense = Globals.curr_item

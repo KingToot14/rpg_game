@@ -6,6 +6,7 @@
 script = ExtResource("1_bbh54")
 name = "Jump Attack"
 animation_name = &"jump_attack"
+cooldown = 0
 description = ""
 power = 13.0
 element = 0
@@ -13,6 +14,6 @@ element_percent = 0.0
 side = 0
 targeting = 0
 damage_type = 0
-accuracy = 100.0
-crit_rate = 10.0
-randomness = 10.0
+accuracy = 1.0
+crit_rate = 0.1
+randomness = 0.1

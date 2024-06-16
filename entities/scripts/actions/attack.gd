@@ -30,9 +30,9 @@ var remaining_cooldown := 0
 @export var side: TargetSide = TargetSide.PLAYER
 @export var targeting: TargetingMode = TargetingMode.SINGLE
 @export var damage_type: DamageType = DamageType.PHYSICAL
-@export var accuracy: float = 100
-@export var crit_rate: float = 10
-@export var randomness: float = 10
+@export var accuracy: float = 1
+@export var crit_rate: float = .10
+@export var randomness: float = .10
 
 # --- Functions --- #
 func calculate_damage(attacker: Entity, target: Entity) -> float:
@@ -46,7 +46,7 @@ func calculate_damage(attacker: Entity, target: Entity) -> float:
 	dmg *= (1.0 - element_percent) + (element_percent * (1.0 - target.get_resistance(element)))
 	
 	# randomizer
-	dmg *= randf_range(100 - randomness / 2, 100 + randomness / 2) / 100
+	dmg *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
 	
 	return dmg
 

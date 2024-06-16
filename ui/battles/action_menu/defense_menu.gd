@@ -43,7 +43,7 @@ func load_items(items) -> void:
 	var index = 0
 	var item_count = len(items)
 	
-	for child in get_children():
+	for child in defense_grid.get_children():
 		if index < item_count:
 			child.set_menu_item(items[index])
 		else:

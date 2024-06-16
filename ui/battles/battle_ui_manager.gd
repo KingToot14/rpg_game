@@ -125,6 +125,9 @@ func set_cancel_button(value: bool) -> void:
 
 func load_attacks() -> void:
 	attack_menu.load_items(Globals.curr_entity.attack_pool)
+
+func load_defenses() -> void:
+	defense_menu.load_items(Globals.curr_entity.defense_pool)
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:
