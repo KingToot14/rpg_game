@@ -149,6 +149,24 @@ tracks/3/keys = {
 "values": [0.0, 1.0, 0.0, 0.0, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_40of0"]
+resource_name = "defend"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_defense"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_djre5"]
 resource_name = "enter_battle"
 length = 0.6
@@ -626,24 +644,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_40of0"]
-resource_name = "defend"
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"do_defense"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]

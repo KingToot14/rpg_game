@@ -12,6 +12,7 @@ script = ExtResource("2_yrjsm")
 name = "Normal Attack"
 animation_name = &"normal_attack"
 icon = SubResource("AtlasTexture_jitcr")
+cooldown = 0
 description = "A simple slash"
 power = 40.0
 element = 1

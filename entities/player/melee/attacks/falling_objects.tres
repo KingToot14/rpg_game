@@ -12,6 +12,7 @@ script = ExtResource("2_acttd")
 name = "Falling Objects"
 animation_name = &"falling_objects"
 icon = SubResource("AtlasTexture_70663")
+cooldown = 3
 description = "Thrust a sword into the ground, causing objects to fall from the sky
  - Hits all enemies
  - Very random damage"
@@ -24,4 +25,3 @@ damage_type = 0
 accuracy = 100.0
 crit_rate = 10.0
 randomness = 10.0
-cooldown = 3
