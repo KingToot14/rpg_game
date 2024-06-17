@@ -32,7 +32,7 @@ func set_item(item: Resource) -> void:
 	curr_item = item
 	item_set.emit()
 
-var timing_mods: Array[float] = []
+var timing_mods: Array[StringName] = []
 
 var action_fsm: ActionFSM
 var attack_manager: AttackManager

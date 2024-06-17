@@ -331,6 +331,43 @@ tracks/6/keys = {
 "values": [0.12, 0.09, 0.09, 0.12]
 }
 
+[sub_resource type="Animation" id="Animation_ygeth"]
+resource_name = "fury"
+length = 2.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [4],
+"method": &"timed_input"
+}, {
+"args": [0.2],
+"method": &"do_damage"
+}, {
+"args": [0.2],
+"method": &"do_damage"
+}, {
+"args": [0.2],
+"method": &"do_damage"
+}, {
+"args": [0.2],
+"method": &"do_damage"
+}, {
+"args": [0.2],
+"method": &"do_damage"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_bgxww"]
 resource_name = "heavy_attack"
 length = 0.95
@@ -645,55 +682,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_ygeth"]
-resource_name = "fury"
-length = 3.0
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.55, 1, 1.05, 1.5, 1.55, 2, 2.05, 2.5, 2.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [],
-"method": &"set_target"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [0.2],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [0.2],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [0.2],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [0.2],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [0.2],
-"method": &"do_damage"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]

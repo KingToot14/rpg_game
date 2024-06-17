@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=79 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/stats/element_icons_small.png" id="34_oquq2"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
+[ext_resource type="PackedScene" uid="uid://cuchs4266ic3t" path="res://ui/battles/timed_attacks/mash_timing.tscn" id="45_gvyev"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dtt10"]
 seed = 1220
@@ -401,7 +402,7 @@ position = Vector2(423, 308)
 [node name="forest_tree17" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
 position = Vector2(359, 301)
 
-[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "victory_panel", "loss_panel", "action_bar", "attack_menu", "defense_menu", "cancel_button", "single_hit", "result_label")]
+[node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "victory_panel", "loss_panel", "action_bar", "attack_menu", "defense_menu", "cancel_button", "single_hit", "mash_timing", "result_label")]
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
@@ -414,6 +415,7 @@ attack_menu = NodePath("action_bar/attack_menu")
 defense_menu = NodePath("action_bar/defense_menu")
 cancel_button = NodePath("cancel_button")
 single_hit = NodePath("timed_single_hit")
+mash_timing = NodePath("mash_timing")
 result_label = NodePath("results_label")
 good_color = Color(0.254902, 0.937255, 0.164706, 1)
 perf_color = Color(0.941176, 0.901961, 0.168627, 1)
@@ -1603,10 +1605,19 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 0.0
-offset_bottom = 25.0
+offset_bottom = 45.0
 grow_vertical = 1
+
+[node name="mash_timing" parent="ui" instance=ExtResource("45_gvyev")]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
 
 [node name="results_label" type="Label" parent="ui"]
 visible = false
@@ -2025,8 +2036,8 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_m
 [connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]

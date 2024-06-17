@@ -28,6 +28,7 @@ var menu_pos: float = -115
 
 @export_group("Timings")
 @export var single_hit: TimedSingleHit
+@export var mash_timing: MashTiming
 
 @export var result_label: Label
 @export var good_color := Color.WHITE;
@@ -38,6 +39,7 @@ var result_tween: Tween
 
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"
+const MASH_NAME = &'mash'
 
 # --- Functions --- #
 func _ready():
@@ -141,10 +143,12 @@ func set_loss_panel(val: bool) -> void:
 #endregion
 
 #region Timing
-func show_timing(version: StringName, target: Variant) -> void:
+func show_timing(version: StringName, target: Variant, param: Variant = null) -> void:
 	single_hit.visible = version == SINGLE_HIT_NAME
 	if version == SINGLE_HIT_NAME:
 		single_hit.setup_timing(target)
+	elif version == MASH_NAME:
+		mash_timing.setup_timing(target, param)
 
 func show_timing_result(key: StringName) -> void:
 	result_label.visible = true

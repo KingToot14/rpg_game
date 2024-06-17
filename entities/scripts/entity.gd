@@ -316,6 +316,21 @@ func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	
 	return locations
 
+func get_mash_inputs(attack_name: StringName) -> Array:
+	var attack_anim = animator.get_animation(attack_name)
+	if not attack_anim:
+		return []
+	
+	var track_id = attack_anim.find_track(^'animator', Animation.TYPE_METHOD)
+	var key_count = attack_anim.track_get_key_count(track_id)
+	
+	for i in range(key_count):
+		var value = attack_anim.track_get_key_value(track_id, i)
+		if value['method'] == &'timed_input':
+			return [attack_anim.track_get_key_time(track_id, i), value['args'][0]]
+	
+	return []
+
 # - Positioning - #
 func get_front_pos() -> Vector2:
 	return front_marker.global_position

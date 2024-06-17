@@ -6,6 +6,8 @@ enum TargetSide { PLAYER, ENEMY }
 enum TargetingMode { SINGLE, AOE, ALL, RANDOM }
 enum DamageType { PHYSICAL, MAGICAL }
 
+enum TimingType { TIMED_INPUT, MASH }
+
 enum Element {
 	NONE, USE_WEAPON,
 	FIRE, ELECTRIC, NATURE,
@@ -30,6 +32,7 @@ var remaining_cooldown := 0
 @export var side: TargetSide = TargetSide.PLAYER
 @export var targeting: TargetingMode = TargetingMode.SINGLE
 @export var damage_type: DamageType = DamageType.PHYSICAL
+@export var timing_type: TimingType = TimingType.TIMED_INPUT
 @export var accuracy: float = 1
 @export var crit_rate: float = .10
 @export var randomness: float = .10
