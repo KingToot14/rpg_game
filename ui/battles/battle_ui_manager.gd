@@ -19,6 +19,8 @@ var is_player_turn := false
 @export var action_bar: Control
 @export var attack_menu: Control
 @export var defense_menu: Control
+@export var tactic_menu: Control
+
 @export var cancel_button: Control
 
 @export var action_bar_tween_time: float = 0.15
@@ -75,6 +77,7 @@ func _on_state_changed(state: String) -> void:
 func _on_action_changed(state: String) -> void:
 	set_attack_menu(state == 'attack')
 	set_defense_menu(state == 'defend')
+	set_tactic_menu(state == 'tactic')
 
 func _on_targeting_changed() -> void:
 	try_set_action_bar(not Globals.action_fsm.targeting)
@@ -117,6 +120,9 @@ func set_attack_menu(value: bool) -> void:
 
 func set_defense_menu(value: bool) -> void:
 	tween_action(defense_menu, value, menu_pos)
+
+func set_tactic_menu(value: bool) -> void:
+	tween_action(tactic_menu, value, menu_pos)
 
 func set_cancel_button(value: bool) -> void:
 	tween_action(cancel_button, value, action_bar_pos)
