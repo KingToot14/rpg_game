@@ -53,7 +53,7 @@ offset_top = -30.0
 offset_right = 34.0
 offset_bottom = -13.0
 theme_type_variation = &"Cooldown"
-text = " Timed   Input!"
+text = " Timed   Input"
 scroll_active = false
 
 [node name="indicator" type="TextureRect" parent="."]

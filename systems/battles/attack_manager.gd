@@ -19,16 +19,17 @@ func setup_attack() -> bool:
 	Globals.timing_mods = []
 	
 	if Globals.curr_entity.is_player:
-		if Globals.curr_item.timing_type == Attack.TimingType.TIMED_INPUT:
-			Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.get_timed_inputs(anim_name))
-		if Globals.curr_item.timing_type == Attack.TimingType.MASH:
-			var inputs = Globals.curr_entity.get_mash_inputs(anim_name)
-			var target := 10
-			
-			if len(inputs) > 1:
-				target = inputs[1]
-			
-			Globals.ui_manager.show_timing(&'mash', inputs[0], target)
+		Globals.ui_manager.enable_timing()
+		#if Globals.curr_item.timing_type == Attack.TimingType.TIMED_INPUT:
+			#Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.get_timed_inputs(anim_name))
+		#if Globals.curr_item.timing_type == Attack.TimingType.MASH:
+			#var inputs = Globals.curr_entity.get_mash_inputs(anim_name)
+			#var target := 10
+			#
+			#if len(inputs) > 1:
+				#target = inputs[1]
+			#
+			#Globals.ui_manager.show_timing(&'mash', inputs[0], target)
 	
 	Globals.curr_entity.perform_attack(anim_name)
 	Globals.curr_item.start_cooldown() 

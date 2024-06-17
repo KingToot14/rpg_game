@@ -2,8 +2,11 @@ class_name MashTiming
 extends Control
 
 # --- Variables --- #
-var count = 0
-var target = 0
+var count := 0
+var target := 0
+var timing := 0.0
+
+var active := false
 
 # --- References --- #
 @onready var count_label := $"count" as RichTextLabel
@@ -13,7 +16,9 @@ const GOOD_THRESHOLD := 0.70
 
 # --- Functions --- #
 func _input(event: InputEvent) -> void:
-	if not (visible and event is InputEventKey and event.is_pressed()):
+	if not (active and event.is_pressed()):
+		return
+	if not (event is InputEventKey or event is InputEventMouseButton):
 		return
 	
 	count += 1
@@ -23,12 +28,17 @@ func _input(event: InputEvent) -> void:
 	if count >= target:
 		submit_result()
 
-func setup_timing(timing: float, targ: int = 10) -> void:
+func setup_timing(time: float, targ: int = 10) -> void:
 	visible = true
 	
+	timing = time
 	target = targ
 	count = 0
 	
+	count_label.text = "[center]" + str(count) + "/" + str(target)
+
+func set_active() -> void:
+	active = true
 	get_tree().create_timer(timing).timeout.connect(submit_result)
 
 func submit_result() -> void:
@@ -47,3 +57,4 @@ func set_result(result: StringName) -> void:
 	Globals.ui_manager.show_timing_result(result)
 	
 	visible = false
+	active = false

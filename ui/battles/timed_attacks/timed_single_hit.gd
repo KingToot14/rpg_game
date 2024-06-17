@@ -7,6 +7,8 @@ extends Control
 var needle_pos: Array[float] = []
 var curr_needle: int = 0
 
+var active := false
+
 # --- Constants --- #
 const PERF_THRESHOLD: float = 0.10
 
@@ -23,6 +25,9 @@ func _ready() -> void:
 	visible = false
 
 func _process(delta) -> void:
+	if not active:
+		return
+	
 	for i in range(len(needle_pos)):
 		needle_pos[i] -= delta
 	
@@ -32,7 +37,9 @@ func _process(delta) -> void:
 		set_result(&'poor')
 
 func _input(event) -> void:
-	if not (visible and event is InputEventKey and event.is_pressed()):
+	if not (active and event.is_pressed()):
+		return
+	if not (event is InputEventKey or event is InputEventMouseButton):
 		return
 	
 	if needle_pos[curr_needle] < PERF_THRESHOLD:
@@ -50,6 +57,9 @@ func setup_timing(timings: Array[float]) -> void:
 	for i in range(len(needle_pos)):
 		set_needle_rotation(needles[i], 360 - 180 * needle_pos[i] * rotation_speed)
 
+func set_active() -> void:
+	active = true
+
 func set_needle_rotation(needle: Control, rot: float) -> void:
 	if needle:
 		needle.material.set_shader_parameter('rotation', rot)
@@ -62,3 +72,4 @@ func set_result(result: StringName) -> void:
 	
 	if curr_needle >= len(needle_pos):
 		visible = false
+		active = false

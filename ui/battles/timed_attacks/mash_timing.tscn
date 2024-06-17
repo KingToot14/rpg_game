@@ -18,7 +18,7 @@ offset_right = 33.0
 offset_bottom = -13.0
 theme_type_variation = &"Cooldown"
 bbcode_enabled = true
-text = "[center]MASH!"
+text = "[center]Mash"
 scroll_active = false
 
 [node name="icon" type="TextureRect" parent="."]

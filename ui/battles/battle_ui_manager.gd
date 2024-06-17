@@ -144,11 +144,24 @@ func set_loss_panel(val: bool) -> void:
 
 #region Timing
 func show_timing(version: StringName, target: Variant, param: Variant = null) -> void:
+	if Globals.action_fsm.targeting:
+		return
+	
 	single_hit.visible = version == SINGLE_HIT_NAME
+	mash_timing.visible = version == MASH_NAME
+	
 	if version == SINGLE_HIT_NAME:
 		single_hit.setup_timing(target)
 	elif version == MASH_NAME:
 		mash_timing.setup_timing(target, param)
+
+func enable_timing() -> void:
+	await get_tree().create_timer(0.01).timeout
+	
+	if single_hit.visible:
+		single_hit.set_active()
+	elif mash_timing.visible:
+		mash_timing.set_active()
 
 func show_timing_result(key: StringName) -> void:
 	result_label.visible = true

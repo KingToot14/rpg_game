@@ -15,9 +15,32 @@ func _ready() -> void:
 
 func show_outline() -> void:
 	backing.visible = true
+	
+	# show timing
+	if not item is Attack:
+		return
+	
+	var anim_name = item.animation_name
+	
+	if item.timing_type == Attack.TimingType.TIMED_INPUT:
+		Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.get_timed_inputs(anim_name))
+	if item.timing_type == Attack.TimingType.MASH:
+		var inputs = Globals.curr_entity.get_mash_inputs(anim_name)
+		var target := 10
+		
+		if len(inputs) > 1:
+			target = inputs[1]
+		
+		Globals.ui_manager.show_timing(&'mash', inputs[0], target)
 
 func hide_outline() -> void:
 	backing.visible = false
+	
+	# disable timing
+	if not item is Attack:
+		return
+	
+	Globals.ui_manager.show_timing(&'none', null)
 
 func set_menu_item(new_item: Resource) -> void:
 	item = new_item
