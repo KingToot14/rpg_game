@@ -40,6 +40,9 @@ func _ready() -> void:
 	rows = attack_grid.get_children()
 	rows.reverse()
 	
+	info_panel.visible = false
+	info_panel.position.y += 8
+	
 	# setup signals
 	for row in rows:
 		for child in row.get_children():

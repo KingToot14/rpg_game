@@ -16,7 +16,7 @@ cooldown = 3
 description = "Thrust a sword into the ground, causing objects to fall from the sky
  - Hits all enemies
  - Random damage
- - 3-turn cooldown"
+ - No Element"
 power = 25.0
 element = 0
 element_percent = 0.0

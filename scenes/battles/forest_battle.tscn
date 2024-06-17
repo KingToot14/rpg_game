@@ -1107,53 +1107,6 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("33_84n05")
 
-[node name="grid_backing" parent="ui/action_bar/defense_menu" instance=ExtResource("27_e31mb")]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -50.0
-offset_right = 28.0
-offset_bottom = 50.0
-grow_vertical = 2
-metadata/_edit_group_ = true
-
-[node name="panel_inner" parent="ui/action_bar/defense_menu/grid_backing" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-
-[node name="defense_grid" type="VBoxContainer" parent="ui/action_bar/defense_menu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -98.0
-offset_right = 26.0
-offset_bottom = -2.0
-grow_vertical = 0
-alignment = 2
-metadata/_edit_group_ = true
-
-[node name="menu_button" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-layout_mode = 2
-item = ExtResource("35_d0j81")
-
-[node name="menu_button2" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-layout_mode = 2
-item = ExtResource("35_d0j81")
-
-[node name="menu_button3" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-layout_mode = 2
-item = ExtResource("35_d0j81")
-
-[node name="menu_button4" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-layout_mode = 2
-item = ExtResource("35_d0j81")
-
 [node name="defense_info" parent="ui/action_bar/defense_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 6
@@ -1161,22 +1114,21 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -50.0
-offset_right = 0.0
-offset_bottom = 50.0
+offset_left = -109.0
+offset_top = -77.0
+offset_right = -9.0
+offset_bottom = 23.0
 grow_horizontal = 0
 grow_vertical = 2
-metadata/_edit_group_ = true
 
-[node name="title" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
+[node name="info" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -83.0
+offset_bottom = -61.0
 
-[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/title"]
+[node name="name" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1184,25 +1136,18 @@ anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
-offset_bottom = 3.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Defense Name"
 scroll_active = false
 
-[node name="info" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 15.0
-offset_right = -2.0
-offset_bottom = -61.0
-
 [node name="defend_power" type="Control" parent="ui/action_bar/defense_menu/defense_info/info"]
 anchors_preset = 0
-offset_left = 24.0
-offset_top = 8.0
-offset_right = 54.0
-offset_bottom = 16.0
+offset_left = 26.0
+offset_top = 21.0
+offset_right = 56.0
+offset_bottom = 29.0
 metadata/_edit_group_ = true
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
@@ -1226,8 +1171,8 @@ scroll_active = false
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
-offset_top = 2.0
-offset_right = -65.0
+offset_top = 14.0
+offset_right = -72.0
 offset_bottom = -2.0
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/icon_frame"]
@@ -1269,30 +1214,59 @@ theme_type_variation = &"Description"
 text = "Description"
 scroll_active = false
 
-[node name="select_panel" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
+[node name="grid_backing" parent="ui/action_bar/defense_menu" instance=ExtResource("27_e31mb")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -28.0
+offset_right = 50.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="panel_inner" parent="ui/action_bar/defense_menu/grid_backing" instance=ExtResource("29_7enty")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/select_panel"]
-custom_minimum_size = Vector2(87, 38)
+[node name="defense_grid" type="HBoxContainer" parent="ui/action_bar/defense_menu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -17.0
-offset_right = 43.5
-offset_bottom = 21.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -26.0
+offset_right = 48.0
+offset_bottom = -2.0
 grow_horizontal = 2
-grow_vertical = 2
-bbcode_enabled = true
-text = "[center]Hover over a defense to view information"
-scroll_active = false
+grow_vertical = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="menu_button" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("35_d0j81")
+
+[node name="menu_button2" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("35_d0j81")
+
+[node name="menu_button3" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("35_d0j81")
+
+[node name="menu_button4" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("35_d0j81")
 
 [node name="cancel_button" type="BaseButton" parent="ui"]
 _import_path = NodePath("")
