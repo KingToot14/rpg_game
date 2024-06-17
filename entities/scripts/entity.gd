@@ -19,7 +19,7 @@ var performing: bool = false
 
 # - Stats - #
 @export var stats: EntityStats
-var hp: float
+var hp: int
 var special_charge: float = 0
 
 var action_count: int = 0

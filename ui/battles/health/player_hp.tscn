@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2wjs7ohttbr2"]
+[gd_scene load_steps=3 format=3 uid="uid://d2wjs7ohttbr2"]
 
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="1_51ijg"]
-[ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_a1jwk"]
 [ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="2_byne6"]
 
 [node name="hp_section" type="NinePatchRect" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
@@ -13,7 +12,6 @@ offset_left = -48.0
 offset_right = 49.0
 offset_bottom = 12.0
 grow_horizontal = 2
-theme = ExtResource("1_a1jwk")
 texture = ExtResource("1_51ijg")
 patch_margin_left = 1
 patch_margin_top = 1
@@ -27,8 +25,9 @@ special_label = NodePath("special_value")
 [node name="hp_value" type="Label" parent="."]
 layout_mode = 0
 offset_left = 2.0
+offset_top = 2.0
 offset_right = 74.0
-offset_bottom = 14.0
+offset_bottom = 9.0
 theme_type_variation = &"HpLabel"
 text = "12345/67890"
 

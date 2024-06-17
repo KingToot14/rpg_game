@@ -8,7 +8,7 @@ enum PlayerRole { NONE, MELEE, RANGED, HEALER, MAGIC }
 var role: PlayerRole = PlayerRole.NONE
 
 var stats: EntityStats
-var curr_hp: float = 210
+var curr_hp: int = 210
 var curr_special: float = 0
 var curr_xp: int = 0
 var curr_ap: int = 0

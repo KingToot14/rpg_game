@@ -2,7 +2,7 @@ class_name EntityStats
 extends Resource
 
 # --- Variables --- #
-@export var max_hp: float
+@export var max_hp: int
 @export var p_attack: float
 @export var p_defense: float
 @export var m_attack: float

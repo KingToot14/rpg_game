@@ -641,6 +641,7 @@ offset_right = 59.0
 offset_bottom = 18.0
 theme_type_variation = &"BlockButton"
 text = "Block"
+horizontal_alignment = 1
 clip_text = true
 
 [node name="tactics_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
@@ -748,6 +749,7 @@ text = "Tactics"
 clip_text = true
 
 [node name="attack_menu" type="Control" parent="ui/action_bar"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1047,12 +1049,12 @@ offset_bottom = -2.0
 metadata/_edit_group_ = true
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/description"]
-texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
+offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
@@ -1170,7 +1172,7 @@ layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -86.0
+offset_bottom = -83.0
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/title"]
 layout_mode = 1
@@ -1178,9 +1180,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = -1.0
+offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -1.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Defense Name"
@@ -1197,7 +1199,7 @@ offset_bottom = -61.0
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 8.0
-offset_right = 52.0
+offset_right = 54.0
 offset_bottom = 16.0
 metadata/_edit_group_ = true
 
@@ -1212,8 +1214,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -3.0
+offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "50"
@@ -1257,7 +1258,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = -1.0
+offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
@@ -1282,9 +1283,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -43.5
-offset_top = -14.0
+offset_top = -17.0
 offset_right = 43.5
-offset_bottom = 10.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
@@ -1300,7 +1301,7 @@ process_physics_priority = 0
 process_thread_group = 0
 editor_description = ""
 visible = false
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 1)
 self_modulate = Color(1, 1, 1, 1)
 show_behind_parent = false
 top_level = false
@@ -1386,8 +1387,9 @@ texture = ExtResource("32_a24v6")
 [node name="action_name" type="Label" parent="ui/cancel_button"]
 layout_mode = 0
 offset_left = 25.0
+offset_top = 7.0
 offset_right = 59.0
-offset_bottom = 23.0
+offset_bottom = 18.0
 theme_type_variation = &"AttackButton"
 text = "Cancel"
 horizontal_alignment = 1
@@ -1634,6 +1636,7 @@ offset_right = 100.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_66gh2")
 
 [node name="backing" type="NinePatchRect" parent="ui/victory_panel"]
 layout_mode = 1
@@ -1671,10 +1674,11 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = -2.0
-offset_top = 1.0
+offset_top = 5.0
 offset_right = -2.0
 offset_bottom = 25.0
 grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[center]VICTORY[/center]"
 scroll_active = false
@@ -1699,6 +1703,7 @@ patch_margin_bottom = 1
 
 [node name="xp_label" type="RichTextLabel" parent="ui/victory_panel/rewards_panel"]
 layout_mode = 0
+offset_top = 2.0
 offset_right = 96.0
 offset_bottom = 23.0
 bbcode_enabled = true
@@ -1708,6 +1713,7 @@ scroll_active = false
 [node name="ap_label" type="RichTextLabel" parent="ui/victory_panel/rewards_panel"]
 layout_mode = 0
 offset_left = 100.0
+offset_top = 2.0
 offset_right = 196.0
 offset_bottom = 23.0
 bbcode_enabled = true
@@ -1806,7 +1812,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1.0
+offset_top = 6.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1829,6 +1835,7 @@ offset_right = 100.0
 offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_66gh2")
 
 [node name="backing" type="NinePatchRect" parent="ui/loss_panel"]
 layout_mode = 1
@@ -1867,10 +1874,11 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = -2.0
-offset_top = 1.0
+offset_top = 5.0
 offset_right = -2.0
-offset_bottom = 25.0
+offset_bottom = 26.0
 grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 22
 bbcode_enabled = true
 text = "[center]DEFEATED[/center]"
 scroll_active = false
@@ -1908,9 +1916,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 51.0
-offset_top = 29.0
+offset_top = 36.0
 offset_right = 149.0
-offset_bottom = 51.0
+offset_bottom = 52.0
 grow_horizontal = 1
 grow_vertical = 1
 rotation = 0.0
@@ -2017,8 +2025,8 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_m
 [connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
 [connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
 [connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]

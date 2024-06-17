@@ -15,7 +15,8 @@ icon = SubResource("AtlasTexture_70663")
 cooldown = 3
 description = "Thrust a sword into the ground, causing objects to fall from the sky
  - Hits all enemies
- - Very random damage"
+ - Very random damage
+ - 3-turn cooldown"
 power = 25.0
 element = 0
 element_percent = 0.0

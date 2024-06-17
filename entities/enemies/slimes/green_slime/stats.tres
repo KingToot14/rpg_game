@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_x2nfi")
-max_hp = 54.0
+max_hp = 54
 p_attack = 4.0
 p_defense = 4.0
 m_attack = 4.0

@@ -44,12 +44,6 @@ func _ready():
 	
 	action_bar_pos = action_bar.position.y
 	action_bar.modulate.a = 0
-	
-	set_attack_menu(false)
-	set_defense_menu(false)
-	set_cancel_button(false)
-	set_victory_panel(false)
-	set_loss_panel(false)
 
 #region HP
 func setup_entity_hp(hp_bar, entity: Entity) -> void:
@@ -102,14 +96,15 @@ func tween_action(control: Control, value: bool, pos: float) -> void:
 		
 		tween.tween_property(control, 'modulate:a', 1.0, action_bar_tween_time)
 		tween.tween_property(control, 'position:y', pos, action_bar_tween_time)
+		tween.chain().tween_callback(control.show)
 	else:
-		control.visible = false
 		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		control.position.y = pos
 		
 		tween.tween_property(control, 'modulate:a', 0.0, action_bar_tween_time)
 		tween.tween_property(control, 'position:y', pos + action_bar_offset, action_bar_tween_time)
+		tween.chain().tween_callback(control.hide)
 
 func set_action_bar(value: bool) -> void:
 	tween_action(action_bar, value, action_bar_pos)
