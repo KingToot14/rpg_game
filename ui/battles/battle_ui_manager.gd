@@ -34,6 +34,7 @@ var menu_pos: float = -115
 @export var perf_color := Color.WHITE;
 @export var poor_color := Color.WHITE;
 var result_color: Color
+var result_tween: Tween
 
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"
@@ -161,11 +162,14 @@ func show_timing_result(key: StringName) -> void:
 	
 	set_result_text_alpha(1.0)
 	
-	var tween = create_tween()
+	if result_tween:
+		result_tween.kill()
 	
-	tween.tween_interval(0.5)
-	tween.tween_method(set_result_text_alpha, 1.0, 0.0, 0.5)
-	tween.finished.connect(result_label.hide)
+	result_tween = create_tween()
+	
+	result_tween.tween_interval(0.5)
+	result_tween.tween_method(set_result_text_alpha, 1.0, 0.0, 0.5)
+	result_tween.finished.connect(result_label.hide)
 
 func set_result_text_alpha(alpha: float):
 	result_color.a = alpha

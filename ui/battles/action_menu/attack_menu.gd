@@ -9,9 +9,10 @@ var rows: Array[Node]
 
 @onready var backing := $"grid_backing" as Control
 
-@onready var select_panel := $"attack_info/select_panel" as Control
+@onready var info_panel := $"attack_info" as Control
+var info_panel_pos: float
 
-@onready var name_label := $"attack_info/title/label" as RichTextLabel
+@onready var name_label := $"attack_info/info/name" as RichTextLabel
 @onready var icon_rect := $"attack_info/info/icon_frame/icon" as TextureRect
 
 @onready var power_icon := $"attack_info/info/power_holder/icon" as TextureRect
@@ -24,6 +25,8 @@ var rows: Array[Node]
 @onready var accuracy_label := $"attack_info/info/accuracy_holder/label" as RichTextLabel
 @onready var crit_label := $"attack_info/info/crit_rate/label" as RichTextLabel
 
+@onready var cooldown_holder := $'attack_info/info/cooldown' as Control
+@onready var cooldown_label := $'attack_info/info/cooldown/label' as RichTextLabel
 
 @onready var description_label := $"attack_info/description/label" as RichTextLabel
 
@@ -43,8 +46,20 @@ func _ready() -> void:
 			child.mouse_entered.connect(item_hovered.bind(child))
 			child.mouse_exited.connect(item_hovered.bind(null))
 
+func tween_info_panel(value: bool) -> void:
+	var tween = create_tween().set_parallel()
+	
+	if value:
+		info_panel.show()
+		
+		tween.tween_property(info_panel, 'position:y', info_panel_pos, 0.15)
+		tween.tween_property(info_panel, 'modulate:a', 1.0, 0.15)
+	else:
+		tween.tween_property(info_panel, 'position:y', info_panel_pos + 8.0, 0.15)
+		tween.tween_property(info_panel, 'modulate:a', 0.0, 0.15)
+
 func item_hovered(item: ActionMenuItem) -> void:
-	select_panel.visible = not item
+	tween_info_panel(not not item)
 	
 	if not item:
 		return
@@ -76,6 +91,10 @@ func item_hovered(item: ActionMenuItem) -> void:
 	# crit rate
 	crit_label.text = str(int(attack.crit_rate * 100))
 	
+	# cooldown
+	cooldown_holder.visible = attack.cooldown > 0
+	cooldown_label.text = str(attack.cooldown)
+	
 	# description
 	description_label.text = attack.description
 
@@ -94,4 +113,6 @@ func load_items(items) -> void:
 			index += 1
 	
 	backing.size.y = 24 * (floor(item_count / 5.0) + 1) + 4
-	backing.position.y = 94 - backing.size.y + 6
+	backing.position.y = 100 - backing.size.y
+	info_panel.position.y = 1 - backing.size.y
+	info_panel_pos = info_panel.position.y

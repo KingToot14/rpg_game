@@ -13,7 +13,8 @@ name = "Normal Attack"
 animation_name = &"normal_attack"
 icon = SubResource("AtlasTexture_jitcr")
 cooldown = 0
-description = "A simple slash"
+description = "A simple slash
+ - Element based on weapon"
 power = 40.0
 element = 1
 element_percent = 1.0

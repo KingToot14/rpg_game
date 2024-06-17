@@ -6,6 +6,9 @@ extends AnimationPlayer
 var target = null
 
 # --- Functions --- #
+func timed_input() -> void:
+	return
+
 func do_damage(modifier: float = 1.0) -> void:
 	if target is Array:
 		for targ in target:

@@ -14,9 +14,10 @@ animation_name = &"heavy_attack"
 icon = SubResource("AtlasTexture_fcxdd")
 cooldown = 1
 description = "A heavy slash
+ - Element based on weapon
  - Deals damage to neighboring enemies
  - 1-turn Cooldown"
-power = 60.0
+power = 50.0
 element = 0
 element_percent = 0.0
 side = 1
