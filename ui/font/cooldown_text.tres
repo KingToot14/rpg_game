@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cjx30rv4vmrer"]
+
+[ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_rll4t"]
+
+[resource]
+base_font = ExtResource("1_rll4t")
+spacing_space = -2
+spacing_top = 1

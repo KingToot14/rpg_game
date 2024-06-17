@@ -1,7 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://fq773hj8ga33"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://fq773hj8ga33"]
+
+[ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_kdwbr"]
 
 [resource]
 HBoxContainer/constants/separation = -1
 QuestContainer/base_type = &"HBoxContainer"
 QuestContainer/constants/separation = 0
-RichTextLabel/font_sizes/normal_font_size = 9
+RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/fonts/normal_font = ExtResource("1_kdwbr")

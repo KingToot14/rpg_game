@@ -525,14 +525,18 @@ grow_vertical = 2
 texture = ExtResource("7_bd1i3")
 
 [node name="action_name" type="Label" parent="ui/action_bar/attack_button"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 25.0
-offset_right = 59.0
-offset_bottom = 23.0
+offset_top = 7.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_type_variation = &"AttackButton"
 text = "Attack"
-horizontal_alignment = 1
-vertical_alignment = 1
 clip_text = true
 
 [node name="block_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
@@ -632,12 +636,11 @@ texture = ExtResource("9_gvg6k")
 [node name="action_name" type="Label" parent="ui/action_bar/block_button"]
 layout_mode = 0
 offset_left = 25.0
+offset_top = 7.0
 offset_right = 59.0
-offset_bottom = 23.0
+offset_bottom = 18.0
 theme_type_variation = &"BlockButton"
 text = "Block"
-horizontal_alignment = 1
-vertical_alignment = 1
 clip_text = true
 
 [node name="tactics_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
@@ -737,12 +740,11 @@ texture = ExtResource("10_qg1o5")
 [node name="action_name" type="Label" parent="ui/action_bar/tactics_button"]
 layout_mode = 0
 offset_left = 25.0
-offset_right = 59.0
-offset_bottom = 23.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 18.0
 theme_type_variation = &"TacticsButton"
 text = "Tactics"
-horizontal_alignment = 1
-vertical_alignment = 1
 clip_text = true
 
 [node name="attack_menu" type="Control" parent="ui/action_bar"]
@@ -884,7 +886,7 @@ layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -86.0
+offset_bottom = -83.0
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/title"]
 layout_mode = 1
@@ -892,9 +894,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = -1.0
+offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Attack Name"
@@ -911,7 +913,7 @@ offset_bottom = -61.0
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 3.0
-offset_right = 52.0
+offset_right = 54.0
 offset_bottom = 11.0
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/info/power_holder"]
@@ -926,8 +928,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -3.0
+offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100"
@@ -937,7 +938,7 @@ scroll_active = false
 anchors_preset = 0
 offset_left = 56.0
 offset_top = 3.0
-offset_right = 84.0
+offset_right = 86.0
 offset_bottom = 11.0
 metadata/_edit_group_ = true
 
@@ -955,8 +956,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -3.0
+offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100"
@@ -966,7 +966,7 @@ scroll_active = false
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 13.0
-offset_right = 52.0
+offset_right = 54.0
 offset_bottom = 21.0
 metadata/_edit_group_ = true
 
@@ -982,8 +982,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -3.0
+offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100"
@@ -993,7 +992,7 @@ scroll_active = false
 anchors_preset = 0
 offset_left = 56.0
 offset_top = 13.0
-offset_right = 84.0
+offset_right = 86.0
 offset_bottom = 21.0
 metadata/_edit_group_ = true
 
@@ -1009,8 +1008,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -3.0
+offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "100"
@@ -1064,13 +1062,14 @@ text = "Description"
 scroll_active = false
 
 [node name="select_panel" parent="ui/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
+visible = false
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/select_panel"]
+[node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/select_panel"]
 custom_minimum_size = Vector2(87, 38)
 layout_mode = 1
 anchors_preset = 8
@@ -1079,9 +1078,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -43.5
-offset_top = -14.0
+offset_top = -15.0
 offset_right = 43.5
-offset_bottom = 10.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
@@ -1564,7 +1563,7 @@ patch_margin_bottom = 1
 [node name="label" type="Label" parent="ui/encounter_info/wave_panel"]
 layout_mode = 0
 offset_left = 2.0
-offset_top = -2.0
+offset_top = 1.0
 offset_right = 95.0
 offset_bottom = 12.0
 theme = ExtResource("6_66gh2")
@@ -1590,7 +1589,7 @@ patch_margin_bottom = 1
 [node name="label" type="Label" parent="ui/encounter_info/condition_panel"]
 layout_mode = 0
 offset_left = 2.0
-offset_top = -2.0
+offset_top = 1.0
 offset_right = 95.0
 offset_bottom = 12.0
 theme = ExtResource("6_66gh2")

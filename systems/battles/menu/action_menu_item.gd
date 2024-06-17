@@ -33,10 +33,7 @@ func set_menu_item(new_item: Resource) -> void:
 	
 	if item.remaining_cooldown > 0:
 		icon_rect.material.set_shader_parameter('intensity', 0.5)
-		cooldown_label.clear()
-		cooldown_label.push_outline_size(2)
-		cooldown_label.append_text(str(item.remaining_cooldown))
-		cooldown_label.pop()
+		cooldown_label.text = " " + str(item.remaining_cooldown)
 	else:
 		icon_rect.material.set_shader_parameter('intensity', 0.0)
 		cooldown_label.text = ""

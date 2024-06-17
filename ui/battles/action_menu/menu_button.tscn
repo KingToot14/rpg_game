@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk0wwacwjncj7"]
+[gd_scene load_steps=9 format=3 uid="uid://bk0wwacwjncj7"]
 
 [ext_resource type="Script" path="res://systems/battles/menu/action_menu_item.gd" id="1_leqd4"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_p7gq2"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_hjerr"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="4_cwr3v"]
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="4_dmxo8"]
+[ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_ljpgd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bedf6"]
 resource_local_to_scene = true
@@ -119,14 +120,14 @@ expand_mode = 1
 
 [node name="cooldown_label" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 11.0
-offset_right = 42.0
-offset_bottom = 23.0
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 24.0
+offset_bottom = 22.0
 mouse_filter = 2
+theme = ExtResource("6_ljpgd")
 theme_type_variation = &"Cooldown"
-bbcode_enabled = true
-text = "[outline_size=1]10"
+text = " 10"
 scroll_active = false
 
 [connection signal="mouse_entered" from="." to="." method="show_outline"]
