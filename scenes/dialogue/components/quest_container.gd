@@ -2,7 +2,8 @@ class_name QuestContainer
 extends Control
 
 # --- Variables --- #
-@onready var icon_container := $"icon_container" as HBoxContainer
+@onready var icon_container := $"panel/icon_container" as HBoxContainer
+@onready var panel_rect := $"panel" as Control
 
 # --- References --- #
 var quest_info_scene = preload("res://scenes/dialogue/components/item_info.tscn")
@@ -14,9 +15,9 @@ func load_items(tag: StringName) -> void:
 	if not quest:
 		return
 	
-	var new_size = size
+	var new_size = panel_rect.size
 	new_size.x = 6 + len(quest.requirements) * 28
-	set_size(new_size, true)
+	panel_rect.set_size(new_size, true)
 	
 	for item in quest.requirements:
 		var quest_info = quest_info_scene.instantiate()

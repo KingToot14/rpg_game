@@ -53,8 +53,7 @@ func _ready() -> void:
 	find_status_effects("res://resources/status_effects/")
 	
 	# load default preset
-	#set_preset(load("res://resources/theme_presets/blue_preset.tres"))
-	set_preset(load("res://resources/theme_presets/red_preset.tres"))
+	set_preset(load("res://resources/theme_presets/blue_preset.tres"))
 
 func find_status_effects(path: String) -> void:
 	var dir = DirAccess.open(path)

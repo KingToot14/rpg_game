@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ThemePreset" load_steps=2 format=3 uid="uid://bnegth5ej3ud4"]
+
+[ext_resource type="Script" path="res://ui/color_management/theme_preset.gd" id="1_asasq"]
+
+[resource]
+script = ExtResource("1_asasq")
+light_color = Color(0.807843, 0.568627, 0.929412, 1)
+normal_color = Color(0.631373, 0.243137, 0.870588, 1)
+dark_color = Color(0.4, 0.129412, 0.639216, 1)
+accent_text_color = Color(0.807843, 0.568627, 0.929412, 1)

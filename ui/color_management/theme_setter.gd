@@ -8,13 +8,16 @@ extends Control
 func _ready() -> void:
 	update_theme()
 
-func update_theme() -> void:
+func update_theme(curr_key: StringName = &"") -> void:
 	var preset = Globals.theme_preset
 	
 	if not preset:
 		return
 	
-	match key:
+	if curr_key == &"":
+		curr_key = key
+	
+	match curr_key:
 		&'light':
 			self_modulate = preset.light_color
 		&'normal':

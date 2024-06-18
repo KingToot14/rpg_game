@@ -9,8 +9,8 @@ extends BaseButton
 @export var hover_offset := 4.0
 var curr_pos: float
 
-@export var normal_color: Color
-@export var hover_color: Color
+@export var normal_key: StringName
+@export var hover_key: StringName
 
 var tween
 
@@ -31,7 +31,7 @@ func highlight(hovered: bool) -> void:
 	tween = create_tween()
 	
 	tween.tween_property(self, 'position:x', curr_pos - (hover_offset if hovered else 0), tween_time)
-	outline_rect.color = hover_color if hovered else normal_color
+	outline_rect.update_theme(hover_key if hovered else normal_key)
 
 func set_response(response) -> void:
 	label.text = "[center]" + response.text + "[/center]"

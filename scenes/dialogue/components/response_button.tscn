@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dka6sdlieeto3"]
+[gd_scene load_steps=4 format=3 uid="uid://dka6sdlieeto3"]
 
 [ext_resource type="Script" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_56h58"]
+[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="2_gtr4y"]
 
 [node name="response_example" type="BaseButton" node_paths=PackedStringArray("label", "outline_rect")]
 _import_path = NodePath("")
@@ -76,10 +77,11 @@ script = ExtResource("1_td51a")
 label = NodePath("text")
 outline_rect = NodePath("outline")
 tween_time = 0.1
-normal_color = Color(0.129412, 0.407843, 0.639216, 1)
-hover_color = Color(0.568627, 0.807843, 0.929412, 1)
+normal_key = &"dark"
+hover_key = &"light"
 
 [node name="outline" type="ColorRect" parent="."]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,7 +89,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.129412, 0.407843, 0.639216, 1)
+script = ExtResource("2_gtr4y")
+key = &"dark"
 
 [node name="panel_inner" parent="outline" instance=ExtResource("2_56h58")]
 layout_mode = 1
