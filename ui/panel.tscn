@@ -1,11 +1,16 @@
-[gd_scene format=3 uid="uid://bid4lugwt1f6c"]
+[gd_scene load_steps=2 format=3 uid="uid://bid4lugwt1f6c"]
 
-[node name="panel" type="ColorRect"]
+[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="1_uqgmj"]
+
+[node name="panel" type="ColorRect" groups=["theme_setter"]]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 offset_right = 132.0
 offset_bottom = 106.0
-color = Color(0.568627, 0.807843, 0.929412, 1)
+script = ExtResource("1_uqgmj")
+key = &"light"
 
-[node name="fill" type="ColorRect" parent="."]
+[node name="fill" type="ColorRect" parent="." groups=["theme_setter"]]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,4 +21,5 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.129412, 0.407843, 0.639216, 1)
+script = ExtResource("1_uqgmj")
+key = &"dark"

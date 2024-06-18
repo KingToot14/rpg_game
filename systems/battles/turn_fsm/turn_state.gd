@@ -5,6 +5,9 @@ extends Node2D
 @onready var fsm: TurnFSM = $".."
 @onready var root: EncounterManager = $"../.."
 
+var group_name: StringName
+var next_state: String
+
 # --- Functions --- #
 func state_entered() -> void:
 	pass

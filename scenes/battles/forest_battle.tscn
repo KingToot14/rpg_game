@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=83 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
 [ext_resource type="Resource" uid="uid://b6dixk683scj1" path="res://entities/player/general/flee_tactic.tres" id="41_u0bu5"]
+[ext_resource type="Resource" uid="uid://vvso3cyu67wy" path="res://entities/player/general/change_turn_tactic.tres" id="42_68b6r"]
 [ext_resource type="PackedScene" uid="uid://cuchs4266ic3t" path="res://ui/battles/timed_attacks/mash_timing.tscn" id="45_gvyev"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dtt10"]
@@ -1290,7 +1291,7 @@ offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("40_44v6f")
-tactics = Array[Resource("res://entities/scripts/actions/tactic.gd")]([ExtResource("41_u0bu5")])
+tactics = Array[Resource("res://entities/scripts/actions/tactic.gd")]([ExtResource("41_u0bu5"), ExtResource("42_68b6r")])
 
 [node name="tactic_info" parent="ui/action_bar/tactics_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
@@ -1513,18 +1514,15 @@ offset_bottom = 1.0
 grow_vertical = 0
 theme = ExtResource("6_66gh2")
 
-[node name="panel" type="NinePatchRect" parent="ui/player_hp"]
+[node name="panel" parent="ui/player_hp" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("14_hl1jg")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
 
 [node name="hp_section" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 0
@@ -1573,18 +1571,15 @@ grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("6_66gh2")
 
-[node name="panel" type="NinePatchRect" parent="ui/enemy_hp"]
+[node name="panel" parent="ui/enemy_hp" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("14_hl1jg")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
 
 [node name="hp_section" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 0
@@ -1599,9 +1594,7 @@ grow_horizontal = 1
 
 [node name="hp_section2" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_left = -49.0
 offset_top = 15.0
-offset_right = 48.0
 offset_bottom = 27.0
 
 [node name="hp_section3" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
@@ -1613,16 +1606,12 @@ offset_bottom = 40.0
 
 [node name="hp_section4" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_left = -49.0
 offset_top = 41.0
-offset_right = 48.0
 offset_bottom = 53.0
 
 [node name="hp_section5" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_left = -49.0
 offset_top = 54.0
-offset_right = 48.0
 offset_bottom = 66.0
 
 [node name="encounter_info" type="Control" parent="ui"]
@@ -1636,36 +1625,22 @@ offset_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 0
 
-[node name="panel" type="NinePatchRect" parent="ui/encounter_info"]
+[node name="panel" parent="ui/encounter_info" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("14_hl1jg")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
 
-[node name="wave_panel" type="NinePatchRect" parent="ui/encounter_info"]
-self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+[node name="wave_panel" parent="ui/encounter_info" instance=ExtResource("29_7enty")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = 2.0
 offset_top = 2.0
-offset_right = 48.5
-offset_bottom = 12.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
+offset_right = -2.0
+offset_bottom = -12.0
 
 [node name="label" type="Label" parent="ui/encounter_info/wave_panel"]
 layout_mode = 0
@@ -1676,22 +1651,12 @@ offset_bottom = 12.0
 theme = ExtResource("6_66gh2")
 text = "Wave: 1/2"
 
-[node name="condition_panel" type="NinePatchRect" parent="ui/encounter_info"]
-self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+[node name="condition_panel" parent="ui/encounter_info" instance=ExtResource("29_7enty")]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
+offset_left = 2.0
 offset_top = 13.0
-offset_right = 48.5
-offset_bottom = 23.0
-grow_horizontal = 2
-texture = ExtResource("15_cq36e")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
+offset_right = -2.0
+offset_bottom = -1.0
 
 [node name="label" type="Label" parent="ui/encounter_info/condition_panel"]
 layout_mode = 0

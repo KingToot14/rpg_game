@@ -52,6 +52,7 @@ func set_menu_item(new_item: Resource) -> void:
 	
 	# cooldown
 	if not (item and 'remaining_cooldown' in item):
+		cooldown_label.text = ""
 		return
 	
 	if item.remaining_cooldown > 0:

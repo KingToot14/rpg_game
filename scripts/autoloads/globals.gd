@@ -12,6 +12,15 @@ var ui_manager: CanvasLayer
 
 var curr_dialogue
 
+var theme_preset: ThemePreset
+func set_preset(preset: ThemePreset) -> void:
+	theme_preset = preset
+	var nodes = get_tree().get_nodes_in_group(&'theme_setter')
+	
+	for node in nodes:
+		if 'update_theme' in node:
+			node.update_theme()
+
 # --- Overworld --- #
 const OVERWORLD_SCENE: String = "res://scenes/overworld_root.tscn"
 
@@ -35,12 +44,17 @@ func set_item(item: Resource) -> void:
 var timing_mods: Array[StringName] = []
 
 var action_fsm: ActionFSM
+var turn_fsm: TurnFSM
 var attack_manager: AttackManager
 
 # --- Functions --- #
 func _ready() -> void:
 	# Fill registered effects
 	find_status_effects("res://resources/status_effects/")
+	
+	# load default preset
+	#set_preset(load("res://resources/theme_presets/blue_preset.tres"))
+	set_preset(load("res://resources/theme_presets/red_preset.tres"))
 
 func find_status_effects(path: String) -> void:
 	var dir = DirAccess.open(path)

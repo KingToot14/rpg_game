@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bnt1sbgk7fkkn"]
+[gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://bnt1sbgk7fkkn"]
 
 [ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="1_lcnoy"]
+[ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="1_u6ajd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rka2f"]
+atlas = ExtResource("1_u6ajd")
+region = Rect2(60, 0, 20, 20)
 
 [resource]
 script = ExtResource("1_lcnoy")
 name = "Fury"
 animation_name = &"fury"
+icon = SubResource("AtlasTexture_rka2f")
 cooldown = 0
 description = "Unleash a flury of slashes and stabs
  - Element based on weapon"

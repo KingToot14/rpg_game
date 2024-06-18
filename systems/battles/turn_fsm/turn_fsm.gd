@@ -13,6 +13,7 @@ var curr_state: TurnState
 
 # --- Functions --- #
 func _ready() -> void:
+	Globals.turn_fsm = self
 	Globals.item_set.connect(item_set)
 
 func set_state(state: String) -> void:
@@ -31,6 +32,49 @@ func set_state(state: String) -> void:
 
 func set_side(_side: String) -> void:
 	pass
+
+func find_next_turn() -> void:
+	Globals.curr_entity = get_next_entity()
+	
+	var battle_state = Globals.encounter_manager.evaluate_state()
+	
+	if battle_state == -1:
+		set_state('lose')
+		return
+	elif battle_state == 1:
+		if not Globals.encounter_manager.load_next_wave():
+			set_state('win')
+			return
+	
+	if Globals.curr_entity:
+		start_turn()
+		Globals.curr_entity.take_turn()
+	else:
+		set_state(curr_state.next_state)
+
+func set_entity(entity: Entity) -> void:
+	Globals.curr_entity = entity
+	start_turn()
+	Globals.curr_entity.take_turn()
+	Globals.action_fsm.set_state("blank")
+
+func get_next_entity() -> Entity:
+	var i = 0
+	var group = TargetingHelper.get_entities(curr_state.group_name)
+	var group_size = len(group)
+	
+	if group_size <= 0:
+		return null
+	
+	var entity: Entity = null
+	while i < group_size:
+		entity = group[i]
+		if is_instance_valid(entity) and entity.can_act():
+			return entity
+		
+		i += 1
+	
+	return null
 
 func start_turn() -> void:
 	turn_started.emit()

@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="FleeTactic" load_steps=2 format=3 uid="uid://b6dixk683scj1"]
+[gd_resource type="Resource" script_class="FleeTactic" load_steps=4 format=3 uid="uid://b6dixk683scj1"]
 
 [ext_resource type="Script" path="res://entities/scripts/actions/flee_tactic.gd" id="1_33r6r"]
+[ext_resource type="Texture2D" uid="uid://dhwgjwqne7e8k" path="res://entities/player/general/tactics.png" id="1_ctuv0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwn3x"]
+atlas = ExtResource("1_ctuv0")
+region = Rect2(0, 0, 20, 20)
 
 [resource]
 script = ExtResource("1_33r6r")
 name = "Flee"
+icon = SubResource("AtlasTexture_pwn3x")
 description = "Escape battle
  - Lose any collected loot"

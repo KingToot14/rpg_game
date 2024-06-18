@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://u8ci3rbwkevj"]
+[gd_scene load_steps=3 format=3 uid="uid://u8ci3rbwkevj"]
 
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="1_8ken5"]
+[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="2_brvpc"]
 
-[node name="panel_inner" type="NinePatchRect"]
+[node name="panel_inner" type="NinePatchRect" groups=["theme_setter"]]
 self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,3 +15,5 @@ patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
+script = ExtResource("2_brvpc")
+key = &"normal"

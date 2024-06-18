@@ -10,8 +10,10 @@ func entity_selected(entity: Entity) -> void:
 		return
 	tactic = tactic as Tactic
 	
-	if entity != Globals.curr_entity:
+	if not entity.targetable:
 		return
+	
+	Globals.curr_target = entity
 	
 	# Disable highlighting
 	TargetingHelper.disable_highlights()
