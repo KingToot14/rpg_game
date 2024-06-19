@@ -27,6 +27,8 @@ var action_count: int = 0
 @export var status_effects = {}
 var removal_queue: Array[StringName] = []
 
+@export var loot: Array[EntityLoot] = []
+
 # - Attacks - #
 @export_group("Attacks")
 @export var default_attack: Attack
@@ -338,3 +340,12 @@ func get_front_pos() -> Vector2:
 # - Data Saving - #
 func store_data() -> void:
 	DataManager.players[spawn_index].store_hp(hp)
+
+# - Loot - #
+func add_loot() -> void:
+	var items: Array[InventoryItem] = []
+	
+	for item in loot:
+		items.append(item.get_item())
+	
+	Globals.encounter_manager.add_items(items)

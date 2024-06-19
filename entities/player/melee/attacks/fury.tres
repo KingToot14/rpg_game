@@ -12,7 +12,7 @@ script = ExtResource("1_lcnoy")
 name = "Fury"
 animation_name = &"fury"
 icon = SubResource("AtlasTexture_rka2f")
-cooldown = 0
+cooldown = 5
 description = "Unleash a flury of slashes and stabs
  - Element based on weapon"
 power = 80.0

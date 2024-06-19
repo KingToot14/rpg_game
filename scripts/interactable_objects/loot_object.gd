@@ -27,6 +27,7 @@ func collect_loot() -> void:
 	
 	# Set flag
 	DataManager.open_chest(loot_key)
+	Globals.ui_manager.open_chest(loot)
 	
 	# Set interactivity
 	set_collected()

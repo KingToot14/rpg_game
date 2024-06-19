@@ -6,6 +6,8 @@ signal encounter_victory()
 signal encounter_loss()
 
 # --- Variables --- #
+var total_loot: Array[InventoryItem] = []
+
 @export_group("Player Paths")
 @export_file("*.tscn") var melee_path: String
 @export_file("*.tscn") var ranged_path: String
@@ -135,6 +137,7 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	return 1 if all_dead else 0
 
 func handle_victory() -> void:
+	store_loot()
 	encounter_victory.emit()
 
 func handle_loss() -> void:
@@ -146,3 +149,11 @@ func load_overworld() -> void:
 	Globals.from_battle = true
 	await get_tree().create_timer(wait_time).timeout
 	SceneManager.load_scene(Globals.OVERWORLD_SCENE)
+
+# - Items - #
+func add_items(items: Array[InventoryItem]) -> void:
+	total_loot.append_array(items)
+
+func store_loot() -> void:
+	for loot in total_loot:
+		DataManager.add_to_inventory(loot)

@@ -24,5 +24,5 @@ func update_theme(curr_key: StringName = &"") -> void:
 			self_modulate = preset.normal_color
 		&'dark':
 			self_modulate = preset.dark_color
-		&'accent_text':
+		&'accent':
 			self_modulate = preset.accent_text_color

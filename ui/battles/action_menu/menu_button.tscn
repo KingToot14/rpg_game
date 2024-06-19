@@ -93,6 +93,7 @@ item = ExtResource("2_p7gq2")
 visible = false
 self_modulate = Color(1, 1, 1, 1)
 layout_mode = 1
+key = &"light"
 
 [node name="fill" parent="backing" instance=ExtResource("3_hjerr")]
 layout_mode = 1

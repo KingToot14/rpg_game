@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cthpngydpydqw"]
+[gd_scene load_steps=28 format=3 uid="uid://cthpngydpydqw"]
 
 [ext_resource type="Script" path="res://systems/data_saving/data_manager.gd" id="1_bh6xq"]
 [ext_resource type="Script" path="res://systems/data_saving/item_data_chunk.gd" id="2_1bh6r"]
@@ -147,6 +147,19 @@ inventory = &"item"
 icon = SubResource("AtlasTexture_3yrbe")
 quantity = 0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbsj2"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(60, 20, 20, 20)
+
+[sub_resource type="Resource" id="Resource_2dw5n"]
+script = ExtResource("2_1bh6r")
+name = "Goop"
+key = &"goop"
+description = ""
+inventory = &""
+icon = SubResource("AtlasTexture_xbsj2")
+quantity = 0
+
 [node name="data_manager" type="Node"]
 script = ExtResource("1_bh6xq")
-inventory = Array[ExtResource("2_1bh6r")]([SubResource("Resource_wdjsp"), SubResource("Resource_ywjv4"), SubResource("Resource_cfixh"), SubResource("Resource_h24sn"), SubResource("Resource_p8g5u"), SubResource("Resource_27rko"), SubResource("Resource_idt5s"), SubResource("Resource_5uqb3"), SubResource("Resource_p1bbr"), SubResource("Resource_cynph"), SubResource("Resource_infet")])
+inventory = Array[ExtResource("2_1bh6r")]([SubResource("Resource_wdjsp"), SubResource("Resource_ywjv4"), SubResource("Resource_cfixh"), SubResource("Resource_h24sn"), SubResource("Resource_p8g5u"), SubResource("Resource_27rko"), SubResource("Resource_idt5s"), SubResource("Resource_5uqb3"), SubResource("Resource_p1bbr"), SubResource("Resource_cynph"), SubResource("Resource_infet"), SubResource("Resource_2dw5n")])

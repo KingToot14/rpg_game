@@ -13,6 +13,10 @@ var current_area: AreaInformation
 
 # --- Functions --- #
 func _ready() -> void:
+	print("Inventory:")
+	for item in DataManager.inventory:
+		print(item.name, ": ", item.quantity)
+	
 	Globals.overworld_manager = self
 	area_changed.connect(DataManager.clear_local_area)
 	

@@ -2,9 +2,10 @@ class_name OverworldButton
 extends BaseButton
 
 # --- Variables --- #
+@export var outline_rect: ThemeSetter
 
-# --- References --- #
-@onready var backing := $"backing" as Control
+@export var normal_key: StringName = &'normal'
+@export var hover_key: StringName = &'light'
 
 # --- Functions --- #
 func _ready() -> void:
@@ -12,14 +13,10 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 
 func _on_mouse_entered() -> void:
-	var tween = create_tween()
-	
-	tween.tween_property(backing, 'modulate:a', 1.0, 0.15)
+	outline_rect.update_theme(hover_key)
 
 func _on_mouse_exited() -> void:
-	var tween = create_tween()
-	
-	tween.tween_property(backing, 'modulate:a', 0.0, 0.15)
+	outline_rect.update_theme(normal_key)
 
 func quit_game() -> void:
 	SceneManager.quit_game()

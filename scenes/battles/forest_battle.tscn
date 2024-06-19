@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=84 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -45,6 +45,7 @@
 [ext_resource type="Script" path="res://ui/battles/action_menu/defense_menu.gd" id="33_84n05"]
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/stats/element_icons_small.png" id="34_oquq2"]
+[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="34_ujwxc"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
@@ -816,11 +817,14 @@ offset_right = 54.0
 offset_bottom = 24.0
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/info/power_holder"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_di2ji")
 stretch_mode = 2
+script = ExtResource("34_ujwxc")
+key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/info/power_holder"]
 layout_mode = 1
@@ -870,11 +874,14 @@ offset_bottom = 34.0
 metadata/_edit_group_ = true
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/info/accuracy_holder"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_op7a0")
 stretch_mode = 2
+script = ExtResource("34_ujwxc")
+key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/info/accuracy_holder"]
 layout_mode = 1
@@ -896,11 +903,14 @@ offset_bottom = 34.0
 metadata/_edit_group_ = true
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/info/crit_rate"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_vctt4")
 stretch_mode = 2
+script = ExtResource("34_ujwxc")
+key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/info/crit_rate"]
 layout_mode = 1
@@ -922,11 +932,14 @@ offset_bottom = 34.0
 metadata/_edit_group_ = true
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/attack_menu/attack_info/info/cooldown"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_r5o7i")
 stretch_mode = 2
+script = ExtResource("34_ujwxc")
+key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/attack_menu/attack_info/info/cooldown"]
 layout_mode = 1
@@ -1159,10 +1172,13 @@ offset_bottom = 29.0
 metadata/_edit_group_ = true
 
 [node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_k5po2")
+script = ExtResource("34_ujwxc")
+key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
 layout_mode = 1
@@ -2104,8 +2120,8 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_m
 [connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
 [connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
 [connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
