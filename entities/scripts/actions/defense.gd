@@ -15,10 +15,10 @@ var remaining_cooldown := 0
 
 # --- Functions --- #
 func do_defense() -> void:
-	Globals.curr_entity.add_effect(&'defend', 1)
+	Globals.curr_entity.status_effects.add_effect(&'defend', 1)
 
 func highlight_targets() -> void:
-	Globals.curr_entity.set_targetable(true)
+	Globals.curr_entity.targeting.set_targetable(true)
 
 func start_cooldown(val: int = -1) -> void:
 	if val < 0:

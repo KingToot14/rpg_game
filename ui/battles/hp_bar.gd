@@ -2,6 +2,8 @@ class_name HpBar
 extends Control
 
 # --- Variables --- #
+var entity: Entity
+
 @export var cover_rect: ColorRect
 var cover_size: float
 
@@ -12,15 +14,21 @@ var cover_size: float
 func _ready() -> void:
 	cover_size = cover_rect.size.x
 
-func update_health(_dmg: float, entity: Entity) -> void:
-	if not entity:
+func set_entity(e: Entity) -> void:
+	entity = e
+	entity.hp.lost_health.connect(update_health)
+	
+	update_health()
+
+func update_health(_dmg: int = 0) -> void:
+	if not entity.hp.alive:
 		visible = false
 		return
-	else:
-		visible = true
 	
-	cover_rect.size.x = cover_size * clamp(entity.get_hp_percent(), 0, 1)
-	hp_label.text = str(entity.hp) + "/" + str(entity.get_max_hp())
-
-func update_special(entity: Entity) -> void:
-	special_label.text = str(floor(entity.special_charge)) + "%"
+	visible = true
+	
+	cover_rect.size.x = cover_size * clamp(entity.hp.get_hp_percent(), 0.0, 1.0)
+	hp_label.text = str(entity.hp.curr_hp) + "/" + str(entity.stats.get_max_hp())
+	
+	if entity.special:
+		special_label.text = str(floor(entity.special.curr_special)) + "%"

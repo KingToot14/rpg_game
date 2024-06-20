@@ -2,7 +2,7 @@ class_name AttackAnimator
 extends AnimationPlayer
 
 # --- Variables --- #
-@onready var parent := $".." as Node2D
+@export var parent: Node2D
 var target = null
 
 # --- Functions --- #

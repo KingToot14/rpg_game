@@ -10,7 +10,7 @@ func entity_selected(entity: Entity) -> void:
 		return
 	tactic = tactic as Tactic
 	
-	if not entity.targetable:
+	if not entity.targeting.targetable:
 		return
 	
 	Globals.curr_target = entity

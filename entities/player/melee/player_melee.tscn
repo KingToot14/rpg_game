@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=41 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
-[ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="2_hdvll"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Resource" uid="uid://qs1553avx8h3" path="res://entities/player/melee/attacks/normal_slash.tres" id="3_4gvet"]
@@ -11,11 +10,20 @@
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="5_k0j8f"]
 [ext_resource type="Resource" uid="uid://bnt1sbgk7fkkn" path="res://entities/player/melee/attacks/fury.tres" id="5_wff5c"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
+[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_k1p5g"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
 [ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
+[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_7ebs2"]
+[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="8_ecppd"]
+[ext_resource type="Script" path="res://entities/scripts/components/special_manager.gd" id="9_gvw2u"]
+[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="9_hritc"]
 [ext_resource type="Texture2D" uid="uid://boirb4wurj37t" path="res://entities/player/melee/paw.png" id="9_q2yg6"]
 [ext_resource type="Texture2D" uid="uid://bdefpfoeurbdn" path="res://ui/battles/indicators/player_targeting.png" id="11_cdc8h"]
+[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="11_dr50q"]
+[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="12_bj3mx"]
+[ext_resource type="Resource" uid="uid://c60a2d1hu8uda" path="res://entities/player/melee/stats.tres" id="12_e8uqe"]
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
+[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
@@ -156,7 +164,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -175,7 +183,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -245,7 +253,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -338,7 +346,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -375,7 +383,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -398,7 +406,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("animator")
+tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -409,66 +417,49 @@ tracks/1/keys = {
 "method": &"set_target"
 }]
 }
-tracks/2/type = "method"
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("effect_manager")
-tracks/2/interp = 1
+tracks/2/path = NodePath("sprite/group/pivot:rotation")
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.05, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [0.08],
-"method": &"set_shadow_radius"
-}, {
-"args": [0.12],
-"method": &"set_shadow_radius"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/group/pivot:rotation")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, -2.00713]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/group/pivot:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/group/pivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.55, 0.6, 0.65, 0.7, 0.75, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 2.79253, 3.05433, 2.79253, 2.79253, 2.00713]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite:position:y")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:position:y")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.55, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-13.0, -38.0, -38.0, -13.0]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/group/pivot:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite/group/pivot:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.55, 0.6, 0.75, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
@@ -524,7 +515,7 @@ step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
+tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -547,7 +538,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("animator")
+tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -715,29 +706,62 @@ shader_parameter/intensity = 0.0
 blend_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
+size = Vector2(20, 34)
 
-[node name="player_melee" type="Area2D" node_paths=PackedStringArray("front_marker", "marker_pos", "animator") groups=["entity", "player"]]
+[node name="player_melee" type="Area2D" node_paths=PackedStringArray("hp", "special", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["entity", "player"]]
 z_index = 100
 script = ExtResource("1_xrkk6")
-is_player = true
-use_special = true
-default_attack = ExtResource("3_4gvet")
-attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
-defense_pool = Array[Resource("res://entities/scripts/actions/defense.gd")]([ExtResource("5_k0j8f")])
+hp = NodePath("managers/hp")
+special = NodePath("managers/special")
+actions = NodePath("managers/actions")
+targeting = NodePath("managers/targeting")
+stats = NodePath("managers/stats")
+status_effects = NodePath("managers/status_effect")
+turn = NodePath("managers/turn")
+animator = NodePath("managers/animation_manager")
 front_marker = NodePath("front_marker")
-marker_pos = NodePath("damage_marker")
-animator = NodePath("animator")
 
-[node name="animator" type="AnimationPlayer" parent="."]
+[node name="managers" type="Node" parent="."]
+
+[node name="animator" type="AnimationPlayer" parent="managers" node_paths=PackedStringArray("parent")]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_xm32f")
 }
 script = ExtResource("2_xdhph")
+parent = NodePath("../..")
 
-[node name="effect_manager" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "shadow_sprite")]
-script = ExtResource("2_hdvll")
-sprite = NodePath("../sprite")
-shadow_sprite = NodePath("../shadow")
+[node name="animation_manager" type="Node" parent="managers" node_paths=PackedStringArray("animator")]
+script = ExtResource("8_ecppd")
+animator = NodePath("../animator")
+
+[node name="hp" type="Node" parent="managers"]
+script = ExtResource("8_7ebs2")
+load_max_hp = true
+
+[node name="special" type="Node" parent="managers"]
+script = ExtResource("9_gvw2u")
+load_special = true
+
+[node name="actions" type="Node" parent="managers"]
+script = ExtResource("6_k1p5g")
+default_attack = ExtResource("3_4gvet")
+attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
+defense_pool = Array[Resource("res://entities/scripts/actions/defense.gd")]([ExtResource("5_k0j8f")])
+
+[node name="targeting" type="Node" parent="managers" node_paths=PackedStringArray("targeting_marker")]
+script = ExtResource("9_hritc")
+targeting_marker = NodePath("../../targeting_marker")
+
+[node name="stats" type="Node" parent="managers"]
+script = ExtResource("11_dr50q")
+stats = ExtResource("12_e8uqe")
+
+[node name="status_effect" type="Node" parent="managers"]
+script = ExtResource("12_bj3mx")
+
+[node name="turn" type="Node" parent="managers"]
+script = ExtResource("14_dus6n")
 
 [node name="shadow" type="Sprite2D" parent="."]
 z_index = -10
@@ -773,6 +797,7 @@ texture = ExtResource("6_ac2aa")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_syoe4")
 
 [node name="damage_marker" type="Marker2D" parent="."]
@@ -809,5 +834,8 @@ visible = false
 [node name="falling_objects5" parent="attack_objects" instance=ExtResource("14_6ew1w")]
 visible = false
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
+[connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
+[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]

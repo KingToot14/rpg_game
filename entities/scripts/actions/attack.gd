@@ -43,10 +43,10 @@ func calculate_damage(attacker: Entity, target: Entity) -> float:
 	var use_magic = damage_type == DamageType.MAGICAL
 	
 	# base damage
-	var dmg = power * (attacker.get_attack(use_magic) / target.get_defense(use_magic))
+	var dmg = power * (attacker.stats.get_attack(use_magic) / target.stats.get_defense(use_magic))
 	
 	# elemental mod
-	dmg *= (1.0 - element_percent) + (element_percent * (1.0 - target.get_resistance(element)))
+	dmg *= (1.0 - element_percent) + (element_percent * (1.0 - target.stats.get_resistance(element)))
 	
 	# randomizer
 	dmg *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
@@ -58,12 +58,12 @@ func highlight_targets() -> void:
 		var enemies = TargetingHelper.get_entities(&'enemy')
 		
 		for enemy in enemies:
-			enemy.set_targetable(true)
+			enemy.targeting.set_targetable(true)
 	if side == TargetSide.PLAYER:
 		var players = TargetingHelper.get_entities(&'player')
 		
 		for player in players:
-			player.set_targetable(true)
+			player.targeting.set_targetable(true)
 
 func start_cooldown(val: int = -1) -> void:
 	if val < 0:

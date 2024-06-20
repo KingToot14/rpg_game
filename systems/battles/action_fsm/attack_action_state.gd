@@ -14,9 +14,9 @@ func entity_selected(entity: Entity) -> void:
 	attack = attack as Attack
 	
 	# Check if valid target
-	if entity.is_player and attack.side == Attack.TargetSide.ENEMY:
+	if entity.is_player() and attack.side == Attack.TargetSide.ENEMY:
 		return
-	if not entity.is_player and attack.side == Attack.TargetSide.PLAYER:
+	if not entity.is_player() and attack.side == Attack.TargetSide.PLAYER:
 		return
 	
 	Globals.curr_target = entity

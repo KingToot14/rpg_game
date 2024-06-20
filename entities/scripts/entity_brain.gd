@@ -1,11 +1,11 @@
 class_name EntityBrain
-extends Node2D
+extends Node
 
 # --- Variables --- #
 @export var action_delay: float = 0.5
 
 # --- References --- #
-@onready var parent := $".." as Entity
+@onready var parent := $"../.." as Entity
 
 # --- Functions --- #
 func perform_turn() -> void:

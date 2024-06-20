@@ -56,18 +56,15 @@ func setup_entity_hp(hp_bar, entity: Entity) -> void:
 	if not entity:
 		return
 	
-	entity.lost_health.connect(hp_bar.update_health)
-	hp_bar.update_health(0, entity)
+	hp_bar.set_entity(entity)
+	#entity.hp.lost_health.connect(hp_bar.update_health)
+	#hp_bar.update_health(0, entity)
 
 func setup_player_hp(player: Entity, index: int) -> void:
 	setup_entity_hp(player_hp_bars[index], player)
 
 func setup_enemy_hp(enemy: Entity, index: int):
 	setup_entity_hp(enemy_hp_bars[index], enemy)
-
-func setup_player_special(player: Entity, index: int):
-	player.special_increased.connect(player_hp_bars[index].update_special)
-	player_hp_bars[index].update_special(player)
 #endregion
 
 func _on_state_changed(state: String) -> void:
@@ -128,10 +125,10 @@ func set_cancel_button(value: bool) -> void:
 	tween_action(cancel_button, value, action_bar_pos)
 
 func load_attacks() -> void:
-	attack_menu.load_items(Globals.curr_entity.attack_pool)
+	attack_menu.load_items(Globals.curr_entity.actions.attack_pool)
 
 func load_defenses() -> void:
-	defense_menu.load_items(Globals.curr_entity.defense_pool)
+	defense_menu.load_items(Globals.curr_entity.actions.defense_pool)
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:

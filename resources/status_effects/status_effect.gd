@@ -49,7 +49,7 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 	set_status_info()
 
 func remove_status() -> void:
-	entity.queue_removal(key)
+	entity.status_effects.queue_removal(key)
 
 # - Effects - #
 func turn_started() -> void:

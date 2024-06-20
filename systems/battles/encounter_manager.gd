@@ -90,23 +90,25 @@ func load_wave(wave: Wave) -> void:
 # - Entity Management - #
 func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
+	add_child(entity)
 	entity.visible = false
 	entity.setup(spawn_index)
 	
+	await get_tree().create_timer(0.05).timeout
+	
 	# Signals
-	entity.selected.connect(action_fsm.entity_selected)
+	entity.targeting.selected.connect(action_fsm.entity_selected)
 	
 	var spawn_pos: Node2D
-	if entity.is_player:
+	if entity.is_player():
 		encounter_victory.connect(entity.store_data)
 		spawn_pos = player_positions[spawn_index]
 		ui_manager.setup_player_hp(entity, spawn_index)
-		ui_manager.setup_player_special(entity, spawn_index)
 	else:
 		spawn_pos = enemy_positions[spawn_index]
 		ui_manager.setup_enemy_hp(entity, spawn_index)
 	
-	spawn_pos.add_child(entity)
+	entity.reparent(spawn_pos)
 	entity.position = Vector2.ZERO
 
 func remove_from_battle(entity: Entity, index: int) -> void:
@@ -120,7 +122,7 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	# Check if all players are dead
 	var players = TargetingHelper.get_entities(&'player')
 	for player: Entity in players:
-		if player and player.alive:
+		if player and player.hp.alive:
 			all_dead = false
 			break
 	
@@ -131,7 +133,7 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	all_dead = true
 	var enemies = TargetingHelper.get_entities(&'enemy')
 	for enemy: Entity in enemies:
-		if enemy and enemy.alive:
+		if enemy and enemy.hp.alive:
 			all_dead = false
 	
 	return 1 if all_dead else 0

@@ -11,7 +11,7 @@ func get_alive_entities(group_name: StringName = &'entity') -> Array[Entity]:
 	var ret: Array[Entity] = []
 	
 	for entity in entities:
-		if entity.alive:
+		if entity.hp.alive:
 			ret.append(entity as Entity)
 	
 	return ret
@@ -26,8 +26,8 @@ func get_entity_by_index(group_name: String = &'entity', index: int = 0) -> Enti
 	return null
 
 func get_random_entity(group_name: StringName = &'entity') -> Entity:
-	var entites = get_alive_entities(group_name)
-	return entites[randi_range(0, len(entites) - 1)] as Entity
+	var entities = get_alive_entities(group_name)
+	return entities.pick_random() as Entity
 
 func get_neighbors(index: int, group_name: StringName) -> Array[Entity]:
 	var entities = get_alive_entities(group_name)
@@ -47,4 +47,4 @@ func disable_highlights() -> void:
 	var entities = get_entities()
 	
 	for entity in entities:
-		entity.set_targetable(false)
+		entity.targeting.set_targetable(false)

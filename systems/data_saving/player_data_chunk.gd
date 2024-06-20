@@ -16,8 +16,11 @@ var curr_ap: int = 0
 # --- Functions --- #
 
 # - HP - #
-func store_hp(hp) -> void:
+func store_hp(hp: int) -> void:
 	curr_hp = clamp(hp, 0, stats.max_hp)
+
+func store_special(special: float) -> void:
+	curr_special = special
 
 func heal(percent: float) -> void:
 	store_hp(curr_hp + stats.max_hp * percent)

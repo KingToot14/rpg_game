@@ -23,9 +23,9 @@ func show_outline() -> void:
 	var anim_name = item.animation_name
 	
 	if item.timing_type == Attack.TimingType.TIMED_INPUT:
-		Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.get_timed_inputs(anim_name))
+		Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.animator.get_timed_inputs(anim_name))
 	if item.timing_type == Attack.TimingType.MASH:
-		var inputs = Globals.curr_entity.get_mash_inputs(anim_name)
+		var inputs = Globals.curr_entity.animator.get_mash_inputs(anim_name)
 		var target := 10
 		
 		if len(inputs) > 1:

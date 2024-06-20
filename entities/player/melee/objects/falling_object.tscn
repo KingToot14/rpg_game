@@ -196,11 +196,12 @@ script = ExtResource("1_w4yh0")
 animator = NodePath("animator")
 sprite = NodePath("sprite")
 
-[node name="animator" type="AnimationPlayer" parent="."]
+[node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
 libraries = {
 "": SubResource("AnimationLibrary_80f1w")
 }
 script = ExtResource("2_7kk3e")
+parent = NodePath("..")
 
 [node name="shadow" type="Sprite2D" parent="."]
 z_index = -10

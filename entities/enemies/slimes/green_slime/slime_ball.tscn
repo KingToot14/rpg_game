@@ -82,11 +82,12 @@ shader_parameter/squash_factor = Vector2(1, 2.5)
 script = ExtResource("1_jhty8")
 animator = NodePath("animator")
 
-[node name="animator" type="AnimationPlayer" parent="."]
+[node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
 libraries = {
 "": SubResource("AnimationLibrary_bm884")
 }
 script = ExtResource("1_4wrvq")
+parent = NodePath("..")
 
 [node name="effect" type="Node2D" parent="." node_paths=PackedStringArray("shadow_sprite")]
 script = ExtResource("3_mtude")

@@ -12,6 +12,6 @@ func highlight_targets() -> void:
 	var players = TargetingHelper.get_alive_entities(&'player')
 	
 	for player in players:
-		if player.can_act():
-			player.set_targetable(true)
+		if player.turn.can_act():
+			player.targeting.set_targetable(true)
 

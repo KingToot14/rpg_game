@@ -48,14 +48,14 @@ func find_next_turn() -> void:
 	
 	if Globals.curr_entity:
 		start_turn()
-		Globals.curr_entity.take_turn()
+		Globals.curr_entity.turn.take_turn()
 	else:
 		set_state(curr_state.next_state)
 
 func set_entity(entity: Entity) -> void:
 	Globals.curr_entity = entity
 	start_turn()
-	Globals.curr_entity.take_turn()
+	Globals.curr_entity.turn.take_turn()
 	Globals.action_fsm.set_state("blank")
 
 func get_next_entity() -> Entity:
@@ -69,7 +69,7 @@ func get_next_entity() -> Entity:
 	var entity: Entity = null
 	while i < group_size:
 		entity = group[i]
-		if is_instance_valid(entity) and entity.can_act():
+		if is_instance_valid(entity) and entity.turn.can_act():
 			return entity
 		
 		i += 1

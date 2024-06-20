@@ -13,15 +13,12 @@ func _ready() -> void:
 func setup_attack() -> bool:
 	var anim_name = Globals.curr_item.animation_name
 	
-	if not Globals.curr_entity.contains_attack(anim_name):
-		return false
-	
 	Globals.timing_mods = []
 	
 	if Globals.curr_entity.is_player:
 		Globals.ui_manager.enable_timing()
 	
-	Globals.curr_entity.perform_attack(anim_name)
+	Globals.curr_entity.animator.play_action_anim(anim_name)
 	Globals.curr_item.start_cooldown() 
 	
 	return true
@@ -29,10 +26,7 @@ func setup_attack() -> bool:
 func setup_defense() -> bool:
 	var anim_name = Globals.curr_item.animation_name
 	
-	if not Globals.curr_entity.contains_defense(anim_name):
-		return false
-	
-	Globals.curr_entity.perform_attack(anim_name)
+	Globals.curr_entity.animator.play_action_anim(anim_name)
 	Globals.curr_item.start_cooldown()
 	
 	return true
@@ -54,7 +48,7 @@ func do_damage(target, modifier: float = 1.0) -> void:
 	dmg *= modifier
 	
 	# set target
-	target.take_damage(dmg)
+	target.hp.take_damage(dmg)
 	
 	if attack.targeting == Attack.TargetingMode.AOE:
 		var group = &'player'
@@ -65,5 +59,5 @@ func do_damage(target, modifier: float = 1.0) -> void:
 		var neighbors = TargetingHelper.get_neighbors(target.spawn_index, group)
 		
 		for neighbor in neighbors:
-			neighbor.take_damage(dmg * 0.5)
+			neighbor.hp.take_damage(dmg * 0.5)
 	
