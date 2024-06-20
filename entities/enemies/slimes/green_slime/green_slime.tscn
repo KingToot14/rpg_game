@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=37 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="14_0nx2n"]
 [ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="14_8ej3a"]
 [ext_resource type="PackedScene" uid="uid://cmbq1u4yd64bw" path="res://entities/enemies/slimes/green_slime/slime_ball.tscn" id="15_8nkit"]
+[ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="22_ct680"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
 resource_name = "RESET"
@@ -121,14 +122,14 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.65, 1),
+"times": PackedFloat32Array(0.65, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"hide"
 }, {
 "args": [],
-"method": &"do_death"
+"method": &"queue_free"
 }]
 }
 tracks/3/type = "value"
@@ -150,7 +151,7 @@ tracks/4/path = NodePath("managers/loot")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.7),
+"times": PackedFloat32Array(0.65),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -573,9 +574,8 @@ position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ldi4s")
 
-[node name="damage_marker" type="Marker2D" parent="."]
-visible = false
-position = Vector2(23, 0)
+[node name="damage_marker" parent="." instance=ExtResource("22_ct680")]
+position = Vector2(31, -15)
 
 [node name="front_marker" type="Marker2D" parent="."]
 visible = false
@@ -596,6 +596,8 @@ visible = false
 
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
+[connection signal="died" from="managers/hp" to="damage_marker" method="detatch"]
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
-[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
+[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]

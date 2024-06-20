@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=42 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
+[ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -800,9 +801,8 @@ visible = false
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_syoe4")
 
-[node name="damage_marker" type="Marker2D" parent="."]
-visible = false
-position = Vector2(-21, 0)
+[node name="damage_marker" parent="." instance=ExtResource("23_eq6ta")]
+position = Vector2(-27, -16)
 
 [node name="front_marker" type="Marker2D" parent="."]
 visible = false
@@ -837,5 +837,7 @@ visible = false
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
-[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="lost_health" from="managers/hp" to="managers/special" method="_on_lost_health"]
+[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
+[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]

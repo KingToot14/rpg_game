@@ -33,6 +33,9 @@ func _process(delta) -> void:
 	
 		set_needle_rotation(needles[i], 360 - 180 * needle_pos[i] * rotation_speed)
 	
+	if curr_needle >= len(needle_pos):
+		return
+	
 	if visible and 360 - 180 * needle_pos[curr_needle] * rotation_speed > 360:
 		set_result(&'poor')
 

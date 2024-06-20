@@ -1,30 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu8yreah8gela"]
+[gd_scene load_steps=3 format=3 uid="uid://bu8yreah8gela"]
 
 [ext_resource type="Script" path="res://ui/battles/health/damage_marker.gd" id="1_tbwek"]
+[ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="2_dodlu"]
 
-[node name="damage_marker" type="Node2D" node_paths=PackedStringArray("dmg_label", "crit_label")]
+[node name="damage_marker" type="Node2D" node_paths=PackedStringArray("dmg_label")]
 z_index = 1000
 script = ExtResource("1_tbwek")
+fade_time = 0.25
 dmg_label = NodePath("dmg_label")
-crit_label = NodePath("crit_label")
 
-[node name="dmg_label" type="Label" parent="."]
+[node name="dmg_label" type="RichTextLabel" parent="."]
+modulate = Color(1, 1, 1, 0)
+clip_contents = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -4.0
+offset_right = 15.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "75"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="crit_label" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -18.0
-offset_bottom = -18.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
+theme = ExtResource("2_dodlu")
+theme_type_variation = &"Cooldown"
+bbcode_enabled = true
+text = "[center]75"
+scroll_active = false
+autowrap_mode = 0

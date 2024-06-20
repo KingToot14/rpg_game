@@ -22,11 +22,11 @@ func setup(entity: Entity) -> void:
 	else:
 		curr_special = 54
 
-func _on_health_changed(delta: int) -> void:
-	if delta >= 0:
+func _on_lost_health(dmg: int) -> void:
+	if dmg < 0:
 		return
 	
-	curr_special += (-delta / parent.stats.get_max_hp()) * modifier
+	curr_special += (dmg / parent.stats.get_max_hp()) * modifier
 
 func store_special() -> void:
 	DataManager.players[parent.spawn_index].store_special(curr_special)

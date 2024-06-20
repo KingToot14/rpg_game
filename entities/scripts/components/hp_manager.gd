@@ -27,6 +27,9 @@ func load_hp() -> void:
 		curr_hp = parent.stats.get_max_hp()
 
 func take_damage(dmg: int, from_entity: bool = true) -> void:
+	if not alive:
+		return
+	
 	if from_entity:
 		for effect in parent.status_effects.get_effects():
 			dmg = effect.take_damage(dmg)
@@ -39,13 +42,12 @@ func take_damage(dmg: int, from_entity: bool = true) -> void:
 		alive = false
 	
 	lost_health.emit(dmg)
+	
+	if not alive:
+		died.emit()
 
 func get_hp_percent() -> float:
 	return curr_hp / parent.stats.get_max_hp()
-
-func do_death() -> void:
-	died.emit()
-	queue_free()
 
 func store_hp() -> void:
 	DataManager.players[parent.spawn_index].store_hp(curr_hp)

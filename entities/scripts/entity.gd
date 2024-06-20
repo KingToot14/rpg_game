@@ -56,13 +56,3 @@ func action_ended(_s: StringName) -> void:
 # - Positioning - #
 func get_front_pos() -> Vector2:
 	return front_marker.global_position
-
-# - Effects - #
-#func show_damage_marker(dmg: int, _entity: Entity) -> void:
-	#var damage_marker = Globals.object_pool.get_item('damage_marker') as DamageMarker
-	#
-	#damage_marker.visible = true
-	#damage_marker.global_position = marker_pos.global_position
-	#damage_marker.set_text(dmg, 0)
-	#damage_marker.start_fade()
-

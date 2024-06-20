@@ -1,6 +1,9 @@
 class_name AnimationManager
 extends Node
 
+# --- Signals --- #
+signal entered_battle()
+
 # --- Variables --- #
 @export var animator: AnimationPlayer
 

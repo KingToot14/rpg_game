@@ -5,41 +5,35 @@ extends Node2D
 @export var wait_time: float = 0.5
 @export var fade_time: float = 0.5
 
-@export var text_color: Color = Color.WHITE
+@export var dmg_label: RichTextLabel
 
-@export var dmg_label: Label
-@export var crit_label: Label
-
-var dmg_tween: Tween
-var crit_tween: Tween
+var tween: Tween
 
 # --- Functions --- #
-func start_fade():
-	set_text_alpha(1.0, dmg_label)
-	set_text_alpha(1.0, crit_label)
-	
-	tween_fade(dmg_tween, dmg_label)
-	tween_fade(crit_tween, crit_label)
+func _ready() -> void:
+	dmg_label.clip_contents = false
 
-func tween_fade(tween: Tween, label: Label) -> void:
+func _on_lost_health(dmg: int) -> void:
+	set_text(dmg)
+	start_fade()
+
+func detatch() -> void:
+	reparent($"../..")
+	
+	if tween and tween.is_running():
+		tween.tween_callback(queue_free)
+	else:
+		queue_free()
+
+func start_fade():
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	
+	dmg_label.modulate.a = 1.0
+	
 	tween.tween_interval(wait_time)
-	tween.tween_method(set_text_alpha.bind(label), 1.0, 0.0, fade_time)
-	tween.finished.connect(hide)
+	tween.tween_property(dmg_label, 'modulate:a', 0.0, fade_time)
 
-func set_text(dmg: int, crit: int):
-	dmg_label.text = str(dmg)
-	
-	crit_label.visible = crit > 0
-	crit_label.text = "Crit"
-	
-	if crit > 1:
-		crit_label.text += " x" + str(crit)
-
-func set_text_alpha(alpha: float, label: Label):
-	text_color.a = alpha
-	
-	label.add_theme_color_override('font_color', text_color)
+func set_text(dmg: int):
+	dmg_label.text = "[center]" + str(dmg)
