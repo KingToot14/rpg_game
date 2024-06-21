@@ -9,10 +9,6 @@ var direction: Vector2
 
 @export_group("Textures")
 @export var front_threshold: float = 0.10
-@export var texture_front: Texture2D
-@export var texture_back: Texture2D
-@export var texture_side_front: Texture2D
-@export var texture_side_back: Texture2D
 var texture_direction: int = 0
 
 @export_group("Shaders")
@@ -20,7 +16,7 @@ var texture_direction: int = 0
 @export var position_marker: Node2D
 
 # --- References --- #
-@onready var sprite: Sprite2D = $"sprite_group/sprite"
+@export var sprite: Sprite2D
 @onready var reflection_sprite: ReflectionTexture = $"reflection"
 
 var curr_state: PlayerControlState
@@ -28,6 +24,11 @@ var curr_state: PlayerControlState
 # --- Functions --- #
 func _ready() -> void:
 	set_state('moving')
+	
+	# load appearance
+	var data = DataManager.players[1]
+	
+	AsyncLoader.new(data.get_appearance_path(), set_appearance)
 
 func _physics_process(_delta) -> void:
 	get_direction()
@@ -42,6 +43,7 @@ func set_state(state: String) -> void:
 	
 	curr_state = get_node(state + "_state") as PlayerControlState
 
+# - Sprites - #
 func get_direction() -> void:
 	direction = Vector2(Input.get_axis('overworld_left', 'overworld_right'), Input.get_axis('overworld_up', 'overworld_down')).normalized()
 
@@ -64,6 +66,7 @@ func update_texture() -> void:
 		reflection_sprite.generate_texture()
 		texture_direction = tex_dir
 
+# - Transitions - #
 func load_position() -> void:
 	global_position = DataManager.local_area.player_position
 
@@ -80,3 +83,9 @@ func prepare_transition(dir: String) -> void:
 
 func prepare_battle() -> void:
 	DataManager.local_area.player_position = global_position
+
+# - Appearance - #
+func set_appearance(appearance: PlayerAppearance) -> void:
+	sprite.material.set_shader_parameter('outline_color', appearance.outline_color)
+	sprite.material.set_shader_parameter('normal_color', appearance.normal_color)
+	sprite.material.set_shader_parameter('shadow_color', appearance.shadow_color)

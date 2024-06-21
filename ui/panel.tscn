@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bid4lugwt1f6c"]
 
-[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="1_uqgmj"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="1_uqgmj"]
 
 [node name="panel" type="ColorRect" groups=["theme_setter"]]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)

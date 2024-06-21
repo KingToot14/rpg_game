@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=44 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
+[ext_resource type="Script" path="res://entities/scripts/components/appearance_manager.gd" id="17_avy3g"]
 [ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="19_50ult"]
 [ext_resource type="Texture2D" uid="uid://g88ljr073ewy" path="res://entities/player/bodies/player_battle.png" id="20_ve56e"]
 [ext_resource type="Texture2D" uid="uid://me4aansygwv2" path="res://entities/player/bodies/faces.png" id="21_ieeb4"]
@@ -727,13 +728,6 @@ _data = {
 "take_damage": SubResource("Animation_rrl67")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_no6yo"]
-resource_local_to_scene = true
-shader = ExtResource("5_218u3")
-shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
-shader_parameter/radius = 0.12
-shader_parameter/squash_factor = Vector2(1, 2.5)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
 resource_local_to_scene = true
 shader = ExtResource("19_50ult")
@@ -742,6 +736,13 @@ shader_parameter/normal_color = Color(0.592157, 0.670588, 0.941176, 1)
 shader_parameter/shadow_color = Color(0.529412, 0.592157, 0.878431, 1)
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no6yo"]
+resource_local_to_scene = true
+shader = ExtResource("5_218u3")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.12
+shader_parameter/squash_factor = Vector2(1, 2.5)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v8ilj"]
 blend_mode = 2
@@ -803,6 +804,10 @@ script = ExtResource("12_bj3mx")
 
 [node name="turn" type="Node" parent="managers"]
 script = ExtResource("14_dus6n")
+
+[node name="appearance" type="Node" parent="managers"]
+script = ExtResource("17_avy3g")
+entity_material = SubResource("ShaderMaterial_utwch")
 
 [node name="shadow" type="Sprite2D" parent="."]
 z_index = -10

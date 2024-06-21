@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_56h58"]
-[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="2_gtr4y"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_gtr4y"]
 
 [node name="response_example" type="BaseButton" node_paths=PackedStringArray("label", "outline_rect")]
 _import_path = NodePath("")

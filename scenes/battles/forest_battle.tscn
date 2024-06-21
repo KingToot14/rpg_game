@@ -45,7 +45,7 @@
 [ext_resource type="Script" path="res://ui/battles/action_menu/defense_menu.gd" id="33_84n05"]
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/stats/element_icons_small.png" id="34_oquq2"]
-[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="34_ujwxc"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="34_ujwxc"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]

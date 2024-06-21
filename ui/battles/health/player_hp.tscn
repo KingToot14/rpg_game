@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="1_51ijg"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_v4y3h"]
 [ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="2_byne6"]
-[ext_resource type="Script" path="res://ui/color_management/theme_setter.gd" id="2_plyvy"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_plyvy"]
 
 [node name="player_hp" type="Control" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
 layout_mode = 3

@@ -20,6 +20,7 @@ func _ready() -> void:
 	#players[2].role = PlayerDataChunk.PlayerRole.MELEE
 	players[1].stats = load("res://entities/player/melee/stats.tres") as EntityStats
 	#players[2].stats = load("res://entities/player/melee/stats.tres") as EntityStats
+	players[1].appearance = "pastel_purple"
 
 #region Local Area
 # - Local Area - #

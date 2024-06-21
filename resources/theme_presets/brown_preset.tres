@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ThemePreset" load_steps=2 format=3 uid="uid://dvd8lo326nhds"]
 
-[ext_resource type="Script" path="res://ui/color_management/theme_preset.gd" id="1_mdvv2"]
+[ext_resource type="Script" path="res://resources/scripts/theme_preset.gd" id="1_mdvv2"]
 
 [resource]
 script = ExtResource("1_mdvv2")
