@@ -1,10 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=43 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Resource" uid="uid://qs1553avx8h3" path="res://entities/player/melee/attacks/normal_slash.tres" id="3_4gvet"]
-[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="3_ts5ou"]
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="5_k0j8f"]
@@ -12,12 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_k1p5g"]
 [ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
-[ext_resource type="Texture2D" uid="uid://cj5dlln5k0k3d" path="res://entities/player/melee/player_battle.png" id="8_3jq5f"]
 [ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_7ebs2"]
 [ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="8_ecppd"]
 [ext_resource type="Script" path="res://entities/scripts/components/special_manager.gd" id="9_gvw2u"]
 [ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="9_hritc"]
-[ext_resource type="Texture2D" uid="uid://boirb4wurj37t" path="res://entities/player/melee/paw.png" id="9_q2yg6"]
 [ext_resource type="Texture2D" uid="uid://bdefpfoeurbdn" path="res://ui/battles/indicators/player_targeting.png" id="11_cdc8h"]
 [ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="11_dr50q"]
 [ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="12_bj3mx"]
@@ -25,6 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
+[ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="19_50ult"]
+[ext_resource type="Texture2D" uid="uid://g88ljr073ewy" path="res://entities/player/bodies/player_battle.png" id="20_ve56e"]
+[ext_resource type="Texture2D" uid="uid://me4aansygwv2" path="res://entities/player/bodies/faces.png" id="21_ieeb4"]
+[ext_resource type="Texture2D" uid="uid://cjahxgg37en1c" path="res://entities/player/bodies/paw.png" id="21_k8ach"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
@@ -75,7 +76,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [2]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -100,6 +101,42 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite/face:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite/face:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_gphxx"]
@@ -137,26 +174,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:frame")
+tracks/2/path = NodePath("sprite:material:shader_parameter/intensity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.15, 0.45, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/face:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
 }
 
 [sub_resource type="Animation" id="Animation_40of0"]
@@ -482,7 +519,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 3, 4, 0, 2, 3, 4, 1]
+"values": [0, 1, 1, 0, 0, 1, 1, 0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -498,15 +535,15 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("sprite/group/pivot:rotation")
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/face:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -0.174533]
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-3.0, -2.0, -3.0, -2.0]
 }
 
 [sub_resource type="Animation" id="Animation_1ymxq"]
@@ -642,38 +679,38 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:frame")
+tracks/2/path = NodePath("sprite/group/pivot:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/group/pivot:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.35, 0.55, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.523599, -0.523599, 0.174533, 0.0]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/face:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
@@ -699,7 +736,10 @@ shader_parameter/squash_factor = Vector2(1, 2.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utwch"]
 resource_local_to_scene = true
-shader = ExtResource("3_ts5ou")
+shader = ExtResource("19_50ult")
+shader_parameter/outline_color = Color(0.878431, 0.894118, 1, 1)
+shader_parameter/normal_color = Color(0.592157, 0.670588, 0.941176, 1)
+shader_parameter/shadow_color = Color(0.529412, 0.592157, 0.878431, 1)
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
 
@@ -774,17 +814,23 @@ texture = ExtResource("6_ac2aa")
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_utwch")
 position = Vector2(0, -13)
-texture = ExtResource("8_3jq5f")
-hframes = 5
-vframes = 2
+texture = ExtResource("20_ve56e")
+hframes = 2
 metadata/_edit_group_ = true
+
+[node name="face" type="Sprite2D" parent="sprite"]
+material = SubResource("ShaderMaterial_utwch")
+position = Vector2(4, -3)
+texture = ExtResource("21_ieeb4")
+hframes = 3
 
 [node name="group" type="CanvasGroup" parent="sprite"]
 
 [node name="pivot" type="Sprite2D" parent="sprite/group"]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_utwch")
 position = Vector2(4, 12)
-texture = ExtResource("9_q2yg6")
+texture = ExtResource("21_k8ach")
 metadata/_edit_group_ = true
 
 [node name="sword" type="Sprite2D" parent="sprite/group/pivot"]

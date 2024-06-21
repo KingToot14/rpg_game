@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsd56x7sbosdr"]
+[gd_scene load_steps=16 format=3 uid="uid://dsd56x7sbosdr"]
 
 [ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
@@ -10,11 +10,21 @@
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/player_control_state.gd" id="6_t3gle"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
+[ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="9_3b5ol"]
+[ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/overworld/player_overworld.png" id="9_v6e35"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vwcf"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0glyt"]
+shader = ExtResource("9_3b5ol")
+shader_parameter/outline_color = Color(0.878431, 0.894118, 1, 1)
+shader_parameter/normal_color = Color(0.592157, 0.670588, 0.941176, 1)
+shader_parameter/shadow_color = Color(0.529412, 0.592157, 0.878431, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2iktr"]
 shader = ExtResource("2_6y3vp")
 shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/texture_height = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l0mef"]
 radius = 6.0
@@ -41,11 +51,24 @@ movement_speed = 75.0
 [node name="dialogue_state" type="Node2D" parent="."]
 script = ExtResource("8_tra4j")
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="sprite_group" type="CanvasGroup" parent="."]
+fit_margin = 0.0
+clear_margin = 0.0
+
+[node name="sprite" type="Sprite2D" parent="sprite_group"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_0vwcf")
-position = Vector2(0, -6)
-texture = ExtResource("4_wabot")
+material = SubResource("ShaderMaterial_0glyt")
+position = Vector2(0, -10)
+texture = ExtResource("9_v6e35")
+hframes = 2
+vframes = 2
+
+[node name="grass_cover" type="ColorRect" parent="sprite_group"]
+material = SubResource("ShaderMaterial_2iktr")
+offset_left = -13.0
+offset_top = -5.0
+offset_right = 13.0
+offset_bottom = 5.0
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_l0mef")
@@ -63,4 +86,4 @@ flip_v = true
 script = ExtResource("4_5t1er")
 image_size = Vector2(32, 32)
 bottom_pos = NodePath("../bottom_marker")
-sprites = [NodePath("../sprite")]
+sprites = [NodePath("../sprite_group/sprite")]

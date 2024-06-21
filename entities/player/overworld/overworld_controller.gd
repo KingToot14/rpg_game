@@ -20,7 +20,7 @@ var texture_direction: int = 0
 @export var position_marker: Node2D
 
 # --- References --- #
-@onready var sprite: Sprite2D = $"sprite"
+@onready var sprite: Sprite2D = $"sprite_group/sprite"
 @onready var reflection_sprite: ReflectionTexture = $"reflection"
 
 var curr_state: PlayerControlState
@@ -55,10 +55,10 @@ func update_texture() -> void:
 	
 	if abs(direction.x) < front_threshold:
 		tex_dir = 0 if direction.y >= 0.0 else 1
-		sprite.texture = texture_front if direction.y >= 0.0 else texture_back
+		sprite.frame = 0 if direction.y >= 0.0 else 2
 	else:
 		tex_dir = 2 if direction.y >= 0.0 else 3
-		sprite.texture = texture_side_front if direction.y >= 0.0 else texture_side_back
+		sprite.frame = 1 if direction.y >= 0.0 else 3
 	
 	if tex_dir != texture_direction:
 		reflection_sprite.generate_texture()
