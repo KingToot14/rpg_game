@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://bnt1sbgk7fkkn" path="res://entities/player/melee/attacks/fury.tres" id="5_wff5c"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_k1p5g"]
-[ext_resource type="Texture2D" uid="uid://yo0wmnonv4ds" path="res://entities/player/melee/test_sword.png" id="7_tr6dd"]
 [ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_7ebs2"]
 [ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="8_ecppd"]
 [ext_resource type="Script" path="res://entities/scripts/components/special_manager.gd" id="9_gvw2u"]
@@ -24,10 +23,11 @@
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
 [ext_resource type="Script" path="res://entities/scripts/components/appearance_manager.gd" id="17_avy3g"]
 [ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="19_50ult"]
-[ext_resource type="Texture2D" uid="uid://g88ljr073ewy" path="res://entities/player/bodies/player_battle.png" id="20_ve56e"]
+[ext_resource type="Texture2D" uid="uid://ckq0lf1gkknh4" path="res://entities/player/bodies/cat.png" id="21_i4bbh"]
 [ext_resource type="Texture2D" uid="uid://me4aansygwv2" path="res://entities/player/bodies/faces.png" id="21_ieeb4"]
 [ext_resource type="Texture2D" uid="uid://cjahxgg37en1c" path="res://entities/player/bodies/paw.png" id="21_k8ach"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
+[ext_resource type="Texture2D" uid="uid://dwfb2absmx4p7" path="res://entities/player/melee/weapons/wooden_sword.png" id="24_fovud"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -77,7 +77,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -360,10 +360,10 @@ tracks/5/path = NodePath("sprite:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.45, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.45, 0.6, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0]
+"values": [0, 2, 1, 0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -376,6 +376,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.12, 0.09, 0.09, 0.12]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite/face:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-3.0, 0.0, -2.0, -3.0]
 }
 
 [sub_resource type="Animation" id="Animation_ygeth"]
@@ -648,6 +660,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.12, 0.09, 0.09, 0.12]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.55, 0.7, 0.75, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_rrl67"]
 resource_name = "take_damage"
@@ -712,6 +736,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
@@ -819,8 +855,8 @@ texture = ExtResource("6_ac2aa")
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_utwch")
 position = Vector2(0, -13)
-texture = ExtResource("20_ve56e")
-hframes = 2
+texture = ExtResource("21_i4bbh")
+hframes = 3
 metadata/_edit_group_ = true
 
 [node name="face" type="Sprite2D" parent="sprite"]
@@ -840,7 +876,7 @@ metadata/_edit_group_ = true
 
 [node name="sword" type="Sprite2D" parent="sprite/group/pivot"]
 position = Vector2(9, -9)
-texture = ExtResource("7_tr6dd")
+texture = ExtResource("24_fovud")
 
 [node name="mask" type="Sprite2D" parent="sprite/group"]
 material = SubResource("CanvasItemMaterial_v8ilj")

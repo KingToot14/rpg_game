@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c31pjhbitr0kp"
-path="res://.godot/imported/player_overworld_side_front.png-7b55b1c3444582c6c342ada819e112ab.ctex"
+uid="uid://yo0wmnonv4ds"
+path="res://.godot/imported/test_sword.png-246654e879bff1b7d619ec66ec6b22a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/overworld/player_overworld_side_front.png"
-dest_files=["res://.godot/imported/player_overworld_side_front.png-7b55b1c3444582c6c342ada819e112ab.ctex"]
+source_file="res://entities/player/melee/weapons/test_sword.png"
+dest_files=["res://.godot/imported/test_sword.png-246654e879bff1b7d619ec66ec6b22a4.ctex"]
 
 [params]
 
