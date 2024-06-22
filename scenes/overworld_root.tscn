@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=26 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
@@ -9,9 +9,11 @@
 [ext_resource type="Theme" uid="uid://fupny5sldap3" path="res://resources/themes/overworld.tres" id="5_nuo0b"]
 [ext_resource type="Script" path="res://ui/overworld/main_ui_panel.gd" id="5_olh6n"]
 [ext_resource type="Script" path="res://ui/overworld/overworld_button.gd" id="8_40l3n"]
-[ext_resource type="Texture2D" uid="uid://b0mv21b0n5gnv" path="res://ui/overworld/icons/icons.png" id="10_xu5bp"]
+[ext_resource type="Texture2D" uid="uid://b0mv21b0n5gnv" path="res://ui/overworld/menus/icons.png" id="10_xu5bp"]
+[ext_resource type="Script" path="res://ui/overworld/menus/tab_menu.gd" id="11_5mxsm"]
 [ext_resource type="Script" path="res://ui/overworld/chest_ui/chest_ui.gd" id="11_uvdfv"]
 [ext_resource type="PackedScene" uid="uid://k01qlajn0pie" path="res://ui/overworld/chest_ui/item_info.tscn" id="12_6d1i2"]
+[ext_resource type="Script" path="res://ui/overworld/menus/party_manager.gd" id="12_svvh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)
@@ -34,6 +36,26 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ruc5"]
 atlas = ExtResource("10_xu5bp")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sruin"]
+atlas = ExtResource("10_xu5bp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1da2r"]
+atlas = ExtResource("10_xu5bp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2lu7"]
+atlas = ExtResource("10_xu5bp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s48xr"]
+atlas = ExtResource("10_xu5bp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h50j"]
+atlas = ExtResource("10_xu5bp")
+region = Rect2(48, 16, 16, 16)
 
 [node name="overworld_root" type="Node2D"]
 visibility_layer = 7
@@ -86,7 +108,7 @@ position = Vector2(213, 129)
 script = ExtResource("4_hl626")
 chest_panel = NodePath("chest_panel")
 
-[node name="panel" parent="ui" instance=ExtResource("4_7u65r")]
+[node name="main_panel" parent="ui" instance=ExtResource("4_7u65r")]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -105,7 +127,7 @@ mouse_threshold = 226.0
 tween_time = 0.15
 tween_offset = 4.0
 
-[node name="bottom" type="Control" parent="ui/panel"]
+[node name="bottom" type="Control" parent="ui/main_panel"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -119,7 +141,7 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="exit_button" type="BaseButton" parent="ui/panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="exit_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -192,17 +214,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/main_panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/main_panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/panel/bottom/exit_button"]
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/exit_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -216,7 +238,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_auk4g")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/panel/bottom/exit_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/exit_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -233,7 +255,7 @@ theme_type_variation = &"Count"
 text = " Exit"
 scroll_active = false
 
-[node name="save_button" type="BaseButton" parent="ui/panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="save_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -303,20 +325,20 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../exit_button/outline")
+outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/main_panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/main_panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/panel/bottom/save_button"]
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/save_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -330,7 +352,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_gj61c")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/panel/bottom/save_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/save_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -347,7 +369,7 @@ theme_type_variation = &"Count"
 text = " Save"
 scroll_active = false
 
-[node name="options_button" type="BaseButton" parent="ui/panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="options_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -417,20 +439,20 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../exit_button/outline")
+outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/main_panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/main_panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/panel/bottom/options_button"]
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/options_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -444,7 +466,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_fx751")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/panel/bottom/options_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/options_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -452,7 +474,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -8.0
 offset_top = 3.0
-offset_right = 31.0
+offset_right = 37.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
@@ -460,7 +482,7 @@ theme_type_variation = &"Count"
 text = " Options"
 scroll_active = false
 
-[node name="info_button" type="BaseButton" parent="ui/panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="info_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -530,20 +552,20 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../exit_button/outline")
+outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/main_panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/main_panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/panel/bottom/info_button"]
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/info_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -557,7 +579,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_8ruc5")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/panel/bottom/info_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/info_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -571,6 +593,1790 @@ grow_vertical = 2
 mouse_filter = 2
 theme_type_variation = &"Count"
 text = " Info"
+scroll_active = false
+
+[node name="item_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -10.0
+offset_right = -180.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/main_panel/bottom/item_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/main_panel/bottom/item_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/item_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_sruin")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/item_button/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Items"
+scroll_active = false
+
+[node name="party_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -277.0
+offset_top = -10.0
+offset_right = -230.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/main_panel/bottom/party_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/main_panel/bottom/party_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/party_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/party_button/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Party"
+scroll_active = false
+
+[node name="gold_holder" type="Control" parent="ui/main_panel/bottom"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -478.0
+offset_top = -10.0
+offset_right = -397.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/main_panel/bottom/gold_holder" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/main_panel/bottom/gold_holder" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/gold_holder"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_q2lu7")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/gold_holder/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 60.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " 1,000,000"
+scroll_active = false
+
+[node name="party_panel" type="Control" parent="ui"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -80.0
+offset_right = 83.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nuo0b")
+script = ExtResource("11_5mxsm")
+
+[node name="backing" parent="ui/party_panel" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tabs" type="HBoxContainer" parent="ui/party_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_type_variation = &"Tabs"
+
+[node name="overview_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(66, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/tabs/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/party_panel/tabs/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/overview_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/overview_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 47.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Overview"
+scroll_active = false
+
+[node name="equips_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(50, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/tabs/equips_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/party_panel/tabs/equips_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/equips_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/equips_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Equips"
+scroll_active = false
+
+[node name="skills_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(44, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/tabs/skills_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/party_panel/tabs/skills_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/skills_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/skills_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Skills"
+scroll_active = false
+
+[node name="overview_tab" type="Control" parent="ui/party_panel"]
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/overview_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Overview"
+scroll_active = false
+
+[node name="buttons" type="HBoxContainer" parent="ui/party_panel/overview_tab"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.997
+offset_top = -52.5
+offset_right = 27.003
+offset_bottom = -40.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("12_svvh6")
+
+[node name="party_button" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(12, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]1"
+scroll_active = false
+
+[node name="party_button2" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(12, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]2"
+scroll_active = false
+
+[node name="party_button3" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(12, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]3"
+scroll_active = false
+
+[node name="party_button4" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(12, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]4"
+scroll_active = false
+
+[node name="equips_tab" type="Control" parent="ui/party_panel"]
+visible = false
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/party_panel/equips_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/equips_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Equips"
+scroll_active = false
+
+[node name="skills_tab" type="Control" parent="ui/party_panel"]
+visible = false
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/party_panel/skills_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/skills_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Skills"
+scroll_active = false
+
+[node name="item_panel" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nuo0b")
+script = ExtResource("11_5mxsm")
+
+[node name="backing" parent="ui/item_panel" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tabs" type="HBoxContainer" parent="ui/item_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_type_variation = &"Tabs"
+
+[node name="common_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(60, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/item_panel/tabs/common_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/item_panel/tabs/common_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/item_panel/tabs/common_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_s48xr")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/common_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Common"
+scroll_active = false
+
+[node name="key_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(36, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../party_panel/tabs/equips_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/item_panel/tabs/key_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/item_panel/tabs/key_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/item_panel/tabs/key_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1h50j")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/key_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Key"
+scroll_active = false
+
+[node name="common_tab" type="Control" parent="ui/item_panel"]
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/item_panel/common_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="text" type="RichTextLabel" parent="ui/item_panel/common_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Common"
+scroll_active = false
+
+[node name="key_tab" type="Control" parent="ui/item_panel"]
+visible = false
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/item_panel/key_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="text" type="RichTextLabel" parent="ui/item_panel/key_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Key"
+scroll_active = false
+
+[node name="info_panel" type="Control" parent="ui"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -80.0
+offset_right = 91.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nuo0b")
+script = ExtResource("11_5mxsm")
+
+[node name="backing" parent="ui/info_panel" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tabs" type="HBoxContainer" parent="ui/info_panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_type_variation = &"Tabs"
+
+[node name="quest" type="BaseButton" parent="ui/info_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(51, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/info_panel/tabs/quest" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/info_panel/tabs/quest" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/info_panel/tabs/quest"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/info_panel/tabs/quest/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Quests"
+scroll_active = false
+
+[node name="achievement_tab" type="BaseButton" parent="ui/info_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(87, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../party_panel/tabs/equips_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/info_panel/tabs/achievement_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/info_panel/tabs/achievement_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/info_panel/tabs/achievement_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/info_panel/tabs/achievement_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 68.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Achievements"
+scroll_active = false
+
+[node name="map_tab" type="BaseButton" parent="ui/info_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(38, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="ui/info_panel/tabs/map_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+
+[node name="backing" parent="ui/info_panel/tabs/map_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/info_panel/tabs/map_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1da2r")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="ui/info_panel/tabs/map_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+text = " Map"
+scroll_active = false
+
+[node name="quest_tab" type="Control" parent="ui/info_panel"]
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = 0.0799999
+offset_top = -0.0400009
+offset_right = 0.0799866
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/info_panel/quest_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_right = 0.550018
+
+[node name="text" type="RichTextLabel" parent="ui/info_panel/quest_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Quests"
+scroll_active = false
+
+[node name="achievement_tab" type="Control" parent="ui/info_panel"]
+visible = false
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = -0.184
+offset_top = -0.0400009
+offset_right = 0.365997
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/info_panel/achievement_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_right = -0.449982
+
+[node name="text" type="RichTextLabel" parent="ui/info_panel/achievement_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 0.550018
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Achievements"
+scroll_active = false
+
+[node name="map_tab" type="Control" parent="ui/info_panel"]
+visible = false
+layout_mode = 1
+anchor_left = 0.012
+anchor_top = 0.144
+anchor_right = 0.987
+anchor_bottom = 0.987
+offset_left = -0.184
+offset_top = -0.0400009
+offset_right = 0.365997
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="ui/info_panel/map_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_right = -0.449982
+
+[node name="text" type="RichTextLabel" parent="ui/info_panel/map_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 0.550018
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Map"
 scroll_active = false
 
 [node name="chest_panel" type="Control" parent="ui" node_paths=PackedStringArray("item_rows")]
@@ -768,8 +2574,22 @@ scroll_active = false
 [connection signal="transition_reached" from="bounds/bottom" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/left" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/right" to="." method="load_direction"]
-[connection signal="pressed" from="ui/panel/bottom/exit_button" to="ui/panel/bottom/exit_button" method="quit_game"]
-[connection signal="pressed" from="ui/panel/bottom/save_button" to="ui/panel/bottom/save_button" method="quit_game"]
-[connection signal="pressed" from="ui/panel/bottom/options_button" to="ui/panel/bottom/options_button" method="quit_game"]
-[connection signal="pressed" from="ui/panel/bottom/info_button" to="ui/panel/bottom/info_button" method="quit_game"]
+[connection signal="pressed" from="ui/main_panel/bottom/exit_button" to="ui/main_panel/bottom/exit_button" method="quit_game"]
+[connection signal="pressed" from="ui/main_panel/bottom/save_button" to="ui" method="set_panel" binds= ["save"]]
+[connection signal="pressed" from="ui/main_panel/bottom/options_button" to="ui" method="set_panel" binds= ["options"]]
+[connection signal="pressed" from="ui/main_panel/bottom/info_button" to="ui" method="set_panel" binds= ["info"]]
+[connection signal="pressed" from="ui/main_panel/bottom/item_button" to="ui" method="set_panel" binds= ["item"]]
+[connection signal="pressed" from="ui/main_panel/bottom/party_button" to="ui" method="set_panel" binds= ["party"]]
+[connection signal="pressed" from="ui/party_panel/tabs/overview_tab" to="ui/party_panel" method="set_tab" binds= ["overview"]]
+[connection signal="pressed" from="ui/party_panel/tabs/equips_tab" to="ui/party_panel" method="set_tab" binds= ["equips"]]
+[connection signal="pressed" from="ui/party_panel/tabs/skills_tab" to="ui/party_panel" method="set_tab" binds= ["skills"]]
+[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [0]]
+[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button2" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [1]]
+[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button3" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [2]]
+[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button4" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [3]]
+[connection signal="pressed" from="ui/item_panel/tabs/common_tab" to="ui/item_panel" method="set_tab" binds= ["common"]]
+[connection signal="pressed" from="ui/item_panel/tabs/key_tab" to="ui/item_panel" method="set_tab" binds= ["key"]]
+[connection signal="pressed" from="ui/info_panel/tabs/quest" to="ui/info_panel" method="set_tab" binds= ["quest"]]
+[connection signal="pressed" from="ui/info_panel/tabs/achievement_tab" to="ui/info_panel" method="set_tab" binds= ["achievement"]]
+[connection signal="pressed" from="ui/info_panel/tabs/map_tab" to="ui/info_panel" method="set_tab" binds= ["map"]]
 [connection signal="pressed" from="ui/chest_panel/collect_butotn" to="ui/chest_panel" method="hide_panel"]
