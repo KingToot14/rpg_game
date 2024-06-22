@@ -41,6 +41,10 @@ func get_timed_inputs(attack_name: StringName) -> Array[float]:
 		return []
 	
 	var track_id = attack_anim.find_track(^'managers/animator', Animation.TYPE_METHOD)
+	
+	if track_id < 0:
+		return []
+	
 	var key_count = attack_anim.track_get_key_count(track_id)
 	
 	var locations: Array[float] = []

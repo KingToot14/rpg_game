@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckjrk6gvf5h43"
-path="res://.godot/imported/exit_icon.png-2082b2abe4fd7b02ec23554aae89a461.ctex"
+uid="uid://d0f5mp6op4y0i"
+path="res://.godot/imported/shine.png-49ee3d301739844cba0cc8cffec42917.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/overworld/icon/exit_icon.png"
-dest_files=["res://.godot/imported/exit_icon.png-2082b2abe4fd7b02ec23554aae89a461.ctex"]
+source_file="res://entities/player/effects/shine.png"
+dest_files=["res://.godot/imported/shine.png-49ee3d301739844cba0cc8cffec42917.ctex"]
 
 [params]
 

@@ -70,3 +70,6 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 
 func set_visible(val: bool) -> void:
 	parent.visible = val
+
+func screen_shake(intensity: float = 4, time = 0.25) -> void:
+	get_viewport().get_camera_2d().do_screen_shake(intensity, time)
