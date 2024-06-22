@@ -1312,8 +1312,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-normal_key = &"dark"
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
@@ -1400,8 +1399,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-normal_key = &"dark"
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
@@ -1488,8 +1486,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-normal_key = &"dark"
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
@@ -1576,8 +1573,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-normal_key = &"dark"
+outline_rect = NodePath("../../../tabs/overview_tab/outline")
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
@@ -1667,7 +1663,6 @@ text = "[center]Skills"
 scroll_active = false
 
 [node name="item_panel" type="Control" parent="ui"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -1949,122 +1944,262 @@ key = &"item"
 [node name="row" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip/label")
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip/label")
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip/label")
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
 [node name="row2" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip/label")
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip/label")
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip/label")
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
 [node name="row3" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip/label")
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip/label")
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip/label")
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
 [node name="row4" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip/label")
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip/label")
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip/label")
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
 [node name="row5" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info/tooltip/label")
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info2/tooltip/label")
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info3/tooltip/label")
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label") instance=ExtResource("12_6d1i2")]
 layout_mode = 2
+icon_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/icon")
+count_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/count")
+tooltip_rect = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip")
+tooltip_label = NodePath("../../../../../chest_panel/loot_panel/vbox/row/item_info4/tooltip/label")
 
 [node name="key_tab" type="Control" parent="ui/item_panel"]
 visible = false
@@ -2093,141 +2228,8 @@ offset_top = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
+text = "[center]Key"
 scroll_active = false
-
-[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/key_tab"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -3.89998
-offset_bottom = -3.99998
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_nbprq")
-key = &"key"
-
-[node name="row" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="row2" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="row3" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="row4" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="row5" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
 
 [node name="info_panel" type="Control" parent="ui"]
 visible = false
@@ -2863,10 +2865,9 @@ scroll_active = false
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button2" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [1]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button3" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [2]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button4" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [3]]
-[connection signal="visibility_changed" from="ui/item_panel" to="ui/item_panel/common_tab/item_grid" method="load_inventory"]
-[connection signal="visibility_changed" from="ui/item_panel" to="ui/item_panel/key_tab/item_grid" method="load_inventory"]
 [connection signal="pressed" from="ui/item_panel/tabs/common_tab" to="ui/item_panel" method="set_tab" binds= ["common"]]
 [connection signal="pressed" from="ui/item_panel/tabs/key_tab" to="ui/item_panel" method="set_tab" binds= ["key"]]
+[connection signal="visibility_changed" from="ui/item_panel/common_tab" to="ui/item_panel/common_tab/item_grid" method="load_inventory"]
 [connection signal="pressed" from="ui/info_panel/tabs/quest" to="ui/info_panel" method="set_tab" binds= ["quest"]]
 [connection signal="pressed" from="ui/info_panel/tabs/achievement_tab" to="ui/info_panel" method="set_tab" binds= ["achievement"]]
 [connection signal="pressed" from="ui/info_panel/tabs/map_tab" to="ui/info_panel" method="set_tab" binds= ["map"]]

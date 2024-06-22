@@ -107,6 +107,15 @@ func get_item(key: StringName) -> ItemDataChunk:
 	
 	return null
 
+func get_inventory(key: StringName) -> Array[ItemDataChunk]:
+	var list: Array[ItemDataChunk] = []
+	
+	for item in inventory:
+		if item.inventory == key:
+			list.append(item)
+	
+	return list
+
 func has_item(item: InventoryItem) -> bool:
 	var inventory_item = get_item(item.item_key)
 	

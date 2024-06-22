@@ -12,8 +12,15 @@ extends Control
 func _ready() -> void:
 	tooltip_rect.modulate.a = 0.0
 
-func set_item(item: InventoryItem) -> void:
-	var inventory_item = DataManager.get_item(item.item_key) as ItemDataChunk
+func set_item(item) -> void:
+	visible = not not item
+	
+	if not visible:
+		return
+	
+	var inventory_item = item
+	if item is InventoryItem:
+		inventory_item = DataManager.get_item(item.item_key) as ItemDataChunk
 	
 	if not inventory_item:
 		return

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="1_4wrvq"]
 [ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_jhty8"]
-[ext_resource type="Texture2D" uid="uid://e66bllhh4l3o" path="res://entities/enemies/slimes/green_slime/slime_ball.png" id="2_t7ts4"]
+[ext_resource type="Texture2D" uid="uid://e66bllhh4l3o" path="res://entities/enemies/slimes/green_slime/attacks/slime_ball.png" id="2_t7ts4"]
 [ext_resource type="Script" path="res://shaders/entities/effect_manager.gd" id="3_mtude"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="4_33dt4"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="5_sjqd0"]

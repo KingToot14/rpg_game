@@ -56,6 +56,7 @@ text = " 5"
 scroll_active = false
 
 [node name="tooltip" parent="." instance=ExtResource("3_nfrdt")]
+modulate = Color(1, 1, 1, 0)
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
 offset_left = -22.0
