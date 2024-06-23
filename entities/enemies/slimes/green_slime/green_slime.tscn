@@ -1060,6 +1060,7 @@ height = 34.0
 
 [node name="slime" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
 z_index = 100
+position = Vector2(10, 0)
 script = ExtResource("1_gt34u")
 brain = NodePath("managers/brain")
 hp = NodePath("managers/hp")

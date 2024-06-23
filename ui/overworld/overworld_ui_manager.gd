@@ -4,7 +4,7 @@ extends CanvasLayer
 # --- Variables --- #
 @export var chest_panel: ChestUI
 
-var curr_panel: Control
+var curr_panel
 
 # --- Functions --- #
 func _ready() -> void:
@@ -15,13 +15,16 @@ func set_panel(panel_name: String) -> void:
 	panel_name += "_panel"
 	var panel = get_node_or_null(panel_name)
 	
+	if panel_name == "options_panel":
+		panel = OptionsMenu
+	
 	if not panel:
 		return
 	
 	if curr_panel:
 		curr_panel.visible = false
 		
-		if panel_name == curr_panel.name:
+		if panel == curr_panel:
 			curr_panel = null
 			return
 	

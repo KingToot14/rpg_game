@@ -21,9 +21,9 @@
 [ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="19_ckuiq"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="19_uc2wy"]
 [ext_resource type="PackedScene" uid="uid://cur7d1tqtfkvy" path="res://environment/objects/sign.tscn" id="20_2u6ib"]
-[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/interactions/read_icon.png" id="20_c610j"]
+[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="20_c610j"]
 [ext_resource type="Texture2D" uid="uid://0col8d4bm7li" path="res://entities/npcs/testing/overworld.png" id="21_egxev"]
-[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/interactions/interaction_box.tscn" id="22_aeits"]
+[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="22_aeits"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hdym8"]
 viewport_path = NodePath("environment/shader_viewport")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqdakj4xv45bo"
-path="res://.godot/imported/interaction_box.png-6dbf719bc05b2be855ec369a292c5f65.ctex"
+uid="uid://cryvcxcpswi2e"
+path="res://.godot/imported/fight_icon.png-1e42292a2fdcec4b9632bddb8db810df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/interactions/interaction_box.png"
-dest_files=["res://.godot/imported/interaction_box.png-6dbf719bc05b2be855ec369a292c5f65.ctex"]
+source_file="res://ui/overworld/interactions/fight_icon.png"
+dest_files=["res://.godot/imported/fight_icon.png-1e42292a2fdcec4b9632bddb8db810df.ctex"]
 
 [params]
 

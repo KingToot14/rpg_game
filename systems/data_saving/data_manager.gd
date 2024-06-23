@@ -8,8 +8,9 @@ var areas = {}
 
 var quests = {}
 
-#var inventory = {}
 @export var inventory: Array[ItemDataChunk] = []
+
+var options := OptionsDataChunk.new()
 
 # --- Functions --- #
 func _ready() -> void:

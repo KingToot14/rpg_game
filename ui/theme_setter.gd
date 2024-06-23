@@ -18,6 +18,8 @@ func update_theme(curr_key: StringName = &"") -> void:
 		curr_key = key
 	
 	match curr_key:
+		&'white':
+			self_modulate = Color.WHITE
 		&'light':
 			self_modulate = preset.light_color
 		&'normal':

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dokdunuxwvycx"]
 
-[ext_resource type="Texture2D" uid="uid://dqdakj4xv45bo" path="res://ui/interactions/interaction_box.png" id="1_lbn8u"]
+[ext_resource type="Texture2D" uid="uid://dqdakj4xv45bo" path="res://ui/overworld/interactions/interaction_box.png" id="1_lbn8u"]
 
 [node name="interaction_box" type="TextureRect"]
 z_index = 100

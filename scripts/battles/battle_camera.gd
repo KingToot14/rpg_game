@@ -24,4 +24,8 @@ func do_screen_shake(intensity: float = 10.0, time: float = 0.25) -> void:
 	var tween = create_tween()
 	
 	shake_strength = intensity
+	
+	# pull from options
+	shake_strength *= DataManager.options.screen_shake_intensity
+	
 	tween.tween_property(self, 'shake_strength', 0, time)

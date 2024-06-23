@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6wj8dnpapaki"]
+
+[ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="1_fqu63"]
+[ext_resource type="Script" path="res://ui/options/option_slider.gd" id="2_w1pmp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0mq5v"]
+shader = ExtResource("1_fqu63")
+shader_parameter/outline_color = Color(0.568627, 0.807843, 0.929412, 1)
+shader_parameter/normal_color = Color(0.243137, 0.639216, 0.870588, 1)
+shader_parameter/shadow_color = Color(0.129412, 0.407843, 0.639216, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
+
+[node name="slider" type="HSlider" node_paths=PackedStringArray("value_label")]
+material = SubResource("ShaderMaterial_0mq5v")
+offset_top = 11.0
+offset_right = 100.0
+offset_bottom = 17.0
+step = 10.0
+value = 50.0
+script = ExtResource("2_w1pmp")
+value_label = NodePath("value")
+
+[node name="value" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = -1.0
+offset_right = 137.0
+offset_bottom = 7.0
+text = "100"
+scroll_active = false

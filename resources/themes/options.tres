@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://brsms71mmn7lt"]
+
+[ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_iv45h"]
+[ext_resource type="Texture2D" uid="uid://c3f6rokfuex5r" path="res://ui/options/grabber.png" id="1_k4v1h"]
+[ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_text.tres" id="2_5kklf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si2l4"]
+atlas = ExtResource("1_k4v1h")
+region = Rect2(0, 0, 5, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8w8b"]
+atlas = ExtResource("1_k4v1h")
+region = Rect2(5, 0, 5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5koa"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13n0y"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hn4rl"]
+bg_color = Color(0, 0, 1, 1)
+border_width_top = 1
+border_width_bottom = 1
+
+[resource]
+HSlider/icons/grabber = SubResource("AtlasTexture_si2l4")
+HSlider/icons/grabber_disabled = ExtResource("1_k4v1h")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_j8w8b")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_p5koa")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_13n0y")
+HSlider/styles/slider = SubResource("StyleBoxFlat_hn4rl")
+RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/fonts/normal_font = ExtResource("1_iv45h")
+Tab/base_type = &"RichTextLabel"
+Tab/constants/outline_size = 4
+Tab/fonts/normal_font = ExtResource("2_5kklf")
+VBoxContainer/constants/separation = 2
