@@ -60,4 +60,3 @@ func do_damage(target, modifier: float = 1.0) -> void:
 		
 		for neighbor in neighbors:
 			neighbor.hp.take_damage(dmg * 0.5)
-	

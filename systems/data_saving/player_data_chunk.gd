@@ -31,7 +31,7 @@ func store_special(special: float) -> void:
 	curr_special = special
 
 func heal(percent: float) -> void:
-	store_hp(curr_hp + stats.max_hp * percent)
+	store_hp(curr_hp + int(stats.max_hp * percent))
 
 # - Appearance - #
 func get_appearance_path() -> String:

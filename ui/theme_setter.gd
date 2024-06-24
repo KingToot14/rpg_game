@@ -6,6 +6,9 @@ extends Control
 
 # --- Functions --- #
 func _ready() -> void:
+	if not is_in_group(&'theme_setter'):
+		add_to_group(&'theme_setter')
+	
 	update_theme()
 
 func update_theme(curr_key: StringName = &"") -> void:
@@ -28,3 +31,8 @@ func update_theme(curr_key: StringName = &"") -> void:
 			self_modulate = preset.dark_color
 		&'accent':
 			self_modulate = preset.accent_text_color
+		&'shader':
+			print("Updating shader")
+			material.set_shader_parameter('outline_color', preset.light_color)
+			material.set_shader_parameter('normal_color', preset.normal_color)
+			material.set_shader_parameter('shadow_color', preset.dark_color)

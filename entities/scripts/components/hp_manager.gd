@@ -24,7 +24,7 @@ func load_hp() -> void:
 	if load_max_hp:
 		curr_hp = DataManager.players[parent.spawn_index].curr_hp
 	else:
-		curr_hp = parent.stats.get_max_hp()
+		curr_hp = int(parent.stats.get_max_hp())
 
 func take_damage(dmg: int, from_entity: bool = true) -> void:
 	if not alive:

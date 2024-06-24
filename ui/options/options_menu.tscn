@@ -1,13 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckmeukvcpldp8"]
+[gd_scene load_steps=13 format=3 uid="uid://ckmeukvcpldp8"]
 
 [ext_resource type="Script" path="res://ui/options/options_menu.gd" id="1_5rbgt"]
 [ext_resource type="Theme" uid="uid://brsms71mmn7lt" path="res://resources/themes/options.tres" id="1_qmseg"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="1_rodyq"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_tstxd"]
+[ext_resource type="Script" path="res://ui/overworld/menus/tab_menu.gd" id="3_7nure"]
 [ext_resource type="PackedScene" uid="uid://c6wj8dnpapaki" path="res://ui/options/slider.tscn" id="5_hhaxa"]
+[ext_resource type="Texture2D" uid="uid://b0mv21b0n5gnv" path="res://ui/overworld/menus/icons.png" id="6_usgwb"]
 [ext_resource type="Script" path="res://ui/options/options_menu_button.gd" id="6_wnhbh"]
 [ext_resource type="Script" path="res://ui/overworld/overworld_button.gd" id="7_aihbr"]
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="8_f3mpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qwj0"]
+atlas = ExtResource("6_usgwb")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70sty"]
+atlas = ExtResource("6_usgwb")
+region = Rect2(48, 16, 16, 16)
 
 [node name="options_menu" type="CanvasLayer"]
 layer = 100
@@ -33,6 +43,7 @@ offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qmseg")
+script = ExtResource("3_7nure")
 
 [node name="backing" parent="menu" instance=ExtResource("1_rodyq")]
 layout_mode = 1
@@ -43,6 +54,215 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="tabs" type="HBoxContainer" parent="menu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_type_variation = &"Tabs"
+
+[node name="gameplay_tab" type="BaseButton" parent="menu/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(66, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/tabs/gameplay_tab" instance=ExtResource("2_tstxd")]
+layout_mode = 1
+
+[node name="backing" parent="menu/tabs/gameplay_tab" instance=ExtResource("2_tstxd")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="menu/tabs/gameplay_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_3qwj0")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="menu/tabs/gameplay_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Tab"
+text = " Gameplay"
+scroll_active = false
+
+[node name="video_tab" type="BaseButton" parent="menu/tabs" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(45, 20)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/tabs/video_tab" instance=ExtResource("2_tstxd")]
+layout_mode = 1
+
+[node name="backing" parent="menu/tabs/video_tab" instance=ExtResource("2_tstxd")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="menu/tabs/video_tab"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_70sty")
+stretch_mode = 2
+
+[node name="label" type="RichTextLabel" parent="menu/tabs/video_tab/icon"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 3.0
+offset_right = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Tab"
+text = " Video"
+scroll_active = false
 
 [node name="gameplay_tab" type="Control" parent="menu"]
 layout_mode = 1
@@ -58,6 +278,7 @@ grow_vertical = 2
 
 [node name="backing" parent="menu/gameplay_tab" instance=ExtResource("2_tstxd")]
 layout_mode = 1
+offset_right = -1.0
 
 [node name="left_options" type="VBoxContainer" parent="menu/gameplay_tab"]
 layout_mode = 1
@@ -82,7 +303,7 @@ grow_horizontal = 2
 text = "Screen Shake"
 scroll_active = false
 
-[node name="slider" parent="menu/gameplay_tab/left_options/screen_shake" instance=ExtResource("5_hhaxa")]
+[node name="slider" parent="menu/gameplay_tab/left_options/screen_shake" node_paths=PackedStringArray("slider") instance=ExtResource("5_hhaxa")]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -95,9 +316,11 @@ grow_horizontal = 2
 grow_vertical = 0
 value = 100.0
 suffix = "%"
+slider = NodePath(".")
+key = &"shader"
 
 [node name="timing_mode" type="Control" parent="menu/gameplay_tab/left_options"]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 
 [node name="title" type="RichTextLabel" parent="menu/gameplay_tab/left_options/timing_mode"]
@@ -109,7 +332,7 @@ grow_horizontal = 2
 text = "Timing Mode"
 scroll_active = false
 
-[node name="menu" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode"]
+[node name="menu" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode" node_paths=PackedStringArray("curr_item_label", "menu_panel", "item_parent")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -179,6 +402,9 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("6_wnhbh")
+curr_item_label = NodePath("curr_item")
+menu_panel = NodePath("menu")
+item_parent = NodePath("menu/items")
 
 [node name="backing" parent="menu/gameplay_tab/left_options/timing_mode/menu" instance=ExtResource("2_tstxd")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
@@ -195,28 +421,30 @@ offset_top = 3.0
 offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 text = "Normal"
+scroll_active = false
 
-[node name="menu_backing" parent="menu/gameplay_tab/left_options/timing_mode/menu" instance=ExtResource("2_tstxd")]
+[node name="menu" parent="menu/gameplay_tab/left_options/timing_mode/menu" instance=ExtResource("2_tstxd")]
+visible = false
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_top = 15.0
 offset_bottom = 39.0
 key = &"dark"
 
-[node name="menu_items" type="VBoxContainer" parent="menu/gameplay_tab/left_options/timing_mode/menu"]
+[node name="items" type="VBoxContainer" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 18.0
-offset_right = -2.0
-offset_bottom = 36.0
+offset_top = 1.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"Menu"
 
-[node name="item" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu_items"]
+[node name="normal" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -240,7 +468,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 12)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -272,20 +500,183 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_aihbr")
+outline_rect = NodePath("label")
 normal_key = &"light"
 hover_key = &"white"
 
-[node name="label" type="RichTextLabel" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu_items/item"]
-modulate = Color(0.568627, 0.807843, 0.929412, 1)
+[node name="label" type="RichTextLabel" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items/normal"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 text = "Normal"
+scroll_active = false
 script = ExtResource("8_f3mpd")
+key = &"light"
+
+[node name="timing_only" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("label")
+normal_key = &"light"
+hover_key = &"white"
+
+[node name="label" type="RichTextLabel" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items/timing_only"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Timing Only"
+scroll_active = false
+script = ExtResource("8_f3mpd")
+key = &"light"
+
+[node name="disabled" type="BaseButton" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("label")
+normal_key = &"light"
+hover_key = &"white"
+
+[node name="label" type="RichTextLabel" parent="menu/gameplay_tab/left_options/timing_mode/menu/menu/items/disabled"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Disabled"
+scroll_active = false
+script = ExtResource("8_f3mpd")
+key = &"light"
 
 [node name="right_options" type="VBoxContainer" parent="menu/gameplay_tab"]
 layout_mode = 1
@@ -300,4 +691,508 @@ offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="video_tab" type="Control" parent="menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 23.0
+offset_right = -1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" parent="menu/video_tab" instance=ExtResource("2_tstxd")]
+layout_mode = 1
+offset_right = -1.0
+
+[node name="options" type="VBoxContainer" parent="menu/video_tab"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 274.0
+offset_bottom = -2.0
+grow_vertical = 2
+
+[node name="ui_color" type="Control" parent="menu/video_tab/options"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="title" type="RichTextLabel" parent="menu/video_tab/options/ui_color"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 11.0
+grow_horizontal = 2
+text = "UI Color"
+scroll_active = false
+
+[node name="buttons" type="HBoxContainer" parent="menu/video_tab/options/ui_color"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 272.0
+offset_bottom = 25.0
+
+[node name="button" type="BaseButton" parent="menu/video_tab/options/ui_color/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(27, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+normal_key = &"dark"
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/video_tab/options/ui_color/buttons/button" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="fill" parent="menu/video_tab/options/ui_color/buttons/button/outline" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="menu/video_tab/options/ui_color/buttons/button"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Blue"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("8_f3mpd")
+key = &"accent"
+
+[node name="button2" type="BaseButton" parent="menu/video_tab/options/ui_color/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(39, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+normal_key = &"dark"
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/video_tab/options/ui_color/buttons/button2" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="fill" parent="menu/video_tab/options/ui_color/buttons/button2/outline" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="menu/video_tab/options/ui_color/buttons/button2"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Brown"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("8_f3mpd")
+key = &"accent"
+
+[node name="button3" type="BaseButton" parent="menu/video_tab/options/ui_color/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(36, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+normal_key = &"dark"
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/video_tab/options/ui_color/buttons/button3" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="fill" parent="menu/video_tab/options/ui_color/buttons/button3/outline" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="menu/video_tab/options/ui_color/buttons/button3"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Green"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("8_f3mpd")
+key = &"accent"
+
+[node name="button4" type="BaseButton" parent="menu/video_tab/options/ui_color/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(39, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+normal_key = &"dark"
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/video_tab/options/ui_color/buttons/button4" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="fill" parent="menu/video_tab/options/ui_color/buttons/button4/outline" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="menu/video_tab/options/ui_color/buttons/button4"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Purple"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("8_f3mpd")
+key = &"accent"
+
+[node name="button5" type="BaseButton" parent="menu/video_tab/options/ui_color/buttons" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(24, 12)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_aihbr")
+outline_rect = NodePath("outline")
+normal_key = &"dark"
+metadata/_edit_group_ = true
+
+[node name="outline" parent="menu/video_tab/options/ui_color/buttons/button5" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="fill" parent="menu/video_tab/options/ui_color/buttons/button5/outline" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="menu/video_tab/options/ui_color/buttons/button5"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Red"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("8_f3mpd")
+key = &"accent"
+
+[connection signal="pressed" from="menu/tabs/gameplay_tab" to="menu" method="set_tab" binds= ["gameplay"]]
+[connection signal="pressed" from="menu/tabs/video_tab" to="menu" method="set_tab" binds= ["video"]]
 [connection signal="value_changed" from="menu/gameplay_tab/left_options/screen_shake/slider" to="." method="set_screen_shake"]
+[connection signal="item_set" from="menu/gameplay_tab/left_options/timing_mode/menu" to="." method="set_timing_mode"]
+[connection signal="pressed" from="menu/video_tab/options/ui_color/buttons/button" to="." method="set_theme_color" binds= [&"blue"]]
+[connection signal="pressed" from="menu/video_tab/options/ui_color/buttons/button2" to="." method="set_theme_color" binds= [&"brown"]]
+[connection signal="pressed" from="menu/video_tab/options/ui_color/buttons/button3" to="." method="set_theme_color" binds= [&"green"]]
+[connection signal="pressed" from="menu/video_tab/options/ui_color/buttons/button4" to="." method="set_theme_color" binds= [&"purple"]]
+[connection signal="pressed" from="menu/video_tab/options/ui_color/buttons/button5" to="." method="set_theme_color" binds= [&"red"]]

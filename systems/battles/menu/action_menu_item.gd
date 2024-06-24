@@ -17,14 +17,19 @@ func show_outline() -> void:
 	backing.visible = true
 	
 	# show timing
-	if not item is Attack:
+	if item is Attack:
+		show_timing()
+
+func show_timing() -> void:
+	var anim_name = item.animation_name
+	var timing_mode = DataManager.options.timing_mode
+	
+	if timing_mode == &'disabled':
 		return
 	
-	var anim_name = item.animation_name
-	
-	if item.timing_type == Attack.TimingType.TIMED_INPUT:
+	if timing_mode == &'timing_only' or item.timing_type == Attack.TimingType.TIMED_INPUT:
 		Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.animator.get_timed_inputs(anim_name))
-	if item.timing_type == Attack.TimingType.MASH:
+	elif item.timing_type == Attack.TimingType.MASH:
 		var inputs = Globals.curr_entity.animator.get_mash_inputs(anim_name)
 		var target := 10
 		

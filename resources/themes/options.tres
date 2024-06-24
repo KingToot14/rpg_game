@@ -24,15 +24,19 @@ border_width_top = 1
 border_width_bottom = 1
 
 [resource]
+HBoxContainer/constants/separation = 1
 HSlider/icons/grabber = SubResource("AtlasTexture_si2l4")
 HSlider/icons/grabber_disabled = ExtResource("1_k4v1h")
 HSlider/icons/grabber_highlight = SubResource("AtlasTexture_j8w8b")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_p5koa")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_13n0y")
 HSlider/styles/slider = SubResource("StyleBoxFlat_hn4rl")
+Menu/base_type = &"HBoxContainer"
+Menu/constants/separation = 0
 RichTextLabel/font_sizes/normal_font_size = 11
 RichTextLabel/fonts/normal_font = ExtResource("1_iv45h")
 Tab/base_type = &"RichTextLabel"
+Tab/colors/font_outline_color = Color(0, 0, 0, 1)
 Tab/constants/outline_size = 4
 Tab/fonts/normal_font = ExtResource("2_5kklf")
 VBoxContainer/constants/separation = 2
