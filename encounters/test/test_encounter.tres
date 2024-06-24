@@ -5,11 +5,11 @@
 
 [sub_resource type="Resource" id="Resource_ptpoa"]
 script = ExtResource("2_cwe8q")
-enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn", "res://entities/enemies/slimes/green_slime/green_slime.tscn", ""])
+enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn", "res://entities/enemies/slimes/green_slime/green_slime.tscn", ""])
 
 [sub_resource type="Resource" id="Resource_sny1s"]
 script = ExtResource("2_cwe8q")
-enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn"])
+enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn"])
 
 [resource]
 script = ExtResource("1_ldqpt")

@@ -29,7 +29,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="menu" type="Control" parent="."]
+[node name="menu" type="Control" parent="." node_paths=PackedStringArray("tab_parent")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,6 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qmseg")
 script = ExtResource("3_7nure")
+tab_parent = NodePath("tabs")
 
 [node name="backing" parent="menu" instance=ExtResource("1_rodyq")]
 layout_mode = 1
@@ -123,17 +124,11 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_aihbr")
 outline_rect = NodePath("outline")
+hover_key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="outline" parent="menu/tabs/gameplay_tab" instance=ExtResource("2_tstxd")]
 layout_mode = 1
-
-[node name="backing" parent="menu/tabs/gameplay_tab" instance=ExtResource("2_tstxd")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="icon" type="TextureRect" parent="menu/tabs/gameplay_tab"]
 layout_mode = 1
@@ -222,17 +217,13 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_aihbr")
 outline_rect = NodePath("outline")
+hover_key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="outline" parent="menu/tabs/video_tab" instance=ExtResource("2_tstxd")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="menu/tabs/video_tab" instance=ExtResource("2_tstxd")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="menu/tabs/video_tab"]
 layout_mode = 1

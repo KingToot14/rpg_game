@@ -1,0 +1,196 @@
+[gd_scene load_steps=26 format=3 uid="uid://b3llk8qv1sgyt"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_555yy"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_thc5o"]
+[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="3_kn88w"]
+[ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_i5frk"]
+[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="5_21ouf"]
+[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_btfce"]
+[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="9_s3s5l"]
+[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="10_ityq2"]
+[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="12_ang62"]
+[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="13_gbhqx"]
+[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="14_cglu8"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="16_nbrjs"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="17_l3bux"]
+[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="18_lrn0w"]
+[ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_6pec0"]
+[ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="24_cxbpw"]
+
+[sub_resource type="Animation" id="Animation_wwx0v"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shadow:material:shader_parameter/radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.15]
+}
+
+[sub_resource type="Animation" id="Animation_iyow3"]
+resource_name = "death"
+length = 1.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rbvcc"]
+resource_name = "enter_battle"
+length = 0.65
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_b23y5"]
+resource_name = "take_damage"
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_6cwo8"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
+_data = {
+"RESET": SubResource("Animation_wwx0v"),
+"death": SubResource("Animation_iyow3"),
+"enter_battle": SubResource("Animation_rbvcc"),
+"idle": SubResource("Animation_6cwo8"),
+"take_damage": SubResource("Animation_b23y5")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrj3q"]
+resource_local_to_scene = true
+shader = ExtResource("16_nbrjs")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.15
+shader_parameter/squash_factor = Vector2(1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2ut"]
+resource_local_to_scene = true
+shader = ExtResource("18_lrn0w")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ldi4s"]
+radius = 12.0
+height = 34.0
+
+[node name="enemy_base" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
+z_index = 100
+script = ExtResource("1_555yy")
+brain = NodePath("managers/brain")
+hp = NodePath("managers/hp")
+actions = NodePath("managers/actions")
+targeting = NodePath("managers/targeting")
+stats = NodePath("managers/stats")
+status_effects = NodePath("managers/status_effect")
+turn = NodePath("managers/turn")
+animator = NodePath("managers/animation_manager")
+front_marker = NodePath("front_marker")
+
+[node name="managers" type="Node" parent="."]
+
+[node name="animator" type="AnimationPlayer" parent="managers" node_paths=PackedStringArray("parent")]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_25d6s")
+}
+script = ExtResource("2_thc5o")
+parent = NodePath("../..")
+
+[node name="animation_manager" type="Node" parent="managers" node_paths=PackedStringArray("animator")]
+script = ExtResource("3_kn88w")
+animator = NodePath("../animator")
+
+[node name="brain" type="Node" parent="managers"]
+script = ExtResource("4_i5frk")
+action_delay = 0.0
+
+[node name="hp" type="Node" parent="managers"]
+script = ExtResource("5_21ouf")
+
+[node name="actions" type="Node" parent="managers"]
+script = ExtResource("6_btfce")
+
+[node name="targeting" type="Node" parent="managers" node_paths=PackedStringArray("targeting_marker")]
+script = ExtResource("9_s3s5l")
+targeting_marker = NodePath("../../targeting_marker")
+
+[node name="stats" type="Node" parent="managers"]
+script = ExtResource("10_ityq2")
+
+[node name="status_effect" type="Node" parent="managers"]
+script = ExtResource("12_ang62")
+
+[node name="turn" type="Node" parent="managers"]
+script = ExtResource("13_gbhqx")
+
+[node name="loot" type="Node" parent="managers"]
+script = ExtResource("14_cglu8")
+
+[node name="shadow" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hrj3q")
+position = Vector2(0, 1)
+texture = ExtResource("17_l3bux")
+
+[node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ju2ut")
+position = Vector2(0, -4)
+frame = 12
+
+[node name="shape" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ldi4s")
+
+[node name="damage_marker" parent="." instance=ExtResource("23_6pec0")]
+position = Vector2(31, -15)
+
+[node name="front_marker" type="Marker2D" parent="."]
+visible = false
+position = Vector2(-40, 0)
+
+[node name="targeting_marker" type="Sprite2D" parent="."]
+visible = false
+z_index = 200
+position = Vector2(-1, -23)
+texture = ExtResource("24_cxbpw")
+vframes = 2
+
+[connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
+[connection signal="died" from="managers/hp" to="damage_marker" method="detatch"]
+[connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
+[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
+[connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
+[connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]

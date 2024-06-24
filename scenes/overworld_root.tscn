@@ -877,7 +877,7 @@ theme_type_variation = &"Count"
 text = " 1,000,000"
 scroll_active = false
 
-[node name="party_panel" type="Control" parent="ui"]
+[node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -893,6 +893,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_nuo0b")
 script = ExtResource("11_5mxsm")
+tab_parent = NodePath("tabs")
 
 [node name="backing" parent="ui/party_panel" instance=ExtResource("4_7u65r")]
 layout_mode = 1
@@ -972,17 +973,11 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
+hover_key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/tabs/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
-
-[node name="backing" parent="ui/party_panel/tabs/overview_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="icon" type="TextureRect" parent="ui/party_panel/tabs/overview_tab"]
 layout_mode = 1
@@ -1071,17 +1066,14 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
+hover_key = &"normal"
+use_alternate = true
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/tabs/equips_tab" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="ui/party_panel/tabs/equips_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="ui/party_panel/tabs/equips_tab"]
 layout_mode = 1
@@ -1170,17 +1162,14 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
+hover_key = &"normal"
+use_alternate = true
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/party_panel/tabs/skills_tab" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="ui/party_panel/tabs/skills_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="ui/party_panel/tabs/skills_tab"]
 layout_mode = 1
@@ -1666,7 +1655,7 @@ bbcode_enabled = true
 text = "[center]Skills"
 scroll_active = false
 
-[node name="item_panel" type="Control" parent="ui"]
+[node name="item_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -1682,6 +1671,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_nuo0b")
 script = ExtResource("11_5mxsm")
+tab_parent = NodePath("tabs")
 
 [node name="backing" parent="ui/item_panel" instance=ExtResource("4_7u65r")]
 layout_mode = 2
@@ -1760,18 +1750,12 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+outline_rect = NodePath("outline")
+hover_key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/item_panel/tabs/common_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
-
-[node name="backing" parent="ui/item_panel/tabs/common_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="icon" type="TextureRect" parent="ui/item_panel/tabs/common_tab"]
 layout_mode = 1
@@ -1859,18 +1843,15 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../../../party_panel/tabs/equips_tab/outline")
+outline_rect = NodePath("outline")
+hover_key = &"normal"
+use_alternate = true
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/item_panel/tabs/key_tab" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="ui/item_panel/tabs/key_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="ui/item_panel/tabs/key_tab"]
 layout_mode = 1
@@ -2229,7 +2210,7 @@ layout_mode = 2
 [node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
 layout_mode = 2
 
-[node name="info_panel" type="Control" parent="ui"]
+[node name="info_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -2245,6 +2226,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_nuo0b")
 script = ExtResource("11_5mxsm")
+tab_parent = NodePath("tabs")
 
 [node name="backing" parent="ui/info_panel" instance=ExtResource("4_7u65r")]
 layout_mode = 1
@@ -2324,17 +2306,11 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
 outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+hover_key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/info_panel/tabs/quest" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
-
-[node name="backing" parent="ui/info_panel/tabs/quest" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="icon" type="TextureRect" parent="ui/info_panel/tabs/quest"]
 layout_mode = 1
@@ -2422,18 +2398,15 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../../../party_panel/tabs/equips_tab/outline")
+outline_rect = NodePath("../quest/outline")
+hover_key = &"normal"
+use_alternate = true
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/info_panel/tabs/achievement_tab" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="ui/info_panel/tabs/achievement_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="ui/info_panel/tabs/achievement_tab"]
 layout_mode = 1
@@ -2521,18 +2494,15 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
+outline_rect = NodePath("outline")
+hover_key = &"normal"
+use_alternate = true
 metadata/_edit_group_ = true
 
 [node name="outline" parent="ui/info_panel/tabs/map_tab" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
-
-[node name="backing" parent="ui/info_panel/tabs/map_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+key = &"dark"
 
 [node name="icon" type="TextureRect" parent="ui/info_panel/tabs/map_tab"]
 layout_mode = 1

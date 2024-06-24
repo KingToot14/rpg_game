@@ -40,7 +40,7 @@ func _process(delta) -> void:
 		set_result(&'poor')
 
 func _input(event) -> void:
-	if not (active and event.is_pressed()):
+	if not (active and event.is_pressed() and curr_needle < len(needle_pos)):
 		return
 	if not (event is InputEventKey or event is InputEventMouseButton):
 		return

@@ -17,10 +17,10 @@ func update_theme(curr_key: StringName = &"") -> void:
 	if not preset:
 		return
 	
-	if curr_key == &"":
-		curr_key = key
+	if curr_key != &"":
+		key = curr_key
 	
-	match curr_key:
+	match key:
 		&'white':
 			self_modulate = Color.WHITE
 		&'light':
