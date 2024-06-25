@@ -1,0 +1,346 @@
+[gd_scene load_steps=38 format=3 uid="uid://bu0ktqr3wancy"]
+
+[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
+[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
+[ext_resource type="Shader" path="res://environment/shaders/grass/short_grass.gdshader" id="3_wnipq"]
+[ext_resource type="Texture2D" uid="uid://dgxu65mbg012p" path="res://scenes/forest/starting_area/short_grass_map.png" id="4_svauk"]
+[ext_resource type="Texture2D" uid="uid://boiegj21n7buq" path="res://scenes/forest/starting_area/shader_map.png" id="7_8ik0f"]
+[ext_resource type="Script" path="res://scripts/world_setter.gd" id="9_oox87"]
+[ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="10_opdin"]
+[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="11_dy5jm"]
+[ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="11_rfhvx"]
+[ext_resource type="PackedScene" uid="uid://biqmftnd6r3i6" path="res://environment/forest/trees/covered_tree.tscn" id="12_1ywg2"]
+[ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="12_23mxx"]
+[ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="12_ct6eb"]
+[ext_resource type="PackedScene" uid="uid://dsg0j1xqf3dyy" path="res://environment/forest/trees/covered_tree_2.tscn" id="12_wgao2"]
+[ext_resource type="Texture2D" uid="uid://h10t0hha8h5p" path="res://scenes/forest/starting_area/bottom_fence.png" id="14_op7tu"]
+[ext_resource type="Texture2D" uid="uid://5xg00usrrsnp" path="res://scenes/forest/starting_area/top_fence.png" id="15_n6j3j"]
+[ext_resource type="Texture2D" uid="uid://dusfb62xn3crf" path="res://environment/objects/guardian/spawn_site.png" id="16_2qhru"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dbtda"]
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kh6bc"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_dbtda")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pg7hx"]
+shader = ExtResource("3_wnipq")
+shader_parameter/wind_speed = -0.5
+shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_kh6bc")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s2df2"]
+frequency = 0.0082
+fractal_type = 3
+fractal_octaves = 2
+fractal_lacunarity = 2.18
+fractal_gain = 0.305
+domain_warp_enabled = true
+domain_warp_amplitude = 10.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtknx"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_s2df2")
+
+[sub_resource type="Gradient" id="Gradient_d3lm2"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1)
+colors = PackedColorArray(0.337255, 0.741176, 0.215686, 1, 0.427451, 0.819608, 0.270588, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ey4s0"]
+gradient = SubResource("Gradient_d3lm2")
+width = 8
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8rp7f"]
+frequency = 0.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mjboh"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_8rp7f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ellcd"]
+resource_local_to_scene = true
+shader = ExtResource("10_opdin")
+shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
+shader_parameter/patch_intensity = 0.05
+shader_parameter/patch_threshold = 0.65
+shader_parameter/side_gradient = SubResource("GradientTexture1D_ey4s0")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_wtknx")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_mjboh")
+shader_parameter/wind_intensity = 0.6
+shader_parameter/wind_speed = 0.5
+shader_parameter/wind_direction = Vector2(-1, -1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mu5cx"]
+frequency = 0.122
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a6mrm"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_mu5cx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gs2do"]
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yishe"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_gs2do")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d3tve"]
+frequency = 0.0395
+fractal_octaves = 3
+fractal_lacunarity = 2.21
+domain_warp_type = 1
+domain_warp_amplitude = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ej3ef"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_d3tve")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2wptt"]
+viewport_path = NodePath("environment/reflection_viewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybkr0"]
+resource_local_to_scene = true
+shader = ExtResource("11_dy5jm")
+shader_parameter/texture_size = Vector2(480, 270)
+shader_parameter/reflection_intensity = 0.25
+shader_parameter/reflection_texture = SubResource("ViewportTexture_2wptt")
+shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
+shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_ej3ef")
+shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/dirt_darkness = 0.05
+shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/wind_speed = -0.25
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_a6mrm")
+shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
+shader_parameter/foam_speed = -0.25
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_yishe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjn1h"]
+shader = ExtResource("12_23mxx")
+shader_parameter/texture_size = Vector2(480, 270)
+shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
+shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/wind_speed = -0.5
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_yishe")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31i3j"]
+size = Vector2(20, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdgp1"]
+size = Vector2(480, 20)
+
+[node name="area_root" type="Node2D"]
+visibility_layer = 7
+y_sort_enabled = true
+script = ExtResource("1_1mvng")
+shader_texture = ExtResource("7_8ik0f")
+
+[node name="wind_manager" type="Node2D" parent="."]
+script = ExtResource("2_3vw15")
+
+[node name="environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="short_grass_map" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_pg7hx")
+position = Vector2(240, 135)
+texture = ExtResource("4_svauk")
+
+[node name="reflection_viewport" type="SubViewport" parent="environment"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966276
+size = Vector2i(480, 270)
+script = ExtResource("9_oox87")
+visibility_layer = 3
+
+[node name="long_grass_render" type="Sprite2D" parent="environment"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ellcd")
+position = Vector2(240, 135)
+texture = ExtResource("7_8ik0f")
+
+[node name="water_render" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_ybkr0")
+position = Vector2(240, 135)
+texture = ExtResource("7_8ik0f")
+
+[node name="trail_render" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_qjn1h")
+position = Vector2(240, 135)
+texture = ExtResource("7_8ik0f")
+
+[node name="collision" type="StaticBody2D" parent="environment"]
+
+[node name="water" type="CollisionPolygon2D" parent="environment/collision"]
+polygon = PackedVector2Array(30, 270, 82, 253, 116, 255, 142, 250, 152, 249, 161, 253, 172, 252, 224, 240, 237, 240, 261, 248, 291, 247, 307, 251, 331, 251, 347, 249, 353, 249, 366, 253, 371, 253, 397, 249, 402, 249, 413, 253, 423, 254, 434, 254, 440, 256, 454, 256, 463, 254, 470, 254, 480, 260, 480, 270)
+
+[node name="left_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(-10, 135)
+shape = SubResource("RectangleShape2D_31i3j")
+
+[node name="top_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(240, -10)
+shape = SubResource("RectangleShape2D_fdgp1")
+
+[node name="right_area" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="forest_tree" parent="right_area" instance=ExtResource("11_rfhvx")]
+position = Vector2(436, 106)
+
+[node name="forest_tree2" parent="right_area" instance=ExtResource("12_ct6eb")]
+position = Vector2(457, 206)
+
+[node name="surrounding_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="forest_tree" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(351, 50)
+
+[node name="forest_tree2" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(245, 45)
+
+[node name="forest_tree3" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(281, 49)
+
+[node name="forest_tree4" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(307, 13)
+
+[node name="forest_tree5" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(385, 32)
+
+[node name="forest_tree6" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(417, 8)
+
+[node name="forest_tree7" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(484, 40)
+
+[node name="forest_tree8" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(448, 25)
+
+[node name="forest_tree9" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(362, -6)
+
+[node name="forest_tree10" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(185, 8)
+
+[node name="forest_tree11" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(206, 29)
+
+[node name="forest_tree12" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(222, 12)
+
+[node name="forest_tree13" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(181, 48)
+
+[node name="forest_tree14" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(147, 7)
+
+[node name="forest_tree15" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(114, 46)
+
+[node name="forest_tree16" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(22, 8)
+
+[node name="forest_tree17" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(87, 13)
+
+[node name="forest_tree18" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(58, 26)
+
+[node name="forest_tree19" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(114, 13)
+
+[node name="forest_tree20" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(277, 5)
+
+[node name="forest_tree21" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(1, 35)
+
+[node name="forest_tree22" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(29, 52)
+
+[node name="forest_tree23" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(23, 74)
+
+[node name="forest_tree24" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(4, 91)
+
+[node name="forest_tree25" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(22, 119)
+
+[node name="forest_tree26" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(6, 137)
+
+[node name="forest_tree27" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
+position = Vector2(22, 162)
+
+[node name="forest_tree28" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(31, 191)
+
+[node name="forest_tree29" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(11, 208)
+
+[node name="forest_tree31" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(9, 261)
+
+[node name="forest_tree32" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
+position = Vector2(44, 246)
+
+[node name="forest_tree33" parent="surrounding_trees" instance=ExtResource("12_wgao2")]
+position = Vector2(214, 110)
+
+[node name="forest_tree34" parent="surrounding_trees" instance=ExtResource("12_1ywg2")]
+position = Vector2(302, 202)
+
+[node name="fence" type="StaticBody2D" parent="."]
+z_index = 100
+y_sort_enabled = true
+
+[node name="bottom" type="Sprite2D" parent="fence"]
+y_sort_enabled = true
+position = Vector2(429, 238)
+texture = ExtResource("14_op7tu")
+offset = Vector2(-1, -30)
+
+[node name="bottom_col" type="CollisionPolygon2D" parent="fence"]
+visible = false
+polygon = PackedVector2Array(376, 241, 383, 241, 397, 245, 403, 245, 417, 249, 423, 249, 437, 251, 443, 251, 443, 244, 437, 244, 423, 242, 417, 242, 403, 238, 397, 238, 383, 234, 376, 234)
+
+[node name="bottom_col2" type="CollisionPolygon2D" parent="fence"]
+visible = false
+polygon = PackedVector2Array(443, 251, 480, 251, 480, 244, 477, 244, 463, 242, 457, 242, 443, 244)
+
+[node name="bottom_col3" type="CollisionPolygon2D" parent="fence"]
+visible = false
+polygon = PackedVector2Array(376, 234, 375, 221, 375, 213, 376, 201, 376, 194, 377, 180, 377, 174, 385, 174, 385, 181, 384, 194, 384, 201, 384, 234)
+
+[node name="top" type="Sprite2D" parent="fence"]
+position = Vector2(389, 73)
+texture = ExtResource("15_n6j3j")
+offset = Vector2(1, 29)
+
+[node name="top_col" type="CollisionPolygon2D" parent="fence"]
+visible = false
+polygon = PackedVector2Array(376, 141, 376, 134, 375, 121, 375, 107, 376, 101, 376, 75, 396, 71, 404, 71, 404, 78, 396, 78, 384, 81, 384, 141)
+
+[node name="spawn_site" type="Sprite2D" parent="."]
+position = Vector2(136, 138)
+texture = ExtResource("16_2qhru")

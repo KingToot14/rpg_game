@@ -1,5 +1,8 @@
 shader_type canvas_item;
 
+// --- Includes --- //
+#include "res://shaders/general_methods.gdshaderinc"
+
 // --- Uniforms --- //
 global uniform float wind_position;
 
@@ -47,10 +50,10 @@ float get_dirt(vec2 _uv) {
 }
 
 void fragment() {
-	vec2 uv = round(UV * (texture_size + 1.0) - (UV - 0.5)) / (texture_size + 1.0);
-	uv -= vec2(0.0, COLOR.b * 255.0 * TEXTURE_PIXEL_SIZE.y);
-	
 	COLOR.a = step(0.01, COLOR.b);
+	
+	vec2 uv = pixelize(UV, texture_size);
+	uv -= vec2(0.0, COLOR.b * 255.0 * TEXTURE_PIXEL_SIZE.y);
 	
 	// Set Base Water Color
 	vec2 water_uv = uv + vec2(sine_wave(TWO_PI, 2.0 * TEXTURE_PIXEL_SIZE.x, 40.0 * uv.y + wind_position, vec2(-1, 0), uv), 0.0);
@@ -63,21 +66,21 @@ void fragment() {
 	// Foam Color
 	float foam_val = get_noise(uv + vec2(TIME * foam_speed * 0.05, 0.0));
 	
-	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(0.0, 1.0) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(0.0, 2.0 * foam_val) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(1.0, 0.0) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv + vec2(1.0, 0.0) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(0.0, 1.0) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(0.0, 2.0 * foam_val) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv - vec2(1.0, 0.0) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.rgb = mix(COLOR.rgb, foam_color.rgb, 1.0 - step(0.01, texture(TEXTURE, uv + vec2(1.0, 0.0) * TEXTURE_PIXEL_SIZE).b));
 	
 	// Dirt Color
 	float dirt = get_dirt(uv);
-	COLOR.rgb = mix(COLOR.rgb, dirt_color.rgb - dirt * dirt_darkness, 1.0 - step(0.01, texture(TEXTURE, uv + vec2(0.0, dirt / 270.0)).a));
+	COLOR.rgb = mix(COLOR.rgb, dirt_color.rgb - dirt * dirt_darkness, 1.0 - step(0.01, texture(TEXTURE, uv + vec2(0.0, dirt / 270.0)).b));
 	
 	// Grass Fringe
 	float wind_vert = get_noise(uv + vec2(0.0, wind_position * wind_speed * 0.05));
 	float wind_horz = get_noise(uv + vec2(wind_position * wind_speed * 0.05, 0.0));
 	
-	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
-	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).a));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(0.0, 1.0 * wind_horz) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV - vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).b));
+	COLOR.a *= mix(1.0, 0.0, 1.0 - step(0.01, texture(TEXTURE, UV + vec2(1.0 * wind_vert, 0.0) * TEXTURE_PIXEL_SIZE).b));
 }

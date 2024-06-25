@@ -25,7 +25,7 @@ func set_preset(preset: ThemePreset) -> void:
 const OVERWORLD_SCENE: String = "res://scenes/overworld_root.tscn"
 
 var overworld_manager: OverworldManager
-var overworld_area: String = "res://scenes/testing/starting_area.tscn"
+var overworld_area: String = "res://scenes/forest/starting_area/starting_area.tscn"
 
 # --- Encounters --- #
 var from_battle: bool = false

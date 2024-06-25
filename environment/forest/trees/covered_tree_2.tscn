@@ -1,28 +1,45 @@
-[gd_scene load_steps=15 format=3 uid="uid://x3sh11ejtmsd"]
+[gd_scene load_steps=19 format=3 uid="uid://dsg0j1xqf3dyy"]
 
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_sumql"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_kji2a"]
-[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
-[ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="3_hj56p"]
-[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="4_jcd0y"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="5_qdvdd"]
-[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="6_gbmmx"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_vcd26"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_rbo58"]
+[ext_resource type="Texture2D" uid="uid://du2xm58vm4akg" path="res://environment/forest/trees/tree_2.png" id="3_vdoa7"]
+[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="4_k4iv6"]
+[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="5_vgi0m"]
+[ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="6_wn8jv"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="7_xv46x"]
+[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="8_lg4f8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
-radius = 12.5
+radius = 7.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eist3"]
-shader = ExtResource("1_sumql")
+shader = ExtResource("1_vcd26")
 shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
 shader_parameter/radius = 0.18
 shader_parameter/squash_factor = Vector2(1, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrn7o"]
 resource_local_to_scene = true
-shader = ExtResource("2_tet37")
+shader = ExtResource("4_k4iv6")
 shader_parameter/intensity = 0.0
 shader_parameter/player_influence = 0.15
 shader_parameter/radius = 0.15
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_24p63"]
+frequency = 0.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtfqx"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_24p63")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkyyd"]
+shader = ExtResource("6_wn8jv")
+shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_speed = -0.25
+shader_parameter/texture_height = 12.0
+shader_parameter/offset = 4.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_wtfqx")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5tp4f"]
 frequency = 0.0553
@@ -34,7 +51,7 @@ noise = SubResource("FastNoiseLite_5tp4f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4ale"]
 resource_local_to_scene = true
-shader = ExtResource("5_qdvdd")
+shader = ExtResource("7_xv46x")
 shader_parameter/transparency = 0.0
 shader_parameter/wind_speed = 2.0
 shader_parameter/wind_threshold = 0.6
@@ -44,8 +61,8 @@ shader_parameter/player_influence = 0.6
 shader_parameter/radius = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btqaj"]
-radius = 31.0
-height = 80.0
+radius = 33.0
+height = 68.0
 
 [node name="forest_tree" type="StaticBody2D"]
 visibility_layer = 5
@@ -64,31 +81,42 @@ visible = false
 z_as_relative = false
 material = SubResource("ShaderMaterial_eist3")
 position = Vector2(0, 4)
-texture = ExtResource("2_kji2a")
+texture = ExtResource("2_rbo58")
 
-[node name="trunk" type="Sprite2D" parent="."]
-position = Vector2(0, -31)
-texture = ExtResource("3_hj56p")
+[node name="trunk_group" type="CanvasGroup" parent="."]
+
+[node name="trunk" type="Sprite2D" parent="trunk_group"]
+position = Vector2(-1, -6)
+texture = ExtResource("3_vdoa7")
+offset = Vector2(0, -32)
 hframes = 3
 
-[node name="trunk_shadow" type="Sprite2D" parent="."]
+[node name="trunk_shadow" type="Sprite2D" parent="trunk_group"]
 material = SubResource("ShaderMaterial_yrn7o")
-position = Vector2(0, -31)
-texture = ExtResource("3_hj56p")
+position = Vector2(-1, -6)
+texture = ExtResource("3_vdoa7")
+offset = Vector2(0, -32)
 hframes = 3
 frame = 1
-script = ExtResource("4_jcd0y")
+script = ExtResource("5_vgi0m")
 transparency = 1.0
 tween_speed = 0.3
+
+[node name="grass_cover" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_hkyyd")
+offset_left = -13.0
+offset_top = -6.0
+offset_right = 13.0
+offset_bottom = 6.0
 
 [node name="leaves" type="Sprite2D" parent="."]
 z_index = 10
 material = SubResource("ShaderMaterial_a4ale")
-position = Vector2(0, -31)
-texture = ExtResource("3_hj56p")
+position = Vector2(-1, -38)
+texture = ExtResource("3_vdoa7")
 hframes = 3
 frame = 2
-script = ExtResource("4_jcd0y")
+script = ExtResource("5_vgi0m")
 transparency = 0.45
 tween_speed = 0.3
 
@@ -97,7 +125,7 @@ collision_mask = 2
 
 [node name="shape" type="CollisionShape2D" parent="leaves/player_collider"]
 visible = false
-position = Vector2(0, 2)
+position = Vector2(0, -9)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_btqaj")
 debug_color = Color(0, 0.596078, 0.701961, 0)
@@ -111,13 +139,13 @@ visibility_layer = 4
 z_index = -10
 position = Vector2(-0.305, 12)
 flip_v = true
-script = ExtResource("6_gbmmx")
+script = ExtResource("8_lg4f8")
 image_size = Vector2(82, 85)
 bottom_pos = NodePath("../bottom_marker")
 reflection_offset = 4.0
-sprites = [NodePath("../trunk"), NodePath("../trunk_shadow"), NodePath("../leaves")]
+sprites = [NodePath("../trunk_group/trunk"), NodePath("../trunk_group/trunk_shadow"), NodePath("../leaves")]
 
-[connection signal="body_entered" from="leaves/player_collider" to="trunk_shadow" method="set_visibility_state" binds= [false]]
+[connection signal="body_entered" from="leaves/player_collider" to="trunk_group/trunk_shadow" method="set_visibility_state" binds= [false]]
 [connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]
-[connection signal="body_exited" from="leaves/player_collider" to="trunk_shadow" method="set_visibility_state" binds= [true]]
+[connection signal="body_exited" from="leaves/player_collider" to="trunk_group/trunk_shadow" method="set_visibility_state" binds= [true]]
 [connection signal="body_exited" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [true]]

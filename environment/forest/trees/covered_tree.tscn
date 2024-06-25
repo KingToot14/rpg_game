@@ -1,0 +1,190 @@
+[gd_scene load_steps=21 format=3 uid="uid://biqmftnd6r3i6"]
+
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_aqfid"]
+[ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_d645o"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_djuvn"]
+[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="4_cryho"]
+[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="6_37ctl"]
+[ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="8_8feqt"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="8_ifoie"]
+[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="10_fsng5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
+radius = 12.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eist3"]
+shader = ExtResource("1_aqfid")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.18
+shader_parameter/squash_factor = Vector2(1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2d0yf"]
+resource_local_to_scene = true
+shader = ExtResource("4_cryho")
+shader_parameter/intensity = 0.0
+shader_parameter/player_influence = 0.15
+shader_parameter/radius = 0.15
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t46dx"]
+frequency = 0.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0y18j"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_t46dx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r236m"]
+shader = ExtResource("2_d645o")
+shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_speed = -0.25
+shader_parameter/texture_height = 12.0
+shader_parameter/offset = 3.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_0y18j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0cve7"]
+shader = ExtResource("2_d645o")
+shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_speed = -0.25
+shader_parameter/texture_height = 12.0
+shader_parameter/offset = 4.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_0y18j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uy60g"]
+shader = ExtResource("2_d645o")
+shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_speed = -0.25
+shader_parameter/texture_height = 9.0
+shader_parameter/offset = 4.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_0y18j")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tp4f"]
+frequency = 0.0553
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t32mv"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_5tp4f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4ale"]
+resource_local_to_scene = true
+shader = ExtResource("8_ifoie")
+shader_parameter/transparency = 0.0
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_threshold = 0.6
+shader_parameter/wave_count = 3.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_t32mv")
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btqaj"]
+radius = 31.0
+height = 80.0
+
+[node name="forest_tree" type="StaticBody2D"]
+visibility_layer = 5
+z_index = 100
+y_sort_enabled = true
+
+[node name="collision" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-0.5, -4)
+shape = SubResource("CircleShape2D_785ak")
+debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[node name="shadow" type="Sprite2D" parent="."]
+visible = false
+z_as_relative = false
+material = SubResource("ShaderMaterial_eist3")
+position = Vector2(0, 4)
+texture = ExtResource("2_djuvn")
+
+[node name="trunk_group" type="CanvasGroup" parent="."]
+
+[node name="trunk" type="Sprite2D" parent="trunk_group"]
+position = Vector2(0, -31)
+texture = ExtResource("8_8feqt")
+hframes = 3
+
+[node name="trunk_shadow" type="Sprite2D" parent="trunk_group"]
+material = SubResource("ShaderMaterial_2d0yf")
+position = Vector2(0, -31)
+texture = ExtResource("8_8feqt")
+hframes = 3
+frame = 1
+script = ExtResource("6_37ctl")
+transparency = 1.0
+tween_speed = 0.3
+
+[node name="grass_cover" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_r236m")
+offset_left = -6.0
+offset_top = -1.0
+offset_right = 5.0
+offset_bottom = 11.0
+
+[node name="grass_cover4" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_0cve7")
+offset_left = 5.0
+offset_top = -1.0
+offset_right = 12.0
+offset_bottom = 11.0
+
+[node name="grass_cover5" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_0cve7")
+offset_left = -13.0
+offset_top = -1.0
+offset_right = -6.0
+offset_bottom = 11.0
+
+[node name="grass_cover2" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_uy60g")
+offset_left = 12.0
+offset_top = -1.0
+offset_right = 17.0
+offset_bottom = 8.0
+
+[node name="grass_cover3" type="ColorRect" parent="trunk_group"]
+material = SubResource("ShaderMaterial_uy60g")
+offset_left = -17.0
+offset_top = -1.0
+offset_right = -13.0
+offset_bottom = 8.0
+
+[node name="leaves" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_a4ale")
+position = Vector2(0, -31)
+texture = ExtResource("8_8feqt")
+hframes = 3
+frame = 2
+script = ExtResource("6_37ctl")
+transparency = 0.45
+tween_speed = 0.3
+
+[node name="player_collider" type="Area2D" parent="leaves"]
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="leaves/player_collider"]
+visible = false
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_btqaj")
+debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[node name="bottom_marker" type="Marker2D" parent="."]
+visible = false
+position = Vector2(0, 12)
+
+[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
+visibility_layer = 4
+z_index = -10
+position = Vector2(-0.305, 12)
+flip_v = true
+script = ExtResource("10_fsng5")
+image_size = Vector2(82, 85)
+bottom_pos = NodePath("../bottom_marker")
+reflection_offset = 4.0
+sprites = [NodePath("../trunk_group/trunk"), NodePath("../trunk_group/trunk_shadow"), NodePath("../leaves")]
+
+[connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]
+[connection signal="body_exited" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [true]]

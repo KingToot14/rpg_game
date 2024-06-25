@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v6nu604f644m"
-path="res://.godot/imported/trunk_shadow.png-186ef9cb03eae5d11f6d1e2d1640333f.ctex"
+uid="uid://5xg00usrrsnp"
+path="res://.godot/imported/top_fence.png-f972259afee38d15b70a69806ca0cd7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/forest/trees/trunk_shadow.png"
-dest_files=["res://.godot/imported/trunk_shadow.png-186ef9cb03eae5d11f6d1e2d1640333f.ctex"]
+source_file="res://scenes/forest/starting_area/top_fence.png"
+dest_files=["res://.godot/imported/top_fence.png-f972259afee38d15b70a69806ca0cd7c.ctex"]
 
 [params]
 
