@@ -21,10 +21,9 @@ float get_wind(vec2 _uv) {
 void fragment() {
 	vec2 uv = pixelize(UV, screen_size);
 	
-	uv.y -= get_wind(uv + vec2(0.0, wind_position * wind_speed * 0.05)) / screen_size.y;
+	uv.y -= get_wind(vec2(0.0, uv.y + wind_position * wind_speed * 0.05)) * TEXTURE_PIXEL_SIZE.y;
 	
 	float grass_val = texture(TEXTURE, uv).g * 255.0;
-	grass_val = clamp(grass_val, 0.0, 2.0);
 	
 	COLOR.rgb = mix(normal_color, patch_color, grass_val).rgb;
 }

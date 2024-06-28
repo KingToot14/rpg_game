@@ -49,12 +49,19 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 	
 	match key:
 		'target':
+			if not target:
+				return
+			
 			pos = target.global_position
 		'home':
 			pos = Vector2.ZERO
 			global = false
 		'front':
 			pos = Globals.curr_target.get_front_pos()
+		'offset':
+			pos = offset
+			offset = Vector2.ZERO
+			global = false
 	
 	if offset != Vector2.ZERO:
 		if global:

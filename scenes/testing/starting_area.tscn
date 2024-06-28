@@ -422,10 +422,12 @@ loot = Array[ExtResource("17_5h66u")]([SubResource("Resource_1rhxd"), SubResourc
 [node name="encounter" parent="." instance=ExtResource("19_uc2wy")]
 position = Vector2(109, 154)
 encounter_path = "res://encounters/test/test_encounter.tres"
+battle_path = "res://scenes/battles/forest/forest_battle.tscn"
 
 [node name="encounter2" parent="." instance=ExtResource("19_uc2wy")]
 position = Vector2(394, 133)
 encounter_path = "res://encounters/test/small_test.tres"
+battle_path = "res://scenes/battles/forest/forest_battle.tscn"
 
 [node name="sign" parent="." instance=ExtResource("20_2u6ib")]
 position = Vector2(173, 129)

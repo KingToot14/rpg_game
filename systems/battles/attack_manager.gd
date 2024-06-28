@@ -33,6 +33,7 @@ func setup_defense() -> bool:
 
 func do_damage(target, modifier: float = 1.0) -> void:
 	var attack = Globals.curr_item as Attack
+	
 	var dmg = round(attack.calculate_damage(Globals.curr_entity, target))
 	
 	if len(Globals.timing_mods) > 0:

@@ -4,7 +4,7 @@ extends Resource
 # --- Variables --- #
 var area_path: String = ""
 var name: String = ""
-var player_position: Vector2 = Vector2(240, 135)
+var player_position: Vector2 = Vector2(136, 142)
 
 var defeated_encounters: Array[StringName]
 

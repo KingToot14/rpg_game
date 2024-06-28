@@ -42,7 +42,7 @@ fractal_gain = 0.305
 domain_warp_enabled = true
 domain_warp_amplitude = 10.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtknx"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i1yd0"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_s2df2")
@@ -53,14 +53,14 @@ offsets = PackedFloat32Array(0, 0.1)
 colors = PackedColorArray(0.337255, 0.741176, 0.215686, 1, 0.427451, 0.819608, 0.270588, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ey4s0"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgaca"]
 gradient = SubResource("Gradient_d3lm2")
 width = 8
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8rp7f"]
 frequency = 0.15
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mjboh"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o8v14"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_8rp7f")
@@ -71,9 +71,9 @@ shader = ExtResource("10_opdin")
 shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
 shader_parameter/patch_intensity = 0.05
 shader_parameter/patch_threshold = 0.65
-shader_parameter/side_gradient = SubResource("GradientTexture1D_ey4s0")
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_wtknx")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_mjboh")
+shader_parameter/side_gradient = SubResource("GradientTexture1D_vgaca")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_i1yd0")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_o8v14")
 shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
@@ -82,7 +82,7 @@ shader_parameter/wind_direction = Vector2(-1, -1)
 frequency = 0.122
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a6mrm"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vkyge"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_mu5cx")
@@ -91,7 +91,7 @@ noise = SubResource("FastNoiseLite_mu5cx")
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yishe"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjxn"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_gs2do")
@@ -103,12 +103,12 @@ fractal_lacunarity = 2.21
 domain_warp_type = 1
 domain_warp_amplitude = 5.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ej3ef"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27oty"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_d3tve")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2wptt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxx4b"]
 viewport_path = NodePath("environment/reflection_viewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybkr0"]
@@ -116,18 +116,18 @@ resource_local_to_scene = true
 shader = ExtResource("11_dy5jm")
 shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/reflection_intensity = 0.25
-shader_parameter/reflection_texture = SubResource("ViewportTexture_2wptt")
+shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_ej3ef")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_a6mrm")
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
 shader_parameter/foam_speed = -0.25
-shader_parameter/foam_noise = SubResource("NoiseTexture2D_yishe")
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjn1h"]
 shader = ExtResource("12_23mxx")
@@ -136,7 +136,7 @@ shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.5
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_yishe")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31i3j"]
 size = Vector2(20, 270)
@@ -156,7 +156,7 @@ script = ExtResource("2_3vw15")
 [node name="environment" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="short_grass_map" type="Sprite2D" parent="environment"]
+[node name="short_grass" type="Sprite2D" parent="environment"]
 material = SubResource("ShaderMaterial_pg7hx")
 position = Vector2(240, 135)
 texture = ExtResource("4_svauk")
