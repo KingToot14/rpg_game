@@ -21,6 +21,6 @@ func set_status_info() -> void:
 	key = &'burn'
 
 func turn_ended() -> void:
-	entity.take_damage(int(entity.get_max_hp() * dmg), false)
+	entity.hp.take_damage(int(entity.stats.get_max_hp() * dmg), false)
 	
 	super()

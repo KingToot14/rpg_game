@@ -13,7 +13,7 @@ func setup(entity: Entity) -> void:
 	parent = entity
 
 func _on_turn_ended() -> void:
-	for effect in status_effects:
+	for effect in get_effects():
 		effect.turn_ended()
 	
 	remove_effects()

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://p4vc2pax2xo3"]
+
+[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="1_cbwmy"]
+
+[resource]
+script = ExtResource("1_cbwmy")
+name = "Big Bud"
+animation_name = &"big_bud"
+cooldown = 0
+description = ""
+power = 40.0
+element = 2
+element_percent = 1.0
+side = 0
+targeting = 1
+damage_type = 1
+timing_type = 0
+accuracy = 1.0
+crit_rate = 0.1
+randomness = 0.1

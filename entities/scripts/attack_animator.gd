@@ -23,6 +23,9 @@ func do_damage(modifier: float = 1.0) -> void:
 func do_defense() -> void:
 	Globals.curr_item.do_defense()
 
+func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
+	target.status_effects.add_effect(key, stacks, stage)
+
 func set_target() -> void:
 	var attack = Globals.curr_item as Attack
 	
@@ -57,7 +60,10 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 			pos = Vector2.ZERO
 			global = false
 		'front':
-			pos = Globals.curr_target.get_front_pos()
+			if not target:
+				return
+			
+			pos = target.get_front_pos()
 		'offset':
 			pos = offset
 			offset = Vector2.ZERO
