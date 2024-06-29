@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=41 format=3 uid="uid://co7gfgpnhufh3"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://ccgo36j5clno" path="res://entities/enemies/mageflowers/blazing/blazing_mageflower.png" id="15_ubiup"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="16_bkchi"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="17_t6lud"]
+[ext_resource type="Texture2D" uid="uid://rjnjv23o7uir" path="res://entities/enemies/mageflowers/blazing/seed.png" id="19_rmbig"]
 [ext_resource type="Texture2D" uid="uid://c04lrrw26mmvh" path="res://entities/enemies/mageflowers/blazing/fireball_particle.png" id="21_xwa8o"]
 [ext_resource type="Texture2D" uid="uid://yupfmu7j76c2" path="res://entities/enemies/mageflowers/blazing/little_bud.png" id="22_xy207"]
 
@@ -36,6 +37,42 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("seed_group/seed:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, -28)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("seed_group/seed:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("seed_group/seed:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_iyow3"]
@@ -59,8 +96,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rbvcc"]
 resource_name = "enter_battle"
-length = 1.2
-step = 0.05
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -80,10 +116,10 @@ tracks/1/path = NodePath("sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.6, 0.675, 0.75, 0.825, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+"values": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]
 }
 
 [sub_resource type="Animation" id="Animation_c1ho8"]
@@ -140,7 +176,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_deme8"]
 resource_name = "little_bud"
-length = 2.0
+length = 0.85
 step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -149,7 +185,7 @@ tracks/0/path = NodePath("little_bud/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -159,14 +195,95 @@ tracks/0/keys = {
 "method": &"play"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("seed_group/seed:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-7.0, -27.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("seed_group/seed:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25, 0.5, 0.65, 0.8),
+"transitions": PackedFloat32Array(3.13834, 1, 1.7411, 1),
+"update": 0,
+"values": [-28.0, 0.0, 0.0, 5.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("seed_group/seed:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, -3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("seed_group/seed:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_b23y5"]
 resource_name = "take_damage"
 step = 0.05
 
+[sub_resource type="Animation" id="Animation_bpbn7"]
+resource_name = "big_bud"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("managers/animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [1.0],
+"method": &"do_damage"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
 "RESET": SubResource("Animation_wwx0v"),
+"big_bud": SubResource("Animation_bpbn7"),
 "death": SubResource("Animation_iyow3"),
 "enter_battle": SubResource("Animation_rbvcc"),
 "flame_pillar": SubResource("Animation_c1ho8"),
@@ -188,9 +305,51 @@ shader = ExtResource("14_gii8q")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a752x"]
+blend_mode = 2
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ldi4s"]
 radius = 12.0
 height = 34.0
+
+[sub_resource type="Animation" id="Animation_lvg33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:self_modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flame:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_r4drv"]
 resource_name = "do_attack"
@@ -203,14 +362,17 @@ tracks/0/path = NodePath("animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.35),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.35, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": ["front", 0.0],
 "method": &"move_towards"
 }, {
 "args": [1.0],
 "method": &"do_damage"
+}, {
+"args": [],
+"method": &"end_turn"
 }]
 }
 tracks/1/type = "value"
@@ -262,45 +424,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_lvg33"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("flame:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r8nti"]
@@ -382,6 +505,20 @@ texture = ExtResource("15_ubiup")
 hframes = 4
 vframes = 5
 
+[node name="seed_group" type="CanvasGroup" parent="."]
+
+[node name="seed" type="Sprite2D" parent="seed_group"]
+visible = false
+position = Vector2(-7, -28)
+rotation = -1.5708
+texture = ExtResource("19_rmbig")
+
+[node name="mask" type="Sprite2D" parent="seed_group"]
+material = SubResource("CanvasItemMaterial_a752x")
+position = Vector2(-32, 13)
+scale = Vector2(0.203125, 0.203125)
+texture = ExtResource("13_v3ha5")
+
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, -1)
@@ -414,6 +551,7 @@ script = ExtResource("2_jllwm")
 parent = NodePath("..")
 
 [node name="sprite" type="Sprite2D" parent="little_bud"]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(-4, -13)
 texture = ExtResource("22_xy207")
 hframes = 4

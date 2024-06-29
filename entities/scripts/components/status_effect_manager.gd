@@ -12,6 +12,12 @@ var parent: Entity
 func setup(entity: Entity) -> void:
 	parent = entity
 
+func _on_turn_started() -> void:
+	for effect in get_effects():
+		effect.turn_started()
+	
+	remove_effects()
+
 func _on_turn_ended() -> void:
 	for effect in get_effects():
 		effect.turn_ended()

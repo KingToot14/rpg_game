@@ -32,7 +32,7 @@ func play_damage_anim(_dmg: int) -> void:
 
 func play_action_anim(anim_name: StringName) -> void:
 	animator.play(anim_name)
-	animator.animation_finished.connect(parent.action_ended, CONNECT_ONE_SHOT)
+	#animator.animation_finished.connect(parent.action_ended, CONNECT_ONE_SHOT)
 
 # - Timing - #
 func get_timed_inputs(attack_name: StringName) -> Array[float]:

@@ -86,3 +86,6 @@ func set_visible(val: bool) -> void:
 
 func screen_shake(intensity: float = 4, time = 0.25) -> void:
 	get_viewport().get_camera_2d().do_screen_shake(intensity, time)
+
+func end_turn() -> void:
+	Globals.curr_entity.action_ended()

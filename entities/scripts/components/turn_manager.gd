@@ -2,6 +2,7 @@ class_name TurnManager
 extends Node
 
 # --- Signals --- #
+signal turn_started()
 signal turn_ended()
 
 # --- Variables --- #
@@ -15,13 +16,7 @@ func _ready() -> void:
 	parent = $"../.." as Entity
 
 func take_turn() -> void:
-	for effect in parent.status_effects.get_effects():
-		effect.turn_started()
-	
-	parent.status_effects.remove_effects()
-	
-	if parent.brain:
-		parent.brain.perform_turn()
+	turn_started.emit()
 
 func replenish_actions() -> void:
 	actions_remaining = 1

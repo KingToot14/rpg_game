@@ -8,12 +8,12 @@ extends Node2D
 func set_falling_object_targets() -> void:
 	var enemies = TargetingHelper.get_alive_entities(&'enemy')
 	
-	for enemy in enemies:
-		var object = falling_objects[enemy.spawn_index]
+	for i in range(len(enemies)):
+		var object = falling_objects[enemies[i].spawn_index]
 		
 		var mode = randi_range(0, 2)
 		
-		object.set_target(enemy)
+		object.set_target(enemies[i])
 		if mode == 0:
 			object.set_sprite_frame(0)
 			object.play_animation(&"fall_light")
@@ -23,3 +23,6 @@ func set_falling_object_targets() -> void:
 		else:
 			object.set_sprite_frame(2)
 			object.play_animation(&"fall_heavy")
+		
+		if i == len(enemies) - 1:
+			object.queue_method(Globals.curr_entity.action_ended)

@@ -1,4 +1,4 @@
-class_name GreenSlimeBrain
+class_name BlazingMageflowerBrain
 extends EntityBrain
 
 # --- Functions --- #

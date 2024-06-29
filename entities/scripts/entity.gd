@@ -49,7 +49,7 @@ func is_player() -> bool:
 func remove_from_battle() -> void:
 	Globals.encounter_manager.remove_from_battle(self, spawn_index)
 
-func action_ended(_s: StringName) -> void:
+func action_ended() -> void:
 	Globals.action_fsm.perform_action()
 	Globals.ui_manager.show_timing('none', null)
 
