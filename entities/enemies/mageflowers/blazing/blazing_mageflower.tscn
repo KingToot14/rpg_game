@@ -1,15 +1,16 @@
-[gd_scene load_steps=41 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=42 format=3 uid="uid://co7gfgpnhufh3"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
 [ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="3_c5gs3"]
-[ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_jcesl"]
+[ext_resource type="Script" path="res://entities/enemies/mageflowers/mageflower_brain.gd" id="4_wvgnq"]
 [ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="5_i58o0"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_gdl0r"]
 [ext_resource type="Resource" uid="uid://p4vc2pax2xo3" path="res://entities/enemies/mageflowers/blazing/attacks/big_bud.tres" id="7_5aqdt"]
 [ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="7_xvjls"]
 [ext_resource type="Resource" uid="uid://q3fhbyd0xm6u" path="res://entities/enemies/mageflowers/blazing/attacks/little_bud.tres" id="8_123sa"]
 [ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="8_i0ftl"]
+[ext_resource type="Resource" uid="uid://cdwko24c0da0r" path="res://entities/enemies/mageflowers/blazing/attacks/flame_pillar.tres" id="9_5cjcm"]
 [ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="9_fa008"]
 [ext_resource type="Resource" uid="uid://swt053wv4iqx" path="res://entities/enemies/mageflowers/blazing/stats.tres" id="9_o52bj"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="10_h32kc"]
@@ -269,14 +270,17 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"set_target"
 }, {
 "args": [1.0],
 "method": &"do_damage"
+}, {
+"args": [],
+"method": &"end_turn"
 }]
 }
 
@@ -465,7 +469,11 @@ script = ExtResource("3_c5gs3")
 animator = NodePath("../animator")
 
 [node name="brain" type="Node" parent="managers"]
-script = ExtResource("4_jcesl")
+script = ExtResource("4_wvgnq")
+status_elemental_key = &"little_bud"
+status_effect_key = &"burn"
+normal_elemental_key = &"big_bud"
+ultimate_elemental_key = &"flame_pillar"
 action_delay = 0.0
 
 [node name="hp" type="Node" parent="managers"]
@@ -474,7 +482,7 @@ script = ExtResource("5_i58o0")
 [node name="actions" type="Node" parent="managers"]
 script = ExtResource("6_gdl0r")
 default_attack = ExtResource("7_5aqdt")
-attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("8_123sa")])
+attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("8_123sa"), ExtResource("7_5aqdt"), ExtResource("9_5cjcm")])
 
 [node name="targeting" type="Node" parent="managers" node_paths=PackedStringArray("targeting_marker")]
 script = ExtResource("7_xvjls")
@@ -580,3 +588,5 @@ color_ramp = SubResource("Gradient_lp0fy")
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="turn_started" from="managers/turn" to="managers/brain" method="_on_turn_started"]
+[connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]

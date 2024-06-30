@@ -27,11 +27,19 @@ func _on_turn_ended() -> void:
 func get_effects():
 	return status_effects.values()
 
-func add_effect(key: StringName, stacks: int = 1, stage: int = 1) -> void:
+func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	if key in status_effects:
 		status_effects[key].add_stacks(stacks, stage)
 	else:
 		status_effects[key] = Globals.registered_effects[key].new(parent, stacks, stage)
+
+func has_effect(key: StringName, min_stacks := 0, min_stage := 0) -> bool:
+	if not key in status_effects:
+		return false
+	
+	var effect = status_effects[key]
+	
+	return not (effect.stacks < min_stacks or effect.stage < min_stage)
 
 func queue_removal(effect: StringName) -> void:
 	removal_queue.append(effect)

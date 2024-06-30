@@ -13,3 +13,10 @@ func _on_turn_ended() -> void:
 	
 	for defense in defense_pool:
 		defense.decrement_cooldown()
+
+func get_attack(key: StringName) -> Attack:
+	for attack: Attack in attack_pool:
+		if attack.animation_name == key:
+			return attack
+	
+	return

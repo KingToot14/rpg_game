@@ -1349,3 +1349,4 @@ visible = false
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
