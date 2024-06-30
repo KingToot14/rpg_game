@@ -1208,6 +1208,7 @@ size = Vector2(20, 34)
 
 [node name="player_melee" type="Area2D" node_paths=PackedStringArray("hp", "special", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["entity", "player"]]
 z_index = 100
+y_sort_enabled = true
 script = ExtResource("1_xrkk6")
 hp = NodePath("managers/hp")
 special = NodePath("managers/special")
@@ -1294,12 +1295,15 @@ texture = ExtResource("21_k8ach")
 metadata/_edit_group_ = true
 
 [node name="sword" type="Sprite2D" parent="sprite/group/pivot"]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_v80ed")
-position = Vector2(9, -9)
+position = Vector2(1, -1)
 texture = ExtResource("24_fovud")
+offset = Vector2(8, -8)
 
 [node name="mask" type="Sprite2D" parent="sprite/group"]
 visible = false
+y_sort_enabled = true
 material = SubResource("CanvasItemMaterial_v8ilj")
 position = Vector2(0, 86)
 texture = ExtResource("6_ac2aa")

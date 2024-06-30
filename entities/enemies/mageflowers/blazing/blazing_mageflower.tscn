@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=46 format=3 uid="uid://co7gfgpnhufh3"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://rjnjv23o7uir" path="res://entities/enemies/mageflowers/blazing/seed.png" id="19_rmbig"]
 [ext_resource type="Texture2D" uid="uid://c04lrrw26mmvh" path="res://entities/enemies/mageflowers/blazing/fireball_particle.png" id="21_xwa8o"]
 [ext_resource type="Texture2D" uid="uid://yupfmu7j76c2" path="res://entities/enemies/mageflowers/blazing/little_bud.png" id="22_xy207"]
+[ext_resource type="Texture2D" uid="uid://rohlsvxy2gfv" path="res://entities/enemies/mageflowers/blazing/big_bud.png" id="25_eyv3e"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
 resource_name = "RESET"
@@ -261,33 +262,92 @@ tracks/5/keys = {
 resource_name = "take_damage"
 step = 0.05
 
-[sub_resource type="Animation" id="Animation_bpbn7"]
+[sub_resource type="Animation" id="Animation_6lcpr"]
 resource_name = "big_bud"
+length = 0.85
+step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("managers/animator")
+tracks/0/path = NodePath("big_bud/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"set_target"
 }, {
-"args": [1.0],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"end_turn"
+"args": ["do_attack", -1, 1.0, false],
+"method": &"play"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("seed_group/seed:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-7.0, -27.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("seed_group/seed:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25, 0.5, 0.65, 0.8),
+"transitions": PackedFloat32Array(3.13834, 1, 1.7411, 1),
+"update": 0,
+"values": [-28.0, 0.0, 0.0, 5.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("seed_group/seed:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, -3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("seed_group/seed:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
 "RESET": SubResource("Animation_wwx0v"),
-"big_bud": SubResource("Animation_bpbn7"),
+"big_bud": SubResource("Animation_6lcpr"),
 "death": SubResource("Animation_iyow3"),
 "enter_battle": SubResource("Animation_rbvcc"),
 "flame_pillar": SubResource("Animation_c1ho8"),
@@ -441,8 +501,139 @@ offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
 colors = PackedColorArray(1, 0.960784, 0.219608, 1, 0.968627, 0.752941, 0.192157, 1, 0.941176, 0.552941, 0.168627, 1, 0.890196, 0.309804, 0.133333, 1, 0.5, 0.485, 0.485, 0)
 metadata/_snap_count = 5
 
+[sub_resource type="Animation" id="Animation_8jlfg"]
+resource_name = "do_attack"
+length = 1.25
+step = 0.025
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["target", 0.0],
+"method": &"move_towards"
+}, {
+"args": [1.0],
+"method": &"do_damage"
+}, {
+"args": [],
+"method": &"end_turn"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.6, 0.675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:self_modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("flame:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 0]
+}
+
+[sub_resource type="Animation" id="Animation_gqs8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:self_modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flame:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4jeu"]
+_data = {
+"RESET": SubResource("Animation_gqs8o"),
+"do_attack": SubResource("Animation_8jlfg")
+}
+
 [node name="enemy_base" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
 z_index = 100
+y_sort_enabled = true
 script = ExtResource("1_31smw")
 brain = NodePath("managers/brain")
 hp = NodePath("managers/hp")
@@ -511,7 +702,7 @@ material = SubResource("ShaderMaterial_ju2ut")
 position = Vector2(-2, -23)
 texture = ExtResource("15_ubiup")
 hframes = 4
-vframes = 5
+vframes = 6
 
 [node name="seed_group" type="CanvasGroup" parent="."]
 
@@ -548,7 +739,7 @@ texture = ExtResource("17_t6lud")
 vframes = 2
 
 [node name="little_bud" type="Node2D" parent="."]
-z_index = 100
+z_index = 10
 position = Vector2(-36, 0)
 
 [node name="animator" type="AnimationPlayer" parent="little_bud" node_paths=PackedStringArray("parent")]
@@ -577,6 +768,44 @@ direction = Vector2(-1, 0)
 gravity = Vector2(0, -40)
 initial_velocity_min = 40.0
 initial_velocity_max = 80.0
+linear_accel_min = -80.0
+linear_accel_max = -80.0
+color_ramp = SubResource("Gradient_lp0fy")
+
+[node name="big_bud" type="Node2D" parent="."]
+z_index = 10
+position = Vector2(-36, 0)
+
+[node name="animator" type="AnimationPlayer" parent="big_bud" node_paths=PackedStringArray("parent")]
+libraries = {
+"": SubResource("AnimationLibrary_u4jeu")
+}
+script = ExtResource("2_jllwm")
+parent = NodePath("..")
+
+[node name="sprite" type="Sprite2D" parent="big_bud"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -10
+position = Vector2(-1, -1)
+texture = ExtResource("25_eyv3e")
+hframes = 4
+vframes = 2
+
+[node name="flame" type="CPUParticles2D" parent="big_bud"]
+position = Vector2(0, 4)
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 0.75
+texture = ExtResource("21_xwa8o")
+emission_shape = 1
+emission_sphere_radius = 5.0
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -40)
+initial_velocity_min = 80.0
+initial_velocity_max = 120.0
 linear_accel_min = -80.0
 linear_accel_max = -80.0
 color_ramp = SubResource("Gradient_lp0fy")

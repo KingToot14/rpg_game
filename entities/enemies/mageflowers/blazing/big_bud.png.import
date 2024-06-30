@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mxucc7lp3ycm"
-path="res://.godot/imported/fireball.png-9269f15ecbb18a455430daf3f0e43d92.ctex"
+uid="uid://rohlsvxy2gfv"
+path="res://.godot/imported/big_bud.png-bf4e076679619ba7d9165d89b6eba53a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/mageflowers/blazing/fireball.png"
-dest_files=["res://.godot/imported/fireball.png-9269f15ecbb18a455430daf3f0e43d92.ctex"]
+source_file="res://entities/enemies/mageflowers/blazing/big_bud.png"
+dest_files=["res://.godot/imported/big_bud.png-bf4e076679619ba7d9165d89b6eba53a.ctex"]
 
 [params]
 

@@ -31,6 +31,8 @@ var remaining_cooldown := 0
 @export var element_percent: float
 @export var side: TargetSide = TargetSide.PLAYER
 @export var targeting: TargetingMode = TargetingMode.SINGLE
+# @@show_if(targeting == TargetingMode.AOE)
+@export var aoe_modifier := 0.5
 @export var damage_type: DamageType = DamageType.PHYSICAL
 @export var timing_type: TimingType = TimingType.TIMED_INPUT
 @export var accuracy: float = 1
