@@ -1,5 +1,5 @@
 class_name DamageMarker
-extends Node2D
+extends Node
 
 # --- Variables --- #
 @export var wait_time: float = 0.5

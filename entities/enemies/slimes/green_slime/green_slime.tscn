@@ -1112,9 +1112,8 @@ script = ExtResource("7_8ki07")
 default_attack = ExtResource("2_uucff")
 attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("2_uucff"), ExtResource("3_8qkmm")])
 
-[node name="targeting" type="Node" parent="managers" node_paths=PackedStringArray("targeting_marker")]
+[node name="targeting" type="Node" parent="managers"]
 script = ExtResource("9_qxfbx")
-targeting_marker = NodePath("../../targeting_marker")
 
 [node name="stats" type="Node" parent="managers"]
 script = ExtResource("9_2whdx")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=54 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
@@ -29,6 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
 [ext_resource type="Texture2D" uid="uid://dwfb2absmx4p7" path="res://entities/player/melee/weapons/wooden_sword.png" id="24_fovud"]
 [ext_resource type="Shader" path="res://entities/player/effects/shine.gdshader" id="24_fvdco"]
+[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="26_5cf7o"]
+[ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="26_klxqp"]
+[ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="26_ut0rw"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -1203,6 +1206,26 @@ shader_parameter/shine_color = Color(1, 1, 1, 0)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v8ilj"]
 blend_mode = 2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsor3"]
+atlas = ExtResource("11_cdc8h")
+region = Rect2(0, 0, 14, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8c05"]
+atlas = ExtResource("11_cdc8h")
+region = Rect2(0, 9, 14, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qae6u"]
+atlas = ExtResource("26_ut0rw")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufrp3"]
+atlas = ExtResource("26_ut0rw")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue3kr"]
+atlas = ExtResource("26_ut0rw")
+region = Rect2(30, 0, 10, 10)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
 size = Vector2(20, 34)
 
@@ -1248,9 +1271,8 @@ default_attack = ExtResource("3_4gvet")
 attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
 defense_pool = Array[Resource("res://entities/scripts/actions/defense.gd")]([ExtResource("5_k0j8f")])
 
-[node name="targeting" type="Node" parent="managers" node_paths=PackedStringArray("targeting_marker")]
+[node name="targeting" type="Node" parent="managers"]
 script = ExtResource("9_hritc")
-targeting_marker = NodePath("../../targeting_marker")
 
 [node name="stats" type="Node" parent="managers"]
 script = ExtResource("11_dr50q")
@@ -1308,24 +1330,86 @@ material = SubResource("CanvasItemMaterial_v8ilj")
 position = Vector2(0, 86)
 texture = ExtResource("6_ac2aa")
 
+[node name="ui" type="Node2D" parent="." node_paths=PackedStringArray("targeting_marker", "effect_icon_rect", "effect_list_rect")]
+z_index = 200
+script = ExtResource("26_5cf7o")
+targeting_marker = NodePath("top_holder/targeting_marker")
+normal_texture = SubResource("AtlasTexture_dsor3")
+hovered_texture = SubResource("AtlasTexture_k8c05")
+effect_icon_rect = NodePath("top_holder/status_effect_icon")
+effect_list_rect = NodePath("top_holder/effect_list")
+
+[node name="top_holder" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -19.0
+offset_top = -40.0
+offset_right = 21.0
+offset_bottom = -30.0
+theme = ExtResource("26_klxqp")
+
+[node name="status_effect_icon" type="TextureRect" parent="ui/top_holder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_qae6u")
+
+[node name="effect_list" type="HBoxContainer" parent="ui/top_holder"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="effect" type="TextureRect" parent="ui/top_holder/effect_list"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = SubResource("AtlasTexture_ufrp3")
+
+[node name="effect2" type="TextureRect" parent="ui/top_holder/effect_list"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = SubResource("AtlasTexture_ue3kr")
+
+[node name="targeting_marker" type="TextureRect" parent="ui/top_holder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -4.5
+offset_right = 7.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_dsor3")
+
 [node name="shape" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_syoe4")
 
 [node name="damage_marker" parent="." instance=ExtResource("23_eq6ta")]
-position = Vector2(-27, -16)
+position = Vector2(-25, -19)
 
 [node name="front_marker" type="Marker2D" parent="."]
 visible = false
 position = Vector2(40, 4)
-
-[node name="targeting_marker" type="Sprite2D" parent="."]
-visible = false
-z_index = 200
-position = Vector2(2, -33)
-texture = ExtResource("11_cdc8h")
-vframes = 2
 
 [node name="attack_objects" type="Node2D" parent="." node_paths=PackedStringArray("falling_objects")]
 script = ExtResource("14_jx8ob")
@@ -1347,10 +1431,14 @@ visible = false
 visible = false
 
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="." to="ui" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="." to="ui" method="_on_mouse_exited"]
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
 [connection signal="lost_health" from="managers/hp" to="managers/special" method="_on_lost_health"]
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
+[connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
+[connection signal="effect_added" from="managers/status_effect" to="ui" method="_on_status_effect_added"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]

@@ -1,6 +1,9 @@
 class_name StatusEffectManager
 extends Node
 
+# --- Signals --- #
+signal effect_added()
+
 # --- Variables --- #
 var status_effects = {}
 var removal_queue: Array[StringName] = []
@@ -32,6 +35,8 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 		status_effects[key].add_stacks(stacks, stage)
 	else:
 		status_effects[key] = Globals.registered_effects[key].new(parent, stacks, stage)
+	
+	effect_added.emit()
 
 func has_effect(key: StringName, min_stacks := 0, min_stage := 0) -> bool:
 	if not key in status_effects:
