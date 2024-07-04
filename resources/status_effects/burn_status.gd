@@ -11,12 +11,15 @@ func set_status_info() -> void:
 	
 	if stage == 1:
 		name = "Overheating"
+		description = "Take minor fire damage at the end of each turn"
 		dmg = 0.035
 	elif stage == 2:
 		name = "Burning"
+		description = "Take moderate fire damage at the end of each turn"
 		dmg = 0.050
 	else:
 		name = "Scorching"
+		description = "Take major fire damage at the end of each turn"
 		dmg = 0.065
 	key = &'burn'
 

@@ -31,7 +31,7 @@ func take_damage(dmg: int, from_entity: bool = true) -> void:
 		return
 	
 	if from_entity:
-		for effect in parent.status_effects.get_effects():
+		for effect in parent.status_effects.status_effects:
 			dmg = effect.take_damage(dmg)
 		
 		parent.status_effects.remove_effects()

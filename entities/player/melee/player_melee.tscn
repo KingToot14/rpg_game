@@ -32,6 +32,7 @@
 [ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="26_5cf7o"]
 [ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="26_klxqp"]
 [ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="26_ut0rw"]
+[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="30_rd481"]
 
 [sub_resource type="Animation" id="Animation_ste4p"]
 resource_name = "RESET"
@@ -1214,19 +1215,15 @@ region = Rect2(0, 0, 14, 9)
 atlas = ExtResource("11_cdc8h")
 region = Rect2(0, 9, 14, 9)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecc8o"]
+atlas = ExtResource("26_ut0rw")
+region = Rect2(20, 0, 10, 10)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qae6u"]
 atlas = ExtResource("26_ut0rw")
 region = Rect2(10, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufrp3"]
-atlas = ExtResource("26_ut0rw")
-region = Rect2(20, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ue3kr"]
-atlas = ExtResource("26_ut0rw")
-region = Rect2(30, 0, 10, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_syoe4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8msm"]
 size = Vector2(20, 34)
 
 [node name="player_melee" type="Area2D" node_paths=PackedStringArray("hp", "special", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["entity", "player"]]
@@ -1342,11 +1339,26 @@ effect_list_rect = NodePath("top_holder/effect_list")
 [node name="top_holder" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -19.0
-offset_top = -40.0
-offset_right = 21.0
-offset_bottom = -30.0
+offset_left = -42.0
+offset_top = -41.0
+offset_right = 44.0
+offset_bottom = -29.0
 theme = ExtResource("26_klxqp")
+
+[node name="effect_list" type="HBoxContainer" parent="ui/top_holder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="effect" type="TextureRect" parent="ui/top_holder/effect_list"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_ecc8o")
+script = ExtResource("30_rd481")
 
 [node name="status_effect_icon" type="TextureRect" parent="ui/top_holder"]
 layout_mode = 1
@@ -1363,46 +1375,27 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_qae6u")
 
-[node name="effect_list" type="HBoxContainer" parent="ui/top_holder"]
+[node name="targeting_marker" type="TextureRect" parent="ui/top_holder"]
+visible = false
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -8.0
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 7.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
-
-[node name="effect" type="TextureRect" parent="ui/top_holder/effect_list"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-texture = SubResource("AtlasTexture_ufrp3")
-
-[node name="effect2" type="TextureRect" parent="ui/top_holder/effect_list"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-texture = SubResource("AtlasTexture_ue3kr")
-
-[node name="targeting_marker" type="TextureRect" parent="ui/top_holder"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -7.0
-offset_top = -4.5
-offset_right = 7.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
+pivot_offset = Vector2(7, 4.5)
+mouse_filter = 2
 texture = SubResource("AtlasTexture_dsor3")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -11)
-shape = SubResource("RectangleShape2D_syoe4")
+position = Vector2(1, -12)
+shape = SubResource("RectangleShape2D_g8msm")
 
 [node name="damage_marker" parent="." instance=ExtResource("23_eq6ta")]
 position = Vector2(-25, -19)
@@ -1442,3 +1435,5 @@ visible = false
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
+[connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

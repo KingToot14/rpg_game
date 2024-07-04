@@ -13,6 +13,7 @@ var targeting_tween: Tween
 @export var effect_list_rect: Control
 
 var is_mouse_over := false
+var is_over_effects := false
 
 # --- References --- #
 @onready var parent := $".." as Entity
@@ -40,8 +41,6 @@ func _on_targetable_set(targetable: bool) -> void:
 	update_top()
 
 func _on_mouse_entered():
-	is_mouse_over = true
-	
 	targeting_marker.texture = hovered_texture
 	
 	targeting_tween = create_tween().set_loops(0)
@@ -51,8 +50,6 @@ func _on_mouse_entered():
 	update_top()
 
 func _on_mouse_exited():
-	is_mouse_over = false
-	
 	targeting_marker.texture = normal_texture
 	
 	if targeting_tween:
@@ -61,8 +58,15 @@ func _on_mouse_exited():
 	
 	update_top()
 
+func _on_ui_entered() -> void:
+	is_mouse_over = true
+	update_top()
+
+func _on_ui_exited() -> void:
+	is_mouse_over = false
+	update_top()
+
 func update_top() -> void:
-	print(len(parent.status_effects.status_effects))
 	if parent.targeting.targetable or len(parent.status_effects.status_effects) <= 0:
 		effect_icon_rect.visible = false
 		effect_list_rect.visible = false
@@ -72,4 +76,14 @@ func update_top() -> void:
 	effect_list_rect.visible = is_mouse_over
 
 func _on_status_effect_added():
+	update_effects()
 	update_top()
+
+func update_effects() -> void:
+	var effects = parent.status_effects.status_effects
+	
+	for i in range(effect_list_rect.get_child_count()):
+		if i >= len(effects):
+			effect_list_rect.get_child(i).set_effect(null)
+		else:
+			effect_list_rect.get_child(i).set_effect(effects[i])

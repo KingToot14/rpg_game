@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ptufq240l68"]
+
+[ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_ate57"]
+[ext_resource type="Script" path="res://ui/tooltip/tooltip.gd" id="1_jo6u5"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_bte4v"]
+[ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="3_wrywy"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="4_qwolq"]
+
+[node name="tooltip" type="Node2D" node_paths=PackedStringArray("title_label", "body_label")]
+z_index = 500
+script = ExtResource("1_jo6u5")
+title_label = NodePath("tooltip/title/label")
+body_label = NodePath("tooltip/body/label")
+
+[node name="pointer" type="ColorRect" parent="." groups=["theme_setter"]]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = -1.0
+grow_vertical = 0
+script = ExtResource("2_bte4v")
+key = &"light"
+
+[node name="tooltip" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -32.0
+offset_right = 82.0
+offset_bottom = -2.0
+pivot_offset = Vector2(0, 30)
+theme = ExtResource("1_ate57")
+metadata/_edit_group_ = true
+
+[node name="panel" parent="tooltip" instance=ExtResource("3_wrywy")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" parent="tooltip" instance=ExtResource("4_qwolq")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 11.0
+grow_vertical = 1
+
+[node name="label" type="RichTextLabel" parent="tooltip/title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Description"
+text = "Tooltip Title"
+scroll_active = false
+
+[node name="body" parent="tooltip" instance=ExtResource("4_qwolq")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 12.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="label" type="RichTextLabel" parent="tooltip/body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Description"
+text = "Tooltip Body"
+scroll_active = false

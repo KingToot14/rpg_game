@@ -5,6 +5,7 @@ extends Resource
 var entity: Entity = null
 
 var name: String = "Status"
+var description: String = "Description"
 var key: StringName = &'key'
 var icon: Texture2D = null
 
