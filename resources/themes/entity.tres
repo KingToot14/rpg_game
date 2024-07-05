@@ -1,4 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://vwccas6yn07u"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://vwccas6yn07u"]
+
+[ext_resource type="FontVariation" uid="uid://bgd5wwncikkmn" path="res://ui/font/outline_3x5.tres" id="1_dpcog"]
 
 [resource]
 HBoxContainer/constants/separation = 1
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 4
+RichTextLabel/font_sizes/normal_font_size = 7
+RichTextLabel/fonts/normal_font = ExtResource("1_dpcog")

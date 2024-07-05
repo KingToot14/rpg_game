@@ -1350,6 +1350,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -1360,7 +1361,18 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_ecc8o")
 script = ExtResource("30_rd481")
 
+[node name="stacks" type="RichTextLabel" parent="ui/top_holder/effect_list/effect"]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+bbcode_enabled = true
+text = " 19"
+scroll_active = false
+
 [node name="status_effect_icon" type="TextureRect" parent="ui/top_holder"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1434,6 +1446,7 @@ visible = false
 [connection signal="effect_added" from="managers/status_effect" to="ui" method="_on_status_effect_added"]
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
+[connection signal="turn_ended" from="managers/turn" to="ui" method="update_effects"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

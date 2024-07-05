@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_iv45h"]
 [ext_resource type="Texture2D" uid="uid://c3f6rokfuex5r" path="res://ui/options/grabber.png" id="1_k4v1h"]
-[ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_text.tres" id="2_5kklf"]
+[ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_6x8.tres" id="2_5kklf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_si2l4"]
 atlas = ExtResource("1_k4v1h")

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://fupny5sldap3"]
 
-[ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_text.tres" id="1_5xkhm"]
+[ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_6x8.tres" id="1_5xkhm"]
 [ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_56huq"]
 
 [resource]

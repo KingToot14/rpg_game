@@ -28,3 +28,6 @@ func set_effect(new_effect: StatusEffect) -> void:
 	
 	if not effect:
 		hide()
+		return
+	
+	$"stacks".text = " " + str(effect.stacks)
