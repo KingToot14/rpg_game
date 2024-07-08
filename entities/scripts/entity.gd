@@ -3,6 +3,7 @@ extends Node2D
 
 # --- Variables --- #
 var spawn_index: int
+var level: int = 1
 
 # - Components - #
 @export var brain: EntityBrain
@@ -36,15 +37,14 @@ func setup(index: int):
 	for child in manager_root.get_children():
 		if 'setup' in child:
 			child.setup(self)
-	
-	#if is_player():
-		#status_effects.add_effect(&'burn', 3, 1)
 
 func store_data() -> void:
 	if hp:
 		hp.store_hp()
 	if special:
 		special.store_special()
+	
+	DataManager.players[spawn_index].level = level
 
 func is_player() -> bool:
 	return is_in_group(&'player')

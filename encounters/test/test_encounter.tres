@@ -1,18 +1,61 @@
-[gd_resource type="Resource" script_class="Encounter" load_steps=5 format=3 uid="uid://l1d1m8dt3td4"]
+[gd_resource type="Resource" script_class="Encounter" load_steps=12 format=3 uid="uid://l1d1m8dt3td4"]
 
 [ext_resource type="Script" path="res://encounters/encounter.gd" id="1_ldqpt"]
 [ext_resource type="Script" path="res://encounters/wave.gd" id="2_cwe8q"]
+[ext_resource type="Script" path="res://encounters/wave_item.gd" id="2_nq8uv"]
 
-[sub_resource type="Resource" id="Resource_ptpoa"]
-script = ExtResource("2_cwe8q")
-enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn", "res://entities/enemies/slimes/green_slime/green_slime.tscn", ""])
+[sub_resource type="Resource" id="Resource_j3fgw"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/slimes/green_slime/green_slime.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_sny1s"]
+[sub_resource type="Resource" id="Resource_ntqgv"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_ndrvs"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/slimes/green_slime/green_slime.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_us5py"]
 script = ExtResource("2_cwe8q")
-enemies = Array[String](["res://entities/enemies/slimes/green_slime/green_slime.tscn", "", "res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn", "", "res://entities/enemies/slimes/green_slime/green_slime.tscn"])
+enemies = Array[ExtResource("2_nq8uv")]([SubResource("Resource_j3fgw"), null, null, SubResource("Resource_ntqgv"), SubResource("Resource_ndrvs")])
+
+[sub_resource type="Resource" id="Resource_7fejt"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/slimes/green_slime/green_slime.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_opyf4"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/mageflowers/blazing/blazing_mageflower.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_uxn8s"]
+script = ExtResource("2_nq8uv")
+entity_path = "res://entities/enemies/slimes/green_slime/green_slime.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_w7i31"]
+script = ExtResource("2_cwe8q")
+enemies = Array[ExtResource("2_nq8uv")]([SubResource("Resource_7fejt"), null, SubResource("Resource_opyf4"), null, SubResource("Resource_uxn8s")])
 
 [resource]
 script = ExtResource("1_ldqpt")
 encounter_key = &"test_encounter"
 respawn = false
-waves = Array[ExtResource("2_cwe8q")]([SubResource("Resource_ptpoa"), SubResource("Resource_sny1s")])
+waves = Array[ExtResource("2_cwe8q")]([SubResource("Resource_us5py"), SubResource("Resource_w7i31")])

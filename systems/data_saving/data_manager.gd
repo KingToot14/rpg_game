@@ -17,11 +17,14 @@ func _ready() -> void:
 	# Initialize players
 	players = [PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new()]
 	
-	players[1].role = PlayerDataChunk.PlayerRole.MELEE
-	#players[2].role = PlayerDataChunk.PlayerRole.MELEE
-	players[1].stats = load("res://entities/player/melee/stats.tres") as EntityStats
-	#players[2].stats = load("res://entities/player/melee/stats.tres") as EntityStats
-	players[1].appearance = "pastel_purple"
+	players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
+	players[0].set_appearance("pastel_purple")
+	
+	#players[1].role = PlayerDataChunk.PlayerRole.MELEE
+	##players[2].role = PlayerDataChunk.PlayerRole.MELEE
+	#players[1].stats = load("res://entities/player/melee/stats.tres") as EntityStats
+	##players[2].stats = load("res://entities/player/melee/stats.tres") as EntityStats
+	#players[1].appearance = "pastel_purple"
 
 #region Local Area
 # - Local Area - #

@@ -26,7 +26,7 @@ func _ready() -> void:
 	set_state('moving')
 	
 	# load appearance
-	var data = DataManager.players[1]
+	var data = DataManager.players[0]
 	
 	AsyncLoader.new(data.get_appearance_path(), set_appearance)
 

@@ -48,6 +48,9 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	
 	# Setup players
 	for i in range(4):
+		if not DataManager.players[i]:
+			continue
+		
 		match DataManager.players[i].role:
 			PlayerDataChunk.PlayerRole.NONE:
 				ui_manager.setup_player_hp(null, i)
@@ -82,14 +85,20 @@ func load_wave(wave: Wave) -> void:
 	ui_manager.update_wave_counter(curr_wave + 1, wave_count)
 	
 	for i in range(len(wave.enemies)):
-		if wave.enemies[i] != "":
-			AsyncLoader.new(wave.enemies[i], setup_entity.bind(i))
+		if wave.enemies[i]:
+			AsyncLoader.new(wave.enemies[i].entity_path, setup_entity.bind(i))
 		else:
 			ui_manager.setup_enemy_hp(null, i)
 
 # - Entity Management - #
 func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
+	if entity.is_player():
+		entity.level = DataManager.players[spawn_index].level
+	else:
+		entity.level = encounter.waves[curr_wave].enemies[spawn_index].level
+	
+	# visibility
 	add_child(entity)
 	entity.visible = false
 	entity.setup(spawn_index)

@@ -12,7 +12,7 @@ func setup(entity: Entity) -> void:
 	parent = entity
 
 func get_max_hp() -> float:
-	var max_hp = stats.max_hp
+	var max_hp = stats.get_max_hp(parent.level)
 	
 	for effect in parent.status_effects.status_effects:
 		max_hp = effect.get_max_hp(max_hp)
@@ -20,7 +20,7 @@ func get_max_hp() -> float:
 	return max_hp
 
 func get_attack(use_magic: bool) -> float:
-	var attack = stats.m_attack if use_magic else stats.p_attack
+	var attack = stats.get_m_attack(parent.level) if use_magic else stats.get_p_attack(parent.level)
 	
 	for effect in parent.status_effects.status_effects:
 		if use_magic:
@@ -31,7 +31,7 @@ func get_attack(use_magic: bool) -> float:
 	return attack
 
 func get_defense(use_magic: bool) -> float:
-	var defense = stats.m_defense if use_magic else stats.p_defense
+	var defense = stats.get_m_defense(parent.level) if use_magic else stats.get_p_defense(parent.level)
 	
 	for effect in parent.status_effects.status_effects:
 		if use_magic:
@@ -42,7 +42,7 @@ func get_defense(use_magic: bool) -> float:
 	return defense
 
 func get_accuracy() -> float:
-	var accuracy = stats.accuracy
+	var accuracy = stats.get_accuracy(parent.level)
 	
 	for effect in parent.status_effects.status_effects:
 		accuracy = effect.get_accuracy(accuracy)
@@ -50,7 +50,7 @@ func get_accuracy() -> float:
 	return accuracy
 
 func get_evasion() -> float:
-	var evasion = stats.max_hp
+	var evasion = stats.get_evasion(parent.level)
 	
 	for effect in parent.status_effects.status_effects:
 		evasion = effect.get_evasion(evasion)
