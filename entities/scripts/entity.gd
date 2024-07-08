@@ -37,8 +37,8 @@ func setup(index: int):
 		if 'setup' in child:
 			child.setup(self)
 	
-	if is_player():
-		status_effects.add_effect(&'burn', 3, 1)
+	#if is_player():
+		#status_effects.add_effect(&'burn', 3, 1)
 
 func store_data() -> void:
 	if hp:

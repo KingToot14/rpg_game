@@ -26,8 +26,9 @@ func _on_mouse_exited() -> void:
 func set_effect(new_effect: StatusEffect) -> void:
 	effect = new_effect
 	
+	visible = not not effect
+	
 	if not effect:
-		hide()
 		return
 	
 	$"stacks".text = " " + str(effect.stacks)

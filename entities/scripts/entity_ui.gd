@@ -2,27 +2,35 @@ class_name EntityUi
 extends Node
 
 # --- Variables --- #
-@export var targeting_marker: Node
+var targeting_marker: Node
 var targeting_origin: float
 var targeting_tween: Tween
 
 @export var normal_texture: Texture2D
 @export var hovered_texture: Texture2D
 
-@export var effect_icon_rect: TextureRect
-@export var effect_list_rect: Control
+@onready var effect_icon_rect := %'effect_icon' as TextureRect
+@onready var effect_list_rect := %'effect_list' as Control
 
 var is_mouse_over := false
 var is_over_effects := false
 
 # --- References --- #
 @onready var parent := $".." as Entity
+@onready var effect_node := $"top_holder/effect_list/effect" as Control
 
 # --- Functions --- #
 func _ready() -> void:
+	targeting_marker = %'targeting_marker'
+	
+	# setup targeting
 	targeting_origin = targeting_marker.position.y
 	targeting_marker.visible = true
 	targeting_marker.modulate.a = 0
+	
+	# setup signals
+	parent.mouse_entered.connect(_on_mouse_entered)
+	parent.mouse_exited.connect(_on_mouse_exited)
 	
 	update_top()
 
@@ -82,8 +90,13 @@ func _on_status_effect_added():
 func update_effects() -> void:
 	var effects = parent.status_effects.status_effects
 	
-	for i in range(effect_list_rect.get_child_count()):
-		if i >= len(effects):
-			effect_list_rect.get_child(i).set_effect(null)
-		else:
-			effect_list_rect.get_child(i).set_effect(effects[i])
+	# hide all effect buttons
+	for child in effect_list_rect.get_children():
+		child.set_effect(null)
+	
+	# enable effects that exist
+	for i in range(len(effects)):
+		if i >= effect_list_rect.get_child_count():
+			effect_list_rect.add_child(effect_node.duplicate(0b0111))
+		
+		effect_list_rect.get_child(i).set_effect(effects[i])

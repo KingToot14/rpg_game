@@ -1,6 +1,9 @@
 extends Node2D
 
 # --- Variables --- #
+@export var horizontal_padding := 10.0
+@export var vertical_padding := 10.0
+
 @export var tooltip_rect: Control
 @export var pointer_rect: Control
 
@@ -18,6 +21,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	position = get_viewport().get_mouse_position()
+	
+	update_position()
 
 func set_title_text(text: String) -> void:
 	title_label.text = text
@@ -44,6 +49,17 @@ func update_size() -> void:
 	
 	if title_size > 0 and body_size > 0:
 		tooltip_rect.size.y += 1
+
+func update_position() -> void:
+	# horizontal
+	if position.x > 480 - tooltip_rect.size.x - vertical_padding:
+		tooltip_rect.position.x = -tooltip_rect.size.x - 2
+		pointer_rect.position.x = -pointer_rect.size.x - 1
+	else:
+		tooltip_rect.position.x = 2
+		pointer_rect.position.x = 1
+	
+	#tooltip_rect.global_position.x = clamp(global_position.x, 0, 480 - tooltip_rect.size.x)
 
 func show_tooltip() -> void:
 	var tween = create_tween()
