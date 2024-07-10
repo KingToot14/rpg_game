@@ -16,8 +16,11 @@ func get_alive_entities(group_name: StringName = &'entity') -> Array[Entity]:
 	
 	return ret
 
-func get_entity_by_index(group_name: String = &'entity', index: int = 0) -> Entity:
-	var entities = get_alive_entities(group_name)
+func get_entity_by_index(group_name: String = &'entity', index: int = 0, alive := true) -> Entity:
+	var entities = get_entities(group_name)
+	
+	if alive:
+		entities = get_alive_entities(group_name)
 	
 	for entity in entities:
 		if entity.spawn_index == index:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=54 format=3 uid="uid://co7gfgpnhufh3"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
@@ -23,7 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="17_t6lud"]
 [ext_resource type="Texture2D" uid="uid://rjnjv23o7uir" path="res://entities/enemies/mageflowers/blazing/seed.png" id="19_rmbig"]
 [ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="20_2lp82"]
-[ext_resource type="Texture2D" uid="uid://bdefpfoeurbdn" path="res://ui/battles/indicators/player_targeting.png" id="21_3c3fg"]
 [ext_resource type="Texture2D" uid="uid://c04lrrw26mmvh" path="res://entities/enemies/mageflowers/blazing/fireball_particle.png" id="21_xwa8o"]
 [ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="22_wimn7"]
 [ext_resource type="Texture2D" uid="uid://yupfmu7j76c2" path="res://entities/enemies/mageflowers/blazing/little_bud.png" id="22_xy207"]
@@ -489,10 +488,6 @@ region = Rect2(20, 0, 10, 10)
 atlas = ExtResource("23_4c2yw")
 region = Rect2(10, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8eybx"]
-atlas = ExtResource("21_3c3fg")
-region = Rect2(0, 0, 14, 9)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a752x"]
 blend_mode = 2
 
@@ -904,7 +899,7 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(7, 4.5)
 mouse_filter = 2
-texture = SubResource("AtlasTexture_8eybx")
+texture = SubResource("AtlasTexture_v8suc")
 
 [node name="seed_group" type="CanvasGroup" parent="."]
 

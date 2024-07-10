@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="4_pg1f6"]
 [ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="6_2qgj7"]
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="7_wwj8q"]
-[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="9_sol1s"]
+[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="7_xfp3g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 7.5
@@ -104,20 +104,37 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_btqaj")
 debug_color = Color(0, 0.596078, 0.701961, 0)
 
-[node name="bottom_marker" type="Marker2D" parent="."]
+[node name="reflection" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, 12)
-
-[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
 visibility_layer = 4
 z_index = -10
-position = Vector2(-0.305, 12)
+position = Vector2(-1, 40)
+texture = ExtResource("2_t5e58")
 flip_v = true
-script = ExtResource("9_sol1s")
-image_size = Vector2(82, 85)
-bottom_pos = NodePath("../bottom_marker")
-reflection_offset = 4.0
-sprites = [NodePath("../trunk"), NodePath("../trunk_shadow"), NodePath("../leaves")]
+hframes = 3
+script = ExtResource("7_xfp3g")
+
+[node name="reflection2" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(-1, 40)
+texture = ExtResource("2_t5e58")
+flip_v = true
+hframes = 3
+frame = 1
+script = ExtResource("7_xfp3g")
+
+[node name="reflection3" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(-1, 40)
+texture = ExtResource("2_t5e58")
+flip_v = true
+hframes = 3
+frame = 2
+script = ExtResource("7_xfp3g")
 
 [connection signal="body_entered" from="leaves/player_collider" to="trunk_shadow" method="set_visibility_state" binds= [false]]
 [connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]

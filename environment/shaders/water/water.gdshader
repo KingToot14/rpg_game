@@ -61,6 +61,7 @@ void fragment() {
 	
 	// Calculate Reflection
 	vec4 reflection_color = texture(reflection_texture, water_uv);
+	reflection_color.a = step(0.90, reflection_color.a);
 	COLOR.rgb = mix(COLOR.rgb, reflection_color.rgb, reflection_color.a * reflection_intensity);
 	
 	// Foam Color

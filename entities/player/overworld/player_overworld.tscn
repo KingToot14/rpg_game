@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
-[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="4_5t1er"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/player_control_state.gd" id="6_t3gle"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
+[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_hawyb"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
 [ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="9_3b5ol"]
 [ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/overworld/player_overworld.png" id="9_v6e35"]
@@ -83,13 +83,14 @@ shape = SubResource("CircleShape2D_l0mef")
 visible = false
 position = Vector2(-1, -5)
 
-[node name="bottom_marker" type="Marker2D" parent="."]
-position = Vector2(0, 6)
-
-[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
+[node name="reflection" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
 visibility_layer = 4
+material = SubResource("ShaderMaterial_0glyt")
+position = Vector2(0, 20)
+texture = ExtResource("9_v6e35")
 flip_v = true
-script = ExtResource("4_5t1er")
-image_size = Vector2(32, 32)
-bottom_pos = NodePath("../bottom_marker")
-sprites = [NodePath("../sprite_group/sprite")]
+hframes = 2
+vframes = 2
+script = ExtResource("8_hawyb")

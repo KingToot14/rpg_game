@@ -6,8 +6,8 @@
 [ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="4_cryho"]
 [ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="6_37ctl"]
 [ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="8_8feqt"]
+[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_42iea"]
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="8_ifoie"]
-[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="10_fsng5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 12.5
@@ -175,16 +175,37 @@ debug_color = Color(0, 0.596078, 0.701961, 0)
 visible = false
 position = Vector2(0, 12)
 
-[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
+[node name="reflection" type="Sprite2D" parent="."]
+visible = false
 visibility_layer = 4
 z_index = -10
-position = Vector2(-0.305, 12)
+position = Vector2(0, 37)
+texture = ExtResource("8_8feqt")
 flip_v = true
-script = ExtResource("10_fsng5")
-image_size = Vector2(82, 85)
-bottom_pos = NodePath("../bottom_marker")
-reflection_offset = 4.0
-sprites = [NodePath("../trunk_group/trunk"), NodePath("../trunk_group/trunk_shadow"), NodePath("../leaves")]
+hframes = 3
+script = ExtResource("8_42iea")
+
+[node name="reflection2" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(0, 37)
+texture = ExtResource("8_8feqt")
+flip_v = true
+hframes = 3
+frame = 1
+script = ExtResource("8_42iea")
+
+[node name="reflection3" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(0, 37)
+texture = ExtResource("8_8feqt")
+flip_v = true
+hframes = 3
+frame = 2
+script = ExtResource("8_42iea")
 
 [connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]
 [connection signal="body_exited" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [true]]

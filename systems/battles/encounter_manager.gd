@@ -75,8 +75,6 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 func load_next_wave() -> bool:
 	curr_wave += 1
 	
-	print("loading next wave")
-	
 	if curr_wave < wave_count:
 		load_wave(encounter.waves[curr_wave])
 		return true
@@ -98,6 +96,7 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
 	if entity.is_player():
 		entity.level = DataManager.players[spawn_index].level
+		print("Player ", spawn_index, " level: ", entity.level)
 	else:
 		entity.level = encounter.waves[curr_wave].enemies[spawn_index].level
 	
@@ -182,4 +181,4 @@ func store_xp() -> void:
 			continue
 		
 		if player.add_xp(total_xp):
-			print("A player has leveled up!")
+			print("A player has leveled up! (new level: ", player.level, ")")

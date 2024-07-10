@@ -43,8 +43,6 @@ func store_data() -> void:
 		hp.store_hp()
 	if special:
 		special.store_special()
-	
-	DataManager.players[spawn_index].level = level
 
 func is_player() -> bool:
 	return is_in_group(&'player')

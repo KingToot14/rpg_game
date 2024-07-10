@@ -165,6 +165,7 @@ texture = ExtResource("4_svauk")
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
 canvas_cull_mask = 4294966276
 size = Vector2i(480, 270)
 script = ExtResource("9_oox87")

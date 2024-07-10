@@ -9,7 +9,6 @@ var direction: Vector2
 
 @export_group("Textures")
 @export var front_threshold: float = 0.10
-var texture_direction: int = 0
 
 @export_group("Shaders")
 @export var overworld_size: Vector2 = Vector2(480, 270)
@@ -17,7 +16,7 @@ var texture_direction: int = 0
 
 # --- References --- #
 @export var sprite: Sprite2D
-@onready var reflection_sprite: ReflectionTexture = $"reflection"
+@onready var reflection_sprite := %"reflection" as Sprite2D
 
 var curr_state: PlayerControlState
 
@@ -51,20 +50,15 @@ func update_texture() -> void:
 	if direction == Vector2.ZERO:
 		return
 	
-	var tex_dir = 0
 	sprite.flip_h = direction.x > 0.0
 	reflection_sprite.flip_h = sprite.flip_h
 	
 	if abs(direction.x) < front_threshold:
-		tex_dir = 0 if direction.y >= 0.0 else 1
 		sprite.frame = 0 if direction.y >= 0.0 else 2
 	else:
-		tex_dir = 2 if direction.y >= 0.0 else 3
 		sprite.frame = 1 if direction.y >= 0.0 else 3
 	
-	if tex_dir != texture_direction:
-		reflection_sprite.generate_texture()
-		texture_direction = tex_dir
+	reflection_sprite.frame = sprite.frame
 
 # - Transitions - #
 func load_position() -> void:

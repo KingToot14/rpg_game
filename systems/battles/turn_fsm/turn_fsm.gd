@@ -42,16 +42,12 @@ func find_next_turn() -> void:
 		set_state('lose')
 		return
 	elif battle_state == 1:
-		print("All defeated!")
-		
 		# make sure nothing is in the process of dying
-		var entities = TargetingHelper.get_entities(&'enemy')
 		for i in range(5):
-			for entity in entities:
-				if entity.spawn_index != i:
-					continue
-				if is_instance_valid(entity) and not entity.hp.alive:
-					await entity.hp.died
+			var entity = TargetingHelper.get_entity_by_index(&'enemy', i, false)
+			
+			if is_instance_valid(entity) and not entity.hp.alive:
+				await entity.hp.died
 		
 		if not Globals.encounter_manager.load_next_wave():
 			set_state('win')

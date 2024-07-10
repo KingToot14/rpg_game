@@ -6,6 +6,13 @@ extends Node
 @export var loot: Array[EntityLoot] = []
 
 # --- Functions --- #
+func setup(entity: Entity) -> void:
+	entity.hp.died.connect(_on_death)
+
+func _on_death() -> void:
+	add_xp()
+	add_loot()
+
 func add_xp() -> void:
 	Globals.encounter_manager.add_xp(xp_reward)
 

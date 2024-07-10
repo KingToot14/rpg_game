@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="5_vgi0m"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="6_wn8jv"]
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="7_xv46x"]
-[ext_resource type="Script" path="res://scripts/environment/reflection_texture.gd" id="8_lg4f8"]
+[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_xelf6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 7.5
@@ -134,16 +134,37 @@ debug_color = Color(0, 0.596078, 0.701961, 0)
 visible = false
 position = Vector2(0, 12)
 
-[node name="reflection" type="Sprite2D" parent="." node_paths=PackedStringArray("bottom_pos", "sprites")]
+[node name="reflection" type="Sprite2D" parent="."]
+visible = false
 visibility_layer = 4
 z_index = -10
-position = Vector2(-0.305, 12)
+position = Vector2(-1, 40)
+texture = ExtResource("3_vdoa7")
 flip_v = true
-script = ExtResource("8_lg4f8")
-image_size = Vector2(82, 85)
-bottom_pos = NodePath("../bottom_marker")
-reflection_offset = 4.0
-sprites = [NodePath("../trunk_group/trunk"), NodePath("../trunk_group/trunk_shadow"), NodePath("../leaves")]
+hframes = 3
+script = ExtResource("8_xelf6")
+
+[node name="reflection2" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(-1, 40)
+texture = ExtResource("3_vdoa7")
+flip_v = true
+hframes = 3
+frame = 1
+script = ExtResource("8_xelf6")
+
+[node name="reflection3" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 4
+z_index = -10
+position = Vector2(-1, 40)
+texture = ExtResource("3_vdoa7")
+flip_v = true
+hframes = 3
+frame = 2
+script = ExtResource("8_xelf6")
 
 [connection signal="body_entered" from="leaves/player_collider" to="trunk_group/trunk_shadow" method="set_visibility_state" binds= [false]]
 [connection signal="body_entered" from="leaves/player_collider" to="leaves" method="set_visibility_state" binds= [false]]
