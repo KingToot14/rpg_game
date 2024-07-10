@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_um0us")
-level = 1
 max_hp = 210
 p_attack = 6.6
 p_defense = 5.4

@@ -43,8 +43,11 @@ func take_damage(dmg: int, from_entity: bool = true) -> void:
 	
 	lost_health.emit(dmg)
 	
-	if not alive:
-		died.emit()
+	#if not alive:
+		#died.emit()
+
+func do_death() -> void:
+	died.emit()
 
 func get_hp_percent() -> float:
 	return curr_hp / parent.stats.get_max_hp()

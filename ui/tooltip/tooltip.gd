@@ -44,6 +44,9 @@ func set_body_text(text: String) -> void:
 	
 	update_size()
 
+func set_width(width: int) -> void:
+	tooltip_rect.size.x = width
+
 func update_size() -> void:
 	tooltip_rect.size.y = title_size + body_size + 5
 	
@@ -58,6 +61,8 @@ func update_position() -> void:
 	else:
 		tooltip_rect.position.x = 2
 		pointer_rect.position.x = 1
+	
+	tooltip_rect.position.y = -tooltip_rect.size.y - 2
 	
 	#tooltip_rect.global_position.x = clamp(global_position.x, 0, 480 - tooltip_rect.size.x)
 

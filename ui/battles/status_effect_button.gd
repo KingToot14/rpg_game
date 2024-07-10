@@ -13,6 +13,7 @@ func _on_mouse_entered() -> void:
 	if not effect:
 		return
 	
+	Tooltip.set_width(100)
 	Tooltip.set_title_text(effect.name)
 	Tooltip.set_body_text(effect.description)
 	Tooltip.show_tooltip()

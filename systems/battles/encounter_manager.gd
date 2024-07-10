@@ -7,6 +7,7 @@ signal encounter_loss()
 
 # --- Variables --- #
 var total_loot: Array[InventoryItem] = []
+var total_xp: int
 
 @export_group("Player Paths")
 @export_file("*.tscn") var melee_path: String
@@ -73,6 +74,8 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 # - Wave Loading - #
 func load_next_wave() -> bool:
 	curr_wave += 1
+	
+	print("loading next wave")
 	
 	if curr_wave < wave_count:
 		load_wave(encounter.waves[curr_wave])
@@ -149,6 +152,7 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 
 func handle_victory() -> void:
 	store_loot()
+	store_xp()
 	encounter_victory.emit()
 
 func handle_loss() -> void:
@@ -165,6 +169,17 @@ func load_overworld() -> void:
 func add_items(items: Array[InventoryItem]) -> void:
 	total_loot.append_array(items)
 
+func add_xp(xp: int) -> void:
+	total_xp += xp
+
 func store_loot() -> void:
 	for loot in total_loot:
 		DataManager.add_to_inventory(loot)
+
+func store_xp() -> void:
+	for player in DataManager.players:
+		if not (player and player.role != PlayerDataChunk.PlayerRole.NONE):
+			continue
+		
+		if player.add_xp(total_xp):
+			print("A player has leveled up!")
