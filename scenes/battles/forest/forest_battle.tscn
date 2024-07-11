@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=101 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -218,6 +218,70 @@ region = Rect2(0, 16, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5e26k"]
 atlas = ExtResource("38_06ocl")
 region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_curyc"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axsxp"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyej0"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klefq"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38j8v"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(8, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d2wy"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j0jn"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(8, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onkxg"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35jen"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svhfc"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4egj"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p10cm"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(10, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5srsm"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(20, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cm2i0"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(0, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikbmx"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(10, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0q4s"]
+atlas = ExtResource("34_oquq2")
+region = Rect2(20, 20, 10, 10)
 
 [node name="battle_root" type="Node2D" node_paths=PackedStringArray("player_positions", "enemy_positions")]
 y_sort_enabled = true
@@ -1692,9 +1756,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -55.5
+offset_left = -56.0
 offset_top = -90.0
-offset_right = 55.5
+offset_right = 55.0
 offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1766,9 +1830,465 @@ key = &"accent"
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
+[node name="hp" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 105.0
+offset_bottom = 10.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/hp"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_curyc")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="hp_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/hp"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000,000"
+scroll_active = false
+
+[node name="p_attack" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 51.0
+offset_bottom = 20.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/p_attack"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_axsxp")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="p_attack_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/p_attack"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
+[node name="m_attack" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 55.0
+offset_top = 12.0
+offset_right = 103.0
+offset_bottom = 20.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/m_attack"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_fyej0")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="m_attack_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/m_attack"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
+[node name="p_defense" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 22.0
+offset_right = 51.0
+offset_bottom = 30.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/p_defense"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_klefq")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="p_defense_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/p_defense"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
+[node name="m_defense" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 55.0
+offset_top = 22.0
+offset_right = 103.0
+offset_bottom = 30.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/m_defense"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_38j8v")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="m_defense_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/m_defense"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
+[node name="accuracy" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 32.0
+offset_right = 51.0
+offset_bottom = 40.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/accuracy"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_8d2wy")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="accuracy_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/accuracy"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
+[node name="evasion" type="Control" parent="ui/entity_info/panels/stats_panel"]
+anchors_preset = 0
+offset_left = 55.0
+offset_top = 32.0
+offset_right = 103.0
+offset_bottom = 40.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/stats_panel/evasion"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_0j0jn")
+script = ExtResource("34_ujwxc")
+key = &"accent"
+
+[node name="evasion_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/evasion"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10,000"
+scroll_active = false
+
 [node name="element_panel" parent="ui/entity_info/panels" instance=ExtResource("29_7enty")]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
+
+[node name="fire" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 36.0
+offset_bottom = 12.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/fire"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_onkxg")
+
+[node name="fire_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/fire"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="electric" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 2.0
+offset_right = 71.0
+offset_bottom = 12.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/electric"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_35jen")
+
+[node name="electric_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/electric"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="nature" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 2.0
+offset_right = 106.0
+offset_bottom = 12.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/nature"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_svhfc")
+
+[node name="nature_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/nature"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="water" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 14.0
+offset_right = 36.0
+offset_bottom = 24.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/water"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_r4egj")
+
+[node name="water_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/water"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="ice" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 14.0
+offset_right = 71.0
+offset_bottom = 24.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/ice"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_p10cm")
+
+[node name="ice_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/ice"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="flying" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 14.0
+offset_right = 106.0
+offset_bottom = 24.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/flying"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_5srsm")
+
+[node name="flying_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/flying"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="earth" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 26.0
+offset_right = 36.0
+offset_bottom = 36.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/earth"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_cm2i0")
+
+[node name="earth_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/earth"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="light" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 26.0
+offset_right = 71.0
+offset_bottom = 36.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/light"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_ikbmx")
+
+[node name="light_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/light"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
+
+[node name="dark" type="Control" parent="ui/entity_info/panels/element_panel"]
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 26.0
+offset_right = 106.0
+offset_bottom = 36.0
+
+[node name="icon" type="TextureRect" parent="ui/entity_info/panels/element_panel/dark"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = SubResource("AtlasTexture_l0q4s")
+
+[node name="dark_label" type="RichTextLabel" parent="ui/entity_info/panels/element_panel/dark"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ElementNone"
+bbcode_enabled = true
+text = "[center] 200"
+scroll_active = false
 
 [node name="description_panel" parent="ui/entity_info/panels" instance=ExtResource("29_7enty")]
 custom_minimum_size = Vector2(0, 37)
@@ -2237,8 +2757,8 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_m
 [connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
