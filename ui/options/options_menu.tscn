@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckmeukvcpldp8"]
+[gd_scene load_steps=15 format=3 uid="uid://ckmeukvcpldp8"]
 
 [ext_resource type="Script" path="res://ui/options/options_menu.gd" id="1_5rbgt"]
 [ext_resource type="Theme" uid="uid://brsms71mmn7lt" path="res://resources/themes/options.tres" id="1_qmseg"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="1_rodyq"]
+[ext_resource type="Texture2D" uid="uid://fylj1akod321" path="res://ui/icons/cursors.png" id="2_sqe4u"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_tstxd"]
 [ext_resource type="Script" path="res://ui/overworld/menus/tab_menu.gd" id="3_7nure"]
 [ext_resource type="PackedScene" uid="uid://c6wj8dnpapaki" path="res://ui/options/slider.tscn" id="5_hhaxa"]
@@ -10,6 +11,10 @@
 [ext_resource type="Script" path="res://ui/options/options_menu_button.gd" id="6_wnhbh"]
 [ext_resource type="Script" path="res://ui/overworld/overworld_button.gd" id="7_aihbr"]
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="8_f3mpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nq7j"]
+atlas = ExtResource("2_sqe4u")
+region = Rect2(0, 0, 9, 9)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3qwj0"]
 atlas = ExtResource("6_usgwb")
@@ -22,6 +27,7 @@ region = Rect2(48, 16, 16, 16)
 [node name="options_menu" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_5rbgt")
+pixel_cursor = SubResource("AtlasTexture_1nq7j")
 
 [node name="mouse_blocker" type="Control" parent="."]
 layout_mode = 3

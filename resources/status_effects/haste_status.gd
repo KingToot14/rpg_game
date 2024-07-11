@@ -10,6 +10,6 @@ func set_status_info() -> void:
 	key = &'haste'
 
 func turn_ended() -> void:
-	entity.action_count += 1
+	entity.turn.actions_remaining += 1
 	
 	super()

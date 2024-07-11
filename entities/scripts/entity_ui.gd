@@ -100,3 +100,5 @@ func update_effects() -> void:
 			effect_list_rect.add_child(effect_node.duplicate(0b0111))
 		
 		effect_list_rect.get_child(i).set_effect(effects[i])
+	
+	update_top()

@@ -491,9 +491,8 @@ region = Rect2(10, 0, 10, 10)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a752x"]
 blend_mode = 2
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8dmny"]
-radius = 16.0
-height = 46.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q156l"]
+size = Vector2(36, 44)
 
 [sub_resource type="Animation" id="Animation_lvg33"]
 length = 0.001
@@ -754,6 +753,8 @@ _data = {
 z_index = 100
 y_sort_enabled = true
 script = ExtResource("1_31smw")
+entity_name = "Blazing Mageflower"
+description = "A wildflower who harnesses magical fire abilities."
 brain = NodePath("managers/brain")
 hp = NodePath("managers/hp")
 actions = NodePath("managers/actions")
@@ -916,8 +917,8 @@ scale = Vector2(0.203125, 0.203125)
 texture = ExtResource("13_v3ha5")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2(2, -22)
-shape = SubResource("CapsuleShape2D_8dmny")
+position = Vector2(3, -21)
+shape = SubResource("RectangleShape2D_q156l")
 
 [node name="damage_marker" parent="." instance=ExtResource("16_bkchi")]
 position = Vector2(33, -40)
@@ -1018,3 +1019,5 @@ color_ramp = SubResource("Gradient_lp0fy")
 [connection signal="turn_started" from="managers/turn" to="managers/brain" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="ui" method="update_effects"]
+[connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

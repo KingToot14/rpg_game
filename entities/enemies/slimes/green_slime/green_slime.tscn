@@ -1100,6 +1100,8 @@ height = 34.0
 z_index = 100
 y_sort_enabled = true
 script = ExtResource("1_gt34u")
+entity_name = "Green Slime"
+description = "A sentient pile of goo. It appears to have absorbed elements from the forest"
 brain = NodePath("managers/brain")
 hp = NodePath("managers/hp")
 actions = NodePath("managers/actions")
@@ -1184,9 +1186,9 @@ hovered_texture = SubResource("AtlasTexture_bhgie")
 [node name="top_holder" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -44.0
+offset_left = -8.0
 offset_top = -31.0
-offset_right = 42.0
+offset_right = 6.0
 offset_bottom = -19.0
 theme = ExtResource("24_qxeqc")
 metadata/_edit_group_ = true
@@ -1351,3 +1353,5 @@ vframes = 2
 [connection signal="turn_started" from="managers/turn" to="managers/brain" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="ui" method="update_effects"]
+[connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

@@ -2,6 +2,9 @@ class_name Entity
 extends Node2D
 
 # --- Variables --- #
+@export var entity_name: String
+@export_multiline var description: String
+
 var spawn_index: int
 var level: int = 1
 

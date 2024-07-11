@@ -39,6 +39,9 @@ var menu_pos: float = -115
 var result_color: Color
 var result_tween: Tween
 
+# --- References --- #
+@onready var entity_info_panel := %'entity_info' as EntityInfoUi
+
 # --- Constants --- #
 const SINGLE_HIT_NAME = &"single_hit"
 const MASH_NAME = &'mash'
