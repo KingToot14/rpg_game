@@ -28,9 +28,25 @@ const LEVEL_UP_MOD := 1.10
 # --- Functions --- #
 func _init(load_info = null) -> void:
 	if not load_info:
+		load_info = {}
+	
+	if 'role' in load_info:
+		# player role is none
+		if not create_new(load_info['role']):
+			return
+	else:
 		return
 	
-	# TODO: Implement Save System
+	level = max(load_info.get('level', 1), 1)
+	curr_hp = max(load_info.get('hp', stats.get_max_hp(level)), 0)
+	curr_special = clamp(load_info.get('special', 0.0), 0.0, 1.0)
+	
+	# xp
+	xp_to_next = get_cumulative_xp()
+	curr_xp = clamp(load_info.get('xp', 0), get_cumulative_xp(level - 1), xp_to_next)
+	
+	body = load_info.get('body', "")
+	appearance = load_info.get('appearance', 'pastel_blue')
 
 func get_save_data() -> Dictionary:
 	return {
@@ -43,7 +59,7 @@ func get_save_data() -> Dictionary:
 		'appearance':	appearance
 	}
 
-func create_new(new_role: PlayerRole) -> void:
+func create_new(new_role: PlayerRole) -> bool:
 	# basic info
 	role = new_role
 	level = 1
@@ -58,6 +74,8 @@ func create_new(new_role: PlayerRole) -> void:
 			stats = load("res://entities/player/healer/stats.tres") as EntityStats
 		PlayerRole.MAGIC:
 			stats = load("res://entities/player/magic/stats.tres") as EntityStats
+		_:
+			return false
 	
 	# load hp
 	heal_to_full()
@@ -65,7 +83,9 @@ func create_new(new_role: PlayerRole) -> void:
 	
 	# load xp
 	curr_xp = 0
-	xp_to_next = get_xp_to_level()
+	xp_to_next = get_cumulative_xp()
+	
+	return true
 
 func set_appearance(value: String) -> void:
 	appearance = value
@@ -78,7 +98,8 @@ func store_special(special: float) -> void:
 	curr_special = special
 
 func heal_to_full() -> void:
-	curr_hp = stats.get_max_hp(level)
+	if stats:
+		curr_hp = stats.get_max_hp(level)
 
 # - Appearance - #
 func get_appearance_path() -> String:
@@ -92,6 +113,19 @@ func get_xp_to_level(to_level := -1) -> int:
 		return 0
 	
 	return BASE_LEVEL_UP_XP * LEVEL_UP_MOD ** (to_level - 1)
+
+func get_cumulative_xp(to_level := -1) -> int:
+	if to_level < 0:
+		to_level = level
+	elif to_level == 0:
+		return 0
+	
+	var total = 0
+	
+	for i in range(1, to_level + 1):
+		total += get_xp_to_level(i)
+	
+	return total
 
 func get_remaining_xp() -> int:
 	return xp_to_next - curr_xp
@@ -111,7 +145,7 @@ func add_xp(xp: int) -> bool:
 func level_up() -> void:
 	level += 1
 	
-	xp_to_next += get_xp_to_level()
+	xp_to_next = get_cumulative_xp()
 	heal_to_full()
 	
 	if curr_xp >= xp_to_next:

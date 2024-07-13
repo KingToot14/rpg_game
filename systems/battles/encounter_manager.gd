@@ -54,6 +54,7 @@ func setup_encounter(loaded_encounter: Encounter) -> void:
 	# Setup players
 	for i in range(4):
 		if not DataManager.players[i]:
+			ui_manager.setup_player_hp(null, i)
 			continue
 		
 		match DataManager.players[i].role:
@@ -100,7 +101,6 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
 	if entity.is_player():
 		entity.level = DataManager.players[spawn_index].level
-		print("Player ", spawn_index, " level: ", entity.level)
 	else:
 		entity.level = encounter.waves[curr_wave].enemies[spawn_index].level
 	

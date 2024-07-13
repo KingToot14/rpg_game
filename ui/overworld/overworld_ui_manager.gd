@@ -37,8 +37,11 @@ func open_chest(items: Array[InventoryItem]) -> void:
 func save_game() -> void:
 	SaveManager.save_game()
 	
-	#TODO: Remove
-	print(JSON.stringify(SaveManager.get_save(), "\t"))
+func load_game():
+	DataManager.load_from_save()
+
+func clear_save():
+	SaveManager.clear_save()
 
 func reload_file() -> void:
 	pass

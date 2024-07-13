@@ -2994,6 +2994,282 @@ bbcode_enabled = true
 text = " Save   Game"
 scroll_active = false
 
+[node name="load_button" type="BaseButton" parent="ui/save_panel/content" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -84.0
+offset_top = 80.0
+offset_right = -8.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("backing/fill")
+normal_key = &"dark"
+hover_key = &"normal"
+
+[node name="backing" type="ColorRect" parent="ui/save_panel/content/load_button"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/save_panel/content/load_button/backing" groups=["theme_setter"]]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="fill" parent="ui/save_panel/content/load_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/save_panel/content/load_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -8.0
+offset_right = 22.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_gj61c")
+
+[node name="label" type="RichTextLabel" parent="ui/save_panel/content/load_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 7.0
+offset_right = -1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+bbcode_enabled = true
+text = " Load   Game"
+scroll_active = false
+
+[node name="clear_button" type="BaseButton" parent="ui/save_panel/content" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 84.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("backing/fill")
+normal_key = &"dark"
+hover_key = &"normal"
+
+[node name="backing" type="ColorRect" parent="ui/save_panel/content/clear_button"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/save_panel/content/clear_button/backing" groups=["theme_setter"]]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="fill" parent="ui/save_panel/content/clear_button" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="ui/save_panel/content/clear_button"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -8.0
+offset_right = 22.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_gj61c")
+
+[node name="label" type="RichTextLabel" parent="ui/save_panel/content/clear_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 7.0
+offset_right = -1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Count"
+bbcode_enabled = true
+text = " Clear   Game"
+scroll_active = false
+
 [node name="chest_panel" type="Control" parent="ui" node_paths=PackedStringArray("item_rows")]
 visible = false
 layout_mode = 3
@@ -3211,4 +3487,6 @@ scroll_active = false
 [connection signal="pressed" from="ui/info_panel/tabs/map_tab" to="ui/info_panel" method="set_tab" binds= ["map"]]
 [connection signal="pressed" from="ui/save_panel/content/reload_button" to="ui" method="reload_file"]
 [connection signal="pressed" from="ui/save_panel/content/save_button" to="ui" method="save_game"]
+[connection signal="pressed" from="ui/save_panel/content/load_button" to="ui" method="load_game"]
+[connection signal="pressed" from="ui/save_panel/content/clear_button" to="ui" method="clear_save"]
 [connection signal="pressed" from="ui/chest_panel/collect_butotn" to="ui/chest_panel" method="hide_panel"]

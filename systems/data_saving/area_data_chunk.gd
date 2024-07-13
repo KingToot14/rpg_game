@@ -9,6 +9,25 @@ var dialogue_states = {}
 var flags = {}
 
 # --- Functions --- #
+func _init(load_info = null) -> void:
+	if not load_info:
+		load_info = {}
+	
+	var chests = load_info.get('chests', [])
+	for chest in chests:
+		opened_chests.append(chest)
+	
+	var encounters = load_info.get('encounters', [])
+	for encounter in encounters:
+		defeated_encounters.append(encounter)
+	
+	var puzzles = load_info.get('puzzles', [])
+	for puzzle in puzzles:
+		solved_puzzles.append(puzzle)
+	
+	dialogue_states = load_info.get('dialogue', {})
+	flags = load_info.get('flags', {})
+
 func get_save_data() -> Dictionary:
 	return {
 		'chests': 		opened_chests,

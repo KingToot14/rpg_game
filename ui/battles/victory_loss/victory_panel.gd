@@ -35,8 +35,6 @@ func set_xp(value: int) -> void:
 	
 	# wait for adding to be completed
 	for xp_bar in xp_bars:
-		print(xp_bar.is_done_adding)
-		
 		if not xp_bar.is_done_adding:
 			await xp_bar.done_adding
 	

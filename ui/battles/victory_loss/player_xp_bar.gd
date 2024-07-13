@@ -52,7 +52,7 @@ func load_player_info() -> void:
 	
 	# xp
 	xp_label.text = str(data.curr_xp) + "/" + str(data.xp_to_next)
-	var prev_xp = data.get_xp_to_level(data.level - 1)
+	var prev_xp = data.get_cumulative_xp(data.level - 1)
 	var fill_size = floor(50 * (1.0 * (data.curr_xp - prev_xp) / (data.xp_to_next - prev_xp)))
 	
 	fill_rect.size.x = fill_size

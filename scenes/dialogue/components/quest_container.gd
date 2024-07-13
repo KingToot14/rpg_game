@@ -21,8 +21,6 @@ func load_items(tag: StringName) -> void:
 		
 		container.visible = i < len(quest.requirements)
 		
-		print(container.visible)
-		
 		if not container.visible:
 			continue
 		

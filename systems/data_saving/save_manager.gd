@@ -20,10 +20,14 @@ func save_game() -> void:
 func get_save() -> Dictionary:
 	var file = FileAccess.open(get_save_path(), FileAccess.READ)
 	
-	if file.get_position() < file.get_length():
-		return file.get_var()
-	else:
+	if not (file and file.get_position() < file.get_length()):
 		return {}
+	else:
+		return file.get_var()
+
+func clear_save() -> void:
+	if FileAccess.file_exists(get_save_path()):
+		DirAccess.remove_absolute(get_save_path())
 
 func make_save_directory() -> void:
 	if not DirAccess.dir_exists_absolute(SAVE_FOLDER):

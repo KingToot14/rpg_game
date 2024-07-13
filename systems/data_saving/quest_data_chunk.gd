@@ -6,8 +6,12 @@ var quest_path: String
 var completed: bool = false
 
 # --- Functions --- #
-func _init(path: String = "") -> void:
-	quest_path = path
+func _init(load_info = null) -> void:
+	if not load_info:
+		load_info = {}
+	
+	quest_path = load_info.get('quest_path', "")
+	completed = load_info.get('completed', false)
 
 func get_save_data() -> Dictionary:
 	return {

@@ -32,7 +32,6 @@ func update_theme(curr_key: StringName = &"") -> void:
 		&'accent':
 			self_modulate = preset.accent_text_color
 		&'shader':
-			print("Updating shader")
 			material.set_shader_parameter('outline_color', preset.light_color)
 			material.set_shader_parameter('normal_color', preset.normal_color)
 			material.set_shader_parameter('shadow_color', preset.dark_color)

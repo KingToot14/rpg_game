@@ -27,7 +27,8 @@ func _ready() -> void:
 	# load appearance
 	var data = DataManager.players[0]
 	
-	AsyncLoader.new(data.get_appearance_path(), set_appearance)
+	if data:
+		AsyncLoader.new(data.get_appearance_path(), set_appearance)
 
 func _physics_process(_delta) -> void:
 	get_direction()

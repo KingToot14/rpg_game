@@ -1,7 +1,7 @@
 extends Node
 
 # --- Variables --- #
-var players: Array[PlayerDataChunk]
+var players: Array[PlayerDataChunk] = [null, null, null, null]
 
 var local_area: LocalAreaChunk = LocalAreaChunk.new()
 var areas = {}
@@ -14,11 +14,7 @@ var options := OptionsDataChunk.new()
 
 # --- Functions --- #
 func _ready() -> void:
-	# Initialize players
-	players = [PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new()]
-	
-	players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
-	players[0].set_appearance("pastel_purple")
+	load_from_save()
 
 func get_save_data() -> Dictionary:
 	var data = {}
@@ -66,7 +62,48 @@ func get_save_data() -> Dictionary:
 func load_from_save() -> void:
 	var data = SaveManager.get_save()
 	
-	print(data)
+	# - Player Data
+	players = [null, null, null, null]
+	
+	if 'players' in data:
+		var player_data = data['players']
+		
+		for i in range(4):
+			if i >= len(player_data):
+				break
+			
+			players[i] = PlayerDataChunk.new(player_data[i])
+	else:
+		players = [PlayerDataChunk.new(), null, null, null]
+		
+		players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
+		players[0].set_appearance("pastel_purple")
+	
+	# - Local Area
+	local_area = LocalAreaChunk.new(data.get('local_area'))
+	
+	# - Areas
+	var area_data = data.get('areas', {})
+	
+	areas = {}
+	for key in area_data:
+		areas[key] = AreaDataChunk.new(area_data.get(key, null))
+	
+	# - Quests
+	var quest_data = data.get('quests', {})
+	
+	quests = {}
+	for key in quest_data:
+		quests[key] = QuestDataChunk.new(quest_data.get(key, null))
+	
+	# - Inventory
+	var inventory_data = data.get('inventory', [])
+	
+	for item in inventory:
+		item.quantity = 0
+	
+	for item in inventory_data:
+		add_to_inventory(InventoryItem.new(item.get('key', &"twig"), item.get('quantity', 0)))
 
 #region Local Area
 # - Local Area - #
@@ -177,7 +214,8 @@ func has_item_list(item_list: Array[InventoryItem]) -> bool:
 
 #region Quests
 func start_quest(key: StringName, path: String) -> void:
-	quests[key] = QuestDataChunk.new(path)
+	quests[key] = QuestDataChunk.new()
+	quests[key].quest_path = path
 
 func load_quest(key: StringName) -> Quest:
 	if key in quests:
