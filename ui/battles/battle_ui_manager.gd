@@ -54,20 +54,11 @@ func _ready():
 	action_bar.modulate.a = 0
 
 #region HP
-func setup_entity_hp(hp_bar, entity: Entity) -> void:
-	hp_bar.visible = not not entity
-	if not entity:
-		return
-	
-	hp_bar.set_entity(entity)
-	#entity.hp.lost_health.connect(hp_bar.update_health)
-	#hp_bar.update_health(0, entity)
-
 func setup_player_hp(player: Entity, index: int) -> void:
-	setup_entity_hp(player_hp_bars[index], player)
+	player_hp_bars[index].set_entity(player)
 
 func setup_enemy_hp(enemy: Entity, index: int):
-	setup_entity_hp(enemy_hp_bars[index], enemy)
+	enemy_hp_bars[index].set_entity(enemy)
 #endregion
 
 func _on_state_changed(state: String) -> void:
@@ -141,8 +132,8 @@ func update_condition(condition: String) -> void:
 	condition_label.text = "Condition: " + condition
 
 #region Panels
-func set_victory_panel(val: bool) -> void:
-	victory_panel.visible = val
+#func set_victory_panel(val: bool) -> void:
+	#victory_panel.show_panel()
 
 func set_loss_panel(val: bool) -> void:
 	loss_panel.visible = val
@@ -162,7 +153,7 @@ func show_timing(version: StringName, target: Variant, param: Variant = null) ->
 		mash_timing.setup_timing(target, param)
 
 func enable_timing() -> void:
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().process_frame
 	
 	if single_hit.visible:
 		single_hit.set_active()

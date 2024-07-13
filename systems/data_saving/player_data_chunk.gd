@@ -49,7 +49,7 @@ func create_new(new_role: PlayerRole) -> void:
 			stats = load("res://entities/player/magic/stats.tres") as EntityStats
 	
 	# load hp
-	curr_hp = stats.get_max_hp(level)
+	heal_to_full()
 	curr_special = 0.0
 	
 	# load xp
@@ -66,30 +66,39 @@ func store_hp(hp: int) -> void:
 func store_special(special: float) -> void:
 	curr_special = special
 
-func heal(percent: float) -> void:
-	store_hp(curr_hp + int(stats.get_max_hp() * percent))
+func heal_to_full() -> void:
+	curr_hp = stats.get_max_hp(level)
 
 # - Appearance - #
 func get_appearance_path() -> String:
 	return APPEARANCE_PATH + appearance + ".tres"
 
 # - XP - #
-func get_xp_to_level() -> int:
-	return BASE_LEVEL_UP_XP * LEVEL_UP_MOD ** (level - 1)
+func get_xp_to_level(to_level := -1) -> int:
+	if to_level < 0:
+		to_level = level
+	elif to_level == 0:
+		return 0
+	
+	return BASE_LEVEL_UP_XP * LEVEL_UP_MOD ** (to_level - 1)
 
-func add_xp(xp: int) -> bool:
-	curr_xp += xp
+func get_remaining_xp() -> int:
+	return xp_to_next - curr_xp
+
+func set_xp(xp: int) -> void:
+	curr_xp = xp
 	
 	if curr_xp >= xp_to_next:
 		level_up()
-		return true
-	
-	return false
+
+func add_xp(xp: int) -> void:
+	set_xp(curr_xp + xp)
 
 func level_up() -> void:
 	level += 1
 	
 	xp_to_next += get_xp_to_level()
+	heal_to_full()
 	
 	if curr_xp >= xp_to_next:
 		level_up()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="1_uqgmj"]
 
-[node name="panel" type="ColorRect" groups=["theme_setter"]]
+[node name="panel" type="ColorRect"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 offset_right = 132.0
 offset_bottom = 106.0

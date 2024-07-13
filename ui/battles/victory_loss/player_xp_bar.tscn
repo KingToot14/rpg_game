@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://boxije6upv4im"]
+
+[ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="1_2q2y5"]
+[ext_resource type="Script" path="res://ui/battles/victory_loss/player_xp_bar.gd" id="1_ksj7l"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_kfmdh"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_65bb8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlkmq"]
+atlas = ExtResource("1_2q2y5")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew6o6"]
+atlas = ExtResource("1_2q2y5")
+region = Rect2(8, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x52d8"]
+atlas = ExtResource("1_2q2y5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4454q"]
+atlas = ExtResource("1_2q2y5")
+region = Rect2(8, 8, 8, 8)
+
+[node name="player_xp_bar" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 6.0
+offset_top = 15.0
+offset_right = -6.0
+offset_bottom = 29.0
+grow_horizontal = 2
+script = ExtResource("1_ksj7l")
+melee_icon = SubResource("AtlasTexture_tlkmq")
+ranged_icon = SubResource("AtlasTexture_ew6o6")
+healer_icon = SubResource("AtlasTexture_x52d8")
+magic_icon = SubResource("AtlasTexture_4454q")
+increment_duration = 2.0
+
+[node name="icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_tlkmq")
+script = ExtResource("2_kfmdh")
+key = &"accent"
+
+[node name="bar_back" parent="." instance=ExtResource("3_65bb8")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = 10.0
+offset_top = -8.0
+offset_right = 60.0
+grow_horizontal = 1
+grow_vertical = 0
+key = &"dark"
+
+[node name="bar_fill" parent="bar_back" instance=ExtResource("3_65bb8")]
+unique_name_in_owner = true
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+key = &"light"
+
+[node name="level_label" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 13.0
+offset_right = 59.0
+offset_bottom = 6.0
+mouse_filter = 2
+theme_type_variation = &"Description"
+text = "Level 10"
+scroll_active = false
+
+[node name="xp_label" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 63.0
+offset_top = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"Description"
+text = "100,000/100,000"
+scroll_active = false

@@ -6,16 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="3_wrywy"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="4_qwolq"]
 
-[node name="tooltip" type="Node2D" node_paths=PackedStringArray("tooltip_rect", "pointer_rect", "title_label", "body_label")]
-z_index = 500
+[node name="tooltip" type="CanvasLayer"]
+layer = 50
 script = ExtResource("1_jo6u5")
-tooltip_rect = NodePath("holder")
-pointer_rect = NodePath("pointer")
-title_label = NodePath("holder/title/label")
-body_label = NodePath("holder/body/label")
 
-[node name="pointer" type="ColorRect" parent="." groups=["theme_setter"]]
+[node name="tooltip" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+
+[node name="pointer" type="ColorRect" parent="tooltip" groups=["theme_setter"]]
+unique_name_in_owner = true
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -27,7 +30,8 @@ grow_vertical = 0
 script = ExtResource("2_bte4v")
 key = &"light"
 
-[node name="holder" type="Control" parent="."]
+[node name="text" type="Control" parent="tooltip"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2.0
@@ -38,7 +42,7 @@ pivot_offset = Vector2(0, 30)
 theme = ExtResource("1_ate57")
 metadata/_edit_group_ = true
 
-[node name="panel" parent="holder" instance=ExtResource("3_wrywy")]
+[node name="panel" parent="tooltip/text" instance=ExtResource("3_wrywy")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +52,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="title" parent="holder" instance=ExtResource("4_qwolq")]
+[node name="title" parent="tooltip/text" instance=ExtResource("4_qwolq")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
@@ -58,7 +62,8 @@ offset_right = -2.0
 offset_bottom = 11.0
 grow_vertical = 1
 
-[node name="label" type="RichTextLabel" parent="holder/title"]
+[node name="title_label" type="RichTextLabel" parent="tooltip/text/title"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,14 +76,15 @@ theme_type_variation = &"Description"
 text = "Tooltip Title"
 scroll_active = false
 
-[node name="body" parent="holder" instance=ExtResource("4_qwolq")]
+[node name="body" parent="tooltip/text" instance=ExtResource("4_qwolq")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 12.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="label" type="RichTextLabel" parent="holder/body"]
+[node name="body_label" type="RichTextLabel" parent="tooltip/text/body"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0

@@ -130,6 +130,3 @@ theme = ExtResource("6_ljpgd")
 theme_type_variation = &"Cooldown"
 text = " 10"
 scroll_active = false
-
-[connection signal="mouse_entered" from="." to="." method="show_outline"]
-[connection signal="mouse_exited" from="." to="." method="hide_outline"]

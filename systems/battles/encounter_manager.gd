@@ -36,6 +36,10 @@ var wave_count: int = 0
 func _ready():
 	Globals.encounter_manager = self
 	
+	# Signals
+	encounter_victory.connect(store_loot)
+	encounter_victory.connect(store_xp)
+	
 	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
 	
 	# Reveal battle
@@ -150,8 +154,6 @@ func evaluate_state() -> int:		# -1 => lose  |  0 => neither  |  1 => win
 	return 1 if all_dead else 0
 
 func handle_victory() -> void:
-	store_loot()
-	store_xp()
 	encounter_victory.emit()
 
 func handle_loss() -> void:
@@ -176,9 +178,5 @@ func store_loot() -> void:
 		DataManager.add_to_inventory(loot)
 
 func store_xp() -> void:
-	for player in DataManager.players:
-		if not (player and player.role != PlayerDataChunk.PlayerRole.NONE):
-			continue
-		
-		if player.add_xp(total_xp):
-			print("A player has leveled up! (new level: ", player.level, ")")
+	# Push xp to victory panel
+	Globals.ui_manager.victory_panel.show_xp(total_xp)

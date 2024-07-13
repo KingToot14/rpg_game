@@ -6,7 +6,7 @@ signal lost_health(dmg: int)
 signal died()
 
 # --- Variables --- #
-var curr_hp: int
+var curr_hp := 10
 var alive := true
 
 @export var load_max_hp: bool = false
