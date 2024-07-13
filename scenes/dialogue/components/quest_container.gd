@@ -28,9 +28,5 @@ func load_items(tag: StringName) -> void:
 		
 		var quest_item = quest.requirements[i]
 		var inventory_item = DataManager.get_item(quest_item.item_key)
-		var curr_count = 0
-		
-		if inventory_item:
-			curr_count = clamp(inventory_item.quantity, 0, quest_item.quantity)
 		
 		icon_container.get_child(i).set_item_target(inventory_item, quest_item.quantity)

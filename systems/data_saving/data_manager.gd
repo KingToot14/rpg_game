@@ -20,6 +20,54 @@ func _ready() -> void:
 	players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
 	players[0].set_appearance("pastel_purple")
 
+func get_save_data() -> Dictionary:
+	var data = {}
+	
+	# player data
+	var player_data = []
+	for player in players:
+		if player:
+			player_data.append(player.get_save_data())
+		else:
+			player_data.append(null)
+	
+	data['players'] = player_data
+	
+	# local area
+	if local_area:
+		data['local_area'] = local_area.get_save_data()
+	
+	# area chunk
+	var area_data = {}
+	
+	for key in areas:
+		area_data[key] = areas[key].get_save_data()
+	
+	data['areas'] = area_data
+	
+	# quests
+	var quest_data = {}
+	
+	for key in quests:
+		quest_data[key] = quests[key].get_save_data()
+	
+	data['quests'] = quest_data
+	
+	# inventory
+	var inventory_data = []
+	
+	for item in inventory:
+		inventory_data.append(item.get_save_data())
+	
+	data['inventory'] = inventory_data
+	
+	return data
+
+func load_from_save() -> void:
+	var data = SaveManager.get_save()
+	
+	print(data)
+
 #region Local Area
 # - Local Area - #
 func clear_local_area() -> void:

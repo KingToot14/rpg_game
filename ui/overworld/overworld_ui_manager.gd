@@ -33,3 +33,15 @@ func set_panel(panel_name: String) -> void:
 
 func open_chest(items: Array[InventoryItem]) -> void:
 	chest_panel.load_items(items)
+
+func save_game() -> void:
+	SaveManager.save_game()
+	
+	#TODO: Remove
+	print(JSON.stringify(SaveManager.get_save(), "\t"))
+
+func reload_file() -> void:
+	pass
+
+func quit_game() -> void:
+	SceneManager.quit_game()

@@ -9,6 +9,12 @@ var completed: bool = false
 func _init(path: String = "") -> void:
 	quest_path = path
 
+func get_save_data() -> Dictionary:
+	return {
+		'quest_path': 	quest_path,
+		'completed': 	completed
+	}
+
 func get_status() -> bool:
 	var quest = load(quest_path) as Quest
 	

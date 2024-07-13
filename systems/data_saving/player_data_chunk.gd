@@ -32,6 +32,17 @@ func _init(load_info = null) -> void:
 	
 	# TODO: Implement Save System
 
+func get_save_data() -> Dictionary:
+	return {
+		'role': 		role,
+		'level': 		level,
+		'hp': 			curr_hp,
+		'special':	 	curr_special,
+		'xp':			curr_xp,
+		'body':			body,
+		'appearance':	appearance
+	}
+
 func create_new(new_role: PlayerRole) -> void:
 	# basic info
 	role = new_role

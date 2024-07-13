@@ -2401,7 +2401,6 @@ text = "Description"
 scroll_active = false
 
 [node name="victory_panel" type="Control" parent="ui" node_paths=PackedStringArray("xp_bars")]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

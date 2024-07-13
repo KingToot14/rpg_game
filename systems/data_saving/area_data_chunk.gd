@@ -9,6 +9,14 @@ var dialogue_states = {}
 var flags = {}
 
 # --- Functions --- #
+func get_save_data() -> Dictionary:
+	return {
+		'chests': 		opened_chests,
+		'encounters': 	defeated_encounters,
+		'puzzles': 		solved_puzzles,
+		'dialogue': 	dialogue_states,
+		'flags': 		flags
+	}
 
 # - Chests - #
 func open_chest(key: StringName) -> void:

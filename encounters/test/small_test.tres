@@ -24,6 +24,6 @@ enemies = Array[ExtResource("2_u2oq0")]([null, SubResource("Resource_4q2am"), nu
 
 [resource]
 script = ExtResource("1_a0lvn")
-encounter_key = &""
+encounter_key = &"small_test"
 respawn = true
 waves = Array[ExtResource("2_ahmps")]([SubResource("Resource_rmmam")])

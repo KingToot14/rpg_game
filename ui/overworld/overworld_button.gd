@@ -38,6 +38,3 @@ func set_normal() -> void:
 		outline_rect.update_theme(alt_normal_key)
 	else:
 		outline_rect.update_theme(normal_key)
-
-func quit_game() -> void:
-	SceneManager.quit_game()

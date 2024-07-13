@@ -9,6 +9,13 @@ var player_position: Vector2 = Vector2(136, 142)
 var defeated_encounters: Array[StringName]
 
 # --- Functions --- #
+func get_save_data() -> Dictionary:
+	return {
+		'area_path': 	area_path,
+		'name': 		name,
+		'player_pos': 	player_position,
+		'encounters': 	defeated_encounters
+	}
 
 # - Encounters - #
 func add_victory(key: StringName) -> void:

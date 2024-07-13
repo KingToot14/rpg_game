@@ -10,4 +10,8 @@ extends Resource
 @export var quantity: int
 
 # --- Functions --- #
-
+func get_save_data() -> Dictionary:
+	return {
+		'key': 		key,
+		'quantity': quantity
+	}
