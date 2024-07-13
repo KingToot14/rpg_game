@@ -2,48 +2,53 @@ class_name ItemInfo
 extends Control
 
 # --- Variables --- #
+var item
+
 @export var icon_rect: TextureRect
 @export var count_label: RichTextLabel
 
-@export var tooltip_rect: Control
-@export var tooltip_label: RichTextLabel
+@export var center_count := false
 
 # --- Functions --- #
 func _ready() -> void:
-	tooltip_rect.modulate.a = 0.0
+	mouse_entered.connect(show_tooltip)
+	mouse_exited.connect(hide_tooltip)
 
-func set_item(item) -> void:
-	visible = not not item
+func set_item(new_item) -> void:
+	visible = not not new_item
 	
 	if not visible:
 		return
 	
-	var inventory_item = item
+	item = new_item
 	if item is InventoryItem:
-		inventory_item = DataManager.get_item(item.item_key) as ItemDataChunk
+		item = DataManager.get_item(item.item_key) as ItemDataChunk
 	
-	if not inventory_item:
+	if not item:
 		return
 	
 	# set icon
-	icon_rect.texture = inventory_item.icon
+	icon_rect.texture = item.icon
 	
 	# set count
-	count_label.text = " " + str(item.quantity)
+	if center_count:
+		count_label.text = "[center]"
+	else:
+		count_label.text = " "
 	
-	# set tooltip
-	tooltip_label.text = "[center]" + inventory_item.name
+	count_label.text += str(item.quantity)
 
-func set_item_target(item: InventoryItem, target: int) -> void:
-	set_item(item)
+func set_item_target(new_item, target: int) -> void:
+	set_item(new_item)
 	count_label.append_text("/" + str(target))
 
 func show_tooltip() -> void:
-	var tween = create_tween()
+	if not item:
+		return
 	
-	tween.tween_property(tooltip_rect, 'modulate:a', 1.0, 0.15)
+	Tooltip.set_title_text(item.name)
+	Tooltip.set_body_text(item.description)
+	Tooltip.show_tooltip()
 
 func hide_tooltip() -> void:
-	var tween = create_tween()
-	
-	tween.tween_property(tooltip_rect, 'modulate:a', 0.0, 0.15)
+	Tooltip.hide_tooltip()

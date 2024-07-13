@@ -1,15 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://k01qlajn0pie"]
+[gd_scene load_steps=5 format=3 uid="uid://k01qlajn0pie"]
 
 [ext_resource type="Theme" uid="uid://fupny5sldap3" path="res://resources/themes/overworld.tres" id="1_cequ7"]
 [ext_resource type="Script" path="res://ui/overworld/chest_ui/item_info.gd" id="2_exkml"]
 [ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="2_og5e1"]
-[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_nfrdt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ladmy"]
 atlas = ExtResource("2_og5e1")
 region = Rect2(0, 0, 20, 20)
 
-[node name="item_info" type="Control" node_paths=PackedStringArray("icon_rect", "count_label", "tooltip_rect", "tooltip_label")]
+[node name="item_info" type="Control" node_paths=PackedStringArray("icon_rect", "count_label")]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
@@ -20,8 +19,6 @@ theme = ExtResource("1_cequ7")
 script = ExtResource("2_exkml")
 icon_rect = NodePath("icon")
 count_label = NodePath("count")
-tooltip_rect = NodePath("tooltip")
-tooltip_label = NodePath("tooltip/label")
 
 [node name="icon" type="TextureRect" parent="."]
 layout_mode = 1
@@ -37,6 +34,7 @@ texture = SubResource("AtlasTexture_ladmy")
 expand_mode = 1
 
 [node name="count" type="RichTextLabel" parent="."]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -45,7 +43,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -9.0
 offset_top = -9.0
-offset_right = 5.0
+offset_right = 8.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -54,40 +52,3 @@ theme_type_variation = &"Count"
 bbcode_enabled = true
 text = " 5"
 scroll_active = false
-
-[node name="tooltip" parent="." instance=ExtResource("3_nfrdt")]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
-layout_mode = 1
-offset_left = -22.0
-offset_top = -17.0
-offset_right = 22.0
-offset_bottom = -23.0
-key = &"light"
-metadata/_edit_group_ = true
-
-[node name="fill" parent="tooltip" instance=ExtResource("3_nfrdt")]
-layout_mode = 1
-offset_left = 1.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
-
-[node name="label" type="RichTextLabel" parent="tooltip"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 3.0
-offset_right = -1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "[center]Hiiii"
-scroll_active = false
-
-[connection signal="mouse_entered" from="." to="." method="show_tooltip"]
-[connection signal="mouse_exited" from="." to="." method="hide_tooltip"]

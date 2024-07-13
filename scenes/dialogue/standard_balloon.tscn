@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsgjeltgr4wl4"]
+[gd_scene load_steps=9 format=3 uid="uid://bsgjeltgr4wl4"]
 
 [ext_resource type="Script" path="res://scenes/dialogue/standard_balloon.gd" id="1_fqa6c"]
 [ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="2_203ak"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="5_tdnb8"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="6_frked"]
 [ext_resource type="Script" path="res://scenes/dialogue/components/quest_container.gd" id="7_2bf51"]
+[ext_resource type="PackedScene" uid="uid://dbasqqwej8pvy" path="res://scenes/dialogue/components/item_info.tscn" id="8_s3owf"]
 
 [node name="standard_balloon" type="CanvasLayer"]
-layer = 100
+layer = 10
 script = ExtResource("1_fqa6c")
 
 [node name="balloon" type="Control" parent="."]
@@ -159,17 +160,23 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
 offset_left = 159.0
-offset_top = 178.0
+offset_top = 179.0
 offset_right = 361.0
 offset_bottom = 214.0
+pivot_offset = Vector2(101, 18)
 theme = ExtResource("2_203ak")
 script = ExtResource("7_2bf51")
 metadata/_edit_group_ = true
 
 [node name="panel" parent="balloon/quest_container" instance=ExtResource("5_tdnb8")]
-layout_mode = 0
-offset_right = 202.0
-offset_bottom = 36.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="backing" parent="balloon/quest_container/panel" instance=ExtResource("4_ohcf5")]
 layout_mode = 1
@@ -179,14 +186,49 @@ offset_right = -2.0
 offset_bottom = -2.0
 
 [node name="icon_container" type="HBoxContainer" parent="balloon/quest_container/panel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"QuestContainer"
 alignment = 1
+
+[node name="item_info" parent="balloon/quest_container/panel/icon_container" instance=ExtResource("8_s3owf")]
+layout_mode = 2
+
+[node name="item_info2" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
+
+[node name="item_info3" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
+
+[node name="item_info4" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
+
+[node name="item_info5" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
+
+[node name="item_info6" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
+
+[node name="item_info7" parent="balloon/quest_container/panel/icon_container" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("8_s3owf")]
+layout_mode = 2
+icon_rect = NodePath("../item_info/icon")
+count_label = NodePath("../item_info/count")
 
 [connection signal="gui_input" from="balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="balloon/response_container/response_menu" to="." method="_on_responses_menu_response_selected"]
