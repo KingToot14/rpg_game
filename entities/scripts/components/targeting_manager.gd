@@ -28,13 +28,9 @@ func setup(entity: Entity) -> void:
 
 func _on_mouse_entered() -> void:
 	is_mouse_over = true
-	
-	show_info()
 
 func _on_mouse_exited() -> void:
 	is_mouse_over = false
-	
-	hide_info()
 
 func select() -> void:
 	selected.emit(parent)
@@ -42,9 +38,3 @@ func select() -> void:
 func set_targetable(val: bool) -> void:
 	targetable = val
 	targetable_set.emit(targetable)
-
-func show_info() -> void:
-	Globals.ui_manager.entity_info_panel.show_entity(parent)
-
-func hide_info() -> void:
-	Globals.ui_manager.entity_info_panel.hide_info()

@@ -23,6 +23,8 @@ var is_done_adding := false
 @onready var level_label := %'level_label' as RichTextLabel
 @onready var xp_label := %'xp_label' as RichTextLabel
 
+@onready var level_up_rect := %'level_up_bar' as Control
+
 # --- Functions --- #
 func _ready() -> void:
 	load_player_info()
@@ -57,7 +59,13 @@ func load_player_info() -> void:
 	fill_rect.visible = fill_size >= 2
 
 func set_xp(xp: int) -> void:
-	DataManager.players[player_index].set_xp(xp)
+	if DataManager.players[player_index].set_xp(xp):
+		level_up_rect.modulate.a = 1.0
+		var tween = create_tween()
+		
+		tween.tween_interval(level_up_duration / 2.0)
+		tween.tween_property(level_up_rect, ^'modulate:a', 0.0, level_up_duration / 2.0)
+	
 	load_player_info()
 
 func add_xp(value: int, collected := 0) -> void:
@@ -82,10 +90,9 @@ func add_xp(value: int, collected := 0) -> void:
 	
 	var tween = create_tween()
 	
-	print("Duration: ", increment_duration * (1.0 * min(xp, remaining_xp) / value))
-	
 	tween.tween_method(set_xp, initial_xp, to_xp, increment_duration * (1.0 * min(xp, remaining_xp) / value))
 	
+	# level up occurred
 	if xp - (collected + min(xp, remaining_xp)) > 0:
 		tween.tween_interval(level_up_duration)
 	

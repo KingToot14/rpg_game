@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=55 format=3 uid="uid://co7gfgpnhufh3"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
@@ -488,6 +488,10 @@ region = Rect2(20, 0, 10, 10)
 atlas = ExtResource("23_4c2yw")
 region = Rect2(10, 0, 10, 10)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_axs05"]
+atlas = ExtResource("23_4c2yw")
+region = Rect2(0, 0, 10, 10)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a752x"]
 blend_mode = 2
 
@@ -901,6 +905,14 @@ grow_vertical = 0
 pivot_offset = Vector2(7, 4.5)
 mouse_filter = 2
 texture = SubResource("AtlasTexture_v8suc")
+
+[node name="info_icon" type="TextureRect" parent="ui"]
+unique_name_in_owner = true
+offset_left = 22.0
+offset_top = -35.0
+offset_right = 32.0
+offset_bottom = -25.0
+texture = SubResource("AtlasTexture_axs05")
 
 [node name="seed_group" type="CanvasGroup" parent="."]
 

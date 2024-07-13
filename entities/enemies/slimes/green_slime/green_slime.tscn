@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=52 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
@@ -1064,6 +1064,10 @@ region = Rect2(10, 0, 10, 10)
 atlas = ExtResource("14_0nx2n")
 region = Rect2(0, 0, 14, 9)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_su8p1"]
+atlas = ExtResource("25_t8axw")
+region = Rect2(0, 0, 10, 10)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnydc"]
 resource_local_to_scene = true
 shader = ExtResource("12_8s6gd")
@@ -1195,6 +1199,7 @@ metadata/_edit_group_ = true
 
 [node name="effect_list" type="HBoxContainer" parent="ui/top_holder"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1239,6 +1244,7 @@ texture = SubResource("AtlasTexture_76uea")
 
 [node name="targeting_marker" type="TextureRect" parent="ui/top_holder"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1254,6 +1260,14 @@ grow_vertical = 0
 pivot_offset = Vector2(7, 4.5)
 mouse_filter = 2
 texture = SubResource("AtlasTexture_nb2m0")
+
+[node name="info_icon" type="TextureRect" parent="ui"]
+unique_name_in_owner = true
+offset_left = 17.0
+offset_top = -11.0
+offset_right = 27.0
+offset_bottom = -1.0
+texture = SubResource("AtlasTexture_su8p1")
 
 [node name="slime_particle" type="Node2D" parent="."]
 visible = false

@@ -21,6 +21,7 @@ offset_right = 15.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("2_dodlu")
 theme_type_variation = &"Cooldown"
 bbcode_enabled = true

@@ -85,14 +85,17 @@ func get_xp_to_level(to_level := -1) -> int:
 func get_remaining_xp() -> int:
 	return xp_to_next - curr_xp
 
-func set_xp(xp: int) -> void:
+func set_xp(xp: int) -> bool:
 	curr_xp = xp
 	
 	if curr_xp >= xp_to_next:
 		level_up()
+		return true
+	
+	return false
 
-func add_xp(xp: int) -> void:
-	set_xp(curr_xp + xp)
+func add_xp(xp: int) -> bool:
+	return set_xp(curr_xp + xp)
 
 func level_up() -> void:
 	level += 1

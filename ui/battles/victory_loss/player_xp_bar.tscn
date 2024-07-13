@@ -71,6 +71,38 @@ self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
 key = &"light"
 
+[node name="level_up_bar" parent="." instance=ExtResource("3_65bb8")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = 10.0
+offset_top = -8.0
+offset_right = 60.0
+grow_horizontal = 1
+grow_vertical = 0
+key = &"white"
+
+[node name="label" type="RichTextLabel" parent="level_up_bar"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Description"
+bbcode_enabled = true
+text = "[center]Level up!"
+scroll_active = false
+script = ExtResource("2_kfmdh")
+key = &"accent"
+
 [node name="level_label" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
 layout_mode = 0

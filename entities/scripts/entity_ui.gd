@@ -1,5 +1,5 @@
 class_name EntityUi
-extends Node
+extends Node2D
 
 # --- Variables --- #
 var targeting_marker: Node
@@ -19,6 +19,8 @@ var is_over_effects := false
 @onready var parent := $".." as Entity
 @onready var effect_node := $"top_holder/effect_list/effect" as Control
 
+@onready var info_icon := %'info_icon' as TextureRect
+
 # --- Functions --- #
 func _ready() -> void:
 	targeting_marker = %'targeting_marker'
@@ -31,6 +33,12 @@ func _ready() -> void:
 	# setup signals
 	parent.mouse_entered.connect(_on_mouse_entered)
 	parent.mouse_exited.connect(_on_mouse_exited)
+	
+	info_icon.mouse_entered.connect(show_info)
+	info_icon.mouse_exited.connect(hide_info)
+	
+	parent.animator.action_started.connect(hide)
+	parent.turn.turn_ended.connect(show)
 	
 	update_top()
 
@@ -102,3 +110,9 @@ func update_effects() -> void:
 		effect_list_rect.get_child(i).set_effect(effects[i])
 	
 	update_top()
+
+func show_info() -> void:
+	Globals.ui_manager.entity_info_panel.show_entity(parent)
+
+func hide_info() -> void:
+	Globals.ui_manager.entity_info_panel.hide_info()

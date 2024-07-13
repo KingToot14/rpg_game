@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=55 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
@@ -1226,6 +1226,10 @@ region = Rect2(20, 0, 10, 10)
 atlas = ExtResource("26_ut0rw")
 region = Rect2(10, 0, 10, 10)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vas2d"]
+atlas = ExtResource("26_ut0rw")
+region = Rect2(0, 0, 10, 10)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8msm"]
 size = Vector2(20, 34)
 
@@ -1409,6 +1413,14 @@ grow_vertical = 0
 pivot_offset = Vector2(7, 4.5)
 mouse_filter = 2
 texture = SubResource("AtlasTexture_dsor3")
+
+[node name="info_icon" type="TextureRect" parent="ui"]
+unique_name_in_owner = true
+offset_left = -20.0
+offset_top = -24.0
+offset_right = -10.0
+offset_bottom = -14.0
+texture = SubResource("AtlasTexture_vas2d")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(1, -12)
