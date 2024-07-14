@@ -15,7 +15,15 @@ func save_game() -> void:
 	var file = FileAccess.open(get_save_path(), FileAccess.WRITE)
 	
 	file.store_var(DataManager.get_save_data())
-	file.close()
+
+func auto_save() -> void:
+	# make sure save dir exists
+	make_save_directory()
+	
+	# store data
+	var file = FileAccess.open(SAVE_FOLDER + "/auto.save", FileAccess.WRITE)
+	
+	file.store_var(DataManager.get_save_data())
 
 func get_save() -> Dictionary:
 	var file = FileAccess.open(get_save_path(), FileAccess.READ)

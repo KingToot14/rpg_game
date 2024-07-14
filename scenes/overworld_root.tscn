@@ -2631,6 +2631,7 @@ text = "[center]Map"
 scroll_active = false
 
 [node name="save_panel" type="Control" parent="ui"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

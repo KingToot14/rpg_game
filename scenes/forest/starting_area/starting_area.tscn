@@ -135,7 +135,7 @@ shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.5
+shader_parameter/wind_speed = -0.25
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31i3j"]
@@ -205,6 +205,7 @@ y_sort_enabled = true
 
 [node name="forest_tree" parent="right_area" instance=ExtResource("11_rfhvx")]
 position = Vector2(436, 106)
+variant = 1
 
 [node name="forest_tree2" parent="right_area" instance=ExtResource("12_ct6eb")]
 position = Vector2(457, 206)
@@ -214,18 +215,23 @@ y_sort_enabled = true
 
 [node name="forest_tree" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(351, 50)
+variant = 1
 
 [node name="forest_tree2" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(245, 45)
+variant = 2
 
 [node name="forest_tree3" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(281, 49)
+variant = 1
 
 [node name="forest_tree4" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(307, 13)
+variant = 2
 
 [node name="forest_tree5" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(385, 32)
+variant = 2
 
 [node name="forest_tree6" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(417, 8)
@@ -235,12 +241,15 @@ position = Vector2(484, 40)
 
 [node name="forest_tree8" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(448, 25)
+variant = 1
 
 [node name="forest_tree9" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(362, -6)
+variant = 1
 
 [node name="forest_tree10" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(185, 8)
+variant = 2
 
 [node name="forest_tree11" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(206, 29)
@@ -256,6 +265,7 @@ position = Vector2(147, 7)
 
 [node name="forest_tree15" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(114, 46)
+variant = 2
 
 [node name="forest_tree16" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(22, 8)
@@ -271,9 +281,11 @@ position = Vector2(114, 13)
 
 [node name="forest_tree20" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(277, 5)
+variant = 2
 
 [node name="forest_tree21" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(1, 35)
+variant = 1
 
 [node name="forest_tree22" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(29, 52)
@@ -283,27 +295,33 @@ position = Vector2(23, 74)
 
 [node name="forest_tree24" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(4, 91)
+variant = 1
 
 [node name="forest_tree25" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(22, 119)
 
 [node name="forest_tree26" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(6, 137)
+variant = 1
 
 [node name="forest_tree27" parent="surrounding_trees" instance=ExtResource("12_ct6eb")]
 position = Vector2(22, 162)
+variant = 2
 
 [node name="forest_tree28" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(31, 191)
+variant = 1
 
 [node name="forest_tree29" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(11, 208)
 
 [node name="forest_tree31" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(9, 261)
+variant = 1
 
 [node name="forest_tree32" parent="surrounding_trees" instance=ExtResource("11_rfhvx")]
 position = Vector2(44, 246)
+variant = 2
 
 [node name="forest_tree33" parent="surrounding_trees" instance=ExtResource("12_wgao2")]
 position = Vector2(214, 110)

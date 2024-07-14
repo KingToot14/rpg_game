@@ -1,6 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://x3sh11ejtmsd"]
+[gd_scene load_steps=17 format=3 uid="uid://x3sh11ejtmsd"]
 
+[ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_gh2p6"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_sumql"]
+[ext_resource type="Texture2D" uid="uid://bde66qvxtguvd" path="res://environment/forest/trees/leaf_variations.png" id="2_05wv8"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_kji2a"]
 [ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
 [ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="3_hj56p"]
@@ -47,13 +49,14 @@ shader_parameter/radius = 0.05
 radius = 31.0
 height = 80.0
 
-[node name="forest_tree" type="StaticBody2D"]
+[node name="forest_tree" type="StaticBody2D" node_paths=PackedStringArray("sprite")]
 visibility_layer = 5
 z_index = 100
 y_sort_enabled = true
+script = ExtResource("1_gh2p6")
+sprite = NodePath("leaves")
 
 [node name="collision" type="CollisionShape2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(-0.5, -4)
 shape = SubResource("CircleShape2D_785ak")
@@ -67,14 +70,16 @@ position = Vector2(0, 4)
 texture = ExtResource("2_kji2a")
 
 [node name="trunk" type="Sprite2D" parent="."]
-position = Vector2(0, -31)
+position = Vector2(0, -5)
 texture = ExtResource("3_hj56p")
+offset = Vector2(0, -26)
 hframes = 3
 
 [node name="trunk_shadow" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_yrn7o")
-position = Vector2(0, -31)
+position = Vector2(0, -5)
 texture = ExtResource("3_hj56p")
+offset = Vector2(0, -26)
 hframes = 3
 frame = 1
 script = ExtResource("4_jcd0y")
@@ -85,9 +90,8 @@ tween_speed = 0.3
 z_index = 10
 material = SubResource("ShaderMaterial_a4ale")
 position = Vector2(0, -31)
-texture = ExtResource("3_hj56p")
+texture = ExtResource("2_05wv8")
 hframes = 3
-frame = 2
 script = ExtResource("4_jcd0y")
 transparency = 0.45
 tween_speed = 0.3

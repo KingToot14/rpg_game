@@ -97,3 +97,6 @@ func add_area(scene: PackedScene):
 			TransitionManager.end_split()
 	
 	area_loaded.emit()
+	
+	# auto save
+	SaveManager.auto_save()

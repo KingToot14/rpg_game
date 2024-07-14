@@ -132,9 +132,6 @@ func update_condition(condition: String) -> void:
 	condition_label.text = "Condition: " + condition
 
 #region Panels
-#func set_victory_panel(val: bool) -> void:
-	#victory_panel.show_panel()
-
 func set_loss_panel(val: bool) -> void:
 	loss_panel.visible = val
 #endregion
