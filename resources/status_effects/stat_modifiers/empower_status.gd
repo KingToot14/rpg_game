@@ -6,9 +6,6 @@ extends StatusEffect
 
 # --- Functions --- #
 func set_status_info() -> void:
-	name = "Empower"
-	key = &'empower'
-	
 	max_stack = 100
 	decrement_value = 5
 	additive = false

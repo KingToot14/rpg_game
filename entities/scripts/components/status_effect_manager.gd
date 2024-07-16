@@ -10,20 +10,35 @@ var removal_queue: Array[StringName] = []
 
 # --- References --- #
 var parent: Entity
+var timer: Timer
 
 # --- Functions --- #
+func _ready() -> void:
+	timer = Timer.new()
+	timer.one_shot = true
+	
+	add_child(timer)
+
 func setup(entity: Entity) -> void:
 	parent = entity
 
 func _on_turn_started() -> void:
 	for effect in status_effects:
-		effect.turn_started()
+		var wait_time = effect.turn_started()
+		
+		if wait_time > 0.0:
+			timer.start(wait_time)
+			await timer.time_out
 	
 	remove_effects()
 
 func _on_turn_ended() -> void:
 	for effect in status_effects:
-		effect.turn_ended()
+		var wait_time = effect.turn_ended()
+		
+		if wait_time > 0.0:
+			timer.start(wait_time)
+			await timer.timeout
 	
 	remove_effects()
 
@@ -33,15 +48,27 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	if effect:
 		effect.add_stacks(stacks, stage)
 	else:
-		status_effects.append(Globals.registered_effects[key].new(parent, stacks, stage))
+		effect = StatusEffectHelper.get_effect(key).effect_class.new(parent, stacks, stage)
+		effect.key = key
+		status_effects.append(effect)
 	
 	effect_added.emit()
+
+func remove_effect(key: StringName, stacks = -1) -> void:
+	var effect = get_effect(key)
+	
+	if effect:
+		if stacks < 0:
+			status_effects.erase(effect)
+		else:
+			for i in range(stacks):
+				effect.decrement_stacks()
 
 func get_effect(key: StringName) -> StatusEffect:
 	var target := StatusEffectHelper.get_effect(key) as StatusEffectInfo
 	
 	for effect in status_effects:
-		if effect.is_class(target.effect_class.resource_name):
+		if effect.key == key:
 			return effect
 	
 	return null

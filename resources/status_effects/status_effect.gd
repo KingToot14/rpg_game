@@ -4,11 +4,7 @@ extends Resource
 # --- Variables --- #
 var entity: Entity = null
 
-var name: String = "Status"
-var description: String = "Description"
 var key: StringName = &'key'
-var small_icon_index := 0
-var large_icon: Texture2D = null
 
 var stage: int = 1
 var stacks: int = 1
@@ -16,6 +12,9 @@ var max_stack: int = 1
 var additive: bool = true
 
 var decrement_value: int = 1
+
+# --- Constants --- #
+const DELAY_DURATION = 0.50
 
 # --- Functions --- #
 func _init(init_entity: Entity = null, init_stacks: int = 1, init_stage: int = 1) -> void:
@@ -42,6 +41,8 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 	if new_stage < stage:
 		return
 	
+	stage = new_stage
+	
 	if additive:
 		set_stacks(stacks + new_stacks)
 	else:
@@ -57,11 +58,13 @@ func get_icon() -> Texture2D:
 	return null
 
 # - Effects - #
-func turn_started() -> void:
-	return
+func turn_started() -> float:
+	return 0.0
 
-func turn_ended() -> void:
+func turn_ended() -> float:
 	decrement_stacks()
+	
+	return 0.0
 
 func take_damage(dmg: float) -> float:
 	return dmg

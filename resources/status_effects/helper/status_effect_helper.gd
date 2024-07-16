@@ -9,4 +9,5 @@ func get_effect(key: StringName) -> StatusEffectInfo:
 		if effect.key == key:
 			return effect
 	
+	
 	return null

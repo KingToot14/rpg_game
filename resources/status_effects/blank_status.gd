@@ -1,4 +1,4 @@
-class_name HasteStatus
+class_name BlankStatus
 extends StatusEffect
 
 # --- Variables --- #
@@ -6,6 +6,4 @@ extends StatusEffect
 
 # --- Functions --- #
 func turn_ended() -> float:
-	entity.turn.actions_remaining += 1
-	
-	return super()
+	return 0.0

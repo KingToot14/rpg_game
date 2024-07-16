@@ -46,8 +46,18 @@ func set_body_text(text: String) -> void:
 	
 	update_size()
 
+func clear_tooltip() -> void:
+	set_title_text("")
+	set_body_text("")
+
 func set_width(width: int) -> void:
 	text_rect.size.x = width
+
+func has_title(text: String) -> bool:
+	return title_label.text == text
+
+func has_body(text: String) -> bool:
+	return body_label.text == text
 
 func update_size() -> void:
 	text_rect.size.y = title_size + body_size + 5
