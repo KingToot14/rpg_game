@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bu0ktqr3wancy"]
+[gd_scene load_steps=39 format=3 uid="uid://bu0ktqr3wancy"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
@@ -16,12 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://h10t0hha8h5p" path="res://scenes/forest/starting_area/bottom_fence.png" id="14_op7tu"]
 [ext_resource type="Texture2D" uid="uid://5xg00usrrsnp" path="res://scenes/forest/starting_area/top_fence.png" id="15_n6j3j"]
 [ext_resource type="Texture2D" uid="uid://dusfb62xn3crf" path="res://environment/objects/guardian/spawn_site.png" id="16_2qhru"]
+[ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="17_16yiu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dbtda"]
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kh6bc"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kxhd2"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_dbtda")
@@ -31,7 +32,7 @@ shader = ExtResource("3_wnipq")
 shader_parameter/wind_speed = -0.5
 shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_kh6bc")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_kxhd2")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s2df2"]
 frequency = 0.0082
@@ -42,7 +43,7 @@ fractal_gain = 0.305
 domain_warp_enabled = true
 domain_warp_amplitude = 10.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i1yd0"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lh1yk"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_s2df2")
@@ -53,14 +54,14 @@ offsets = PackedFloat32Array(0, 0.1)
 colors = PackedColorArray(0.337255, 0.741176, 0.215686, 1, 0.427451, 0.819608, 0.270588, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgaca"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_31djs"]
 gradient = SubResource("Gradient_d3lm2")
 width = 8
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8rp7f"]
 frequency = 0.15
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o8v14"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vci3i"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_8rp7f")
@@ -71,9 +72,9 @@ shader = ExtResource("10_opdin")
 shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
 shader_parameter/patch_intensity = 0.05
 shader_parameter/patch_threshold = 0.65
-shader_parameter/side_gradient = SubResource("GradientTexture1D_vgaca")
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_i1yd0")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_o8v14")
+shader_parameter/side_gradient = SubResource("GradientTexture1D_31djs")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_lh1yk")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_vci3i")
 shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
@@ -82,7 +83,7 @@ shader_parameter/wind_direction = Vector2(-1, -1)
 frequency = 0.122
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vkyge"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gd1w6"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_mu5cx")
@@ -91,7 +92,7 @@ noise = SubResource("FastNoiseLite_mu5cx")
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjxn"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0avi3"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_gs2do")
@@ -103,12 +104,12 @@ fractal_lacunarity = 2.21
 domain_warp_type = 1
 domain_warp_amplitude = 5.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27oty"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_58x1a"]
 width = 480
 height = 270
 noise = SubResource("FastNoiseLite_d3tve")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lxx4b"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nkhw3"]
 viewport_path = NodePath("environment/reflection_viewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ybkr0"]
@@ -116,18 +117,18 @@ resource_local_to_scene = true
 shader = ExtResource("11_dy5jm")
 shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/reflection_intensity = 0.25
-shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
+shader_parameter/reflection_texture = SubResource("ViewportTexture_nkhw3")
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_58x1a")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_gd1w6")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
 shader_parameter/foam_speed = -0.25
-shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_0avi3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjn1h"]
 shader = ExtResource("12_23mxx")
@@ -136,7 +137,7 @@ shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_0avi3")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31i3j"]
 size = Vector2(20, 270)
@@ -148,6 +149,7 @@ size = Vector2(480, 20)
 visibility_layer = 7
 y_sort_enabled = true
 script = ExtResource("1_1mvng")
+right_area = "res://scenes/forest/starting_trail/starting_trail.tscn"
 shader_texture = ExtResource("7_8ik0f")
 
 [node name="wind_manager" type="Node2D" parent="."]
@@ -328,6 +330,66 @@ position = Vector2(214, 110)
 
 [node name="forest_tree34" parent="surrounding_trees" instance=ExtResource("12_1ywg2")]
 position = Vector2(302, 202)
+
+[node name="bush" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(20, 214)
+
+[node name="bush2" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(20, 232)
+
+[node name="bush3" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(32, 252)
+
+[node name="bush4" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(14, 169)
+
+[node name="bush5" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(28, 124)
+
+[node name="bush6" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(10, 49)
+
+[node name="bush7" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(36, 22)
+
+[node name="bush8" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(133, 23)
+
+[node name="bush9" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(171, 10)
+
+[node name="bush10" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(246, 3)
+
+[node name="bush11" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(275, 18)
+
+[node name="bush12" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(337, 5)
+
+[node name="bush13" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(371, 12)
+
+[node name="bush14" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(323, 27)
+
+[node name="bush15" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(476, 1)
+
+[node name="bush16" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(396, -3)
+
+[node name="bush17" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(471, 19)
+
+[node name="bush18" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(444, 4)
+
+[node name="bush19" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(83, 22)
+
+[node name="bush20" parent="surrounding_trees" instance=ExtResource("17_16yiu")]
+position = Vector2(152, 33)
 
 [node name="fence" type="StaticBody2D" parent="."]
 z_index = 100

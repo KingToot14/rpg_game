@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4xs7uq6ds0ht"]
+
+[ext_resource type="Texture2D" uid="uid://b10p8d0p5cmt1" path="res://environment/forest/plants/bush.png" id="1_kv2uw"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="1_l63wc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4sux3"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tp4f"]
+frequency = 0.0553
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t32mv"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_5tp4f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ne0g"]
+resource_local_to_scene = true
+shader = ExtResource("1_l63wc")
+shader_parameter/transparency = 0.0
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_threshold = 0.6
+shader_parameter/wave_count = 3.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_t32mv")
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
+[node name="bush" type="StaticBody2D"]
+
+[node name="shape" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 101
+y_sort_enabled = true
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4sux3")
+
+[node name="sprite" type="Sprite2D" parent="."]
+z_index = 100
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_0ne0g")
+position = Vector2(0, 3)
+texture = ExtResource("1_kv2uw")
+offset = Vector2(0, -3)
+vframes = 3

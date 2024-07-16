@@ -1,76 +1,31 @@
-[gd_scene load_steps=42 format=3 uid="uid://cqalxg4axriei"]
+[gd_scene load_steps=29 format=3 uid="uid://cqalxg4axriei"]
 
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="1_jy7mr"]
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_n81gk"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass_wind.gdshader" id="2_vqt3s"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/short_grass.gdshader" id="3_jxy62"]
-[ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/shaders/grass/grass_tiles.tres" id="3_qcypm"]
-[ext_resource type="TileSet" uid="uid://ciq6olswrcdfy" path="res://environment/shaders/water/water.tres" id="4_2kwa5"]
-[ext_resource type="Shader" path="res://environment/shaders/trail/trail_patch.gdshader" id="5_mr4qw"]
-[ext_resource type="TileSet" uid="uid://thbxl7l3cgo2" path="res://environment/shaders/trail/trail_tiles.tres" id="6_d2vja"]
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="7_0rxdm"]
-[ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_tiles.tres" id="8_a7ocg"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="9_6aijn"]
 [ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="10_p1pwv"]
 [ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="11_3f54l"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1yi0f"]
-viewport_path = NodePath("environment/shader_viewport")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_haiv6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bdnn0"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_haiv6")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_em1bp"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aeiir"]
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mxrk6"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kh6bc"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_em1bp")
+noise = SubResource("FastNoiseLite_aeiir")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvx1b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r6f3q"]
 shader = ExtResource("3_jxy62")
 shader_parameter/wind_speed = -0.5
 shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_bdnn0")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_mxrk6")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_kh6bc")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qxnm8"]
-frequency = 0.1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c7ppf"]
-height = 1
-noise = SubResource("FastNoiseLite_qxnm8")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgccq"]
-shader = ExtResource("2_vqt3s")
-shader_parameter/wind_speed = 0.5
-shader_parameter/noise_size = Vector2(512, 1)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_c7ppf")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xyh2k"]
-frequency = 0.0221
-fractal_octaves = 3
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_la3nq"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_xyh2k")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_osway"]
-shader = ExtResource("5_mr4qw")
-shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/patch_threshold = 0.15
-shader_parameter/patch_nosie = SubResource("NoiseTexture2D_la3nq")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_s2df2"]
-frequency = 0.0145
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pbaxp"]
+frequency = 0.0082
 fractal_type = 3
 fractal_octaves = 2
 fractal_lacunarity = 2.18
@@ -78,103 +33,112 @@ fractal_gain = 0.305
 domain_warp_enabled = true
 domain_warp_amplitude = 10.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wtknx"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i1yd0"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_s2df2")
+noise = SubResource("FastNoiseLite_pbaxp")
 
-[sub_resource type="Gradient" id="Gradient_d3lm2"]
+[sub_resource type="Gradient" id="Gradient_itfrw"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.1)
 colors = PackedColorArray(0.337255, 0.741176, 0.215686, 1, 0.427451, 0.819608, 0.270588, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ey4s0"]
-gradient = SubResource("Gradient_d3lm2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgaca"]
+gradient = SubResource("Gradient_itfrw")
 width = 8
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ellcd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dn8cc"]
+frequency = 0.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o8v14"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_dn8cc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8slxg"]
 resource_local_to_scene = true
 shader = ExtResource("9_6aijn")
 shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
 shader_parameter/patch_intensity = 0.05
-shader_parameter/side_gradient = SubResource("GradientTexture1D_ey4s0")
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_wtknx")
+shader_parameter/patch_threshold = 0.65
+shader_parameter/side_gradient = SubResource("GradientTexture1D_vgaca")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_i1yd0")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_o8v14")
 shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kyubb"]
-viewport_path = NodePath("environment/shader_viewport")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mu5cx"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gwlfn"]
 frequency = 0.122
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a6mrm"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vkyge"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_mu5cx")
+noise = SubResource("FastNoiseLite_gwlfn")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gs2do"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p4cnu"]
 frequency = 0.2
 fractal_type = 0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yishe"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjxn"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_gs2do")
+noise = SubResource("FastNoiseLite_p4cnu")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d3tve"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yksyw"]
 frequency = 0.0395
 fractal_octaves = 3
 fractal_lacunarity = 2.21
 domain_warp_type = 1
 domain_warp_amplitude = 5.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ej3ef"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27oty"]
 width = 480
 height = 270
-noise = SubResource("FastNoiseLite_d3tve")
+noise = SubResource("FastNoiseLite_yksyw")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2wptt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxx4b"]
 viewport_path = NodePath("environment/reflection_viewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybkr0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlw24"]
 resource_local_to_scene = true
 shader = ExtResource("10_p1pwv")
 shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/reflection_intensity = 0.25
-shader_parameter/reflection_texture = SubResource("ViewportTexture_2wptt")
+shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_ej3ef")
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.5
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_a6mrm")
+shader_parameter/wind_speed = -0.25
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
 shader_parameter/foam_speed = -0.25
-shader_parameter/foam_noise = SubResource("NoiseTexture2D_yishe")
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_u4t1i"]
-viewport_path = NodePath("environment/shader_viewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjn1h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dr1u4"]
 shader = ExtResource("11_3f54l")
 shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/trail_color = Color(0.901961, 0.705882, 0.415686, 1)
-shader_parameter/shadow_color = Color(0.85098, 0.635294, 0.372549, 1)
+shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.5
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_yishe")
+shader_parameter/wind_speed = -0.25
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bhgb"]
+size = Vector2(20, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ogx"]
+size = Vector2(480, 20)
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
 y_sort_enabled = true
 script = ExtResource("1_n81gk")
-shader_texture = SubResource("ViewportTexture_1yi0f")
 
 [node name="wind_manager" type="Node2D" parent="."]
 script = ExtResource("1_jy7mr")
@@ -182,80 +146,47 @@ script = ExtResource("1_jy7mr")
 [node name="environment" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="short_grass" type="CanvasGroup" parent="environment"]
-material = SubResource("ShaderMaterial_gvx1b")
-
-[node name="grass_tilemap" type="TileMap" parent="environment/short_grass"]
-position = Vector2(0, 5)
-tile_set = ExtResource("3_qcypm")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 65537, 1, 65536, 65537, 1, 131072, 65537, 1, 196608, 65537, 1, 262144, 65537, 1, 327680, 65537, 1, 393216, 65537, 1, 458752, 65537, 1, 524288, 65537, 1, 589824, 65537, 1, 655360, 65537, 1, 720896, 65537, 1, 786432, 65537, 1, 1, 65537, 1, 65537, 65537, 1, 131073, 65537, 1, 196609, 65537, 1, 262145, 65537, 1, 327681, 65537, 1, 393217, 65537, 1, 458753, 65537, 1, 524289, 65537, 1, 589825, 65537, 1, 655361, 65537, 1, 720897, 65537, 1, 786433, 65537, 1, 2, 65537, 1, 65538, 65537, 1, 131074, 65537, 1, 196610, 65537, 1, 262146, 65537, 1, 327682, 65537, 1, 393218, 65537, 1, 458754, 65537, 1, 524290, 65537, 1, 589826, 65537, 1, 655362, 65537, 1, 720898, 65537, 1, 786434, 65537, 1, 3, 65537, 1, 65539, 65537, 1, 131075, 65537, 1, 196611, 65537, 1, 262147, 65537, 1, 327683, 65537, 1, 393219, 65537, 1, 458755, 65537, 1, 524291, 65537, 1, 589827, 65537, 1, 655363, 65537, 1, 720899, 65537, 1, 786435, 65537, 1, 4, 65537, 1, 65540, 65537, 1, 131076, 65537, 1, 196612, 65537, 1, 262148, 65537, 1, 327684, 65537, 1, 393220, 65537, 1, 458756, 65537, 1, 524292, 65537, 1, 589828, 65537, 1, 655364, 65537, 1, 720900, 65537, 1, 786436, 65537, 1, 5, 65537, 1, 65541, 65537, 1, 131077, 65537, 1, 196613, 65537, 1, 262149, 65537, 1, 327685, 65537, 1, 393221, 65537, 1, 458757, 65537, 1, 524293, 65537, 1, 589829, 65537, 1, 655365, 65537, 1, 720901, 65537, 1, 786437, 65537, 1, 6, 65537, 1, 65542, 65537, 1, 131078, 65537, 1, 196614, 65537, 1, 262150, 65537, 1, 327686, 65537, 1, 393222, 65537, 1, 458758, 65537, 1, 524294, 65537, 1, 589830, 65537, 1, 655366, 65537, 1, 720902, 65537, 1, 786438, 65537, 1, 7, 65537, 1, 65543, 65537, 1, 131079, 65537, 1, 196615, 65537, 1, 262151, 65537, 1, 327687, 65537, 1, 393223, 65537, 1, 458759, 65537, 1, 524295, 65537, 1, 589831, 65537, 1, 655367, 65537, 1, 720903, 65537, 1, 786439, 65537, 1, 8, 65537, 1, 65544, 65537, 1, 131080, 65537, 1, 196616, 65537, 1, 262152, 65537, 1, 327688, 65537, 1, 393224, 65537, 1, 458760, 65537, 1, 524296, 65537, 1, 589832, 65537, 1, 655368, 65537, 1, 720904, 65537, 1, 786440, 65537, 1, 9, 65537, 1, 65545, 65537, 1, 131081, 65537, 1, 196617, 65537, 1, 262153, 65537, 1, 327689, 65537, 1, 393225, 65537, 1, 458761, 65537, 1, 524297, 65537, 1, 589833, 65537, 1, 655369, 65537, 1, 720905, 65537, 1, 786441, 65537, 1, 10, 65537, 1, 65546, 65537, 1, 131082, 65537, 1, 196618, 65537, 1, 262154, 65537, 1, 327690, 65537, 1, 393226, 65537, 1, 458762, 65537, 1, 524298, 65537, 1, 589834, 65537, 1, 655370, 65537, 1, 720906, 65537, 1, 786442, 65537, 1, 11, 65537, 1, 65547, 65537, 1, 131083, 65537, 1, 196619, 65537, 1, 262155, 65537, 1, 327691, 65537, 1, 393227, 65537, 1, 458763, 65537, 1, 524299, 65537, 1, 589835, 65537, 1, 655371, 65537, 1, 720907, 65537, 1, 786443, 65537, 1, 12, 65537, 1, 65548, 65537, 1, 131084, 65537, 1, 196620, 65537, 1, 262156, 65537, 1, 327692, 65537, 1, 393228, 65537, 1, 458764, 65537, 1, 524300, 65537, 1, 589836, 65537, 1, 655372, 65537, 1, 720908, 65537, 1, 786444, 65537, 1, 13, 65537, 1, 65549, 65537, 1, 131085, 65537, 1, 196621, 65537, 1, 262157, 65537, 1, 327693, 65537, 1, 393229, 65537, 1, 458765, 65537, 1, 524301, 65537, 1, 589837, 65537, 1, 655373, 65537, 1, 720909, 65537, 1, 786445, 65537, 1, 14, 65537, 1, 65550, 65537, 1, 131086, 65537, 1, 196622, 65537, 1, 262158, 65537, 1, 327694, 65537, 1, 393230, 65537, 1, 458766, 65537, 1, 524302, 65537, 1, 589838, 65537, 1, 655374, 65537, 1, 720910, 65537, 1, 786446, 65537, 1, 15, 65537, 1, 65551, 65537, 1, 131087, 65537, 1, 196623, 65537, 1, 262159, 65537, 1, 327695, 65537, 1, 393231, 65537, 1, 458767, 65537, 1, 524303, 65537, 1, 589839, 65537, 1, 655375, 65537, 1, 720911, 65537, 1, 786447, 65537, 1, 16, 65537, 1, 65552, 65537, 1, 131088, 65537, 1, 196624, 65537, 1, 262160, 65537, 1, 327696, 65537, 1, 393232, 65537, 1, 458768, 65537, 1, 524304, 65537, 1, 589840, 65537, 1, 655376, 65537, 1, 720912, 65537, 1, 786448, 65537, 1, 17, 65537, 1, 65553, 65537, 1, 131089, 65537, 1, 196625, 65537, 1, 262161, 65537, 1, 327697, 65537, 1, 393233, 65537, 1, 458769, 65537, 1, 524305, 65537, 1, 589841, 65537, 1, 655377, 65537, 1, 720913, 65537, 1, 786449, 65537, 1, 18, 65537, 1, 65554, 65537, 1, 131090, 65537, 1, 196626, 65537, 1, 262162, 65537, 1, 327698, 65537, 1, 393234, 65537, 1, 458770, 65537, 1, 524306, 65537, 1, 589842, 65537, 1, 655378, 65537, 1, 720914, 65537, 1, 786450, 65537, 1, 19, 65537, 1, 65555, 65537, 1, 131091, 65537, 1, 196627, 65537, 1, 262163, 65537, 1, 327699, 65537, 1, 393235, 65537, 1, 458771, 65537, 1, 524307, 65537, 1, 589843, 65537, 1, 655379, 65537, 1, 720915, 65537, 1, 786451, 65537, 1, 20, 65537, 1, 65556, 65537, 1, 131092, 65537, 1, 196628, 65537, 1, 262164, 65537, 1, 327700, 65537, 1, 393236, 65537, 1, 458772, 65537, 1, 524308, 65537, 1, 589844, 65537, 1, 655380, 65537, 1, 720916, 65537, 1, 786452, 65537, 1, 21, 65537, 1, 65557, 65537, 1, 131093, 65537, 1, 196629, 65537, 1, 262165, 65537, 1, 327701, 65537, 1, 393237, 65537, 1, 458773, 65537, 1, 524309, 65537, 1, 589845, 65537, 1, 655381, 65537, 1, 720917, 65537, 1, 786453, 65537, 1, 22, 65537, 1, 65558, 65537, 1, 131094, 65537, 1, 196630, 65537, 1, 262166, 65537, 1, 327702, 65537, 1, 393238, 65537, 1, 458774, 65537, 1, 524310, 65537, 1, 589846, 65537, 1, 655382, 65537, 1, 720918, 65537, 1, 786454, 65537, 1, 23, 65537, 1, 65559, 65537, 1, 131095, 65537, 1, 196631, 65537, 1, 262167, 65537, 1, 327703, 65537, 1, 393239, 65537, 1, 458775, 65537, 1, 524311, 65537, 1, 589847, 65537, 1, 655383, 65537, 1, 720919, 65537, 1, 786455, 65537, 1, -65536, 65537, 1, 851968, 65537, 1, -65535, 65537, 1, 851969, 65537, 1, -65534, 65537, 1, 851970, 65537, 1, -65533, 65537, 1, 851971, 65537, 1, -65532, 65537, 1, 851972, 65537, 1, -65531, 65537, 1, 851973, 65537, 1, -65530, 65537, 1, 851974, 65537, 1, -65529, 65537, 1, 851975, 65537, 1, -65528, 65537, 1, 851976, 65537, 1, -65527, 65537, 1, 851977, 65537, 1, -65526, 65537, 1, 851978, 65537, 1, -65525, 65537, 1, 851979, 65537, 1, -65524, 65537, 1, 851980, 65537, 1, -65523, 65537, 1, 851981, 65537, 1, -65522, 65537, 1, 851982, 65537, 1, -65521, 65537, 1, 851983, 65537, 1, -65520, 65537, 1, 851984, 65537, 1, -65519, 65537, 1, 851985, 65537, 1, -65518, 65537, 1, 851986, 65537, 1, -65517, 65537, 1, 851987, 65537, 1, -65516, 65537, 1, 851988, 65537, 1, -65515, 65537, 1, 851989, 65537, 1, -65514, 65537, 1, 851990, 65537, 1, -65513, 65537, 1, 851991, 65537, 1)
-
-[node name="shader_viewport" type="SubViewport" parent="environment"]
-disable_3d = true
-transparent_bg = true
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-canvas_cull_mask = 4294966274
-size = Vector2i(480, 270)
-
-[node name="long_grass_tilemap" type="TileMap" parent="environment/shader_viewport"]
-visibility_layer = 2
-texture_filter = 1
-material = SubResource("ShaderMaterial_wgccq")
-position = Vector2(0, 5)
-rotation = -0.000235103
-tile_set = ExtResource("3_qcypm")
-format = 2
-layer_0/z_index = 500
-
-[node name="water_tilemap" type="TileMap" parent="environment/shader_viewport"]
-visibility_layer = 2
-texture_filter = 1
-position = Vector2(0, 5)
-rotation = -0.000235103
-tile_set = ExtResource("4_2kwa5")
-format = 2
-layer_0/z_index = 500
-
-[node name="trail_tilemap" type="TileMap" parent="environment/shader_viewport"]
-visibility_layer = 2
-texture_filter = 1
-material = SubResource("ShaderMaterial_osway")
-position = Vector2(0, 5)
-rotation = -0.000235103
-tile_set = ExtResource("6_d2vja")
-format = 2
-layer_0/z_index = 500
+[node name="short_grass" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_r6f3q")
+position = Vector2(240, 135)
 
 [node name="reflection_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
 canvas_cull_mask = 4294966276
 size = Vector2i(480, 270)
 script = ExtResource("7_0rxdm")
 visibility_layer = 3
 
 [node name="long_grass_render" type="Sprite2D" parent="environment"]
-material = SubResource("ShaderMaterial_ellcd")
+texture_filter = 1
+material = SubResource("ShaderMaterial_8slxg")
 position = Vector2(240, 135)
-texture = SubResource("ViewportTexture_kyubb")
 
 [node name="water_render" type="Sprite2D" parent="environment"]
-material = SubResource("ShaderMaterial_ybkr0")
+material = SubResource("ShaderMaterial_rlw24")
 position = Vector2(240, 135)
-texture = SubResource("ViewportTexture_u4t1i")
 
 [node name="trail_render" type="Sprite2D" parent="environment"]
-material = SubResource("ShaderMaterial_qjn1h")
+material = SubResource("ShaderMaterial_dr1u4")
 position = Vector2(240, 135)
-texture = SubResource("ViewportTexture_u4t1i")
 
-[node name="object_tilemap" type="TileMap" parent="."]
-z_index = 100
-y_sort_enabled = true
-position = Vector2(0, 5)
-tile_set = ExtResource("8_a7ocg")
-format = 2
-layer_0/y_sort_enabled = true
+[node name="collision" type="StaticBody2D" parent="environment"]
+
+[node name="left_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(-10, 135)
+shape = SubResource("RectangleShape2D_8bhgb")
+
+[node name="right_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(490, 135)
+shape = SubResource("RectangleShape2D_8bhgb")
+
+[node name="top_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(240, -10)
+shape = SubResource("RectangleShape2D_k7ogx")
+
+[node name="bottom_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(240, 280)
+shape = SubResource("RectangleShape2D_k7ogx")

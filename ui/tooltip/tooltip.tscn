@@ -30,6 +30,51 @@ grow_vertical = 0
 script = ExtResource("2_bte4v")
 key = &"light"
 
+[node name="hbox" type="HBoxContainer" parent="tooltip"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -26.0
+offset_right = 102.0
+offset_bottom = -2.0
+
+[node name="icon" type="Control" parent="tooltip"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -26.0
+offset_right = 3.0
+offset_bottom = -2.0
+grow_vertical = 2
+
+[node name="panel" parent="tooltip/icon" instance=ExtResource("3_wrywy")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="frame" parent="tooltip/icon" instance=ExtResource("4_qwolq")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="icon" type="TextureRect" parent="tooltip/icon/frame"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="text" type="Control" parent="tooltip"]
 unique_name_in_owner = true
 layout_mode = 3

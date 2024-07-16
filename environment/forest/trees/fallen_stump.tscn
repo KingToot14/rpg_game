@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://didawtt43kmlk"]
+
+[ext_resource type="Texture2D" uid="uid://bdyd2fhsxkg80" path="res://environment/forest/trees/fallen_stump.png" id="1_i12yb"]
+
+[node name="fallen_stump" type="StaticBody2D"]
+z_index = 100
+y_sort_enabled = true
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionPolygon2D" parent="."]
+visible = false
+z_index = 1
+polygon = PackedVector2Array(-12, 14, -18, 1, 11, 0, 14, 13)
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("1_i12yb")
+offset = Vector2(0, -1)

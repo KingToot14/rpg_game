@@ -7,7 +7,8 @@ var entity: Entity = null
 var name: String = "Status"
 var description: String = "Description"
 var key: StringName = &'key'
-var icon: Texture2D = null
+var small_icon_index := 0
+var large_icon: Texture2D = null
 
 var stage: int = 1
 var stacks: int = 1
@@ -51,6 +52,9 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 
 func remove_status() -> void:
 	entity.status_effects.queue_removal(key)
+
+func get_icon() -> Texture2D:
+	return null
 
 # - Effects - #
 func turn_started() -> void:

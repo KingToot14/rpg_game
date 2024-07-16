@@ -57,6 +57,7 @@ script = ExtResource("1_gh2p6")
 sprite = NodePath("leaves")
 
 [node name="collision" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(-0.5, -4)
 shape = SubResource("CircleShape2D_785ak")

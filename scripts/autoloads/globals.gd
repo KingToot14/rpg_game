@@ -50,7 +50,7 @@ var attack_manager: AttackManager
 # --- Functions --- #
 func _ready() -> void:
 	# Fill registered effects
-	find_status_effects("res://resources/status_effects/")
+	#find_status_effects("res://resources/status_effects/")
 	
 	# load default preset
 	set_preset(load("res://resources/theme_presets/blue_preset.tres"))

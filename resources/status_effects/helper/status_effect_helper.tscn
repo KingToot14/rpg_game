@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc8atfm46g18q"]
+
+[ext_resource type="Script" path="res://resources/status_effects/helper/status_effect_helper.gd" id="1_7qk20"]
+[ext_resource type="Script" path="res://resources/status_effects/burn_status.gd" id="2_8pigt"]
+[ext_resource type="Script" path="res://resources/status_effects/helper/status_effect_info.gd" id="2_lppda"]
+[ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="4_qkb78"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gor86"]
+atlas = ExtResource("4_qkb78")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="Resource" id="Resource_wj1x3"]
+script = ExtResource("2_lppda")
+key = &"burn"
+names = Array[String](["Overheating", "Burning", "Scoarching"])
+descriptions = Array[String](["Recieve minor fire damage at the end of each turn", "Recieve moderate fire damage at the end of each turn", "Recieve major fire damage at the end of each turn"])
+small_icon = SubResource("AtlasTexture_gor86")
+large_icons = Array[Texture2D]([])
+effect_class = ExtResource("2_8pigt")
+
+[node name="status_effect_helper" type="Node"]
+script = ExtResource("1_7qk20")
+effects = Array[ExtResource("2_lppda")]([SubResource("Resource_wj1x3")])

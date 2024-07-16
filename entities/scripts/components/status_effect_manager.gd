@@ -38,8 +38,10 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	effect_added.emit()
 
 func get_effect(key: StringName) -> StatusEffect:
+	var target := StatusEffectHelper.get_effect(key) as StatusEffectInfo
+	
 	for effect in status_effects:
-		if effect.key == key:
+		if effect.is_class(target.effect_class.resource_name):
 			return effect
 	
 	return null

@@ -29,6 +29,7 @@ TransitionManager="*res://ui/transitions/transition_manager.tscn"
 OptionsMenu="*res://ui/options/options_menu.tscn"
 Tooltip="*res://ui/tooltip/tooltip.tscn"
 SaveManager="*res://systems/data_saving/save_manager.gd"
+StatusEffectHelper="*res://resources/status_effects/helper/status_effect_helper.tscn"
 
 [dialogue_manager]
 
