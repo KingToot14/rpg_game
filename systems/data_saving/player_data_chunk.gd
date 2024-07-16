@@ -112,7 +112,7 @@ func get_xp_to_level(to_level := -1) -> int:
 	elif to_level == 0:
 		return 0
 	
-	return BASE_LEVEL_UP_XP * LEVEL_UP_MOD ** (to_level - 1)
+	return roundi(BASE_LEVEL_UP_XP * LEVEL_UP_MOD ** (to_level - 1))
 
 func get_cumulative_xp(to_level := -1) -> int:
 	if to_level < 0:

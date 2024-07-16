@@ -32,24 +32,24 @@ func setup_defense() -> bool:
 	return true
 
 func do_damage(target, modifier: float = 1.0) -> void:
-	var attack = Globals.curr_item as Attack
+	var attack := Globals.curr_item as Attack
 	
-	var dmg = round(attack.calculate_damage(Globals.curr_entity, target))
+	var dmg_chunk := attack.calculate_damage(Globals.curr_entity, target) as DamageChunk
 	
 	if len(Globals.timing_mods) > 0:
 		var mod = Globals.timing_mods[0]
 		match mod:
 			&'poor':
-				dmg *= POOR_MULT
+				dmg_chunk.damage *= POOR_MULT
 			&'good':
-				dmg *= GOOD_MULT
+				dmg_chunk.damage *= GOOD_MULT
 			&'perfect':
-				dmg *= PERF_MULT
+				dmg_chunk.damage *= PERF_MULT
 	
-	dmg *= modifier
+	dmg_chunk.damage *= modifier
 	
 	# set target
-	target.hp.take_damage(dmg)
+	target.hp.take_damage(dmg_chunk)
 	
 	if attack.targeting == Attack.TargetingMode.AOE:
 		var group = &'player'
@@ -60,4 +60,5 @@ func do_damage(target, modifier: float = 1.0) -> void:
 		var neighbors = TargetingHelper.get_neighbors(target.spawn_index, group)
 		
 		for neighbor in neighbors:
-			neighbor.hp.take_damage(dmg * 0.5)
+			dmg_chunk.damage *= 0.5
+			neighbor.hp.take_damage(dmg_chunk.damage)

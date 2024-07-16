@@ -65,8 +65,6 @@ func remove_effect(key: StringName, stacks = -1) -> void:
 				effect.decrement_stacks()
 
 func get_effect(key: StringName) -> StatusEffect:
-	var target := StatusEffectHelper.get_effect(key) as StatusEffectInfo
-	
 	for effect in status_effects:
 		if effect.key == key:
 			return effect

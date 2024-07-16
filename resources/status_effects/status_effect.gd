@@ -66,8 +66,8 @@ func turn_ended() -> float:
 	
 	return 0.0
 
-func take_damage(dmg: float) -> float:
-	return dmg
+func take_damage(dmg_chunk: DamageChunk) -> void:
+	return
 
 func get_max_hp(hp: float) -> float:
 	return hp

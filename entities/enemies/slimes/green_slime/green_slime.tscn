@@ -1136,6 +1136,7 @@ action_delay = 0.0
 
 [node name="hp" type="Node" parent="managers"]
 script = ExtResource("8_keams")
+load_max_hp = null
 
 [node name="actions" type="Node" parent="managers"]
 script = ExtResource("7_8ki07")

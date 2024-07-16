@@ -31,7 +31,9 @@ func turn_ended() -> float:
 				e.status_effects.add_effect(&'poison', randi_range(1, spread_stacks), stage)
 	
 	# deal damage		TODO: Change to damage chunk
-	entity.hp.take_damage(int(entity.stats.get_max_hp() * dmg * turns), false)
+	var dmg_chunk = DamageChunk.new(roundi(entity.stats.get_max_hp() * dmg * turns), Attack.Element.NATURE, 1.0)
+	
+	entity.hp.take_damage(dmg_chunk, false)
 	
 	super()
 	

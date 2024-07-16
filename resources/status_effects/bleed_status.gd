@@ -19,16 +19,18 @@ func set_status_info() -> void:
 		3:
 			heal_mod = 0.50
 
-func take_damage(damage: float) -> float:
+func take_damage(dmg_chunk: DamageChunk) -> void:
 	# ignore taking damage
-	if damage > 0:
-		return damage
+	if dmg_chunk.damage > 0:
+		return
 	
 	# reduce healing
-	return damage * heal_mod
+	dmg_chunk.damage *= heal_mod
 
 func turn_ended() -> float:
-	entity.hp.take_damage(int(entity.stats.get_max_hp() * dmg), false)
+	var dmg_chunk = DamageChunk.new(roundi(entity.stats.get_max_hp() * dmg), Attack.Element.NONE, 1.0)
+	
+	entity.hp.take_damage(dmg_chunk, false)
 	
 	super()
 	

@@ -17,11 +17,3 @@ extends Node2D
 # --- Functions --- #
 func _ready() -> void:
 	RenderingServer.global_shader_parameter_set('overworld_shader_texture', shader_texture)
-
-func _process(delta) -> void:
-	return
-	for i in range(4):
-		var player = DataManager.players[i]
-		if player.role != PlayerDataChunk.PlayerRole.NONE:
-			return
-			player.heal(heal_rate * delta)

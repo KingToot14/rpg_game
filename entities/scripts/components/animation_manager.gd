@@ -23,7 +23,7 @@ func setup(entity: Entity) -> void:
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')
 
-func play_damage_anim(_dmg: int) -> void:
+func play_damage_anim(_dmg_chunk: DamageChunk) -> void:
 	if parent.hp.alive:
 		animator.stop()
 		animator.play(&'take_damage')

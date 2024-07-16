@@ -40,8 +40,8 @@ var remaining_cooldown := 0
 @export var randomness: float = .10
 
 # --- Functions --- #
-func calculate_damage(attacker: Entity, target: Entity) -> float:
-	# Formula: (Power * Attack/Defense) * TODO: Elemental Mod
+func calculate_damage(attacker: Entity, target: Entity) -> DamageChunk:
+	# Formula: (Power * Attack/Defense) * Elemental Mod
 	var use_magic = damage_type == DamageType.MAGICAL
 	
 	# base damage
@@ -53,7 +53,7 @@ func calculate_damage(attacker: Entity, target: Entity) -> float:
 	# randomizer
 	dmg *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
 	
-	return dmg
+	return DamageChunk.new(dmg, element, element_percent)
 
 func highlight_targets() -> void:
 	if side == TargetSide.ENEMY:
