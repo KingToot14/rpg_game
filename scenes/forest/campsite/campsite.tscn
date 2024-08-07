@@ -1,0 +1,383 @@
+[gd_scene load_steps=25 format=3 uid="uid://dhlffyihw86sr"]
+
+[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
+[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
+[ext_resource type="Texture2D" uid="uid://b1mnqkqprdsxh" path="res://scenes/forest/campsite/shader_map.png" id="2_tow5x"]
+[ext_resource type="Texture2D" uid="uid://y4lsvf76j1wx" path="res://scenes/forest/campsite/ground_map.png" id="3_eyxl0"]
+[ext_resource type="Script" path="res://scripts/world_setter.gd" id="4_2rnsd"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="4_utprv"]
+[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="6_e7ac4"]
+[ext_resource type="PackedScene" uid="uid://dtoff1ugyxk58" path="res://environment/objects/tent.tscn" id="8_tjidq"]
+[ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="9_ug7et"]
+[ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="10_dap6k"]
+[ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="11_hwj4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btsgl"]
+shader = ExtResource("4_utprv")
+shader_parameter/transparency = 0.0
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_threshold = 0.75
+shader_parameter/wind_offset = 10.0
+shader_parameter/wave_count = 3.0
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gwlfn"]
+frequency = 0.122
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vkyge"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_gwlfn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p4cnu"]
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjxn"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_p4cnu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yksyw"]
+frequency = 0.0395
+fractal_octaves = 3
+fractal_lacunarity = 2.21
+domain_warp_type = 1
+domain_warp_amplitude = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27oty"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_yksyw")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxx4b"]
+viewport_path = NodePath("environment/reflection_viewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlw24"]
+resource_local_to_scene = true
+shader = ExtResource("6_e7ac4")
+shader_parameter/texture_size = Vector2(480, 270)
+shader_parameter/reflection_intensity = 0.25
+shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
+shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
+shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
+shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/dirt_darkness = 0.05
+shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/wind_speed = -0.25
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
+shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
+shader_parameter/foam_speed = -0.25
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bhgb"]
+size = Vector2(20, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ld1x"]
+size = Vector2(300, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjfss"]
+size = Vector2(35, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ogx"]
+size = Vector2(480, 20)
+
+[node name="area_root" type="Node2D"]
+visibility_layer = 7
+y_sort_enabled = true
+script = ExtResource("1_lrmwf")
+top_area = "res://scenes/forest/starting_trail/starting_trail.tscn"
+shader_texture = ExtResource("2_tow5x")
+
+[node name="wind_manager" type="Node2D" parent="."]
+script = ExtResource("2_4hymg")
+
+[node name="environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="trail" type="Sprite2D" parent="environment"]
+position = Vector2(240, 135)
+texture = ExtResource("3_eyxl0")
+vframes = 2
+
+[node name="short_grass" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_btsgl")
+position = Vector2(240, 135)
+texture = ExtResource("3_eyxl0")
+vframes = 2
+frame = 1
+
+[node name="reflection_viewport" type="SubViewport" parent="environment"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_cull_mask = 4294966276
+size = Vector2i(480, 270)
+script = ExtResource("4_2rnsd")
+visibility_layer = 3
+
+[node name="water_render" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_rlw24")
+position = Vector2(240, 135)
+texture = ExtResource("2_tow5x")
+
+[node name="collision" type="StaticBody2D" parent="environment"]
+
+[node name="left_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(-10, 135)
+shape = SubResource("RectangleShape2D_8bhgb")
+
+[node name="right_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(490, 135)
+shape = SubResource("RectangleShape2D_8bhgb")
+
+[node name="top_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(150, -10)
+shape = SubResource("RectangleShape2D_6ld1x")
+
+[node name="top_block2" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(482.5, -10)
+shape = SubResource("RectangleShape2D_vjfss")
+
+[node name="bottom_block" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(240, 280)
+shape = SubResource("RectangleShape2D_k7ogx")
+
+[node name="tent" parent="." instance=ExtResource("8_tjidq")]
+position = Vector2(174, 79)
+
+[node name="tent2" parent="." instance=ExtResource("8_tjidq")]
+position = Vector2(356, 92)
+scale = Vector2(-1, 1)
+
+[node name="tent3" parent="." instance=ExtResource("8_tjidq")]
+position = Vector2(197, 178)
+scale = Vector2(-1, 1)
+variant = 1
+
+[node name="top_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="forest_tree" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(34, 3)
+
+[node name="forest_tree2" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(115, 7)
+variant = 2
+
+[node name="forest_tree3" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(189, 26)
+variant = 1
+
+[node name="forest_tree4" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(65, 12)
+variant = 1
+
+[node name="forest_tree5" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(89, 2)
+variant = 1
+
+[node name="forest_tree6" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(153, 3)
+variant = 2
+
+[node name="forest_tree7" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(235, 2)
+variant = 1
+
+[node name="forest_tree8" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(135, 31)
+
+[node name="forest_tree9" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(91, 29)
+variant = 2
+
+[node name="forest_tree10" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(42, 30)
+variant = 1
+
+[node name="forest_tree11" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(37, 115)
+variant = 1
+
+[node name="forest_tree12" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(278, 9)
+variant = 1
+
+[node name="forest_tree13" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(214, 16)
+variant = 2
+
+[node name="forest_tree14" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(403, 50)
+variant = 2
+
+[node name="forest_tree15" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(444, 5)
+variant = 2
+
+[node name="forest_tree16" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(478, 22)
+variant = 1
+
+[node name="forest_tree17" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(470, 85)
+
+[node name="forest_tree18" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(448, 28)
+variant = 2
+
+[node name="forest_tree19" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(427, 37)
+
+[node name="forest_tree20" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(470, 53)
+
+[node name="forest_tree21" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(437, 63)
+
+[node name="forest_tree22" parent="top_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(452, 115)
+
+[node name="forest_tree23" parent="top_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(483, 120)
+variant = 2
+
+[node name="bottom_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="forest_tree" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(440, 223)
+variant = 1
+
+[node name="forest_tree2" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(478, 229)
+variant = 1
+
+[node name="forest_tree3" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(396, 230)
+variant = 1
+
+[node name="forest_tree4" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(350, 287)
+variant = 1
+
+[node name="forest_tree5" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(485, 267)
+variant = 2
+
+[node name="forest_tree6" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(460, 319)
+variant = 2
+
+[node name="forest_tree7" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(382, 320)
+variant = 1
+
+[node name="forest_tree8" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(48, 231)
+
+[node name="forest_tree9" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(107, 252)
+variant = 2
+
+[node name="forest_tree10" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(166, 258)
+variant = 2
+
+[node name="forest_tree11" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(274, 248)
+variant = 1
+
+[node name="forest_tree12" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(233, 258)
+
+[node name="forest_tree13" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(24, 270)
+variant = 2
+
+[node name="forest_tree14" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(64, 282)
+
+[node name="forest_tree15" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(140, 252)
+variant = 2
+
+[node name="forest_tree16" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(123, 287)
+variant = 2
+
+[node name="forest_tree17" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(209, 275)
+variant = 1
+
+[node name="forest_tree18" parent="bottom_trees" instance=ExtResource("9_ug7et")]
+position = Vector2(318, 260)
+variant = 1
+
+[node name="forest_tree19" parent="bottom_trees" instance=ExtResource("10_dap6k")]
+position = Vector2(286, 284)
+
+[node name="bush" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(384, 265)
+
+[node name="bush2" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(406, 271)
+
+[node name="bush3" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(434, 273)
+
+[node name="bush4" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(466, 266)
+
+[node name="bush5" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(422, 220)
+
+[node name="bush6" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(127, 16)
+
+[node name="bush7" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(167, 12)
+
+[node name="bush8" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(244, 8)
+
+[node name="bush9" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(22, 18)
+
+[node name="bush10" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(55, 99)
+
+[node name="bush11" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(426, 54)
+
+[node name="bush12" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(461, 93)
+
+[node name="bush13" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(92, 261)
+
+[node name="bush14" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(45, 260)
+
+[node name="bush15" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(216, 256)
+
+[node name="bush16" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(467, 225)
+
+[node name="bush17" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(252, 269)
+
+[node name="bush18" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(326, 269)
+
+[node name="bush19" parent="." instance=ExtResource("11_hwj4i")]
+position = Vector2(144, 265)
+
+[node name="plants" type="Node2D" parent="."]
+y_sort_enabled = true

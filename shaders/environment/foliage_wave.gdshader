@@ -13,6 +13,7 @@ uniform float transparency: hint_range(0.0, 1.0, 0.05) = 0.0;
 group_uniforms wind;
 uniform float wind_speed: hint_range(-5.0, 5.0, 0.05) = 2.0;
 uniform float wind_threshold: hint_range(-1.0, 1.0, 0.05) = 0.75;
+uniform float wind_offset: hint_range(0.0, 16.0, 1.0) = 0.0;
 uniform float wave_count: hint_range(1.0, 10.0) = 3.0;
 uniform sampler2D wind_noise: filter_nearest, repeat_enable;
 
@@ -42,7 +43,7 @@ void fragment() {
 	vec2 pos = pixelize(1.0 - SCREEN_UV, screen_size) * screen_size;
 	
 	pos.y += get_noise(pixelize(UV, vec2(textureSize(TEXTURE, 0))));
-	float wind = get_wind(pos.y - 10.0 * wind_position * wind_speed);
+	float wind = get_wind(pos.y + wind_offset - 10.0 * wind_position * wind_speed);
 	
 	vec2 uv = UV;
 	uv.x -= TEXTURE_PIXEL_SIZE.x * wind;

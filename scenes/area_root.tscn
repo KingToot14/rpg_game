@@ -130,6 +130,7 @@ shader_parameter/wind_speed = -0.25
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bhgb"]
+resource_local_to_scene = true
 size = Vector2(20, 270)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ogx"]

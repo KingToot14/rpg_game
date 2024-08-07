@@ -1,13 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://dpsc3mtp7w6ob"]
+[gd_scene load_steps=37 format=3 uid="uid://dpsc3mtp7w6ob"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_u6rmh"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_joetf"]
 [ext_resource type="Texture2D" uid="uid://bai4kv2w6xl6p" path="res://scenes/forest/starting_trail/grass_map.png" id="3_qwcog"]
+[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="4_ka0n1"]
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="4_w82d4"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="5_rgn1s"]
 [ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="6_0twie"]
 [ext_resource type="Texture2D" uid="uid://vbfo5kngm42q" path="res://scenes/forest/starting_trail/shader_map.png" id="6_ryxmw"]
-[ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="7_8654n"]
 [ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="9_5nj6s"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="10_xiigw"]
 [ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="11_3tjy6"]
@@ -16,51 +15,18 @@
 [ext_resource type="PackedScene" uid="uid://cur7d1tqtfkvy" path="res://environment/objects/sign.tscn" id="13_4ac0x"]
 [ext_resource type="Script" path="res://resources/scripts/inventory_item.gd" id="13_kj3sv"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="14_cqxmu"]
+[ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="16_0rojl"]
+[ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="17_041ax"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pbaxp"]
-frequency = 0.0082
-fractal_type = 3
-fractal_octaves = 2
-fractal_lacunarity = 2.18
-fractal_gain = 0.305
-domain_warp_enabled = true
-domain_warp_amplitude = 10.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i1yd0"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_pbaxp")
-
-[sub_resource type="Gradient" id="Gradient_itfrw"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.1)
-colors = PackedColorArray(0.337255, 0.741176, 0.215686, 1, 0.427451, 0.819608, 0.270588, 1)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vgaca"]
-gradient = SubResource("Gradient_itfrw")
-width = 8
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dn8cc"]
-frequency = 0.15
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o8v14"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_dn8cc")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8slxg"]
-resource_local_to_scene = true
-shader = ExtResource("5_rgn1s")
-shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
-shader_parameter/patch_intensity = 0.05
-shader_parameter/patch_threshold = 0.65
-shader_parameter/side_gradient = SubResource("GradientTexture1D_vgaca")
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_i1yd0")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_o8v14")
-shader_parameter/wind_intensity = 0.6
-shader_parameter/wind_speed = 0.5
-shader_parameter/wind_direction = Vector2(-1, -1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivnop"]
+shader = ExtResource("4_ka0n1")
+shader_parameter/transparency = 0.0
+shader_parameter/wind_speed = 2.0
+shader_parameter/wind_threshold = 0.75
+shader_parameter/wind_offset = 10.0
+shader_parameter/wave_count = 3.0
+shader_parameter/player_influence = 0.6
+shader_parameter/radius = 0.05
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gwlfn"]
 frequency = 0.122
@@ -113,15 +79,6 @@ shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
 shader_parameter/foam_speed = -0.25
 shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dr1u4"]
-shader = ExtResource("7_8654n")
-shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
-shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
-shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.25
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_lvjxn")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqsiw"]
 size = Vector2(20, 177)
 
@@ -132,7 +89,7 @@ size = Vector2(480, 20)
 size = Vector2(300, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jtwb"]
-size = Vector2(49, 20)
+size = Vector2(35, 20)
 
 [sub_resource type="Resource" id="Resource_l3iya"]
 script = ExtResource("13_kj3sv")
@@ -170,6 +127,7 @@ height = 48.0
 visibility_layer = 7
 y_sort_enabled = true
 script = ExtResource("1_u6rmh")
+bottom_area = "res://scenes/forest/campsite/campsite.tscn"
 left_area = "res://scenes/forest/starting_area/starting_area.tscn"
 shader_texture = ExtResource("6_ryxmw")
 
@@ -179,9 +137,17 @@ script = ExtResource("2_joetf")
 [node name="environment" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="short_grass" type="Sprite2D" parent="environment"]
+[node name="trail" type="Sprite2D" parent="environment"]
 position = Vector2(240, 135)
 texture = ExtResource("3_qwcog")
+vframes = 2
+
+[node name="short_grass" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_ivnop")
+position = Vector2(240, 135)
+texture = ExtResource("3_qwcog")
+vframes = 2
+frame = 1
 
 [node name="reflection_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
@@ -193,19 +159,8 @@ size = Vector2i(480, 270)
 script = ExtResource("4_w82d4")
 visibility_layer = 3
 
-[node name="long_grass_render" type="Sprite2D" parent="environment"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_8slxg")
-position = Vector2(240, 135)
-texture = ExtResource("6_ryxmw")
-
 [node name="water_render" type="Sprite2D" parent="environment"]
 material = SubResource("ShaderMaterial_rlw24")
-position = Vector2(240, 135)
-texture = ExtResource("6_ryxmw")
-
-[node name="trail_render" type="Sprite2D" parent="environment"]
-material = SubResource("ShaderMaterial_dr1u4")
 position = Vector2(240, 135)
 texture = ExtResource("6_ryxmw")
 
@@ -224,7 +179,7 @@ position = Vector2(150, 280)
 shape = SubResource("RectangleShape2D_h2cdx")
 
 [node name="bottom_block2" type="CollisionShape2D" parent="environment/collision"]
-position = Vector2(475.5, 280)
+position = Vector2(482.5, 280)
 shape = SubResource("RectangleShape2D_7jtwb")
 
 [node name="top_trees" type="Node2D" parent="."]
@@ -337,7 +292,7 @@ position = Vector2(310, 22)
 position = Vector2(346, 28)
 
 [node name="bush6" parent="top_trees" instance=ExtResource("11_3tjy6")]
-position = Vector2(414, 78)
+position = Vector2(414, 74)
 
 [node name="bush7" parent="top_trees" instance=ExtResource("11_3tjy6")]
 position = Vector2(430, 92)
@@ -414,6 +369,7 @@ variant = 2
 
 [node name="forest_tree12" parent="bottom_trees" instance=ExtResource("10_xiigw")]
 position = Vector2(126, 258)
+variant = 2
 
 [node name="forest_tree13" parent="bottom_trees" instance=ExtResource("10_xiigw")]
 position = Vector2(294, 258)
@@ -511,17 +467,17 @@ position = Vector2(244, 262)
 position = Vector2(196, 264)
 
 [node name="chest" parent="." instance=ExtResource("12_hme3p")]
-position = Vector2(431, 42)
+position = Vector2(433, 41)
 loot_key = "top_secret"
 loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_l3iya"), SubResource("Resource_8ubsf")])
 
 [node name="chest2" parent="." instance=ExtResource("12_hme3p")]
-position = Vector2(201, 188)
+position = Vector2(205, 188)
 loot_key = "center_clearing"
 loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_270tl"), SubResource("Resource_b8gsa")])
 
 [node name="sign" parent="." instance=ExtResource("13_4ac0x")]
-position = Vector2(50, 117)
+position = Vector2(34, 118)
 
 [node name="encounter" parent="." instance=ExtResource("14_cqxmu")]
 position = Vector2(232, 34)
@@ -547,3 +503,87 @@ battle_path = "res://scenes/battles/forest/forest_battle.tscn"
 position = Vector2(0, 5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_lj6r1")
+
+[node name="plants" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="big_plant" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(173, 25)
+
+[node name="big_plant2" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(280, 26)
+
+[node name="big_plant3" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(29, 122)
+
+[node name="big_plant4" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(70, 83)
+
+[node name="big_plant5" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(50, 25)
+
+[node name="big_plant6" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(210, 190)
+
+[node name="big_plant7" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(190, 165)
+
+[node name="big_plant8" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(346, 185)
+
+[node name="big_plant9" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(403, 95)
+
+[node name="big_plant10" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(404, 243)
+
+[node name="swirl_plant" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(418, 246)
+
+[node name="swirl_plant2" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(394, 252)
+
+[node name="swirl_plant3" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(197, 17)
+
+[node name="swirl_plant4" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(64, 35)
+
+[node name="swirl_plant5" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(85, 33)
+
+[node name="swirl_plant6" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(52, 104)
+
+[node name="swirl_plant7" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(197, 198)
+
+[node name="swirl_plant8" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(243, 162)
+
+[node name="swirl_plant9" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(447, 23)
+
+[node name="swirl_plant10" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(464, 21)
+
+[node name="swirl_plant11" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(428, 63)
+
+[node name="swirl_plant12" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(425, 188)
+
+[node name="big_plant11" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(108, 268)
+
+[node name="big_plant12" parent="plants" instance=ExtResource("16_0rojl")]
+position = Vector2(34, 267)
+
+[node name="swirl_plant13" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(170, 269)
+
+[node name="swirl_plant14" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(339, 48)
+
+[node name="swirl_plant15" parent="plants" instance=ExtResource("17_041ax")]
+position = Vector2(119, 63)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtoff1ugyxk58"]
+
+[ext_resource type="Texture2D" uid="uid://oxba0tl6wivg" path="res://environment/objects/tent.png" id="1_fs3w0"]
+[ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_xxwe8"]
+
+[node name="tent" type="StaticBody2D" node_paths=PackedStringArray("sprite")]
+z_index = 100
+y_sort_enabled = true
+script = ExtResource("1_xxwe8")
+sprite = NodePath("sprite")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 6)
+texture = ExtResource("1_fs3w0")
+offset = Vector2(0, -6)
+vframes = 2
+
+[node name="shape" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-25, 6, -17, 9, -6, 14, 2, 19, 11, 16, 21, 13, 26, 13, 18, 10, 4, 4, -5, 0)

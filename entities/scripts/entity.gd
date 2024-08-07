@@ -40,9 +40,6 @@ func setup(index: int):
 	for child in manager_root.get_children():
 		if 'setup' in child:
 			child.setup(self)
-	
-	if is_player():
-		status_effects.add_effect(&'burn', 10)
 
 func store_data() -> void:
 	if hp:

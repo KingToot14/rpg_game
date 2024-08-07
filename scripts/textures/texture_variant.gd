@@ -5,7 +5,11 @@ extends Node
 # --- Variables --- #
 @export var sprite: Sprite2D
 
-@export var variant := 0
+@export var variant := 0:
+	set(value):
+		variant = value
+		if sprite:
+			update_texture()
 
 # --- Functions --- #
 func _ready() -> void:

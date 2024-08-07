@@ -34,6 +34,8 @@ func _input(event: InputEvent) -> void:
 			load_area("res://scenes/testing/starting_area.tscn")
 		51:		# 3. Battle Test
 			load_area("res://scenes/testing/starting_area.tscn")
+		52:		# 4. Current Scene
+			load_area("res://scenes/forest/campsite/campsite.tscn")
 
 func load_area(path: String, handle_transition := true) -> void:
 	if handle_transition:

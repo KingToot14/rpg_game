@@ -40,6 +40,7 @@ shader = ExtResource("5_qdvdd")
 shader_parameter/transparency = 0.0
 shader_parameter/wind_speed = 2.0
 shader_parameter/wind_threshold = 0.6
+shader_parameter/wind_offset = 0.0
 shader_parameter/wave_count = 3.0
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_t32mv")
 shader_parameter/player_influence = 0.6
