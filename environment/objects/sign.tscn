@@ -24,8 +24,7 @@ z_index = 100
 y_sort_enabled = true
 collision_mask = 2
 script = ExtResource("1_kd2yj")
-dialogue_path = "test_sign"
-box_offset = 19.0
+box_offset = -28.0
 icon = ExtResource("2_0mxqc")
 
 [node name="shadow" type="Sprite2D" parent="."]

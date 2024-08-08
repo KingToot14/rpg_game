@@ -7,6 +7,7 @@
 HBoxContainer/constants/separation = -1
 QuestContainer/base_type = &"HBoxContainer"
 QuestContainer/constants/separation = 0
+RichTextLabel/colors/default_color = Color(0.568627, 0.807843, 0.929412, 1)
 RichTextLabel/font_sizes/normal_font_size = 11
 RichTextLabel/fonts/normal_font = ExtResource("1_kdwbr")
 Small/base_type = &"RichTextLabel"

@@ -61,4 +61,4 @@ func do_damage(target, modifier: float = 1.0) -> void:
 		
 		for neighbor in neighbors:
 			dmg_chunk.damage *= 0.5
-			neighbor.hp.take_damage(dmg_chunk.damage)
+			neighbor.hp.take_damage(dmg_chunk)

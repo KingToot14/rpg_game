@@ -478,11 +478,14 @@ loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_270tl"), SubResourc
 
 [node name="sign" parent="." instance=ExtResource("13_4ac0x")]
 position = Vector2(34, 118)
+dialogue_path = "res://resources/dialogue/sign_text.dialogue"
+dialogue_title = "starting_area_sign"
+balloon_path = "res://scenes/dialogue/sign_balloon.tscn"
 
 [node name="encounter" parent="." instance=ExtResource("14_cqxmu")]
 position = Vector2(232, 34)
 scale = Vector2(-1, 1)
-encounter_path = "res://encounters/test/small_test.tres"
+encounter_path = "res://scenes/forest/starting_trail/encounters/first_encounter.tres"
 battle_path = "res://scenes/battles/forest/forest_battle.tscn"
 
 [node name="blocker" type="StaticBody2D" parent="encounter"]
@@ -494,7 +497,7 @@ shape = SubResource("CapsuleShape2D_axqbl")
 
 [node name="encounter2" parent="." instance=ExtResource("14_cqxmu")]
 position = Vector2(384, 174)
-encounter_path = "res://encounters/test/small_test.tres"
+encounter_path = "res://scenes/forest/starting_trail/encounters/second_encounter.tres"
 battle_path = "res://scenes/battles/forest/forest_battle.tscn"
 
 [node name="blocker" type="StaticBody2D" parent="encounter2"]

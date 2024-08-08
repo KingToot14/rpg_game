@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://drjfwso3bw6ig"]
+
+[ext_resource type="Texture2D" uid="uid://brrgilv0iu8uh" path="res://environment/objects/campfire.png" id="1_6bqq0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dt24n"]
+radius = 8.0
+height = 24.0
+
+[node name="campfire" type="StaticBody2D"]
+z_index = 100
+y_sort_enabled = true
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_6bqq0")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dt24n")

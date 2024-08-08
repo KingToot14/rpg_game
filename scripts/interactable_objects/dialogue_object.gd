@@ -44,14 +44,14 @@ func show_dialogue():
 		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, curr_title)
 
 func update_texture() -> void:
-	var direction = Vector2.ZERO
+	var direction = position.direction_to(Globals.overworld_manager.player.position)
 	
 	if direction == Vector2.ZERO:
 		return
 	
 	sprite.flip_h = direction.x > 0.0
 	
-	if abs(direction.x) < 0.1:
+	if abs(direction.x) < 0.25:
 		sprite.frame = 0 if direction.y >= 0.0 else 2
 	else:
 		sprite.frame = 1 if direction.y >= 0.0 else 3

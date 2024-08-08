@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgxu65mbg012p"
-path="res://.godot/imported/short_grass_map.png-13fe0442c0ed54420294e6c3e43d77bc.ctex"
+uid="uid://cunv1b1igjby7"
+path="res://.godot/imported/terrain_map.png-f8162745f61caa5bc8382c1868009859.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/forest/starting_area/short_grass_map.png"
-dest_files=["res://.godot/imported/short_grass_map.png-13fe0442c0ed54420294e6c3e43d77bc.ctex"]
+source_file="res://scenes/forest/starting_area/terrain_map.png"
+dest_files=["res://.godot/imported/terrain_map.png-f8162745f61caa5bc8382c1868009859.ctex"]
 
 [params]
 

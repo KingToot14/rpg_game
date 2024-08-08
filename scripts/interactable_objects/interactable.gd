@@ -22,7 +22,7 @@ func _ready() -> void:
 	body_exited.connect(object_moved.bind(false))
 	
 	# Setup interaction box
-	box_rect.position.y = -box_rect.size.y / 2.0 - box_offset
+	box_rect.position.y = box_offset
 	icon_rect.texture = icon
 	
 	box_rect.visible = false

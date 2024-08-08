@@ -62,9 +62,9 @@ clear_margin = 0.0
 [node name="sprite" type="Sprite2D" parent="sprite_group"]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_0glyt")
-position = Vector2(0, 5)
+position = Vector2(-2, 4)
 texture = ExtResource("9_v6e35")
-offset = Vector2(0, -15)
+offset = Vector2(2, -13)
 hframes = 2
 vframes = 2
 
@@ -76,7 +76,6 @@ offset_right = 13.0
 offset_bottom = 5.0
 
 [node name="collision" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_l0mef")
 
 [node name="position_marker" type="Marker2D" parent="."]
@@ -88,7 +87,7 @@ unique_name_in_owner = true
 visible = false
 visibility_layer = 4
 material = SubResource("ShaderMaterial_0glyt")
-position = Vector2(0, 20)
+position = Vector2(2, 18)
 texture = ExtResource("9_v6e35")
 flip_v = true
 hframes = 2

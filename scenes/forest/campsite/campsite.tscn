@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dhlffyihw86sr"]
+[gd_scene load_steps=34 format=3 uid="uid://dhlffyihw86sr"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="14_8i2db"]
 [ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="14_l4gh5"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="15_iux3y"]
+[ext_resource type="PackedScene" uid="uid://bc2yg7kt18h7w" path="res://environment/objects/crate.tscn" id="17_6rp7q"]
+[ext_resource type="PackedScene" uid="uid://drjfwso3bw6ig" path="res://environment/objects/campfire.tscn" id="18_5ftdy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btsgl"]
 shader = ExtResource("4_utprv")
@@ -91,6 +93,11 @@ size = Vector2(35, 20)
 size = Vector2(480, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vyfou"]
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoj0j"]
+radius = 3.0
+height = 12.0
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
@@ -412,25 +419,56 @@ frame = 1
 z_index = 100
 y_sort_enabled = true
 position = Vector2(174, 115)
+collision_mask = 2
 script = ExtResource("13_oeuat")
 npc_name = "ranger"
 look_at_player = true
 sprite = NodePath("sprite")
 npc_info_path = "res://scenes/forest/campsite/ranger/info.tres"
 dialogue_path = "res://scenes/forest/campsite/ranger/ranger.dialogue"
-box_offset = 19.0
+box_offset = -38.0
 icon = ExtResource("14_l4gh5")
 
 [node name="sprite" type="Sprite2D" parent="ranger"]
-position = Vector2(1, -9)
+position = Vector2(0, 1)
 texture = ExtResource("14_8i2db")
+offset = Vector2(1, -10)
 hframes = 2
 vframes = 2
 
 [node name="shape" type="CollisionShape2D" parent="ranger"]
+visible = false
 shape = SubResource("CircleShape2D_vyfou")
+
+[node name="blocker" type="StaticBody2D" parent="ranger"]
+visible = false
+
+[node name="shape" type="CollisionShape2D" parent="ranger/blocker"]
+position = Vector2(-1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yoj0j")
 
 [node name="interaction_box" parent="ranger" instance=ExtResource("15_iux3y")]
 visible = false
-offset_top = -28.0
-offset_bottom = -10.0
+offset_left = -10.0
+offset_top = -38.0
+offset_right = 8.0
+offset_bottom = -20.0
+
+[node name="crate" parent="." instance=ExtResource("17_6rp7q")]
+position = Vector2(143, 103)
+variant = 1
+
+[node name="crate2" parent="." instance=ExtResource("17_6rp7q")]
+position = Vector2(223, 62)
+scale = Vector2(-1, 1)
+
+[node name="crate3" parent="." instance=ExtResource("17_6rp7q")]
+position = Vector2(404, 120)
+
+[node name="crate4" parent="." instance=ExtResource("17_6rp7q")]
+position = Vector2(380, 123)
+scale = Vector2(-1, 1)
+
+[node name="campfire" parent="." instance=ExtResource("18_5ftdy")]
+position = Vector2(257, 134)

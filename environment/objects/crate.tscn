@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc2yg7kt18h7w"]
+
+[ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_4ueus"]
+[ext_resource type="Texture2D" uid="uid://4f365qlgqblp" path="res://environment/objects/crate.png" id="1_f1b72"]
+
+[node name="crate" type="StaticBody2D" node_paths=PackedStringArray("sprite")]
+z_index = 100
+y_sort_enabled = true
+script = ExtResource("1_4ueus")
+sprite = NodePath("sprite")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 7)
+texture = ExtResource("1_f1b72")
+offset = Vector2(0, -7)
+hframes = 2
+
+[node name="shape" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(7, 12, -9, 11, -7, 4, 9, 5)

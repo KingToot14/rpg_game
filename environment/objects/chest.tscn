@@ -33,7 +33,7 @@ y_sort_enabled = true
 collision_mask = 2
 script = ExtResource("1_ha7r0")
 collected_sprite = SubResource("AtlasTexture_ai6y7")
-box_offset = 18.0
+box_offset = -27.0
 icon = ExtResource("3_bf7je")
 
 [node name="shadow" type="Sprite2D" parent="."]
