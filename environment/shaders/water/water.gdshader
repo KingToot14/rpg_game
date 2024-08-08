@@ -57,11 +57,11 @@ void fragment() {
 	//uv -= vec2(0.0, COLOR.b * 255.0 * TEXTURE_PIXEL_SIZE.y);
 	
 	// Set Base Water Color
-	//vec2 water_uv = uv + vec2(sine_wave(TWO_PI, 2.0 * TEXTURE_PIXEL_SIZE.x, 40.0 * uv.y + wind_position, vec2(-1, 0), uv), 0.0);
+	vec2 water_uv = uv + vec2(sine_wave(TWO_PI, 2.0 * TEXTURE_PIXEL_SIZE.x, 40.0 * uv.y + wind_position, vec2(-1, 0), uv), 0.0);
 	//COLOR.rgb = mix(water_color.rgb, dark_color.rgb, get_patch(water_uv));
 	
 	// Calculate Reflection
-	vec4 reflection_color = texture(reflection_texture, uv);
+	vec4 reflection_color = texture(reflection_texture, water_uv);
 	reflection_color.a = step(0.90, reflection_color.a);
 	COLOR = mix(COLOR, reflection_color, reflection_color.a) * step(0.01, COLOR.b);
 	COLOR.a *= reflection_intensity;

@@ -3,6 +3,9 @@ extends Interactable
 
 # --- Variables --- #
 @export var npc_name: String
+@export var look_at_player := false
+# @@show_if(look_at_player)
+@export var sprite: Sprite2D
 
 @export_file("*.tres") var npc_info_path: String
 @export_file("*.dialogue") var dialogue_path: String
@@ -25,6 +28,13 @@ func _ready():
 	interacted_with.connect(show_dialogue)
 
 func show_dialogue():
+	if is_instance_valid(Globals.curr_dialogue):
+		return
+	
+	# look at player
+	if look_at_player:
+		update_texture()
+	
 	PortraitManager.set_portrait(npc_resource, "happy")
 	get_title()
 	
@@ -32,6 +42,19 @@ func show_dialogue():
 		DialogueManager.show_dialogue_balloon(dialogue, curr_title)
 	else:
 		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, curr_title)
+
+func update_texture() -> void:
+	var direction = Vector2.ZERO
+	
+	if direction == Vector2.ZERO:
+		return
+	
+	sprite.flip_h = direction.x > 0.0
+	
+	if abs(direction.x) < 0.1:
+		sprite.frame = 0 if direction.y >= 0.0 else 2
+	else:
+		sprite.frame = 1 if direction.y >= 0.0 else 3
 
 func get_title() -> void:
 	if not dialogue_title.is_empty():

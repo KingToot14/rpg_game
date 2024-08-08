@@ -1,0 +1,60 @@
+~ introduction
+
+Ranger: Oh! Well hello there!
+Ranger: Sorry, I wasn't paying much attention... [wait=0.5]
+	Not many folks have been around lately
+ - Why not?
+	Ranger: Well ever since that **spider's den** popped up, most **villagers** aren't too keen on traveling into the forest.
+	do DataManager.set_dialogue_state('ranger', 'post_intro')
+	=> select_option
+
+=> END
+
+~ post_intro
+
+Ranger: Hey there again! What can I help you with?
+=> select_option
+
+=> END
+
+~ select_option
+
+- Spider's Den? [if DataManager.get_flag_current('ranger_den_info') != true] => info_spiders_den
+- Spider's Den? [if DataManager.get_flag_current('ranger_den_info') == true] => recap_spiders_den
+- Village? [if DataManager.get_flag_current('ranger_village_info') != true] => info_village
+- Village? [if DataManager.get_flag_current('ranger_village_info') == true] => recap_village
+
+=> END
+
+#region First Time Asking
+~ info_spiders_den
+
+Ranger: I'm surprised you hadn't noticed it! I suppose it's pretty easy to got lost in the [wave]beauty[/wave] of the forest.
+Ranger: To find it, just follow the trail **straight east**.
+	I would advise against venturing too far, however, those spiders can be pretty nasty!
+
+do DataManager.set_flag_current('ranger_den_info', true)
+=> select_option
+
+~ info_village
+
+Ranger: Huh, I thought you would've came from that direction!
+Ranger: In any case, just follow the trail **east** and then **north**! You'll find the folks there quite kind to newcomers!
+
+do DataManager.set_flag_current('ranger_village_info', true)
+=> select_option
+#endregion
+
+#region Recaps
+~ recap_spiders_den
+
+Ranger: All you need to do is follow the trail **straight east**!
+
+=> END
+
+~ recap_village
+
+Ranger: Just follow the trail **east** and then **north**!
+
+=> END
+#endregion

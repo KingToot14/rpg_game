@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NpcInformation" load_steps=3 format=3 uid="uid://bfl7v7yaj2wmd"]
+
+[ext_resource type="Script" path="res://entities/scripts/npc_information.gd" id="1_0q7nq"]
+[ext_resource type="Texture2D" uid="uid://joasmiva6fp6" path="res://scenes/forest/campsite/ranger/portrait.png" id="1_7nh28"]
+
+[resource]
+script = ExtResource("1_0q7nq")
+name = "Ranger"
+color = Color(0, 0, 0, 1)
+form = "Cat"
+portrait_texture = ExtResource("1_7nh28")

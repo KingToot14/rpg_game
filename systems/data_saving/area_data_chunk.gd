@@ -64,3 +64,10 @@ func get_dialogue_state(key: StringName) -> String:
 
 func set_dialogue_state(key: StringName, state: String) -> void:
 	dialogue_states[key] = state
+
+# - Flags - #
+func get_flag(key: StringName) -> Variant:
+	return flags.get(key, null)
+
+func set_flag(key: StringName, value: Variant) -> void:
+	flags[key] = value

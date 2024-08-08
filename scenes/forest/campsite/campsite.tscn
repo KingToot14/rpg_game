@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dhlffyihw86sr"]
+[gd_scene load_steps=31 format=3 uid="uid://dhlffyihw86sr"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
@@ -11,6 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="9_ug7et"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="10_dap6k"]
 [ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="11_hwj4i"]
+[ext_resource type="Texture2D" uid="uid://dv1qe0bgbf03d" path="res://scenes/forest/campsite/dock_begin.png" id="12_cnwhl"]
+[ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="13_oeuat"]
+[ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="14_8i2db"]
+[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="14_l4gh5"]
+[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="15_iux3y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btsgl"]
 shader = ExtResource("4_utprv")
@@ -85,6 +90,8 @@ size = Vector2(35, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ogx"]
 size = Vector2(480, 20)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyfou"]
+
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
 y_sort_enabled = true
@@ -146,6 +153,12 @@ shape = SubResource("RectangleShape2D_vjfss")
 [node name="bottom_block" type="CollisionShape2D" parent="environment/collision"]
 position = Vector2(240, 280)
 shape = SubResource("RectangleShape2D_k7ogx")
+
+[node name="water_top" type="CollisionPolygon2D" parent="environment/collision"]
+polygon = PackedVector2Array(0, 4, 5, 9, 8, 18, 8, 47, 6, 56, 11, 69, 16, 86, 16, 112, 11, 124, 9, 135, 9, 142, 0, 142)
+
+[node name="water_bottom" type="CollisionPolygon2D" parent="environment/collision"]
+polygon = PackedVector2Array(13, 188, 13, 204, 17, 214, 17, 237, 11, 254, 9, 263, 9, 270, 0, 270, 0, 188)
 
 [node name="tent" parent="." instance=ExtResource("8_tjidq")]
 position = Vector2(174, 79)
@@ -290,7 +303,7 @@ position = Vector2(166, 258)
 variant = 2
 
 [node name="forest_tree11" parent="bottom_trees" instance=ExtResource("10_dap6k")]
-position = Vector2(274, 248)
+position = Vector2(274, 254)
 variant = 1
 
 [node name="forest_tree12" parent="bottom_trees" instance=ExtResource("9_ug7et")]
@@ -316,68 +329,108 @@ position = Vector2(209, 275)
 variant = 1
 
 [node name="forest_tree18" parent="bottom_trees" instance=ExtResource("9_ug7et")]
-position = Vector2(318, 260)
+position = Vector2(321, 260)
 variant = 1
 
 [node name="forest_tree19" parent="bottom_trees" instance=ExtResource("10_dap6k")]
 position = Vector2(286, 284)
 
-[node name="bush" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(384, 265)
-
-[node name="bush2" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(406, 271)
-
-[node name="bush3" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(434, 273)
-
-[node name="bush4" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(466, 266)
-
-[node name="bush5" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(422, 220)
-
-[node name="bush6" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(127, 16)
-
-[node name="bush7" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(167, 12)
-
-[node name="bush8" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(244, 8)
-
-[node name="bush9" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(22, 18)
-
-[node name="bush10" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(55, 99)
-
-[node name="bush11" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(426, 54)
-
-[node name="bush12" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(461, 93)
-
-[node name="bush13" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(92, 261)
-
-[node name="bush14" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(45, 260)
-
-[node name="bush15" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(216, 256)
-
-[node name="bush16" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(467, 225)
-
-[node name="bush17" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(252, 269)
-
-[node name="bush18" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(326, 269)
-
-[node name="bush19" parent="." instance=ExtResource("11_hwj4i")]
-position = Vector2(144, 265)
-
 [node name="plants" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="bush" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(384, 265)
+
+[node name="bush2" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(406, 271)
+
+[node name="bush3" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(434, 273)
+
+[node name="bush4" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(466, 266)
+
+[node name="bush5" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(422, 220)
+
+[node name="bush6" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(127, 16)
+
+[node name="bush7" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(167, 12)
+
+[node name="bush8" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(244, 8)
+
+[node name="bush9" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(22, 18)
+
+[node name="bush10" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(55, 99)
+
+[node name="bush11" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(426, 54)
+
+[node name="bush12" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(461, 93)
+
+[node name="bush13" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(92, 261)
+
+[node name="bush14" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(45, 260)
+
+[node name="bush15" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(216, 256)
+
+[node name="bush16" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(467, 225)
+
+[node name="bush17" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(252, 269)
+
+[node name="bush18" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(326, 269)
+
+[node name="bush19" parent="plants" instance=ExtResource("11_hwj4i")]
+position = Vector2(144, 265)
+
+[node name="dock" type="Sprite2D" parent="."]
+z_index = 50
+y_sort_enabled = true
+position = Vector2(15, 163)
+texture = ExtResource("12_cnwhl")
+hframes = 2
+
+[node name="dock_post" type="Sprite2D" parent="dock"]
+z_index = 100
+texture = ExtResource("12_cnwhl")
+hframes = 2
+frame = 1
+
+[node name="ranger" type="Area2D" parent="." node_paths=PackedStringArray("sprite")]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(174, 115)
+script = ExtResource("13_oeuat")
+npc_name = "ranger"
+look_at_player = true
+sprite = NodePath("sprite")
+npc_info_path = "res://scenes/forest/campsite/ranger/info.tres"
+dialogue_path = "res://scenes/forest/campsite/ranger/ranger.dialogue"
+box_offset = 19.0
+icon = ExtResource("14_l4gh5")
+
+[node name="sprite" type="Sprite2D" parent="ranger"]
+position = Vector2(1, -9)
+texture = ExtResource("14_8i2db")
+hframes = 2
+vframes = 2
+
+[node name="shape" type="CollisionShape2D" parent="ranger"]
+shape = SubResource("CircleShape2D_vyfou")
+
+[node name="interaction_box" parent="ranger" instance=ExtResource("15_iux3y")]
+visible = false
+offset_top = -28.0
+offset_bottom = -10.0

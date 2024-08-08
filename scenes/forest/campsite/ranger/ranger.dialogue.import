@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://e6k4bsvy4kas"
+path="res://.godot/imported/ranger.dialogue-a60d9a2a1db647455a891a1181660384.tres"
+
+[deps]
+
+source_file="res://scenes/forest/campsite/ranger/ranger.dialogue"
+dest_files=["res://.godot/imported/ranger.dialogue-a60d9a2a1db647455a891a1181660384.tres"]
+
+[params]
+
+defaults=true

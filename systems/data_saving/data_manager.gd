@@ -128,6 +128,18 @@ func get_area_chunk(key: String) -> AreaDataChunk:
 		return areas[key]
 	create_area_chunk(key)
 	return areas[key]
+
+func get_flag(area_key: StringName, flag_key: StringName) -> Variant:
+	return get_area_chunk(area_key).get_flag(flag_key)
+
+func set_flag(area_key: StringName, flag_key: StringName, value: Variant) -> void:
+	get_area_chunk(area_key).set_flag(flag_key, value)
+
+func get_flag_current(flag_key: StringName) -> Variant:
+	return get_flag("", flag_key)
+
+func set_flag_current(flag_key: StringName, value: Variant) -> void:
+	set_flag("", flag_key, value)
 #endregion
 
 #region Chests
