@@ -18,7 +18,7 @@ var parent: Entity
 func setup(entity: Entity) -> void:
 	parent = entity
 	
-	get_tree().process_frame.connect(load_hp, CONNECT_ONE_SHOT)
+	parent.entity_setup.connect(load_hp)
 
 func load_hp() -> void:
 	if load_max_hp:

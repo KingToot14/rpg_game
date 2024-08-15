@@ -17,6 +17,9 @@ var parent: Entity
 func setup(entity: Entity) -> void:
 	parent = entity
 	
+	parent.entity_setup.connect(load_spec)
+
+func load_spec():
 	if load_special:
 		curr_special = DataManager.players[parent.spawn_index].curr_special
 	else:

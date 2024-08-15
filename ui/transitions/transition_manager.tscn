@@ -16,6 +16,7 @@ shader_parameter/cutoff = 0.0
 shader_parameter/fade_length = 0.1
 
 [node name="transition_manager" type="CanvasLayer"]
+layer = 50
 script = ExtResource("1_08xaj")
 swipe_time = 0.4
 circle_time = 0.5

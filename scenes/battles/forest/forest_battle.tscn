@@ -1,8 +1,7 @@
-[gd_scene load_steps=103 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=99 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
-[ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_tiles.tres" id="2_j2t4l"]
 [ext_resource type="Script" path="res://scripts/battles/battle_camera.gd" id="2_km81k"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/player_state.gd" id="3_ntjl1"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/enemy_state.gd" id="4_7xy13"]
@@ -22,10 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/melee_icons/tactics_melee.png" id="10_qg1o5"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="11_562by"]
 [ext_resource type="Script" path="res://systems/battles/action_fsm/tactic_action_state.gd" id="11_pn5pf"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/short_grass.gdshader" id="13_3gd3i"]
+[ext_resource type="Texture2D" uid="uid://b7jxwwpwash2v" path="res://scenes/battles/forest/ground_map.png" id="15_bhykm"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="16_6d7b8"]
-[ext_resource type="Texture2D" uid="uid://p40pn4oonncw" path="res://scenes/battles/forest/grass_map.png" id="17_oqhuu"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="17_ty8w6"]
 [ext_resource type="Texture2D" uid="uid://dngvxddv10ync" path="res://scenes/battles/forest/shader_map.png" id="19_min80"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="19_ok23t"]
@@ -56,25 +54,10 @@
 [ext_resource type="Script" path="res://ui/battles/victory_loss/victory_panel.gd" id="51_pokc6"]
 [ext_resource type="Script" path="res://ui/overworld/overworld_button.gd" id="53_1x413"]
 [ext_resource type="PackedScene" uid="uid://boxije6upv4im" path="res://ui/battles/victory_loss/player_xp_bar.tscn" id="53_3n2mt"]
+[ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="55_ho2vv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tp5cl"]
 frequency = 0.5
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qsru2"]
-frequency = 0.2
-fractal_type = 0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0oyx"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_qsru2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dpw5"]
-shader = ExtResource("13_3gd3i")
-shader_parameter/wind_speed = -0.5
-shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_o0oyx")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cavhj"]
 frequency = 0.0082
@@ -299,6 +282,7 @@ script = ExtResource("2_km81k")
 noise = SubResource("FastNoiseLite_tp5cl")
 
 [node name="turn_fsm" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_eejpv")
 turn_switch_delay = 0.5
 
@@ -315,6 +299,7 @@ script = ExtResource("5_1or2o")
 script = ExtResource("6_s453a")
 
 [node name="action_fsm" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("5_hg5dv")
 
 [node name="blank_state" type="Node2D" parent="action_fsm"]
@@ -339,12 +324,18 @@ metadata/_edit_group_ = true
 [node name="wind_manager" type="Node2D" parent="environment"]
 script = ExtResource("11_562by")
 
-[node name="ground" type="TileMap" parent="environment"]
-visible = false
-position = Vector2(0, 5)
-tile_set = ExtResource("2_j2t4l")
-format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, -65534, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 524290, 0, 0, 589826, 0, 0, 655362, 0, 0, 720898, 0, 0, 786434, 0, 0, 851970, 0, 0, -65533, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 589827, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 0, 0, 851971, 0, 0, -65532, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 589828, 0, 0, 655364, 0, 0, 720900, 0, 0, 786436, 0, 0, 851972, 0, 0, -65531, 0, 0, 5, 0, 0, 65541, 0, 0, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 589829, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 0, 0, 851973, 0, 0, -65530, 0, 0, 6, 0, 0, 65542, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 0, 0, 589830, 0, 0, 655366, 0, 0, 720902, 0, 0, 786438, 0, 0, 851974, 0, 0, -65529, 0, 0, 7, 0, 0, 65543, 0, 0, 131079, 0, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 0, 0, 589831, 0, 0, 655367, 0, 0, 720903, 0, 0, 786439, 0, 0, 851975, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 0, 0, 524296, 0, 0, 589832, 0, 0, 655368, 0, 0, 720904, 0, 0, 786440, 0, 0, 851976, 0, 0, -65527, 0, 0, 9, 0, 0, 65545, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 0, 0, 524297, 0, 0, 589833, 0, 0, 655369, 0, 0, 720905, 0, 0, 786441, 0, 0, 851977, 0, 0, -65526, 0, 0, 10, 0, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 0, 0, 458762, 0, 0, 524298, 0, 0, 589834, 0, 0, 655370, 0, 0, 720906, 0, 0, 786442, 0, 0, 851978, 0, 0, -65525, 0, 0, 11, 0, 0, 65547, 0, 0, 131083, 0, 0, 196619, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 0, 0, 458763, 0, 0, 524299, 0, 0, 589835, 0, 0, 655371, 0, 0, 720907, 0, 0, 786443, 0, 0, 851979, 0, 0, -65524, 0, 0, 12, 0, 0, 65548, 0, 0, 131084, 0, 0, 196620, 0, 0, 262156, 0, 0, 327692, 0, 0, 393228, 0, 0, 458764, 0, 0, 524300, 0, 0, 589836, 0, 0, 655372, 0, 0, 720908, 0, 0, 786444, 0, 0, 851980, 0, 0, -65523, 0, 0, 13, 0, 0, 65549, 0, 0, 131085, 0, 0, 196621, 0, 0, 262157, 0, 0, 327693, 0, 0, 393229, 0, 0, 458765, 0, 0, 524301, 0, 0, 589837, 0, 0, 655373, 0, 0, 720909, 0, 0, 786445, 0, 0, 851981, 0, 0, -65522, 0, 0, 14, 0, 0, 65550, 0, 0, 131086, 0, 0, 196622, 0, 0, 262158, 0, 0, 327694, 0, 0, 393230, 0, 0, 458766, 0, 0, 524302, 0, 0, 589838, 0, 0, 655374, 0, 0, 720910, 0, 0, 786446, 0, 0, 851982, 0, 0, -65521, 0, 0, 15, 0, 0, 65551, 0, 0, 131087, 0, 0, 196623, 0, 0, 262159, 0, 0, 327695, 0, 0, 393231, 0, 0, 458767, 0, 0, 524303, 0, 0, 589839, 0, 0, 655375, 0, 0, 720911, 0, 0, 786447, 0, 0, 851983, 0, 0, -65520, 0, 0, 16, 0, 0, 65552, 0, 0, 131088, 0, 0, 196624, 0, 0, 262160, 0, 0, 327696, 0, 0, 393232, 0, 0, 458768, 0, 0, 524304, 0, 0, 589840, 0, 0, 655376, 0, 0, 720912, 0, 0, 786448, 0, 0, 851984, 0, 0, -65519, 0, 0, 17, 0, 0, 65553, 0, 0, 131089, 0, 0, 196625, 0, 0, 262161, 0, 0, 327697, 0, 0, 393233, 0, 0, 458769, 0, 0, 524305, 0, 0, 589841, 0, 0, 655377, 0, 0, 720913, 0, 0, 786449, 0, 0, 851985, 0, 0, -65518, 0, 0, 18, 0, 0, 65554, 0, 0, 131090, 0, 0, 196626, 0, 0, 262162, 0, 0, 327698, 0, 0, 393234, 0, 0, 458770, 0, 0, 524306, 0, 0, 589842, 0, 0, 655378, 0, 0, 720914, 0, 0, 786450, 0, 0, 851986, 0, 0, -65517, 0, 0, 19, 0, 0, 65555, 0, 0, 131091, 0, 0, 196627, 0, 0, 262163, 0, 0, 327699, 0, 0, 393235, 0, 0, 458771, 0, 0, 524307, 0, 0, 589843, 0, 0, 655379, 0, 0, 720915, 0, 0, 786451, 0, 0, 851987, 0, 0, -65516, 0, 0, 20, 0, 0, 65556, 0, 0, 131092, 0, 0, 196628, 0, 0, 262164, 0, 0, 327700, 0, 0, 393236, 0, 0, 458772, 0, 0, 524308, 0, 0, 589844, 0, 0, 655380, 0, 0, 720916, 0, 0, 786452, 0, 0, 851988, 0, 0, -65515, 0, 0, 21, 0, 0, 65557, 0, 0, 131093, 0, 0, 196629, 0, 0, 262165, 0, 0, 327701, 0, 0, 393237, 0, 0, 458773, 0, 0, 524309, 0, 0, 589845, 0, 0, 655381, 0, 0, 720917, 0, 0, 786453, 0, 0, 851989, 0, 0, -65514, 0, 0, 22, 0, 0, 65558, 0, 0, 131094, 0, 0, 196630, 0, 0, 262166, 0, 0, 327702, 0, 0, 393238, 0, 0, 458774, 0, 0, 524310, 0, 0, 589846, 0, 0, 655382, 0, 0, 720918, 0, 0, 786454, 0, 0, 851990, 0, 0, -65513, 0, 0, 23, 0, 0, 65559, 0, 0, 131095, 0, 0, 196631, 0, 0, 262167, 0, 0, 327703, 0, 0, 393239, 0, 0, 458775, 0, 0, 524311, 0, 0, 589847, 0, 0, 655383, 0, 0, 720919, 0, 0, 786455, 0, 0, 851991, 0, 0)
+[node name="trail" type="Sprite2D" parent="environment"]
+z_index = -10
+position = Vector2(240, 135)
+texture = ExtResource("15_bhykm")
+vframes = 2
+
+[node name="short_grass" type="Sprite2D" parent="environment"]
+z_index = -10
+position = Vector2(240, 135)
+texture = ExtResource("15_bhykm")
+vframes = 2
+frame = 1
 
 [node name="reflection_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
@@ -354,12 +345,6 @@ canvas_cull_mask = 4294966276
 size = Vector2i(480, 270)
 script = ExtResource("16_6d7b8")
 visibility_layer = 3
-
-[node name="short_grass" type="Sprite2D" parent="environment"]
-z_index = -10
-material = SubResource("ShaderMaterial_2dpw5")
-position = Vector2(240, 135)
-texture = ExtResource("17_oqhuu")
 
 [node name="long_grass_render" type="Sprite2D" parent="environment"]
 texture_filter = 1
@@ -373,111 +358,166 @@ position = Vector2(240, 135)
 texture = ExtResource("19_min80")
 
 [node name="trail_render" type="Sprite2D" parent="environment"]
+visible = false
 material = SubResource("ShaderMaterial_n2fwc")
 position = Vector2(240, 135)
 texture = ExtResource("19_min80")
 
-[node name="top_trees" type="Node2D" parent="environment"]
-z_index = -100
+[node name="top_trees" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="forest_tree" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(24, 17)
+[node name="forest_tree" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(20, 12)
+variant = 1
 
-[node name="forest_tree2" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(61, 8)
+[node name="forest_tree2" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(91, 4)
+variant = 2
 
-[node name="forest_tree3" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(90, 30)
+[node name="forest_tree3" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(128, 19)
+variant = 2
 
-[node name="forest_tree4" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(130, 18)
+[node name="forest_tree4" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(88, 32)
+variant = 1
 
-[node name="forest_tree5" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(166, 29)
+[node name="forest_tree5" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(396, 22)
+variant = 2
 
-[node name="forest_tree6" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(204, 24)
+[node name="forest_tree6" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(481, 20)
+variant = 1
 
-[node name="forest_tree7" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(243, 14)
+[node name="forest_tree7" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(185, 3)
+variant = 2
 
-[node name="forest_tree8" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(273, 29)
+[node name="forest_tree8" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(234, 21)
 
-[node name="forest_tree9" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(313, 18)
+[node name="forest_tree9" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(299, 49)
+variant = 2
 
-[node name="forest_tree10" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(349, 30)
+[node name="forest_tree10" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(293, 6)
+variant = 1
 
-[node name="forest_tree11" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(386, 17)
+[node name="forest_tree11" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(359, 40)
 
-[node name="forest_tree12" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(408, 28)
+[node name="forest_tree12" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(51, 30)
 
-[node name="forest_tree13" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(440, 17)
+[node name="forest_tree13" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(159, 45)
+variant = 2
 
-[node name="forest_tree14" parent="environment/top_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(475, 23)
+[node name="forest_tree14" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(197, 43)
+variant = 2
 
-[node name="bottom_trees" type="Node2D" parent="environment"]
+[node name="forest_tree15" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(242, 52)
+
+[node name="forest_tree16" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(431, 23)
+variant = 2
+
+[node name="forest_tree17" parent="top_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(402, 51)
+
+[node name="forest_tree18" parent="top_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(447, 40)
+variant = 1
+
+[node name="bottom_trees" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="forest_tree" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(18, 270)
+[node name="forest_tree19" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(20, 272)
 
-[node name="forest_tree2" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(72, 269)
+[node name="forest_tree20" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(94, 255)
+variant = 1
 
-[node name="forest_tree3" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(112, 286)
+[node name="forest_tree21" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(185, 263)
 
-[node name="forest_tree4" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(142, 272)
+[node name="forest_tree22" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(237, 235)
+variant = 1
 
-[node name="forest_tree5" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(45, 291)
+[node name="forest_tree23" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(289, 249)
+variant = 1
 
-[node name="forest_tree6" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(199, 275)
+[node name="forest_tree24" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(365, 264)
+variant = 2
 
-[node name="forest_tree7" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(170, 298)
+[node name="forest_tree25" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(465, 265)
 
-[node name="forest_tree8" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(242, 263)
+[node name="forest_tree26" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(54, 264)
+variant = 2
 
-[node name="forest_tree9" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(284, 275)
+[node name="forest_tree27" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(138, 274)
+variant = 1
 
-[node name="forest_tree10" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(238, 313)
+[node name="forest_tree28" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(171, 245)
 
-[node name="forest_tree11" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(327, 268)
+[node name="forest_tree29" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(230, 272)
+variant = 2
 
-[node name="forest_tree12" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(313, 311)
+[node name="forest_tree30" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(274, 288)
 
-[node name="forest_tree13" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(393, 277)
+[node name="forest_tree31" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(326, 251)
+variant = 2
 
-[node name="forest_tree14" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(445, 267)
+[node name="forest_tree32" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(420, 279)
+variant = 1
 
-[node name="forest_tree15" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(479, 304)
+[node name="forest_tree33" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(107, 304)
 
-[node name="forest_tree16" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(423, 308)
+[node name="forest_tree34" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(69, 291)
+variant = 1
 
-[node name="forest_tree17" parent="environment/bottom_trees" instance=ExtResource("19_ok23t")]
-position = Vector2(359, 301)
+[node name="forest_tree35" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(222, 295)
+
+[node name="forest_tree36" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(166, 284)
+
+[node name="forest_tree37" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(317, 296)
+variant = 2
+
+[node name="forest_tree38" parent="bottom_trees" instance=ExtResource("55_ho2vv")]
+position = Vector2(396, 297)
+variant = 1
+
+[node name="forest_tree39" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(359, 292)
+variant = 1
+
+[node name="forest_tree40" parent="bottom_trees" instance=ExtResource("19_ok23t")]
+position = Vector2(460, 300)
+variant = 2
 
 [node name="ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_hp_bars", "enemy_hp_bars", "wave_label", "condition_label", "victory_panel", "loss_panel", "action_bar", "attack_menu", "defense_menu", "tactic_menu", "cancel_button", "single_hit", "mash_timing", "result_label")]
+unique_name_in_owner = true
 script = ExtResource("8_ex6oy")
 player_hp_bars = [NodePath("player_hp/hp_section"), NodePath("player_hp/hp_section2"), NodePath("player_hp/hp_section3"), NodePath("player_hp/hp_section4")]
 enemy_hp_bars = [NodePath("enemy_hp/hp_section"), NodePath("enemy_hp/hp_section2"), NodePath("enemy_hp/hp_section3"), NodePath("enemy_hp/hp_section4"), NodePath("enemy_hp/hp_section5")]
@@ -2859,8 +2899,8 @@ inital_items = Array[String](["damage_marker|10|res://ui/battles/health/damage_m
 [connection signal="turn_started" from="turn_fsm" to="ui" method="try_set_action_bar" binds= [true]]
 [connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
 [connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="action_started" from="action_fsm" to="ui" method="try_set_action_bar" binds= [false]]
+[connection signal="action_started" from="action_fsm" to="ui" method="set_attack_menu" binds= [false]]
 [connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]

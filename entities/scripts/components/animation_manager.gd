@@ -13,12 +13,14 @@ var parent: Entity
 
 # --- Functions --- #
 func _ready() -> void:
+	await get_tree().process_frame
 	animator.animation_finished.connect(_on_animation_finished)
 
 func setup(entity: Entity) -> void:
 	parent = entity
 	
-	animator.play(&'enter_battle')
+	# play animation after setup
+	parent.entity_setup.connect(animator.play.bind(&'enter_battle'))
 
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')

@@ -1,6 +1,9 @@
 class_name Entity
 extends Node2D
 
+# --- Signals --- #
+signal entity_setup()
+
 # --- Variables --- #
 @export var entity_name: String
 @export_multiline var description: String
@@ -40,6 +43,10 @@ func setup(index: int):
 	for child in manager_root.get_children():
 		if 'setup' in child:
 			child.setup(self)
+	
+	await get_tree().process_frame
+	
+	entity_setup.emit()
 
 func store_data() -> void:
 	if hp:

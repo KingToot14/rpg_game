@@ -28,9 +28,9 @@ var curr_wave: int = 0
 var wave_count: int = 0
 
 # --- References --- #
-@onready var turn_fsm = $"turn_fsm" as TurnFSM
-@onready var action_fsm = $"action_fsm" as ActionFSM
-@onready var ui_manager = $"ui" as BattleUiManager
+@onready var turn_fsm = %"turn_fsm" as TurnFSM
+@onready var action_fsm = %"action_fsm" as ActionFSM
+@onready var ui_manager = %"ui" as BattleUiManager
 
 # --- Functions --- #
 func _ready():
@@ -99,32 +99,33 @@ func load_wave(wave: Wave) -> void:
 # - Entity Management - #
 func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	var entity := entity_scene.instantiate() as Entity
+	var spawn_pos: Node2D
+
 	if entity.is_player():
 		entity.level = DataManager.players[spawn_index].level
+		spawn_pos = player_positions[spawn_index]
 	else:
 		entity.level = encounter.waves[curr_wave].enemies[spawn_index].level
+		spawn_pos = enemy_positions[spawn_index]
+	
+	# position
+	spawn_pos.add_child(entity)
+	entity.position = Vector2.ZERO
 	
 	# visibility
-	add_child(entity)
 	entity.visible = false
 	entity.setup(spawn_index)
 	
-	await get_tree().create_timer(0.05).timeout
+	await entity.entity_setup
 	
 	# Signals
 	entity.targeting.selected.connect(action_fsm.entity_selected)
 	
-	var spawn_pos: Node2D
 	if entity.is_player():
 		encounter_victory.connect(entity.store_data)
-		spawn_pos = player_positions[spawn_index]
 		ui_manager.setup_player_hp(entity, spawn_index)
 	else:
-		spawn_pos = enemy_positions[spawn_index]
 		ui_manager.setup_enemy_hp(entity, spawn_index)
-	
-	entity.reparent(spawn_pos)
-	entity.position = Vector2.ZERO
 
 func remove_from_battle(entity: Entity, index: int) -> void:
 	ui_manager.setup_enemy_hp(null, index)

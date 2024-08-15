@@ -12,8 +12,8 @@ var actions_remaining: int = 0
 var parent: Entity
 
 # --- Functions --- #
-func _ready() -> void:
-	parent = $"../.." as Entity
+func setup(entity: Entity) -> void:
+	parent = entity
 
 func take_turn() -> void:
 	turn_started.emit()

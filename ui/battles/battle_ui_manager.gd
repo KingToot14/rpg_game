@@ -57,7 +57,7 @@ func _ready():
 func setup_player_hp(player: Entity, index: int) -> void:
 	player_hp_bars[index].set_entity(player)
 
-func setup_enemy_hp(enemy: Entity, index: int):
+func setup_enemy_hp(enemy: Entity, index: int) -> void:
 	enemy_hp_bars[index].set_entity(enemy)
 #endregion
 
