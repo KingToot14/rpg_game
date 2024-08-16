@@ -109,6 +109,10 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 		spawn_pos = enemy_positions[spawn_index]
 	
 	# position
+	var item = encounter.waves[curr_wave].enemies[spawn_index] as WaveItem
+	if item and item.use_custom_position:
+		spawn_pos.global_position = item.position
+	
 	spawn_pos.add_child(entity)
 	entity.position = Vector2.ZERO
 	

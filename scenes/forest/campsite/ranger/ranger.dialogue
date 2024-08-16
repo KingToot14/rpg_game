@@ -5,7 +5,7 @@ Ranger: Oh! Well hello there!
 Ranger: Sorry, I wasn't paying much attention... [wait=0.5]
 	Not many folks have been around lately
  - Why not?
-	Ranger: Well ever since that **spider's den** popped up, most **villagers** aren't too keen on traveling into the forest.
+	Ranger: Well ever since that [location]spider's den[/location] popped up, most [important]villagers[/important] aren't too keen on traveling into the forest.
 	- Spider's Den? => info_spiders_den
 	- Village? => info_village
 
@@ -26,7 +26,7 @@ Ranger: Hey there again! What can I help you with?
 do DataManager.set_flag_current('ranger_den_info', true)
 
 Ranger: I'm surprised you hadn't noticed it! I suppose it's pretty easy to got lost in the [wave]beauty[/wave] of the forest.
-Ranger: To find it, just follow the trail **straight east**.
+Ranger: To find it, just follow the trail [location]straight east[/location].
 	I would advise against venturing too far, however, those spiders can be pretty nasty!
 - Village? [if DataManager.get_flag_current('ranger_village_info') != true] => info_village
 - Village? [if DataManager.get_flag_current('ranger_village_info') == true] => recap_village
@@ -38,7 +38,7 @@ Ranger: To find it, just follow the trail **straight east**.
 do DataManager.set_flag_current('ranger_village_info', true)
 
 Ranger: Huh, I thought you would've came from that direction...
-Ranger: In any case, just follow the trail **east** and then **north**! You'll find the folks there quite kind to newcomers!
+Ranger: In any case, just follow the trail [location]east[/location] and then [location]north[/location]! You'll find the folks there quite kind to newcomers!
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') != true] => info_spiders_den
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') == true] => recap_spiders_den
 - Thanks! => end_conversation
@@ -49,7 +49,7 @@ Ranger: In any case, just follow the trail **east** and then **north**! You'll f
 #region Recaps
 ~ recap_spiders_den
 
-Ranger: All you need to do is follow the trail **straight east**!
+Ranger: All you need to do is follow the trail [location]straight east[/location]!
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') != true] => info_spiders_den
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') == true] => recap_spiders_den
 - Village? [if DataManager.get_flag_current('ranger_village_info') != true] => info_village
@@ -60,7 +60,7 @@ Ranger: All you need to do is follow the trail **straight east**!
 
 ~ recap_village
 
-Ranger: Just follow the trail **east** and then **north**!
+Ranger: Just follow the trail [location]east[/location] and then [location]north[/location]!
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') != true] => info_spiders_den
 - Spider's Den? [if DataManager.get_flag_current('ranger_den_info') == true] => recap_spiders_den
 - Village? [if DataManager.get_flag_current('ranger_village_info') != true] => info_village

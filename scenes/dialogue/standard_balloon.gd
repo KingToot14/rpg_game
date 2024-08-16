@@ -7,6 +7,8 @@ extends CanvasLayer
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
 
+@export var custom_tags: Dictionary
+
 @onready var balloon := %balloon as Control
 @onready var character_label := %character_label as RichTextLabel
 @onready var character_panel := %character_panel as Control
@@ -36,7 +38,17 @@ var dialogue_line: DialogueLine:
 		# If the node isn't ready yet then none of the labels will be ready yet either
 		if not is_node_ready():
 			await ready
-
+		
+		# parse custom tags
+		for tag in custom_tags:
+			var pattern = RegEx.new()
+			pattern.compile(r'\[' + tag + r'\]')
+			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[color=' + custom_tags[tag].to_html() + r']')
+			
+			pattern = RegEx.new()
+			pattern.compile(r'\[/' + tag + r'\]')
+			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[/color]')
+		
 		dialogue_line = next_dialogue_line
 		
 		var from_character = not dialogue_line.character.is_empty()

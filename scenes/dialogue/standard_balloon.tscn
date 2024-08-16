@@ -12,6 +12,12 @@
 [node name="standard_balloon" type="CanvasLayer"]
 layer = 10
 script = ExtResource("1_fqa6c")
+custom_tags = {
+"danger": Color(1, 0, 0, 1),
+"important": Color(1, 1, 0, 1),
+"location": Color(0, 0.72549, 1, 1),
+"quest": Color(1, 0.588235, 0, 1)
+}
 
 [node name="balloon" type="Control" parent="."]
 unique_name_in_owner = true

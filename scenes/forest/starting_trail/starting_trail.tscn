@@ -140,14 +140,24 @@ y_sort_enabled = true
 [node name="trail" type="Sprite2D" parent="environment"]
 position = Vector2(240, 135)
 texture = ExtResource("3_qwcog")
-vframes = 2
+vframes = 3
 
 [node name="short_grass" type="Sprite2D" parent="environment"]
 material = SubResource("ShaderMaterial_ivnop")
 position = Vector2(240, 135)
 texture = ExtResource("3_qwcog")
-vframes = 2
+vframes = 3
 frame = 1
+
+[node name="over" type="Sprite2D" parent="environment"]
+z_index = 100
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_ivnop")
+position = Vector2(239, 271)
+texture = ExtResource("3_qwcog")
+offset = Vector2(1, -136)
+vframes = 3
+frame = 2
 
 [node name="reflection_viewport" type="SubViewport" parent="environment"]
 disable_3d = true
@@ -467,7 +477,7 @@ position = Vector2(244, 262)
 position = Vector2(196, 264)
 
 [node name="chest" parent="." instance=ExtResource("12_hme3p")]
-position = Vector2(433, 41)
+position = Vector2(441, 39)
 loot_key = "top_secret"
 loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_l3iya"), SubResource("Resource_8ubsf")])
 
