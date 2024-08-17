@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 # --- Variables --- #
 var direction: Vector2
+var in_transition := false
 
 @export var lower_area_pos: Vector2 = Vector2(20, 20)
 @export var upper_area_pos: Vector2 = Vector2(460, 250)
@@ -17,6 +18,8 @@ var direction: Vector2
 # --- References --- #
 @export var sprite: Sprite2D
 @onready var reflection_sprite := %"reflection" as Sprite2D
+@onready var audio_player := %'audio_player' as SfxPlayer
+@onready var footstep_timer := %'footstep_timer' as Timer
 
 var curr_state: PlayerControlState
 
@@ -29,11 +32,15 @@ func _ready() -> void:
 	
 	if data:
 		AsyncLoader.new(data.get_appearance_path(), set_appearance)
+	
+	await get_tree().process_frame
+	# signals
+	Globals.overworld_manager.area_loaded.connect(end_transition)
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta: float) -> void:
 	get_direction()
 	
-	curr_state.handle_process()
+	curr_state.handle_process(delta)
 	
 	RenderingServer.global_shader_parameter_set('player_position', position_marker.global_position / overworld_size)
 
@@ -43,10 +50,10 @@ func set_state(state: String) -> void:
 	
 	curr_state = get_node(state + "_state") as PlayerControlState
 
-# - Sprites - #
 func get_direction() -> void:
 	direction = Vector2(Input.get_axis('overworld_left', 'overworld_right'), Input.get_axis('overworld_up', 'overworld_down')).normalized()
 
+#region Sprites
 func update_texture() -> void:
 	if direction == Vector2.ZERO:
 		return
@@ -61,11 +68,15 @@ func update_texture() -> void:
 	
 	reflection_sprite.frame = sprite.frame
 
-# - Transitions - #
+#endregion
+
+#region Transitions
 func load_position() -> void:
 	global_position = DataManager.local_area.player_position
 
 func prepare_transition(dir: String) -> void:
+	in_transition = true
+	
 	match dir:
 		'top':
 			DataManager.local_area.player_position = Vector2(global_position.x, upper_area_pos.y)
@@ -79,8 +90,15 @@ func prepare_transition(dir: String) -> void:
 func prepare_battle() -> void:
 	DataManager.local_area.player_position = global_position
 
-# - Appearance - #
+func end_transition() -> void:
+	in_transition = false
+
+#endregion
+
+#region Appearance
 func set_appearance(appearance: PlayerAppearance) -> void:
 	sprite.material.set_shader_parameter('outline_color', appearance.outline_color)
 	sprite.material.set_shader_parameter('normal_color', appearance.normal_color)
 	sprite.material.set_shader_parameter('shadow_color', appearance.shadow_color)
+
+#endregion

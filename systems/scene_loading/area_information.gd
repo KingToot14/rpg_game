@@ -11,8 +11,9 @@ extends Node2D
 @export_group("Conditions")
 @export var heal_rate: float = 0.20
 
-@export_group("Shaders")
+@export_group("Textures")
 @export var shader_texture: Texture2D
+@export var terrain_texture: Texture2D
 
 # --- Functions --- #
 func _ready() -> void:

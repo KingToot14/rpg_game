@@ -1,9 +1,9 @@
 class_name PlayerControlState
-extends Node2D
+extends Node
 
 # --- Variables --- #
 @onready var player := $".." as OverworldController
 
 # --- Functions --- #
-func handle_process() -> void:
-	pass
+func handle_process(_delta: float) -> void:
+	return

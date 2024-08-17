@@ -1,7 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://bu0ktqr3wancy"]
+[gd_scene load_steps=38 format=3 uid="uid://bu0ktqr3wancy"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
+[ext_resource type="Texture2D" uid="uid://cunv1b1igjby7" path="res://scenes/forest/starting_area/terrain_map.png" id="3_y6x5q"]
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="4_2b0eb"]
 [ext_resource type="Texture2D" uid="uid://ckkx3p3ftue44" path="res://scenes/forest/starting_area/ground_map.png" id="5_kkqjl"]
 [ext_resource type="Texture2D" uid="uid://boiegj21n7buq" path="res://scenes/forest/starting_area/shader_map.png" id="7_8ik0f"]
@@ -145,6 +146,7 @@ y_sort_enabled = true
 script = ExtResource("1_1mvng")
 right_area = "res://scenes/forest/starting_trail/starting_trail.tscn"
 shader_texture = ExtResource("7_8ik0f")
+terrain_texture = ExtResource("3_y6x5q")
 
 [node name="wind_manager" type="Node2D" parent="."]
 script = ExtResource("2_3vw15")

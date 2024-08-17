@@ -17,13 +17,13 @@
 script = ExtResource("5_nfabf")
 color_key = Color(1, 0, 0, 1)
 footstep_sound = ExtResource("2_vpofr")
-volume_modifier = -6.0
+volume_modifier = 0.0
 
 [sub_resource type="Resource" id="Resource_l8we0"]
 script = ExtResource("5_nfabf")
 color_key = Color(0, 1, 0, 1)
 footstep_sound = ExtResource("3_5cn0t")
-volume_modifier = 0.0
+volume_modifier = -2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0glyt"]
 shader = ExtResource("9_3b5ol")
@@ -69,20 +69,19 @@ script = ExtResource("7_2n4je")
 movement_speed = 75.0
 footstep_sfx = Array[ExtResource("5_nfabf")]([SubResource("Resource_a8xs5"), SubResource("Resource_l8we0")])
 
-[node name="footstep_timer" type="Timer" parent="moving_state"]
-unique_name_in_owner = true
-process_callback = 0
-wait_time = 0.35
-autostart = true
-
 [node name="dialogue_state" type="Node" parent="."]
 script = ExtResource("8_tra4j")
 
 [node name="audio_player" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 volume_db = -18.0
-bus = &"Gameplay"
 script = ExtResource("5_mrf4t")
+
+[node name="footstep_timer" type="Timer" parent="audio_player"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.35
+autostart = true
 
 [node name="sprite_group" type="CanvasGroup" parent="."]
 fit_margin = 0.0
@@ -123,4 +122,4 @@ hframes = 2
 vframes = 2
 script = ExtResource("8_hawyb")
 
-[connection signal="timeout" from="moving_state/footstep_timer" to="moving_state" method="play_footstep"]
+[connection signal="timeout" from="audio_player/footstep_timer" to="." method="play_footstep"]
