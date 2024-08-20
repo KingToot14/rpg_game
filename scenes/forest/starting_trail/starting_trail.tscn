@@ -492,7 +492,7 @@ loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_270tl"), SubResourc
 position = Vector2(34, 118)
 dialogue_path = "res://resources/dialogue/sign_text.dialogue"
 dialogue_title = "starting_area_sign"
-balloon_path = "res://scenes/dialogue/sign_balloon.tscn"
+balloon_path = "res://scenes/dialogue/sign/sign_balloon.tscn"
 
 [node name="encounter" parent="." instance=ExtResource("14_cqxmu")]
 position = Vector2(232, 34)

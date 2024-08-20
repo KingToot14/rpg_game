@@ -7,6 +7,12 @@ extends CanvasLayer
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
 
+@export_group("Animation")
+@export var tween_duration := 0.25
+@export var open_sfx: AudioStream
+@export var close_sfx: AudioStream
+
+# --- References --- #
 @onready var balloon: Control = %balloon
 @onready var dialogue_label: DialogueLabel = %dialogue_label
 @onready var dialogue_panel: Control = %dialogue_panel
@@ -25,7 +31,7 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
-			queue_free()
+			close()
 			return
 
 		# If the node isn't ready yet then none of the labels will be ready yet either
@@ -74,13 +80,31 @@ func _notification(what: int) -> void:
 
 ## Start some dialogue
 func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
+	# load dialogue
 	temporary_game_states =  [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource
 	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
+	
+	# tween dialogue
+	open()
+
+func open() -> void:
+	var tween = create_tween().set_parallel()
+	
+	tween.tween_property(balloon, ^'position:y', balloon.position.y, tween_duration).from(balloon.position.y + 16)
+	tween.tween_property(balloon, ^'modulate:a', 1.0, tween_duration).from(0.0)
+	%'audio_player'.play_sfx(open_sfx)
 
 func close() -> void:
-	queue_free()
+	var tween = create_tween().set_parallel()
+	
+	tween.tween_property(balloon, ^'position:y', balloon.position.y - 16, tween_duration)
+	tween.tween_property(balloon, ^'modulate:a', 0.0, tween_duration)
+	
+	tween.finished.connect(queue_free)
+	
+	%'audio_player'.play_sfx(close_sfx)
 
 ## Go to the next line
 func next(next_id: String) -> void:
