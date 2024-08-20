@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://1c4l26xpr3xk"]
 
-[ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_ukgou"]
+[ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="1_c2w3n"]
 
 [resource]
 RichTextLabel/colors/default_color = Color(0.211765, 0.0980392, 0.0196078, 1)
-RichTextLabel/font_sizes/normal_font_size = 11
-RichTextLabel/fonts/normal_font = ExtResource("1_ukgou")
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("1_c2w3n")
