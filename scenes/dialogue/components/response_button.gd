@@ -2,9 +2,6 @@ class_name ResponseButton
 extends BaseButton
 
 # --- Variables --- #
-@export var label: RichTextLabel
-@export var outline_rect: ColorRect
-
 @export var tween_time := 0.15
 @export var hover_offset := 4.0
 var curr_pos: float
@@ -14,11 +11,11 @@ var curr_pos: float
 
 var tween
 
-# --- Functions --- #
-func _ready() -> void:
-	outline_rect = $"outline"
-	curr_pos = position.x
+# --- References --- #
+@onready var label := %'label' as RichTextLabel
+@onready var outline_rect := %'outline' as ColorRect
 
+# --- Functions --- #
 func _on_mouse_entered() -> void:
 	highlight(true)
 
@@ -34,4 +31,9 @@ func highlight(hovered: bool) -> void:
 	outline_rect.update_theme(hover_key if hovered else normal_key)
 
 func set_response(response) -> void:
-	label.text = "[center]" + response.text + "[/center]"
+	label = %'label'
+	
+	label.text = response.text
+	custom_minimum_size.x = label.get_content_width() + 7
+	
+	curr_pos = 100.0 - custom_minimum_size.x

@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsgjeltgr4wl4"]
+[gd_scene load_steps=11 format=3 uid="uid://bsgjeltgr4wl4"]
 
 [ext_resource type="Script" path="res://scenes/dialogue/standard_balloon.gd" id="1_fqa6c"]
 [ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="2_203ak"]
+[ext_resource type="Texture2D" uid="uid://joasmiva6fp6" path="res://scenes/forest/campsite/ranger/portrait.png" id="4_4xkuu"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="4_ohcf5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="5_53xaa"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="5_tdnb8"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="6_frked"]
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="6_ioycr"]
 [ext_resource type="Script" path="res://scenes/dialogue/components/quest_container.gd" id="7_2bf51"]
 [ext_resource type="PackedScene" uid="uid://dbasqqwej8pvy" path="res://scenes/dialogue/components/item_info.tscn" id="8_s3owf"]
 
@@ -22,72 +24,92 @@ custom_tags = {
 [node name="balloon" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_203ak")
-
-[node name="h_box" type="HBoxContainer" parent="balloon"]
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -1.0
-offset_top = -61.0
+offset_top = -45.0
 offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("2_203ak")
 
-[node name="character_panel" parent="balloon/h_box" instance=ExtResource("5_tdnb8")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(62, 62)
-layout_mode = 2
-
-[node name="backing" parent="balloon/h_box/character_panel" instance=ExtResource("4_ohcf5")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-
-[node name="fill" parent="balloon/h_box/character_panel/backing" instance=ExtResource("4_ohcf5")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-key = &"dark"
-
-[node name="portrait" type="TextureRect" parent="balloon/h_box/character_panel"]
-unique_name_in_owner = true
+[node name="panel" parent="balloon" instance=ExtResource("5_tdnb8")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="name_panel" parent="balloon/h_box/character_panel" instance=ExtResource("5_tdnb8")]
-layout_mode = 0
-offset_top = -16.0
-offset_right = 62.0
-offset_bottom = 1.0
-
-[node name="fill2" parent="balloon/h_box/character_panel/name_panel" instance=ExtResource("4_ohcf5")]
+[node name="panel_inner" parent="balloon/panel" instance=ExtResource("4_ohcf5")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
+
+[node name="h_box" type="HBoxContainer" parent="balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="character_panel" type="Control" parent="balloon/h_box"]
+unique_name_in_owner = true
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+
+[node name="portrait" type="TextureRect" parent="balloon/h_box/character_panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -58.0
+offset_right = 57.0
+offset_bottom = -4.0
+grow_vertical = 0
+texture = ExtResource("4_4xkuu")
+
+[node name="underline" type="ColorRect" parent="balloon/h_box/character_panel/portrait"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.129412, 0.407843, 0.639216, 1)
+
+[node name="name_panel" type="ColorRect" parent="balloon/h_box/character_panel"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 0
+offset_left = 64.0
+offset_top = -12.0
+offset_right = 115.0
+script = ExtResource("6_ioycr")
+key = &"dark"
+
+[node name="fill" parent="balloon/h_box/character_panel/name_panel" instance=ExtResource("4_ohcf5")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 
 [node name="character_label" type="RichTextLabel" parent="balloon/h_box/character_panel/name_panel"]
 unique_name_in_owner = true
@@ -96,9 +118,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -2.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -107,20 +129,13 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="dialogue_panel" parent="balloon/h_box" instance=ExtResource("5_tdnb8")]
+[node name="dialogue_panel" type="Control" parent="balloon/h_box"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(421, 58)
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+custom_minimum_size = Vector2(421, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 mouse_filter = 1
-
-[node name="backing" parent="balloon/h_box/dialogue_panel" instance=ExtResource("4_ohcf5")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="dialogue_label" parent="balloon/h_box/dialogue_panel" instance=ExtResource("5_53xaa")]
 unique_name_in_owner = true
@@ -138,7 +153,7 @@ text = "Dialogue...
 Dialogue...
 Dialogue...
 Dialogue...
-"
+Dialogue..."
 
 [node name="response_container" type="MarginContainer" parent="balloon"]
 layout_mode = 1
@@ -159,30 +174,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
+alignment = 2
 script = ExtResource("6_frked")
 
-[node name="quest_container" type="Control" parent="balloon"]
+[node name="quest_container" type="CenterContainer" parent="balloon"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 0
-offset_left = 159.0
-offset_top = 179.0
-offset_right = 361.0
-offset_bottom = 214.0
+offset_left = 165.0
+offset_top = -32.0
+offset_right = 367.0
+offset_bottom = 1.0
 pivot_offset = Vector2(101, 18)
 theme = ExtResource("2_203ak")
 script = ExtResource("7_2bf51")
 metadata/_edit_group_ = true
 
 [node name="panel" parent="balloon/quest_container" instance=ExtResource("5_tdnb8")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(202, 33)
+layout_mode = 2
 
 [node name="backing" parent="balloon/quest_container/panel" instance=ExtResource("4_ohcf5")]
 layout_mode = 1
@@ -197,7 +206,8 @@ custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"QuestContainer"
@@ -235,6 +245,37 @@ count_label = NodePath("../item_info/count")
 layout_mode = 2
 icon_rect = NodePath("../item_info/icon")
 count_label = NodePath("../item_info/count")
+
+[node name="title_panel" parent="balloon/quest_container/panel" instance=ExtResource("5_tdnb8")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -13.0
+offset_right = 32.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="panel_inner" parent="balloon/quest_container/panel/title_panel" instance=ExtResource("4_ohcf5")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+
+[node name="title" type="RichTextLabel" parent="balloon/quest_container/panel/title_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Requirements"
+scroll_active = false
 
 [connection signal="gui_input" from="balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="balloon/response_container/response_menu" to="." method="_on_responses_menu_response_selected"]

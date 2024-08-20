@@ -43,11 +43,11 @@ var dialogue_line: DialogueLine:
 		for tag in custom_tags:
 			var pattern = RegEx.new()
 			pattern.compile(r'\[' + tag + r'\]')
-			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[color=' + custom_tags[tag].to_html() + r']')
+			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[color=' + custom_tags[tag].to_html() + r']', true)
 			
 			pattern = RegEx.new()
 			pattern.compile(r'\[/' + tag + r'\]')
-			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[/color]')
+			next_dialogue_line.text = pattern.sub(next_dialogue_line.text, r'[/color]', true)
 		
 		dialogue_line = next_dialogue_line
 		
@@ -56,6 +56,8 @@ var dialogue_line: DialogueLine:
 		# set character
 		character_panel.visible = from_character
 		character_label.text = tr(dialogue_line.character, "dialogue")
+		
+		character_label.get_parent().size.x = character_label.get_content_width() + 7
 		
 		portrait_rect.texture = PortraitManager.curr_portrait
 		

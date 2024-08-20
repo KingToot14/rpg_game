@@ -47,7 +47,9 @@ var responses: Array = []:
 				if not response.is_allowed:
 					item.name = String(item.name) + "Disallowed"
 					item.disabled = true
-
+				
+				add_child(item)
+				
 				# If the item has a response property then use that
 				if "set_response" in item:
 					item.set_response(response)
@@ -58,8 +60,6 @@ var responses: Array = []:
 					item.get_node("text").text = response.text
 
 				item.set_meta("response", response)
-
-				add_child(item)
 
 			_configure_focus()
 

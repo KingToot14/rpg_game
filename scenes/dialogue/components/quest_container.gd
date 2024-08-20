@@ -14,7 +14,8 @@ func load_items(tag: StringName) -> void:
 	
 	var new_size = panel_rect.size
 	new_size.x = 6 + len(quest.requirements) * 28
-	panel_rect.set_size(new_size, true)
+	#panel_rect.set_size(new_size, true)
+	panel_rect.custom_minimum_size.x = 6 + len(quest.requirements) * 28
 	
 	for i in range(icon_container.get_child_count()):
 		var container = icon_container.get_child(i)

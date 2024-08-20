@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://fq773hj8ga33"]
 
-[ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_kdwbr"]
+[ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="1_amok0"]
 [ext_resource type="FontFile" uid="uid://bfoa5gh35dkcq" path="res://ui/font/rpg_pixel_3x5.ttf" id="2_6bmgv"]
 
 [resource]
@@ -8,8 +8,8 @@ HBoxContainer/constants/separation = -1
 QuestContainer/base_type = &"HBoxContainer"
 QuestContainer/constants/separation = 0
 RichTextLabel/colors/default_color = Color(0.568627, 0.807843, 0.929412, 1)
-RichTextLabel/font_sizes/normal_font_size = 11
-RichTextLabel/fonts/normal_font = ExtResource("1_kdwbr")
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("1_amok0")
 Small/base_type = &"RichTextLabel"
 Small/font_sizes/normal_font_size = 7
 Small/fonts/normal_font = ExtResource("2_6bmgv")

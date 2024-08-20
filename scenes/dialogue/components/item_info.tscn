@@ -9,7 +9,7 @@ atlas = ExtResource("1_hknxx")
 region = Rect2(0, 0, 20, 20)
 
 [node name="item_info" type="Control" node_paths=PackedStringArray("icon_rect", "count_label")]
-custom_minimum_size = Vector2(28, 32)
+custom_minimum_size = Vector2(28, 29)
 layout_mode = 3
 anchors_preset = 0
 size_flags_vertical = 4
@@ -36,15 +36,11 @@ expand_mode = 1
 [node name="count" type="RichTextLabel" parent="."]
 clip_contents = false
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -19.0
-offset_top = -9.0
-offset_right = 21.0
-offset_bottom = 4.0
+offset_top = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
