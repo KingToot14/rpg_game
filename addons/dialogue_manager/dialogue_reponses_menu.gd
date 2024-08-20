@@ -16,6 +16,8 @@ signal response_selected(response)
 @export var next_action: StringName = &""
 
 # --- Reference --- #
+@onready var response_timer := %'response_timer' as Timer
+
 var response_scene = preload("res://scenes/dialogue/components/response_button.tscn")
 
 ## The list of dialogue responses.
@@ -27,7 +29,7 @@ var responses: Array = []:
 
 		# Remove any current items
 		for item in get_children():
-			if item == response_template: continue
+			#if item == response_template: continue
 
 			remove_child(item)
 			item.queue_free()
@@ -72,6 +74,25 @@ func _ready() -> void:
 	
 	if is_instance_valid(response_template):
 		response_template.hide()
+
+func show_responses() -> void:
+	show()
+	
+	for item in get_children():
+		item.hide()
+	
+	var items = get_children()
+	items.reverse()
+	
+	for item in items:
+		item.show()
+		var tween = create_tween().set_parallel()
+		
+		tween.tween_property(item, ^'position:x', item.curr_pos, 0.25).from(item.curr_pos + 8)
+		tween.tween_property(item, ^'modulate:a', 1.0, 0.25).from(0.0)
+		
+		response_timer.start()
+		await response_timer.timeout
 
 ## Get the selectable items in the menu.
 func get_menu_items() -> Array:

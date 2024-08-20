@@ -9,6 +9,10 @@ extends CanvasLayer
 
 @export var custom_tags: Dictionary
 
+@export_group("Animation")
+@export var tween_duration := 0.25
+
+# --- References --- #
 @onready var balloon := %balloon as Control
 @onready var character_label := %character_label as RichTextLabel
 @onready var character_panel := %character_panel as Control
@@ -90,7 +94,7 @@ var dialogue_line: DialogueLine:
 		# Wait for input
 		if dialogue_line.responses.size() > 0:
 			balloon.focus_mode = Control.FOCUS_NONE
-			responses_menu.show()
+			responses_menu.show_responses()
 		elif dialogue_line.time != "":
 			var time = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
 			await get_tree().create_timer(time).timeout
@@ -130,13 +134,28 @@ func _notification(what: int) -> void:
 
 ## Start some dialogue
 func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
+	# set dialogue
 	temporary_game_states =  [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource
 	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
+	
+	# show panel
+	open()
+
+func open() -> void:
+	var tween = create_tween().set_parallel()
+	
+	tween.tween_property(balloon, ^'position:y', balloon.position.y, tween_duration).from(balloon.position.y + 16).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(balloon, ^'modulate:a', 1.0, tween_duration).from(0.0)
 
 func close() -> void:
-	queue_free()
+	var tween = create_tween().set_parallel()
+	
+	tween.tween_property(balloon, ^'position:y', balloon.position.y + 16, tween_duration)
+	tween.tween_property(balloon, ^'modulate:a', 0.0, tween_duration)
+	
+	tween.finished.connect(queue_free)
 
 ## Go to the next line
 func next(next_id: String) -> void:
