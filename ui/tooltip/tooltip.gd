@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 func set_title_text(text: String) -> void:
 	title_label.text = text
 	
-	title_size = title_label.get_line_count() * 7 + 2
+	title_size = title_label.get_line_count() * 8 + 2
 	
 	if text.is_empty():
 		title_size = 0
@@ -39,7 +39,7 @@ func set_title_text(text: String) -> void:
 func set_body_text(text: String) -> void:
 	body_label.text = text
 	
-	body_size = body_label.get_line_count() * 7 + 2
+	body_size = body_label.get_line_count() * 8 + 2
 	
 	if text.is_empty():
 		body_size = 0

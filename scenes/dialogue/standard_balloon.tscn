@@ -16,10 +16,10 @@
 layer = 10
 script = ExtResource("1_fqa6c")
 custom_tags = {
-"danger": Color(1, 0, 0, 1),
-"important": Color(1, 1, 0, 1),
-"location": Color(0, 0.72549, 1, 1),
-"quest": Color(1, 0.588235, 0, 1)
+"danger": Color(1, 0.709804, 0.709804, 1),
+"important": Color(0.976471, 1, 0.709804, 1),
+"location": Color(0.709804, 0.929412, 1, 1),
+"quest": Color(1, 0.878431, 0.709804, 1)
 }
 
 [node name="balloon" type="Control" parent="."]
@@ -144,13 +144,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_bottom = 1.0
 offset_left = 4.0
-offset_top = 4.0
+offset_top = -4.0
 offset_right = -106.0
-offset_bottom = -4.0
+offset_bottom = -1.0
 grow_vertical = 2
-scale = Vector2(1, 1.01061)
 size_flags_vertical = 3
-text = "Dialogue...
+text = "
+[outline_size=4]Dialogue...[/outline_size]
 Dialogue...
 Dialogue...
 Dialogue...

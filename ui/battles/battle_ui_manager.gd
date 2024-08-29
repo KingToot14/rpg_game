@@ -7,8 +7,8 @@ extends CanvasLayer
 @export var enemy_hp_bars: Array[HpBar]
 
 @export_group("Labels")
-@export var wave_label: Label
-@export var condition_label: Label
+@export var wave_label: RichTextLabel
+@export var condition_label: RichTextLabel
 
 @export_group("Panels")
 @export var victory_panel: Control

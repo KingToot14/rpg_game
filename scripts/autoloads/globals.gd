@@ -4,7 +4,6 @@ extends Node2D
 signal item_set()
 
 # --- General --- #
-var object_pool: ObjectPool
 var ui_manager: CanvasLayer
 
 var curr_dialogue

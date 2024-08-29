@@ -43,6 +43,9 @@ var dialogue_line: DialogueLine:
 		if not is_node_ready():
 			await ready
 		
+		# add spacing for outlines
+		next_dialogue_line.text = "\n" + next_dialogue_line.text
+		
 		# parse custom tags
 		for tag in custom_tags:
 			var pattern = RegEx.new()

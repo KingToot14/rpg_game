@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://be34gqw0yq7ao"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://be34gqw0yq7ao"]
 
 [ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_6x8.tres" id="1_8fp4o"]
 [ext_resource type="FontFile" uid="uid://bfoa5gh35dkcq" path="res://ui/font/rpg_pixel_3x5.ttf" id="2_3wvsq"]
 [ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="2_qejo8"]
+[ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="4_1mfxp"]
 
 [resource]
 AttackButton/base_type = &"Label"
@@ -44,6 +45,9 @@ InfoContainer/base_type = &"VBoxContainer"
 InfoContainer/constants/separation = 1
 Label/font_sizes/font_size = 11
 Label/fonts/font = ExtResource("2_qejo8")
+Medium/base_type = &"RichTextLabel"
+Medium/font_sizes/normal_font_size = 8
+Medium/fonts/normal_font = ExtResource("4_1mfxp")
 RichTextLabel/constants/line_separation = 0
 RichTextLabel/font_sizes/normal_font_size = 11
 RichTextLabel/fonts/normal_font = ExtResource("2_qejo8")
