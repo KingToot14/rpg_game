@@ -2,16 +2,21 @@ class_name DialogueObject
 extends Interactable
 
 # --- Variables --- #
+@export_file("*.dialogue") var dialogue_path: String
+@export var dialogue_title: String
+var curr_title: String
+@export_file("*.tscn") var balloon_path: String
+
+@export_group("NPC Info")
 @export var npc_name: String
 @export var look_at_player := false
 # @@show_if(look_at_player)
 @export var sprite: Sprite2D
 
 @export_file("*.tres") var npc_info_path: String
-@export_file("*.dialogue") var dialogue_path: String
-@export var dialogue_title: String
-var curr_title: String
-@export_file("*.tscn") var balloon_path: String
+
+@export_group("Sound Effects")
+@export var interact_sfx: AudioStream
 
 # --- References --- #
 var dialogue: DialogueResource
@@ -31,9 +36,16 @@ func show_dialogue():
 	if is_instance_valid(Globals.curr_dialogue):
 		return
 	
+	# play sfx
+	if interact_sfx and %'audio_player':
+		%'audio_player'.play_sfx(interact_sfx)
+	
 	# look at player
 	if look_at_player:
 		update_texture()
+	
+	# set npc info
+	DialogueManager.curr_npc_info = npc_resource
 	
 	PortraitManager.set_portrait(npc_resource, "happy")
 	get_title()

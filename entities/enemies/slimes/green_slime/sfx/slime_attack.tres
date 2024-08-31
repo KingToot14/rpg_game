@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://choskjgsxa5eb"]
+
+[ext_resource type="AudioStream" uid="uid://vubfbnrgi000" path="res://entities/enemies/slimes/green_slime/sfx/slime_attack_1.wav" id="1_sl8xs"]
+[ext_resource type="AudioStream" uid="uid://mr8k016l3201" path="res://entities/enemies/slimes/green_slime/sfx/slime_attack_2.wav" id="2_f5m2a"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_sl8xs")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_f5m2a")
+stream_1/weight = 1.0

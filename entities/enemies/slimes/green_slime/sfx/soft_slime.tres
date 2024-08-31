@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://db802bsd8tdly"]
+
+[ext_resource type="AudioStream" uid="uid://dhl5gt7cv1j0n" path="res://entities/enemies/slimes/green_slime/sfx/soft_slime_1.ogg" id="1_nbg8p"]
+
+[resource]
+playback_mode = 2
+streams_count = 1
+stream_0/stream = ExtResource("1_nbg8p")
+stream_0/weight = 1.0

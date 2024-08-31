@@ -1,9 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=57 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
+[ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Resource" uid="uid://qs1553avx8h3" path="res://entities/player/melee/attacks/normal_slash.tres" id="3_4gvet"]
+[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_1vjuk"]
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="5_k0j8f"]
@@ -1169,6 +1171,20 @@ tracks/5/keys = {
 "update": 0,
 "values": [-13.0, -18.0, -18.0, -13.0]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("managers/sfx_player")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("2_dv32v"), -1000.0],
+"method": &"play_sfx"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
@@ -1258,6 +1274,10 @@ libraries = {
 }
 script = ExtResource("2_xdhph")
 parent = NodePath("../..")
+
+[node name="sfx_player" type="AudioStreamPlayer" parent="managers"]
+bus = &"Gameplay"
+script = ExtResource("4_1vjuk")
 
 [node name="animation_manager" type="Node" parent="managers" node_paths=PackedStringArray("animator")]
 script = ExtResource("8_ecppd")

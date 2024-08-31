@@ -285,6 +285,7 @@ scroll_active = false
 
 [node name="audio_player" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"Gameplay"
 script = ExtResource("11_d7fxb")
 
 [connection signal="gui_input" from="balloon" to="." method="_on_balloon_gui_input"]

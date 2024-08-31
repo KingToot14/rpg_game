@@ -22,6 +22,8 @@ extends CanvasLayer
 @onready var responses_menu := %response_menu as DialogueResponsesMenu
 @onready var quest_container := %quest_container as QuestContainer
 
+@onready var audio_player := %'audio_player' as SfxPlayer
+
 var resource: DialogueResource
 var temporary_game_states: Array = []
 var is_waiting_for_input: bool = false
@@ -36,7 +38,8 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
-			queue_free()
+			DialogueManager.curr_npc_info = null
+			close()
 			return
 
 		# If the node isn't ready yet then none of the labels will be ready yet either
@@ -145,6 +148,10 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 	
 	# show panel
 	open()
+	
+	# setup sfx signals
+	if DialogueManager.curr_npc_info and DialogueManager.curr_npc_info.dialogue_sfx:
+		dialogue_label.spoke.connect(_on_dialogue_spoke)
 
 func open() -> void:
 	var tween = create_tween().set_parallel()
@@ -197,4 +204,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
+
+func _on_dialogue_spoke(_letter: String, _letter_index: int, _speed: float) -> void:
+	audio_player.play_sfx(DialogueManager.curr_npc_info.dialogue_sfx)
 #endregion

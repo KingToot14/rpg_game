@@ -46,6 +46,9 @@ enum TranslationSource {
 }
 
 
+## Current npc info
+var curr_npc_info: NpcInformation
+
 ## The list of globals that dialogue can query
 var game_states: Array = []
 

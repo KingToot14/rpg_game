@@ -6,6 +6,8 @@ extends Resource
 @export var color: Color
 @export var form: String
 
+@export var dialogue_sfx: AudioStream
+
 # TODO: Replace with a better system
 @export var overworld_texture: Texture2D
 @export var portrait_texture: Texture2D

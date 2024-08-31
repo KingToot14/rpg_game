@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dhlffyihw86sr"]
+[gd_scene load_steps=37 format=3 uid="uid://dhlffyihw86sr"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
@@ -16,7 +16,9 @@
 [ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="13_oeuat"]
 [ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="14_8i2db"]
 [ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="14_l4gh5"]
+[ext_resource type="AudioStream" uid="uid://1k6c3t5ov47b" path="res://scenes/forest/campsite/ranger/sfx/hehefarbt_02.wav" id="15_bo6xl"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="15_iux3y"]
+[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="16_3ig2h"]
 [ext_resource type="PackedScene" uid="uid://bc2yg7kt18h7w" path="res://environment/objects/crate.tscn" id="17_6rp7q"]
 [ext_resource type="PackedScene" uid="uid://drjfwso3bw6ig" path="res://environment/objects/campfire.tscn" id="18_5ftdy"]
 
@@ -423,13 +425,20 @@ y_sort_enabled = true
 position = Vector2(174, 115)
 collision_mask = 2
 script = ExtResource("13_oeuat")
+dialogue_path = "res://scenes/forest/campsite/ranger/ranger.dialogue"
 npc_name = "ranger"
 look_at_player = true
 sprite = NodePath("sprite")
 npc_info_path = "res://scenes/forest/campsite/ranger/info.tres"
-dialogue_path = "res://scenes/forest/campsite/ranger/ranger.dialogue"
+interact_sfx = ExtResource("15_bo6xl")
 box_offset = -38.0
 icon = ExtResource("14_l4gh5")
+
+[node name="audio_player" type="AudioStreamPlayer" parent="ranger"]
+unique_name_in_owner = true
+volume_db = -18.0
+bus = &"Gameplay"
+script = ExtResource("16_3ig2h")
 
 [node name="sprite" type="Sprite2D" parent="ranger"]
 position = Vector2(0, 1)
