@@ -22,6 +22,8 @@ var temporary_game_states: Array = []
 var is_waiting_for_input: bool = false
 var will_hide_balloon: bool = false
 
+var npc_info: NpcInformation
+
 ## The current line
 var dialogue_line: DialogueLine:
 	set(next_dialogue_line):
@@ -79,8 +81,10 @@ func _notification(what: int) -> void:
 			dialogue_label.skip_typing()
 
 ## Start some dialogue
-func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
+func start(dialogue_resource: DialogueResource, title: String, npc: NpcInformation = null, extra_game_states: Array = []) -> void:
 	# load dialogue
+	npc_info = npc
+	
 	temporary_game_states =  [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource

@@ -137,7 +137,6 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 		got_dialogue.emit(dialogue)
 		return dialogue
 
-
 func get_resolved_line_data(data: Dictionary, extra_game_states: Array = []) -> ResolvedLineData:
 	var text: String = translate(data)
 
@@ -213,7 +212,6 @@ func get_resolved_line_data(data: Dictionary, extra_game_states: Array = []) -> 
 
 	return markers
 
-
 ## Replace any variables, etc in the character name
 func get_resolved_character(data: Dictionary, extra_game_states: Array = []) -> String:
 	var character: String = data.get(&"character", "")
@@ -233,7 +231,6 @@ func get_resolved_character(data: Dictionary, extra_game_states: Array = []) -> 
 		character = character.replace("[[%s]]" % found.get_string(&"options"), options[randi_range(0, options.size() - 1)])
 
 	return character
-
 
 ## Generate a dialogue resource on the fly from some text
 func create_resource_from_text(text: String) -> Resource:
@@ -271,17 +268,15 @@ func show_example_dialogue_balloon(resource: DialogueResource, title: String = "
 
 	return balloon
 
-
 ## Show the configured dialogue balloon
-func show_dialogue_balloon(resource: DialogueResource, title: String = "", extra_game_states: Array = []) -> Node:
+func show_dialogue_balloon(resource: DialogueResource, title: String = "", npc_info: NpcInformation = null, extra_game_states: Array = []) -> Node:
 	var balloon_path: String = DialogueSettings.get_setting(&"balloon_path", _get_example_balloon_path())
 	if not ResourceLoader.exists(balloon_path):
 		balloon_path = _get_example_balloon_path()
-	return show_dialogue_balloon_scene(balloon_path, resource, title, extra_game_states)
-
+	return show_dialogue_balloon_scene(balloon_path, resource, title, npc_info, extra_game_states)
 
 ## Show a given balloon scene
-func show_dialogue_balloon_scene(balloon_scene, resource: DialogueResource, title: String = "", extra_game_states: Array = []) -> Node:
+func show_dialogue_balloon_scene(balloon_scene, resource: DialogueResource, title: String = "", npc_info: NpcInformation = null, extra_game_states: Array = []) -> Node:
 	if balloon_scene is String:
 		balloon_scene = load(balloon_scene)
 	if balloon_scene is PackedScene:
@@ -290,9 +285,9 @@ func show_dialogue_balloon_scene(balloon_scene, resource: DialogueResource, titl
 	var balloon: Node = balloon_scene
 	get_current_scene.call().add_child(balloon)
 	if balloon.has_method(&"start"):
-		balloon.start(resource, title, extra_game_states)
+		balloon.start(resource, title, npc_info, extra_game_states)
 	elif balloon.has_method(&"Start"):
-		balloon.Start(resource, title, extra_game_states)
+		balloon.Start(resource, title, npc_info, extra_game_states)
 	else:
 		assert(false, DialogueConstants.translate(&"runtime.dialogue_balloon_missing_start_method"))
 	return balloon

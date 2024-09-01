@@ -2,33 +2,25 @@ class_name DialogueObject
 extends Interactable
 
 # --- Variables --- #
-@export_file("*.dialogue") var dialogue_path: String
 @export var dialogue_title: String
 var curr_title: String
 @export_file("*.tscn") var balloon_path: String
+@export var dialogue: DialogueResource
+@export var npc_resource: NpcInformation
 
 @export_group("NPC Info")
 @export var npc_name: String
 @export var look_at_player := false
-# @@show_if(look_at_player)
-@export var sprite: Sprite2D
-
-@export_file("*.tres") var npc_info_path: String
 
 @export_group("Sound Effects")
 @export var interact_sfx: AudioStream
 
 # --- References --- #
-var dialogue: DialogueResource
-var npc_resource: NpcInformation
+@onready var sprite := get_node_or_null('%sprite') as Sprite2D
 
 # --- Functions --- #
 func _ready():
 	super()
-	if npc_info_path:
-		AsyncLoader.new(npc_info_path, func f(r): npc_resource = r)
-	
-	AsyncLoader.new(dialogue_path, func f(d: DialogueResource): dialogue = d)
 	
 	interacted_with.connect(show_dialogue)
 
@@ -47,13 +39,12 @@ func show_dialogue():
 	# set npc info
 	DialogueManager.curr_npc_info = npc_resource
 	
-	PortraitManager.set_portrait(npc_resource, "happy")
 	get_title()
 	
 	if balloon_path.is_empty():
-		DialogueManager.show_dialogue_balloon(dialogue, curr_title)
+		DialogueManager.show_dialogue_balloon(dialogue, curr_title, npc_resource)
 	else:
-		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, curr_title)
+		DialogueManager.show_dialogue_balloon_scene(balloon_path, dialogue, curr_title, npc_resource)
 
 func update_texture() -> void:
 	var direction = position.direction_to(Globals.overworld_manager.player.position)

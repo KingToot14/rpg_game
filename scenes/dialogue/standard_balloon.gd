@@ -14,17 +14,13 @@ extends CanvasLayer
 
 # --- References --- #
 @onready var balloon := %balloon as Control
-@onready var character_label := %character_label as RichTextLabel
-@onready var character_panel := %character_panel as Control
-@onready var portrait_rect := %portrait as TextureRect
 @onready var dialogue_label := %dialogue_label as DialogueLabel
-@onready var dialogue_panel := %dialogue_panel as Control
-@onready var responses_menu := %response_menu as DialogueResponsesMenu
-@onready var quest_container := %quest_container as QuestContainer
 
 @onready var audio_player := %'audio_player' as SfxPlayer
 
 var resource: DialogueResource
+var npc_info: NpcInformation
+
 var temporary_game_states: Array = []
 var is_waiting_for_input: bool = false
 var will_hide_balloon: bool = false
@@ -38,7 +34,6 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
-			DialogueManager.curr_npc_info = null
 			close()
 			return
 
@@ -64,18 +59,21 @@ var dialogue_line: DialogueLine:
 		var from_character = not dialogue_line.character.is_empty()
 		
 		# set character
-		character_panel.visible = from_character
-		character_label.text = tr(dialogue_line.character, "dialogue")
+		%"character_panel".visible = from_character
+		%"character_label".text = tr(dialogue_line.character, "dialogue")
 		
-		character_label.get_parent().size.x = character_label.get_content_width() + 7
+		%"character_label".get_parent().size.x = %"character_label".get_content_width() + 7
 		
-		portrait_rect.texture = PortraitManager.curr_portrait
+		%"portrait".texture = npc_info.portrait_texture
 		
 		# set dialogue
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
 		
 		# show response menu
+		var responses_menu = %'response_menu'
+		var quest_container = %'quest_container'
+		
 		responses_menu.hide()
 		responses_menu.set_responses(dialogue_line.responses)
 		
@@ -123,6 +121,7 @@ func _ready() -> void:
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 	
 	# If the responses menu doesn't have a next action set, use this one
+	var responses_menu = %'response_menu'
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
 
@@ -139,18 +138,21 @@ func _notification(what: int) -> void:
 			dialogue_label.skip_typing()
 
 ## Start some dialogue
-func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
+func start(dialogue_resource: DialogueResource, title: String, npc: NpcInformation = null, extra_game_states: Array = []) -> void:
 	# set dialogue
-	temporary_game_states =  [self] + extra_game_states
+	npc_info = npc
+	
+	temporary_game_states = [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource
+	
 	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
 	
 	# show panel
 	open()
 	
 	# setup sfx signals
-	if DialogueManager.curr_npc_info and DialogueManager.curr_npc_info.dialogue_sfx:
+	if npc_info and npc_info.dialogue_sfx:
 		dialogue_label.spoke.connect(_on_dialogue_spoke)
 
 func open() -> void:
@@ -206,5 +208,5 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _on_dialogue_spoke(_letter: String, _letter_index: int, _speed: float) -> void:
-	audio_player.play_sfx(DialogueManager.curr_npc_info.dialogue_sfx)
+	audio_player.play_sfx(npc_info.dialogue_sfx)
 #endregion

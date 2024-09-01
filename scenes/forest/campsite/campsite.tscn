@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dhlffyihw86sr"]
+[gd_scene load_steps=32 format=3 uid="uid://dhlffyihw86sr"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
@@ -13,12 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="10_dap6k"]
 [ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="11_hwj4i"]
 [ext_resource type="Texture2D" uid="uid://dv1qe0bgbf03d" path="res://scenes/forest/campsite/dock_begin.png" id="12_cnwhl"]
-[ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="13_oeuat"]
-[ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="14_8i2db"]
-[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="14_l4gh5"]
-[ext_resource type="AudioStream" uid="uid://1k6c3t5ov47b" path="res://scenes/forest/campsite/ranger/sfx/hehefarbt_02.wav" id="15_bo6xl"]
-[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="15_iux3y"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="16_3ig2h"]
+[ext_resource type="PackedScene" uid="uid://dakitx3m6wiho" path="res://npc.tscn" id="14_1lwqn"]
+[ext_resource type="Resource" uid="uid://e6k4bsvy4kas" path="res://scenes/forest/campsite/ranger/ranger.dialogue" id="15_aj4c0"]
+[ext_resource type="Resource" uid="uid://bfl7v7yaj2wmd" path="res://scenes/forest/campsite/ranger/info.tres" id="16_rope2"]
 [ext_resource type="PackedScene" uid="uid://bc2yg7kt18h7w" path="res://environment/objects/crate.tscn" id="17_6rp7q"]
 [ext_resource type="PackedScene" uid="uid://drjfwso3bw6ig" path="res://environment/objects/campfire.tscn" id="18_5ftdy"]
 
@@ -94,13 +91,6 @@ size = Vector2(35, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7ogx"]
 size = Vector2(480, 20)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vyfou"]
-radius = 16.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoj0j"]
-radius = 3.0
-height = 12.0
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
@@ -419,52 +409,10 @@ texture = ExtResource("12_cnwhl")
 hframes = 2
 frame = 1
 
-[node name="ranger" type="Area2D" parent="." node_paths=PackedStringArray("sprite")]
-z_index = 100
-y_sort_enabled = true
-position = Vector2(174, 115)
-collision_mask = 2
-script = ExtResource("13_oeuat")
-dialogue_path = "res://scenes/forest/campsite/ranger/ranger.dialogue"
-npc_name = "ranger"
-look_at_player = true
-sprite = NodePath("sprite")
-npc_info_path = "res://scenes/forest/campsite/ranger/info.tres"
-interact_sfx = ExtResource("15_bo6xl")
-box_offset = -38.0
-icon = ExtResource("14_l4gh5")
-
-[node name="audio_player" type="AudioStreamPlayer" parent="ranger"]
-unique_name_in_owner = true
-volume_db = -18.0
-bus = &"Gameplay"
-script = ExtResource("16_3ig2h")
-
-[node name="sprite" type="Sprite2D" parent="ranger"]
-position = Vector2(0, 1)
-texture = ExtResource("14_8i2db")
-offset = Vector2(1, -10)
-hframes = 2
-vframes = 2
-
-[node name="shape" type="CollisionShape2D" parent="ranger"]
-visible = false
-shape = SubResource("CircleShape2D_vyfou")
-
-[node name="blocker" type="StaticBody2D" parent="ranger"]
-visible = false
-
-[node name="shape" type="CollisionShape2D" parent="ranger/blocker"]
-position = Vector2(-1, 1)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_yoj0j")
-
-[node name="interaction_box" parent="ranger" instance=ExtResource("15_iux3y")]
-visible = false
-offset_left = -10.0
-offset_top = -38.0
-offset_right = 8.0
-offset_bottom = -20.0
+[node name="ranger" parent="." instance=ExtResource("14_1lwqn")]
+position = Vector2(172, 113)
+dialogue = ExtResource("15_aj4c0")
+npc_resource = ExtResource("16_rope2")
 
 [node name="crate" parent="." instance=ExtResource("17_6rp7q")]
 position = Vector2(143, 103)

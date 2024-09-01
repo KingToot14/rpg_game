@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dpsc3mtp7w6ob"]
+[gd_scene load_steps=39 format=3 uid="uid://dpsc3mtp7w6ob"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_u6rmh"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_joetf"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://resources/scripts/inventory_item.gd" id="13_kj3sv"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="14_cqxmu"]
 [ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="16_0rojl"]
+[ext_resource type="Resource" uid="uid://cj8jvxquo51f4" path="res://resources/dialogue/sign_text.dialogue" id="16_kw7pf"]
 [ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="17_041ax"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ivnop"]
@@ -490,9 +491,9 @@ loot = Array[ExtResource("13_kj3sv")]([SubResource("Resource_270tl"), SubResourc
 
 [node name="sign" parent="." instance=ExtResource("13_4ac0x")]
 position = Vector2(34, 118)
-dialogue_path = "res://resources/dialogue/sign_text.dialogue"
 dialogue_title = "starting_area_sign"
 balloon_path = "res://scenes/dialogue/sign/sign_balloon.tscn"
+dialogue = ExtResource("16_kw7pf")
 
 [node name="encounter" parent="." instance=ExtResource("14_cqxmu")]
 position = Vector2(232, 34)

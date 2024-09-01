@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dakitx3m6wiho"]
+
+[ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="1_5825x"]
+[ext_resource type="AudioStream" uid="uid://1k6c3t5ov47b" path="res://scenes/forest/campsite/ranger/sfx/hehefarbt_02.wav" id="2_oy7ov"]
+[ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="3_ebu2j"]
+[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_mmnl4"]
+[ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="5_nb3vp"]
+[ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="6_yst05"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyfou"]
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoj0j"]
+radius = 3.0
+height = 12.0
+
+[node name="ranger" type="Area2D"]
+z_index = 100
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_5825x")
+npc_name = "ranger"
+look_at_player = true
+interact_sfx = ExtResource("2_oy7ov")
+box_offset = -38.0
+icon = ExtResource("3_ebu2j")
+
+[node name="audio_player" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -18.0
+bus = &"Gameplay"
+script = ExtResource("4_mmnl4")
+
+[node name="sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+texture = ExtResource("5_nb3vp")
+offset = Vector2(1, -10)
+hframes = 2
+vframes = 2
+
+[node name="shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_vyfou")
+
+[node name="blocker" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="shape" type="CollisionShape2D" parent="blocker"]
+position = Vector2(-1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yoj0j")
+
+[node name="interaction_box" parent="." instance=ExtResource("6_yst05")]
+visible = false
+offset_left = -10.0
+offset_top = -38.0
+offset_right = 8.0
+offset_bottom = -20.0
