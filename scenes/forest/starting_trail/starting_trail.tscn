@@ -1,10 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://dpsc3mtp7w6ob"]
+[gd_scene load_steps=37 format=3 uid="uid://dpsc3mtp7w6ob"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_u6rmh"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_joetf"]
 [ext_resource type="Texture2D" uid="uid://bp7tf8mmgy82o" path="res://scenes/forest/starting_trail/terrain_map.png" id="3_cgfri"]
 [ext_resource type="Texture2D" uid="uid://bai4kv2w6xl6p" path="res://scenes/forest/starting_trail/grass_map.png" id="3_qwcog"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="4_ka0n1"]
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="4_w82d4"]
 [ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="6_0twie"]
 [ext_resource type="Texture2D" uid="uid://vbfo5kngm42q" path="res://scenes/forest/starting_trail/shader_map.png" id="6_ryxmw"]
@@ -19,16 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="16_0rojl"]
 [ext_resource type="Resource" uid="uid://cj8jvxquo51f4" path="res://resources/dialogue/sign_text.dialogue" id="16_kw7pf"]
 [ext_resource type="PackedScene" uid="uid://ckqt2ygfqjr4q" path="res://environment/forest/plants/swirl_plant.tscn" id="17_041ax"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivnop"]
-shader = ExtResource("4_ka0n1")
-shader_parameter/transparency = 0.0
-shader_parameter/wind_speed = 2.0
-shader_parameter/wind_threshold = 0.75
-shader_parameter/wind_offset = 10.0
-shader_parameter/wave_count = 3.0
-shader_parameter/player_influence = 0.6
-shader_parameter/radius = 0.05
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gwlfn"]
 frequency = 0.122
@@ -146,7 +135,6 @@ texture = ExtResource("3_qwcog")
 vframes = 3
 
 [node name="short_grass" type="Sprite2D" parent="environment"]
-material = SubResource("ShaderMaterial_ivnop")
 position = Vector2(240, 135)
 texture = ExtResource("3_qwcog")
 vframes = 3
@@ -155,7 +143,6 @@ frame = 1
 [node name="over" type="Sprite2D" parent="environment"]
 z_index = 100
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ivnop")
 position = Vector2(239, 271)
 texture = ExtResource("3_qwcog")
 offset = Vector2(1, -136)

@@ -15,7 +15,7 @@ uniform float wind_speed: hint_range(-5.0, 5.0, 0.05) = 2.0;
 uniform float wind_threshold: hint_range(-1.0, 1.0, 0.05) = 0.75;
 uniform float wind_offset: hint_range(0.0, 16.0, 1.0) = 0.0;
 uniform float wave_count: hint_range(1.0, 10.0) = 3.0;
-uniform sampler2D wind_noise: filter_nearest, repeat_enable;
+uniform float wind_angle: hint_range(0.0, 6.28318530718, 0.392699081699) = 0.0;
 
 group_uniforms player;
 uniform float player_influence: hint_range(0.0, 1.0, 0.05) = 0.60;
@@ -34,16 +34,19 @@ const mat4 THRESHOLD_MATRIX = mat4(
 float get_wind(float _height) {
 	return step(wind_threshold, sin((2.0 * PI * wave_count * _height) / screen_size.y));
 }
-
-float get_noise(vec2 _uv) {
-	return step(0.5, texture(wind_noise, _uv).g);
+float get_sine(float _time, float _height) {
+	return  1.0 * sin(_height * 1.0 + _time) + 
+			0.6 * sin(_height * 2.3 + _time) + 
+			0.4 * sin(_height * 4.2 + _time);
 }
 
 void fragment() {
-	vec2 pos = pixelize(1.0 - SCREEN_UV, screen_size) * screen_size;
+	vec2 pos = pixelize(1.0 - UV + SCREEN_UV, vec2(textureSize(TEXTURE, 0))) * vec2(textureSize(TEXTURE, 0));
+	pos = 1.0 - UV + SCREEN_UV;
+	pos = rotate_to(pos, wind_angle) * vec2(textureSize(TEXTURE, 0));
 	
-	pos.y += get_noise(pixelize(UV, vec2(textureSize(TEXTURE, 0))));
-	float wind = get_wind(pos.y + wind_offset - 10.0 * wind_position * wind_speed);
+	float pos_y = pos.y + 4.0 * get_sine(TIME, 0.1 * pos.x);
+	float wind = get_wind(pos_y - 10.0 * wind_position * wind_speed);
 	
 	vec2 uv = UV;
 	uv.x -= TEXTURE_PIXEL_SIZE.x * wind;
@@ -52,6 +55,8 @@ void fragment() {
 	
 	// Transparency
 	uv = UV / TEXTURE_PIXEL_SIZE;
+	
+	uv = pixelize(uv, vec2(textureSize(TEXTURE, 0)));
 	
 	float player_dist = (clamp(1.0 - distance(SCREEN_UV / SCREEN_PIXEL_SIZE, player_position / SCREEN_PIXEL_SIZE) * SCREEN_PIXEL_SIZE.x / radius, 0.0, 1.0)) * player_influence * step(0.01, transparency);
 	COLOR.a *= step(0.0, THRESHOLD_MATRIX[int(uv.x) % 4][int(uv.y) % 4] - transparency - player_dist);
