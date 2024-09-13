@@ -9,6 +9,8 @@ signal state_changed(state: String)
 # --- Variables --- #
 var curr_state: TurnState
 
+var busy_count := 0
+
 @export var turn_switch_delay: float = 0.0
 
 # --- Functions --- #
@@ -30,9 +32,7 @@ func set_state(state: String) -> void:
 	
 	state_changed.emit(state)
 
-func set_side(_side: String) -> void:
-	pass
-
+#region Entity Management
 func find_next_turn() -> void:
 	Globals.curr_entity = get_next_entity()
 	
@@ -85,6 +85,20 @@ func get_next_entity() -> Entity:
 
 func start_turn() -> void:
 	turn_started.emit()
+
+#endregion
+
+#region Busy System
+func add_busy() -> void:
+	busy_count += 1
+
+func remove_busy() -> void:
+	busy_count -= 1
+	
+	if busy_count <= 0:
+		find_next_turn()
+
+#endregion
 
 func item_set() -> void:
 	curr_state.item_set()

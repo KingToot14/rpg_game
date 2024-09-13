@@ -10,6 +10,8 @@ region = Rect2(0, 0, 20, 20)
 [resource]
 script = ExtResource("1_33r6r")
 name = "Flee"
+animation_name = &""
 icon = SubResource("AtlasTexture_pwn3x")
 description = "Escape battle
  - Lose any collected loot"
+cooldown = 0

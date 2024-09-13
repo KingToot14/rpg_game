@@ -7,6 +7,7 @@ signal turn_ended()
 
 # --- Variables --- #
 var actions_remaining: int = 0
+var taking_turn := false
 
 # --- References --- #
 var parent: Entity
@@ -16,12 +17,14 @@ func setup(entity: Entity) -> void:
 	parent = entity
 
 func take_turn() -> void:
+	taking_turn = true
 	turn_started.emit()
 
 func replenish_actions() -> void:
 	actions_remaining = 1
 
 func end_turn() -> void:
+	taking_turn = false
 	turn_ended.emit()
 	
 	actions_remaining -= 1

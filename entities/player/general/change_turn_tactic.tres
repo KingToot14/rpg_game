@@ -10,5 +10,7 @@ region = Rect2(20, 0, 20, 20)
 [resource]
 script = ExtResource("1_twyhv")
 name = "Change Turn"
+animation_name = &""
 icon = SubResource("AtlasTexture_03y43")
 description = "Passes control to another guardian who can still act"
+cooldown = 0

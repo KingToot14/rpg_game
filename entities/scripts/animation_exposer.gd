@@ -5,9 +5,17 @@ extends Node2D
 @export var animator: AttackAnimator
 @export var sprite: Sprite2D
 
+@export var entity: Entity
+
 var callback: Callable
 
 # --- Functions --- #
+func _ready() -> void:
+	await get_tree().process_frame
+	
+	if animator and entity:
+		animator.entity = entity
+
 func play_animation(anim_name: StringName) -> void:
 	animator.play(anim_name)
 

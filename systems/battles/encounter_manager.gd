@@ -20,6 +20,7 @@ var total_xp: int
 @export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
 
 @export_group("Timing")
+@export var spawn_delay: float = 0.25
 @export var wave_delay: float = 0.25
 
 # - Encounter Info - #
@@ -90,9 +91,20 @@ func load_wave(wave: Wave) -> void:
 	
 	ui_manager.update_wave_counter(curr_wave + 1, wave_count)
 	
-	for i in range(len(wave.enemies)):
-		if wave.enemies[i]:
-			AsyncLoader.new(wave.enemies[i].entity_path, setup_entity.bind(i))
+	var paths: Array[String] = []
+	for enemy in wave.enemies:
+		if enemy:
+			paths.append(enemy.entity_path)
+		else:
+			paths.append("")
+	
+	BatchLoader.new(paths, setup_wave)
+
+func setup_wave(enemies: Array) -> void:
+	for i in range(len(enemies)):
+		if enemies[i]:
+			setup_entity(enemies[i], i)
+			await get_tree().create_timer(spawn_delay).timeout
 		else:
 			ui_manager.setup_enemy_hp(null, i)
 

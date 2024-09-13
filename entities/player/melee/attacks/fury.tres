@@ -9,12 +9,6 @@ region = Rect2(60, 0, 20, 20)
 
 [resource]
 script = ExtResource("1_lcnoy")
-name = "Fury"
-animation_name = &"fury"
-icon = SubResource("AtlasTexture_rka2f")
-cooldown = 0
-description = "Unleash a flury of slashes and stabs
- - Element based on weapon"
 power = 20.0
 element = 1
 element_percent = 0.0
@@ -26,3 +20,9 @@ timing_type = 1
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+name = "Fury"
+animation_name = &"fury"
+icon = SubResource("AtlasTexture_rka2f")
+description = "Unleash a flury of slashes and stabs
+ - Element based on weapon"
+cooldown = 0

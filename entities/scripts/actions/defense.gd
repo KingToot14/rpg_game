@@ -1,16 +1,7 @@
 class_name Defense
-extends Resource
+extends ActionResource
 
 # --- Variables --- #
-@export var name: String
-@export var animation_name: StringName
-@export var icon: Texture2D
-
-@export var cooldown: int = 0
-var remaining_cooldown := 0
-
-@export_multiline var description: String
-
 @export var defense_value := 0.5
 
 # --- Functions --- #

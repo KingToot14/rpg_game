@@ -19,7 +19,7 @@ func setup_attack() -> bool:
 		Globals.ui_manager.enable_timing()
 	
 	Globals.curr_entity.animator.play_action_anim(anim_name)
-	Globals.curr_item.start_cooldown() 
+	Globals.curr_item.start_cooldown()
 	
 	return true
 

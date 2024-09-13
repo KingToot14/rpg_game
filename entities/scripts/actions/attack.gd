@@ -1,5 +1,5 @@
 class_name Attack
-extends Resource
+extends ActionResource
 
 # --- Enums --- #
 enum TargetSide { PLAYER, ENEMY }
@@ -16,15 +16,6 @@ enum Element {
 }
 
 # --- Variables --- #
-@export var name: String
-@export var animation_name: StringName
-@export var icon: Texture2D
-
-@export var cooldown: int = 0
-var remaining_cooldown := 0
-
-@export_multiline var description: String
-
 @export var power: float
 @export var element: Element
 # @@show_if(element != Element.NONE)
@@ -55,13 +46,21 @@ func calculate_damage(attacker: Entity, target: Entity) -> DamageChunk:
 	
 	return DamageChunk.new(dmg, element, element_percent)
 
+func can_target(target: Entity) -> bool:
+	if side & TargetSide.ENEMY:
+		return not target.is_player()
+	if side & TargetSide.PLAYER:
+		return target.is_player()
+	
+	return false
+
 func highlight_targets() -> void:
-	if side == TargetSide.ENEMY:
+	if side & TargetSide.ENEMY:
 		var enemies = TargetingHelper.get_entities(&'enemy')
 		
 		for enemy in enemies:
 			enemy.targeting.set_targetable(true)
-	if side == TargetSide.PLAYER:
+	if side & TargetSide.PLAYER:
 		var players = TargetingHelper.get_entities(&'player')
 		
 		for player in players:

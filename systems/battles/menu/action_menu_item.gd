@@ -93,5 +93,8 @@ func set_item() -> void:
 	if item is Attack and item.remaining_cooldown > 0:
 		return
 	
-	Globals.set_item(item)
+	for entity: Entity in get_tree().get_nodes_in_group(&'player'):
+		entity.brain._on_action_selected(item)
+	
+	#Globals.set_item(item)
 	release_focus()

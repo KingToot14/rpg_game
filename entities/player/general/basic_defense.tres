@@ -9,10 +9,10 @@ region = Rect2(0, 0, 20, 20)
 
 [resource]
 script = ExtResource("1_yh4pe")
+defense_value = 0.5
 name = "Defend"
 animation_name = &"defend"
 icon = SubResource("AtlasTexture_7bv5w")
-cooldown = 0
 description = "Prepare for incoming damage
  - Take moderately reduced damage until next turn"
-defense_value = 0.5
+cooldown = 0

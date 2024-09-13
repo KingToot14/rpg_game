@@ -9,14 +9,6 @@ region = Rect2(40, 0, 20, 20)
 
 [resource]
 script = ExtResource("2_acttd")
-name = "Falling Objects"
-animation_name = &"falling_objects"
-icon = SubResource("AtlasTexture_70663")
-cooldown = 3
-description = "Thrust a sword into the ground, causing objects to fall from the sky
- - Hits all enemies
- - Random damage
- - No Element"
 power = 25.0
 element = 0
 element_percent = 0.0
@@ -28,3 +20,11 @@ timing_type = 0
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+name = "Falling Objects"
+animation_name = &"falling_objects"
+icon = SubResource("AtlasTexture_70663")
+description = "Thrust a sword into the ground, causing objects to fall from the sky
+ - Hits all enemies
+ - Random damage
+ - No Element"
+cooldown = 3

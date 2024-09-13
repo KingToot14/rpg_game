@@ -2,7 +2,7 @@ class_name AsyncLoader
 extends Node
 
 # --- Signals --- #
-signal done_loading(obj)
+signal done_loading(obj: Resource)
 
 # --- Variables --- #
 var path: String

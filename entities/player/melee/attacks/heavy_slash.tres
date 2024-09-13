@@ -9,13 +9,6 @@ region = Rect2(20, 0, 20, 20)
 
 [resource]
 script = ExtResource("2_yrjsm")
-name = "Heavy Slash"
-animation_name = &"heavy_attack"
-icon = SubResource("AtlasTexture_fcxdd")
-cooldown = 1
-description = "A heavy slash
- - Element based on weapon
- - Deals damage to neighboring enemies"
 power = 50.0
 element = 0
 element_percent = 0.0
@@ -27,3 +20,10 @@ timing_type = 0
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+name = "Heavy Slash"
+animation_name = &"heavy_attack"
+icon = SubResource("AtlasTexture_fcxdd")
+description = "A heavy slash
+ - Element based on weapon
+ - Deals damage to neighboring enemies"
+cooldown = 1

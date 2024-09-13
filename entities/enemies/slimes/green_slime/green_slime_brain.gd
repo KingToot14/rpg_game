@@ -2,10 +2,9 @@ class_name GreenSlimeBrain
 extends EntityBrain
 
 # --- Functions --- #
-func perform_turn() -> void:
-	# always attack
-	Globals.action_fsm.set_state('attack')
-	
+func _on_turn_started() -> void:
 	# select random attack + target
-	Globals.curr_item = parent.actions.attack_pool.pick_random()
-	TargetingHelper.get_random_entity(&'player').targeting.select()
+	action = parent.actions.attack_pool.pick_random()
+	selected_target = TargetingHelper.get_random_entity(&'player')
+	
+	parent.animator.play_action_anim(action.animation_name)

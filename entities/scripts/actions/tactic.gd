@@ -1,11 +1,7 @@
 class_name Tactic
-extends Resource
+extends ActionResource
 
 # --- Variables --- #
-@export var name: String
-@export var icon: Texture2D
-
-@export_multiline var description: String
 
 # --- Functions --- #
 func do_tactic() -> void:

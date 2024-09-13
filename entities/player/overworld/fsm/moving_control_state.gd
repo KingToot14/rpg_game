@@ -18,7 +18,6 @@ func handle_process(delta: float) -> void:
 	player.update_texture()
 	
 	# get position delta
-	var timer_delta = player.position.distance_to(prev_pos) * delta
 	prev_pos = player.position
 	
 	# play/pause footsteps
@@ -37,7 +36,7 @@ func play_footstep() -> void:
 		return
 	
 	var image = Globals.overworld_manager.curr_area.terrain_texture.get_image() as Image
-	var color = image.get_pixel(player.position.x, player.position.y + 4)
+	var color = image.get_pixel(int(player.position.x), int(player.position.y + 4))
 	
 	for footstep in footstep_sfx:
 		if footstep.color_key == color:

@@ -3,9 +3,15 @@ extends AnimationPlayer
 
 # --- Variables --- #
 @export var parent: Node2D
+var entity: Entity
+
 var target = null
 
 # --- Functions --- #
+func _ready() -> void:
+	if parent is Entity:
+		entity = parent
+
 func timed_input() -> void:
 	return
 
@@ -13,9 +19,9 @@ func do_damage(modifier: float = 1.0) -> void:
 	if target is Array:
 		for targ in target:
 			if is_instance_valid(targ):
-				Globals.attack_manager.do_damage(targ, modifier)
+				entity.brain.do_damage(targ, modifier)
 	elif is_instance_valid(target):
-		Globals.attack_manager.do_damage(target, modifier)
+		entity.brain.do_damage(target, modifier)
 	
 	if len(Globals.timing_mods) > 0:
 		Globals.timing_mods.pop_front()
@@ -27,11 +33,11 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	target.status_effects.add_effect(key, stacks, stage)
 
 func set_target() -> void:
-	var attack = Globals.curr_item as Attack
+	var attack = entity.brain.action as Attack
 	
 	match attack.targeting:
 		Attack.TargetingMode.SINGLE, Attack.TargetingMode.AOE:
-			target = Globals.curr_target
+			target = entity.brain.selected_target
 		Attack.TargetingMode.ALL:
 			if attack.side == Attack.TargetSide.ENEMY:
 				target = TargetingHelper.get_entities(&'enemy')
@@ -88,4 +94,4 @@ func screen_shake(intensity: float = 4, time = 0.25) -> void:
 	get_viewport().get_camera_2d().do_screen_shake(intensity, time)
 
 func end_turn() -> void:
-	Globals.curr_entity.action_ended()
+	entity.action_ended()

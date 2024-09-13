@@ -1425,9 +1425,11 @@ position = Vector2(-1, -23)
 texture = ExtResource("14_0nx2n")
 vframes = 2
 
-[node name="slime_ball" parent="." instance=ExtResource("15_8nkit")]
+[node name="slime_ball" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("15_8nkit")]
+entity = NodePath("..")
 
-[node name="slime_ball2" parent="." instance=ExtResource("15_8nkit")]
+[node name="slime_ball2" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("15_8nkit")]
+entity = NodePath("..")
 
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
