@@ -1462,20 +1462,25 @@ position = Vector2(40, 4)
 script = ExtResource("14_jx8ob")
 falling_objects = [NodePath("falling_objects"), NodePath("falling_objects2"), NodePath("falling_objects3"), NodePath("falling_objects4"), NodePath("falling_objects5")]
 
-[node name="falling_objects" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+[node name="falling_objects" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
 visible = false
+entity = NodePath("../..")
 
-[node name="falling_objects2" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+[node name="falling_objects2" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
 visible = false
+entity = NodePath("../..")
 
-[node name="falling_objects3" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+[node name="falling_objects3" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
 visible = false
+entity = NodePath("../..")
 
-[node name="falling_objects4" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+[node name="falling_objects4" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
 visible = false
+entity = NodePath("../..")
 
-[node name="falling_objects5" parent="attack_objects" instance=ExtResource("14_6ew1w")]
+[node name="falling_objects5" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
 visible = false
+entity = NodePath("../..")
 
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
@@ -1487,6 +1492,7 @@ visible = false
 [connection signal="turn_ended" from="managers/turn" to="managers/actions" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="managers/status_effect" method="_on_turn_ended"]
 [connection signal="turn_ended" from="managers/turn" to="ui" method="update_effects"]
+[connection signal="turn_started" from="managers/turn" to="managers/brain" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="managers/status_effect" method="_on_turn_started"]
 [connection signal="turn_started" from="managers/turn" to="ui" method="update_effects"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]

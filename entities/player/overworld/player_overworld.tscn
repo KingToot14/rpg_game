@@ -67,6 +67,7 @@ script = ExtResource("6_t3gle")
 [node name="moving_state" type="Node" parent="."]
 script = ExtResource("7_2n4je")
 movement_speed = 75.0
+sprint_speed = 250.0
 footstep_sfx = Array[ExtResource("5_nfabf")]([SubResource("Resource_a8xs5"), SubResource("Resource_l8we0")])
 
 [node name="footstep_timer" type="Timer" parent="moving_state"]

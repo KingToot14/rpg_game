@@ -1,6 +1,13 @@
 class_name BattleUiManager
 extends CanvasLayer
 
+# --- Enums --- #
+enum ActionState {
+	Hidden,
+	ActionBar,
+	CancelButton
+}
+
 # --- Variables --- #
 @export_group("Health Bars")
 @export var player_hp_bars: Array[HpBar]
@@ -62,21 +69,51 @@ func setup_enemy_hp(enemy: Entity, index: int) -> void:
 #endregion
 
 func _on_state_changed(state: String) -> void:
+	return
+	
 	is_player_turn = state == 'player'
 	set_action_bar(is_player_turn)
 
-func _on_action_changed(state: String) -> void:
-	set_attack_menu(state == 'attack')
-	set_defense_menu(state == 'defend')
-	set_tactic_menu(state == 'tactic')
-
 func _on_targeting_changed() -> void:
+	return
+	
 	try_set_action_bar(not Globals.action_fsm.targeting)
 	set_cancel_button(is_player_turn and Globals.action_fsm.targeting)
 
 #region Actions
 func try_set_action_bar(value: bool) -> void:
 	set_action_bar(is_player_turn and value)
+
+func set_action_state(state: BattleUiManager.ActionState) -> void:
+	if state == ActionState.ActionBar:
+		show_action_bar()
+	else:
+		hide_action_bar()
+	
+	if state == ActionState.CancelButton:
+		cancel_button.show_button()
+	else:
+		cancel_button.hide_button()
+
+func show_action_bar() -> void:
+	var tween = create_tween().set_parallel()
+	
+	action_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	tween.tween_property(action_bar, 'modulate:a', 1.0, action_bar_tween_time)
+	tween.tween_property(action_bar, 'position:y', action_bar_pos, action_bar_tween_time).from(action_bar_pos + 8)
+
+func hide_action_bar() -> void:
+	var tween = create_tween().set_parallel()
+	
+	action_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	tween.tween_property(action_bar, 'modulate:a', 0.0, action_bar_tween_time)
+	tween.tween_property(action_bar, 'position:y', action_bar_pos + 8, action_bar_tween_time)
+
+func clear_action() -> void:
+	for entity: Entity in get_tree().get_nodes_in_group(&'player'):
+		entity.brain._on_action_selected(null)
 
 func tween_action(control: Control, value: bool, pos: float) -> void:
 	if value and control.modulate.a > 0.0:
@@ -104,6 +141,7 @@ func tween_action(control: Control, value: bool, pos: float) -> void:
 		tween.chain().tween_callback(control.hide)
 
 func set_action_bar(value: bool) -> void:
+	return
 	tween_action(action_bar, value, action_bar_pos)
 
 func set_attack_menu(value: bool) -> void:
@@ -117,6 +155,10 @@ func set_tactic_menu(value: bool) -> void:
 
 func set_cancel_button(value: bool) -> void:
 	tween_action(cancel_button, value, action_bar_pos)
+
+func load_player_action(entity: Entity) -> void:
+	attack_menu.load_items(entity.actions.attack_pool)
+	defense_menu.load_items(entity.actions.defense_pool)
 
 func load_attacks() -> void:
 	attack_menu.load_items(Globals.curr_entity.actions.attack_pool)

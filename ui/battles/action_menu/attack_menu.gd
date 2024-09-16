@@ -1,5 +1,5 @@
 class_name AttackMenu
-extends Control
+extends ActionMenu
 
 # --- Variables --- #
 
@@ -33,6 +33,8 @@ var info_panel_pos: float
 # --- Functions --- #
 #f8jc duke duke :3
 func _ready() -> void:
+	super()
+	
 	# set references
 	attack_grid = $"attack_grid" as Control
 	

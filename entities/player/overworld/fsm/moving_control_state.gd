@@ -4,6 +4,7 @@ extends PlayerControlState
 # --- Variables --- #
 var prev_pos: Vector2
 @export var movement_speed: float = 20.0
+@export var sprint_speed := 100.0
 
 @export var footstep_sfx: Array[FootstepSfx] = []
 
@@ -13,7 +14,12 @@ var prev_pos: Vector2
 
 # --- Functions --- #
 func handle_process(delta: float) -> void:
-	player.velocity = player.direction * movement_speed
+	var sprinting = Input.is_action_pressed(&'sprint')
+	
+	if sprinting:
+		player.velocity = player.direction * sprint_speed
+	else:
+		player.velocity = player.direction * movement_speed
 	var collided = player.move_and_slide()
 	player.update_texture()
 	

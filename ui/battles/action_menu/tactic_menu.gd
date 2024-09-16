@@ -1,5 +1,5 @@
 class_name TacticMenu
-extends Node
+extends ActionMenu
 
 # --- Variables --- #
 @export var tactics: Array[Tactic] = []
@@ -18,6 +18,8 @@ var info_panel_pos: float
 # --- Functions --- #
 #f8jc duke duke :3
 func _ready() -> void:
+	super()
+	
 	# set references
 	tactic_grid = $"tactic_grid" as Control
 	info_panel = $"tactic_info" as Control

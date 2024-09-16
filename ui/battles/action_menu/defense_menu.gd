@@ -1,5 +1,5 @@
 class_name DefendMenu
-extends Control
+extends ActionMenu
 
 # --- Variables --- #
 
@@ -19,6 +19,8 @@ var info_panel_pos: float
 # --- Functions --- #
 #f8jc duke duke :3
 func _ready() -> void:
+	super()
+	
 	# set references
 	defense_grid = $"defense_grid" as Control
 	info_panel = $"defense_info" as Control
