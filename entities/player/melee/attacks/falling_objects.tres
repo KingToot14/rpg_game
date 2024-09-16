@@ -12,9 +12,6 @@ script = ExtResource("2_acttd")
 power = 25.0
 element = 0
 element_percent = 0.0
-side = 1
-targeting = 2
-aoe_modifier = 0.5
 damage_type = 0
 timing_type = 0
 accuracy = 1.0
@@ -27,4 +24,6 @@ description = "Thrust a sword into the ground, causing objects to fall from the 
  - Hits all enemies
  - Random damage
  - No Element"
+side = 2
+targeting = 2
 cooldown = 3

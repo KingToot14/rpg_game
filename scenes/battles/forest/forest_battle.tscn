@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=102 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -48,6 +48,8 @@
 [ext_resource type="Script" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
 [ext_resource type="Resource" uid="uid://b6dixk683scj1" path="res://entities/player/general/flee_tactic.tres" id="41_u0bu5"]
 [ext_resource type="Resource" uid="uid://vvso3cyu67wy" path="res://entities/player/general/change_turn_tactic.tres" id="42_68b6r"]
+[ext_resource type="Texture2D" uid="uid://dv81q67jbw74x" path="res://entities/player/general/defense.png" id="42_dhx3q"]
+[ext_resource type="Script" path="res://entities/scripts/actions/defense.gd" id="43_2knp5"]
 [ext_resource type="PackedScene" uid="uid://cuchs4266ic3t" path="res://ui/battles/timed_attacks/mash_timing.tscn" id="45_gvyev"]
 [ext_resource type="Script" path="res://ui/battles/entity_info_ui.gd" id="48_cd7b1"]
 [ext_resource type="Script" path="res://ui/battles/victory_loss/victory_panel.gd" id="51_pokc6"]
@@ -202,6 +204,22 @@ region = Rect2(0, 16, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5e26k"]
 atlas = ExtResource("38_06ocl")
 region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvl3m"]
+atlas = ExtResource("42_dhx3q")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="Resource" id="Resource_sc3fj"]
+script = ExtResource("43_2knp5")
+defense_value = 0.5
+name = "Defend"
+animation_name = &"defend"
+icon = SubResource("AtlasTexture_nvl3m")
+description = "Tense up in preparation for a heavy attack
+ - Reduces damage taken for 1 turn"
+side = 1
+targeting = 0
+cooldown = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_curyc"]
 atlas = ExtResource("33_8otb5")
@@ -528,7 +546,7 @@ victory_panel = NodePath("victory_panel")
 loss_panel = NodePath("loss_panel")
 action_bar = NodePath("action_bar")
 attack_menu = NodePath("action_bar/attack_menu")
-defense_menu = NodePath("action_bar/defense_menu")
+defense_menu = NodePath("action_bar/items_menu")
 tactic_menu = NodePath("action_bar/tactics_menu")
 cancel_button = NodePath("cancel_button")
 single_hit = NodePath("timed_single_hit")
@@ -663,7 +681,7 @@ theme_type_variation = &"AttackButton"
 text = "Attack"
 clip_text = true
 
-[node name="block_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
+[node name="items_button" type="BaseButton" parent="ui/action_bar" node_paths=PackedStringArray("backing_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -737,7 +755,7 @@ normal_texture = SubResource("AtlasTexture_glmrl")
 hovered_texture = SubResource("AtlasTexture_kplc7")
 backing_rect = NodePath("backing")
 
-[node name="backing" type="TextureRect" parent="ui/action_bar/block_button"]
+[node name="backing" type="TextureRect" parent="ui/action_bar/items_button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -746,7 +764,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_glmrl")
 
-[node name="icon" type="TextureRect" parent="ui/action_bar/block_button"]
+[node name="icon" type="TextureRect" parent="ui/action_bar/items_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -757,14 +775,14 @@ offset_bottom = 11.0
 grow_vertical = 2
 texture = ExtResource("9_gvg6k")
 
-[node name="action_name" type="Label" parent="ui/action_bar/block_button"]
+[node name="action_name" type="Label" parent="ui/action_bar/items_button"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 7.0
 offset_right = 59.0
 offset_bottom = 18.0
 theme_type_variation = &"BlockButton"
-text = "Block"
+text = "Items"
 horizontal_alignment = 1
 clip_text = true
 
@@ -1243,7 +1261,7 @@ layout_mode = 2
 [node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
 
-[node name="defense_menu" type="Control" parent="ui/action_bar" groups=["action_menu"]]
+[node name="items_menu" type="Control" parent="ui/action_bar" groups=["action_menu"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -1260,7 +1278,7 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("33_84n05")
 
-[node name="defense_info" parent="ui/action_bar/defense_menu" instance=ExtResource("27_e31mb")]
+[node name="defense_info" parent="ui/action_bar/items_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1274,14 +1292,14 @@ offset_bottom = 23.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="info" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
+[node name="info" parent="ui/action_bar/items_menu/defense_info" instance=ExtResource("29_7enty")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -61.0
 
-[node name="name" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info"]
+[node name="name" type="RichTextLabel" parent="ui/action_bar/items_menu/defense_info/info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1295,7 +1313,7 @@ grow_vertical = 2
 text = "Defense Name"
 scroll_active = false
 
-[node name="defend_power" type="Control" parent="ui/action_bar/defense_menu/defense_info/info"]
+[node name="defend_power" type="Control" parent="ui/action_bar/items_menu/defense_info/info"]
 anchors_preset = 0
 offset_left = 26.0
 offset_top = 21.0
@@ -1303,7 +1321,7 @@ offset_right = 56.0
 offset_bottom = 29.0
 metadata/_edit_group_ = true
 
-[node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
+[node name="icon" type="TextureRect" parent="ui/action_bar/items_menu/defense_info/info/defend_power"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -1312,7 +1330,7 @@ texture = SubResource("AtlasTexture_k5po2")
 script = ExtResource("34_ujwxc")
 key = &"accent"
 
-[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/info/defend_power"]
+[node name="label" type="RichTextLabel" parent="ui/action_bar/items_menu/defense_info/info/defend_power"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1325,7 +1343,7 @@ theme_type_variation = &"Medium"
 text = "50"
 scroll_active = false
 
-[node name="icon_frame" parent="ui/action_bar/defense_menu/defense_info/info" instance=ExtResource("29_7enty")]
+[node name="icon_frame" parent="ui/action_bar/items_menu/defense_info/info" instance=ExtResource("29_7enty")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
@@ -1333,7 +1351,7 @@ offset_top = 14.0
 offset_right = -72.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/action_bar/defense_menu/defense_info/info/icon_frame"]
+[node name="icon" type="TextureRect" parent="ui/action_bar/items_menu/defense_info/info/icon_frame"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1349,7 +1367,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_5e26k")
 expand_mode = 1
 
-[node name="description" parent="ui/action_bar/defense_menu/defense_info" instance=ExtResource("29_7enty")]
+[node name="description" parent="ui/action_bar/items_menu/defense_info" instance=ExtResource("29_7enty")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 40.0
@@ -1357,7 +1375,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 metadata/_edit_group_ = true
 
-[node name="label" type="RichTextLabel" parent="ui/action_bar/defense_menu/defense_info/description"]
+[node name="label" type="RichTextLabel" parent="ui/action_bar/items_menu/defense_info/description"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1372,7 +1390,7 @@ theme_type_variation = &"Medium"
 text = "Description"
 scroll_active = false
 
-[node name="grid_backing" parent="ui/action_bar/defense_menu" instance=ExtResource("27_e31mb")]
+[node name="grid_backing" parent="ui/action_bar/items_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1387,14 +1405,14 @@ grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_group_ = true
 
-[node name="panel_inner" parent="ui/action_bar/defense_menu/grid_backing" instance=ExtResource("29_7enty")]
+[node name="panel_inner" parent="ui/action_bar/items_menu/grid_backing" instance=ExtResource("29_7enty")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="defense_grid" type="HBoxContainer" parent="ui/action_bar/defense_menu"]
+[node name="defense_grid" type="HBoxContainer" parent="ui/action_bar/items_menu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1410,19 +1428,19 @@ grow_vertical = 0
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="menu_button" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+[node name="menu_button" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
-[node name="menu_button2" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+[node name="menu_button2" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
-[node name="menu_button3" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+[node name="menu_button3" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
-[node name="menu_button4" parent="ui/action_bar/defense_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+[node name="menu_button4" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
@@ -1442,7 +1460,7 @@ offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("40_44v6f")
-tactics = Array[Resource("res://entities/scripts/actions/tactic.gd")]([ExtResource("41_u0bu5"), ExtResource("42_68b6r")])
+tactics = Array[Resource("res://entities/scripts/actions/tactic.gd")]([SubResource("Resource_sc3fj"), ExtResource("42_68b6r"), ExtResource("41_u0bu5")])
 
 [node name="tactic_info" parent="ui/action_bar/tactics_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
@@ -2930,9 +2948,9 @@ position = Vector2(60, 185)
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="ui/action_bar/attack_button" to="ui/action_bar/attack_menu" method="toggle_menu"]
-[connection signal="mouse_entered" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ui/action_bar/block_button" to="ui/action_bar/block_button" method="_on_mouse_exited"]
-[connection signal="pressed" from="ui/action_bar/block_button" to="ui/action_bar/defense_menu" method="toggle_menu"]
+[connection signal="mouse_entered" from="ui/action_bar/items_button" to="ui/action_bar/items_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ui/action_bar/items_button" to="ui/action_bar/items_button" method="_on_mouse_exited"]
+[connection signal="pressed" from="ui/action_bar/items_button" to="ui/action_bar/items_menu" method="toggle_menu"]
 [connection signal="mouse_entered" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="ui/action_bar/tactics_button" to="ui/action_bar/tactics_menu" method="toggle_menu"]

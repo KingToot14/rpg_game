@@ -26,25 +26,25 @@ func do_damage(modifier: float = 1.0) -> void:
 	if len(Globals.timing_mods) > 0:
 		Globals.timing_mods.pop_front()
 
-func do_defense() -> void:
-	Globals.curr_item.do_defense()
+func perform_action() -> void:
+	entity.brain.action.perform_action(target)
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	target.status_effects.add_effect(key, stacks, stage)
 
 func set_target() -> void:
-	var attack = entity.brain.action as Attack
+	var action = entity.brain.action
 	
-	match attack.targeting:
+	match action.targeting:
 		Attack.TargetingMode.SINGLE, Attack.TargetingMode.AOE:
 			target = entity.brain.selected_target
 		Attack.TargetingMode.ALL:
-			if attack.side == Attack.TargetSide.ENEMY:
+			if action.side == Attack.TargetSide.ENEMY:
 				target = TargetingHelper.get_entities(&'enemy')
 			else:
 				target = TargetingHelper.get_entities(&'player')
 		Attack.TargetingMode.RANDOM:
-			if attack.side == Attack.TargetSide.ENEMY:
+			if action.side == Attack.TargetSide.ENEMY:
 				target = TargetingHelper.get_random_entity(&'enemy')
 			else:
 				target = TargetingHelper.get_random_entity(&'player')

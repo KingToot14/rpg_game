@@ -14,4 +14,6 @@ animation_name = &""
 icon = SubResource("AtlasTexture_pwn3x")
 description = "Escape battle
  - Lose any collected loot"
+side = 1
+targeting = 0
 cooldown = 0

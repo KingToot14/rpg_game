@@ -15,4 +15,6 @@ animation_name = &"defend"
 icon = SubResource("AtlasTexture_7bv5w")
 description = "Prepare for incoming damage
  - Take moderately reduced damage until next turn"
+side = 1
+targeting = 0
 cooldown = 0

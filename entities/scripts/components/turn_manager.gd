@@ -17,6 +17,9 @@ func setup(entity: Entity) -> void:
 	parent = entity
 
 func take_turn() -> void:
+	for entity in get_tree().get_nodes_in_group(&'entity'):
+		entity.turn.taking_turn = false
+	
 	taking_turn = true
 	turn_started.emit()
 

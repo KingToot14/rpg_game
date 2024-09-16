@@ -12,9 +12,6 @@ script = ExtResource("2_yrjsm")
 power = 40.0
 element = 1
 element_percent = 1.0
-side = 1
-targeting = 0
-aoe_modifier = 0.5
 damage_type = 0
 timing_type = 0
 accuracy = 1.0
@@ -25,4 +22,6 @@ animation_name = &"normal_attack"
 icon = SubResource("AtlasTexture_jitcr")
 description = "A simple slash
  - Element based on weapon"
+side = 2
+targeting = 0
 cooldown = 0

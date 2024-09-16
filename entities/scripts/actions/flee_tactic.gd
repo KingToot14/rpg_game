@@ -5,8 +5,5 @@ extends Tactic
 
 
 # --- Functions --- #
-func do_tactic() -> void:
+func perform_action(_target: Entity) -> void:
 	Globals.encounter_manager.load_overworld()
-
-func highlight_targets() -> void:
-	Globals.curr_entity.targeting.set_targetable(true)

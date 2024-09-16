@@ -299,11 +299,14 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
-"method": &"do_defense"
+"method": &"set_target"
+}, {
+"args": [&"defend", 1, 1],
+"method": &"add_effect"
 }, {
 "args": [],
 "method": &"end_turn"

@@ -60,10 +60,11 @@ func find_next_turn() -> void:
 		set_state(curr_state.next_state)
 
 func set_entity(entity: Entity) -> void:
-	Globals.curr_entity = entity
-	start_turn()
-	Globals.curr_entity.turn.take_turn()
-	Globals.action_fsm.set_state("blank")
+	entity.turn.take_turn()
+	#Globals.curr_entity = entity
+	#start_turn()
+	#Globals.curr_entity.turn.take_turn()
+	#Globals.action_fsm.set_state("blank")
 
 func get_next_entity() -> Entity:
 	var i = 0

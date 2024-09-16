@@ -12,9 +12,6 @@ script = ExtResource("2_yrjsm")
 power = 50.0
 element = 0
 element_percent = 0.0
-side = 1
-targeting = 1
-aoe_modifier = 0.5
 damage_type = 0
 timing_type = 0
 accuracy = 1.0
@@ -26,4 +23,6 @@ icon = SubResource("AtlasTexture_fcxdd")
 description = "A heavy slash
  - Element based on weapon
  - Deals damage to neighboring enemies"
+side = 2
+targeting = 1
 cooldown = 1
