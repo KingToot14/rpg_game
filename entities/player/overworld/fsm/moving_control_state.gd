@@ -13,7 +13,7 @@ var prev_pos: Vector2
 @onready var footstep_timer := %'footstep_timer' as Timer
 
 # --- Functions --- #
-func handle_process(delta: float) -> void:
+func handle_process(_delta: float) -> void:
 	var sprinting = Input.is_action_pressed(&'sprint')
 	
 	if sprinting:

@@ -26,7 +26,6 @@ var wave_count: int = 0
 
 # --- References --- #
 @onready var turn_fsm = %"turn_fsm" as TurnFSM
-@onready var action_fsm = %"action_fsm" as ActionFSM
 @onready var ui_manager = %"ui" as BattleUiManager
 
 # --- Functions --- #
@@ -131,8 +130,6 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	await entity.entity_setup
 	
 	# Signals
-	entity.targeting.selected.connect(action_fsm.entity_selected)
-	
 	if entity.is_player():
 		encounter_victory.connect(entity.store_data)
 		ui_manager.setup_player_hp(entity, spawn_index)

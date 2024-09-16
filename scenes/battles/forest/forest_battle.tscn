@@ -1,26 +1,19 @@
-[gd_scene load_steps=102 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=95 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
 [ext_resource type="Script" path="res://scripts/battles/battle_camera.gd" id="2_km81k"]
-[ext_resource type="Script" path="res://systems/battles/turn_fsm/player_state.gd" id="3_ntjl1"]
-[ext_resource type="Script" path="res://systems/battles/turn_fsm/enemy_state.gd" id="4_7xy13"]
+[ext_resource type="Script" path="res://systems/battles/turn_fsm/entity_turn_state.gd" id="4_vlt5o"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/win_state.gd" id="5_1or2o"]
-[ext_resource type="Script" path="res://systems/battles/action_fsm/action_fsm.gd" id="5_hg5dv"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="6_66gh2"]
 [ext_resource type="Texture2D" uid="uid://ddvepuvx83g8y" path="res://ui/battles/action_menu/action_button.png" id="6_a4ney"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/lose_state.gd" id="6_s453a"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/melee_icons/battle_action_button.gd" id="7_3w10q"]
 [ext_resource type="Texture2D" uid="uid://c77wdap622yi1" path="res://ui/battles/action_menu/melee_icons/attack_melee.png" id="7_bd1i3"]
 [ext_resource type="Script" path="res://ui/battles/battle_ui_manager.gd" id="8_ex6oy"]
-[ext_resource type="Script" path="res://systems/battles/action_fsm/action_state.gd" id="8_u1m5v"]
-[ext_resource type="Script" path="res://systems/battles/action_fsm/attack_action_state.gd" id="9_5pcwq"]
 [ext_resource type="Texture2D" uid="uid://d1uxhsuh6jjis" path="res://ui/battles/action_menu/melee_icons/block_melee.png" id="9_gvg6k"]
-[ext_resource type="Script" path="res://systems/battles/attack_manager.gd" id="10_1kl6y"]
-[ext_resource type="Script" path="res://systems/battles/action_fsm/defense_action_state.gd" id="10_5k24m"]
 [ext_resource type="Texture2D" uid="uid://bdv1yvsfr6l2u" path="res://ui/battles/action_menu/melee_icons/tactics_melee.png" id="10_qg1o5"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="11_562by"]
-[ext_resource type="Script" path="res://systems/battles/action_fsm/tactic_action_state.gd" id="11_pn5pf"]
 [ext_resource type="Texture2D" uid="uid://b7jxwwpwash2v" path="res://scenes/battles/forest/ground_map.png" id="15_bhykm"]
 [ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="15_cq36e"]
 [ext_resource type="Script" path="res://scripts/world_setter.gd" id="16_6d7b8"]
@@ -302,35 +295,20 @@ script = ExtResource("2_eejpv")
 turn_switch_delay = 0.5
 
 [node name="player_state" type="Node2D" parent="turn_fsm"]
-script = ExtResource("3_ntjl1")
+script = ExtResource("4_vlt5o")
+group_name = &"player"
+next_state = "enemy"
 
 [node name="enemy_state" type="Node2D" parent="turn_fsm"]
-script = ExtResource("4_7xy13")
+script = ExtResource("4_vlt5o")
+group_name = &"enemy"
+next_state = "player"
 
 [node name="win_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("5_1or2o")
 
 [node name="lose_state" type="Node2D" parent="turn_fsm"]
 script = ExtResource("6_s453a")
-
-[node name="action_fsm" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("5_hg5dv")
-
-[node name="blank_state" type="Node2D" parent="action_fsm"]
-script = ExtResource("8_u1m5v")
-
-[node name="attack_state" type="Node2D" parent="action_fsm"]
-script = ExtResource("9_5pcwq")
-
-[node name="defend_state" type="Node2D" parent="action_fsm"]
-script = ExtResource("10_5k24m")
-
-[node name="tactic_state" type="Node2D" parent="action_fsm"]
-script = ExtResource("11_pn5pf")
-
-[node name="attack_manager" type="Node2D" parent="."]
-script = ExtResource("10_1kl6y")
 
 [node name="environment" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -2939,9 +2917,6 @@ y_sort_enabled = true
 position = Vector2(60, 185)
 
 [connection signal="state_changed" from="turn_fsm" to="ui" method="_on_state_changed"]
-[connection signal="action_changed" from="action_fsm" to="ui" method="_on_action_changed"]
-[connection signal="action_performed" from="action_fsm" to="turn_fsm" method="action_performed"]
-[connection signal="targeting_changed" from="action_fsm" to="ui" method="_on_targeting_changed"]
 [connection signal="mouse_entered" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ui/action_bar/attack_button" to="ui/action_bar/attack_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="ui/action_bar/attack_button" to="ui/action_bar/attack_menu" method="toggle_menu"]

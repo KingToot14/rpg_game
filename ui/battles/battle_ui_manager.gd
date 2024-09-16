@@ -44,8 +44,6 @@ const MASH_NAME = &'mash'
 func _ready():
 	Globals.ui_manager = self
 	
-	Globals
-	
 	action_bar_pos = action_bar.position.y
 	action_bar.modulate.a = 0
 

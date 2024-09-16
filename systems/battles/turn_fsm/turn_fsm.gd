@@ -89,9 +89,6 @@ func remove_busy() -> void:
 
 #endregion
 
-func item_set() -> void:
-	curr_state.item_set()
-
 func entity_removed(entity: Entity) -> void:
 	curr_state.entity_removed(entity)
 

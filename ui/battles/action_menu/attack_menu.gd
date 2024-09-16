@@ -52,7 +52,7 @@ func _ready() -> void:
 			child.mouse_exited.connect(item_hovered.bind(null))
 
 func tween_info_panel(value: bool) -> void:
-	var tween = create_tween().set_parallel()
+	var info_tween = create_tween().set_parallel()
 	
 	if value:
 		info_panel.show()
