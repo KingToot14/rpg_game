@@ -43,6 +43,8 @@ func show_outline() -> void:
 		show_timing()
 
 func show_timing() -> void:
+	return
+	
 	var anim_name = item.animation_name
 	var timing_mode = DataManager.options.timing_mode
 	

@@ -15,6 +15,7 @@ func _ready() -> void:
 func timed_input() -> void:
 	return
 
+#region Actions
 func do_damage(modifier: float = 1.0) -> void:
 	if target is Array:
 		for targ in target:
@@ -29,9 +30,12 @@ func do_damage(modifier: float = 1.0) -> void:
 func perform_action() -> void:
 	entity.brain.action.perform_action(target)
 
+#endregion
+
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	target.status_effects.add_effect(key, stacks, stage)
 
+#region Targeting
 func set_target() -> void:
 	var action = entity.brain.action
 	
@@ -87,11 +91,23 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 	else:
 		tween.tween_property(parent, 'position', pos, time)
 
+#endregion
+
 func set_visible(val: bool) -> void:
 	parent.visible = val
 
 func screen_shake(intensity: float = 4, time = 0.25) -> void:
 	get_viewport().get_camera_2d().do_screen_shake(intensity, time)
 
+#region Busy System
+func add_busy() -> void:
+	Globals.turn_fsm.add_busy()
+
+func remove_busy() -> void:
+	Globals.turn_fsm.remove_busy()
+
 func end_turn() -> void:
-	entity.action_ended()
+	entity.turn.end_turn()
+	remove_busy()
+
+#endregion

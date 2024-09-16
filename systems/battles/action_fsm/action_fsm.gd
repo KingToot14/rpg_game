@@ -13,12 +13,6 @@ var curr_state: ActionState
 var targeting: bool = true
 
 # --- Functions --- #
-func _ready():
-	Globals.action_fsm = self
-	Globals.item_set.connect(item_set)
-	
-	set_state('blank')
-
 func set_state(state: String) -> void:
 	if not has_node(state + "_state"):
 		return

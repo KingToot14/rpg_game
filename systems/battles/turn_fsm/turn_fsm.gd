@@ -16,7 +16,6 @@ var busy_count := 0
 # --- Functions --- #
 func _ready() -> void:
 	Globals.turn_fsm = self
-	Globals.item_set.connect(item_set)
 
 func set_state(state: String) -> void:
 	if not has_node(state + "_state"):
@@ -34,37 +33,26 @@ func set_state(state: String) -> void:
 
 #region Entity Management
 func find_next_turn() -> void:
-	Globals.curr_entity = get_next_entity()
-	
 	var battle_state = Globals.encounter_manager.evaluate_state()
 	
 	if battle_state == -1:
 		set_state('lose')
 		return
 	elif battle_state == 1:
-		# make sure nothing is in the process of dying
-		for i in range(5):
-			var entity = TargetingHelper.get_entity_by_index(&'enemy', i, false)
-			
-			if is_instance_valid(entity) and not entity.hp.alive:
-				await entity.hp.died
-		
 		if not Globals.encounter_manager.load_next_wave():
 			set_state('win')
 			return
 	
-	if Globals.curr_entity:
+	var entity = get_next_entity()
+	
+	if entity:
 		start_turn()
-		Globals.curr_entity.turn.take_turn()
+		entity.turn.take_turn()
 	else:
 		set_state(curr_state.next_state)
 
 func set_entity(entity: Entity) -> void:
 	entity.turn.take_turn()
-	#Globals.curr_entity = entity
-	#start_turn()
-	#Globals.curr_entity.turn.take_turn()
-	#Globals.action_fsm.set_state("blank")
 
 func get_next_entity() -> Entity:
 	var i = 0

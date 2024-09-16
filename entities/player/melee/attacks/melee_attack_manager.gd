@@ -11,7 +11,7 @@ func set_falling_object_targets() -> void:
 	for i in range(len(enemies)):
 		var object = falling_objects[enemies[i].spawn_index]
 		
-		var mode = randi_range(0, 2)
+		var mode = randi_range(1, 2)
 		
 		object.set_target(enemies[i])
 		if mode == 0:
@@ -23,6 +23,3 @@ func set_falling_object_targets() -> void:
 		else:
 			object.set_sprite_frame(2)
 			object.play_animation(&"fall_heavy")
-		
-		if i == len(enemies) - 1:
-			object.queue_method(Globals.curr_entity.action_ended)

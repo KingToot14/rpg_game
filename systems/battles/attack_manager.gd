@@ -7,9 +7,6 @@ const GOOD_MULT := 1.00
 const PERF_MULT := 1.20
 
 # --- Functions --- #
-func _ready() -> void:
-	Globals.attack_manager = self
-
 func setup_attack() -> bool:
 	var anim_name = Globals.curr_item.animation_name
 	

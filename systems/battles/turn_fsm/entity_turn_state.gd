@@ -12,10 +12,10 @@ func state_entered() -> void:
 	fsm.find_next_turn()
 
 func entity_removed(entity: Entity) -> void:
-	if entity == Globals.curr_entity:
+	if entity.turn.taking_turn:
 		fsm.find_next_turn()
 
-func action_performed() -> void:
-	if is_instance_valid(Globals.curr_entity):
-		Globals.curr_entity.turn.end_turn()
-	fsm.find_next_turn()
+#func action_performed() -> void:
+	#if is_instance_valid(Globals.curr_entity):
+		#Globals.curr_entity.turn.end_turn()
+	#fsm.find_next_turn()

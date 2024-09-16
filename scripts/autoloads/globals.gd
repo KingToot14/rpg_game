@@ -1,8 +1,5 @@
 extends Node2D
 
-# --- Signals --- #
-signal item_set()
-
 # --- General --- #
 var ui_manager: CanvasLayer
 
@@ -29,19 +26,9 @@ var from_battle: bool = false
 var encounter_manager: EncounterManager
 var encounter_resource: String
 
-var curr_entity: Entity
-var curr_target: Entity
-
-var curr_item: Resource
-func set_item(item: Resource) -> void:
-	curr_item = item
-	item_set.emit()
-
 var timing_mods: Array[StringName] = []
 
-var action_fsm: ActionFSM
 var turn_fsm: TurnFSM
-var attack_manager: AttackManager
 
 # --- Functions --- #
 func _ready() -> void:

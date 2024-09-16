@@ -15,10 +15,6 @@ var total_xp: int
 @export_file("*.tscn") var healer_path: String
 @export_file("*.tscn") var magic_path: String
 
-@export_group("Spawn Positions")
-@export var player_positions: Array[Node2D] = [null, null, null, null]
-@export var enemy_positions: Array[Node2D] = [null, null, null, null, null]
-
 @export_group("Timing")
 @export var spawn_delay: float = 0.25
 @export var wave_delay: float = 0.25
@@ -115,10 +111,10 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 
 	if entity.is_player():
 		entity.level = DataManager.players[spawn_index].level
-		spawn_pos = player_positions[spawn_index]
+		spawn_pos = %'player_positions'.get_child(spawn_index)
 	else:
 		entity.level = encounter.waves[curr_wave].enemies[spawn_index].level
-		spawn_pos = enemy_positions[spawn_index]
+		spawn_pos = %'enemy_positions'.get_child(spawn_index)
 	
 	# position
 	var item = encounter.waves[curr_wave].enemies[spawn_index] as WaveItem

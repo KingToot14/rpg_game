@@ -9,14 +9,6 @@ enum ActionState {
 }
 
 # --- Variables --- #
-@export_group("Health Bars")
-@export var player_hp_bars: Array[HpBar]
-@export var enemy_hp_bars: Array[HpBar]
-
-@export_group("Labels")
-@export var wave_label: RichTextLabel
-@export var condition_label: RichTextLabel
-
 @export_group("Panels")
 @export var victory_panel: Control
 @export var loss_panel: Control
@@ -24,16 +16,11 @@ enum ActionState {
 @export_group("Actions")
 var is_player_turn := false
 @export var action_bar: Control
-@export var attack_menu: Control
-@export var defense_menu: Control
-@export var tactic_menu: Control
 
 @export var cancel_button: Control
 
 @export var action_bar_tween_time: float = 0.15
-@export var action_bar_offset: float = 10
 var action_bar_pos: float = 238
-var menu_pos: float = -115
 
 @export_group("Timings")
 @export var single_hit: TimedSingleHit
@@ -57,33 +44,24 @@ const MASH_NAME = &'mash'
 func _ready():
 	Globals.ui_manager = self
 	
+	Globals
+	
 	action_bar_pos = action_bar.position.y
 	action_bar.modulate.a = 0
 
 #region HP
 func setup_player_hp(player: Entity, index: int) -> void:
-	player_hp_bars[index].set_entity(player)
+	var hp_bars = %'player_hp'
+	
+	hp_bars.get_child(index + 1).set_entity(player)
 
 func setup_enemy_hp(enemy: Entity, index: int) -> void:
-	enemy_hp_bars[index].set_entity(enemy)
+	var hp_bars = %'enemy_hp'
+	
+	hp_bars.get_child(index + 1).set_entity(enemy)
 #endregion
 
-func _on_state_changed(state: String) -> void:
-	return
-	
-	is_player_turn = state == 'player'
-	set_action_bar(is_player_turn)
-
-func _on_targeting_changed() -> void:
-	return
-	
-	try_set_action_bar(not Globals.action_fsm.targeting)
-	set_cancel_button(is_player_turn and Globals.action_fsm.targeting)
-
 #region Actions
-func try_set_action_bar(value: bool) -> void:
-	set_action_bar(is_player_turn and value)
-
 func set_action_state(state: BattleUiManager.ActionState) -> void:
 	if state == ActionState.ActionBar:
 		show_action_bar()
@@ -115,63 +93,16 @@ func clear_action() -> void:
 	for entity: Entity in get_tree().get_nodes_in_group(&'player'):
 		entity.brain._on_action_selected(null)
 
-func tween_action(control: Control, value: bool, pos: float) -> void:
-	if value and control.modulate.a > 0.0:
-		return
-	
-	var tween = create_tween().set_parallel()
-	
-	if value:
-		control.visible = true
-		
-		control.mouse_filter = Control.MOUSE_FILTER_STOP
-		
-		control.position.y = pos + action_bar_offset
-		
-		tween.tween_property(control, 'modulate:a', 1.0, action_bar_tween_time)
-		tween.tween_property(control, 'position:y', pos, action_bar_tween_time)
-		tween.chain().tween_callback(control.show)
-	else:
-		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		
-		control.position.y = pos
-		
-		tween.tween_property(control, 'modulate:a', 0.0, action_bar_tween_time)
-		tween.tween_property(control, 'position:y', pos + action_bar_offset, action_bar_tween_time)
-		tween.chain().tween_callback(control.hide)
-
-func set_action_bar(value: bool) -> void:
-	return
-	tween_action(action_bar, value, action_bar_pos)
-
-func set_attack_menu(value: bool) -> void:
-	tween_action(attack_menu, value, menu_pos)
-
-func set_defense_menu(value: bool) -> void:
-	tween_action(defense_menu, value, menu_pos)
-
-func set_tactic_menu(value: bool) -> void:
-	tween_action(tactic_menu, value, menu_pos)
-
-func set_cancel_button(value: bool) -> void:
-	tween_action(cancel_button, value, action_bar_pos)
-
 func load_player_action(entity: Entity) -> void:
-	attack_menu.load_items(entity.actions.attack_pool)
-	defense_menu.load_items(entity.actions.defense_pool)
+	%'attack_menu'.load_items(entity.actions.attack_pool)
 
-func load_attacks() -> void:
-	attack_menu.load_items(Globals.curr_entity.actions.attack_pool)
-
-func load_defenses() -> void:
-	defense_menu.load_items(Globals.curr_entity.actions.defense_pool)
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:
-	wave_label.text = "Wave: " + str(curr) + "/" + str(wave_count)
+	%'wave_label'.text = "Wave: " + str(curr) + "/" + str(wave_count)
 
 func update_condition(condition: String) -> void:
-	condition_label.text = "Condition: " + condition
+	%'condition_label'.text = "Condition: " + condition
 
 #region Panels
 func set_loss_panel(val: bool) -> void:
@@ -180,6 +111,8 @@ func set_loss_panel(val: bool) -> void:
 
 #region Timing
 func show_timing(version: StringName, target: Variant, param: Variant = null) -> void:
+	return
+	
 	if Globals.action_fsm.targeting:
 		return
 	
