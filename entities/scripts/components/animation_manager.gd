@@ -18,9 +18,10 @@ func _ready() -> void:
 
 func setup(entity: Entity) -> void:
 	parent = entity
-	
+
+func play_enter_anim() -> void:
 	# play animation after setup
-	parent.entity_setup.connect(animator.play.bind(&'enter_battle'))
+	animator.play(&'enter_battle')
 
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')

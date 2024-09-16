@@ -11,7 +11,7 @@ func set_falling_object_targets() -> void:
 	for i in range(len(enemies)):
 		var object = falling_objects[enemies[i].spawn_index]
 		
-		var mode = randi_range(1, 2)
+		var mode = randi_range(0, 2)
 		
 		object.set_target(enemies[i])
 		if mode == 0:

@@ -36,41 +36,22 @@ func _ready():
 	encounter_victory.connect(store_loot)
 	encounter_victory.connect(store_xp)
 	
-	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
+	# Offset spawn points
+	#for pos in %'player_positions'.get_children():
+		#pos.position.x -= -1000
+	#for pos in %'enemy_positions'.get_children():
+		#pos.position.x -= -1000
 	
-	# Reveal battle
-	TransitionManager.reset_all()
-	TransitionManager.end_split()
+	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
 
 # - Encounters - #
 func setup_encounter(loaded_encounter: Encounter) -> void:
 	encounter = loaded_encounter
 	encounter_victory.connect(encounter.handle_victory)
 	
-	# Setup players
-	for i in range(4):
-		if not DataManager.players[i]:
-			ui_manager.setup_player_hp(null, i)
-			continue
-		
-		match DataManager.players[i].role:
-			PlayerDataChunk.PlayerRole.NONE:
-				ui_manager.setup_player_hp(null, i)
-			PlayerDataChunk.PlayerRole.MELEE:
-				AsyncLoader.new(melee_path, setup_entity.bind(i))
-			PlayerDataChunk.PlayerRole.RANGED:
-				AsyncLoader.new(ranged_path, setup_entity.bind(i))
-			PlayerDataChunk.PlayerRole.HEALER:
-				AsyncLoader.new(healer_path, setup_entity.bind(i))
-			PlayerDataChunk.PlayerRole.MAGIC:
-				AsyncLoader.new(magic_path, setup_entity.bind(i))
-	
 	# Setup waves
 	wave_count = len(encounter.waves)
 	load_wave(encounter.waves[curr_wave])
-	
-	# Start state machine
-	turn_fsm.set_state('player')
 
 # - Wave Loading - #
 func load_next_wave() -> bool:
@@ -93,21 +74,57 @@ func load_wave(wave: Wave) -> void:
 		else:
 			paths.append("")
 	
-	BatchLoader.new(paths, setup_wave)
+	# Setup players
+	if curr_wave == 0:
+		for i in range(4):
+			if not DataManager.players[i]:
+				paths.append("")
+				continue
+			
+			match DataManager.players[i].role:
+				PlayerDataChunk.PlayerRole.MELEE:
+					paths.append(melee_path)
+				PlayerDataChunk.PlayerRole.RANGED:
+					paths.append(ranged_path)
+				PlayerDataChunk.PlayerRole.HEALER:
+					paths.append(healer_path)
+				PlayerDataChunk.PlayerRole.MAGIC:
+					paths.append(magic_path)
+	
+	BatchLoader.new(paths, setup_wave.bind(curr_wave == 0))
 
-func setup_wave(enemies: Array) -> void:
-	for i in range(len(enemies)):
-		if enemies[i]:
-			setup_entity(enemies[i], i)
-			await get_tree().create_timer(spawn_delay).timeout
+func setup_wave(entities: Array, first_wave: bool) -> void:
+	var delay = spawn_delay
+	
+	for i in range(len(entities) - 4):
+		if entities[i]:
+			setup_entity(entities[i], i, delay)
+			delay += spawn_delay
 		else:
 			ui_manager.setup_enemy_hp(null, i)
+	
+	if first_wave:
+		delay = spawn_delay
+		for i in range(5, len(entities)):
+			if entities[i]:
+				setup_entity(entities[i], i - 5, delay)
+				delay += spawn_delay
+			else:
+				ui_manager.setup_player_hp(null, i - 5)
+		
+		# Start state machine
+		turn_fsm.set_state('player')
+		
+		# Reveal battle
+		TransitionManager.reset_all()
+		TransitionManager.end_split()
 
 # - Entity Management - #
-func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
+func setup_entity(entity_scene: PackedScene, spawn_index: int, delay: float) -> void:
 	var entity := entity_scene.instantiate() as Entity
+	entity.hide()
 	var spawn_pos: Node2D
-
+	
 	if entity.is_player():
 		entity.level = DataManager.players[spawn_index].level
 		spawn_pos = %'player_positions'.get_child(spawn_index)
@@ -123,8 +140,7 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 	spawn_pos.add_child(entity)
 	entity.position = Vector2.ZERO
 	
-	# visibility
-	entity.visible = false
+	# setup
 	entity.setup(spawn_index)
 	
 	await entity.entity_setup
@@ -135,6 +151,10 @@ func setup_entity(entity_scene: PackedScene, spawn_index: int) -> void:
 		ui_manager.setup_player_hp(entity, spawn_index)
 	else:
 		ui_manager.setup_enemy_hp(entity, spawn_index)
+	
+	await get_tree().create_timer(delay).timeout
+	
+	entity.animator.play_enter_anim()
 
 func remove_from_battle(entity: Entity, index: int) -> void:
 	ui_manager.setup_enemy_hp(null, index)

@@ -48,9 +48,6 @@ func setup(index: int):
 	
 	entity_setup.emit()
 
-func enter_battle() -> void:
-	pass
-
 func store_data() -> void:
 	if hp:
 		hp.store_hp()
