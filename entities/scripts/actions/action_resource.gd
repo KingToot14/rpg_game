@@ -37,6 +37,12 @@ func highlight_targets() -> void:
 		for player in players:
 			player.targeting.set_targetable(true)
 
+func get_side_string() -> StringName:
+	if side & TargetSide.ENEMY:
+		return &'enemy'
+	else:
+		return &'player'
+
 #region Cooldown
 func start_cooldown(val: int = -1) -> void:
 	if val < 0:

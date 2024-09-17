@@ -43,15 +43,21 @@ func set_target() -> void:
 		Attack.TargetingMode.SINGLE, Attack.TargetingMode.AOE:
 			target = entity.brain.selected_target
 		Attack.TargetingMode.ALL:
-			if action.side == Attack.TargetSide.ENEMY:
-				target = TargetingHelper.get_entities(&'enemy')
-			else:
-				target = TargetingHelper.get_entities(&'player')
+			target = TargetingHelper.get_entities(action.get_side_string())
 		Attack.TargetingMode.RANDOM:
-			if action.side == Attack.TargetSide.ENEMY:
-				target = TargetingHelper.get_random_entity(&'enemy')
-			else:
-				target = TargetingHelper.get_random_entity(&'player')
+			target = TargetingHelper.get_random_entity(action.get_side_string())
+
+func target_neighbors(depth := 1) -> void:
+	if not target:
+		return
+	
+	var index = target.spawn_index
+	var side = entity.brain.action.get_side_string()
+	target = []
+	
+	for dist in range(1, depth + 1):
+		target.append(TargetingHelper.get_entity_by_index(side, index - dist, true))
+		target.append(TargetingHelper.get_entity_by_index(side, index + dist, true))
 
 func move_towards(key: String, time: float) -> void:
 	move_from(key, time, Vector2.ZERO)

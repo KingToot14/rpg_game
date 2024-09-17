@@ -20,6 +20,7 @@ var is_player_turn := false
 @export var cancel_button: Control
 
 @export var action_bar_tween_time: float = 0.15
+var action_bar_tween: Tween
 var action_bar_pos: float = 238
 
 @export_group("Timings")
@@ -72,20 +73,31 @@ func set_action_state(state: BattleUiManager.ActionState) -> void:
 		cancel_button.hide_button()
 
 func show_action_bar() -> void:
-	var tween = create_tween().set_parallel()
+	if action_bar_tween:
+		action_bar_tween.kill()
+	action_bar_tween = create_tween().set_parallel()
 	
 	action_bar.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	tween.tween_property(action_bar, 'modulate:a', 1.0, action_bar_tween_time)
-	tween.tween_property(action_bar, 'position:y', action_bar_pos, action_bar_tween_time).from(action_bar_pos + 8)
+	action_bar.show()
+	action_bar_tween.tween_property(action_bar, 'modulate:a', 1.0, action_bar_tween_time)
+	action_bar_tween.tween_property(action_bar, 'position:y', action_bar_pos, action_bar_tween_time).from(action_bar_pos + 8)
 
 func hide_action_bar() -> void:
-	var tween = create_tween().set_parallel()
+	if action_bar_tween:
+		action_bar_tween.kill()
+	action_bar_tween = create_tween().set_parallel()
 	
 	action_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	tween.tween_property(action_bar, 'modulate:a', 0.0, action_bar_tween_time)
-	tween.tween_property(action_bar, 'position:y', action_bar_pos + 8, action_bar_tween_time)
+	action_bar_tween.tween_property(action_bar, 'modulate:a', 0.0, action_bar_tween_time)
+	action_bar_tween.tween_property(action_bar, 'position:y', action_bar_pos + 8, action_bar_tween_time)
+	action_bar_tween.finished.connect(action_bar.hide)
+	
+	# hide menus
+	%'attack_menu'.hide_menu()
+	%'items_menu'.hide_menu()
+	%'tactics_menu'.hide_menu()
 
 func clear_action() -> void:
 	for entity: Entity in get_tree().get_nodes_in_group(&'player'):

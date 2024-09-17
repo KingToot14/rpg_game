@@ -3,6 +3,7 @@ extends Node2D
 
 # --- Variables --- #
 @export var falling_objects: Array[Node2D] = [null, null, null, null, null]
+@export var object_delay := 0.25
 
 # --- Functions --- #
 func set_falling_object_targets() -> void:
@@ -23,3 +24,5 @@ func set_falling_object_targets() -> void:
 		else:
 			object.set_sprite_frame(2)
 			object.play_animation(&"fall_heavy")
+		
+		await get_tree().create_timer(object_delay).timeout
