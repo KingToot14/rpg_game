@@ -41,6 +41,6 @@ func _on_entity_selected(entity: Entity) -> void:
 	selected_target = entity
 	
 	# start attack
-	parent.animator.play_action_anim(action.animation_name)
+	perform_action(action.animation_name)
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)

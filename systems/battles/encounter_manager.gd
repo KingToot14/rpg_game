@@ -96,7 +96,11 @@ func load_wave(wave: Wave) -> void:
 func setup_wave(entities: Array, first_wave: bool) -> void:
 	var delay = spawn_delay
 	
-	for i in range(len(entities) - 4):
+	var entity_count = len(entities)
+	if first_wave:
+		entity_count -= 4
+	
+	for i in range(entity_count):
 		if entities[i]:
 			setup_entity(entities[i], i, delay)
 			delay += spawn_delay
@@ -112,7 +116,6 @@ func setup_wave(entities: Array, first_wave: bool) -> void:
 			else:
 				ui_manager.setup_player_hp(null, i - 5)
 		
-		# Start state machine
 		turn_fsm.set_state('player')
 		
 		# Reveal battle

@@ -26,6 +26,10 @@ func _on_entity_selected(entity: Entity) -> void:
 	
 	selected_target = entity
 
+func perform_action(anim_name: String) -> void:
+	parent.turn.actions_remaining -= 1
+	parent.animator.play_action_anim(anim_name)
+
 func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	var attack := action as Attack
 	

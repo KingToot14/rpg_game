@@ -3,11 +3,13 @@ extends Node2D
 
 # --- Signals --- #
 signal entity_setup()
+signal entity_entered()
 
 # --- Variables --- #
 @export var entity_name: String
 @export_multiline var description: String
 
+var entered := false
 var spawn_index: int
 var level: int = 1
 
@@ -47,6 +49,10 @@ func setup(index: int):
 	await get_tree().process_frame
 	
 	entity_setup.emit()
+
+func finish_entered_battle() -> void:
+	entered = true
+	entity_entered.emit()
 
 func store_data() -> void:
 	if hp:

@@ -46,6 +46,9 @@ func find_next_turn() -> void:
 	var entity = get_next_entity()
 	
 	if entity:
+		if not entity.entered:
+			await entity.entity_entered
+		
 		start_turn()
 		entity.turn.take_turn()
 	else:

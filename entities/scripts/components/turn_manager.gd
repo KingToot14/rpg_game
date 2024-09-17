@@ -29,8 +29,6 @@ func replenish_actions() -> void:
 func end_turn() -> void:
 	taking_turn = false
 	turn_ended.emit()
-	
-	actions_remaining -= 1
 
 func can_act() -> bool:
 	return parent.hp.alive and actions_remaining > 0
