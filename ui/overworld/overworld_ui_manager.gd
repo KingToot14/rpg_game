@@ -11,6 +11,14 @@ func _ready() -> void:
 	Globals.ui_manager = self
 	chest_panel.hide_panel()
 
+func _shortcut_input(event: InputEvent) -> void:
+	if event.is_action_pressed('ui_cancel'):
+		hide_panels()
+
+func hide_panels() -> void:
+	for panel in get_tree().get_nodes_in_group(&'overworld_panel'):
+		panel.hide()
+
 func set_panel(panel_name: String) -> void:
 	panel_name += "_panel"
 	var panel = get_node_or_null(panel_name)
@@ -21,15 +29,11 @@ func set_panel(panel_name: String) -> void:
 	if not panel:
 		return
 	
-	if curr_panel:
-		curr_panel.visible = false
-		
-		if panel == curr_panel:
-			curr_panel = null
-			return
+	var show = not panel.visible
 	
-	curr_panel = panel
-	panel.visible = true
+	hide_panels()
+	
+	panel.visible = show
 
 func open_chest(items: Array[InventoryItem]) -> void:
 	chest_panel.load_items(items)

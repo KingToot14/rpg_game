@@ -1,17 +1,32 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://fupny5sldap3"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://fupny5sldap3"]
 
 [ext_resource type="FontVariation" uid="uid://cjx30rv4vmrer" path="res://ui/font/outline_6x8.tres" id="1_5xkhm"]
 [ext_resource type="FontFile" uid="uid://cl8sdp1ctrl4k" path="res://ui/font/rpg_pixel_6x8.ttf" id="1_56huq"]
+[ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="2_xcy0d"]
 
 [resource]
 Count/base_type = &"RichTextLabel"
 Count/colors/font_outline_color = Color(0, 0, 0, 1)
 Count/constants/outline_size = 4
-Count/fonts/normal_font = ExtResource("1_5xkhm")
+Count/font_sizes/normal_font_size = 8
+Count/fonts/normal_font = ExtResource("2_xcy0d")
 GridContainer/constants/h_separation = 2
 GridContainer/constants/v_separation = 2
 HBoxContainer/constants/separation = 2
+InventoryGrid/base_type = &"VBoxContainer"
+InventoryGrid/constants/separation = 2
+InventoryTab/base_type = &"RichTextLabel"
+InventoryTab/colors/default_color = Color(0.909804, 0.772549, 0.564706, 1)
+InventoryTab/font_sizes/normal_font_size = 8
+InventoryTab/fonts/normal_font = ExtResource("2_xcy0d")
+Medium/base_type = &"RichTextLabel"
+Medium/font_sizes/normal_font_size = 8
+Medium/fonts/normal_font = ExtResource("2_xcy0d")
 RichTextLabel/font_sizes/normal_font_size = 11
 RichTextLabel/fonts/normal_font = ExtResource("1_56huq")
+TabName/base_type = &"RichTextLabel"
+TabName/colors/font_outline_color = Color(0, 0, 0, 1)
+TabName/constants/outline_size = 4
+TabName/fonts/normal_font = ExtResource("1_5xkhm")
 Tabs/base_type = &"HBoxContainer"
 Tabs/constants/separation = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=34 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
@@ -15,7 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://k01qlajn0pie" path="res://ui/overworld/chest_ui/item_info.tscn" id="12_6d1i2"]
 [ext_resource type="Script" path="res://ui/overworld/menus/party_manager.gd" id="12_svvh6"]
 [ext_resource type="Script" path="res://ui/overworld/menus/inventory_display.gd" id="13_nbprq"]
+[ext_resource type="Texture2D" uid="uid://dct8suxr7kywt" path="res://ui/overworld/inventory/main_panel.png" id="15_bqrkx"]
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="15_ncx5y"]
+[ext_resource type="Texture2D" uid="uid://dwgdq3k5xdko0" path="res://ui/overworld/inventory/item_slots.png" id="16_5l4gb"]
+[ext_resource type="Texture2D" uid="uid://bbmbw2vxmu5gt" path="res://ui/overworld/inventory/tabs.png" id="16_ji43i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)
@@ -51,13 +54,21 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("10_xu5bp")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s48xr"]
-atlas = ExtResource("10_xu5bp")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v3iv"]
+atlas = ExtResource("16_ji43i")
+region = Rect2(0, 0, 46, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1h50j"]
-atlas = ExtResource("10_xu5bp")
-region = Rect2(48, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j7ew"]
+atlas = ExtResource("16_ji43i")
+region = Rect2(0, 12, 46, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27b86"]
+atlas = ExtResource("16_ji43i")
+region = Rect2(0, 24, 46, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vf02"]
+atlas = ExtResource("16_5l4gb")
+region = Rect2(0, 0, 22, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vskqu"]
 atlas = ExtResource("10_xu5bp")
@@ -257,7 +268,7 @@ offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Exit"
 scroll_active = false
 
@@ -371,7 +382,7 @@ offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Save"
 scroll_active = false
 
@@ -484,7 +495,7 @@ offset_right = 37.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Options"
 scroll_active = false
 
@@ -597,7 +608,7 @@ offset_right = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Info"
 scroll_active = false
 
@@ -710,7 +721,7 @@ offset_right = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Items"
 scroll_active = false
 
@@ -823,7 +834,7 @@ offset_right = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Party"
 scroll_active = false
 
@@ -878,11 +889,11 @@ offset_right = 60.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " 1,000,000"
 scroll_active = false
 
-[node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
+[node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -1010,7 +1021,7 @@ offset_right = 47.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Overview"
 scroll_active = false
 
@@ -1106,7 +1117,7 @@ offset_right = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Equips"
 scroll_active = false
 
@@ -1202,7 +1213,7 @@ offset_right = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Skills"
 scroll_active = false
 
@@ -1660,7 +1671,7 @@ bbcode_enabled = true
 text = "[center]Skills"
 scroll_active = false
 
-[node name="item_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
+[node name="item_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -1668,10 +1679,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -80.0
-offset_right = 82.0
-offset_bottom = 80.0
+offset_left = -87.0
+offset_top = -81.0
+offset_right = 87.0
+offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_nuo0b")
@@ -1679,6 +1690,7 @@ script = ExtResource("11_5mxsm")
 tab_parent = NodePath("tabs")
 
 [node name="backing" parent="ui/item_panel" instance=ExtResource("4_7u65r")]
+visible = false
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1692,14 +1704,13 @@ size_flags_vertical = 4
 [node name="tabs" type="HBoxContainer" parent="ui/item_panel"]
 layout_mode = 2
 anchor_right = 1.0
-offset_left = 2.0
-offset_top = 2.0
+offset_left = 3.0
 offset_right = -2.0
-offset_bottom = 22.0
+offset_bottom = 12.0
 grow_horizontal = 2
 theme_type_variation = &"Tabs"
 
-[node name="common_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+[node name="materials_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("texture_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1723,7 +1734,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(60, 20)
+custom_minimum_size = Vector2(47, 0)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -1755,44 +1766,33 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-hover_key = &"normal"
-metadata/_edit_group_ = true
+texture_rect = NodePath("texture")
+use_textures = true
+normal_texture = SubResource("AtlasTexture_3v3iv")
+hover_texture = SubResource("AtlasTexture_3v3iv")
+alt_normal_texture = SubResource("AtlasTexture_8j7ew")
+alt_hover_texture = SubResource("AtlasTexture_27b86")
 
-[node name="outline" parent="ui/item_panel/tabs/common_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-
-[node name="icon" type="TextureRect" parent="ui/item_panel/tabs/common_tab"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
-grow_vertical = 2
+[node name="texture" type="TextureRect" parent="ui/item_panel/tabs/materials_tab"]
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 12.0
 mouse_filter = 2
-texture = SubResource("AtlasTexture_s48xr")
-stretch_mode = 2
+texture = SubResource("AtlasTexture_3v3iv")
 
-[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/common_tab/icon"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = 3.0
-offset_right = 44.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/materials_tab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 46.0
+offset_bottom = 12.0
 mouse_filter = 2
-theme_type_variation = &"Count"
-text = " Common"
+theme_type_variation = &"InventoryTab"
+bbcode_enabled = true
+text = "[center]Materials"
 scroll_active = false
 
-[node name="key_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+[node name="food_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("texture_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1816,7 +1816,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(36, 20)
+custom_minimum_size = Vector2(47, 0)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -1848,77 +1848,182 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
-hover_key = &"normal"
+texture_rect = NodePath("texture")
+use_textures = true
+normal_texture = SubResource("AtlasTexture_3v3iv")
+hover_texture = SubResource("AtlasTexture_3v3iv")
 use_alternate = true
-metadata/_edit_group_ = true
+alt_normal_texture = SubResource("AtlasTexture_8j7ew")
+alt_hover_texture = SubResource("AtlasTexture_27b86")
 
-[node name="outline" parent="ui/item_panel/tabs/key_tab" instance=ExtResource("5_7bpw0")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
-layout_mode = 1
-key = &"dark"
-
-[node name="icon" type="TextureRect" parent="ui/item_panel/tabs/key_tab"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
-grow_vertical = 2
+[node name="texture" type="TextureRect" parent="ui/item_panel/tabs/food_tab"]
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 12.0
 mouse_filter = 2
-texture = SubResource("AtlasTexture_1h50j")
-stretch_mode = 2
+texture = SubResource("AtlasTexture_8j7ew")
 
-[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/key_tab/icon"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = 3.0
-offset_right = 31.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/food_tab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 46.0
+offset_bottom = 12.0
 mouse_filter = 2
-theme_type_variation = &"Count"
-text = " Key"
+theme_type_variation = &"InventoryTab"
+bbcode_enabled = true
+text = "[center]Food"
 scroll_active = false
 
-[node name="common_tab" type="Control" parent="ui/item_panel"]
+[node name="special_tab" type="BaseButton" parent="ui/item_panel/tabs" node_paths=PackedStringArray("texture_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(47, 0)
+layout_direction = 0
 layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.012
-anchor_top = 0.144
-anchor_right = 0.987
-anchor_bottom = 0.987
-offset_left = 0.0799999
-offset_top = -0.0400009
-offset_right = 0.0799866
-offset_bottom = 0.0799866
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+texture_rect = NodePath("texture")
+use_textures = true
+normal_texture = SubResource("AtlasTexture_3v3iv")
+hover_texture = SubResource("AtlasTexture_3v3iv")
+use_alternate = true
+alt_normal_texture = SubResource("AtlasTexture_8j7ew")
+alt_hover_texture = SubResource("AtlasTexture_27b86")
 
-[node name="backing" parent="ui/item_panel/common_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
+[node name="texture" type="TextureRect" parent="ui/item_panel/tabs/special_tab"]
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8j7ew")
 
-[node name="text" type="RichTextLabel" parent="ui/item_panel/common_tab"]
-visible = false
+[node name="label" type="RichTextLabel" parent="ui/item_panel/tabs/special_tab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 46.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_type_variation = &"InventoryTab"
+bbcode_enabled = true
+text = "[center]Special"
+scroll_active = false
+
+[node name="materials_tab" type="Control" parent="ui/item_panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 2.0
+offset_top = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-bbcode_enabled = true
-text = "[center]Common"
-scroll_active = false
 
-[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/common_tab"]
+[node name="backing" type="TextureRect" parent="ui/item_panel/materials_tab"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -150.0
+offset_right = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_bqrkx")
+
+[node name="stripe" type="ColorRect" parent="ui/item_panel/materials_tab"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 9.0
+offset_right = -2.0
+offset_bottom = 21.0
+grow_horizontal = 2
+script = ExtResource("15_ncx5y")
+key = &"normal"
+
+[node name="edge_left" type="ColorRect" parent="ui/item_panel/materials_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -6.0
+offset_bottom = 6.0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="edge_right" type="ColorRect" parent="ui/item_panel/materials_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.0
+offset_right = 2.0
+offset_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="slots" type="VBoxContainer" parent="ui/item_panel/materials_tab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1929,159 +2034,463 @@ offset_right = -3.89998
 offset_bottom = -3.99998
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+theme_type_variation = &"InventoryGrid"
+
+[node name="row" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/materials_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/materials_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/materials_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"InventoryGrid"
 script = ExtResource("13_nbprq")
 key = &"item"
 
-[node name="row" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
+[node name="row" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="row2" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="row3" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="row4" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="row5" type="HBoxContainer" parent="ui/item_panel/common_tab/item_grid"]
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/common_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="key_tab" type="Control" parent="ui/item_panel"]
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/materials_tab/item_grid"]
+layout_mode = 2
+
+[node name="item_info" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info2" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info3" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info4" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info5" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info6" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="item_info7" parent="ui/item_panel/materials_tab/item_grid/row6" instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="food_tab" type="Control" parent="ui/item_panel"]
 visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.012
-anchor_top = 0.144
-anchor_right = 0.987
-anchor_bottom = 0.987
-offset_left = 0.0799999
-offset_top = -0.0400009
-offset_right = 0.0799866
-offset_bottom = 0.0799866
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="backing" parent="ui/item_panel/key_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-
-[node name="text" type="RichTextLabel" parent="ui/item_panel/key_tab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 2.0
+offset_top = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-bbcode_enabled = true
-scroll_active = false
 
-[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/key_tab"]
+[node name="backing" type="TextureRect" parent="ui/item_panel/food_tab"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -150.0
+offset_right = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_bqrkx")
+
+[node name="stripe" type="ColorRect" parent="ui/item_panel/food_tab"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 9.0
+offset_right = -2.0
+offset_bottom = 21.0
+grow_horizontal = 2
+script = ExtResource("15_ncx5y")
+key = &"normal"
+
+[node name="edge_left" type="ColorRect" parent="ui/item_panel/food_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -6.0
+offset_bottom = 6.0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="edge_right" type="ColorRect" parent="ui/item_panel/food_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.0
+offset_right = 2.0
+offset_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="slots" type="VBoxContainer" parent="ui/item_panel/food_tab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2092,130 +2501,1032 @@ offset_right = -3.89998
 offset_bottom = -3.99998
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+theme_type_variation = &"InventoryGrid"
+
+[node name="row" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/food_tab/slots"]
+layout_mode = 2
+
+[node name="slot" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/food_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/food_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"InventoryGrid"
 script = ExtResource("13_nbprq")
-key = &"key"
+key = &"food"
 
-[node name="row" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
+[node name="row" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info7/count")
+
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info7/count")
+
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info7/count")
+
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info7/count")
+
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info7/count")
+
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/food_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/food_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info7/count")
+
+[node name="special_tab" type="Control" parent="ui/item_panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="backing" type="TextureRect" parent="ui/item_panel/special_tab"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -150.0
+offset_right = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_bqrkx")
+
+[node name="stripe" type="ColorRect" parent="ui/item_panel/special_tab"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 9.0
+offset_right = -2.0
+offset_bottom = 21.0
+grow_horizontal = 2
+script = ExtResource("15_ncx5y")
+key = &"normal"
+
+[node name="edge_left" type="ColorRect" parent="ui/item_panel/special_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -6.0
+offset_bottom = 6.0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="edge_right" type="ColorRect" parent="ui/item_panel/special_tab/stripe"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.0
+offset_right = 2.0
+offset_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="slots" type="VBoxContainer" parent="ui/item_panel/special_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -3.89998
+offset_bottom = -3.99998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_type_variation = &"InventoryGrid"
+
+[node name="row" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row" instance=ExtResource("12_6d1i2")]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="row2" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row5"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/special_tab/slots"]
 layout_mode = 2
 
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="slot" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot2" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot3" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot4" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot5" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot6" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="slot7" type="TextureRect" parent="ui/item_panel/special_tab/slots/row6"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1vf02")
+
+[node name="item_grid" type="VBoxContainer" parent="ui/item_panel/special_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"InventoryGrid"
+script = ExtResource("13_nbprq")
+key = &"food"
+
+[node name="row" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row/item_info7/count")
+
+[node name="row2" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row2" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row2/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row2/item_info7/count")
+
+[node name="row3" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row2" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row3" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row3/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row3/item_info7/count")
+
+[node name="row4" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="row3" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row4" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row4/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row4/item_info7/count")
+
+[node name="row5" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info/count")
+
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info2/count")
+
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info3/count")
+
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info4/count")
+
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info5/count")
+
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info6/count")
+
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row5" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row5/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row5/item_info7/count")
+
+[node name="row6" type="HBoxContainer" parent="ui/item_panel/special_tab/item_grid"]
 layout_mode = 2
 
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info/count")
 
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info2" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info2/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info2/count")
 
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info3" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info3/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info3/count")
 
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info4" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info4/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info4/count")
 
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info5" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info5/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info5/count")
 
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row3" instance=ExtResource("12_6d1i2")]
+[node name="item_info6" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info6/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info6/count")
 
-[node name="row4" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
+[node name="item_info7" parent="ui/item_panel/special_tab/item_grid/row6" node_paths=PackedStringArray("icon_rect", "count_label") instance=ExtResource("12_6d1i2")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+icon_rect = NodePath("../../../../materials_tab/item_grid/row6/item_info7/icon")
+count_label = NodePath("../../../../materials_tab/item_grid/row6/item_info7/count")
 
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row4" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="row5" type="HBoxContainer" parent="ui/item_panel/key_tab/item_grid"]
-layout_mode = 2
-
-[node name="item_info" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info2" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info3" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info4" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info5" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info6" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="item_info7" parent="ui/item_panel/key_tab/item_grid/row5" instance=ExtResource("12_6d1i2")]
-layout_mode = 2
-
-[node name="info_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent")]
+[node name="info_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -2343,7 +3654,7 @@ offset_right = 44.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Quests"
 scroll_active = false
 
@@ -2439,7 +3750,7 @@ offset_right = 68.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Achievements"
 scroll_active = false
 
@@ -2535,7 +3846,7 @@ offset_right = 44.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 text = " Map"
 scroll_active = false
 
@@ -2630,7 +3941,7 @@ bbcode_enabled = true
 text = "[center]Map"
 scroll_active = false
 
-[node name="save_panel" type="Control" parent="ui"]
+[node name="save_panel" type="Control" parent="ui" groups=["overworld_panel"]]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -2852,7 +4163,7 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 bbcode_enabled = true
 text = " Reload   File"
 scroll_active = false
@@ -2990,7 +4301,7 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 bbcode_enabled = true
 text = " Save   Game"
 scroll_active = false
@@ -3128,7 +4439,7 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 bbcode_enabled = true
 text = " Load   Game"
 scroll_active = false
@@ -3266,7 +4577,7 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"Count"
+theme_type_variation = &"TabName"
 bbcode_enabled = true
 text = " Clear   Game"
 scroll_active = false
@@ -3479,10 +4790,12 @@ scroll_active = false
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button2" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [1]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button3" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [2]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button4" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [3]]
-[connection signal="visibility_changed" from="ui/item_panel" to="ui/item_panel/common_tab/item_grid" method="load_inventory"]
-[connection signal="visibility_changed" from="ui/item_panel" to="ui/item_panel/key_tab/item_grid" method="load_inventory"]
-[connection signal="pressed" from="ui/item_panel/tabs/common_tab" to="ui/item_panel" method="set_tab" binds= ["common"]]
-[connection signal="pressed" from="ui/item_panel/tabs/key_tab" to="ui/item_panel" method="set_tab" binds= ["key"]]
+[connection signal="pressed" from="ui/item_panel/tabs/materials_tab" to="ui/item_panel" method="set_tab" binds= ["materials"]]
+[connection signal="pressed" from="ui/item_panel/tabs/food_tab" to="ui/item_panel" method="set_tab" binds= ["food"]]
+[connection signal="pressed" from="ui/item_panel/tabs/special_tab" to="ui/item_panel" method="set_tab" binds= ["special"]]
+[connection signal="visibility_changed" from="ui/item_panel/materials_tab" to="ui/item_panel/materials_tab/item_grid" method="load_inventory"]
+[connection signal="visibility_changed" from="ui/item_panel/food_tab" to="ui/item_panel/food_tab/item_grid" method="load_inventory"]
+[connection signal="visibility_changed" from="ui/item_panel/special_tab" to="ui/item_panel/special_tab/item_grid" method="load_inventory"]
 [connection signal="pressed" from="ui/info_panel/tabs/quest" to="ui/info_panel" method="set_tab" binds= ["quest"]]
 [connection signal="pressed" from="ui/info_panel/tabs/achievement_tab" to="ui/info_panel" method="set_tab" binds= ["achievement"]]
 [connection signal="pressed" from="ui/info_panel/tabs/map_tab" to="ui/info_panel" method="set_tab" binds= ["map"]]
