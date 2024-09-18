@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=59 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_1vjuk"]
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
-[ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="5_k0j8f"]
 [ext_resource type="Resource" uid="uid://bnt1sbgk7fkkn" path="res://entities/player/melee/attacks/fury.tres" id="5_wff5c"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_k1p5g"]
@@ -466,6 +465,53 @@ tracks/5/keys = {
 "method": &"finish_entered_battle"
 }]
 }
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-13, -0.05, 0, 0.05, -47.5, -65, -0.05, 0, 0.05, 0, -13, -0.05, -47.5, 0.05, 0),
+"times": PackedFloat32Array(0, 0.25, 0.5)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-150.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sprite:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("sprite/face:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_ym8gf"]
 resource_name = "falling_objects"
@@ -846,303 +892,6 @@ tracks/8/keys = {
 "values": [-3.0, 0.0, -2.0, -3.0]
 }
 
-[sub_resource type="Animation" id="Animation_1n7su"]
-resource_name = "idle"
-length = 1.6
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/face:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [-3.0, -2.0, -3.0, -2.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 1, 0, 0, 1, 1, 0]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/group/pivot:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(11, -0.25, 0, 0.25, 0, 12, -0.2, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 11, -0.2, 0, 0.25, 0),
-"times": PackedFloat32Array(0.15, 0.25, 0.95, 1.05)
-}
-
-[sub_resource type="Animation" id="Animation_1ymxq"]
-resource_name = "normal_attack"
-length = 1.25
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("managers/animator")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [],
-"method": &"set_target"
-}, {
-"args": [],
-"method": &"add_busy"
-}, {
-"args": [],
-"method": &"timed_input"
-}, {
-"args": [],
-"method": &"do_damage"
-}, {
-"args": ["home", 0.65],
-"method": &"move_towards"
-}, {
-"args": [],
-"method": &"end_turn"
-}]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("managers/animator")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": ["front", 0.55],
-"method": &"move_towards"
-}, {
-"args": [2.0],
-"method": &"screen_shake"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.4]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/shine_color:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.55, 1.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.8, 0.8, Color(1, 1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.9, 0.9, 2.25]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.45, 0.6, 0.65, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 1, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("shadow:material:shader_parameter/radius")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.12, 0.09, 0.09, 0.12]
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("sprite:position:y")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-13, -0.1, 0, 0.1, 0, -59.5, -0.2, -0.5, 0.2, 2.5, -13, -0.1, 0, 0.1, 0),
-"times": PackedFloat32Array(0, 0.3, 0.55)
-}
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/group/pivot:rotation_degrees")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.1, 0.5, -90, -0.05, 0, 0.05, -0.5, -94.5, -0.05, 0, 0.05, 1, -90, -0.05, 3.5, 0.05, 18.5, 58.5, -0.05, -13.5, 0.0562636, 0, 45.5, -0.0437365, 10.5, 0.055, 0, 45.5, -0.0413333, 1, 0.108667, 0, 0, -0.0913333, 20, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.35, 0.45, 0.55, 0.65, 0.7, 0.95)
-}
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/group/pivot:position:x")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(4, -0.25, 0, 0.05, -2.5, -5, -0.05, 9.5, 0.05, 0.5, -5, -0.05, 0.5, 0.05, 7.5, 4, -0.05, -0.5, 0.05, -2.5),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.55)
-}
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/group/pivot:position:y")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(12, -0.25, 0, 0.05, -8.5, 7, -0.05, 0, 0.05, 0, 7, -0.05, 0, 0.05, 0, 12, -0.05, -4.5, 0.05, -8.5),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.55)
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/face:position:y")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.35, 0.45, 0.55, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-3.0, 0.0, -5.0, -5.0, 0.0, -3.0]
-}
-
-[sub_resource type="Animation" id="Animation_rrl67"]
-resource_name = "take_damage"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.35, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -10.0, -10.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0, 1, 0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/face:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.05, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1, 0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("managers/sfx_player")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [ExtResource("2_dv32v"), -1000.0],
-"method": &"play_sfx"
-}]
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/group/pivot:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.05, -9.5, -25, -0.05, 7.5, 0.05, 0, -25.5, -0.1, -0.5, 0.05, 0, 0, -0.05, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.05, 0.2, 0.35)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("sprite:position:y")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-13, -0.25, 0, 0.25, 0, -13, -0.05, 0, 0.0311126, -7.5, -22.5, -0.05, 0, 0.05, 0, -13, -0.0188875, -6.5, 0.05, 0),
-"times": PackedFloat32Array(0, 0.35, 0.45, 0.55)
-}
-
 [sub_resource type="Animation" id="Animation_b4dga"]
 resource_name = "heavy_attack"
 length = 3.2
@@ -1388,6 +1137,315 @@ tracks/17/keys = {
 "values": [0.0, 0.0, 1.0, 1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_1n7su"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite/face:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-3.0, -2.0, -3.0, -2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 1, 0, 0, 1, 1, 0]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/group/pivot:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(11, -0.25, 0, 0.25, 0, 12, -0.2, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 11, -0.2, 0, 0.25, 0),
+"times": PackedFloat32Array(0.15, 0.25, 0.95, 1.05)
+}
+
+[sub_resource type="Animation" id="Animation_1ymxq"]
+resource_name = "normal_attack"
+length = 1.25
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("managers/animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [],
+"method": &"add_busy"
+}, {
+"args": [],
+"method": &"timed_input"
+}, {
+"args": [],
+"method": &"do_damage"
+}, {
+"args": ["home", 0.65],
+"method": &"move_towards"
+}, {
+"args": [],
+"method": &"end_turn"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("managers/animator")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["front", 0.55],
+"method": &"move_towards"
+}, {
+"args": [2.0],
+"method": &"screen_shake"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/shine_color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.55, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.8, 0.8, Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/group/pivot/sword:material:shader_parameter/position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.9, 0.9, 2.25]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.6, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 1, 0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("shadow:material:shader_parameter/radius")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.12, 0.09, 0.09, 0.12]
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-13, -0.1, 0, 0.1, 0, -59.5, -0.2, -0.5, 0.2, 2.5, -13, -0.1, 0, 0.1, 0),
+"times": PackedFloat32Array(0, 0.3, 0.55)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sprite/group/pivot:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.1, 0.5, -90, -0.05, 0, 0.05, -0.5, -94.5, -0.05, 0, 0.05, 1, -90, -0.05, 3.5, 0.05, 18.5, 58.5, -0.05, -13.5, 0.0562636, 0, 45.5, -0.0437365, 10.5, 0.055, 0, 45.5, -0.0413333, 1, 0.108667, 0, 0, -0.0913333, 20, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.45, 0.55, 0.65, 0.7, 0.95)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("sprite/group/pivot:position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.05, -2.5, -5, -0.05, 9.5, 0.05, 0.5, -5, -0.05, 0.5, 0.05, 7.5, 4, -0.05, -0.5, 0.05, -2.5),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.55)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("sprite/group/pivot:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(12, -0.25, 0, 0.05, -8.5, 7, -0.05, 0, 0.05, 0, 7, -0.05, 0, 0.05, 0, 12, -0.05, -4.5, 0.05, -8.5),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.55)
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("sprite/face:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.45, 0.55, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-3.0, 0.0, -5.0, -5.0, 0.0, -3.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("sprite/face:frame")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_rrl67"]
+resource_name = "take_damage"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, -10.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/face:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("managers/sfx_player")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("2_dv32v"), -1000.0],
+"method": &"play_sfx"
+}]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite/group/pivot:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.05, -9.5, -25, -0.05, 7.5, 0.05, 0, -25.5, -0.1, -0.5, 0.05, 0, 0, -0.05, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.35)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-13, -0.25, 0, 0.25, 0, -13, -0.05, 0, 0.0311126, -7.5, -22.5, -0.05, 0, 0.05, 0, -13, -0.0188875, -6.5, 0.05, 0),
+"times": PackedFloat32Array(0, 0.35, 0.45, 0.55)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
 "RESET": SubResource("Animation_ste4p"),
@@ -1502,7 +1560,6 @@ load_special = true
 script = ExtResource("6_k1p5g")
 default_attack = ExtResource("3_4gvet")
 attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
-defense_pool = Array[Resource("res://entities/scripts/actions/defense.gd")]([ExtResource("5_k0j8f")])
 
 [node name="targeting" type="Node" parent="managers"]
 script = ExtResource("9_hritc")
@@ -1561,7 +1618,6 @@ visible = false
 y_sort_enabled = true
 material = SubResource("CanvasItemMaterial_v8ilj")
 position = Vector2(0, 86)
-scale = Vector2(1, 1)
 texture = ExtResource("6_ac2aa")
 script = ExtResource("29_sfebb")
 node_to_push_to = NodePath(".")

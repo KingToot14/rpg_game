@@ -4,15 +4,11 @@ extends Node
 # --- Variables --- #
 @export var default_attack: Attack
 @export var attack_pool: Array[Attack]
-@export var defense_pool: Array[Defense]
 
 # --- Functions --- #
 func _on_turn_ended() -> void:
 	for attack in attack_pool:
 		attack.decrement_cooldown()
-	
-	for defense in defense_pool:
-		defense.decrement_cooldown()
 
 func get_attack(key: StringName) -> Attack:
 	for attack: Attack in attack_pool:

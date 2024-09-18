@@ -9,7 +9,7 @@ region = Rect2(60, 0, 20, 20)
 
 [resource]
 script = ExtResource("1_lcnoy")
-power = 20.0
+power = 70.0
 element = 1
 element_percent = 0.0
 damage_type = 0

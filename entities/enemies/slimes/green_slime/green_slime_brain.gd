@@ -7,4 +7,4 @@ func _on_turn_started() -> void:
 	action = parent.actions.attack_pool.pick_random()
 	selected_target = TargetingHelper.get_random_entity(&'player')
 	
-	perform_action(action.animation_name)
+	perform_action(action)

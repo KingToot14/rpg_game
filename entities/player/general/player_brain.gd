@@ -40,7 +40,11 @@ func _on_entity_selected(entity: Entity) -> void:
 	
 	selected_target = entity
 	
+	# disable highlighting
+	for e in get_tree().get_nodes_in_group(&'entity'):
+		e.targeting.set_targetable(false)
+	
 	# start attack
-	perform_action(action.animation_name)
+	perform_action(action)
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)
