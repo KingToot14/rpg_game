@@ -36,16 +36,16 @@ func _ready() -> void:
 		child.mouse_exited.connect(item_hovered.bind(null))
 
 func tween_info_panel(value: bool) -> void:
-	var tween = create_tween().set_parallel()
+	var info_panel_tween = create_tween().set_parallel()
 	
 	if value:
 		info_panel.show()
 		
-		tween.tween_property(info_panel, 'position:y', info_panel_pos, 0.15)
-		tween.tween_property(info_panel, 'modulate:a', 1.0, 0.15)
+		info_panel_tween.tween_property(info_panel, 'position:y', info_panel_pos, 0.15)
+		info_panel_tween.tween_property(info_panel, 'modulate:a', 1.0, 0.15)
 	else:
-		tween.tween_property(info_panel, 'position:y', info_panel_pos + 8.0, 0.15)
-		tween.tween_property(info_panel, 'modulate:a', 0.0, 0.15)
+		info_panel_tween.tween_property(info_panel, 'position:y', info_panel_pos + 8.0, 0.15)
+		info_panel_tween.tween_property(info_panel, 'modulate:a', 0.0, 0.15)
 
 func item_hovered(item: ActionMenuItem) -> void:
 	tween_info_panel(not not item)

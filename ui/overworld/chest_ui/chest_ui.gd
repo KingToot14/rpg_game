@@ -3,6 +3,7 @@ extends Control
 
 # --- Variables --- #
 @export var item_rows: Array[Control] = []
+@export var slot_rows: Array[Control] = []
 
 # --- Functions --- #
 func load_items(items: Array[InventoryItem]) -> void:
@@ -16,6 +17,7 @@ func load_items(items: Array[InventoryItem]) -> void:
 		
 		for child in row.get_children():
 			child.visible = index < len(items)
+			slot_rows[index / 5].get_child(index % 5).visible = index < len(items)
 			
 			if child.visible:
 				child.set_item(items[index])
