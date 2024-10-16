@@ -28,13 +28,13 @@ func load_curr_player() -> void:
 		load_player(player)
 
 func set_current_player(tab: StringName) -> void:
+	curr_index = tabs.find(tab)
+	
 	for e_tab: OverworldButton in get_tree().get_nodes_in_group(&'entity_tab'):
 		var active := e_tab.name == (tab + "_tab")
 		e_tab.set_alternate(!active)
-		(e_tab.get_node("left_button") as CanvasItem).visible = active
-		(e_tab.get_node("right_button") as CanvasItem).visible = active
-	
-	curr_index = tabs.find(tab)
+		(e_tab.get_node("left_button") as CanvasItem).visible = active and curr_index > 0
+		(e_tab.get_node("right_button") as CanvasItem).visible = active and (curr_index < len(DataManager.players) - 1 and tabs[curr_index + 1] != &'none')
 	
 	load_curr_player()
 

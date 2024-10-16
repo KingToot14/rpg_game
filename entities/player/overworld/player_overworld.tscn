@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsd56x7sbosdr"]
+[gd_scene load_steps=18 format=3 uid="uid://dsd56x7sbosdr"]
 
 [ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
@@ -10,8 +10,7 @@
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
 [ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_hawyb"]
 [ext_resource type="Script" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
-[ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="9_3b5ol"]
-[ext_resource type="Texture2D" uid="uid://b2kmxf2di48nw" path="res://entities/player/overworld/player_overworld.png" id="9_v6e35"]
+[ext_resource type="Texture2D" uid="uid://by1pxwgbgrv82" path="res://entities/player/melee/player_overworld.png" id="10_8nbfu"]
 
 [sub_resource type="Resource" id="Resource_a8xs5"]
 script = ExtResource("5_nfabf")
@@ -24,14 +23,6 @@ script = ExtResource("5_nfabf")
 color_key = Color(0, 1, 0, 1)
 footstep_sound = ExtResource("3_5cn0t")
 volume_modifier = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0glyt"]
-shader = ExtResource("9_3b5ol")
-shader_parameter/outline_color = Color(0.878431, 0.894118, 1, 1)
-shader_parameter/normal_color = Color(0.592157, 0.670588, 0.941176, 1)
-shader_parameter/shadow_color = Color(0.529412, 0.592157, 0.878431, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/intensity = 0.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8rp7f"]
 frequency = 0.15
@@ -91,12 +82,11 @@ clear_margin = 0.0
 
 [node name="sprite" type="Sprite2D" parent="sprite_group"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_0glyt")
 position = Vector2(-2, 4)
-texture = ExtResource("9_v6e35")
+texture = ExtResource("10_8nbfu")
 offset = Vector2(2, -13)
 hframes = 2
-vframes = 2
+vframes = 4
 
 [node name="grass_cover" type="ColorRect" parent="sprite_group"]
 material = SubResource("ShaderMaterial_2iktr")
@@ -116,12 +106,11 @@ position = Vector2(-1, -5)
 unique_name_in_owner = true
 visible = false
 visibility_layer = 4
-material = SubResource("ShaderMaterial_0glyt")
 position = Vector2(2, 18)
-texture = ExtResource("9_v6e35")
+texture = ExtResource("10_8nbfu")
 flip_v = true
 hframes = 2
-vframes = 2
+vframes = 4
 script = ExtResource("8_hawyb")
 
 [connection signal="timeout" from="moving_state/footstep_timer" to="moving_state" method="play_footstep"]

@@ -13,7 +13,7 @@ func set_tab(tab_name: String) -> void:
 	
 	# update tab
 	for child in get_children():
-		if not '_tab' in child.name:
+		if not child.name.ends_with('_tab'):
 			continue
 		child.visible = child.name == tab_name
 	

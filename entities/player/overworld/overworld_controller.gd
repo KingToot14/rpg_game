@@ -27,12 +27,6 @@ var curr_state: PlayerControlState
 func _ready() -> void:
 	set_state('moving')
 	
-	# load appearance
-	var data = DataManager.players[0]
-	
-	if data:
-		AsyncLoader.new(data.get_appearance_path(), set_appearance)
-	
 	await get_tree().process_frame
 	# signals
 	Globals.overworld_manager.area_loaded.connect(end_transition)
@@ -58,13 +52,13 @@ func update_texture() -> void:
 	if direction == Vector2.ZERO:
 		return
 	
-	sprite.flip_h = direction.x > 0.0
+	sprite.flip_h = direction.x < 0.0
 	reflection_sprite.flip_h = sprite.flip_h
 	
 	if abs(direction.x) < front_threshold:
-		sprite.frame = 0 if direction.y >= 0.0 else 2
+		sprite.frame = 0 if direction.y >= 0.0 else 4
 	else:
-		sprite.frame = 1 if direction.y >= 0.0 else 3
+		sprite.frame = 2 if direction.y >= 0.0 else 6
 	
 	reflection_sprite.frame = sprite.frame
 
@@ -92,13 +86,5 @@ func prepare_battle() -> void:
 
 func end_transition() -> void:
 	in_transition = false
-
-#endregion
-
-#region Appearance
-func set_appearance(appearance: PlayerAppearance) -> void:
-	sprite.material.set_shader_parameter('outline_color', appearance.outline_color)
-	sprite.material.set_shader_parameter('normal_color', appearance.normal_color)
-	sprite.material.set_shader_parameter('shadow_color', appearance.shadow_color)
 
 #endregion
