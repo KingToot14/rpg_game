@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=59 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="AudioStream" uid="uid://ck7afm54jympr" path="res://entities/enemies/slimes/green_slime/sfx/slime_hit_01.wav" id="2_5162u"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
 [ext_resource type="AudioStream" uid="uid://bvg3q3tlfmokn" path="res://entities/enemies/slimes/green_slime/sfx/slime_jump_1.wav" id="5_21131"]
+[ext_resource type="AudioStream" uid="uid://ifbs6cwm85py" path="res://environment/forest/sfx/dirt_footsteps/dirt_footstep_2.ogg" id="6_6mdyb"]
 [ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="6_vxjld"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="7_8ki07"]
 [ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_keams"]
@@ -848,6 +849,20 @@ tracks/6/keys = {
 "method": &"finish_entered_battle"
 }]
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("managers/sfx_player")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("5_21131"), -40.0],
+"method": &"play_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_6cwo8"]
 resource_name = "idle"
@@ -1006,10 +1021,10 @@ tracks/7/path = NodePath("managers/sfx_player")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.95),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [ExtResource("3_a4xc3"), -34.0],
+"args": [ExtResource("3_a4xc3"), -25.0],
 "method": &"play_sfx"
 }]
 }
@@ -1023,10 +1038,10 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0.3, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [ExtResource("2_5162u"), -6.0],
+"args": [ExtResource("5_21131"), -40.0],
 "method": &"play_sfx"
 }, {
-"args": [ExtResource("2_5162u"), -6.0],
+"args": [ExtResource("6_6mdyb"), -20.0],
 "method": &"play_sfx"
 }]
 }

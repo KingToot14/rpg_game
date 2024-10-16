@@ -11,7 +11,7 @@ var is_done_adding := false
 
 @export var melee_icon: Texture2D
 @export var ranged_icon: Texture2D
-@export var healer_icon: Texture2D
+@export var monk_icon: Texture2D
 @export var magic_icon: Texture2D
 
 @export var increment_duration := 5.0
@@ -42,8 +42,8 @@ func load_player_info() -> void:
 			icon_rect.texture = melee_icon
 		PlayerDataChunk.PlayerRole.RANGED:
 			icon_rect.texture = ranged_icon
-		PlayerDataChunk.PlayerRole.HEALER:
-			icon_rect.texture = healer_icon
+		PlayerDataChunk.PlayerRole.MONK:
+			icon_rect.texture = monk_icon
 		PlayerDataChunk.PlayerRole.MAGIC:
 			icon_rect.texture = magic_icon
 	

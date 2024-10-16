@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=96 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -277,6 +277,10 @@ region = Rect2(10, 20, 10, 10)
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0q4s"]
 atlas = ExtResource("34_oquq2")
 region = Rect2(20, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unuyt"]
+atlas = ExtResource("33_8otb5")
+region = Rect2(0, 40, 8, 8)
 
 [node name="battle_root" type="Node2D"]
 y_sort_enabled = true
@@ -2565,24 +2569,28 @@ scroll_active = false
 
 [node name="player_xp_bar" parent="ui/victory_panel/essence_panel" instance=ExtResource("53_3n2mt")]
 layout_mode = 1
+monk_icon = SubResource("AtlasTexture_unuyt")
 
 [node name="player_xp_bar2" parent="ui/victory_panel/essence_panel" instance=ExtResource("53_3n2mt")]
 layout_mode = 1
 offset_top = 35.0
 offset_bottom = 49.0
 player_index = 1
+monk_icon = SubResource("AtlasTexture_unuyt")
 
 [node name="player_xp_bar3" parent="ui/victory_panel/essence_panel" instance=ExtResource("53_3n2mt")]
 layout_mode = 1
 offset_top = 55.0
 offset_bottom = 69.0
 player_index = 2
+monk_icon = SubResource("AtlasTexture_unuyt")
 
 [node name="player_xp_bar4" parent="ui/victory_panel/essence_panel" instance=ExtResource("53_3n2mt")]
 layout_mode = 1
 offset_top = 75.0
 offset_bottom = 89.0
 player_index = 3
+monk_icon = SubResource("AtlasTexture_unuyt")
 
 [node name="return_button" type="BaseButton" parent="ui/victory_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
