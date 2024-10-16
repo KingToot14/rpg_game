@@ -9,6 +9,8 @@ var curr_panel
 # --- Functions --- #
 func _ready() -> void:
 	Globals.ui_manager = self
+	
+	hide_panels()
 	chest_panel.hide_panel()
 
 func _shortcut_input(event: InputEvent) -> void:

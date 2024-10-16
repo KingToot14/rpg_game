@@ -74,10 +74,23 @@ func load_from_save() -> void:
 			
 			players[i] = PlayerDataChunk.new(player_data[i])
 	else:
-		players = [PlayerDataChunk.new(), null, null, null]
+		players = [PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new(), PlayerDataChunk.new()]
+		#players = [PlayerDataChunk.new(), null, null, null]
 		
 		players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
 		players[0].set_appearance("pastel_purple")
+		
+		players[1].create_new(PlayerDataChunk.PlayerRole.MELEE)
+		players[1].set_appearance("pastel_purple")
+		players[1].level = 5
+		
+		players[2].create_new(PlayerDataChunk.PlayerRole.MELEE)
+		players[2].set_appearance("pastel_purple")
+		players[2].level = 10
+		
+		players[3].create_new(PlayerDataChunk.PlayerRole.MELEE)
+		players[3].set_appearance("pastel_purple")
+		players[3].level = 15
 	
 	# - Local Area
 	local_area = LocalAreaChunk.new(data.get('local_area'))

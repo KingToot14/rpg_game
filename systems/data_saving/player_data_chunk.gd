@@ -16,6 +16,8 @@ var curr_xp := 0
 var xp_to_next := 50
 
 # - appearance - #
+var name: String = "Name"
+var description: String = "Description"
 var body: String
 var appearance := "pastel_blue"
 
@@ -45,11 +47,14 @@ func _init(load_info = null) -> void:
 	xp_to_next = get_cumulative_xp()
 	curr_xp = clamp(load_info.get('xp', 0), get_cumulative_xp(level - 1), xp_to_next)
 	
+	# appearance
+	name = load_info.get('name', "Name")
 	body = load_info.get('body', "")
 	appearance = load_info.get('appearance', 'pastel_blue')
 
 func get_save_data() -> Dictionary:
 	return {
+		'name':			name,
 		'role': 		role,
 		'level': 		level,
 		'hp': 			curr_hp,
@@ -150,3 +155,27 @@ func level_up() -> void:
 	
 	if curr_xp >= xp_to_next:
 		level_up()
+
+#region Stats
+func get_max_hp() -> int:
+	return stats.get_max_hp(level)
+
+func get_p_attack() -> float:
+	return stats.get_p_attack(level)
+
+func get_m_attack() -> float:
+	return stats.get_m_attack(level)
+
+func get_p_defense() -> float:
+	return stats.get_p_defense(level)
+
+func get_m_defense() -> float:
+	return stats.get_m_defense(level)
+
+func get_accuracy() -> float:
+	return stats.get_accuracy(level)
+
+func get_evasion() -> float:
+	return stats.get_evasion(level)
+
+#endregion

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=57 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
@@ -13,12 +13,18 @@
 [ext_resource type="Script" path="res://ui/overworld/menus/tab_menu.gd" id="11_5mxsm"]
 [ext_resource type="Script" path="res://ui/overworld/chest_ui/chest_ui.gd" id="11_uvdfv"]
 [ext_resource type="PackedScene" uid="uid://k01qlajn0pie" path="res://ui/overworld/chest_ui/item_info.tscn" id="12_6d1i2"]
+[ext_resource type="Texture2D" uid="uid://bepw1vdv0xr14" path="res://ui/thick_outline.png" id="12_geasp"]
 [ext_resource type="Script" path="res://ui/overworld/menus/party_manager.gd" id="12_svvh6"]
 [ext_resource type="Script" path="res://ui/overworld/menus/inventory_display.gd" id="13_nbprq"]
+[ext_resource type="Texture2D" uid="uid://c427eqyjrj3fb" path="res://entities/player/melee/details_background.png" id="14_l31uf"]
 [ext_resource type="Texture2D" uid="uid://dct8suxr7kywt" path="res://ui/overworld/inventory/main_panel.png" id="15_bqrkx"]
+[ext_resource type="PackedScene" uid="uid://cr0frogmee5t6" path="res://entities/player/melee/player_melee.tscn" id="15_m3ckk"]
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="15_ncx5y"]
+[ext_resource type="Script" path="res://ui/overworld/overworld_player_loader.gd" id="15_vcvge"]
+[ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="16_4exyq"]
 [ext_resource type="Texture2D" uid="uid://dwgdq3k5xdko0" path="res://ui/overworld/inventory/item_slots.png" id="16_5l4gb"]
 [ext_resource type="Texture2D" uid="uid://bbmbw2vxmu5gt" path="res://ui/overworld/inventory/tabs.png" id="16_ji43i"]
+[ext_resource type="Texture2D" uid="uid://blir4oe1doqle" path="res://ui/icons/edit_icon.png" id="17_6x7gp"]
 [ext_resource type="Texture2D" uid="uid://ca0joglfc3q6w" path="res://ui/overworld/chest_ui/main_panel.png" id="20_kcaw1"]
 [ext_resource type="Texture2D" uid="uid://dixv4de6142ck" path="res://ui/overworld/chest_ui/button.png" id="21_dwufm"]
 
@@ -55,6 +61,58 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2lu7"]
 atlas = ExtResource("10_xu5bp")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njqas"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i5te"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(8, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xsxr"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y7ep"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l41je"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmhls"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vycpc"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy1dv"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apg04"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(8, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m74un"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1isqy"]
+atlas = ExtResource("16_4exyq")
+region = Rect2(8, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wf73"]
+atlas = ExtResource("17_6x7gp")
+region = Rect2(0, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_646qt"]
+atlas = ExtResource("17_6x7gp")
+region = Rect2(9, 0, 9, 9)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v3iv"]
 atlas = ExtResource("16_ji43i")
@@ -904,7 +962,6 @@ text = " 1,000,000"
 scroll_active = false
 
 [node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -913,8 +970,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -83.0
 offset_top = -80.0
-offset_right = 83.0
-offset_bottom = 80.0
+offset_right = 107.0
+offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_nuo0b")
@@ -922,6 +979,7 @@ script = ExtResource("11_5mxsm")
 tab_parent = NodePath("tabs")
 
 [node name="backing" parent="ui/party_panel" instance=ExtResource("4_7u65r")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -935,10 +993,10 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 22.0
+offset_left = 4.0
+offset_top = -12.0
+offset_right = -4.0
+offset_bottom = 3.0
 grow_horizontal = 2
 theme_type_variation = &"Tabs"
 
@@ -966,7 +1024,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(66, 20)
+custom_minimum_size = Vector2(47, 0)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -998,44 +1056,58 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
+outline_rect = NodePath("texture/fill")
 hover_key = &"normal"
-metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/tabs/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/tabs/overview_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
-
-[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/overview_tab"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("AtlasTexture_1da2r")
-stretch_mode = 2
-
-[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/overview_tab/icon"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = 3.0
-offset_right = 47.0
-grow_horizontal = 0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/tabs/overview_tab/texture"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"TabName"
-text = " Overview"
+script = ExtResource("15_ncx5y")
+key = &"normal"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/overview_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Materials"
 scroll_active = false
 
-[node name="equips_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+[node name="equipment_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1059,7 +1131,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(50, 20)
+custom_minimum_size = Vector2(50, 0)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -1091,44 +1163,55 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
+outline_rect = NodePath("texture/fill")
 hover_key = &"normal"
-use_alternate = true
-metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/tabs/equips_tab" instance=ExtResource("5_7bpw0")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/tabs/equipment_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
-key = &"dark"
-
-[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/equips_tab"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("AtlasTexture_1da2r")
-stretch_mode = 2
-
-[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/equips_tab/icon"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = 3.0
-offset_right = 31.0
-grow_horizontal = 0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/tabs/equipment_tab/texture"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"TabName"
-text = " Equips"
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/equipment_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Equipment"
 scroll_active = false
 
 [node name="skills_tab" type="BaseButton" parent="ui/party_panel/tabs" node_paths=PackedStringArray("outline_rect")]
@@ -1155,7 +1238,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(44, 20)
+custom_minimum_size = Vector2(46, 0)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -1187,63 +1270,1160 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("outline")
+outline_rect = NodePath("texture/fill")
 hover_key = &"normal"
-use_alternate = true
-metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/tabs/skills_tab" instance=ExtResource("5_7bpw0")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/tabs/skills_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
-key = &"dark"
-
-[node name="icon" type="TextureRect" parent="ui/party_panel/tabs/skills_tab"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("AtlasTexture_1da2r")
-stretch_mode = 2
-
-[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/skills_tab/icon"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = 3.0
-offset_right = 31.0
-grow_horizontal = 0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/tabs/skills_tab/texture"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_type_variation = &"TabName"
-text = " Skills"
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/tabs/skills_tab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Skill Tree"
 scroll_active = false
+
+[node name="entity_tabs" type="HBoxContainer" parent="ui/party_panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 149.0
+offset_bottom = 12.0
+grow_vertical = 0
+theme_type_variation = &"Tabs"
+
+[node name="melee_tab" type="BaseButton" parent="ui/party_panel/entity_tabs" node_paths=PackedStringArray("outline_rect") groups=["entity_tab"]]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(26, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("texture/fill")
+hover_key = &"normal"
+
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/entity_tabs/melee_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/entity_tabs/melee_tab/texture"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"normal"
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/entity_tabs/melee_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -3.5
+offset_right = 4.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_njqas")
+
+[node name="ranged_tab" type="BaseButton" parent="ui/party_panel/entity_tabs" node_paths=PackedStringArray("outline_rect") groups=["entity_tab"]]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(26, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("texture/fill")
+hover_key = &"normal"
+
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/entity_tabs/ranged_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/entity_tabs/ranged_tab/texture"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/entity_tabs/ranged_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -3.5
+offset_right = 4.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_3i5te")
+
+[node name="magic_tab" type="BaseButton" parent="ui/party_panel/entity_tabs" node_paths=PackedStringArray("outline_rect") groups=["entity_tab"]]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(26, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("texture/fill")
+hover_key = &"normal"
+
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/entity_tabs/magic_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/entity_tabs/magic_tab/texture"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/entity_tabs/magic_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -3.5
+offset_right = 4.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_2xsxr")
+
+[node name="healer_tab" type="BaseButton" parent="ui/party_panel/entity_tabs" node_paths=PackedStringArray("outline_rect") groups=["entity_tab"]]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(26, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("texture/fill")
+hover_key = &"normal"
+
+[node name="texture" type="NinePatchRect" parent="ui/party_panel/entity_tabs/healer_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_geasp")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("15_ncx5y")
+key = &"light"
+
+[node name="fill" type="ColorRect" parent="ui/party_panel/entity_tabs/healer_tab/texture"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/entity_tabs/healer_tab"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -3.5
+offset_right = 4.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_2y7ep")
 
 [node name="overview_tab" type="Control" parent="ui/party_panel"]
 layout_mode = 1
-anchor_left = 0.012
-anchor_top = 0.144
-anchor_right = 0.987
-anchor_bottom = 0.987
-offset_left = 0.0799999
-offset_top = -0.0400009
-offset_right = 0.0799866
-offset_bottom = 0.0799866
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_vcvge")
+
+[node name="panel" parent="ui/party_panel/overview_tab" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="backing" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="player_display" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -130.0
+offset_bottom = -75.0
+
+[node name="background" type="TextureRect" parent="ui/party_panel/overview_tab/player_display"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_l31uf")
+
+[node name="player_melee" parent="ui/party_panel/overview_tab/player_display" instance=ExtResource("15_m3ckk")]
+display_mode = true
+display_pos = Vector2(22, 40)
+
+[node name="player_stats" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 61.0
+offset_right = -130.0
+offset_bottom = -2.0
+
+[node name="hp_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 2.0
+offset_right = 27.0
+offset_bottom = 10.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/hp_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_l41je")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_hp" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/hp_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="p_attack_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 12.0
+offset_right = 27.0
+offset_bottom = 20.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/p_attack_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_lmhls")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_p_attack" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/p_attack_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="m_attack_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 22.0
+offset_right = 27.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/m_attack_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_vycpc")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_m_attack" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/m_attack_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="p_defense_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 32.0
+offset_right = 27.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/p_defense_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_sy1dv")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_p_defense" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/p_defense_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="m_defense_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 42.0
+offset_right = 27.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/m_defense_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_apg04")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_m_defense" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/m_defense_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="accuracy_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 52.0
+offset_right = 27.0
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/accuracy_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_m74un")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_accuracy" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/accuracy_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="evasion_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 62.0
+offset_right = 27.0
+offset_bottom = 70.0
+grow_horizontal = 2
+
+[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/evasion_stat"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_1isqy")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="player_evasion" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/evasion_stat"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="name" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 61.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 15.0
+grow_vertical = 1
+
+[node name="player_name" type="RichTextLabel" parent="ui/party_panel/overview_tab/name"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -17.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Name"
+
+[node name="underline" type="ColorRect" parent="ui/party_panel/overview_tab/name"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = -16.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="edit_button" type="BaseButton" parent="ui/party_panel/overview_tab/name" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.5
+offset_right = -3.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("feather")
+normal_key = &"light"
+hover_key = &"white"
+
+[node name="stem" type="TextureRect" parent="ui/party_panel/overview_tab/name/edit_button"]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 0
+offset_right = 9.0
+offset_bottom = 9.0
+texture = SubResource("AtlasTexture_8wf73")
+script = ExtResource("15_ncx5y")
+key = &"dark"
+
+[node name="feather" type="TextureRect" parent="ui/party_panel/overview_tab/name/edit_button"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_right = 9.0
+offset_bottom = 9.0
+texture = SubResource("AtlasTexture_646qt")
+script = ExtResource("15_ncx5y")
+key = &"accent"
+
+[node name="description" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 61.0
+offset_top = 16.0
+offset_right = -2.0
+offset_bottom = 60.0
+grow_vertical = 1
+
+[node name="player_description" type="RichTextLabel" parent="ui/party_panel/overview_tab/description"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Description
+Description
+Description
+Description
+Description"
+scroll_active = false
+
+[node name="essence" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 61.0
+offset_top = 61.0
+offset_right = -2.0
+offset_bottom = 93.0
+grow_vertical = 1
+
+[node name="player_level" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -56.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Level: 5"
+scroll_active = false
+
+[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 11.0
+offset_right = -56.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Total Essence:"
+scroll_active = false
+
+[node name="label2" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 19.0
+offset_right = -56.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "To Next Level:"
+scroll_active = false
+
+[node name="total_xp" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 73.0
+offset_top = 11.0
+offset_right = -3.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="next_xp" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 73.0
+offset_top = 19.0
+offset_right = -3.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "10,000,000"
+scroll_active = false
+
+[node name="xp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/essence"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -5.0
+offset_right = -2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.027451, 0.478431, 0.478431, 1)
+
+[node name="xp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/essence/xp_slider"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0.941176, 0.941176, 1)
+
+[node name="hp_sp" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 61.0
+offset_top = 94.0
+offset_right = -2.0
+offset_bottom = 133.0
+grow_vertical = 1
+
+[node name="hp_label" type="RichTextLabel" parent="ui/party_panel/overview_tab/hp_sp"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -2.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Health: 10,000,000/10,000,000"
+scroll_active = false
+
+[node name="hp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 11.0
+offset_right = -2.0
+offset_bottom = 13.0
+grow_horizontal = 2
+color = Color(0.54902, 0.0313726, 0.0313726, 1)
+
+[node name="hp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp/hp_slider"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.160784, 0.160784, 1)
+
+[node name="sp_label" type="RichTextLabel" parent="ui/party_panel/overview_tab/hp_sp"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 16.0
+offset_right = -2.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+text = "Special: 50%"
+scroll_active = false
+
+[node name="sp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 24.0
+offset_right = -2.0
+offset_bottom = 26.0
+grow_horizontal = 2
+color = Color(0.54902, 0.541176, 0.0313726, 1)
+
+[node name="sp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp/sp_slider"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.929412, 0.160784, 1)
 
 [node name="text" type="RichTextLabel" parent="ui/party_panel/overview_tab"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1256,6 +2436,7 @@ text = "[center]Overview"
 scroll_active = false
 
 [node name="buttons" type="HBoxContainer" parent="ui/party_panel/overview_tab"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1623,7 +2804,7 @@ bbcode_enabled = true
 text = "[center]4"
 scroll_active = false
 
-[node name="equips_tab" type="Control" parent="ui/party_panel"]
+[node name="equipment_tab" type="Control" parent="ui/party_panel"]
 visible = false
 layout_mode = 1
 anchor_left = 0.012
@@ -1637,10 +2818,10 @@ offset_bottom = 0.0799866
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="backing" parent="ui/party_panel/equips_tab" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/party_panel/equipment_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="text" type="RichTextLabel" parent="ui/party_panel/equips_tab"]
+[node name="text" type="RichTextLabel" parent="ui/party_panel/equipment_tab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3575,7 +4756,7 @@ offset_bottom = 22.0
 grow_horizontal = 2
 theme_type_variation = &"Tabs"
 
-[node name="quest" type="BaseButton" parent="ui/info_panel/tabs" node_paths=PackedStringArray("outline_rect")]
+[node name="quest" type="BaseButton" parent="ui/info_panel/tabs"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -3631,7 +4812,6 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("8_40l3n")
-outline_rect = NodePath("../../../party_panel/tabs/overview_tab/outline")
 hover_key = &"normal"
 metadata/_edit_group_ = true
 
@@ -4888,8 +6068,9 @@ scroll_active = false
 [connection signal="pressed" from="ui/main_panel/bottom/item_button" to="ui" method="set_panel" binds= ["item"]]
 [connection signal="pressed" from="ui/main_panel/bottom/party_button" to="ui" method="set_panel" binds= ["party"]]
 [connection signal="pressed" from="ui/party_panel/tabs/overview_tab" to="ui/party_panel" method="set_tab" binds= ["overview"]]
-[connection signal="pressed" from="ui/party_panel/tabs/equips_tab" to="ui/party_panel" method="set_tab" binds= ["equips"]]
+[connection signal="pressed" from="ui/party_panel/tabs/equipment_tab" to="ui/party_panel" method="set_tab" binds= ["equipment"]]
 [connection signal="pressed" from="ui/party_panel/tabs/skills_tab" to="ui/party_panel" method="set_tab" binds= ["skills"]]
+[connection signal="visibility_changed" from="ui/party_panel/overview_tab" to="ui/party_panel/overview_tab" method="load_curr_player"]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [0]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button2" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [1]]
 [connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button3" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [2]]

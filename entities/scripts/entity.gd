@@ -6,6 +6,10 @@ signal entity_setup()
 signal entity_entered()
 
 # --- Variables --- #
+@export var display_mode := false
+# @@show_if(display_mode)
+@export var display_pos: Vector2
+
 @export var entity_name: String
 @export_multiline var description: String
 
@@ -34,6 +38,13 @@ var level: int = 1
 @export var front_marker: Node2D
 
 # --- Functions --- #
+func _ready() -> void:
+	if display_mode:
+		$"ui".hide()
+		position = display_pos
+		
+		animator.play_idle_anim()
+
 func setup(index: int):
 	spawn_index = index
 	

@@ -4,8 +4,8 @@ extends Resource
 # --- Variables --- #
 @export var max_hp := 50
 @export var p_attack := 4.0
-@export var p_defense := 4.0
 @export var m_attack := 4.0
+@export var p_defense := 4.0
 @export var m_defense := 4.0
 @export var accuracy := 3.0
 @export var evasion := 3.0
@@ -17,13 +17,13 @@ extends Resource
 @export var new_mod: float
 
 # --- Constants --- #
-const HP_LEVEL_UP = 1.10
-const P_ATTACK_LEVEL_UP = 1.10
-const M_ATTACK_LEVEL_UP = 1.10
-const P_DEFENSE_LEVEL_UP = 1.10
-const M_DEFENSE_LEVEL_UP = 1.10
-const ACCURACY_LEVEL_UP = 1.10
-const EVASION_LEVEL_UP = 1.10
+const HP_LEVEL_UP = 1.20
+const P_ATTACK_LEVEL_UP = 1.20
+const M_ATTACK_LEVEL_UP = 1.2
+const P_DEFENSE_LEVEL_UP = 1.20
+const M_DEFENSE_LEVEL_UP = 1.20
+const ACCURACY_LEVEL_UP = 1.20
+const EVASION_LEVEL_UP = 1.20
 
 # --- Functions --- #
 func add_resistance() -> void:

@@ -1,18 +1,19 @@
-[gd_scene load_steps=57 format=3 uid="uid://ty0c8f0laa02"]
+[gd_scene load_steps=58 format=3 uid="uid://ty0c8f0laa02"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
-[ext_resource type="AudioStream" uid="uid://db802bsd8tdly" path="res://entities/enemies/slimes/green_slime/sfx/soft_slime.tres" id="2_5162u"]
+[ext_resource type="AudioStream" uid="uid://ck7afm54jympr" path="res://entities/enemies/slimes/green_slime/sfx/slime_hit_01.wav" id="2_5162u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/attacks/jump_attack.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/attacks/slime_fling.tres" id="3_8qkmm"]
-[ext_resource type="AudioStream" uid="uid://djtm4e5ddqlay" path="res://entities/enemies/slimes/green_slime/sfx/mixkit-fast-sword-whoosh-2792.wav" id="3_a4xc3"]
+[ext_resource type="AudioStream" uid="uid://djtm4e5ddqlay" path="res://entities/sfx/mixkit-fast-sword-whoosh-2792.wav" id="3_a4xc3"]
+[ext_resource type="AudioStream" uid="uid://bnp0j4psg3qqb" path="res://entities/enemies/slimes/green_slime/sfx/bubble_pop_01.wav" id="3_h0ni0"]
 [ext_resource type="Script" path="res://entities/scripts/entity_loot.gd" id="3_wt1m1"]
-[ext_resource type="AudioStream" uid="uid://dhl5gt7cv1j0n" path="res://entities/enemies/slimes/green_slime/sfx/soft_slime_1.ogg" id="4_7xfes"]
+[ext_resource type="AudioStream" uid="uid://dsng1jbxhaae8" path="res://entities/enemies/slimes/green_slime/sfx/slime_hit_02.wav" id="4_3vjsh"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
 [ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_p24fg"]
 [ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
 [ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
-[ext_resource type="AudioStream" uid="uid://cllfxtea6pne0" path="res://entities/enemies/slimes/green_slime/sfx/soft_slime_2.ogg" id="5_cx11e"]
+[ext_resource type="AudioStream" uid="uid://bvg3q3tlfmokn" path="res://entities/enemies/slimes/green_slime/sfx/slime_jump_1.wav" id="5_21131"]
 [ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="6_vxjld"]
 [ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="7_8ki07"]
 [ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_keams"]
@@ -718,13 +719,36 @@ tracks/28/path = NodePath("managers/sfx_player")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = {
+"times": PackedFloat32Array(0, 0.65, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [ExtResource("4_3vjsh"), -12.0],
+"method": &"play_sfx"
+}, {
+"args": [ExtResource("3_h0ni0"), -40.0],
+"method": &"play_sfx"
+}, {
+"args": [ExtResource("5_21131"), -40.0],
+"method": &"play_sfx"
+}, {
+"args": [ExtResource("5_21131"), -40.0],
+"method": &"play_sfx"
+}]
+}
+tracks/29/type = "method"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("managers/sfx_player")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
 "times": PackedFloat32Array(0, 0.65),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [ExtResource("2_5162u"), 0.0],
+"args": [ExtResource("5_21131"), -40.0],
 "method": &"play_sfx"
 }, {
-"args": [ExtResource("2_5162u"), 18.0],
+"args": [ExtResource("2_5162u"), -12.0],
 "method": &"play_sfx"
 }]
 }
@@ -999,10 +1023,10 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0.3, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [ExtResource("4_7xfes"), -6.0],
+"args": [ExtResource("2_5162u"), -6.0],
 "method": &"play_sfx"
 }, {
-"args": [ExtResource("5_cx11e"), -6.0],
+"args": [ExtResource("2_5162u"), -6.0],
 "method": &"play_sfx"
 }]
 }
@@ -1153,7 +1177,21 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [ExtResource("2_5162u"), 0.0],
+"args": [ExtResource("4_3vjsh"), -12.0],
+"method": &"play_sfx"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("managers/sfx_player")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("5_21131"), -40.0],
 "method": &"play_sfx"
 }]
 }
@@ -1247,6 +1285,7 @@ height = 34.0
 [node name="slime" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
 z_index = 100
 y_sort_enabled = true
+position = Vector2(10, 0)
 script = ExtResource("1_gt34u")
 entity_name = "Green Slime"
 description = "A sentient pile of goo. It appears to have absorbed elements from the forest"

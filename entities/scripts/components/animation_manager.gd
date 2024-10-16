@@ -39,6 +39,9 @@ func play_action_anim(anim_name: StringName) -> void:
 	
 	action_started.emit()
 
+func play_idle_anim() -> void:
+	animator.play(&"idle")
+
 # - Timing - #
 func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	var attack_anim = animator.get_animation(attack_name)

@@ -1,11 +1,14 @@
-[gd_scene load_steps=59 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=62 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
 [ext_resource type="Resource" uid="uid://bmn1f41l88x48" path="res://entities/player/melee/attacks/heavy_slash.tres" id="2_mjmh3"]
+[ext_resource type="AudioStream" uid="uid://ifbs6cwm85py" path="res://environment/forest/sfx/dirt_footsteps/dirt_footstep_2.ogg" id="2_r0ggs"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xdhph"]
 [ext_resource type="Resource" uid="uid://qs1553avx8h3" path="res://entities/player/melee/attacks/normal_slash.tres" id="3_4gvet"]
+[ext_resource type="AudioStream" uid="uid://djtm4e5ddqlay" path="res://entities/sfx/mixkit-fast-sword-whoosh-2792.wav" id="3_typ4q"]
 [ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_1vjuk"]
+[ext_resource type="AudioStream" uid="uid://kq1gkq5s173a" path="res://entities/sfx/single_whoosh.wav" id="4_g08al"]
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Resource" uid="uid://bnt1sbgk7fkkn" path="res://entities/player/melee/attacks/fury.tres" id="5_wff5c"]
@@ -1355,6 +1358,37 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 0]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("managers/sfx_player")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("2_r0ggs"), -20.0],
+"method": &"play_sfx"
+}]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("managers/sfx_player")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [ExtResource("3_typ4q"), -25.0],
+"method": &"play_sfx"
+}, {
+"args": [ExtResource("4_g08al"), -2.5],
+"method": &"play_sfx"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rrl67"]

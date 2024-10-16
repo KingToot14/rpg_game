@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EntityStats" load_steps=2 format=3 uid="uid://b7n8gfxfp6fgv"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity_stats.gd" id="1_a0ny2"]
+
+[resource]
+script = ExtResource("1_a0ny2")
+max_hp = 160
+p_attack = 5.2
+m_attack = 7.0
+p_defense = 5.2
+m_defense = 5.9
+accuracy = 5.2
+evasion = 4.3
+resistances = {}
+new_element = 0
+new_mod = 0.0
