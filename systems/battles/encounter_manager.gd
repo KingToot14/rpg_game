@@ -12,7 +12,7 @@ var total_xp: int
 @export_group("Player Paths")
 @export_file("*.tscn") var melee_path: String
 @export_file("*.tscn") var ranged_path: String
-@export_file("*.tscn") var healer_path: String
+@export_file("*.tscn") var monk_path: String
 @export_file("*.tscn") var magic_path: String
 
 @export_group("Timing")
@@ -35,12 +35,6 @@ func _ready():
 	# Signals
 	encounter_victory.connect(store_loot)
 	encounter_victory.connect(store_xp)
-	
-	# Offset spawn points
-	#for pos in %'player_positions'.get_children():
-		#pos.position.x -= -1000
-	#for pos in %'enemy_positions'.get_children():
-		#pos.position.x -= -1000
 	
 	AsyncLoader.new(Globals.encounter_resource, setup_encounter)
 
@@ -86,8 +80,8 @@ func load_wave(wave: Wave) -> void:
 					paths.append(melee_path)
 				PlayerDataChunk.PlayerRole.RANGED:
 					paths.append(ranged_path)
-				PlayerDataChunk.PlayerRole.HEALER:
-					paths.append(healer_path)
+				PlayerDataChunk.PlayerRole.MONK:
+					paths.append(monk_path)
 				PlayerDataChunk.PlayerRole.MAGIC:
 					paths.append(magic_path)
 	

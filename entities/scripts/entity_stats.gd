@@ -37,22 +37,22 @@ func add_resistance() -> void:
 		resistances[new_element] = new_mod
 
 func get_max_hp(level: int = 1) -> int:
-	return round(max_hp * (HP_LEVEL_UP ** level))
+	return round(max_hp * (HP_LEVEL_UP ** (level - 1)))
 
 func get_p_attack(level: int = 1) -> float:
-	return p_attack * (P_ATTACK_LEVEL_UP ** level)
+	return p_attack * (P_ATTACK_LEVEL_UP ** (level - 1))
 
 func get_m_attack(level: int = 1) -> float:
-	return m_attack * (M_ATTACK_LEVEL_UP ** level)
+	return m_attack * (M_ATTACK_LEVEL_UP ** (level - 1))
 
 func get_p_defense(level: int = 1) -> float:
-	return p_defense * (P_DEFENSE_LEVEL_UP ** level)
+	return p_defense * (P_DEFENSE_LEVEL_UP ** (level - 1))
 
 func get_m_defense(level: int = 1) -> float:
-	return m_defense * (M_DEFENSE_LEVEL_UP ** level)
+	return m_defense * (M_DEFENSE_LEVEL_UP ** (level - 1))
 
 func get_accuracy(level: int = 1) -> float:
-	return accuracy * (ACCURACY_LEVEL_UP ** level)
+	return accuracy * (ACCURACY_LEVEL_UP ** (level - 1))
 
 func get_evasion(level: int = 1) -> float:
-	return evasion * (EVASION_LEVEL_UP ** level)
+	return evasion * (EVASION_LEVEL_UP ** (level - 1))

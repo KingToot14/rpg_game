@@ -2,7 +2,7 @@ class_name PlayerDataChunk
 extends Resource
 
 # --- Enums --- #
-enum PlayerRole { NONE, MELEE, RANGED, HEALER, MAGIC }
+enum PlayerRole { NONE, MELEE, RANGED, MONK, MAGIC }
 
 # --- Variables --- #
 var role: PlayerRole = PlayerRole.NONE
@@ -74,9 +74,9 @@ func create_new(new_role: PlayerRole) -> bool:
 		PlayerRole.MELEE:
 			stats = load("res://entities/player/melee/stats.tres") as EntityStats
 		PlayerRole.RANGED:
-			stats = load("res://entities/player/ranged/stats.tres") as EntityStats
-		PlayerRole.HEALER:
-			stats = load("res://entities/player/healer/stats.tres") as EntityStats
+			stats = load("res://entities/player/ranger/stats.tres") as EntityStats
+		PlayerRole.MONK:
+			stats = load("res://entities/player/monk/stats.tres") as EntityStats
 		PlayerRole.MAGIC:
 			stats = load("res://entities/player/magic/stats.tres") as EntityStats
 		_:
