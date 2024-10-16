@@ -8,12 +8,14 @@ var curr_index := 0
 # --- Functions --- #
 func _ready() -> void:
 	# setup signals
-	%'melee_tab'.pressed.connect(set_current_player.bind(&'melee'))
-	%'ranged_tab'.pressed.connect(set_current_player.bind(&'ranged'))
-	%'magic_tab'.pressed.connect(set_current_player.bind(&'magic'))
-	%'monk_tab'.pressed.connect(set_current_player.bind(&'monk'))
+	for key in [&'melee', &'ranged', &'magic', &'monk']:
+		var tab := get_node('%' + key + '_tab')
+		tab.pressed.connect(set_current_player.bind(key))
+		tab.get_node("left_button").pressed.connect(move_current_player.bind(-1))
+		tab.get_node("right_button").pressed.connect(move_current_player.bind(1))
 	
 	load_entity_tabs()
+	set_current_player(tabs[0])
 	load_curr_player()
 
 func load_curr_player() -> void:
@@ -27,13 +29,27 @@ func load_curr_player() -> void:
 
 func set_current_player(tab: StringName) -> void:
 	for e_tab: OverworldButton in get_tree().get_nodes_in_group(&'entity_tab'):
-		e_tab.set_alternate(e_tab.name != (tab + "_tab"))
+		var active := e_tab.name == (tab + "_tab")
+		e_tab.set_alternate(!active)
+		(e_tab.get_node("left_button") as CanvasItem).visible = active
+		(e_tab.get_node("right_button") as CanvasItem).visible = active
 	
 	curr_index = tabs.find(tab)
 	
-	print(curr_index)
-	
 	load_curr_player()
+
+func move_current_player(direction: int) -> void:
+	var new_index = curr_index + direction
+	if new_index < 0 or new_index >= len(DataManager.players):
+		return
+	if tabs[new_index] == &'none':
+		return
+	
+	# swap entity indexes
+	DataManager.swap_players(curr_index, new_index)
+	curr_index = new_index
+	
+	load_entity_tabs()
 
 func load_player(player: PlayerDataChunk) -> void:
 	if not player:
@@ -73,6 +89,8 @@ func load_entity_tabs() -> void:
 	for tab in get_tree().get_nodes_in_group(&'entity_tab'):
 		tab.hide()
 	
+	tabs = []
+	
 	for player in DataManager.players:
 		if not player:
 			tabs.append(&'none')
@@ -91,3 +109,10 @@ func load_entity_tabs() -> void:
 			PlayerDataChunk.PlayerRole.MONK:
 				tabs.append(&'monk')
 				%'monk_tab'.show()
+	
+	# update tab order
+	for i in range(len(tabs)):
+		if tabs[i] == &'none':
+			return
+		
+		%"entity_tabs".move_child(get_node("%" + tabs[i] + "_tab"), i)

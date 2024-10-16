@@ -103,6 +103,11 @@ func load_from_save() -> void:
 	for item in inventory_data:
 		add_to_inventory(InventoryItem.new(item.get('key', &"twig"), item.get('quantity', 0)))
 
+func swap_players(index_1: int, index_2: int) -> void:
+	var player = DataManager.players[index_1]
+	DataManager.players[index_1] = DataManager.players[index_2]
+	DataManager.players[index_2] = player
+
 #region Local Area
 # - Local Area - #
 func clear_local_area() -> void:

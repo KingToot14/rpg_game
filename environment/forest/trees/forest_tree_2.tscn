@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3prkucc0a80x"]
+[gd_scene load_steps=18 format=3 uid="uid://d3prkucc0a80x"]
 
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_h8wdw"]
 [ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_ns2hw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="7_wwj8q"]
 [ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="7_xfp3g"]
 [ext_resource type="Texture2D" uid="uid://eacdmxgody4r" path="res://environment/forest/trees/leaf_variations_2.png" id="8_8wdye"]
+[ext_resource type="Texture2D" uid="uid://7ndbkqnh3206" path="res://environment/forest/leaf_particle.png" id="9_hnrod"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 7.5
@@ -41,6 +42,17 @@ shader_parameter/radius = 0.05
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btqaj"]
 radius = 33.0
 height = 68.0
+
+[sub_resource type="Curve" id="Curve_tcb6p"]
+min_value = -5.0
+max_value = 5.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.139665, 5), 0.0, 0.0, 0, 0, Vector2(0.385475, -5), 0.0, 0.0, 0, 0, Vector2(0.642458, 5), 0.0, 0.0, 0, 0, Vector2(0.888268, -5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Gradient" id="Gradient_bm0rl"]
+offsets = PackedFloat32Array(0, 0.1, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
 
 [node name="forest_tree" type="StaticBody2D" node_paths=PackedStringArray("sprite")]
 visibility_layer = 5
@@ -98,6 +110,28 @@ position = Vector2(0, -9)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_btqaj")
 debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[node name="falling_leaves" type="CPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(-3, -28)
+amount = 4
+lifetime = 10.0
+preprocess = 3.0
+texture = ExtResource("9_hnrod")
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(1, 0.6)
+spread = 30.0
+gravity = Vector2(0, -0.5)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+orbit_velocity_curve = SubResource("Curve_tcb6p")
+damping_min = 0.5
+damping_max = 0.5
+angle_max = 360.0
+color_ramp = SubResource("Gradient_bm0rl")
 
 [node name="reflection" type="Sprite2D" parent="."]
 visible = false
