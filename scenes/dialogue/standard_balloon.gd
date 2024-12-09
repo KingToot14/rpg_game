@@ -112,6 +112,8 @@ var dialogue_line: DialogueLine:
 
 # --- Functions --- #
 func _ready() -> void:
+	print("Ready")
+	
 	Globals.curr_dialogue = self
 	
 	if Globals.overworld_manager:
@@ -130,6 +132,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
+	if not is_node_ready():
+		return
+	
 	# Detect a change of locale and update the current dialogue line to show the new language
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		var visible_ratio = dialogue_label.visible_ratio

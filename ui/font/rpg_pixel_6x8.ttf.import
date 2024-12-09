@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/rpg_pixel_6x8.ttf-e45ccd05c3927d83135db7b83a5
 Rendering=null
 antialiasing=0
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

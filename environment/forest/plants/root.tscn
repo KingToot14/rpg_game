@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://qd620tj3lpl0"]
+
+[ext_resource type="Texture2D" uid="uid://bh0io212r07q4" path="res://environment/forest/plants/root.png" id="1_j0dhv"]
+
+[node name="root" type="StaticBody2D"]
+z_index = 100
+y_sort_enabled = true
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("1_j0dhv")
+
+[node name="collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, -5, -9, -5, 8, 10, 12, 9, -5, -6, -10, -6)

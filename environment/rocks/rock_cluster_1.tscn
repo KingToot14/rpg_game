@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkqn0byb12a02"]
+
+[ext_resource type="Texture2D" uid="uid://cyoof5se3fkla" path="res://environment/rocks/small.png" id="1_qmghp"]
+
+[node name="rock_cluster" type="Node2D"]
+z_index = 100
+y_sort_enabled = true
+
+[node name="rock" type="Sprite2D" parent="."]
+position = Vector2(2, -14)
+texture = ExtResource("1_qmghp")
+offset = Vector2(0, 7)
+hframes = 2
+vframes = 2
+
+[node name="rock2" type="Sprite2D" parent="."]
+position = Vector2(-9, -4)
+texture = ExtResource("1_qmghp")
+offset = Vector2(0, 5)
+hframes = 4
+vframes = 2
+frame = 4
+
+[node name="rock3" type="Sprite2D" parent="."]
+position = Vector2(6, -4)
+texture = ExtResource("1_qmghp")
+offset = Vector2(0, 5)
+hframes = 4
+vframes = 2
+frame = 5
