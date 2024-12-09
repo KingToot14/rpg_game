@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://cqqrvi8mak0gf"]
+
+[ext_resource type="Texture2D" uid="uid://dctihgqxwllyi" path="res://ui/overworld/equip_backing/space.png" id="1_himgc"]
+[ext_resource type="Script" path="res://entities/scripts/equipment.gd" id="1_odpal"]
+[ext_resource type="Texture2D" uid="uid://dwfb2absmx4p7" path="res://entities/player/melee/weapons/wooden_sword.png" id="2_rppww"]
+
+[resource]
+script = ExtResource("1_odpal")
+equip_name = "Primal Rage"
+description = "Call upon your primal ancestors in a time of need"
+abilities = Array[String](["Ability 1", "Ability 2", "Ability 3"])
+equip_texture = ExtResource("2_rppww")
+equip_backing = ExtResource("1_himgc")
+enhancements = Array[Resource("res://entities/scripts/equipment_enhancement.gd")]([])

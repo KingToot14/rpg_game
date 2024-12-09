@@ -21,6 +21,11 @@ var description: String = "Description"
 var body: String
 var appearance := "pastel_blue"
 
+# - equipment - #
+var weapon: Equipment
+var armor: Equipment
+var special: Equipment
+
 # --- Constants --- #
 const APPEARANCE_PATH := "resources/appearances/"
 
@@ -72,13 +77,28 @@ func create_new(new_role: PlayerRole) -> bool:
 	# load stats
 	match role:
 		PlayerRole.MELEE:
+			# load stats
 			stats = load("res://entities/player/melee/stats.tres") as EntityStats
+			
+			# load default equipment
+			armor = load("res://entities/player/melee/armor/natures_tunic.tres") as Equipment
+			weapon = load("res://entities/player/melee/weapons/oakris_blade.tres") as Equipment
+			special = load("res://entities/player/melee/rages/primal_rage.tres") as Equipment
 		PlayerRole.RANGED:
+			# load stats
 			stats = load("res://entities/player/ranger/stats.tres") as EntityStats
+			
+			# load default equipment
 		PlayerRole.MONK:
+			# load stats
 			stats = load("res://entities/player/monk/stats.tres") as EntityStats
+			
+			# load default equipment
 		PlayerRole.MAGIC:
+			# load stats
 			stats = load("res://entities/player/magic/stats.tres") as EntityStats
+			
+			# load default equipment
 		_:
 			return false
 	
@@ -110,7 +130,7 @@ func heal_to_full() -> void:
 func get_appearance_path() -> String:
 	return APPEARANCE_PATH + appearance + ".tres"
 
-# - XP - #
+#region XP
 func get_xp_to_level(to_level := -1) -> int:
 	if to_level < 0:
 		to_level = level
@@ -156,6 +176,8 @@ func level_up() -> void:
 	if curr_xp >= xp_to_next:
 		level_up()
 
+#endregion
+
 #region Stats
 func get_max_hp() -> int:
 	return stats.get_max_hp(level)
@@ -177,5 +199,20 @@ func get_accuracy() -> float:
 
 func get_evasion() -> float:
 	return stats.get_evasion(level)
+
+#endregion
+
+#region Equipment
+func set_equipment(key: StringName, value: Equipment) -> void:
+	if value == null:
+		return
+	
+	match key:
+		&'armor':
+			armor = value
+		&'weapon':
+			weapon = value
+		&'special':
+			special = value
 
 #endregion

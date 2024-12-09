@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://bx0itm0a2g008"]
+
+[ext_resource type="Script" path="res://entities/scripts/equipment.gd" id="1_ty2ic"]
+[ext_resource type="Texture2D" uid="uid://oq754r7eeiwe" path="res://ui/overworld/equip_backing/forest.png" id="1_v5b0w"]
+[ext_resource type="Texture2D" uid="uid://dhehwk66i4ivn" path="res://entities/player/melee/weapons/oakris_blade.png" id="2_iwvgc"]
+
+[resource]
+script = ExtResource("1_ty2ic")
+equip_name = "Oakris Blade"
+description = "A mighty steel blade imbued by the Forest God's spirit"
+abilities = Array[String](["Charges Special at double the rate", "Main attack always lands a critical hit", "Unlocks Oakri's Might as a special"])
+equip_texture = ExtResource("2_iwvgc")
+equip_backing = ExtResource("1_v5b0w")
+enhancements = Array[Resource("res://entities/scripts/equipment_enhancement.gd")]([])

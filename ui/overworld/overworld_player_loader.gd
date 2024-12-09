@@ -25,7 +25,9 @@ func load_curr_player() -> void:
 	var player = DataManager.players[curr_index]
 	
 	if player:
-		load_player(player)
+		for node in get_tree().get_nodes_in_group(&'player_menu'):
+			if 'load_player' in node:
+				node.load_player(player)
 
 func set_current_player(tab: StringName) -> void:
 	curr_index = tabs.find(tab)
@@ -50,40 +52,7 @@ func move_current_player(direction: int) -> void:
 	curr_index = new_index
 	
 	load_entity_tabs()
-
-func load_player(player: PlayerDataChunk) -> void:
-	if not player:
-		return
-	
-	# load stats
-	%'player_hp'.text = "%d" % player.get_max_hp()
-	%'player_p_attack'.text = "%.2f" % player.get_p_attack()
-	%'player_m_attack'.text = "%.2f" % player.get_m_attack()
-	%'player_p_defense'.text = "%.2f" % player.get_p_defense()
-	%'player_m_defense'.text = "%.2f" % player.get_m_defense()
-	%'player_accuracy'.text = "%.2f" % player.get_accuracy()
-	%'player_evasion'.text = "%.2f" % player.get_evasion()
-	
-	# load name
-	%'player_name'.text = player.name
-	
-	# load description
-	%'player_description'.text = player.description
-	
-	# load xp
-	%'player_level'.text = "Level: %d" % player.level
-	
-	%'total_xp'.text = "%d" % player.curr_xp
-	%'next_xp'.text = "%d" % player.xp_to_next
-	
-	%'xp_fill'.size.x = %'xp_fill'.get_parent().size.x * (1.0 * player.curr_xp / player.xp_to_next)
-	
-	# load hp
-	%'hp_label'.text = "Health: %d/%d" % [player.curr_hp, player.get_max_hp()]
-	%'hp_fill'.size.x = %'hp_fill'.get_parent().size.x * (1.0 * player.curr_hp / player.get_max_hp())
-	
-	%'sp_label'.text = "Special: %d" % player.curr_special + "%"
-	%'sp_fill'.size.x = %'sp_fill'.get_parent().size.x * player.curr_special
+	set_current_player(tabs[curr_index])
 
 func load_entity_tabs() -> void:
 	for tab in get_tree().get_nodes_in_group(&'entity_tab'):

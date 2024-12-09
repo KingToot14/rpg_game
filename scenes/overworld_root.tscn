@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=65 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://ui/overworld/chest_ui/chest_ui.gd" id="11_uvdfv"]
 [ext_resource type="PackedScene" uid="uid://k01qlajn0pie" path="res://ui/overworld/chest_ui/item_info.tscn" id="12_6d1i2"]
 [ext_resource type="Texture2D" uid="uid://bepw1vdv0xr14" path="res://ui/thick_outline.png" id="12_geasp"]
-[ext_resource type="Script" path="res://ui/overworld/menus/party_manager.gd" id="12_svvh6"]
 [ext_resource type="Script" path="res://ui/overworld/menus/inventory_display.gd" id="13_nbprq"]
 [ext_resource type="Texture2D" uid="uid://c427eqyjrj3fb" path="res://entities/player/melee/details_background.png" id="14_l31uf"]
 [ext_resource type="Texture2D" uid="uid://dct8suxr7kywt" path="res://ui/overworld/inventory/main_panel.png" id="15_bqrkx"]
@@ -25,8 +24,14 @@
 [ext_resource type="Texture2D" uid="uid://dwgdq3k5xdko0" path="res://ui/overworld/inventory/item_slots.png" id="16_5l4gb"]
 [ext_resource type="Texture2D" uid="uid://bbmbw2vxmu5gt" path="res://ui/overworld/inventory/tabs.png" id="16_ji43i"]
 [ext_resource type="Texture2D" uid="uid://blir4oe1doqle" path="res://ui/icons/edit_icon.png" id="17_6x7gp"]
+[ext_resource type="Script" path="res://ui/overworld/menus/player_stats_menu.gd" id="18_3o0mk"]
+[ext_resource type="Texture2D" uid="uid://dhehwk66i4ivn" path="res://entities/player/melee/weapons/oakris_blade.png" id="18_hsw31"]
+[ext_resource type="Texture2D" uid="uid://oq754r7eeiwe" path="res://ui/overworld/equip_backing/forest.png" id="18_vlqps"]
 [ext_resource type="Texture2D" uid="uid://ca0joglfc3q6w" path="res://ui/overworld/chest_ui/main_panel.png" id="20_kcaw1"]
+[ext_resource type="Texture2D" uid="uid://dctihgqxwllyi" path="res://ui/overworld/equip_backing/space.png" id="20_ru327"]
+[ext_resource type="Texture2D" uid="uid://d01wlsu8pbf3p" path="res://entities/player/melee/armor/natures_tunic.png" id="20_s6o2p"]
 [ext_resource type="Texture2D" uid="uid://dixv4de6142ck" path="res://ui/overworld/chest_ui/button.png" id="21_dwufm"]
+[ext_resource type="Script" path="res://ui/overworld/menus/equipment_info_menu.gd" id="23_sm8ti"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8866"]
 size = Vector2(500, 10)
@@ -121,6 +126,24 @@ region = Rect2(0, 0, 9, 9)
 [sub_resource type="AtlasTexture" id="AtlasTexture_646qt"]
 atlas = ExtResource("17_6x7gp")
 region = Rect2(9, 0, 9, 9)
+
+[sub_resource type="GDScript" id="GDScript_0f313"]
+script/source = "class_name PartyManager
+extends Control
+
+# --- Variables --- #
+var curr_index := 1
+
+# --- Functions --- #
+func set_melee_position(index: int) -> void:
+	swap_members(index, curr_index)
+	curr_index = index
+
+func swap_members(index_1: int, index_2: int) -> void:
+	var temp = DataManager.players[index_1]
+	DataManager.players[index_1] = DataManager.players[index_2]
+	DataManager.players[index_2] = temp
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v3iv"]
 atlas = ExtResource("16_ji43i")
@@ -969,7 +992,7 @@ theme_type_variation = &"TabName"
 text = " 1,000,000"
 scroll_active = false
 
-[node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
+[node name="party_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent", "content_parent") groups=["overworld_panel"]]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -985,11 +1008,11 @@ grow_vertical = 2
 theme = ExtResource("5_nuo0b")
 script = ExtResource("11_5mxsm")
 tab_parent = NodePath("tabs")
+content_parent = NodePath("content")
 
 [node name="backing" parent="ui/party_panel" instance=ExtResource("4_7u65r")]
 visible = false
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
@@ -1001,10 +1024,8 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 4.0
 offset_top = -12.0
-offset_right = -4.0
-offset_bottom = 3.0
+offset_bottom = 5.0
 grow_horizontal = 2
 theme_type_variation = &"Tabs"
 
@@ -1332,15 +1353,16 @@ scroll_active = false
 [node name="entity_tabs" type="HBoxContainer" parent="ui/party_panel"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
 offset_top = -3.0
-offset_right = 149.0
 offset_bottom = 12.0
+grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"Tabs"
+script = ExtResource("15_vcvge")
 
 [node name="melee_tab" type="BaseButton" parent="ui/party_panel/entity_tabs" node_paths=PackedStringArray("outline_rect") groups=["entity_tab"]]
 _import_path = NodePath("")
@@ -2518,16 +2540,27 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_1eavj")
 script = ExtResource("15_ncx5y")
 
-[node name="overview_tab" type="Control" parent="ui/party_panel"]
+[node name="content" type="HBoxContainer" parent="ui/party_panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -67.5
+offset_right = 143.5
+offset_bottom = 67.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("15_vcvge")
+theme_type_variation = &"ContentBox"
+alignment = 1
 
-[node name="panel" parent="ui/party_panel/overview_tab" instance=ExtResource("4_7u65r")]
+[node name="stats_panel" type="Control" parent="ui/party_panel/content"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+
+[node name="panel" parent="ui/party_panel/content/stats_panel" instance=ExtResource("4_7u65r")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2537,14 +2570,17 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="player_display" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="player_display" parent="ui/party_panel/content/stats_panel" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = -130.0
-offset_bottom = -75.0
+offset_right = -2.0
+offset_bottom = 60.0
+grow_vertical = 1
 
-[node name="background" type="TextureRect" parent="ui/party_panel/overview_tab/player_display"]
+[node name="background" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_display"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2559,18 +2595,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_l31uf")
 
-[node name="player_melee" parent="ui/party_panel/overview_tab/player_display" instance=ExtResource("15_m3ckk")]
+[node name="player_melee" parent="ui/party_panel/content/stats_panel/player_display" instance=ExtResource("15_m3ckk")]
 display_mode = true
 display_pos = Vector2(22, 40)
 
-[node name="player_stats" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="player_stats" parent="ui/party_panel/content/stats_panel" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 61.0
-offset_right = -130.0
+offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="hp_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="hp_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2581,7 +2617,7 @@ offset_right = 27.0
 offset_bottom = 10.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/hp_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/hp_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2590,7 +2626,7 @@ texture = SubResource("AtlasTexture_l41je")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_hp" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/hp_stat"]
+[node name="player_hp" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/hp_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2604,7 +2640,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="p_attack_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="p_attack_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2615,7 +2651,7 @@ offset_right = 27.0
 offset_bottom = 20.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/p_attack_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/p_attack_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2624,7 +2660,7 @@ texture = SubResource("AtlasTexture_lmhls")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_p_attack" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/p_attack_stat"]
+[node name="player_p_attack" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/p_attack_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2638,7 +2674,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="m_attack_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="m_attack_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2649,7 +2685,7 @@ offset_right = 27.0
 offset_bottom = 30.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/m_attack_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/m_attack_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2658,7 +2694,7 @@ texture = SubResource("AtlasTexture_vycpc")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_m_attack" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/m_attack_stat"]
+[node name="player_m_attack" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/m_attack_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2672,7 +2708,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="p_defense_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="p_defense_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2683,7 +2719,7 @@ offset_right = 27.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/p_defense_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/p_defense_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2692,7 +2728,7 @@ texture = SubResource("AtlasTexture_sy1dv")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_p_defense" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/p_defense_stat"]
+[node name="player_p_defense" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/p_defense_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2706,7 +2742,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="m_defense_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="m_defense_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2717,7 +2753,7 @@ offset_right = 27.0
 offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/m_defense_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/m_defense_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2726,7 +2762,7 @@ texture = SubResource("AtlasTexture_apg04")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_m_defense" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/m_defense_stat"]
+[node name="player_m_defense" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/m_defense_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2740,7 +2776,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="accuracy_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="accuracy_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2751,7 +2787,7 @@ offset_right = 27.0
 offset_bottom = 60.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/accuracy_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/accuracy_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2760,7 +2796,7 @@ texture = SubResource("AtlasTexture_m74un")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_accuracy" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/accuracy_stat"]
+[node name="player_accuracy" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/accuracy_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2774,7 +2810,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="evasion_stat" type="Control" parent="ui/party_panel/overview_tab/player_stats"]
+[node name="evasion_stat" type="Control" parent="ui/party_panel/content/stats_panel/player_stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2785,7 +2821,7 @@ offset_right = 27.0
 offset_bottom = 70.0
 grow_horizontal = 2
 
-[node name="icon" type="TextureRect" parent="ui/party_panel/overview_tab/player_stats/evasion_stat"]
+[node name="icon" type="TextureRect" parent="ui/party_panel/content/stats_panel/player_stats/evasion_stat"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 8.0
@@ -2794,7 +2830,7 @@ texture = SubResource("AtlasTexture_1isqy")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="player_evasion" type="RichTextLabel" parent="ui/party_panel/overview_tab/player_stats/evasion_stat"]
+[node name="player_evasion" type="RichTextLabel" parent="ui/party_panel/content/stats_panel/player_stats/evasion_stat"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2808,17 +2844,33 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="name" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="overview_tab" type="Control" parent="ui/party_panel/content" groups=["player_menu"]]
+visible = false
+custom_minimum_size = Vector2(129, 0)
+layout_mode = 2
+script = ExtResource("18_3o0mk")
+
+[node name="panel" parent="ui/party_panel/content/overview_tab" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name" parent="ui/party_panel/content/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
-offset_left = 61.0
+offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = 15.0
 grow_vertical = 1
 
-[node name="player_name" type="LineEdit" parent="ui/party_panel/overview_tab/name"]
+[node name="player_name" type="LineEdit" parent="ui/party_panel/content/overview_tab/name"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2839,7 +2891,7 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="underline" type="ColorRect" parent="ui/party_panel/overview_tab/name"]
+[node name="underline" type="ColorRect" parent="ui/party_panel/content/overview_tab/name"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 1
 anchors_preset = 12
@@ -2855,7 +2907,7 @@ grow_vertical = 0
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="edit_button" type="BaseButton" parent="ui/party_panel/overview_tab/name" node_paths=PackedStringArray("outline_rect")]
+[node name="edit_button" type="BaseButton" parent="ui/party_panel/content/overview_tab/name" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2929,7 +2981,7 @@ outline_rect = NodePath("feather")
 normal_key = &"light"
 hover_key = &"white"
 
-[node name="stem" type="TextureRect" parent="ui/party_panel/overview_tab/name/edit_button"]
+[node name="stem" type="TextureRect" parent="ui/party_panel/content/overview_tab/name/edit_button"]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 0
 offset_right = 9.0
@@ -2938,7 +2990,7 @@ texture = SubResource("AtlasTexture_8wf73")
 script = ExtResource("15_ncx5y")
 key = &"dark"
 
-[node name="feather" type="TextureRect" parent="ui/party_panel/overview_tab/name/edit_button"]
+[node name="feather" type="TextureRect" parent="ui/party_panel/content/overview_tab/name/edit_button"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
 layout_mode = 0
 offset_right = 9.0
@@ -2947,17 +2999,17 @@ texture = SubResource("AtlasTexture_646qt")
 script = ExtResource("15_ncx5y")
 key = &"accent"
 
-[node name="description" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="description" parent="ui/party_panel/content/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
-offset_left = 61.0
+offset_left = 2.0
 offset_top = 16.0
 offset_right = -2.0
 offset_bottom = 60.0
 grow_vertical = 1
 
-[node name="player_description" type="RichTextLabel" parent="ui/party_panel/overview_tab/description"]
+[node name="player_description" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/description"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2977,17 +3029,17 @@ Description
 Description"
 scroll_active = false
 
-[node name="essence" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="essence" parent="ui/party_panel/content/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
-offset_left = 61.0
+offset_left = 2.0
 offset_top = 61.0
 offset_right = -2.0
 offset_bottom = 93.0
 grow_vertical = 1
 
-[node name="player_level" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+[node name="player_level" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/essence"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3003,7 +3055,7 @@ theme_type_variation = &"Medium"
 text = "Level: 5"
 scroll_active = false
 
-[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+[node name="label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/essence"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3018,7 +3070,7 @@ theme_type_variation = &"Medium"
 text = "Total Essence:"
 scroll_active = false
 
-[node name="label2" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+[node name="label2" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/essence"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3033,7 +3085,7 @@ theme_type_variation = &"Medium"
 text = "To Next Level:"
 scroll_active = false
 
-[node name="total_xp" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+[node name="total_xp" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/essence"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3049,7 +3101,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="next_xp" type="RichTextLabel" parent="ui/party_panel/overview_tab/essence"]
+[node name="next_xp" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/essence"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3065,7 +3117,7 @@ theme_type_variation = &"Medium"
 text = "10,000,000"
 scroll_active = false
 
-[node name="xp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/essence"]
+[node name="xp_slider" type="ColorRect" parent="ui/party_panel/content/overview_tab/essence"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3079,7 +3131,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.027451, 0.478431, 0.478431, 1)
 
-[node name="xp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/essence/xp_slider"]
+[node name="xp_fill" type="ColorRect" parent="ui/party_panel/content/overview_tab/essence/xp_slider"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3089,17 +3141,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0.941176, 0.941176, 1)
 
-[node name="hp_sp" parent="ui/party_panel/overview_tab" instance=ExtResource("5_7bpw0")]
+[node name="hp_sp" parent="ui/party_panel/content/overview_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
-offset_left = 61.0
+offset_left = 2.0
 offset_top = 94.0
 offset_right = -2.0
 offset_bottom = 133.0
 grow_vertical = 1
 
-[node name="hp_label" type="RichTextLabel" parent="ui/party_panel/overview_tab/hp_sp"]
+[node name="hp_label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/hp_sp"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3115,7 +3167,7 @@ theme_type_variation = &"Medium"
 text = "Health: 10,000,000/10,000,000"
 scroll_active = false
 
-[node name="hp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp"]
+[node name="hp_slider" type="ColorRect" parent="ui/party_panel/content/overview_tab/hp_sp"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3126,7 +3178,7 @@ offset_bottom = 13.0
 grow_horizontal = 2
 color = Color(0.54902, 0.0313726, 0.0313726, 1)
 
-[node name="hp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp/hp_slider"]
+[node name="hp_fill" type="ColorRect" parent="ui/party_panel/content/overview_tab/hp_sp/hp_slider"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3136,7 +3188,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.941176, 0.160784, 0.160784, 1)
 
-[node name="sp_label" type="RichTextLabel" parent="ui/party_panel/overview_tab/hp_sp"]
+[node name="sp_label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/hp_sp"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3152,7 +3204,7 @@ theme_type_variation = &"Medium"
 text = "Special: 50%"
 scroll_active = false
 
-[node name="sp_slider" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp"]
+[node name="sp_slider" type="ColorRect" parent="ui/party_panel/content/overview_tab/hp_sp"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -3163,7 +3215,7 @@ offset_bottom = 26.0
 grow_horizontal = 2
 color = Color(0.54902, 0.541176, 0.0313726, 1)
 
-[node name="sp_fill" type="ColorRect" parent="ui/party_panel/overview_tab/hp_sp/sp_slider"]
+[node name="sp_fill" type="ColorRect" parent="ui/party_panel/content/overview_tab/hp_sp/sp_slider"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -3173,7 +3225,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.941176, 0.929412, 0.160784, 1)
 
-[node name="text" type="RichTextLabel" parent="ui/party_panel/overview_tab"]
+[node name="text" type="RichTextLabel" parent="ui/party_panel/content/overview_tab"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -3186,7 +3238,7 @@ bbcode_enabled = true
 text = "[center]Overview"
 scroll_active = false
 
-[node name="buttons" type="HBoxContainer" parent="ui/party_panel/overview_tab"]
+[node name="buttons" type="HBoxContainer" parent="ui/party_panel/content/overview_tab"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -3201,9 +3253,9 @@ offset_bottom = -40.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-script = ExtResource("12_svvh6")
+script = SubResource("GDScript_0f313")
 
-[node name="party_button" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+[node name="party_button" type="BaseButton" parent="ui/party_panel/content/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -3263,12 +3315,12 @@ outline_rect = NodePath("outline")
 normal_key = &"dark"
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/party_panel/content/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 key = &"dark"
 
-[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/party_panel/content/overview_tab/buttons/party_button" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
@@ -3277,7 +3329,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 key = &"dark"
 
-[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button"]
+[node name="label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/buttons/party_button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3291,7 +3343,7 @@ bbcode_enabled = true
 text = "[center]1"
 scroll_active = false
 
-[node name="party_button2" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+[node name="party_button2" type="BaseButton" parent="ui/party_panel/content/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -3351,12 +3403,12 @@ outline_rect = NodePath("outline")
 normal_key = &"dark"
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/party_panel/content/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 key = &"dark"
 
-[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/party_panel/content/overview_tab/buttons/party_button2" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
@@ -3365,7 +3417,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 key = &"dark"
 
-[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button2"]
+[node name="label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/buttons/party_button2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3379,7 +3431,7 @@ bbcode_enabled = true
 text = "[center]2"
 scroll_active = false
 
-[node name="party_button3" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+[node name="party_button3" type="BaseButton" parent="ui/party_panel/content/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -3439,12 +3491,12 @@ outline_rect = NodePath("outline")
 normal_key = &"dark"
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/party_panel/content/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 key = &"dark"
 
-[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/party_panel/content/overview_tab/buttons/party_button3" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
@@ -3453,7 +3505,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 key = &"dark"
 
-[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button3"]
+[node name="label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/buttons/party_button3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3467,7 +3519,7 @@ bbcode_enabled = true
 text = "[center]3"
 scroll_active = false
 
-[node name="party_button4" type="BaseButton" parent="ui/party_panel/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
+[node name="party_button4" type="BaseButton" parent="ui/party_panel/content/overview_tab/buttons" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -3527,12 +3579,12 @@ outline_rect = NodePath("outline")
 normal_key = &"dark"
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/party_panel/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/party_panel/content/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 key = &"dark"
 
-[node name="backing" parent="ui/party_panel/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/party_panel/content/overview_tab/buttons/party_button4" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
 layout_mode = 1
 offset_left = 2.0
@@ -3541,7 +3593,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 key = &"dark"
 
-[node name="label" type="RichTextLabel" parent="ui/party_panel/overview_tab/buttons/party_button4"]
+[node name="label" type="RichTextLabel" parent="ui/party_panel/content/overview_tab/buttons/party_button4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3555,53 +3607,658 @@ bbcode_enabled = true
 text = "[center]4"
 scroll_active = false
 
-[node name="equipment_tab" type="Control" parent="ui/party_panel"]
-visible = false
-layout_mode = 1
-anchor_left = 0.012
-anchor_top = 0.144
-anchor_right = 0.987
-anchor_bottom = 0.987
-offset_left = 0.0799999
-offset_top = -0.0400009
-offset_right = 0.0799866
-offset_bottom = 0.0799866
-grow_horizontal = 2
-grow_vertical = 2
+[node name="equipment_tab" type="Control" parent="ui/party_panel/content"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
 
-[node name="backing" parent="ui/party_panel/equipment_tab" instance=ExtResource("5_7bpw0")]
-layout_mode = 1
-
-[node name="text" type="RichTextLabel" parent="ui/party_panel/equipment_tab"]
+[node name="panel" parent="ui/party_panel/content/equipment_tab" instance=ExtResource("4_7u65r")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 2.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="weapon" parent="ui/party_panel/content/equipment_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 45.0
+grow_vertical = 1
+
+[node name="frame" type="ColorRect" parent="ui/party_panel/content/equipment_tab/weapon"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="weapon_backing" type="TextureRect" parent="ui/party_panel/content/equipment_tab/weapon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("18_vlqps")
+
+[node name="weapon_texture" type="TextureRect" parent="ui/party_panel/content/equipment_tab/weapon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+texture = ExtResource("18_hsw31")
+
+[node name="weapon_name" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/weapon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
 bbcode_enabled = true
-text = "[center]Equips"
+text = "Oakri's Blade"
 scroll_active = false
 
-[node name="skills_tab" type="Control" parent="ui/party_panel"]
-visible = false
+[node name="weapon_level" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/weapon"]
+unique_name_in_owner = true
 layout_mode = 1
-anchor_left = 0.012
-anchor_top = 0.144
-anchor_right = 0.987
-anchor_bottom = 0.987
-offset_left = 0.0799999
-offset_top = -0.0400009
-offset_right = 0.0799866
-offset_bottom = 0.0799866
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 33.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[right]Level 5"
+scroll_active = false
+
+[node name="info_button" type="BaseButton" parent="ui/party_panel/content/equipment_tab/weapon" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -15.0
+offset_right = 69.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("backing")
+normal_key = &"dark"
+hover_key = &"normal"
+
+[node name="frame" parent="ui/party_panel/content/equipment_tab/weapon/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+key = &"light"
+
+[node name="backing" parent="ui/party_panel/content/equipment_tab/weapon/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+key = &"dark"
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/weapon/info_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Info"
+scroll_active = false
+
+[node name="armor" parent="ui/party_panel/content/equipment_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_top = 46.0
+offset_right = -2.0
+offset_bottom = 89.0
+grow_vertical = 1
+
+[node name="frame" type="ColorRect" parent="ui/party_panel/content/equipment_tab/armor"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="armor_backing" type="TextureRect" parent="ui/party_panel/content/equipment_tab/armor"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("18_vlqps")
+
+[node name="armor_texture" type="TextureRect" parent="ui/party_panel/content/equipment_tab/armor"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+texture = ExtResource("20_s6o2p")
+
+[node name="armor_name" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/armor"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "Nature's Tunic"
+scroll_active = false
+
+[node name="armor_level" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/armor"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 33.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[right]Level 3"
+scroll_active = false
+
+[node name="info_button" type="BaseButton" parent="ui/party_panel/content/equipment_tab/armor" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -15.0
+offset_right = 69.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("backing")
+normal_key = &"dark"
+hover_key = &"normal"
+
+[node name="frame" parent="ui/party_panel/content/equipment_tab/armor/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+key = &"light"
+
+[node name="backing" parent="ui/party_panel/content/equipment_tab/armor/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+key = &"dark"
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/armor/info_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Info"
+scroll_active = false
+
+[node name="special" parent="ui/party_panel/content/equipment_tab" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_top = 90.0
+offset_right = -2.0
+offset_bottom = 133.0
+grow_vertical = 1
+
+[node name="frame" type="ColorRect" parent="ui/party_panel/content/equipment_tab/special"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="special_backing" type="TextureRect" parent="ui/party_panel/content/equipment_tab/special"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("20_ru327")
+
+[node name="special_texture" type="TextureRect" parent="ui/party_panel/content/equipment_tab/special"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+texture = ExtResource("18_hsw31")
+
+[node name="special_name" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/special"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "Primal Rage"
+scroll_active = false
+
+[node name="special_level" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/special"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 33.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[right]Level 1"
+scroll_active = false
+
+[node name="info_button" type="BaseButton" parent="ui/party_panel/content/equipment_tab/special" node_paths=PackedStringArray("outline_rect")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -15.0
+offset_right = 69.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("8_40l3n")
+outline_rect = NodePath("backing")
+normal_key = &"dark"
+hover_key = &"normal"
+
+[node name="frame" parent="ui/party_panel/content/equipment_tab/special/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 1
+key = &"light"
+
+[node name="backing" parent="ui/party_panel/content/equipment_tab/special/info_button" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+key = &"dark"
+
+[node name="text" type="RichTextLabel" parent="ui/party_panel/content/equipment_tab/special/info_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[center]Info"
+scroll_active = false
+
+[node name="equipment_info" type="Control" parent="ui/party_panel/content" groups=["player_menu"]]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+script = ExtResource("23_sm8ti")
+
+[node name="panel" parent="ui/party_panel/content/equipment_info" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="backing" parent="ui/party_panel/skills_tab" instance=ExtResource("5_7bpw0")]
+[node name="name" parent="ui/party_panel/content/equipment_info" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -90.0
+key = &""
+
+[node name="frame" type="ColorRect" parent="ui/party_panel/content/equipment_info/name"]
+self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="equipment_backing" type="TextureRect" parent="ui/party_panel/content/equipment_info/name"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("18_vlqps")
+
+[node name="equipment_texture" type="TextureRect" parent="ui/party_panel/content/equipment_info/name"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+texture = ExtResource("18_hsw31")
+
+[node name="equipment_name" type="RichTextLabel" parent="ui/party_panel/content/equipment_info/name"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "Oakri's Blade"
+scroll_active = false
+
+[node name="equipment_level" type="RichTextLabel" parent="ui/party_panel/content/equipment_info/name"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 33.0
+offset_right = -6.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "Level 5"
+scroll_active = false
+
+[node name="description" parent="ui/party_panel/content/equipment_info" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 46.0
+offset_right = -2.0
+offset_bottom = -2.0
+key = &""
+
+[node name="equipment_description" type="RichTextLabel" parent="ui/party_panel/content/equipment_info/description"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "Description
+- Ability
+- Ability
+- Ability"
+scroll_active = false
+
+[node name="skills_tab" type="Control" parent="ui/party_panel/content"]
+visible = false
+custom_minimum_size = Vector2(129, 0)
+layout_mode = 2
+
+[node name="backing" parent="ui/party_panel/content/skills_tab" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="text" type="RichTextLabel" parent="ui/party_panel/skills_tab"]
+[node name="text" type="RichTextLabel" parent="ui/party_panel/content/skills_tab"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -6821,11 +7478,15 @@ scroll_active = false
 [connection signal="pressed" from="ui/party_panel/tabs/overview_tab" to="ui/party_panel" method="set_tab" binds= ["overview"]]
 [connection signal="pressed" from="ui/party_panel/tabs/equipment_tab" to="ui/party_panel" method="set_tab" binds= ["equipment"]]
 [connection signal="pressed" from="ui/party_panel/tabs/skills_tab" to="ui/party_panel" method="set_tab" binds= ["skills"]]
-[connection signal="visibility_changed" from="ui/party_panel/overview_tab" to="ui/party_panel/overview_tab" method="load_curr_player"]
-[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [0]]
-[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button2" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [1]]
-[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button3" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [2]]
-[connection signal="pressed" from="ui/party_panel/overview_tab/buttons/party_button4" to="ui/party_panel/overview_tab/buttons" method="set_melee_position" binds= [3]]
+[connection signal="visibility_changed" from="ui/party_panel/content/overview_tab" to="ui/party_panel/content/overview_tab" method="load_curr_player"]
+[connection signal="pressed" from="ui/party_panel/content/overview_tab/buttons/party_button" to="ui/party_panel/content/overview_tab/buttons" method="set_melee_position" binds= [0]]
+[connection signal="pressed" from="ui/party_panel/content/overview_tab/buttons/party_button2" to="ui/party_panel/content/overview_tab/buttons" method="set_melee_position" binds= [1]]
+[connection signal="pressed" from="ui/party_panel/content/overview_tab/buttons/party_button3" to="ui/party_panel/content/overview_tab/buttons" method="set_melee_position" binds= [2]]
+[connection signal="pressed" from="ui/party_panel/content/overview_tab/buttons/party_button4" to="ui/party_panel/content/overview_tab/buttons" method="set_melee_position" binds= [3]]
+[connection signal="visibility_changed" from="ui/party_panel/content/equipment_tab" to="ui/party_panel/content/equipment_info" method="load_equipment"]
+[connection signal="pressed" from="ui/party_panel/content/equipment_tab/weapon/info_button" to="ui/party_panel/content/equipment_info" method="load_from_player" binds= [&"weapon"]]
+[connection signal="pressed" from="ui/party_panel/content/equipment_tab/armor/info_button" to="ui/party_panel/content/equipment_info" method="load_from_player" binds= [&"armor"]]
+[connection signal="pressed" from="ui/party_panel/content/equipment_tab/special/info_button" to="ui/party_panel/content/equipment_info" method="load_from_player" binds= [&"special"]]
 [connection signal="pressed" from="ui/item_panel/tabs/materials_tab" to="ui/item_panel" method="set_tab" binds= ["materials"]]
 [connection signal="pressed" from="ui/item_panel/tabs/food_tab" to="ui/item_panel" method="set_tab" binds= ["food"]]
 [connection signal="pressed" from="ui/item_panel/tabs/special_tab" to="ui/item_panel" method="set_tab" binds= ["special"]]

@@ -5,6 +5,8 @@
 [ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="2_xcy0d"]
 
 [resource]
+ContentBox/base_type = &"HBoxContainer"
+ContentBox/constants/separation = -1
 Count/base_type = &"RichTextLabel"
 Count/colors/font_outline_color = Color(0, 0, 0, 1)
 Count/constants/outline_size = 4

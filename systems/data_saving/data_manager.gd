@@ -76,6 +76,9 @@ func load_from_save() -> void:
 	else:
 		players[0] = PlayerDataChunk.new()
 		players[0].create_new(PlayerDataChunk.PlayerRole.MELEE)
+		
+		players[1] = PlayerDataChunk.new()
+		players[1].create_new(PlayerDataChunk.PlayerRole.MONK)
 	
 	# - Local Area
 	local_area = LocalAreaChunk.new(data.get('local_area'))
