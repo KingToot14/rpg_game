@@ -3,6 +3,11 @@ extends CharacterBody2D
 
 # --- Variables --- #
 var direction: Vector2
+var dir_string := "down"
+
+var prev_position: Vector2
+var pos_delta: Vector2
+
 var in_transition := false
 
 @export var lower_area_pos: Vector2 = Vector2(20, 20)
@@ -21,11 +26,15 @@ var in_transition := false
 @onready var audio_player := %'audio_player' as SfxPlayer
 @onready var footstep_timer := %'footstep_timer' as Timer
 
+@onready var animator := %'animator' as AnimationPlayer
+
 var curr_state: PlayerControlState
 
 # --- Functions --- #
 func _ready() -> void:
 	set_state('moving')
+	
+	animator.play(&'walk_down')
 	
 	await get_tree().process_frame
 	# signals
@@ -35,6 +44,10 @@ func _physics_process(delta: float) -> void:
 	get_direction()
 	
 	curr_state.handle_process(delta)
+	
+	pos_delta = prev_position - position
+	prev_position = position
+	update_texture()
 	
 	RenderingServer.global_shader_parameter_set('player_position', position_marker.global_position / overworld_size)
 
@@ -46,21 +59,27 @@ func set_state(state: String) -> void:
 
 func get_direction() -> void:
 	direction = Vector2(Input.get_axis('overworld_left', 'overworld_right'), Input.get_axis('overworld_up', 'overworld_down')).normalized()
+	
+	if direction != Vector2.ZERO:
+		if abs(direction.x) > abs(direction.y):
+			if direction.x < 0:
+				sprite.flip_h = true
+				dir_string = "right"
+			else:
+				sprite.flip_h = false
+				dir_string = "right"
+		else:
+			if direction.y < 0:
+				dir_string = "up"
+			else:
+				dir_string = "down"
 
 #region Sprites
 func update_texture() -> void:
-	if direction == Vector2.ZERO:
-		return
-	
-	sprite.flip_h = direction.x < 0.0
-	reflection_sprite.flip_h = sprite.flip_h
-	
-	if abs(direction.x) < front_threshold:
-		sprite.frame = 0 if direction.y >= 0.0 else 4
+	if pos_delta == Vector2.ZERO:
+		animator.play("idle_%s" % dir_string)
 	else:
-		sprite.frame = 2 if direction.y >= 0.0 else 6
-	
-	reflection_sprite.frame = sprite.frame
+		animator.play("walk_%s" % dir_string)
 
 #endregion
 

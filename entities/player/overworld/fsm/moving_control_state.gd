@@ -21,10 +21,9 @@ func handle_process(_delta: float) -> void:
 	else:
 		player.velocity = player.direction * movement_speed
 	var collided = player.move_and_slide()
-	player.update_texture()
 	
 	# get position delta
-	prev_pos = player.position
+	var pos_delta = get_parent().prev_position - get_parent().position
 	
 	# play/pause footsteps
 	if not collided and footstep_timer.paused and player.direction != Vector2.ZERO:
