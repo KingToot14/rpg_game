@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wwwrofwbdxni"
-path="res://.godot/imported/decorations.png-1f685904730505e7b7f23c3de7f12e6f.ctex"
+uid="uid://ccknc4tabc2a2"
+path="res://.godot/imported/deco_flower.png-70b31f1142b6c0b70f41aab02a903626.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/slimes/green_slime/decorations.png"
-dest_files=["res://.godot/imported/decorations.png-1f685904730505e7b7f23c3de7f12e6f.ctex"]
+source_file="res://entities/enemies/slimes/green_slime/deco_flower.png"
+dest_files=["res://.godot/imported/deco_flower.png-70b31f1142b6c0b70f41aab02a903626.ctex"]
 
 [params]
 
