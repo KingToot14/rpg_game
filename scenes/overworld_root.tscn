@@ -227,17 +227,25 @@ position = Vector2(213, 129)
 script = ExtResource("4_hl626")
 chest_panel = NodePath("chest_panel")
 
-[node name="main_panel" parent="ui" instance=ExtResource("4_7u65r")]
+[node name="bottom_holder" type="Control" parent="ui"]
+layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -23.0
-offset_right = 1.0
-offset_bottom = 1.0
+offset_top = -24.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="main_panel" parent="ui/bottom_holder" instance=ExtResource("4_7u65r")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("5_nuo0b")
 script = ExtResource("5_olh6n")
@@ -246,21 +254,7 @@ mouse_threshold = 226.0
 tween_time = 0.15
 tween_offset = 4.0
 
-[node name="bottom" type="Control" parent="ui/main_panel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -239.0
-offset_top = -22.0
-offset_right = 239.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="exit_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="exit_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -294,9 +288,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -38.0
+offset_left = -40.0
 offset_top = -10.0
-offset_right = 0.0
+offset_right = -2.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -334,17 +328,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/exit_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/exit_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/exit_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/exit_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/exit_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -358,7 +352,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_auk4g")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/exit_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/exit_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -375,7 +369,7 @@ theme_type_variation = &"TabName"
 text = " Exit"
 scroll_active = false
 
-[node name="save_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="save_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -409,9 +403,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -81.0
+offset_left = -83.0
 offset_top = -10.0
-offset_right = -39.0
+offset_right = -41.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -449,17 +443,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/save_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/save_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/save_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/save_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/save_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -473,7 +467,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_gj61c")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/save_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/save_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -490,7 +484,7 @@ theme_type_variation = &"TabName"
 text = " Save"
 scroll_active = false
 
-[node name="options_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="options_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -524,9 +518,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -137.0
+offset_left = -139.0
 offset_top = -10.0
-offset_right = -82.0
+offset_right = -84.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -564,17 +558,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/options_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/options_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/options_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/options_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/options_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -588,7 +582,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_fx751")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/options_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/options_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -604,7 +598,7 @@ theme_type_variation = &"TabName"
 text = " Options"
 scroll_active = false
 
-[node name="info_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="info_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -638,9 +632,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -179.0
+offset_left = -181.0
 offset_top = -10.0
-offset_right = -138.0
+offset_right = -140.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -678,17 +672,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/info_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/info_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/info_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/info_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/info_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -702,7 +696,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_8ruc5")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/info_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/info_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -718,7 +712,7 @@ theme_type_variation = &"TabName"
 text = " Info"
 scroll_active = false
 
-[node name="item_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="item_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -752,9 +746,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -229.0
+offset_left = -231.0
 offset_top = -10.0
-offset_right = -180.0
+offset_right = -182.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -792,17 +786,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/item_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/item_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/item_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/item_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/item_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/item_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -816,7 +810,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_sruin")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/item_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/item_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -832,7 +826,7 @@ theme_type_variation = &"TabName"
 text = " Items"
 scroll_active = false
 
-[node name="party_button" type="BaseButton" parent="ui/main_panel/bottom" node_paths=PackedStringArray("outline_rect")]
+[node name="party_button" type="BaseButton" parent="ui/bottom_holder/main_panel" node_paths=PackedStringArray("outline_rect")]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -866,9 +860,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -277.0
+offset_left = -279.0
 offset_top = -10.0
-offset_right = -230.0
+offset_right = -232.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -906,17 +900,17 @@ script = ExtResource("8_40l3n")
 outline_rect = NodePath("outline")
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/party_button" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/party_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/party_button" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/party_button" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/party_button"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/party_button"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -930,7 +924,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_1da2r")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/party_button/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/party_button/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -946,32 +940,29 @@ theme_type_variation = &"TabName"
 text = " Party"
 scroll_active = false
 
-[node name="gold_holder" type="Control" parent="ui/main_panel/bottom"]
+[node name="gold_holder" type="Control" parent="ui/bottom_holder/main_panel"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -478.0
+offset_left = 2.0
 offset_top = -10.0
-offset_right = -397.0
+offset_right = 83.0
 offset_bottom = 10.0
-grow_horizontal = 0
 grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="outline" parent="ui/main_panel/bottom/gold_holder" instance=ExtResource("5_7bpw0")]
+[node name="outline" parent="ui/bottom_holder/main_panel/gold_holder" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 
-[node name="backing" parent="ui/main_panel/bottom/gold_holder" instance=ExtResource("5_7bpw0")]
+[node name="backing" parent="ui/bottom_holder/main_panel/gold_holder" instance=ExtResource("5_7bpw0")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
 
-[node name="icon" type="TextureRect" parent="ui/main_panel/bottom/gold_holder"]
+[node name="icon" type="TextureRect" parent="ui/bottom_holder/main_panel/gold_holder"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -985,7 +976,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_q2lu7")
 stretch_mode = 2
 
-[node name="label" type="RichTextLabel" parent="ui/main_panel/bottom/gold_holder/icon"]
+[node name="label" type="RichTextLabel" parent="ui/bottom_holder/main_panel/gold_holder/icon"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -7513,12 +7504,12 @@ scroll_active = false
 [connection signal="transition_reached" from="bounds/bottom" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/left" to="." method="load_direction"]
 [connection signal="transition_reached" from="bounds/right" to="." method="load_direction"]
-[connection signal="pressed" from="ui/main_panel/bottom/exit_button" to="ui" method="quit_game"]
-[connection signal="pressed" from="ui/main_panel/bottom/save_button" to="ui" method="set_panel" binds= ["save"]]
-[connection signal="pressed" from="ui/main_panel/bottom/options_button" to="ui" method="set_panel" binds= ["options"]]
-[connection signal="pressed" from="ui/main_panel/bottom/info_button" to="ui" method="set_panel" binds= ["info"]]
-[connection signal="pressed" from="ui/main_panel/bottom/item_button" to="ui" method="set_panel" binds= ["item"]]
-[connection signal="pressed" from="ui/main_panel/bottom/party_button" to="ui" method="set_panel" binds= ["party"]]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/exit_button" to="ui" method="quit_game"]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/save_button" to="ui" method="set_panel" binds= ["save"]]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/options_button" to="ui" method="set_panel" binds= ["options"]]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/info_button" to="ui" method="set_panel" binds= ["info"]]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/item_button" to="ui" method="set_panel" binds= ["item"]]
+[connection signal="pressed" from="ui/bottom_holder/main_panel/party_button" to="ui" method="set_panel" binds= ["party"]]
 [connection signal="pressed" from="ui/party_panel/tabs/overview_tab" to="ui/party_panel" method="set_tab" binds= ["overview"]]
 [connection signal="pressed" from="ui/party_panel/tabs/equipment_tab" to="ui/party_panel" method="set_tab" binds= ["equipment"]]
 [connection signal="pressed" from="ui/party_panel/tabs/skills_tab" to="ui/party_panel" method="set_tab" binds= ["skills"]]

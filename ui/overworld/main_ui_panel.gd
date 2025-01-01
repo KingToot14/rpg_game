@@ -18,9 +18,9 @@ func _input(event):
 	if not use_mouse or not event is InputEventMouseMotion:
 		return
 	
-	if modulate.a > 0.0 and event.position.y < mouse_threshold:
+	if modulate.a > 0.0 and event.position.y < get_parent().global_position.y:
 		set_panel_visibility(false)
-	elif modulate.a < 0.1 and event.position.y > mouse_threshold:
+	elif modulate.a < 0.1 and event.position.y > get_parent().global_position.y:
 		set_panel_visibility(true)
 
 func set_panel_visibility(value: bool, from_mouse := true) -> void:
