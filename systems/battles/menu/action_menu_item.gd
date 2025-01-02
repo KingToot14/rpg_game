@@ -47,29 +47,9 @@ func show_timing() -> void:
 	
 	var anim_name = item.animation_name
 	var timing_mode = DataManager.options.timing_mode
-	
-	if timing_mode == &'disabled':
-		return
-	
-	if timing_mode == &'timing_only' or item.timing_type == Attack.TimingType.TIMED_INPUT:
-		Globals.ui_manager.show_timing(&'single_hit', Globals.curr_entity.animator.get_timed_inputs(anim_name))
-	elif item.timing_type == Attack.TimingType.MASH:
-		var inputs = Globals.curr_entity.animator.get_mash_inputs(anim_name)
-		var target := 10
-		
-		if len(inputs) > 1:
-			target = inputs[1]
-		
-		Globals.ui_manager.show_timing(&'mash', inputs[0], target)
 
 func hide_outline() -> void:
 	backing.visible = false
-	
-	# disable timing
-	if not item is Attack:
-		return
-	
-	Globals.ui_manager.show_timing(&'none', null)
 
 func set_menu_item(new_item: Resource) -> void:
 	item = new_item

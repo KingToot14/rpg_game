@@ -38,7 +38,7 @@ var result_tween: Tween
 @onready var entity_info_panel := %'entity_info' as EntityInfoUi
 
 # --- Constants --- #
-const SINGLE_HIT_NAME = &"single_hit"
+const SINGLE_HIT_NAME = &'single_hit'
 const MASH_NAME = &'mash'
 
 # --- Functions --- #
@@ -120,27 +120,26 @@ func set_loss_panel(val: bool) -> void:
 #endregion
 
 #region Timing
-func show_timing(version: StringName, target: Variant, param: Variant = null) -> void:
-	return
-	
-	if Globals.action_fsm.targeting:
-		return
-	
+func show_timing(version: StringName, timings: Variant, param: Variant = null) -> void:
 	single_hit.visible = version == SINGLE_HIT_NAME
 	mash_timing.visible = version == MASH_NAME
 	
 	if version == SINGLE_HIT_NAME:
-		single_hit.setup_timing(target)
+		single_hit.setup_timing(timings)
+		await get_tree().process_frame
+		single_hit.activate()
 	elif version == MASH_NAME:
-		mash_timing.setup_timing(target, param)
+		mash_timing.setup_timing(timings, param)
+		await get_tree().process_frame
+		mash_timing.activate()
 
 func enable_timing() -> void:
 	await get_tree().process_frame
 	
 	if single_hit.visible:
-		single_hit.set_active()
+		single_hit.activate()
 	elif mash_timing.visible:
-		mash_timing.set_active()
+		mash_timing.activate()
 
 func show_timing_result(key: StringName) -> void:
 	result_label.visible = true

@@ -1,106 +1,118 @@
-[gd_scene load_steps=12 format=3 uid="uid://4ws5v52gxy05"]
+[gd_scene load_steps=10 format=3 uid="uid://4ws5v52gxy05"]
 
-[ext_resource type="Texture2D" uid="uid://c0qey3o7klpvt" path="res://ui/battles/timed_attacks/single_hit.png" id="1_2nnw5"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_o5hxe"]
 [ext_resource type="Script" path="res://ui/battles/timed_attacks/timed_single_hit.gd" id="1_qq41b"]
-[ext_resource type="Shader" path="res://ui/battles/timed_attacks/single_hit_backing.gdshader" id="2_hevfe"]
-[ext_resource type="Shader" path="res://ui/battles/timed_attacks/single_hit_needle.gdshader" id="4_31qxj"]
+[ext_resource type="Shader" path="res://ui/battles/timed_attacks/timed_ring.gdshader" id="6_3pvoj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5060"]
-shader = ExtResource("2_hevfe")
-shader_parameter/threshold = 0.1
-shader_parameter/good_color = Color(0.254902, 0.937255, 0.164706, 1)
-shader_parameter/perf_color = Color(0.941176, 0.901961, 0.168627, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kym5u"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 8.0
+shader_parameter/thickness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14ta"]
-resource_local_to_scene = true
-shader = ExtResource("4_31qxj")
-shader_parameter/rotation = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ney4r"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 20.0
+shader_parameter/thickness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkf6a"]
-shader = ExtResource("4_31qxj")
-shader_parameter/rotation = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_seyum"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 30.0
+shader_parameter/thickness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jn250"]
-shader = ExtResource("4_31qxj")
-shader_parameter/rotation = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1mkk"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 40.0
+shader_parameter/thickness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sljw"]
-shader = ExtResource("4_31qxj")
-shader_parameter/rotation = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kk004"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 50.0
+shader_parameter/thickness = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_svjqw"]
-shader = ExtResource("4_31qxj")
-shader_parameter/rotation = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7bj0"]
+shader = ExtResource("6_3pvoj")
+shader_parameter/radius = 60.0
+shader_parameter/thickness = 2.0
 
 [node name="timed_single_hit" type="Control"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -480.0
-offset_bottom = -270.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
 mouse_filter = 2
 theme = ExtResource("1_o5hxe")
 script = ExtResource("1_qq41b")
+perf_color = Color(0.941176, 0.901961, 0.168627, 1)
+good_color = Color(0.254902, 0.937255, 0.164706, 1)
+poor_color = Color(0.941176, 0.168627, 0.168627, 1)
+norm_color = Color(0.9, 0.9, 0.9, 1)
 
-[node name="title" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = -34.0
-offset_top = -30.0
-offset_right = 34.0
-offset_bottom = -13.0
-theme_type_variation = &"Cooldown"
-text = " Timed   Input"
-scroll_active = false
+[node name="target" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kym5u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.9, 0.9, 0.9, 1)
 
-[node name="indicator" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_x5060")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 17.0
-texture = ExtResource("1_2nnw5")
+[node name="ring1" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ney4r")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="needle" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_g14ta")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 45.0
+[node name="ring2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_seyum")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="needle2" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_bkf6a")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 45.0
+[node name="ring3" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_b1mkk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="needle3" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_jn250")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 45.0
+[node name="ring4" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kk004")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="needle4" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_6sljw")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 45.0
-
-[node name="needle5" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_svjqw")
-layout_mode = 0
-offset_left = -30.0
-offset_top = -15.0
-offset_right = 30.0
-offset_bottom = 45.0
+[node name="ring5" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x7bj0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)

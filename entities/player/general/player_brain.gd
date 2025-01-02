@@ -44,7 +44,23 @@ func _on_entity_selected(entity: Entity) -> void:
 	for e in get_tree().get_nodes_in_group(&'entity'):
 		e.targeting.set_targetable(false)
 	
+	# show timing
+	if action is Attack:
+		setup_timing()
+	
 	# start attack
 	perform_action(action)
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)
+
+func setup_timing() -> void:
+	var timing_mode = DataManager.options.timing_mode
+	Globals.timing_mods = []
+	
+	if timing_mode == &'disabled':
+		return
+	
+	if timing_mode == &'timing_only' or action.timing_type == Attack.TimingType.TIMED_INPUT:
+		Globals.ui_manager.show_timing(&'single_hit', parent.animator.get_timed_inputs(action.animation_name))
+	elif action.timing_type == Attack.TimingType.MASH:
+		pass

@@ -12,7 +12,7 @@ func _ready() -> void:
 	if parent is Entity:
 		entity = parent
 
-func timed_input() -> void:
+func timed_input(reps: int) -> void:
 	return
 
 #region Actions

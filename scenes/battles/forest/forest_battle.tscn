@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=97 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/icons/element_icons_small.png" id="34_oquq2"]
 [ext_resource type="Script" path="res://ui/theme_setter.gd" id="34_ujwxc"]
+[ext_resource type="Script" path="res://entities/scripts/actions/tactic.gd" id="35_78wpl"]
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
@@ -552,6 +553,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 1)
@@ -589,7 +592,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
@@ -661,6 +663,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 1)
@@ -698,7 +702,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
@@ -766,6 +769,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 1)
@@ -803,7 +808,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
@@ -1163,18 +1167,28 @@ layout_mode = 2
 alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="attack_row3" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
@@ -1182,18 +1196,28 @@ layout_mode = 2
 alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="attack_row2" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
@@ -1201,18 +1225,28 @@ layout_mode = 2
 alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="attack_row" type="HBoxContainer" parent="ui/action_bar/attack_menu/attack_grid"]
@@ -1220,18 +1254,28 @@ layout_mode = 2
 alignment = 1
 
 [node name="menu_button" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button2" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button3" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button4" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="menu_button5" parent="ui/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 
 [node name="items_menu" type="Control" parent="ui/action_bar" groups=["action_menu"]]
@@ -1402,18 +1446,26 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="menu_button" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button2" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button3" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button4" parent="ui/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
@@ -1433,7 +1485,7 @@ offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("40_44v6f")
-tactics = Array[Resource("res://entities/scripts/actions/tactic.gd")]([SubResource("Resource_sc3fj"), ExtResource("42_68b6r"), ExtResource("41_u0bu5")])
+tactics = Array[ExtResource("35_78wpl")]([SubResource("Resource_sc3fj"), ExtResource("42_68b6r"), ExtResource("41_u0bu5")])
 
 [node name="tactic_info" parent="ui/action_bar/tactics_menu" instance=ExtResource("27_e31mb")]
 layout_mode = 1
@@ -1525,18 +1577,26 @@ alignment = 1
 metadata/_edit_group_ = true
 
 [node name="menu_button" parent="ui/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button2" parent="ui/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button3" parent="ui/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
 [node name="menu_button4" parent="ui/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 layout_mode = 2
 item = ExtResource("35_d0j81")
 
@@ -1547,6 +1607,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 0)
@@ -1584,7 +1646,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
@@ -1822,11 +1883,9 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_top = 45.0
-offset_right = 0.0
-offset_bottom = 45.0
-grow_vertical = 1
+offset_top = 32.0
+offset_bottom = 92.0
+grow_horizontal = 2
 
 [node name="mash_timing" parent="ui" instance=ExtResource("45_gvyev")]
 visible = false
@@ -2599,6 +2658,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 1)
@@ -2636,7 +2697,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")
@@ -2785,6 +2845,8 @@ process_mode = 0
 process_priority = 0
 process_physics_priority = 0
 process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 1
 editor_description = ""
 visible = true
 modulate = Color(1, 1, 1, 1)
@@ -2822,7 +2884,6 @@ pivot_offset = Vector2(0, 0)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
-auto_translate = true
 localize_numeral_system = true
 tooltip_text = ""
 focus_neighbor_left = NodePath("")

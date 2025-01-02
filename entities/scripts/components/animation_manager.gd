@@ -43,8 +43,9 @@ func play_idle_anim() -> void:
 	animator.play(&"idle")
 
 # - Timing - #
-func get_timed_inputs(attack_name: StringName) -> Array[float]:
+func get_timed_inputs(attack_name: StringName) -> Array[Array]:
 	var attack_anim = animator.get_animation(attack_name)
+	
 	if not attack_anim:
 		return []
 	
@@ -55,10 +56,13 @@ func get_timed_inputs(attack_name: StringName) -> Array[float]:
 	
 	var key_count = attack_anim.track_get_key_count(track_id)
 	
-	var locations: Array[float] = []
+	var locations: Array[Array] = []
 	for i in range(key_count):
-		if attack_anim.track_get_key_value(track_id, i)['method'] == &'timed_input':
-			locations.append(attack_anim.track_get_key_time(track_id, i))
+		var track_vals = attack_anim.track_get_key_value(track_id, i)
+		if track_vals['method'] == &'timed_input':
+			var repetitions = 1 if len(track_vals['args']) == 0 else track_vals['args'][0]
+			
+			locations.append([roundi(attack_anim.track_get_key_time(track_id, i) * 60), repetitions])
 	
 	return locations
 

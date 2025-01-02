@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=62 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
+[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="14_k6gpk"]
 [ext_resource type="Script" path="res://entities/scripts/components/appearance_manager.gd" id="17_avy3g"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
 [ext_resource type="Shader" path="res://entities/player/effects/shine.gdshader" id="24_fvdco"]
@@ -546,7 +547,7 @@ tracks/0/keys = {
 "args": [],
 "method": &"add_busy"
 }, {
-"args": [],
+"args": [5],
 "method": &"timed_input"
 }, {
 "args": [],
@@ -968,7 +969,7 @@ tracks/0/keys = {
 "args": [],
 "method": &"add_busy"
 }, {
-"args": [],
+"args": [3],
 "method": &"timed_input"
 }, {
 "args": [],
@@ -1670,7 +1671,6 @@ animator = NodePath("../animator")
 
 [node name="brain" type="Node" parent="managers"]
 script = ExtResource("6_wki05")
-action_delay = null
 
 [node name="hp" type="Node" parent="managers"]
 script = ExtResource("8_7ebs2")
@@ -1683,7 +1683,7 @@ load_special = true
 [node name="actions" type="Node" parent="managers"]
 script = ExtResource("6_k1p5g")
 default_attack = ExtResource("3_4gvet")
-attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
+attack_pool = Array[ExtResource("14_k6gpk")]([ExtResource("3_4gvet"), ExtResource("2_mjmh3"), ExtResource("4_opsxa"), ExtResource("5_wff5c")])
 
 [node name="targeting" type="Node" parent="managers"]
 script = ExtResource("9_hritc")
