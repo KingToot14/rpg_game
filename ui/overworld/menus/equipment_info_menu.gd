@@ -14,7 +14,7 @@ func load_player(player: PlayerDataChunk) -> void:
 	if player:
 		load_weapon(player.weapon)
 		load_armor(player.armor)
-		load_special(player.special)
+		load_special(player.class_power)
 	load_equipment(null)
 
 func load_from_player(type: StringName) -> void:
@@ -27,7 +27,7 @@ func load_from_player(type: StringName) -> void:
 		&'weapon':
 			load_equipment(curr_player.weapon)
 		&'special':
-			load_equipment(curr_player.special)
+			load_equipment(curr_player.class_power)
 
 func load_equipment(equip: Equipment = null) -> void:
 	if not equip or equip == curr_equip:

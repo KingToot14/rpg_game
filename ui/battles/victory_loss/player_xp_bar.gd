@@ -55,7 +55,7 @@ func load_player_info() -> void:
 	var prev_xp = data.get_cumulative_xp(data.level - 1)
 	var fill_size = floor(50 * (1.0 * (data.curr_xp - prev_xp) / (data.xp_to_next - prev_xp)))
 	
-	fill_rect.size.x = fill_size
+	fill_rect.custom_minimum_size.x = fill_size
 	fill_rect.visible = fill_size >= 2
 
 func set_xp(xp: int) -> void:

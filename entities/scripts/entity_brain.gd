@@ -30,7 +30,7 @@ func _on_entity_selected(entity: Entity) -> void:
 	
 	selected_target = entity
 
-func perform_action(action: ActionResource) -> void:
+func perform_action() -> void:
 	parent.turn.actions_remaining -= 1
 	action.start_cooldown()
 	parent.animator.play_action_anim(action.animation_name)

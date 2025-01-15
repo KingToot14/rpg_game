@@ -49,7 +49,7 @@ func _on_entity_selected(entity: Entity) -> void:
 		setup_timing()
 	
 	# start attack
-	perform_action(action)
+	perform_action()
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)
 

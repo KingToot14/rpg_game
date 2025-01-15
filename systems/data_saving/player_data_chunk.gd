@@ -24,7 +24,7 @@ var appearance := "pastel_blue"
 # - equipment - #
 var weapon: Equipment
 var armor: Equipment
-var special: Equipment
+var class_power: Equipment
 
 # --- Constants --- #
 const APPEARANCE_PATH := "resources/appearances/"
@@ -83,7 +83,7 @@ func create_new(new_role: PlayerRole) -> bool:
 			# load default equipment
 			armor = load("res://entities/player/melee/armor/natures_tunic.tres") as Equipment
 			weapon = load("res://entities/player/melee/weapons/oakris_blade.tres") as Equipment
-			special = load("res://entities/player/melee/rages/primal_rage.tres") as Equipment
+			class_power = load("res://entities/player/melee/rages/primal_rage.tres") as Equipment
 		PlayerRole.RANGED:
 			# load stats
 			stats = load("res://entities/player/ranger/stats.tres") as EntityStats
@@ -212,7 +212,7 @@ func set_equipment(key: StringName, value: Equipment) -> void:
 			armor = value
 		&'weapon':
 			weapon = value
-		&'special':
-			special = value
+		&'class_power':
+			class_power = value
 
 #endregion

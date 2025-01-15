@@ -2,7 +2,6 @@ class_name TargetingManager
 extends Node
 
 # --- Signals --- #
-signal selected(entity: Entity)
 signal targetable_set(value: bool)
 
 # --- Variables --- #

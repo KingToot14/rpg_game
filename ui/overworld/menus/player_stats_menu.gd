@@ -30,11 +30,11 @@ func load_player(player: PlayerDataChunk) -> void:
 	%'total_xp'.text = "%d" % player.curr_xp
 	%'next_xp'.text = "%d" % player.xp_to_next
 	
-	%'xp_fill'.size.x = %'xp_fill'.get_parent().size.x * (1.0 * player.curr_xp / player.xp_to_next)
+	%'xp_fill'.custom_minimum_size.x = %'xp_fill'.get_parent().size.x * (1.0 * player.curr_xp / player.xp_to_next)
 	
 	# load hp
 	%'hp_label'.text = "Health: %d/%d" % [player.curr_hp, player.get_max_hp()]
-	%'hp_fill'.size.x = %'hp_fill'.get_parent().size.x * (1.0 * player.curr_hp / player.get_max_hp())
+	%'hp_fill'.custom_minimum_size.x = %'hp_fill'.get_parent().size.x * (1.0 * player.curr_hp / player.get_max_hp())
 	
 	%'sp_label'.text = "Special: %d" % player.curr_special + "%"
-	%'sp_fill'.size.x = %'sp_fill'.get_parent().size.x * player.curr_special
+	%'sp_fill'.custom_minimum_size.x = %'sp_fill'.get_parent().size.x * player.curr_special

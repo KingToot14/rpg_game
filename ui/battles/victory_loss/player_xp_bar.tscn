@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://boxije6upv4im"]
+[gd_scene load_steps=8 format=3 uid="uid://boxije6upv4im"]
 
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="1_2q2y5"]
 [ext_resource type="Script" path="res://ui/battles/victory_loss/player_xp_bar.gd" id="1_ksj7l"]
@@ -12,10 +12,6 @@ region = Rect2(0, 8, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ew6o6"]
 atlas = ExtResource("1_2q2y5")
 region = Rect2(8, 32, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x52d8"]
-atlas = ExtResource("1_2q2y5")
-region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4454q"]
 atlas = ExtResource("1_2q2y5")
@@ -33,7 +29,6 @@ grow_horizontal = 2
 script = ExtResource("1_ksj7l")
 melee_icon = SubResource("AtlasTexture_tlkmq")
 ranged_icon = SubResource("AtlasTexture_ew6o6")
-healer_icon = SubResource("AtlasTexture_x52d8")
 magic_icon = SubResource("AtlasTexture_4454q")
 increment_duration = 2.0
 
@@ -68,7 +63,16 @@ key = &"dark"
 [node name="bar_fill" parent="bar_back" instance=ExtResource("3_65bb8")]
 unique_name_in_owner = true
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 1
 key = &"light"
 
 [node name="level_up_bar" parent="." instance=ExtResource("3_65bb8")]

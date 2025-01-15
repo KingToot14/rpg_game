@@ -30,6 +30,7 @@ func _on_lost_health(dmg_chunk: DamageChunk) -> void:
 		return
 	
 	curr_special += (dmg_chunk.damage / parent.stats.get_max_hp()) * modifier
+	special_changed.emit()
 
 func store_special() -> void:
 	DataManager.players[parent.spawn_index].store_special(curr_special)

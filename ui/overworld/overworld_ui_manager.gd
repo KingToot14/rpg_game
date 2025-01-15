@@ -31,11 +31,11 @@ func set_panel(panel_name: String) -> void:
 	if not panel:
 		return
 	
-	var show = not panel.visible
+	var show_panel = not panel.visible
 	
 	hide_panels()
 	
-	panel.visible = show
+	panel.visible = show_panel
 
 func open_chest(items: Array[InventoryItem]) -> void:
 	chest_panel.load_items(items)

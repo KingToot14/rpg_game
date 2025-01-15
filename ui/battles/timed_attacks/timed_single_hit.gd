@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	hide()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not active:
 		return
 	
@@ -85,8 +85,8 @@ func setup_timing(timings: Array[Array]) -> void:
 	for i in range(loaded_rings):
 		ring_pos.append(timings[i][0])
 		ring_reps.append(timings[i][1])
-		rings[i].color.a = 1.0 - ring_pos[i] / visible_frames
-		rings[i].material.set_shader_parameter('radius', (ring_pos[i] / visible_frames) * starting_radius + target_radius - 2)
+		rings[i].color.a = 1.0 - float(ring_pos[i]) / visible_frames
+		rings[i].material.set_shader_parameter('radius', (float(ring_pos[i]) / visible_frames) * starting_radius + target_radius - 2)
 
 func activate() -> void:
 	active = true

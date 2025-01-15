@@ -17,7 +17,7 @@ func load_items(items: Array[InventoryItem]) -> void:
 		
 		for child in row.get_children():
 			child.visible = index < len(items)
-			slot_rows[index / 5].get_child(index % 5).visible = index < len(items)
+			slot_rows[floori(index / 5.0)].get_child(index % 5).visible = index < len(items)
 			
 			if child.visible:
 				child.set_item(items[index])

@@ -22,6 +22,7 @@ func setup(entity: Entity) -> void:
 func play_enter_anim() -> void:
 	# play animation after setup
 	animator.play(&'enter_battle')
+	animator.animation_finished.connect(entered_battle.emit, CONNECT_ONE_SHOT)
 
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')

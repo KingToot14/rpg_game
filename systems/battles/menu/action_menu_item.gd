@@ -37,16 +37,6 @@ func _on_mouse_exited() -> void:
 
 func show_outline() -> void:
 	backing.visible = true
-	
-	# show timing
-	if item is Attack:
-		show_timing()
-
-func show_timing() -> void:
-	return
-	
-	var anim_name = item.animation_name
-	var timing_mode = DataManager.options.timing_mode
 
 func hide_outline() -> void:
 	backing.visible = false
