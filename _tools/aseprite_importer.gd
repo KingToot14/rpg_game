@@ -73,7 +73,7 @@ func _reimport() -> void:
 
 func import_aseprite_file(aseprite_path: String, target_path: String, layers: Array[String], merge := false) -> void:
 	# load the arguments
-	var args: Array[String] = ["-b", "--sheet=" + '"' + ProjectSettings.globalize_path(target_path) + '"', 
+	var args: Array[String] = ["-b", "--sheet=" + ProjectSettings.globalize_path(target_path), 
 		"--sheet-columns=6"]
 	
 	# add each layer arg
@@ -87,5 +87,12 @@ func import_aseprite_file(aseprite_path: String, target_path: String, layers: Ar
 		args.append('--merge-duplicates')
 	
 	# reimport new png
-	OS.execute(ASEPRITE_BIN_PATH, args)
+	var out = []
+	var code = OS.execute(ASEPRITE_BIN_PATH, args, out)
 	reimported_files.append(target_path)
+	
+	#print("Code: ", code)
+	#print("Target: ", '"' + ProjectSettings.globalize_path(target_path) + '"')
+	#print("Output: ", out[0])
+	#print("Command:")
+	#print(ASEPRITE_BIN_PATH, " ", " ".join(args))

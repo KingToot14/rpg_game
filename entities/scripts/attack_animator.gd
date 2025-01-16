@@ -47,7 +47,7 @@ func set_target() -> void:
 		Attack.TargetingMode.RANDOM:
 			target = TargetingHelper.get_random_entity(action.get_side_string())
 
-func target_neighbors(depth := 1) -> void:
+func target_neighbors(depth := 1, include_self := false) -> void:
 	if not target:
 		return
 	
@@ -58,6 +58,9 @@ func target_neighbors(depth := 1) -> void:
 	for dist in range(1, depth + 1):
 		target.append(TargetingHelper.get_entity_by_index(side, index - dist, true))
 		target.append(TargetingHelper.get_entity_by_index(side, index + dist, true))
+	
+	if include_self:
+		target.append(TargetingHelper.get_entity_by_index(side, index, true))
 
 func move_towards(key: String, time: float) -> void:
 	move_from(key, time, Vector2.ZERO)
