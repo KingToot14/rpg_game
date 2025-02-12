@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2wjs7ohttbr2"]
 
-[ext_resource type="Texture2D" uid="uid://c11r4yfv5yvuc" path="res://ui/panel_inner.png" id="1_51ijg"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_v4y3h"]
-[ext_resource type="Script" path="res://ui/battles/hp_bar.gd" id="2_byne6"]
-[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_plyvy"]
+[ext_resource type="Texture2D" uid="uid://cqspr0lipeg5n" path="res://ui/battles/health/health_background.png" id="2_12wij"]
+[ext_resource type="Script" path="res://ui/battles/health/hp_bar.gd" id="2_byne6"]
+[ext_resource type="Texture2D" uid="uid://bhamvuv6scbht" path="res://ui/battles/health/health_slider.png" id="4_ca7na"]
 
 [node name="player_hp" type="Control" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]
 layout_mode = 3
@@ -12,74 +12,71 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
 offset_right = 49.0
-offset_bottom = 12.0
+offset_bottom = 13.0
 grow_horizontal = 2
-script = ExtResource("2_byne6")
-cover_rect = NodePath("panel_inner/hp_fill/hp_cover")
-hp_label = NodePath("panel_inner/hp_value")
-special_label = NodePath("panel_inner/special_value")
-metadata/_edit_group_ = true
-
-[node name="panel_inner" type="NinePatchRect" parent="." groups=["theme_setter"]]
-self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("1_v4y3h")
-texture = ExtResource("1_51ijg")
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-script = ExtResource("2_plyvy")
-key = &"normal"
+script = ExtResource("2_byne6")
+cover_rect = NodePath("hp_fill/hp_cover")
+hp_label = NodePath("hp_value")
+special_label = NodePath("special_value")
 
-[node name="hp_value" type="Label" parent="panel_inner"]
+[node name="background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 3.0
+offset_right = 97.0
+offset_bottom = 13.0
+texture = ExtResource("2_12wij")
+
+[node name="hp_value" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 2.0
 offset_top = 2.0
-offset_right = 101.0
+offset_right = 100.0
 offset_bottom = 25.0
 theme_type_variation = &"HpLabel"
-text = "12345/67890"
+bbcode_enabled = true
+text = "10,000,000|10,000,000"
+scroll_active = false
 
-[node name="hp_fill" type="ColorRect" parent="panel_inner"]
+[node name="hp_fill" type="NinePatchRect" parent="."]
+self_modulate = Color(0.678431, 0.027451, 0.027451, 1)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -3.0
-offset_right = 72.0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 96.0
 offset_bottom = -1.0
 grow_vertical = 0
-color = Color(0.54902, 0.0313726, 0.0313726, 1)
+texture = ExtResource("4_ca7na")
+patch_margin_left = 1
+patch_margin_right = 1
 metadata/_edit_group_ = true
 
-[node name="hp_cover" type="ColorRect" parent="panel_inner/hp_fill"]
+[node name="hp_cover" type="NinePatchRect" parent="hp_fill"]
+self_modulate = Color(0.921569, 0.184314, 0.184314, 1)
+custom_minimum_size = Vector2(95, 3)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.941176, 0.160784, 0.160784, 1)
-
-[node name="special_value" type="Label" parent="panel_inner"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -23.0
-offset_top = -4.0
-offset_right = -1.0
-offset_bottom = 7.0
-grow_horizontal = 0
+offset_right = 2.0
 grow_vertical = 2
-theme_type_variation = &"SpecialLabel"
-text = "67%"
+texture = ExtResource("4_ca7na")
+patch_margin_left = 1
+patch_margin_right = 1
+
+[node name="special_value" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 9.0
+grow_horizontal = 0
+theme_type_variation = &"HpLabel"
+bbcode_enabled = true
+text = "[right]|67%[/right]"
+scroll_active = false

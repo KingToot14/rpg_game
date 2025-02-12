@@ -1,0 +1,481 @@
+[gd_scene load_steps=24 format=3 uid="uid://hnyll4v636cm"]
+
+[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_s3pct"]
+[ext_resource type="Texture2D" uid="uid://vbfo5kngm42q" path="res://scenes/forest/starting_trail/shader_map.png" id="2_mfu6w"]
+[ext_resource type="Texture2D" uid="uid://bp7tf8mmgy82o" path="res://scenes/forest/starting_trail/terrain_map.png" id="3_acey8"]
+[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="4_lq3by"]
+[ext_resource type="Texture2D" uid="uid://ctcex45c8fsnk" path="res://scenes/forest/den_trail/grass_map.png" id="5_76u0q"]
+[ext_resource type="Texture2D" uid="uid://bai4kv2w6xl6p" path="res://scenes/forest/starting_trail/grass_map.png" id="5_s003m"]
+[ext_resource type="Script" path="res://scripts/world_setter.gd" id="6_7ik3e"]
+[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="7_rd4mv"]
+[ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="8_qc24h"]
+[ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="9_21qsk"]
+[ext_resource type="Script" path="res://scripts/textures/variant_caller.gd" id="9_mjpr0"]
+[ext_resource type="Texture2D" uid="uid://bs0atgrspiwfc" path="res://scenes/forest/den_trail/right_fence.png" id="12_1cbyp"]
+[ext_resource type="Script" path="res://scripts/environment/custom_ysort.gd" id="12_gulls"]
+[ext_resource type="Texture2D" uid="uid://de5ejcwmcahw7" path="res://scenes/forest/den_trail/left_fence.png" id="14_ogs4e"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gwlfn"]
+frequency = 0.122
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vkyge"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_gwlfn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p4cnu"]
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjxn"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_p4cnu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yksyw"]
+frequency = 0.0395
+fractal_octaves = 3
+fractal_lacunarity = 2.21
+domain_warp_type = 1
+domain_warp_amplitude = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_27oty"]
+width = 480
+height = 270
+noise = SubResource("FastNoiseLite_yksyw")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxx4b"]
+viewport_path = NodePath("environment/reflection_viewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlw24"]
+resource_local_to_scene = true
+shader = ExtResource("7_rd4mv")
+shader_parameter/texture_size = Vector2(480, 270)
+shader_parameter/reflection_intensity = 0.25
+shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
+shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
+shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
+shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
+shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
+shader_parameter/dirt_darkness = 0.05
+shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
+shader_parameter/wind_speed = -0.25
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
+shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
+shader_parameter/foam_speed = -0.25
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8g01"]
+size = Vector2(221, 20)
+
+[node name="area_root" type="Node2D"]
+visibility_layer = 7
+y_sort_enabled = true
+script = ExtResource("1_s3pct")
+left_area = "res://scenes/forest/campsite/campsite.tscn"
+shader_texture = ExtResource("2_mfu6w")
+terrain_texture = ExtResource("3_acey8")
+
+[node name="wind_manager" type="Node2D" parent="."]
+script = ExtResource("4_lq3by")
+
+[node name="environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="ground" type="Sprite2D" parent="environment"]
+position = Vector2(240, 135)
+texture = ExtResource("5_76u0q")
+
+[node name="over" type="Sprite2D" parent="environment"]
+visible = false
+z_index = 100
+y_sort_enabled = true
+position = Vector2(239, 271)
+texture = ExtResource("5_s003m")
+offset = Vector2(1, -136)
+vframes = 2
+frame = 1
+
+[node name="reflection_viewport" type="SubViewport" parent="environment"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_cull_mask = 4294966276
+size = Vector2i(480, 270)
+script = ExtResource("6_7ik3e")
+visibility_layer = 3
+
+[node name="water_render" type="Sprite2D" parent="environment"]
+material = SubResource("ShaderMaterial_rlw24")
+position = Vector2(240, 135)
+texture = ExtResource("2_mfu6w")
+
+[node name="collision" type="StaticBody2D" parent="environment"]
+z_index = 200
+
+[node name="top" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(110.5, -10)
+shape = SubResource("RectangleShape2D_w8g01")
+
+[node name="tl_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("9_mjpr0")
+
+[node name="forest_tree" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-54, -31)
+variant = 1
+
+[node name="forest_tree2" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(1, -21)
+variant = 2
+
+[node name="forest_tree3" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(138, 24)
+
+[node name="forest_tree4" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(188, 40)
+variant = 1
+
+[node name="forest_tree5" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-42, 9)
+variant = 2
+
+[node name="forest_tree6" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(39, -25)
+variant = 1
+
+[node name="forest_tree7" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(75, -13)
+variant = 1
+
+[node name="forest_tree8" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(120, -35)
+variant = 1
+
+[node name="forest_tree9" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(122, 4)
+variant = 2
+
+[node name="forest_tree10" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(34, 9)
+
+[node name="forest_tree11" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(75, 29)
+variant = 1
+
+[node name="forest_tree12" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-66, 33)
+variant = 2
+
+[node name="forest_tree13" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-8, 23)
+variant = 2
+
+[node name="forest_tree14" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-32, 45)
+variant = 2
+
+[node name="forest_tree15" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(174, -17)
+variant = 2
+
+[node name="forest_tree16" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(208, -20)
+
+[node name="forest_tree17" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(24, 48)
+
+[node name="forest_tree18" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(81, 130)
+variant = 1
+
+[node name="forest_tree19" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(126, 128)
+variant = 1
+
+[node name="forest_tree20" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(13, 76)
+variant = 2
+
+[node name="forest_tree21" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-70, 75)
+
+[node name="forest_tree22" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-36, 92)
+variant = 1
+
+[node name="forest_tree23" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-55, 124)
+
+[node name="forest_tree24" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-85, 98)
+variant = 2
+
+[node name="forest_tree25" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-13, 130)
+variant = 2
+
+[node name="forest_tree26" parent="tl_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(29, 137)
+variant = 2
+
+[node name="forest_tree27" parent="tl_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(35, 105)
+variant = 2
+
+[node name="tr_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("9_mjpr0")
+
+[node name="forest_tree" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(390, 97)
+
+[node name="forest_tree2" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(355, 14)
+variant = 2
+
+[node name="forest_tree3" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(343, -20)
+
+[node name="forest_tree4" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(386, -4)
+
+[node name="forest_tree5" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(425, -31)
+variant = 2
+
+[node name="forest_tree6" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(426, 4)
+variant = 2
+
+[node name="forest_tree7" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(397, 30)
+variant = 1
+
+[node name="forest_tree8" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(443, 46)
+
+[node name="forest_tree9" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(478, -11)
+variant = 1
+
+[node name="forest_tree10" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(509, -25)
+variant = 2
+
+[node name="forest_tree11" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(540, -8)
+variant = 2
+
+[node name="forest_tree12" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(526, 16)
+
+[node name="forest_tree13" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(476, 31)
+variant = 2
+
+[node name="forest_tree14" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(556, 49)
+variant = 2
+
+[node name="forest_tree15" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(468, 75)
+variant = 2
+
+[node name="forest_tree16" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(519, 65)
+variant = 1
+
+[node name="forest_tree17" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(555, 95)
+
+[node name="forest_tree18" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(497, 106)
+
+[node name="forest_tree19" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(533, 122)
+variant = 2
+
+[node name="forest_tree20" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(474, 125)
+variant = 1
+
+[node name="forest_tree21" parent="tr_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(508, 162)
+variant = 1
+
+[node name="forest_tree22" parent="tr_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(555, 172)
+
+[node name="back_trees" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("9_mjpr0")
+
+[node name="forest_tree" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(290, 139)
+
+[node name="forest_tree2" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(315, 170)
+variant = 2
+
+[node name="forest_tree3" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(262, 161)
+variant = 1
+
+[node name="forest_tree4" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-46, 234)
+variant = 1
+
+[node name="forest_tree5" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-2, 259)
+variant = 2
+
+[node name="forest_tree6" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(32, 248)
+variant = 2
+
+[node name="forest_tree7" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(39, 268)
+variant = 2
+
+[node name="forest_tree8" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-47, 286)
+variant = 1
+
+[node name="forest_tree9" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(-4, 289)
+
+[node name="forest_tree10" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-75, 270)
+variant = 1
+
+[node name="forest_tree11" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-54, 320)
+variant = 2
+
+[node name="forest_tree12" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(45, 313)
+
+[node name="forest_tree13" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(77, 262)
+variant = 2
+
+[node name="forest_tree14" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(130, 270)
+variant = 1
+
+[node name="forest_tree15" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(88, 292)
+variant = 1
+
+[node name="forest_tree16" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(-5, 335)
+variant = 1
+
+[node name="forest_tree17" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(46, 338)
+variant = 2
+
+[node name="forest_tree18" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(132, 315)
+
+[node name="forest_tree19" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(102, 339)
+variant = 1
+
+[node name="forest_tree20" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(189, 264)
+variant = 1
+
+[node name="forest_tree21" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(241, 278)
+variant = 1
+
+[node name="forest_tree22" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(279, 293)
+variant = 2
+
+[node name="forest_tree23" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(321, 272)
+
+[node name="forest_tree24" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(365, 294)
+
+[node name="forest_tree25" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(390, 331)
+variant = 1
+
+[node name="forest_tree26" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(239, 306)
+
+[node name="forest_tree27" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(178, 306)
+
+[node name="forest_tree28" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(164, 333)
+variant = 1
+
+[node name="forest_tree29" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(210, 339)
+variant = 2
+
+[node name="forest_tree30" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(320, 313)
+variant = 2
+
+[node name="forest_tree31" parent="back_trees" instance=ExtResource("9_21qsk")]
+position = Vector2(285, 323)
+variant = 1
+
+[node name="forest_tree32" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(338, 345)
+variant = 1
+
+[node name="forest_tree33" parent="back_trees" instance=ExtResource("8_qc24h")]
+position = Vector2(251, 351)
+variant = 2
+
+[node name="right_fence" type="StaticBody2D" parent="."]
+z_index = 100
+position = Vector2(486, 196)
+script = ExtResource("12_gulls")
+
+[node name="sprite" type="Sprite2D" parent="right_fence"]
+position = Vector2(39, 1)
+texture = ExtResource("12_1cbyp")
+offset = Vector2(-17, 0)
+
+[node name="collision" type="CollisionPolygon2D" parent="right_fence"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-23, 19, -16, 19, -3, 9, -3, 3, -16, 13, -23, 13)
+
+[node name="point" type="Marker2D" parent="right_fence"]
+position = Vector2(-20, 14)
+
+[node name="point2" type="Marker2D" parent="right_fence"]
+position = Vector2(0, 4)
+
+[node name="point3" type="Marker2D" parent="right_fence"]
+position = Vector2(21, 0)
+
+[node name="left_fence" type="StaticBody2D" parent="."]
+z_index = 100
+position = Vector2(409, 270)
+script = ExtResource("12_gulls")
+
+[node name="sprite" type="Sprite2D" parent="left_fence"]
+texture = ExtResource("14_ogs4e")
+
+[node name="collision" type="CollisionPolygon2D" parent="left_fence"]
+polygon = PackedVector2Array(21, -22, 5, -4, -5, 14, -12, 14, -12, 8, -2, -10, 14, -28, 21, -28)
+
+[node name="point" type="Marker2D" parent="left_fence"]
+position = Vector2(18, -27)
+
+[node name="point2" type="Marker2D" parent="left_fence"]
+position = Vector2(2, -9)
+
+[node name="point3" type="Marker2D" parent="left_fence"]
+position = Vector2(-8, 9)

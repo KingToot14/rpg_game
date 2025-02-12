@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="29_7enty"]
 [ext_resource type="PackedScene" uid="uid://d2wjs7ohttbr2" path="res://ui/battles/health/player_hp.tscn" id="30_308vx"]
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="30_xb3b8"]
-[ext_resource type="PackedScene" uid="uid://dyfr5rkicstsv" path="res://ui/battles/health/enemy_hp.tscn" id="31_gv80f"]
+[ext_resource type="PackedScene" uid="uid://brcinflau5f5x" path="res://ui/battles/health/enemy_hp.tscn" id="31_gv80f"]
 [ext_resource type="Texture2D" uid="uid://b6g6qi1b53uuw" path="res://ui/battles/action_menu/cancel_button.png" id="32_a24v6"]
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="33_8otb5"]
 [ext_resource type="Script" path="res://ui/battles/action_menu/defense_menu.gd" id="33_84n05"]

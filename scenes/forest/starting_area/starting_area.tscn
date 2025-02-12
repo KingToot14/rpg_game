@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bu0ktqr3wancy"]
+[gd_scene load_steps=39 format=3 uid="uid://bu0ktqr3wancy"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
@@ -26,6 +26,7 @@ shader_parameter/wind_speed = 2.0
 shader_parameter/wind_threshold = 0.75
 shader_parameter/wind_offset = 10.0
 shader_parameter/wave_count = 3.0
+shader_parameter/wind_angle = 0.0
 shader_parameter/player_influence = 0.6
 shader_parameter/radius = 0.05
 
@@ -139,6 +140,10 @@ size = Vector2(20, 270)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdgp1"]
 size = Vector2(480, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nyvy5"]
+radius = 2.0
+height = 22.0
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
@@ -426,6 +431,15 @@ offset = Vector2(1, 29)
 visible = false
 polygon = PackedVector2Array(376, 141, 376, 134, 375, 121, 375, 107, 376, 101, 376, 75, 396, 71, 404, 71, 404, 78, 396, 78, 384, 81, 384, 141)
 
-[node name="spawn_site" type="Sprite2D" parent="."]
-position = Vector2(136, 138)
+[node name="spawn_site" type="StaticBody2D" parent="."]
+z_index = 100
+position = Vector2(136, 134)
+
+[node name="sprite" type="Sprite2D" parent="spawn_site"]
 texture = ExtResource("16_2qhru")
+offset = Vector2(0, 4)
+
+[node name="collision" type="CollisionShape2D" parent="spawn_site"]
+position = Vector2(0, -1)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_nyvy5")

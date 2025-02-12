@@ -35,6 +35,14 @@ func _reimport() -> void:
 		true
 	)
 	
+	# load straps
+	if role == PlayerDataChunk.PlayerRole.MELEE:
+		import_aseprite_file(
+			player_dir.path_join("battle.aseprite"),
+			player_dir_res.path_join("weapons/strap.png"),
+			['weapons/strap']
+		)
+	
 	# for each component, reimport based on the role and type
 	for sprite_str in sprites:
 		var type := sprite_str.split("|")[0]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dhlffyihw86sr"]
+[gd_scene load_steps=33 format=3 uid="uid://dhlffyihw86sr"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_lrmwf"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_4hymg"]
@@ -82,7 +82,10 @@ shader_parameter/foam_speed = -0.25
 shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bhgb"]
-size = Vector2(20, 270)
+size = Vector2(20, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l4pc"]
+size = Vector2(20, 82.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ld1x"]
 size = Vector2(300, 20)
@@ -98,6 +101,7 @@ visibility_layer = 7
 y_sort_enabled = true
 script = ExtResource("1_lrmwf")
 top_area = "res://scenes/forest/starting_trail/starting_trail.tscn"
+right_area = "res://scenes/forest/den_trail/forest_4.tscn"
 shader_texture = ExtResource("2_tow5x")
 terrain_texture = ExtResource("3_jui86")
 
@@ -141,8 +145,12 @@ position = Vector2(-10, 135)
 shape = SubResource("RectangleShape2D_8bhgb")
 
 [node name="right_block" type="CollisionShape2D" parent="environment/collision"]
-position = Vector2(490, 135)
+position = Vector2(490, 64.5)
 shape = SubResource("RectangleShape2D_8bhgb")
+
+[node name="right_block2" type="CollisionShape2D" parent="environment/collision"]
+position = Vector2(490, 248.75)
+shape = SubResource("RectangleShape2D_3l4pc")
 
 [node name="top_block" type="CollisionShape2D" parent="environment/collision"]
 position = Vector2(150, -10)
