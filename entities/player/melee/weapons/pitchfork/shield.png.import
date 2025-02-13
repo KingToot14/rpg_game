@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://htpl563r5puw"
-path="res://.godot/imported/face_battle.png-e1a3c13ae65193eacddad55f07db8414.ctex"
+uid="uid://4h1ohrdfw5nm"
+path="res://.godot/imported/shield.png-bb0bf1f9cdb6a53f411c03aa3ccd5cd0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/melee/face_battle.png"
-dest_files=["res://.godot/imported/face_battle.png-e1a3c13ae65193eacddad55f07db8414.ctex"]
+source_file="res://entities/player/melee/weapons/pitchfork/shield.png"
+dest_files=["res://.godot/imported/shield.png-bb0bf1f9cdb6a53f411c03aa3ccd5cd0.ctex"]
 
 [params]
 

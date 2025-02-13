@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dsd56x7sbosdr"]
+[gd_scene load_steps=30 format=3 uid="uid://dsd56x7sbosdr"]
 
 [ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
 [ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="9_04vui"]
 [ext_resource type="Texture2D" uid="uid://dcraejj1058hf" path="res://entities/player/melee/overworld.png" id="9_e8d1h"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="9_ue010"]
-[ext_resource type="Texture2D" uid="uid://by1pxwgbgrv82" path="res://entities/player/melee/player_overworld.png" id="10_8nbfu"]
 
 [sub_resource type="Animation" id="Animation_slxnh"]
 length = 0.001
@@ -273,7 +272,6 @@ unique_name_in_owner = true
 visible = false
 visibility_layer = 4
 position = Vector2(2, 18)
-texture = ExtResource("10_8nbfu")
 flip_v = true
 hframes = 2
 vframes = 4

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7wtvx875pkeh"
-path="res://.godot/imported/paw_battle.png-b818dcc9df114b1f627727a78330e63b.ctex"
+uid="uid://dgs6ue7q6ck5q"
+path="res://.godot/imported/sword.png-a9a29bd4c6d160562ec8b3627c8f8762.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/melee/paw_battle.png"
-dest_files=["res://.godot/imported/paw_battle.png-b818dcc9df114b1f627727a78330e63b.ctex"]
+source_file="res://entities/player/melee/weapons/pitchfork/sword.png"
+dest_files=["res://.godot/imported/sword.png-a9a29bd4c6d160562ec8b3627c8f8762.ctex"]
 
 [params]
 

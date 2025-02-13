@@ -15,7 +15,7 @@ enum Element {
 
 # --- Variables --- #
 @export var power: float
-@export var element: Element = 0
+@export var element: Element = Element.NONE
 # @@show_if(element != Element.NONE)
 @export var element_percent: float
 @export var damage_type: DamageType = DamageType.PHYSICAL

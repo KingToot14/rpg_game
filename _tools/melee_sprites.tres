@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_3ubfj")
 role = 1
-sprites = Array[String](["w|basic", "o|ranger"])
+sprites = Array[String](["w|basic", "o|ranger", "w|pitchfork"])

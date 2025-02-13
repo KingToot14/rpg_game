@@ -139,7 +139,7 @@ animator = NodePath("../animator")
 
 [node name="brain" type="Node" parent="managers"]
 script = ExtResource("11_0cuik")
-action_delay = 0.1
+action_delay = 0.01
 
 [node name="hp" type="Node" parent="managers"]
 script = ExtResource("12_j77v3")
