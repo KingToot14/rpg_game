@@ -38,20 +38,20 @@ func perform_action() -> void:
 func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	var attack := action as Attack
 	
-	var dmg_chunk := attack.calculate_damage(parent, target) as DamageChunk
+	var dmg_chunk := attack.calculate_damage(parent, target) as Dictionary
 	
 	#TODO: Implement timing modifiers
 	if parent.is_player() and len(Globals.timing_mods) > 0:
 		var timing_mod = Globals.timing_mods.pop_front()
 		
 		if timing_mod == &'perf':
-			dmg_chunk.damage *= PERF_MOD
+			dmg_chunk[&'damage'] *= PERF_MOD
 		elif timing_mod == &'good':
-			dmg_chunk.damage *= GOOD_MOD
+			dmg_chunk[&'damage'] *= GOOD_MOD
 		else:
-			dmg_chunk.damage *= POOR_MOD
+			dmg_chunk[&'damage'] *= POOR_MOD
 	
-	dmg_chunk.damage *= damage_mod
+	dmg_chunk[&'damage'] *= damage_mod
 	
 	# set target
 	target.hp.take_damage(dmg_chunk)

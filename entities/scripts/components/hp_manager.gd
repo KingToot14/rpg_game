@@ -2,7 +2,7 @@ class_name HpManager
 extends Node
 
 # --- Signals --- #
-signal lost_health(dmg_chunk: DamageChunk)
+signal lost_health(dmg_chunk: Dictionary)
 signal died()
 
 # --- Variables --- #
@@ -26,17 +26,14 @@ func load_hp() -> void:
 	else:
 		curr_hp = int(parent.stats.get_max_hp())
 
-func take_damage(dmg_chunk: DamageChunk, from_entity: bool = true) -> void:
+func take_damage(dmg_chunk: Dictionary) -> void:
 	if not alive:
 		return
 	
-	var dmg = dmg_chunk.damage
+	parent.took_damage.emit(dmg_chunk)
+	parent.status_effects.remove_effects()
 	
-	if from_entity:
-		for effect in parent.status_effects.status_effects:
-			effect.take_damage(dmg_chunk)
-		
-		parent.status_effects.remove_effects()
+	var dmg = dmg_chunk.get(&'damage', 0)
 	
 	curr_hp = max(curr_hp - roundi(dmg), 0)
 	

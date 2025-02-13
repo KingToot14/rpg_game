@@ -13,8 +13,8 @@ var tween: Tween
 func _ready() -> void:
 	dmg_label.clip_contents = false
 
-func _on_lost_health(dmg_chunk: DamageChunk) -> void:
-	set_text(roundi(dmg_chunk.damage))
+func _on_lost_health(dmg_chunk: Dictionary) -> void:
+	set_text(roundi(dmg_chunk[&'damage']))
 	start_fade()
 
 func detatch() -> void:

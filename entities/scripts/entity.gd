@@ -5,6 +5,15 @@ extends Node2D
 signal entity_setup()
 signal entity_entered()
 
+signal side_changed(params: Dictionary)
+signal turn_started(params: Dictionary)
+signal turn_ended(params: Dictionary)
+
+signal took_damage(params: Dictionary)
+signal deal_damage(params: Dictionary)
+
+signal getting_stat(stat: Globals.Stat, params: Dictionary)
+
 # --- Variables --- #
 @export var display_mode := false
 # @@show_if(display_mode)

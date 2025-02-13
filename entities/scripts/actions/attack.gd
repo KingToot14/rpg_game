@@ -24,17 +24,23 @@ enum Element {
 @export var randomness: float = .10
 
 # --- Functions --- #
-func calculate_damage(attacker: Entity, target: Entity) -> DamageChunk:
+func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
+	var dmg_chunk := {
+		&'damage': 0,
+		&'element': element,
+		&'element_percent': element_percent
+	}
+	
 	# Formula: (Power * Attack/Defense) * Elemental Mod
 	var use_magic = damage_type == DamageType.MAGICAL
 	
 	# base damage
-	var dmg = power * (attacker.stats.get_attack(use_magic) / target.stats.get_defense(use_magic))
+	dmg_chunk[&'damage'] = power * (attacker.stats.get_attack(use_magic) / target.stats.get_defense(use_magic))
 	
 	# elemental mod
-	dmg *= (1.0 - element_percent) + (element_percent * (1.0 - target.stats.get_resistance(element)))
+	dmg_chunk[&'damage'] *= (1.0 - element_percent) + (element_percent * (1.0 - target.stats.get_resistance(element)))
 	
 	# randomizer
-	dmg *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
+	dmg_chunk[&'damage'] *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
 	
-	return DamageChunk.new(dmg, element, element_percent)
+	return dmg_chunk

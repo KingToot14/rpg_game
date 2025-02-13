@@ -7,6 +7,10 @@ var dmg_mod := 0.90
 
 #yg uk niuytds nuras nuts
 # --- Functions --- #
+func setup_signals() -> void:
+	entity.turn_ended.connect(_on_turn_ended)
+	entity.took_damage.connect(_on_take_damage)
+
 func set_status_info() -> void:
 	max_stack = 100
 	
@@ -20,25 +24,27 @@ func set_status_info() -> void:
 		3:
 			dmg_mod = 0.20
 
-func turn_ended() -> float:
-	var dmg_chunk = DamageChunk.new(roundi(entity.stats.get_max_hp() * dmg), Attack.Element.FIRE, 1.0)
+func _on_turn_ended(_params: Dictionary) -> void:
+	entity.hp.take_damage({
+		&'damage': roundi(entity.stats.get_max_hp() * dmg),
+		&'element': Attack.Element.FIRE,
+		&'element_percent': 1.0,
+		&'source': &'status'
+	})
 	
-	entity.hp.take_damage(dmg_chunk, false)
-	
-	super()
-	
-	return DELAY_DURATION
+	decrement_stacks()
 
-func take_damage(dmg_chunk: DamageChunk) -> void:
+func _on_take_damage(dmg_chunk: Dictionary) -> void:
 	# remove if water damage taken
-	if dmg_chunk.element == Attack.Element.WATER:
+	if dmg_chunk[&'element'] == Attack.Element.WATER:
 		remove_status()
 		return
 	
-	var mod := 0.0
-	
 	# nature and ice deal reduced damage
-	if dmg_chunk.element & (Attack.Element.NATURE | Attack.Element.ICE):
-		mod = 1.0
+	var mod := 0.0
+	var percent := dmg_chunk.get(&'element_percent', 0.0) as float
 	
-	dmg_chunk.damage *= (1.0 - dmg_chunk.element_percent) + (dmg_chunk.element_percent * (1.0 - mod))
+	if dmg_chunk.get(&'element', Attack.Element.NONE) & (Attack.Element.NATURE | Attack.Element.ICE):
+		mod = dmg_mod
+	
+	dmg_chunk[&'damage'] *= (1.0 - percent) + (percent * mod)

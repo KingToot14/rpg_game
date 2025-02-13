@@ -5,4 +5,3 @@ extends StatusEffect
 
 
 # --- Functions --- #
-

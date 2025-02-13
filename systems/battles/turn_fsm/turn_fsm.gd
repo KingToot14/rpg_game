@@ -88,6 +88,7 @@ func remove_busy() -> void:
 	busy_count -= 1
 	
 	if busy_count <= 0:
+		busy_count = 0
 		find_next_turn()
 
 #endregion

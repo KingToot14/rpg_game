@@ -9,6 +9,8 @@ signal turn_ended()
 var actions_remaining: int = 0
 var taking_turn := false
 
+var visited_before := false
+
 # --- References --- #
 var parent: Entity
 

@@ -30,6 +30,16 @@ var timing_mods: Array[StringName] = []
 
 var turn_fsm: TurnFSM
 
+enum Stat {
+	HEALTH,
+	P_ATTACK,
+	M_ATTACK,
+	P_DEFENSE,
+	M_DEFENSE,
+	EVASION,
+	ACCURACY
+}
+
 # --- Functions --- #
 func _ready() -> void:
 	# load default preset

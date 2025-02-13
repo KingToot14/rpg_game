@@ -23,7 +23,11 @@ func _init(init_entity: Entity = null, init_stacks: int = 1, init_stage: int = 1
 	stacks = init_stacks
 	stage = init_stage
 	
+	setup_signals()
 	set_status_info()
+
+func setup_signals() -> void:
+	entity.turn_ended.connect(decrement_stacks)
 
 func set_status_info() -> void:
 	return
@@ -58,37 +62,20 @@ func get_icon() -> Texture2D:
 	return null
 
 # - Effects - #
-func turn_started() -> float:
-	return 0.0
-
-func turn_ended() -> float:
-	decrement_stacks()
-	
-	return 0.0
-
-func take_damage(_dmg_chunk: DamageChunk) -> void:
-	return
-
-func get_max_hp(hp: float) -> float:
-	return hp
-
-func get_p_attack(attack: float) -> float:
-	return attack
-
-func get_m_attack(attack: float) -> float:
-	return attack
-
-func get_p_defense(defense: float) -> float:
-	return defense
-
-func get_m_defense(defense: float) -> float:
-	return defense
-
-func get_accuracy(accuracy: float) -> float:
-	return accuracy
-
-func get_evasion(evasion: float) -> float:
-	return evasion
-
-func get_resistance(_resistance: Attack.Element, mod: float) -> float:
-	return mod
+#func _on_turn_started(params: Dictionary) -> void:
+	#return
+#
+#func _on_turn_ended(params: Dictionary) -> void:
+	#return
+#
+#func _on_side_changed(params: Dictionary) -> void:
+	#return
+#
+#func _on_take_damage(params: Dictionary) -> void:
+	#return
+#
+#func _on_deal_damage(params: Dictionary) -> void:
+	#return
+#
+#func _on_get_stat(stat: Globals.STAT, params: Dictionary) -> void:
+	#return

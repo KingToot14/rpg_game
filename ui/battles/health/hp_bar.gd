@@ -24,7 +24,7 @@ func set_entity(e: Entity) -> void:
 	
 	update_health()
 
-func update_health(_dmg_chunk: DamageChunk = null) -> void:
+func update_health(_dmg_chunk: Dictionary = {}) -> void:
 	if not (entity and entity.hp.alive):
 		hide()
 		return

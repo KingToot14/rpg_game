@@ -27,7 +27,7 @@ func play_enter_anim() -> void:
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')
 
-func play_damage_anim(_dmg_chunk: DamageChunk) -> void:
+func play_damage_anim(_dmg_chunk: Dictionary) -> void:
 	if parent.hp.alive:
 		animator.stop()
 		animator.play(&'take_damage')

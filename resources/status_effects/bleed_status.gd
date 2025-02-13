@@ -6,32 +6,38 @@ var dmg := 0.035
 var heal_mod := 0.90
 
 # --- Functions --- #
+func setup_signals() -> void:
+	entity.turn_ended.connect(_on_turn_ended)
+	entity.took_damage.connect(_on_take_damage)
+
 func set_status_info() -> void:
 	max_stack = 100
-	
-	dmg = 0.020 + 0.015 * stage
 	
 	match stage:
 		1:
 			heal_mod = 0.90
+			dmg = 0.035
 		2:
 			heal_mod = 0.75
+			dmg = 0.050
 		3:
 			heal_mod = 0.50
+			dmg = 0.065
 
-func take_damage(dmg_chunk: DamageChunk) -> void:
+func _on_turn_ended(_params: Dictionary) -> void:
+	entity.hp.take_damage({
+		&'damage': roundi(entity.stats.get_max_hp() * dmg),
+		&'element': Attack.Element.NONE,
+		&'element_percent': 1.0,
+		&'source': &'status'
+	})
+	
+	decrement_stacks()
+
+func _on_take_damage(params: Dictionary) -> void:
 	# ignore taking damage
-	if dmg_chunk.damage > 0:
+	if params.get(&'damage', 0) > 0:
 		return
 	
 	# reduce healing
-	dmg_chunk.damage *= heal_mod
-
-func turn_ended() -> float:
-	var dmg_chunk = DamageChunk.new(roundi(entity.stats.get_max_hp() * dmg), Attack.Element.NONE, 1.0)
-	
-	entity.hp.take_damage(dmg_chunk, false)
-	
-	super()
-	
-	return DELAY_DURATION
+	params[&'damage'] *= heal_mod

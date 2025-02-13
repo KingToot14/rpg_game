@@ -81,7 +81,7 @@ func show_action_bar() -> void:
 	
 	action_bar.show()
 	action_bar_tween.tween_property(action_bar, 'modulate:a', 1.0, action_bar_tween_time)
-	action_bar_tween.tween_property(action_bar, 'position:y', action_bar_pos, action_bar_tween_time).from(action_bar_pos + 8)
+	action_bar_tween.tween_property(action_bar, 'position:y', 0, action_bar_tween_time).from(8)
 
 func hide_action_bar() -> void:
 	if action_bar_tween:
@@ -91,7 +91,7 @@ func hide_action_bar() -> void:
 	action_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	action_bar_tween.tween_property(action_bar, 'modulate:a', 0.0, action_bar_tween_time)
-	action_bar_tween.tween_property(action_bar, 'position:y', action_bar_pos + 8, action_bar_tween_time)
+	action_bar_tween.tween_property(action_bar, 'position:y', 8, action_bar_tween_time)
 	action_bar_tween.finished.connect(action_bar.hide)
 	
 	# hide menus
