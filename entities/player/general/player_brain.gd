@@ -5,7 +5,7 @@ extends EntityBrain
 
 
 # --- Functions --- #
-func _on_turn_started() -> void:
+func _on_turn_started(_params := {}) -> void:
 	Globals.ui_manager.load_player_action(parent)
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.ActionBar)
 

@@ -8,13 +8,20 @@ var action: ActionResource
 var selected_target: Entity
 
 # --- References --- #
-@onready var parent := $"../.." as Entity
+#@onready var parent := $"../.." as Entity
+var parent: Entity
 
 const PERF_MOD := 1.15
 const GOOD_MOD := 1.00
 const POOR_MOD := 0.90
 
 # --- Functions --- #
+func _ready() -> void:
+	parent = $'../..'
+	
+	# setup signals
+	parent.turn_started.connect(_on_turn_started)
+
 func _on_turn_started() -> void:
 	return
 

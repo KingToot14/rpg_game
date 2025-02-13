@@ -25,11 +25,12 @@ func load_spec():
 	else:
 		curr_special = 54
 
-func _on_lost_health(dmg_chunk: DamageChunk) -> void:
-	if dmg_chunk.damage < 0:
+func _on_lost_health(dmg_chunk: Dictionary) -> void:
+	var dmg = dmg_chunk.get(&'damage', 0)
+	if dmg < 0:
 		return
 	
-	curr_special += (dmg_chunk.damage / parent.stats.get_max_hp()) * modifier
+	curr_special += (dmg / parent.stats.get_max_hp()) * modifier
 	special_changed.emit()
 
 func store_special() -> void:

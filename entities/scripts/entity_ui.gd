@@ -38,7 +38,8 @@ func _ready() -> void:
 	info_icon.mouse_exited.connect(hide_info)
 	
 	parent.animator.action_started.connect(hide)
-	parent.turn.turn_ended.connect(show)
+	parent.turn_started.connect(_on_turn_started)
+	parent.turn_ended.connect(_on_turn_ended)
 	
 	update_top()
 
@@ -94,6 +95,13 @@ func update_top() -> void:
 func _on_status_effect_added():
 	update_effects()
 	update_top()
+
+func _on_turn_started(_params := {}) -> void:
+	update_effects()
+
+func _on_turn_ended(_params := {}) -> void:
+	update_effects()
+	show()
 
 func update_effects() -> void:
 	var effects = parent.status_effects.status_effects

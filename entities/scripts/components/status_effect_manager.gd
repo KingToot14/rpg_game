@@ -21,8 +21,12 @@ func _ready() -> void:
 
 func setup(entity: Entity) -> void:
 	parent = entity
+	
+	# setup signals
+	parent.turn_started.connect(_on_turn_started)
+	parent.turn_ended.connect(_on_turn_ended)
 
-func _on_turn_started() -> void:
+func _on_turn_started(_params = {}) -> void:
 	for effect in status_effects:
 		var wait_time = effect.turn_started()
 		

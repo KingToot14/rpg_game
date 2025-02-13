@@ -18,7 +18,7 @@ func set_status_info() -> void:
 	if stage != 3:
 		turns = 1
 
-func _on_turn_ended(params: Dictionary) -> void:
+func _on_turn_ended(_params: Dictionary) -> void:
 	# increase irradiated damage
 	if stage == 3:
 		turns += 1

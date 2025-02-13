@@ -6,7 +6,12 @@ extends Node
 @export var attack_pool: Array[Attack]
 
 # --- Functions --- #
-func _on_turn_ended() -> void:
+func _ready() -> void:
+	var entity := $'../..' as Entity
+	
+	entity.turn_ended.connect(_on_turn_ended)
+
+func _on_turn_ended(_params := {}) -> void:
 	for attack in attack_pool:
 		attack.decrement_cooldown()
 

@@ -31,6 +31,10 @@ SaveManager="*res://systems/data_saving/save_manager.gd"
 StatusEffectHelper="*res://resources/status_effects/helper/status_effect_helper.tscn"
 ScreenshotManager="*res://scripts/autoloads/screenshot_manager.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [dialogue_manager]
 
 general/balloon_path="res://scenes/dialogue/standard_balloon.tscn"

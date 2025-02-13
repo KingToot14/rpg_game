@@ -1,10 +1,6 @@
 class_name TurnManager
 extends Node
 
-# --- Signals --- #
-signal turn_started()
-signal turn_ended()
-
 # --- Variables --- #
 var actions_remaining: int = 0
 var taking_turn := false
@@ -23,14 +19,18 @@ func take_turn() -> void:
 		entity.turn.taking_turn = false
 	
 	taking_turn = true
-	turn_started.emit()
+	parent.turn_started.emit({&'visited_before': visited_before})
+	
+	visited_before = true
 
 func replenish_actions() -> void:
 	actions_remaining = 1
 
 func end_turn() -> void:
 	taking_turn = false
-	turn_ended.emit()
+	parent.turn_ended.emit()
+	
+	visited_before = false
 
 func can_act() -> bool:
 	return parent.hp.alive and actions_remaining > 0
