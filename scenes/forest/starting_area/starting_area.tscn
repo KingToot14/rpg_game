@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bu0ktqr3wancy"]
+[gd_scene load_steps=41 format=3 uid="uid://bu0ktqr3wancy"]
 
 [ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
 [ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://5xg00usrrsnp" path="res://scenes/forest/starting_area/top_fence.png" id="15_n6j3j"]
 [ext_resource type="Texture2D" uid="uid://dusfb62xn3crf" path="res://environment/objects/guardian/spawn_site.png" id="16_2qhru"]
 [ext_resource type="PackedScene" uid="uid://c4xs7uq6ds0ht" path="res://environment/forest/plants/bush.tscn" id="17_16yiu"]
+[ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="19_3jatg"]
+[ext_resource type="Texture2D" uid="uid://c8uqx6p1eln3" path="res://entities/enemies/testing/training_dummy/overworld.png" id="20_gmvb6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7qem3"]
 shader = ExtResource("4_2b0eb")
@@ -443,3 +445,11 @@ offset = Vector2(0, 4)
 position = Vector2(0, -1)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_nyvy5")
+
+[node name="encounter" parent="." instance=ExtResource("19_3jatg")]
+position = Vector2(361, 67)
+encounter_path = "res://scenes/forest/starting_area/encounters/training.tres"
+battle_path = "res://scenes/battles/forest/forest_battle.tscn"
+encounter_texture = ExtResource("20_gmvb6")
+total_frames = 1
+box_offset = -20.0

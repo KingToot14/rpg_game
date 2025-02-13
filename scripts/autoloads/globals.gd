@@ -1,5 +1,47 @@
 extends Node2D
 
+# --- Enums --- #
+enum Stat {
+	HEALTH,
+	P_ATTACK,
+	M_ATTACK,
+	P_DEFENSE,
+	M_DEFENSE,
+	EVASION,
+	ACCURACY
+}
+
+enum EquipAction {
+	DEFEND,
+	SKIP
+}
+
+enum EquipVerb {
+	CAST,
+	SUMMON,
+	UNLEASH
+}
+
+enum EquipAbility {
+	BOOST,
+	RANDOM_CAST,
+	GIVE_STATUS,
+	ACTION_STATUS,
+	COUNTER,
+	ATTACK_CAST,
+	RESIST_ELEMEMENT,
+	RESIST_STATUS
+}
+
+enum StatusType {
+	HARASS = 1,
+	HINDER = 2,
+	LIFE = 4,
+	DEATH = 8,
+	BODY = 16,
+	ENVIRONMENT = 32
+}
+
 # --- General --- #
 var ui_manager: CanvasLayer
 
@@ -29,16 +71,6 @@ var encounter_resource: String
 var timing_mods: Array[StringName] = []
 
 var turn_fsm: TurnFSM
-
-enum Stat {
-	HEALTH,
-	P_ATTACK,
-	M_ATTACK,
-	P_DEFENSE,
-	M_DEFENSE,
-	EVASION,
-	ACCURACY
-}
 
 # --- Functions --- #
 func _ready() -> void:

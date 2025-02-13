@@ -33,7 +33,15 @@ func perform_action() -> void:
 #endregion
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
-	target.status_effects.add_effect(key, stacks, stage)
+	var params = {
+		&'key': key,
+		&'stacks': stacks,
+		&'stage': stage
+	}
+	
+	parent.gave_status.emit(params)
+	
+	target.status_effects.add_effect(params[&'key'], params[&'stacks'], params[&'stage'])
 
 #region Targeting
 func set_target() -> void:

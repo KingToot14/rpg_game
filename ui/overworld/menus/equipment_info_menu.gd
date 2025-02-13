@@ -12,9 +12,10 @@ func load_player(player: PlayerDataChunk) -> void:
 	curr_player = player
 	
 	if player:
-		load_weapon(player.weapon)
-		load_armor(player.armor)
-		load_special(player.class_power)
+		print("Make sure to redo the player equip panel")
+		#load_weapon(player.weapon)
+		#load_armor(player.armor)
+		#load_special(player.class_power)
 	load_equipment(null)
 
 func load_from_player(type: StringName) -> void:

@@ -22,7 +22,7 @@ func _ready() -> void:
 	# setup signals
 	parent.turn_started.connect(_on_turn_started)
 
-func _on_turn_started() -> void:
+func _on_turn_started(_params := {}) -> void:
 	return
 
 func _on_action_selected(new_action: ActionResource) -> void:
@@ -47,7 +47,10 @@ func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	
 	var dmg_chunk := attack.calculate_damage(parent, target) as Dictionary
 	
-	#TODO: Implement timing modifiers
+	# call deal damage effects
+	parent.deal_damage.emit(dmg_chunk)
+	
+	# apply timing mods
 	if parent.is_player() and len(Globals.timing_mods) > 0:
 		var timing_mod = Globals.timing_mods.pop_front()
 		

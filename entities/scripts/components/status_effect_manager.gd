@@ -47,13 +47,23 @@ func _on_turn_ended() -> void:
 	remove_effects()
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
-	var effect = get_effect(key)
+	var params = {
+		&'key': key,
+		&'stacks': stacks,
+		&'stage': stage
+	}
 	
+	parent.received_status.emit(params)
+	
+	var effect = get_effect(params[&'key'])
+	
+	# add to current effect if it exists
 	if effect:
-		effect.add_stacks(stacks, stage)
+		effect.add_stacks(params[&'stacks'], params[&'stage'])
 	else:
-		effect = StatusEffectHelper.get_effect(key).effect_class.new(parent, stacks, stage)
-		effect.key = key
+	# create new effect instance
+		effect = StatusEffectHelper.get_effect(params[&'key']).effect_class.new(parent, params[&'stacks'], params[&'stage'])
+		effect.key = params[&'key']
 		status_effects.append(effect)
 	
 	effect_added.emit()

@@ -12,7 +12,7 @@ extends Resource
 
 @export var resistances = {}
 
-@export var new_element: Attack.Element
+@export var new_element: Attack.Element = 0 
 # @@buttons("Add Resistance", add_resistance())
 @export var new_mod: float
 

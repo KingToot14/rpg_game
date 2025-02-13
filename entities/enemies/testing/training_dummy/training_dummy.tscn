@@ -1,0 +1,292 @@
+[gd_scene load_steps=38 format=3 uid="uid://gvcga8n1fk3x"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_4aisw"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="8_ikcrw"]
+[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="9_jvc28"]
+[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="10_ftucf"]
+[ext_resource type="Resource" uid="uid://ct5ccbu6gqnvu" path="res://entities/enemies/testing/training_dummy/stats.tres" id="10_wl5l7"]
+[ext_resource type="Script" path="res://entities/enemies/testing/training_dummy/training_dummy_brain.gd" id="11_0cuik"]
+[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="12_j77v3"]
+[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="13_msebo"]
+[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="17_7t0kq"]
+[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="18_vlq5x"]
+[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="20_xh1vk"]
+[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="21_4o02o"]
+[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="22_3ojyy"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="24_6qixb"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="25_yg16m"]
+[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="26_76jbk"]
+[ext_resource type="Texture2D" uid="uid://cdqutv8lxu7so" path="res://entities/enemies/testing/training_dummy/battle.png" id="27_7tjc7"]
+[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="31_ovg84"]
+[ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="32_6uiu5"]
+[ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="33_kkqni"]
+[ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="34_onvyk"]
+[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="35_0a6sp"]
+[ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="37_b1urw"]
+
+[sub_resource type="Animation" id="Animation_nltwh"]
+resource_name = "enter_battle"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show"
+}, {
+"args": [],
+"method": &"finish_entered_battle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_hqjld"]
+resource_name = "take_damage"
+
+[sub_resource type="Animation" id="Animation_gxvim"]
+resource_name = "death"
+
+[sub_resource type="Animation" id="Animation_afkov"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8r1uf"]
+_data = {
+"death": SubResource("Animation_gxvim"),
+"enter_battle": SubResource("Animation_nltwh"),
+"idle": SubResource("Animation_afkov"),
+"take_damage": SubResource("Animation_hqjld")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrj3q"]
+resource_local_to_scene = true
+shader = ExtResource("24_6qixb")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
+shader_parameter/radius = 0.06
+shader_parameter/squash_factor = Vector2(1, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2ut"]
+resource_local_to_scene = true
+shader = ExtResource("26_76jbk")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwc10"]
+atlas = ExtResource("32_6uiu5")
+region = Rect2(0, 0, 14, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhgie"]
+atlas = ExtResource("32_6uiu5")
+region = Rect2(0, 9, 14, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47dwm"]
+atlas = ExtResource("34_onvyk")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76uea"]
+atlas = ExtResource("34_onvyk")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb2m0"]
+atlas = ExtResource("32_6uiu5")
+region = Rect2(0, 0, 14, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su8p1"]
+atlas = ExtResource("34_onvyk")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k62pd"]
+radius = 11.0
+height = 56.0
+
+[node name="training_dummy" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
+z_index = 100
+y_sort_enabled = true
+position = Vector2(10, 0)
+script = ExtResource("1_4aisw")
+entity_name = "Training Dummy"
+description = "A simple dummy made of straw."
+brain = NodePath("managers/brain")
+hp = NodePath("managers/hp")
+actions = NodePath("managers/actions")
+targeting = NodePath("managers/targeting")
+stats = NodePath("managers/stats")
+status_effects = NodePath("managers/status_effect")
+turn = NodePath("managers/turn")
+animator = NodePath("managers/animation_manager")
+front_marker = NodePath("front_marker")
+
+[node name="managers" type="Node" parent="."]
+
+[node name="animator" type="AnimationPlayer" parent="managers" node_paths=PackedStringArray("parent")]
+libraries = {
+"": SubResource("AnimationLibrary_8r1uf")
+}
+script = ExtResource("8_ikcrw")
+parent = NodePath("../..")
+
+[node name="sfx_player" type="AudioStreamPlayer" parent="managers"]
+max_polyphony = 10
+bus = &"Gameplay"
+script = ExtResource("9_jvc28")
+
+[node name="animation_manager" type="Node" parent="managers" node_paths=PackedStringArray("animator")]
+script = ExtResource("10_ftucf")
+animator = NodePath("../animator")
+
+[node name="brain" type="Node" parent="managers"]
+script = ExtResource("11_0cuik")
+action_delay = 0.1
+
+[node name="hp" type="Node" parent="managers"]
+script = ExtResource("12_j77v3")
+load_max_hp = null
+
+[node name="actions" type="Node" parent="managers"]
+script = ExtResource("13_msebo")
+
+[node name="targeting" type="Node" parent="managers"]
+script = ExtResource("17_7t0kq")
+
+[node name="stats" type="Node" parent="managers"]
+script = ExtResource("18_vlq5x")
+stats = ExtResource("10_wl5l7")
+
+[node name="status_effect" type="Node" parent="managers"]
+script = ExtResource("20_xh1vk")
+
+[node name="turn" type="Node" parent="managers"]
+script = ExtResource("21_4o02o")
+
+[node name="loot" type="Node" parent="managers"]
+script = ExtResource("22_3ojyy")
+xp_reward = 0
+
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = -5
+material = SubResource("ShaderMaterial_hrj3q")
+position = Vector2(0, 1)
+texture = ExtResource("25_yg16m")
+
+[node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ju2ut")
+position = Vector2(-1, -27)
+texture = ExtResource("27_7tjc7")
+
+[node name="ui" type="Node2D" parent="."]
+z_index = 200
+script = ExtResource("31_ovg84")
+normal_texture = SubResource("AtlasTexture_bwc10")
+hovered_texture = SubResource("AtlasTexture_bhgie")
+
+[node name="top_holder" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -7.0
+offset_top = -65.0
+offset_right = 7.0
+offset_bottom = -53.0
+theme = ExtResource("33_kkqni")
+metadata/_edit_group_ = true
+
+[node name="effect_list" type="HBoxContainer" parent="ui/top_holder"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="effect" type="TextureRect" parent="ui/top_holder/effect_list"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_47dwm")
+script = ExtResource("35_0a6sp")
+
+[node name="stacks" type="RichTextLabel" parent="ui/top_holder/effect_list/effect"]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+bbcode_enabled = true
+text = " 19"
+scroll_active = false
+
+[node name="effect_icon" type="TextureRect" parent="ui/top_holder"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_76uea")
+
+[node name="targeting_marker" type="TextureRect" parent="ui/top_holder"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 7.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(7, 4.5)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nb2m0")
+
+[node name="info_icon" type="TextureRect" parent="ui"]
+unique_name_in_owner = true
+offset_left = 17.0
+offset_top = -43.0
+offset_right = 27.0
+offset_bottom = -33.0
+texture = SubResource("AtlasTexture_su8p1")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_k62pd")
+
+[node name="damage_marker" parent="." instance=ExtResource("37_b1urw")]
+position = Vector2(31, -52)
+
+[node name="front_marker" type="Marker2D" parent="."]
+position = Vector2(-40, -3)
+
+[node name="targeting_marker" type="Sprite2D" parent="."]
+visible = false
+z_index = 200
+position = Vector2(0, -61)
+texture = ExtResource("32_6uiu5")
+vframes = 2
+
+[connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
+[connection signal="died" from="managers/hp" to="damage_marker" method="detatch"]
+[connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
+[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
+[connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
+[connection signal="effect_added" from="managers/status_effect" to="ui" method="update_effects"]
+[connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

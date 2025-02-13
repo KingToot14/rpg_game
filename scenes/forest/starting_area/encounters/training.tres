@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=6 format=3 uid="uid://8fq6gjyu65ut"]
+
+[ext_resource type="Script" path="res://encounters/encounter.gd" id="1_jpfv0"]
+[ext_resource type="Script" path="res://encounters/wave.gd" id="2_jaj3i"]
+[ext_resource type="Script" path="res://encounters/wave_item.gd" id="3_wu860"]
+
+[sub_resource type="Resource" id="Resource_qtwvr"]
+script = ExtResource("3_wu860")
+entity_path = "res://entities/enemies/testing/training_dummy/training_dummy.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_hlse3"]
+script = ExtResource("2_jaj3i")
+enemies = Array[ExtResource("3_wu860")]([null, null, SubResource("Resource_qtwvr"), null, null])
+
+[resource]
+script = ExtResource("1_jpfv0")
+encounter_key = &"starting_training"
+respawn = true
+waves = Array[ExtResource("2_jaj3i")]([SubResource("Resource_hlse3")])

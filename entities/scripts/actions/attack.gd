@@ -6,15 +6,16 @@ enum DamageType { PHYSICAL, MAGICAL }
 
 enum TimingType { TIMED_INPUT, MASH }
 enum Element {
-	NONE, USE_WEAPON,
-	FIRE, ELECTRIC, NATURE,
-	WATER, ICE, FLYING,
-	EARTH, LIGHT, DARK
+	EMPTY = 0,
+	NONE = 1, USE_WEAPON = 2,
+	FIRE = 4,    ELECTRIC = 8, NATURE = 16,
+	WATER = 32,  ICE = 64,     FLYING = 128,
+	EARTH = 256, LIGHT = 512,  DARK = 1024
 }
 
 # --- Variables --- #
 @export var power: float
-@export var element: Element
+@export var element: Element = 0
 # @@show_if(element != Element.NONE)
 @export var element_percent: float
 @export var damage_type: DamageType = DamageType.PHYSICAL

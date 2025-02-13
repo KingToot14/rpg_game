@@ -4,13 +4,14 @@ extends Resource
 # --- Variables --- #
 @export var equip_name: String
 @export_multiline var description: String
-@export var abilities: Array[String] = []
 
 @export var equip_texture: Texture2D
 @export var equip_backing: Texture2D
 
 var level := 1
 @export var enhancements: Array[EquipmentEnhancement] = []
+
+@export var abilities: Array[EquipmentAbility] = []
 
 # --- Functions --- #
 func get_description() -> String:
@@ -20,3 +21,7 @@ func get_description() -> String:
 		out += "\n- %s" % abilities[i]
 	
 	return out
+
+func setup_battle(entity: Entity) -> void:
+	for i in range(min(level, len(abilities))):
+		pass
