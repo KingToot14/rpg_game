@@ -41,6 +41,8 @@ func _ready() -> void:
 	parent.turn_started.connect(_on_turn_started)
 	parent.turn_ended.connect(_on_turn_ended)
 	
+	parent.status_effects.effect_changed.connect(_on_status_effect_changed)
+	
 	update_top()
 
 func _on_targetable_set(targetable: bool) -> void:
@@ -92,9 +94,8 @@ func update_top() -> void:
 	effect_icon_rect.visible = not is_mouse_over
 	effect_list_rect.visible = is_mouse_over
 
-func _on_status_effect_added():
+func _on_status_effect_changed():
 	update_effects()
-	update_top()
 
 func _on_turn_started(_params := {}) -> void:
 	update_effects()

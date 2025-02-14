@@ -1616,6 +1616,5 @@ entity = NodePath("..")
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
-[connection signal="effect_added" from="managers/status_effect" to="ui" method="update_effects"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

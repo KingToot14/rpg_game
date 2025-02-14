@@ -24,6 +24,9 @@
 [ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="35_0a6sp"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="37_b1urw"]
 
+[sub_resource type="Animation" id="Animation_gxvim"]
+resource_name = "death"
+
 [sub_resource type="Animation" id="Animation_nltwh"]
 resource_name = "enter_battle"
 tracks/0/type = "method"
@@ -44,14 +47,11 @@ tracks/0/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_hqjld"]
-resource_name = "take_damage"
-
-[sub_resource type="Animation" id="Animation_gxvim"]
-resource_name = "death"
-
 [sub_resource type="Animation" id="Animation_afkov"]
 resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_hqjld"]
+resource_name = "take_damage"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8r1uf"]
 _data = {
@@ -287,6 +287,5 @@ vframes = 2
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
-[connection signal="effect_added" from="managers/status_effect" to="ui" method="update_effects"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

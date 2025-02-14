@@ -2,12 +2,10 @@ class_name StatusEffectManager
 extends Node
 
 # --- Signals --- #
-signal effect_added()
+signal effect_changed()
 
 # --- Variables --- #
 var status_effects: Array[StatusEffect] = []
-var removal_queue: Array[StringName] = []
-
 # --- References --- #
 var parent: Entity
 var timer: Timer
@@ -21,10 +19,6 @@ func _ready() -> void:
 
 func setup(entity: Entity) -> void:
 	parent = entity
-	
-	# setup signals
-	parent.turn_started.connect(_on_turn_started)
-	parent.turn_ended.connect(_on_turn_ended)
 
 func _on_turn_started(_params = {}) -> void:
 	for effect in status_effects:
@@ -33,8 +27,6 @@ func _on_turn_started(_params = {}) -> void:
 		if wait_time > 0.0:
 			timer.start(wait_time)
 			await timer.time_out
-	
-	remove_effects()
 
 func _on_turn_ended() -> void:
 	for effect in status_effects:
@@ -43,8 +35,6 @@ func _on_turn_ended() -> void:
 		if wait_time > 0.0:
 			timer.start(wait_time)
 			await timer.timeout
-	
-	remove_effects()
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	var params = {
@@ -66,7 +56,7 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 		effect.key = params[&'key']
 		status_effects.append(effect)
 	
-	effect_added.emit()
+	effect_changed.emit()
 
 func remove_effect(key: StringName, stacks = -1) -> void:
 	var effect = get_effect(key)
@@ -77,6 +67,8 @@ func remove_effect(key: StringName, stacks = -1) -> void:
 		else:
 			for i in range(stacks):
 				effect.decrement_stacks()
+	
+	effect_changed.emit()
 
 func get_effect(key: StringName) -> StatusEffect:
 	for effect in status_effects:
@@ -92,13 +84,3 @@ func has_effect(key: StringName, min_stacks := 0, min_stage := 0) -> bool:
 		return false
 	
 	return not (effect.stacks < min_stacks or effect.stage < min_stage)
-
-func queue_removal(effect: StringName) -> void:
-	removal_queue.append(effect)
-
-func remove_effects() -> void:
-	for effect in status_effects:
-		if effect.key in removal_queue:
-			status_effects.erase(effect)
-	
-	removal_queue.clear()

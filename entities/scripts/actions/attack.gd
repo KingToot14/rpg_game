@@ -29,7 +29,8 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 	var dmg_chunk := {
 		&'damage': 0,
 		&'element': element,
-		&'element_percent': element_percent
+		&'element_percent': element_percent,
+		&'source': &'entity'
 	}
 	
 	# Formula: (Power * Attack/Defense) * Elemental Mod

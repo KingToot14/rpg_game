@@ -56,26 +56,7 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 	set_status_info()
 
 func remove_status() -> void:
-	entity.status_effects.queue_removal(key)
+	entity.status_effects.remove_effect(key)
 
 func get_icon() -> Texture2D:
 	return null
-
-# - Effects - #
-#func _on_turn_started(params: Dictionary) -> void:
-	#return
-#
-#func _on_turn_ended(params: Dictionary) -> void:
-	#return
-#
-#func _on_side_changed(params: Dictionary) -> void:
-	#return
-#
-#func _on_take_damage(params: Dictionary) -> void:
-	#return
-#
-#func _on_deal_damage(params: Dictionary) -> void:
-	#return
-#
-#func _on_get_stat(stat: Globals.STAT, params: Dictionary) -> void:
-	#return

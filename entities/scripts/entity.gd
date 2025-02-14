@@ -12,6 +12,8 @@ signal turn_ended(params: Dictionary)
 signal took_damage(params: Dictionary)
 signal deal_damage(params: Dictionary)
 
+signal performed_action(param: Dictionary)
+
 signal received_status(params: Dictionary)
 signal gave_status(params: Dictionary)
 

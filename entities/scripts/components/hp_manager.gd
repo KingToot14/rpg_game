@@ -31,7 +31,6 @@ func take_damage(dmg_chunk: Dictionary) -> void:
 		return
 	
 	parent.took_damage.emit(dmg_chunk)
-	parent.status_effects.remove_effects()
 	
 	var dmg = dmg_chunk.get(&'damage', 0)
 	

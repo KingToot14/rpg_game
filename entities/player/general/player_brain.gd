@@ -52,6 +52,8 @@ func _on_entity_selected(entity: Entity) -> void:
 	perform_action()
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)
+	
+	parent.performed_action.emit({&'action': action.name})
 
 func setup_timing() -> void:
 	var timing_mode = DataManager.options.timing_mode

@@ -20,3 +20,5 @@ equip_name = "Oakris Blade"
 description = "Bestowed upon the guardian of the forest. Imbued with the forest God's essence."
 enhancements = Array[ExtResource("2_jlhyo")]([null, null, null])
 abilities = Array[ExtResource("1_hiwhy")]([SubResource("Resource_gd5j8"), null, null])
+element = 16
+element_percent = 0.5

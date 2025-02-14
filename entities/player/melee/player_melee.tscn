@@ -312,7 +312,7 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.5, 1),
+"times": PackedFloat32Array(0, 0.05, 0.5, 0.95),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -325,7 +325,7 @@ tracks/0/keys = {
 "method": &"add_effect"
 }, {
 "args": [],
-"method": &"remove_busy"
+"method": &"end_turn"
 }]
 }
 
@@ -1539,6 +1539,5 @@ entity = NodePath("../..")
 [connection signal="lost_health" from="managers/hp" to="managers/special" method="_on_lost_health"]
 [connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
-[connection signal="effect_added" from="managers/status_effect" to="ui" method="_on_status_effect_added"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

@@ -14,7 +14,10 @@ func set_status_info() -> void:
 
 func _on_turn_started(params: Dictionary) -> void:
 	if not params.get(&'visited_before', false):
-		decrement_stacks()
+		remove_status()
 
 func _on_take_damage(dmg_chunk: Dictionary) -> void:
-	dmg_chunk[&'damage'] *= dmg_mod
+	if dmg_chunk.get(&'source', &'unset') != &'entity':
+		return
+	
+	dmg_chunk[&'damage'] = roundi(dmg_chunk[&'damage'] * dmg_mod)

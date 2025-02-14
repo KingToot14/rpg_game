@@ -19,6 +19,7 @@ func take_turn() -> void:
 		entity.turn.taking_turn = false
 	
 	taking_turn = true
+	
 	parent.turn_started.emit({&'visited_before': visited_before})
 	
 	visited_before = true
@@ -28,7 +29,7 @@ func replenish_actions() -> void:
 
 func end_turn() -> void:
 	taking_turn = false
-	parent.turn_ended.emit()
+	parent.turn_ended.emit({})
 	
 	visited_before = false
 

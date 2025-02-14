@@ -19,7 +19,7 @@ var level := 1
 # --- Functions --- #
 func get_description() -> String:
 	var out = description
-	
+	Globals
 	for i in range(level):
 		out += "\n- %s" % abilities[i]
 	

@@ -41,7 +41,7 @@ func _on_take_damage(dmg_chunk: Dictionary) -> void:
 		return
 	
 	# nature and ice deal reduced damage
-	var mod := 0.0
+	var mod := 1.0
 	var percent := dmg_chunk.get(&'element_percent', 0.0) as float
 	
 	if dmg_chunk.get(&'element', Attack.Element.NONE) & (Attack.Element.NATURE | Attack.Element.ICE):

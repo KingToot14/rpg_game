@@ -30,6 +30,10 @@ func set_state(state: String) -> void:
 	curr_state.state_entered()
 	
 	state_changed.emit(state)
+	
+	# send signal to all entities
+	for entity in TargetingHelper.get_entities():
+		entity.side_changed.emit({&'side': state})
 
 #region Entity Management
 func find_next_turn() -> void:
