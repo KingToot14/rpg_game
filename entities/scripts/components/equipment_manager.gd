@@ -19,13 +19,15 @@ func setup(entity: Entity) -> void:
 		%'sword'.texture = weapon.sword_sprite
 		%'shield'.texture = weapon.shield_sprite
 		
+		weapon.setup_battle(entity)
+		
 		# outfit
 		
 		# hat
 		
 	elif role == PlayerDataChunk.PlayerRole.MONK:
-		PlayerDataChunk
+		pass
 	elif role == PlayerDataChunk.PlayerRole.RANGED:
-		PlayerDataChunk
+		pass
 	elif role == PlayerDataChunk.PlayerRole.MAGIC:
-		PlayerDataChunk
+		pass

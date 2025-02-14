@@ -27,4 +27,4 @@ func get_description() -> String:
 
 func setup_battle(entity: Entity) -> void:
 	for i in range(min(level, len(abilities))):
-		pass
+		abilities[i].setup(entity, level)

@@ -5,14 +5,7 @@ extends EntityBrain
 
 
 # --- Functions --- #
-func _ready() -> void:
-	super()
-	
-	print(parent)
-
 func _on_turn_started(_params := {}) -> void:
-	print("What?")
-	
 	# add delay to not break system
 	await get_tree().create_timer(action_delay).timeout
 	

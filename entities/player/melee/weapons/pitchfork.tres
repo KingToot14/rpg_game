@@ -20,3 +20,5 @@ equip_name = "Pitchfork"
 description = "A simple farmer's tool passed down for generations. You can feel the love put into it."
 enhancements = Array[ExtResource("3_buo2h")]([null, null, null])
 abilities = Array[ExtResource("1_wta2j")]([SubResource("Resource_gd5j8"), null, null])
+element = 1
+element_percent = 0.5

@@ -666,8 +666,8 @@ tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55, 2.65),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.55, 1.25, 1.65, 2.05, 2.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": ["front", 0.55],
 "method": &"move_towards"
@@ -676,6 +676,15 @@ tracks/1/keys = {
 "method": &"screen_shake"
 }, {
 "args": [2.0],
+"method": &"screen_shake"
+}, {
+"args": [2.0],
+"method": &"screen_shake"
+}, {
+"args": [2.0],
+"method": &"screen_shake"
+}, {
+"args": [4.0],
 "method": &"screen_shake"
 }]
 }
@@ -831,7 +840,7 @@ tracks/1/keys = {
 "args": ["front", 0.55],
 "method": &"move_towards"
 }, {
-"args": [2.0],
+"args": [4.0],
 "method": &"screen_shake"
 }]
 }

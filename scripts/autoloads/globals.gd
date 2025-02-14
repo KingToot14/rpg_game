@@ -34,6 +34,7 @@ enum EquipAbility {
 }
 
 enum StatusType {
+	EMPTY = 0,
 	HARASS = 1,
 	HINDER = 2,
 	LIFE = 4,
