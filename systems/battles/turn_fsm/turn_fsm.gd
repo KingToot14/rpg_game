@@ -11,6 +11,8 @@ var curr_state: TurnState
 
 var busy_count := 0
 
+var attack_queue: Array[Dictionary]
+
 @export var turn_switch_delay: float = 0.0
 
 # --- Functions --- #
@@ -91,9 +93,39 @@ func add_busy() -> void:
 func remove_busy() -> void:
 	busy_count -= 1
 	
+	# check counters
+	var used = []
+	for attack in attack_queue:
+		if attack.get(&'type', &'none') != &'counter':
+			continue
+		
+		print("Performing Counter")
+		used.append(attack)
+	
+	for attack in used:
+		attack_queue.erase(attack)
+	
 	if busy_count <= 0:
 		busy_count = 0
 		find_next_turn()
+
+#endregion
+
+#region Queue System
+func queue_attack(attack_chunk: Dictionary) -> void:
+	attack_queue.append(attack_chunk)
+
+func check_addition_attacks() -> void:
+	var used = []
+	for attack in attack_queue:
+		if attack.get(&'type', &'none') != &'addition':
+			continue
+		
+		print("Performing Addition")
+		used.append(attack)
+	
+	for attack in used:
+		attack_queue.erase(attack)
 
 #endregion
 

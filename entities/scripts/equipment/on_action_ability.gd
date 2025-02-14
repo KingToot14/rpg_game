@@ -2,7 +2,7 @@ class_name OnActionAbility
 extends EquipmentAbility
 
 # --- Variables --- #
-@export var action_name: String
+@export var action_name: StringName
 
 @export var status_key: StringName
 @export var stacks := 1

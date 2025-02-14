@@ -613,8 +613,8 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 1.15, 1.25, 1.55, 1.65, 1.95, 2.05, 2.55, 2.65, 3.35, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 1.15, 1.25, 1.55, 1.65, 1.95, 2.05, 2.55, 2.65, 2.7, 3.35, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"set_target"
@@ -651,6 +651,9 @@ tracks/0/keys = {
 }, {
 "args": [0.4],
 "method": &"do_damage"
+}, {
+"args": [],
+"method": &"check_addition_attacks"
 }, {
 "args": ["home", 0.65],
 "method": &"move_towards"
@@ -802,8 +805,8 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 1.45, 1.5, 1.55, 2.15, 2.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 1.45, 1.5, 1.55, 1.6, 2.15, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"set_target"
@@ -819,6 +822,9 @@ tracks/0/keys = {
 }, {
 "args": [],
 "method": &"do_damage"
+}, {
+"args": [],
+"method": &"check_addition_attacks"
 }, {
 "args": ["home", 0.65],
 "method": &"move_towards"
@@ -1012,8 +1018,8 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.9, 1.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 0.9, 1.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"set_target"
@@ -1026,6 +1032,9 @@ tracks/0/keys = {
 }, {
 "args": [],
 "method": &"do_damage"
+}, {
+"args": [],
+"method": &"check_addition_attacks"
 }, {
 "args": ["home", 0.65],
 "method": &"move_towards"

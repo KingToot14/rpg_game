@@ -128,3 +128,9 @@ func end_turn() -> void:
 	remove_busy()
 
 #endregion
+
+#region Queue System
+func check_addition_attacks() -> void:
+	Globals.turn_fsm.check_addition_attacks()
+
+#endregion
