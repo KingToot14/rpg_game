@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Encounter" load_steps=6 format=3 uid="uid://8fq6gjyu65ut"]
 
-[ext_resource type="Script" path="res://encounters/encounter.gd" id="1_jpfv0"]
-[ext_resource type="Script" path="res://encounters/wave.gd" id="2_jaj3i"]
-[ext_resource type="Script" path="res://encounters/wave_item.gd" id="3_wu860"]
+[ext_resource type="Script" path="res://entities/scripts/encounter.gd" id="1_jpfv0"]
+[ext_resource type="Script" path="res://entities/scripts/wave.gd" id="2_jaj3i"]
+[ext_resource type="Script" path="res://entities/scripts/wave_item.gd" id="3_wu860"]
 
 [sub_resource type="Resource" id="Resource_qtwvr"]
 script = ExtResource("3_wu860")

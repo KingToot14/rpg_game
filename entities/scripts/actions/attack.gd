@@ -24,6 +24,8 @@ enum Element {
 @export var crit_rate: float = .10
 @export var randomness: float = .10
 
+@export_file("*.tscn") var attack_obj: String
+
 # --- Functions --- #
 func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 	var dmg_chunk := {

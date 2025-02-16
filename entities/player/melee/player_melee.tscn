@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=61 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
@@ -23,7 +23,7 @@
 [ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="11_dr50q"]
 [ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="12_bj3mx"]
 [ext_resource type="Resource" uid="uid://c60a2d1hu8uda" path="res://entities/player/melee/stats.tres" id="12_e8uqe"]
-[ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://entities/player/melee/objects/falling_object.tscn" id="14_6ew1w"]
+[ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://attacks/environment/falling_objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
 [ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
 [ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="14_k6gpk"]
@@ -1266,6 +1266,167 @@ tracks/6/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_a128w"]
+resource_name = "jump_slam"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("managers/animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [],
+"method": &"add_busy"
+}, {
+"args": [],
+"method": &"timed_input"
+}, {
+"args": [],
+"method": &"activate_object"
+}, {
+"args": [],
+"method": &"check_addition_attacks"
+}, {
+"args": [],
+"method": &"end_turn"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("managers/animator")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2.0],
+"method": &"screen_shake"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.55, 0.65, 0.75, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/sword:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.55, 0.65, 0.75, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shield:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.55, 0.65, 0.75, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite/strap:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.55, 0.65, 0.75, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("shadow:material:shader_parameter/radius")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.12, 0.09, 0.09, 0.12]
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-34, -0.1, 0, 0.1, 0, -80.5, -0.2, -0.5, 0.2, 2.5, -34, -0.1, 0, 0.1, 0),
+"times": PackedFloat32Array(0, 0.3, 0.55)
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("managers/sfx_player")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [ExtResource("2_r0ggs"), -20.0],
+"method": &"play_sfx"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("managers/sfx_player")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [ExtResource("3_typ4q"), -25.0],
+"method": &"play_sfx"
+}, {
+"args": [ExtResource("4_g08al"), -2.5],
+"method": &"play_sfx"
+}]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("sprite/sword:material:shader_parameter/position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.25, 1.75]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xm32f"]
 _data = {
 "RESET": SubResource("Animation_ste4p"),
@@ -1276,6 +1437,7 @@ _data = {
 "fury": SubResource("Animation_e2tet"),
 "heavy_slash": SubResource("Animation_tmxf4"),
 "idle": SubResource("Animation_1n7su"),
+"jump_slam": SubResource("Animation_a128w"),
 "normal_attack": SubResource("Animation_1ymxq"),
 "take_damage": SubResource("Animation_rrl67")
 }

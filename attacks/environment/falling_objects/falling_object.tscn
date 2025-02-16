@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://cp08dhthrsm5i"]
 
-[ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_w4yh0"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_7kk3e"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_opcd4"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_o6rq4"]
-[ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_drd5y"]
+[ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_31dej"]
+[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xv5ry"]
+[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_oktuw"]
+[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_gw5a4"]
+[ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_j12au"]
 
 [sub_resource type="Animation" id="Animation_qgu7g"]
 resource_name = "fall_heavy"
@@ -204,14 +204,13 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c402"]
 resource_local_to_scene = true
-shader = ExtResource("3_opcd4")
+shader = ExtResource("3_oktuw")
 shader_parameter/shadow_color = Color(0, 0, 0, 0.1)
 shader_parameter/radius = 0.12
 shader_parameter/squash_factor = Vector2(1, 2.5)
 
 [node name="falling_object" type="Node2D" node_paths=PackedStringArray("animator", "sprite")]
-visible = false
-script = ExtResource("1_w4yh0")
+script = ExtResource("1_31dej")
 animator = NodePath("animator")
 sprite = NodePath("sprite")
 
@@ -219,17 +218,16 @@ sprite = NodePath("sprite")
 libraries = {
 "": SubResource("AnimationLibrary_80f1w")
 }
-script = ExtResource("2_7kk3e")
+script = ExtResource("2_xv5ry")
 parent = NodePath("..")
 
 [node name="shadow" type="Sprite2D" parent="."]
 z_index = -10
 material = SubResource("ShaderMaterial_2c402")
 position = Vector2(0, -1.19209e-07)
-texture = ExtResource("4_o6rq4")
+texture = ExtResource("4_gw5a4")
 
 [node name="sprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -10)
-texture = ExtResource("5_drd5y")
+position = Vector2(0, -200)
+texture = ExtResource("5_j12au")
 hframes = 3

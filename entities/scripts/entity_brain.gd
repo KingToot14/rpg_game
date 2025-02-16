@@ -7,8 +7,9 @@ extends Node
 var action: ActionResource
 var selected_target: Entity
 
+var attack_obj: PackedScene
+
 # --- References --- #
-#@onready var parent := $"../.." as Entity
 var parent: Entity
 
 const PERF_MOD := 1.15
@@ -38,9 +39,29 @@ func _on_entity_selected(entity: Entity) -> void:
 	selected_target = entity
 
 func perform_action() -> void:
+	# cooldown action
 	parent.turn.actions_remaining -= 1
 	action.start_cooldown()
+	
+	# load objects
+	if action is Attack and action.attack_obj != "":
+		var loader = AsyncLoader.new(action.attack_obj, func(scn: PackedScene): attack_obj = scn)
+		await loader.done_loading
+	
+	# perform action
 	parent.animator.play_action_anim(action.animation_name)
+
+func activate_object(target) -> void:
+	if attack_obj:
+		var obj = attack_obj.instantiate() as AttackObject
+		add_child(obj)
+		
+		# perform attack
+		obj.setup({
+			&'entity': parent,
+			&'target': target
+		})
+		obj.perform_attack()
 
 func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	var attack := action as Attack

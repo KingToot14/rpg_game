@@ -30,6 +30,9 @@ func do_damage(modifier: float = 1.0) -> void:
 func perform_action() -> void:
 	entity.brain.action.perform_action(target)
 
+func activate_object() -> void:
+	entity.brain.activate_object(target)
+
 #endregion
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:

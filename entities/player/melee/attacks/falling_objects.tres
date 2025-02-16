@@ -17,8 +17,9 @@ timing_type = 0
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+attack_obj = "res://attacks/environment/falling_objects/falling_objects.tscn"
 name = "Falling Objects"
-animation_name = &"falling_objects"
+animation_name = &"jump_slam"
 icon = SubResource("AtlasTexture_70663")
 description = "Thrust a sword into the ground, causing objects to fall from the sky
  - Hits all enemies

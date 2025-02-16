@@ -17,6 +17,7 @@ timing_type = 1
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+attack_obj = ""
 name = "Fury"
 animation_name = &"fury"
 icon = SubResource("AtlasTexture_rka2f")
