@@ -2,7 +2,7 @@ class_name EquipmentAbility
 extends Resource
 
 # --- Variables --- #
-var entity
+var entity: Entity
 
 @export_range(1, 3, 1) var level_requirement := 1
 var level := 0

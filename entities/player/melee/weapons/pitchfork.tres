@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="MeleeWeaponEquipment" load_steps=8 format=3 uid="uid://bc0twncpqtigq"]
 
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_wta2j"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/counter_ability.gd" id="2_ru8qm"]
+[ext_resource type="Script" path="res://entities/scripts/equipment/attack_cast_ability.gd" id="2_wcboo"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="3_buo2h"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/melee_weapon_equipment.gd" id="4_s5uyn"]
 [ext_resource type="Texture2D" uid="uid://4h1ohrdfw5nm" path="res://entities/player/melee/weapons/pitchfork/shield.png" id="5_h07so"]
 [ext_resource type="Texture2D" uid="uid://dgs6ue7q6ck5q" path="res://entities/player/melee/weapons/pitchfork/sword.png" id="6_q5jwd"]
 
-[sub_resource type="Resource" id="Resource_joqlk"]
-script = ExtResource("2_ru8qm")
-attack_name = "normal_attack"
+[sub_resource type="Resource" id="Resource_b1luv"]
+script = ExtResource("2_wcboo")
+attack_object = "res://attacks/environment/falling_objects/falling_objects.tscn"
+attack_name = ""
 odds = 1.0
 level_requirement = 1
 
@@ -20,6 +21,6 @@ shield_sprite = ExtResource("5_h07so")
 equip_name = "Pitchfork"
 description = "A simple farmer's tool passed down for generations. You can feel the love put into it."
 enhancements = Array[ExtResource("3_buo2h")]([null, null, null])
-abilities = Array[ExtResource("1_wta2j")]([SubResource("Resource_joqlk"), null, null])
+abilities = Array[ExtResource("1_wta2j")]([SubResource("Resource_b1luv"), null, null])
 element = 1
 element_percent = 0.5

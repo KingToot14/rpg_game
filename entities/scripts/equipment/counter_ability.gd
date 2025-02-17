@@ -2,8 +2,10 @@ class_name CounterAbility
 extends EquipmentAbility
 
 # --- Variables --- #
-@export var attack_name: String
+@export var attack_name: StringName
 @export var odds := 0.25
+
+var countered := false
 
 # --- Functions --- #
 func setup(new_entity: Entity, new_level: int) -> void:
@@ -11,19 +13,25 @@ func setup(new_entity: Entity, new_level: int) -> void:
 	
 	# setup signals
 	entity.took_damage.connect(_on_take_damage)
+	entity.deal_damage.connect(_on_deal_damage)
+
+func _on_deal_damage(_params: Dictionary) -> void:
+	countered = false
 
 func _on_take_damage(params: Dictionary) -> void:
-	# don't counter counters
-	if params.get(&'is_counter', false):
+	# don't counter counters, and only once per attack
+	if params.get(&'is_counter', false) or countered:
 		return
 	
 	if randf() > odds:
 		return
 	
+	countered = true
+	
 	Globals.turn_fsm.queue_attack({
 		&'attack_name': attack_name,
-		&'type': &'counter',
-		&'params': {
-			&'is_counter': true
-		}
+		&'entity': entity,
+		&'target': params.get(&'entity', null),
+		&'type': &'queued',
+		&'is_counter': true
 	})

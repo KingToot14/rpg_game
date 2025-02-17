@@ -32,7 +32,9 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 		&'damage': 0,
 		&'element': element,
 		&'element_percent': element_percent,
-		&'source': &'entity'
+		&'source': &'entity',
+		&'entity': attacker,
+		&'target': target
 	}
 	
 	# Formula: (Power * Attack/Defense) * Elemental Mod

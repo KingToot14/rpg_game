@@ -93,21 +93,36 @@ func add_busy() -> void:
 func remove_busy() -> void:
 	busy_count -= 1
 	
-	# check counters
-	var used = []
-	for attack in attack_queue:
-		if attack.get(&'type', &'none') != &'counter':
-			continue
-		
-		print("Performing Counter")
-		used.append(attack)
-	
-	for attack in used:
-		attack_queue.erase(attack)
-	
 	if busy_count <= 0:
-		busy_count = 0
-		find_next_turn()
+		# check queue
+		var used = []
+		var still_busy := false
+		
+		for attack in attack_queue:
+			if attack.get(&'type', &'none') != &'queued':
+				continue
+			
+			var entity := attack.get(&'entity', null) as Entity
+			var target := attack.get(&'target', null) as Entity
+			
+			if not is_instance_valid(entity) or not is_instance_valid(target):
+				used.append(attack)
+				continue
+			
+			var action = entity.actions.get_attack(attack.get(&'attack_name', &''))
+			
+			entity.brain.setup_and_perform(action, target)
+			
+			used.append(attack)
+			still_busy = true
+			break
+		
+		for attack in used:
+			attack_queue.erase(attack)
+		
+		if not still_busy:
+			busy_count = 0
+			find_next_turn()
 
 #endregion
 
@@ -121,7 +136,16 @@ func check_addition_attacks() -> void:
 		if attack.get(&'type', &'none') != &'addition':
 			continue
 		
-		print("Performing Addition")
+		var entity = attack.get(&'entity', null)
+		var target = attack.get(&'target', null)
+		
+		if not is_instance_valid(entity):
+			used.append(attack)
+			continue
+		
+		await entity.brain.load_object(attack.get(&'attack_object', ""))
+		entity.brain.activate_object(target)
+		
 		used.append(attack)
 	
 	for attack in used:

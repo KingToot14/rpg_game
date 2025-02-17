@@ -38,23 +38,49 @@ func _on_entity_selected(entity: Entity) -> void:
 	
 	selected_target = entity
 
-func perform_action() -> void:
+func setup_and_perform(new_action: ActionResource, target: Entity) -> void:
+	action = new_action
+	selected_target = target
+	
+	perform_action(false)
+
+func perform_action(cooldown := true) -> void:
 	# cooldown action
-	parent.turn.actions_remaining -= 1
-	action.start_cooldown()
+	if cooldown:
+		parent.turn.actions_remaining -= 1
+		action.start_cooldown()
 	
 	# load objects
 	if action is Attack and action.attack_obj != "":
-		var loader = AsyncLoader.new(action.attack_obj, func(scn: PackedScene): attack_obj = scn)
-		await loader.done_loading
+		await load_object(action.attack_obj)
 	
 	# perform action
 	parent.animator.play_action_anim(action.animation_name)
+	
+	# setnd signals
+	var action_string = ""
+	
+	if action is Attack:
+		action_string = "attack"
+	elif action is Defense:
+		action_string = "defend"
+	elif action.name == "Skip":
+		action_string = "skip"
+	
+	parent.performed_action.emit({
+		&'action': action_string,
+		&'entity': parent,
+		&'target': selected_target
+	})
+
+func load_object(path: String) -> void:
+	var loader = AsyncLoader.new(path, func(scn: PackedScene): attack_obj = scn)
+	await loader.done_loading
 
 func activate_object(target) -> void:
 	if attack_obj:
 		var obj = attack_obj.instantiate() as AttackObject
-		add_child(obj)
+		get_tree().current_scene.add_child(obj)
 		
 		# perform attack
 		obj.setup({

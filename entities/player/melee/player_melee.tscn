@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cr0frogmee5t6"]
+[gd_scene load_steps=59 format=3 uid="uid://cr0frogmee5t6"]
 
 [ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_xrkk6"]
 [ext_resource type="AudioStream" uid="uid://bdt1m4ydjgxyx" path="res://entities/sfx/fast_hit.wav" id="2_dv32v"]
@@ -23,9 +23,7 @@
 [ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="11_dr50q"]
 [ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="12_bj3mx"]
 [ext_resource type="Resource" uid="uid://c60a2d1hu8uda" path="res://entities/player/melee/stats.tres" id="12_e8uqe"]
-[ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://attacks/environment/falling_objects/falling_object.tscn" id="14_6ew1w"]
 [ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="14_dus6n"]
-[ext_resource type="Script" path="res://entities/player/melee/attacks/melee_attack_manager.gd" id="14_jx8ob"]
 [ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="14_k6gpk"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_eq6ta"]
 [ext_resource type="Script" path="res://entities/scripts/components/equipment_manager.gd" id="23_hr0sl"]
@@ -498,51 +496,37 @@ tracks/0/keys = {
 "method": &"end_turn"
 }]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("attack_objects")
+tracks/1/path = NodePath("sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"set_falling_object_targets"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.45, 0.6, 0.75, 0.9, 1.3, 1.4, 1.5, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0, 2, 1, 1, 0, 0, 1, 1, 0]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("shadow:material:shader_parameter/radius")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:material:shader_parameter/radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.12, 0.09, 0.09, 0.12]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("managers/animator")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("managers/animator")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -550,24 +534,24 @@ tracks/4/keys = {
 "method": &"screen_shake"
 }]
 }
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite:position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
 "points": PackedFloat32Array(-18, -0.1, 0, 0.1, -26.5, -45, -0.1, 0, 0.1, 0, -18, -0.1, -26.5, 0.1, 0, -18, -0.05, 0, 0.0500001, -6.5, -25, 0, 0, 0, 0, -18, -0.0500001, -7.5, 0.05, 0),
 "times": PackedFloat32Array(0, 0.25, 0.5, 1.15, 1.3, 1.45)
 }
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("managers/sfx_player")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("managers/sfx_player")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.5, 1.15),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
@@ -581,13 +565,13 @@ tracks/6/keys = {
 "method": &"play_sfx"
 }]
 }
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("managers/sfx_player")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("managers/sfx_player")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.35, 1.15),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
@@ -613,7 +597,7 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 1.15, 1.25, 1.55, 1.65, 1.95, 2.05, 2.55, 2.65, 2.7, 3.35, 4),
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 1.15, 1.25, 1.55, 1.65, 1.95, 2.05, 2.55, 2.65, 2.85, 3.35, 4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -669,11 +653,14 @@ tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55, 1.25, 1.65, 2.05, 2.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.55, 1.25, 1.65, 2.05, 2.65, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": ["front", 0.55],
 "method": &"move_towards"
+}, {
+"args": [5],
+"method": &"align_z"
 }, {
 "args": [2.0],
 "method": &"screen_shake"
@@ -689,6 +676,9 @@ tracks/1/keys = {
 }, {
 "args": [4.0],
 "method": &"screen_shake"
+}, {
+"args": [],
+"method": &"restore_z"
 }]
 }
 tracks/2/type = "value"
@@ -805,7 +795,7 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 1.45, 1.5, 1.55, 1.6, 2.15, 2.8),
+"times": PackedFloat32Array(0, 0.05, 1.45, 1.5, 1.55, 1.75, 2.15, 2.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -840,14 +830,20 @@ tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.55),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 1.55, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": ["front", 0.55],
 "method": &"move_towards"
 }, {
+"args": [5],
+"method": &"align_z"
+}, {
 "args": [4.0],
 "method": &"screen_shake"
+}, {
+"args": [],
+"method": &"restore_z"
 }]
 }
 tracks/2/type = "value"
@@ -1018,7 +1014,7 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 0.9, 1.55),
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.75, 0.9, 1.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -1050,14 +1046,20 @@ tracks/1/path = NodePath("managers/animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.55, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": ["front", 0.55],
 "method": &"move_towards"
 }, {
+"args": [5],
+"method": &"align_z"
+}, {
 "args": [2.0],
 "method": &"screen_shake"
+}, {
+"args": [],
+"method": &"restore_z"
 }]
 }
 tracks/2/type = "value"
@@ -1276,7 +1278,7 @@ tracks/0/path = NodePath("managers/animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.6, 1),
+"times": PackedFloat32Array(0, 0.05, 0.45, 0.55, 0.75, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -1684,25 +1686,6 @@ position = Vector2(-25, -19)
 [node name="front_marker" type="Marker2D" parent="."]
 visible = false
 position = Vector2(40, 4)
-
-[node name="attack_objects" type="Node2D" parent="." node_paths=PackedStringArray("falling_objects")]
-script = ExtResource("14_jx8ob")
-falling_objects = [NodePath("falling_objects"), NodePath("falling_objects2"), NodePath("falling_objects3"), NodePath("falling_objects4"), NodePath("falling_objects5")]
-
-[node name="falling_objects" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
-entity = NodePath("../..")
-
-[node name="falling_objects2" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
-entity = NodePath("../..")
-
-[node name="falling_objects3" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
-entity = NodePath("../..")
-
-[node name="falling_objects4" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
-entity = NodePath("../..")
-
-[node name="falling_objects5" parent="attack_objects" node_paths=PackedStringArray("entity") instance=ExtResource("14_6ew1w")]
-entity = NodePath("../..")
 
 [connection signal="mouse_entered" from="." to="managers/targeting" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]

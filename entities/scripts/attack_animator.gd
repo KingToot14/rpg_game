@@ -113,8 +113,19 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 
 #endregion
 
+#region Display
 func set_visible(val: bool) -> void:
 	parent.visible = val
+
+func align_z(offset := 5) -> void:
+	var t = target if target is Entity else target[-1]
+	
+	parent.z_index = 100 + t.spawn_index * 10 + offset
+
+func restore_z() -> void:
+	parent.z_index = 100 + entity.spawn_index * 10
+
+#endregion
 
 func screen_shake(intensity: float = 4, time = 0.25) -> void:
 	get_viewport().get_camera_2d().do_screen_shake(intensity, time)

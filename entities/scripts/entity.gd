@@ -67,9 +67,13 @@ func setup(index: int):
 	if not manager_root:
 		return
 	
+	# setup children
 	for child in manager_root.get_children():
 		if 'setup' in child:
 			child.setup(self)
+	
+	# setup z order
+	z_index = 100 + spawn_index * 10
 	
 	await get_tree().process_frame
 	

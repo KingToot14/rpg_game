@@ -52,18 +52,6 @@ func _on_entity_selected(entity: Entity) -> void:
 	perform_action()
 	Globals.ui_manager.set_action_state(BattleUiManager.ActionState.Hidden)
 	action.perform_action(selected_target)
-	
-	# setnd signals
-	var action_string = ""
-	
-	if action is Attack:
-		action_string = "attack"
-	elif action is Defense:
-		action_string = "defend"
-	elif action.name == "Skip":
-		action_string = "skip"
-	
-	parent.performed_action.emit({&'action': action_string})
 
 func setup_timing() -> void:
 	var timing_mode = DataManager.options.timing_mode
