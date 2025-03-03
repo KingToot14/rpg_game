@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EntityStats" load_steps=2 format=3 uid="uid://cd2cnqdci7pfr"]
+
+[ext_resource type="Script" path="res://entities/scripts/entity_stats.gd" id="1_wgcil"]
+
+[resource]
+script = ExtResource("1_wgcil")
+max_hp = 212
+p_attack = 7.0
+m_attack = 4.0
+p_defense = 5.0
+m_defense = 4.0
+accuracy = 7.0
+evasion = 2.0
+resistances = {}
+new_element = 0
+new_mod = 0.0

@@ -21,3 +21,17 @@ func get_attack(key: StringName) -> Attack:
 			return attack
 	
 	return
+
+func get_random() -> Attack:
+	var possible = attack_pool.duplicate()
+	
+	var attack := possible.pick_random() as Attack
+	
+	while attack.remaining_cooldown > 0 and len(possible) > 0:
+		possible.erase(attack)
+		attack = possible.pick_random()
+	
+	if len(possible) == 0:
+		return null
+	
+	return attack

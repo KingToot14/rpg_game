@@ -39,11 +39,13 @@ func play_action_anim(anim_name: StringName) -> void:
 	animator.play(anim_name)
 	
 	action_started.emit()
+	
+	await animator.animation_finished
 
 func play_idle_anim() -> void:
 	animator.play(&"idle")
 
-# - Timing - #
+#region Timing
 func get_timed_inputs(attack_name: StringName) -> Array[Array]:
 	var attack_anim = animator.get_animation(attack_name)
 	
@@ -81,3 +83,5 @@ func get_mash_inputs(attack_name: StringName) -> Array:
 			return [attack_anim.track_get_key_time(track_id, i), value['args'][0]]
 	
 	return []
+
+#endregion

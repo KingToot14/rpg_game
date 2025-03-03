@@ -24,7 +24,7 @@ func _ready() -> void:
 	parent.turn_started.connect(_on_turn_started)
 
 func _on_turn_started(_params := {}) -> void:
-	return
+	action = null
 
 func _on_action_selected(new_action: ActionResource) -> void:
 	if not parent.turn.taking_turn:
@@ -54,9 +54,6 @@ func perform_action(cooldown := true) -> void:
 	if action is Attack and action.attack_obj != "":
 		await load_object(action.attack_obj)
 	
-	# perform action
-	parent.animator.play_action_anim(action.animation_name)
-	
 	# setnd signals
 	var action_string = ""
 	
@@ -72,6 +69,9 @@ func perform_action(cooldown := true) -> void:
 		&'entity': parent,
 		&'target': selected_target
 	})
+	
+	# perform action
+	await parent.animator.play_action_anim(action.animation_name)
 
 func load_object(path: String) -> void:
 	var loader = AsyncLoader.new(path, func(scn: PackedScene): attack_obj = scn)

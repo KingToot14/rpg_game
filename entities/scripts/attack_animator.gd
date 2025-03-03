@@ -73,6 +73,9 @@ func target_neighbors(depth := 1, include_self := false) -> void:
 	if include_self:
 		target.append(TargetingHelper.get_entity_by_index(side, index, true))
 
+#endregion
+
+#region Movement
 func move_towards(key: String, time: float) -> void:
 	move_from(key, time, Vector2.ZERO)
 
@@ -86,6 +89,11 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 				return
 			
 			pos = target.global_position
+		'entity':
+			if not entity:
+				return
+			
+			pos = entity.global_position
 		'home':
 			pos = Vector2.ZERO
 			global = false
@@ -110,6 +118,17 @@ func move_from(key: String, time: float, offset: Vector2) -> void:
 		tween.tween_property(parent, 'global_position', pos, time)
 	else:
 		tween.tween_property(parent, 'position', pos, time)
+
+func rotate_towards(key: String, node: NodePath) -> void:
+	match key:
+		'target':
+			if target:
+				get_node(node).look_at(target.global_position)
+		'home':
+			get_node(node).look_at(entity.global_position)
+		'front':
+			if target:
+				get_node(node).look_at(target.get_front_position())
 
 #endregion
 

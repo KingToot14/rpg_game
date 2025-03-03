@@ -3,6 +3,7 @@ extends Node2D
 
 # --- Variables --- #
 @export var attack: Attack
+@export var animator: AttackAnimator
 
 var entity: Entity
 var target
@@ -14,9 +15,18 @@ func setup(params: Dictionary) -> void:
 	entity = params.get(&'entity', null)
 	target = params.get(&'target', null)
 	
+	if animator:
+		animator.entity = entity
+		animator.target = target
+	
 	side = params.get(&'side', &'entity')
 	
 	attack = entity.brain.action as Attack
 
 func perform_attack() -> void:
-	pass
+	var animator := get_node_or_null(^'animator') as AttackAnimator
+	
+	if not animator:
+		return
+	
+	animator.play(&'do_attack')

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bbbqoruql4r6v"]
+
+[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="1_5ofxd"]
+
+[resource]
+script = ExtResource("1_5ofxd")
+power = 10.0
+element = 16
+element_percent = 25.0
+damage_type = 0
+timing_type = 0
+accuracy = 1.0
+crit_rate = 0.1
+randomness = 0.1
+attack_obj = "res://entities/enemies/forest/shrapling/acorn.tscn"
+name = "Acorn Spit"
+animation_name = &"acorn_spit"
+description = "Spits multiple acorns at random targets"
+side = 1
+targeting = 3
+cooldown = 0

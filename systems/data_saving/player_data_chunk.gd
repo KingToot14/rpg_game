@@ -81,7 +81,7 @@ func create_new(new_role: PlayerRole) -> bool:
 			stats = load("res://entities/player/melee/stats.tres") as EntityStats
 			
 			# load default equipment
-			weapon = load("res://entities/player/melee/weapons/pitchfork.tres") as Equipment
+			weapon = load("res://entities/player/melee/weapons/basic_sword.tres") as Equipment
 			equip_1 = load("res://entities/player/melee/armor/natures_weave.tres") as OutfitEquipment
 			equip_1 = load("res://entities/player/melee/hats/natures_weave.tres") as OutfitEquipment
 		PlayerRole.RANGED:

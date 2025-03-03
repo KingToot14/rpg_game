@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Encounter" load_steps=10 format=3 uid="uid://bjx3ygeuavxoh"]
+[gd_resource type="Resource" script_class="Encounter" load_steps=12 format=3 uid="uid://bjx3ygeuavxoh"]
 
 [ext_resource type="Script" path="res://entities/scripts/encounter.gd" id="1_bddbh"]
 [ext_resource type="Script" path="res://entities/scripts/wave_item.gd" id="2_6o70s"]
@@ -18,13 +18,27 @@ level = 1
 use_custom_position = false
 position = Vector2(0, 0)
 
+[sub_resource type="Resource" id="Resource_8mj21"]
+script = ExtResource("2_6o70s")
+entity_path = "res://entities/enemies/forest/shrapling/shrapling.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
 [sub_resource type="Resource" id="Resource_rhhyc"]
 script = ExtResource("3_65tci")
-enemies = Array[ExtResource("2_6o70s")]([null, SubResource("Resource_ewuqf"), null, SubResource("Resource_ml7qp"), null])
+enemies = Array[ExtResource("2_6o70s")]([null, SubResource("Resource_ewuqf"), SubResource("Resource_ml7qp"), SubResource("Resource_8mj21"), null])
 
 [sub_resource type="Resource" id="Resource_gn1r1"]
 script = ExtResource("2_6o70s")
 entity_path = "res://entities/enemies/slimes/green_slime/green_slime.tscn"
+level = 1
+use_custom_position = false
+position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_iwtk4"]
+script = ExtResource("2_6o70s")
+entity_path = "res://entities/enemies/forest/shrapling/shrapling.tscn"
 level = 1
 use_custom_position = false
 position = Vector2(0, 0)
@@ -38,7 +52,7 @@ position = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_mbiak"]
 script = ExtResource("3_65tci")
-enemies = Array[ExtResource("2_6o70s")]([SubResource("Resource_gn1r1"), null, null, null, SubResource("Resource_kxgo2")])
+enemies = Array[ExtResource("2_6o70s")]([null, SubResource("Resource_gn1r1"), null, SubResource("Resource_iwtk4"), SubResource("Resource_kxgo2")])
 
 [resource]
 script = ExtResource("1_bddbh")
