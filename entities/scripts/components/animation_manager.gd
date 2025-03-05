@@ -8,6 +8,9 @@ signal action_started()
 # --- Variables --- #
 @export var animator: AnimationPlayer
 
+@export var overrideable_anims := ['idle', 'take_damage']
+@export var main_sprite: Sprite2D
+
 # --- References --- #
 var parent: Entity
 
@@ -18,6 +21,9 @@ func _ready() -> void:
 
 func setup(entity: Entity) -> void:
 	parent = entity
+	
+	if not main_sprite:
+		main_sprite = parent.get_node_or_null(^'sprite')
 
 func play_enter_anim() -> void:
 	# play animation after setup
@@ -28,6 +34,11 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')
 
 func play_damage_anim(_dmg_chunk: Dictionary) -> void:
+	# if currently acting, play a simple flash
+	if animator.current_animation != "" and animator.current_animation not in overrideable_anims:
+		simple_flash()
+		return
+	
 	if parent.hp.alive:
 		animator.stop()
 		animator.play(&'take_damage')
@@ -83,5 +94,14 @@ func get_mash_inputs(attack_name: StringName) -> Array:
 			return [attack_anim.track_get_key_time(track_id, i), value['args'][0]]
 	
 	return []
+
+#endregion
+
+#region Flash
+func simple_flash() -> void:
+	var tween = create_tween()
+	
+	tween.tween_method(func (x): main_sprite.material.set_shader_parameter('intensity', x), 0, 1, 0.05)
+	tween.tween_method(func (x): main_sprite.material.set_shader_parameter('intensity', x), 1, 0, 0.10)
 
 #endregion

@@ -32,6 +32,7 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 		&'damage': 0,
 		&'element': element,
 		&'element_percent': element_percent,
+		&'use_magic': damage_type == DamageType.MAGICAL,
 		&'source': &'entity',
 		&'entity': attacker,
 		&'target': target

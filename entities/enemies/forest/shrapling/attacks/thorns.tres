@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://cu844qfp84jyw"]
+
+[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="1_xy8cv"]
+
+[resource]
+script = ExtResource("1_xy8cv")
+power = 15.0
+element = 1
+element_percent = 0.0
+damage_type = 0
+timing_type = 0
+accuracy = 1.0
+crit_rate = 0.1
+randomness = 0.1
+attack_obj = ""
+name = "Thorns"
+animation_name = &""
+description = ""
+side = 1
+targeting = 0
+cooldown = 0
