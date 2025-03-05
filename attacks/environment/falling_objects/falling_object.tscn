@@ -1,87 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp08dhthrsm5i"]
+[gd_scene load_steps=15 format=3 uid="uid://cp08dhthrsm5i"]
 
 [ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_31dej"]
+[ext_resource type="Texture2D" uid="uid://ngwtsqhdmtxa" path="res://attacks/environment/falling_objects/forest/bush.png" id="2_dsk88"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xv5ry"]
+[ext_resource type="Texture2D" uid="uid://bwb7tvvrda46a" path="res://attacks/environment/falling_objects/forest/log.png" id="3_3yeod"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_oktuw"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_gw5a4"]
+[ext_resource type="Texture2D" uid="uid://bhe421bw64756" path="res://attacks/environment/falling_objects/forest/stone.png" id="5_5ip14"]
 [ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_j12au"]
-
-[sub_resource type="Animation" id="Animation_qgu7g"]
-resource_name = "fall_heavy"
-length = 0.65
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("animator")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.25, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"values": [{
-"args": ["target", 0.0],
-"method": &"move_towards"
-}, {
-"args": [],
-"method": &"add_busy"
-}, {
-"args": [1.5],
-"method": &"do_damage"
-}, {
-"args": [],
-"method": &"remove_busy"
-}]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2, 0),
-"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
-"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.65),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 1.0, 0.0]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("animator")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.05),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [5],
-"method": &"align_z"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_pbbex"]
 resource_name = "fall_light"
@@ -117,9 +43,9 @@ tracks/1/path = NodePath("sprite:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2, 0),
-"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
-"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 21.5, -10, 0, -0.5, 0.0778555, -26.5),
+"times": PackedFloat32Array(0, 0.35)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -158,6 +84,42 @@ tracks/4/keys = {
 "args": [5],
 "method": &"align_z"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_dsk88")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 2]
 }
 
 [sub_resource type="Animation" id="Animation_n13et"]
@@ -194,9 +156,9 @@ tracks/1/path = NodePath("sprite:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2, 0),
-"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 55.5, -10, 0, -0.5, 0.0778555, -26.5, -25, -0.0333333, 0, 0.05, 0, -10, -0.0721445, -1, 0.1, -1),
-"times": PackedFloat32Array(0, 0.25, 0.35, 0.4)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 22.5, -10, 0, -0.5, 0.0778555, -26.5),
+"times": PackedFloat32Array(0, 0.25)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -229,17 +191,212 @@ tracks/4/path = NodePath("animator")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.05),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [5],
 "method": &"align_z"
+}, {
+"args": [2.0, 0.25],
+"method": &"screen_shake"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_3yeod")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_a6tpu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_j12au")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ungsm"]
+resource_name = "fall_heavy"
+length = 0.65
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["target", 0.0],
+"method": &"move_towards"
+}, {
+"args": [],
+"method": &"add_busy"
+}, {
+"args": [1.5],
+"method": &"do_damage"
+}, {
+"args": [],
+"method": &"remove_busy"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.2, 22.5, -10, 0, -0.5, 0.0778555, -26.5),
+"times": PackedFloat32Array(0, 0.25)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("animator")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [5],
+"method": &"align_z"
+}, {
+"args": [4.0, 0.25],
+"method": &"screen_shake"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_5ip14")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80f1w"]
 _data = {
-"fall_heavy": SubResource("Animation_qgu7g"),
+"RESET": SubResource("Animation_a6tpu"),
+"fall_heavy": SubResource("Animation_ungsm"),
 "fall_light": SubResource("Animation_pbbex"),
 "fall_normal": SubResource("Animation_n13et")
 }
