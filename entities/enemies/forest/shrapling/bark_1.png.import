@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4jxfb7lu2ahh"
-path="res://.godot/imported/acorn.png-e9ea952c38b0c4b49798aa08407a116d.ctex"
+uid="uid://cd6cs8wsw3nnp"
+path="res://.godot/imported/bark_1.png-b92bf5f3c4eeeea08fca73943168e6ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/forest/shrapling/acorn.png"
-dest_files=["res://.godot/imported/acorn.png-e9ea952c38b0c4b49798aa08407a116d.ctex"]
+source_file="res://entities/enemies/forest/shrapling/bark_1.png"
+dest_files=["res://.godot/imported/bark_1.png-b92bf5f3c4eeeea08fca73943168e6ed.ctex"]
 
 [params]
 

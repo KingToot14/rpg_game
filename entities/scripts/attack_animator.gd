@@ -136,10 +136,16 @@ func rotate_towards(key: String, node: NodePath) -> void:
 func set_visible(val: bool) -> void:
 	parent.visible = val
 
-func align_z(offset := 5) -> void:
+func align_z(offset := 5, path := ^'') -> void:
+	if not is_instance_valid(target):
+		return
+	
 	var t = target if target is Entity else target[-1]
 	
-	parent.z_index = 100 + t.spawn_index * 10 + offset
+	if path != ^'':
+		get_node(path).z_index = 100 + t.spawn_index * 10 + offset
+	else:
+		parent.z_index = 100 + t.spawn_index * 10 + offset
 
 func restore_z() -> void:
 	parent.z_index = 100 + entity.spawn_index * 10

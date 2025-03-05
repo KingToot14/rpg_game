@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://yupp16fi5ogw"]
 
-[ext_resource type="Texture2D" uid="uid://c4jxfb7lu2ahh" path="res://entities/enemies/forest/shrapling/acorn.png" id="1_5yiuc"]
+[ext_resource type="Texture2D" uid="uid://c4jxfb7lu2ahh" path="res://entities/enemies/forest/shrapling/attacks/acorn.png" id="1_5yiuc"]
 [ext_resource type="Script" path="res://entities/scripts/attack_object.gd" id="1_ph13w"]
 [ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_qdwy4"]
 [ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="4_ulhqx"]

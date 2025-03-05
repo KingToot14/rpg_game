@@ -17,3 +17,5 @@ func _on_turn_started(_params := {}) -> void:
 		
 		parent.turn.end_turn()
 		Globals.turn_fsm.remove_busy()
+	else:
+		perform_action()
