@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="OutfitEquipment" load_steps=9 format=3 uid="uid://diab5q1c0e7eh"]
+
+[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_rrktf"]
+[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_1wjqj"]
+[ext_resource type="Script" path="res://entities/scripts/equipment/resist_ability.gd" id="2_3wgpb"]
+[ext_resource type="Script" path="res://entities/scripts/equipment/outfit_equipment.gd" id="3_01rtu"]
+[ext_resource type="Script" path="res://entities/scripts/equipment/weak_ability.gd" id="3_7kher"]
+[ext_resource type="Texture2D" uid="uid://dyir6g0xk0rr3" path="res://entities/player/outfits/ranger/melee-primary.png" id="5_hlwse"]
+
+[sub_resource type="Resource" id="Resource_w0khl"]
+script = ExtResource("2_3wgpb")
+resists = "nature"
+element_mod = 0.1
+stacks_base = 0.25
+stacks_increase = 0.25
+level_requirement = 1
+
+[sub_resource type="Resource" id="Resource_gaqr7"]
+script = ExtResource("3_7kher")
+resists = "fire"
+element_mod = 0.1
+stacks_base = 0.25
+stacks_increase = 0.25
+level_requirement = 1
+
+[resource]
+script = ExtResource("3_01rtu")
+melee_outfit = ExtResource("5_hlwse")
+equip_name = "Nature's Weave"
+description = "Bestowed upon the guardian of the forest. Bears an earthy scent"
+enhancements = Array[ExtResource("2_1wjqj")]([])
+abilities = Array[ExtResource("1_rrktf")]([SubResource("Resource_w0khl"), SubResource("Resource_gaqr7")])
+element = 16
+element_percent = 0.5

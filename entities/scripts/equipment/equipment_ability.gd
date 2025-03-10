@@ -4,7 +4,7 @@ extends Resource
 # --- Variables --- #
 var entity: Entity
 
-@export_range(1, 3, 1) var level_requirement := 1
+@export_range(0, 3, 1) var level_requirement := 1
 var level := 0
 
 # --- Functions --- #

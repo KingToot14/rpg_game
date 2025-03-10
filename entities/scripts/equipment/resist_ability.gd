@@ -3,15 +3,12 @@ extends EquipmentAbility
 
 # --- Variables --- #
 @export var resists: String
+@export var element_mod := 0.10
+@export var stacks_base := 0.25
+@export var stacks_increase := 0.25
 
 var element_resists: Attack.Element
 var status_resists: Globals.StatusType
-
-# --- Constants --- #
-const ELEMENT_MOD := 0.10
-
-const STACKS_BASE := 0.25
-const STACKS_INC := 0.25
 
 # --- Functions --- #
 @warning_ignore("int_as_enum_without_cast")
@@ -60,18 +57,18 @@ func setup(new_entity: Entity, new_level: int) -> void:
 
 func _on_take_damage(dmg_chunk: Dictionary) -> void:
 	# elemental damage is resisted
-	if dmg_chunk[&'damage'] > 0:
+	if dmg_chunk[&'damage'] >= 0:
 		var mod := 0.0
 		var percent := dmg_chunk.get(&'element_percent', 0.0) as float
 		
 		if dmg_chunk.get(&'element', Attack.Element.NONE) & element_resists:
-			mod = 1.0 - ELEMENT_MOD * level
+			mod = 1.0 - element_mod * level
 			
-			dmg_chunk[&'damage'] *= (1.0 - percent) + (percent * mod)
+			dmg_chunk[&'element_mod'] += (1.0 - percent) + (percent * mod)
 
 func _on_receive_status(params: Dictionary) -> void:
 	# attempt to remove some stacks
-	var odds = STACKS_BASE + STACKS_INC * level
+	var odds = stacks_base + stacks_increase * level
 	
 	if randf() > odds:
 		return

@@ -16,14 +16,17 @@ func setup(entity: Entity) -> void:
 	if role == PlayerDataChunk.PlayerRole.MELEE:
 		# weapon
 		var weapon = chunk.weapon as MeleeWeaponEquipment
+		var primary = chunk.outfit_primary as OutfitEquipment
+		var secondary = chunk.outfit_secondary as OutfitEquipment
+		
 		%'sword'.texture = weapon.sword_sprite
 		%'shield'.texture = weapon.shield_sprite
 		
 		weapon.setup_battle(entity)
 		
 		# outfit
-		
-		# hat
+		%'primary'.texture = primary.melee_outfit
+		%'secondary'.texture = secondary.melee_outfit
 		
 	elif role == PlayerDataChunk.PlayerRole.MONK:
 		pass

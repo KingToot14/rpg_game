@@ -65,9 +65,23 @@ func _reimport() -> void:
 					['shields/' + sprite]
 				)
 			
-			# load outfits
+			# load primary outfit
 			if type == "o":
-				pass
+				import_aseprite_file(
+					player_dir.path_join("battle.aseprite"),
+					"res://entities/player".path_join("outfits").path_join(sprite)
+					.path_join(role_str + "-primary.png"),
+					['primary/' + sprite]
+				)
+			
+			# load secondary outfit
+			if type == "o":
+				import_aseprite_file(
+					player_dir.path_join("battle.aseprite"),
+					"res://entities/player".path_join("outfits").path_join(sprite)
+					.path_join(role_str + "-secondary.png"),
+					['secondary/' + sprite]
+				)
 			
 		if role == PlayerDataChunk.PlayerRole.RANGED:
 			pass
