@@ -15,6 +15,10 @@ func setup(new_entity: Entity, new_level: int) -> void:
 	entity.took_damage.connect(_on_take_damage)
 	entity.deal_damage.connect(_on_deal_damage)
 
+func remove_signals() -> void:
+	entity.took_damage.disconnect(_on_take_damage)
+	entity.deal_damage.disconnect(_on_deal_damage)
+
 func _on_deal_damage(_params: Dictionary) -> void:
 	countered = false
 

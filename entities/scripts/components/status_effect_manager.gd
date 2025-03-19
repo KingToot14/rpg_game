@@ -37,15 +37,24 @@ func _on_turn_ended() -> void:
 			await timer.timeout
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
+	var effect = get_effect(key)
+	
 	var params = {
 		&'key': key,
 		&'stacks': stacks,
-		&'stage': stage
+		&'stage': stage,
+		&'status_type': effect.status_type,
+		&'stacks_odds': 0.0
 	}
 	
 	parent.received_status.emit(params)
 	
-	var effect = get_effect(params[&'key'])
+	effect = get_effect(params[&'key'])
+	
+	# attempt to modify stacks
+	if randf() < abs(params[&'stacks_odds']):
+		var mod = randi_range(1, 2)
+		params[&'stacks'] = max(params[&'stacks'] + mod * sign(params[&'stacks_odds']), 0)
 	
 	# add to current effect if it exists
 	if effect:

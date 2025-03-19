@@ -5,6 +5,7 @@ extends Resource
 var entity: Entity = null
 
 var key: StringName = &'key'
+var status_type: Globals.StatusType = Globals.StatusType.EMPTY
 
 var stage: int = 1
 var stacks: int = 1

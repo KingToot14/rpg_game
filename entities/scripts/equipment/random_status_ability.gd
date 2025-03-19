@@ -17,6 +17,9 @@ func setup(new_entity: Entity, new_level: int) -> void:
 	# setup signals
 	entity.side_changed.connect(_on_side_changed)
 
+func remove_signals() -> void:
+	entity.side_changed.disconnect(_on_side_changed)
+
 func _on_side_changed(params: Dictionary) -> void:
 	# only cast when the correct side has changed
 	if params[&'side'] == "player" and not entity.is_player():

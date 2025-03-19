@@ -79,6 +79,12 @@ func load_from_save() -> void:
 		
 		players[1] = PlayerDataChunk.new()
 		players[1].create_new(PlayerDataChunk.PlayerRole.MONK)
+		
+		players[2] = PlayerDataChunk.new()
+		players[2].create_new(PlayerDataChunk.PlayerRole.RANGED)
+		
+		players[3] = PlayerDataChunk.new()
+		players[3].create_new(PlayerDataChunk.PlayerRole.MAGIC)
 	
 	# - Local Area
 	local_area = LocalAreaChunk.new(data.get('local_area'))
@@ -107,6 +113,9 @@ func load_from_save() -> void:
 		add_to_inventory(InventoryItem.new(item.get('key', &"twig"), item.get('quantity', 0)))
 
 func swap_players(index_1: int, index_2: int) -> void:
+	if not players[index_1] or not players[index_2]:
+		return
+	
 	var player = DataManager.players[index_1]
 	DataManager.players[index_1] = DataManager.players[index_2]
 	DataManager.players[index_2] = player

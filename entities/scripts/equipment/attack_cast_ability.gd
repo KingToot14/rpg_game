@@ -13,6 +13,9 @@ func setup(new_entity: Entity, new_level: int) -> void:
 	# setup signals
 	entity.performed_action.connect(_on_action_performed)
 
+func remove_signals() -> void:
+	entity.performed_action.disconnect(_on_action_performed)
+
 func _on_action_performed(params: Dictionary) -> void:
 	if randf() > odds:
 		return

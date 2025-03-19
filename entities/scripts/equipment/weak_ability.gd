@@ -55,23 +55,17 @@ func setup(new_entity: Entity, new_level: int) -> void:
 			'environment':
 				status_weaknesses |= Globals.StatusType.ENVIRONMENT as Globals.StatusType
 
+func remove_signals() -> void:
+	entity.took_damage.disconnect(_on_take_damage)
+	entity.received_status.disconnect(_on_receive_status)
+
 func _on_take_damage(dmg_chunk: Dictionary) -> void:
 	# elemental damage is increased
-	if dmg_chunk[&'damage'] >= 0:
-		var mod := 0.0
-		var percent := dmg_chunk.get(&'element_percent', 0.0) as float
-		
+	if dmg_chunk[&'damage'] >= 0:		
 		if dmg_chunk.get(&'element', Attack.Element.NONE) & element_weaknesses:
-			mod = 1.0 + element_mod * level
-			
-			dmg_chunk[&'element_mod'] += (1.0 - percent) + (percent * mod)
+			dmg_chunk[&'element_mod'] -= element_mod * level
 
 func _on_receive_status(params: Dictionary) -> void:
 	# attempt to add some stacks
-	var odds = stacks_base + stacks_increase * level
-	
-	if randf() > odds:
-		return
-	
-	# add some stacks
-	params[&'stacks'] = max(params[&'stacks'] + randi_range(1, level), 0)
+	if params.get(&'status_type', Globals.StatusType.EMPTY) & status_weaknesses:
+		params[&'stacks_odds'] += stacks_base + stacks_increase * level

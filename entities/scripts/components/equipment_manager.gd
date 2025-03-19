@@ -4,6 +4,10 @@ extends Node
 # --- Variables --- #
 var parent: Entity
 
+var weapon: Equipment
+var primary: OutfitEquipment
+var secondary: OutfitEquipment
+
 @export var role: PlayerDataChunk.PlayerRole
 
 # --- Functions --- #
@@ -14,15 +18,23 @@ func setup(entity: Entity) -> void:
 	
 	# load equipment
 	if role == PlayerDataChunk.PlayerRole.MELEE:
-		# weapon
-		var weapon = chunk.weapon as MeleeWeaponEquipment
-		var primary = chunk.outfit_primary as OutfitEquipment
-		var secondary = chunk.outfit_secondary as OutfitEquipment
+		# disconnect signals if required
+		if weapon:
+			weapon.remove_signals()
+			primary.remove_signals()
+			secondary.remove_signals()
+		
+		# equipment
+		weapon = chunk.weapon as MeleeWeaponEquipment
+		primary = chunk.outfit_primary as OutfitEquipment
+		secondary = chunk.outfit_secondary as OutfitEquipment
+		
+		weapon.setup_battle(entity)
+		primary.setup_battle(entity)
+		secondary.setup_battle(entity)
 		
 		%'sword'.texture = weapon.sword_sprite
 		%'shield'.texture = weapon.shield_sprite
-		
-		weapon.setup_battle(entity)
 		
 		# outfit
 		%'primary'.texture = primary.melee_outfit
@@ -34,3 +46,6 @@ func setup(entity: Entity) -> void:
 		pass
 	elif role == PlayerDataChunk.PlayerRole.MAGIC:
 		pass
+
+func reload() -> void:
+	setup(parent)

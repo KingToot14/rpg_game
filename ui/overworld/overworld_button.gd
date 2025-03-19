@@ -10,9 +10,9 @@ extends BaseButton
 @export var use_textures := false
 
 # @@show_if(not use_textures)
-@export var normal_key: StringName = &'normal'
+@export var normal_key := ThemePreset.ColorValue.NORMAL
 # @@show_if(not use_textures)
-@export var hover_key: StringName = &'light'
+@export var hover_key := ThemePreset.ColorValue.LIGHT
 # @@show_if(use_textures)
 @export var normal_texture: Texture2D
 # @@show_if(use_textures)
@@ -20,9 +20,9 @@ extends BaseButton
 
 @export var use_alternate: bool = false
 # @@show_if(not use_textures)
-@export var alt_normal_key: StringName = &'dark'
+@export var alt_normal_key := ThemePreset.ColorValue.DARK
 # @@show_if(not use_textures)
-@export var alt_hover_key: StringName = &'normal'
+@export var alt_hover_key := ThemePreset.ColorValue.NORMAL
 # @@show_if(use_textures)
 @export var alt_normal_texture: Texture2D
 # @@show_if(use_textures)

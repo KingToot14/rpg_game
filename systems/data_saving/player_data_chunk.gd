@@ -26,6 +26,10 @@ var weapon: Equipment
 var outfit_primary: OutfitEquipment
 var outfit_secondary: OutfitEquipment
 
+var trinket1: Equipment
+var trinket2: Equipment
+var trinket3: Equipment
+
 # --- Constants --- #
 const APPEARANCE_PATH := "resources/appearances/"
 
@@ -89,16 +93,25 @@ func create_new(new_role: PlayerRole) -> bool:
 			stats = load("res://entities/player/ranger/stats.tres") as EntityStats
 			
 			# load default equipment
+			weapon = load("res://entities/player/melee/weapons/basic/basic_sword.tres") as Equipment
+			outfit_primary = load("res://entities/player/outfits/ranger/primary.tres") as OutfitEquipment
+			outfit_secondary = load("res://entities/player/outfits/ranger/secondary.tres") as OutfitEquipment
 		PlayerRole.MONK:
 			# load stats
 			stats = load("res://entities/player/monk/stats.tres") as EntityStats
 			
 			# load default equipment
+			weapon = load("res://entities/player/melee/weapons/basic/basic_sword.tres") as Equipment
+			outfit_primary = load("res://entities/player/outfits/ranger/primary.tres") as OutfitEquipment
+			outfit_secondary = load("res://entities/player/outfits/ranger/secondary.tres") as OutfitEquipment
 		PlayerRole.MAGIC:
 			# load stats
 			stats = load("res://entities/player/magic/stats.tres") as EntityStats
 			
 			# load default equipment
+			weapon = load("res://entities/player/melee/weapons/basic/basic_sword.tres") as Equipment
+			outfit_primary = load("res://entities/player/outfits/ranger/primary.tres") as OutfitEquipment
+			outfit_secondary = load("res://entities/player/outfits/ranger/secondary.tres") as OutfitEquipment
 		_:
 			return false
 	

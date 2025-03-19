@@ -11,3 +11,6 @@ var level := 0
 func setup(new_entity: Entity, new_level: int) -> void:
 	entity = new_entity
 	level = new_level
+
+func remvoe_signals() -> void:
+	pass

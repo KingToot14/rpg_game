@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="MeleeWeaponEquipment" load_steps=6 format=3 uid="uid://bc0twncpqtigq"]
+[gd_resource type="Resource" script_class="MeleeWeaponEquipment" load_steps=8 format=3 uid="uid://bc0twncpqtigq"]
 
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_wta2j"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="3_buo2h"]
+[ext_resource type="Texture2D" uid="uid://0sjrlhyqsk70" path="res://entities/player/melee/weapon_icons.png" id="3_plppo"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/melee_weapon_equipment.gd" id="4_s5uyn"]
 [ext_resource type="Texture2D" uid="uid://4h1ohrdfw5nm" path="res://entities/player/melee/weapons/pitchfork/shield.png" id="5_h07so"]
 [ext_resource type="Texture2D" uid="uid://dgs6ue7q6ck5q" path="res://entities/player/melee/weapons/pitchfork/sword.png" id="6_q5jwd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyvt3"]
+atlas = ExtResource("3_plppo")
+region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("4_s5uyn")
@@ -12,6 +17,7 @@ sword_sprite = ExtResource("6_q5jwd")
 shield_sprite = ExtResource("5_h07so")
 equip_name = "Pitchfork"
 description = "A simple farmer's tool passed down for generations. You can feel the love put into it."
+equip_texture = SubResource("AtlasTexture_wyvt3")
 enhancements = Array[ExtResource("3_buo2h")]([null, null, null])
 abilities = Array[ExtResource("1_wta2j")]([null, null, null])
 element = 1

@@ -2,7 +2,7 @@ class_name ThemeSetter
 extends Control
 
 # --- Variables --- #
-@export var key: StringName
+@export var color_key := ThemePreset.ColorValue.NORMAL
 
 # --- Functions --- #
 func _ready() -> void:
@@ -11,27 +11,13 @@ func _ready() -> void:
 	
 	update_theme()
 
-func update_theme(curr_key: StringName = &"") -> void:
+func update_theme(key := ThemePreset.ColorValue.NONE) -> void:
 	var preset = Globals.theme_preset
 	
 	if not preset:
 		return
 	
-	if curr_key != &"":
-		key = curr_key
+	if key != ThemePreset.ColorValue.NONE:
+		color_key = key
 	
-	match key:
-		&'white':
-			self_modulate = Color.WHITE
-		&'light':
-			self_modulate = preset.light_color
-		&'normal':
-			self_modulate = preset.normal_color
-		&'dark':
-			self_modulate = preset.dark_color
-		&'accent':
-			self_modulate = preset.accent_text_color
-		&'shader':
-			material.set_shader_parameter('outline_color', preset.light_color)
-			material.set_shader_parameter('normal_color', preset.normal_color)
-			material.set_shader_parameter('shadow_color', preset.dark_color)
+	self_modulate = preset.color_scale[color_key - 1]

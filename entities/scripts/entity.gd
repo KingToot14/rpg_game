@@ -58,6 +58,8 @@ func _ready() -> void:
 		position = display_pos
 		
 		animator.play_idle_anim()
+		
+		setup(0)
 
 func setup(index: int):
 	spawn_index = index

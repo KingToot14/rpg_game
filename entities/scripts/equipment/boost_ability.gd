@@ -62,6 +62,10 @@ func setup(new_entity: Entity, new_level: int) -> void:
 			'heal':
 				healing_boost = true
 
+func remove_signals() -> void:
+	entity.deal_damage.disconnect(_on_deal_damage)
+	entity.gave_status.disconnect(_on_gave_status)
+
 func _on_deal_damage(dmg_chunk: Dictionary) -> void:
 	# elemental damage is boosted
 	if dmg_chunk[&'damage'] > 0:

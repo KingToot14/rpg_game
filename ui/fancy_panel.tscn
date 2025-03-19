@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqd3w8n85wxa1"]
+
+[ext_resource type="Script" path="res://ui/theme_setter.gd" id="1_3x7v8"]
+[ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="2_x182l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73hj6"]
+atlas = ExtResource("2_x182l")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4c4f"]
+atlas = ExtResource("2_x182l")
+region = Rect2(0, 8, 8, 8)
+
+[node name="fancy_panel" type="ColorRect"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3x7v8")
+color_key = 6
+
+[node name="inner" type="ColorRect" parent="."]
+self_modulate = Color(0.137255, 0.454902, 0.729412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3x7v8")
+color_key = 4
+
+[node name="decorator_tl" type="TextureRect" parent="."]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("1_3x7v8")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("1_3x7v8")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="."]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("1_3x7v8")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("1_3x7v8")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="."]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("1_3x7v8")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("1_3x7v8")
+color_key = 1
+
+[node name="decorator_br" type="TextureRect" parent="."]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("1_3x7v8")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("1_3x7v8")
+color_key = 1

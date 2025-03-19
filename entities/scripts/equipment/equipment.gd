@@ -29,3 +29,8 @@ func setup_battle(entity: Entity) -> void:
 	for i in range(len(abilities)):
 		if abilities[i]:
 			abilities[i].setup(entity, level)
+
+func remove_signals() -> void:
+	for i in range(len(abilities)):
+		if abilities[i]:
+			abilities[i].remove_signals()

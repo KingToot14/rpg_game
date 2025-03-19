@@ -34,7 +34,7 @@ func take_damage(dmg_chunk: Dictionary) -> void:
 	
 	# calculate damage
 	var dmg = dmg_chunk.get(&'damage', 0)
-	dmg *= dmg_chunk.get(&'element_mod', 1.0)
+	dmg *= dmg_chunk.get(&'element_percent') * (1.0 - dmg_chunk.get(&'element_mod', 1.0))
 	
 	curr_hp = max(curr_hp - roundi(dmg), 0)
 	

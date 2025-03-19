@@ -18,6 +18,9 @@ func setup(new_entity: Entity, new_level: int) -> void:
 	
 	entity.performed_action.connect(_on_performed_action)
 
+func remove_signals() -> void:
+	entity.performed_action.disconnect(_on_performed_action)
+
 func _on_performed_action(params: Dictionary) -> void:
 	if params[&'action'] != action_name:
 		return

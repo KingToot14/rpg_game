@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="OutfitEquipment" load_steps=9 format=3 uid="uid://cy5awmbgy8knj"]
+[gd_resource type="Resource" script_class="OutfitEquipment" load_steps=11 format=3 uid="uid://cy5awmbgy8knj"]
 
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_xxgwq"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_1ks7a"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://entities/scripts/equipment/outfit_equipment.gd" id="3_3tb54"]
 [ext_resource type="Script" path="res://entities/scripts/equipment/weak_ability.gd" id="3_abm5n"]
 [ext_resource type="Texture2D" uid="uid://d3hi1nm6ak43a" path="res://entities/player/outfits/ranger/melee-secondary.png" id="3_l8k5s"]
+[ext_resource type="Texture2D" uid="uid://c4d01ke71j1b0" path="res://entities/player/outfits/outfit_icons.png" id="5_oncqm"]
 
 [sub_resource type="Resource" id="Resource_s5d16"]
 script = ExtResource("2_ytw81")
@@ -23,11 +24,16 @@ stacks_base = 0.25
 stacks_increase = 0.25
 level_requirement = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1546n"]
+atlas = ExtResource("5_oncqm")
+region = Rect2(0, 0, 16, 16)
+
 [resource]
 script = ExtResource("3_3tb54")
 melee_outfit = ExtResource("3_l8k5s")
 equip_name = "Nature's Weave"
 description = "Bestowed upon the guardian of the forest. Bears an earthy scent"
+equip_texture = SubResource("AtlasTexture_1546n")
 enhancements = Array[ExtResource("2_1ks7a")]([])
 abilities = Array[ExtResource("1_xxgwq")]([SubResource("Resource_s5d16"), SubResource("Resource_107b6")])
 element = 16
