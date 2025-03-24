@@ -2,23 +2,40 @@ class_name EquipmentButton
 extends BaseButton
 
 # --- Variables --- #
+@export var is_main := false
 var equipment: Equipment
 
 # --- Functions --- #
 func _ready() -> void:
 	load_equipment(null)
+	
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
+func _on_mouse_entered() -> void:
+	if not is_main and not equipment:
+		return
+	
+	$'backing'.update_theme(ThemePreset.ColorValue.LIGHT)
+
+func _on_mouse_exited() -> void:
+	if not is_main and not equipment:
+		return
+	
+	$'backing'.update_theme(ThemePreset.ColorValue.SHADED)
+
+#region Equipment
 func load_equipment(new_equip: Equipment) -> void:
 	equipment = new_equip
 	
 	if not equipment:
-		hide()
+		$'equip_icon'.texture = null
 		return
-	else:
-		show()
 	
 	# load icon
 	$'equip_icon'.texture = equipment.equip_texture
+
+#endregion
 
 #region Button Actions
 func show_gear_select(key: StringName) -> void:

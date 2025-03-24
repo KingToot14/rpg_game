@@ -5,17 +5,12 @@ extends EquipmentAbility
 @export var resists: String
 @export var element_mod := 0.10
 @export var stacks_base := 0.25
-@export var stacks_increase := 0.25
 
 var element_weaknesses: int
 var status_weaknesses: int
 
 # --- Functions --- #
-@warning_ignore("int_as_enum_without_cast")
-func setup(new_entity: Entity, new_level: int) -> void:
-	super(new_entity, new_level)
-	
-	# connect signals
+func setup_signals() -> void:
 	entity.took_damage.connect(_on_take_damage)
 	entity.received_status.connect(_on_receive_status)
 	
@@ -63,9 +58,9 @@ func _on_take_damage(dmg_chunk: Dictionary) -> void:
 	# elemental damage is increased
 	if dmg_chunk[&'damage'] >= 0:		
 		if dmg_chunk.get(&'element', Attack.Element.NONE) & element_weaknesses:
-			dmg_chunk[&'element_mod'] = dmg_chunk.get(&'element_mod', 0) + element_mod * level
+			dmg_chunk[&'element_mod'] = dmg_chunk.get(&'element_mod', 0) + element_mod
 
 func _on_receive_status(params: Dictionary) -> void:
 	# attempt to add some stacks
 	if params.get(&'status_type', Globals.StatusType.EMPTY) & status_weaknesses:
-		params[&'stacks_odds'] = params.get(&'stacks_odds', 0) + stacks_base + stacks_increase * level
+		params[&'stacks_odds'] = params.get(&'stacks_odds', 0) + stacks_base

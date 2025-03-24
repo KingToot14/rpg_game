@@ -60,6 +60,7 @@ func _on_turn_ended(_params: Dictionary) -> void:
 		&'damage': roundi(entity.stats.get_max_hp() * dmg * turns),
 		&'element': Attack.Element.NATURE,
 		&'element_percent': 1.0,
+		&'element_mod': 1.0,
 		&'source': &'status'
 	})
 	

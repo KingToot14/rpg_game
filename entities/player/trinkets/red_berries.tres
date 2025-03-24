@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=11 format=3 uid="uid://dggvnu2xmf74t"]
+
+[ext_resource type="Script" uid="uid://cttjskqwemo3e" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_dxyi7"]
+[ext_resource type="Script" uid="uid://l1d134oxae84" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_bbxrx"]
+[ext_resource type="Script" uid="uid://cvdav3ntcvxy" path="res://entities/scripts/equipment/on_action_ability.gd" id="2_tns4j"]
+[ext_resource type="Script" uid="uid://c0thf31es5si1" path="res://entities/scripts/equipment/resist_ability.gd" id="3_2co53"]
+[ext_resource type="Texture2D" uid="uid://o5ol4tdkvt7m" path="res://entities/player/trinkets/trinkets.png" id="3_bbxrx"]
+[ext_resource type="Script" uid="uid://bflujnandibx1" path="res://entities/scripts/equipment/equipment.gd" id="3_tns4j"]
+
+[sub_resource type="Resource" id="Resource_2co53"]
+script = ExtResource("2_tns4j")
+action_name = &"attack"
+status_key = &"poison"
+stacks = 2
+stage = 1
+odds = 0.4
+target_self = false
+level_requirement = 1
+maximum_level = 3
+metadata/_custom_type_script = "uid://cvdav3ntcvxy"
+
+[sub_resource type="Resource" id="Resource_decl8"]
+script = ExtResource("3_2co53")
+resists = "nature"
+element_mod = 0.1
+stacks_base = 0.25
+level_requirement = 2
+maximum_level = 3
+metadata/_custom_type_script = "uid://c0thf31es5si1"
+
+[sub_resource type="Resource" id="Resource_x5m5q"]
+script = ExtResource("3_2co53")
+resists = "body"
+element_mod = 0.1
+stacks_base = 0.05
+level_requirement = 3
+maximum_level = 3
+metadata/_custom_type_script = "uid://c0thf31es5si1"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tns4j"]
+atlas = ExtResource("3_bbxrx")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+script = ExtResource("3_tns4j")
+equip_name = "Red Berries"
+description = "A bunch of small berries. They would make a nice snack if they weren't toxic."
+equip_texture = SubResource("AtlasTexture_tns4j")
+enhancements = Array[ExtResource("2_bbxrx")]([])
+abilities = Array[ExtResource("1_dxyi7")]([SubResource("Resource_2co53"), SubResource("Resource_decl8"), SubResource("Resource_x5m5q")])
+element = 1
+element_percent = 0.5
+metadata/_custom_type_script = "uid://bflujnandibx1"

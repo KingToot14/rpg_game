@@ -22,19 +22,16 @@ func load_equipment(player: PlayerDataChunk, id: StringName) -> void:
 		&'secondary':
 			for outfit in DataManager.outfits:
 				equips.append(DataManager.outfits[outfit].get(&'secondary'))
-		&'trinket':
+		&'trinket1', &'trinket2', &'trinket3':
 			for trinket in DataManager.trinkets:
 				equips.append(DataManager.trinkets[trinket])
 	
 	var boxes = get_equip_boxes()
 	for i in range(len(boxes)):
 		if i >= len(equips):
-			boxes[i].hide()
-			continue
+			boxes[i].load_equipment(null)
 		else:
-			boxes[i].show()
-		
-		boxes[i].load_equipment(load(equips[i].get(&'path')))
+			boxes[i].load_equipment(load(equips[i].get(&'path')))
 
 func get_equip_boxes() -> Array[Control]:
 	var boxes: Array[Control] = []

@@ -49,6 +49,9 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 	
 	parent.received_status.emit(params)
 	
+	if params.get(&'ignore', false):
+		return
+	
 	effect = get_effect(params[&'key'])
 	
 	# attempt to modify stacks

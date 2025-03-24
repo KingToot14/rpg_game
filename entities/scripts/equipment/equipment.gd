@@ -19,13 +19,16 @@ var level := 1
 # --- Functions --- #
 func get_description() -> String:
 	var out = description
-	Globals
+	
 	for i in range(level):
 		out += "\n- %s" % abilities[i]
 	
 	return out
 
 func setup_battle(entity: Entity) -> void:
+	if not entity:
+		return
+	
 	for i in range(len(abilities)):
 		if abilities[i]:
 			abilities[i].setup(entity, level)

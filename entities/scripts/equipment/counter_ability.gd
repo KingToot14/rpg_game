@@ -8,10 +8,7 @@ extends EquipmentAbility
 var countered := false
 
 # --- Functions --- #
-func setup(new_entity: Entity, new_level: int) -> void:
-	super(new_entity, new_level)
-	
-	# setup signals
+func setup_signals() -> void:
 	entity.took_damage.connect(_on_take_damage)
 	entity.deal_damage.connect(_on_deal_damage)
 

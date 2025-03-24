@@ -13,9 +13,7 @@ extends EquipmentAbility
 @export var target_self := true
 
 # --- Functions --- #
-func setup(new_entity: Entity, new_level: int) -> void:
-	super(new_entity, new_level)
-	
+func setup_signals() -> void:
 	entity.performed_action.connect(_on_performed_action)
 
 func remove_signals() -> void:
@@ -29,4 +27,12 @@ func _on_performed_action(params: Dictionary) -> void:
 	if randf() > odds:
 		return
 	
-	entity.status_effects.add_effect(status_key, stacks, stage)
+	var target: Entity = null
+	
+	if target_self:
+		target = entity
+	else:
+		target = params.get(&'target', null)
+	
+	if target:
+		target.status_effects.add_effect(status_key, stacks, stage)

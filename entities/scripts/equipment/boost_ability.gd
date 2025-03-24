@@ -16,11 +16,7 @@ const STACKS_BASE := 0.25
 const STACKS_INC := 0.25
 
 # --- Functions --- #
-@warning_ignore("int_as_enum_without_cast")
-func setup(new_entity: Entity, new_level: int) -> void:
-	super(new_entity, new_level)
-	
-	# connect signals
+func setup_signals() -> void:
 	entity.deal_damage.connect(_on_deal_damage)
 	entity.gave_status.connect(_on_gave_status)
 	

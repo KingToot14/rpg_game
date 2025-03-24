@@ -8,6 +8,10 @@ var weapon: Equipment
 var primary: OutfitEquipment
 var secondary: OutfitEquipment
 
+var trinket1: Equipment
+var trinket2: Equipment
+var trinket3: Equipment
+
 @export var role: PlayerDataChunk.PlayerRole
 
 # --- Functions --- #
@@ -39,6 +43,18 @@ func setup(entity: Entity) -> void:
 		# outfit
 		%'primary'.texture = primary.melee_outfit
 		%'secondary'.texture = secondary.melee_outfit
+		
+		# trinkets
+		trinket1 = chunk.trinket1 as Equipment
+		trinket2 = chunk.trinket1 as Equipment
+		trinket3 = chunk.trinket1 as Equipment
+		
+		if trinket1:
+			trinket1.setup_battle(entity)
+		if trinket2:
+			trinket2.setup_battle(entity)
+		if trinket3:
+			trinket3.setup_battle(entity)
 		
 	elif role == PlayerDataChunk.PlayerRole.MONK:
 		pass

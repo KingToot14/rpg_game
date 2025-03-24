@@ -7,9 +7,7 @@ extends EquipmentAbility
 @export var odds := 0.25
 
 # --- Functions --- #
-func setup(new_entity: Entity, new_level: int) -> void:
-	super(new_entity, new_level)
-	
+func setup_signals() -> void:
 	# setup signals
 	entity.performed_action.connect(_on_action_performed)
 

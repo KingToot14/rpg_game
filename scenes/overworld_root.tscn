@@ -1018,7 +1018,6 @@ text = " 1,000,000"
 scroll_active = false
 
 [node name="party_panel" type="Control" parent="ui"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -4091,6 +4090,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/gear_panel/weapon_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4299,6 +4299,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/gear_panel/primary_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4507,6 +4508,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/gear_panel/secondary_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4753,6 +4755,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket1_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4961,6 +4964,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket2_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -5169,6 +5173,7 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("18_kxwtt")
+is_main = true
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket3_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -5307,7 +5312,6 @@ color_key = 2
 
 [node name="equip_select" type="Control" parent="ui/party_panel" node_paths=PackedStringArray("pointer")]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_left = -26.0
 offset_top = 36.0
@@ -5419,12 +5423,7 @@ metadata/_custom_type_script = "uid://cr4oifcf3prja"
 
 [node name="backing" parent="ui/party_panel/equip_select/equip_1" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 color_key = 4
 
 [node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_1"]
@@ -5517,12 +5516,7 @@ metadata/_custom_type_script = "uid://cr4oifcf3prja"
 
 [node name="backing" parent="ui/party_panel/equip_select/equip_2" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 color_key = 4
 
 [node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_2"]
@@ -5615,12 +5609,7 @@ metadata/_custom_type_script = "uid://cr4oifcf3prja"
 
 [node name="backing" parent="ui/party_panel/equip_select/equip_3" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 color_key = 4
 
 [node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_3"]
@@ -5713,15 +5702,1126 @@ metadata/_custom_type_script = "uid://cr4oifcf3prja"
 
 [node name="backing" parent="ui/party_panel/equip_select/equip_4" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 color_key = 4
 
 [node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_5" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -42.0
+offset_right = 21.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_5" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_6" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -42.0
+offset_right = 42.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_6" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_7" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -42.0
+offset_right = 63.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_7" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_8" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -42.0
+offset_right = 84.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_8" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_9" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -63.0
+offset_right = 21.0
+offset_bottom = -45.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_9" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_10" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -63.0
+offset_right = 42.0
+offset_bottom = -45.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_10" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_11" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -63.0
+offset_right = 63.0
+offset_bottom = -45.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_11" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_12" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -63.0
+offset_right = 84.0
+offset_bottom = -45.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_12" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_13" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -84.0
+offset_right = 21.0
+offset_bottom = -66.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_13" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_14" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -84.0
+offset_right = 42.0
+offset_bottom = -66.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_14" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_15" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -84.0
+offset_right = 63.0
+offset_bottom = -66.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_15" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_16" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -84.0
+offset_right = 84.0
+offset_bottom = -66.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_16" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_16"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -8967,13 +10067,25 @@ scroll_active = false
 [connection signal="pressed" from="ui/party_panel/gear_panel/weapon_holder" to="ui/party_panel/gear_panel/weapon_holder" method="show_gear_select" binds= [&"weapon"]]
 [connection signal="pressed" from="ui/party_panel/gear_panel/primary_holder" to="ui/party_panel/gear_panel/primary_holder" method="show_gear_select" binds= [&"primary"]]
 [connection signal="pressed" from="ui/party_panel/gear_panel/secondary_holder" to="ui/party_panel/gear_panel/secondary_holder" method="show_gear_select" binds= [&"secondary"]]
-[connection signal="pressed" from="ui/party_panel/tool_panel/trinket1_holder" to="ui/party_panel/tool_panel/trinket1_holder" method="show_gear_select" binds= [&"trinket"]]
-[connection signal="pressed" from="ui/party_panel/tool_panel/trinket2_holder" to="ui/party_panel/tool_panel/trinket2_holder" method="show_gear_select" binds= [&"trinket"]]
-[connection signal="pressed" from="ui/party_panel/tool_panel/trinket3_holder" to="ui/party_panel/tool_panel/trinket3_holder" method="show_gear_select" binds= [&"trinket"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket1_holder" to="ui/party_panel/tool_panel/trinket1_holder" method="show_gear_select" binds= [&"trinket1"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket2_holder" to="ui/party_panel/tool_panel/trinket2_holder" method="show_gear_select" binds= [&"trinket2"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket3_holder" to="ui/party_panel/tool_panel/trinket3_holder" method="show_gear_select" binds= [&"trinket3"]]
 [connection signal="pressed" from="ui/party_panel/equip_select/equip_1" to="ui/party_panel/equip_select/equip_1" method="equip_current"]
 [connection signal="pressed" from="ui/party_panel/equip_select/equip_2" to="ui/party_panel/equip_select/equip_2" method="equip_current"]
 [connection signal="pressed" from="ui/party_panel/equip_select/equip_3" to="ui/party_panel/equip_select/equip_3" method="equip_current"]
 [connection signal="pressed" from="ui/party_panel/equip_select/equip_4" to="ui/party_panel/equip_select/equip_4" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_5" to="ui/party_panel/equip_select/equip_5" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_6" to="ui/party_panel/equip_select/equip_6" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_7" to="ui/party_panel/equip_select/equip_7" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_8" to="ui/party_panel/equip_select/equip_8" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_9" to="ui/party_panel/equip_select/equip_9" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_10" to="ui/party_panel/equip_select/equip_10" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_11" to="ui/party_panel/equip_select/equip_11" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_12" to="ui/party_panel/equip_select/equip_12" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_13" to="ui/party_panel/equip_select/equip_13" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_14" to="ui/party_panel/equip_select/equip_14" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_15" to="ui/party_panel/equip_select/equip_15" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_16" to="ui/party_panel/equip_select/equip_16" method="equip_current"]
 [connection signal="pressed" from="ui/item_panel/tabs/materials_tab" to="ui/item_panel" method="set_tab" binds= ["materials"]]
 [connection signal="pressed" from="ui/item_panel/tabs/food_tab" to="ui/item_panel" method="set_tab" binds= ["food"]]
 [connection signal="pressed" from="ui/item_panel/tabs/special_tab" to="ui/item_panel" method="set_tab" binds= ["special"]]

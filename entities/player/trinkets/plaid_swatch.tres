@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=12 format=3 uid="uid://cvkvsew5m4vdv"]
+
+[ext_resource type="Script" uid="uid://cttjskqwemo3e" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_aa1wg"]
+[ext_resource type="Script" uid="uid://61vima2cfdax" path="res://entities/scripts/equipment/status_immune.gd" id="2_akgoo"]
+[ext_resource type="Script" uid="uid://l1d134oxae84" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_kjsrm"]
+[ext_resource type="Texture2D" uid="uid://o5ol4tdkvt7m" path="res://entities/player/trinkets/trinkets.png" id="3_kjsrm"]
+[ext_resource type="Script" uid="uid://dy6ode75vpuen" path="res://entities/scripts/equipment/weak_ability.gd" id="3_s8ub1"]
+[ext_resource type="Script" uid="uid://bflujnandibx1" path="res://entities/scripts/equipment/equipment.gd" id="3_yjnly"]
+
+[sub_resource type="Resource" id="Resource_uaj1g"]
+script = ExtResource("3_s8ub1")
+resists = "fire"
+element_mod = 0.1
+stacks_base = 0.25
+level_requirement = 1
+maximum_level = 3
+metadata/_custom_type_script = "uid://dy6ode75vpuen"
+
+[sub_resource type="Resource" id="Resource_v0bja"]
+script = ExtResource("2_akgoo")
+status_key = &"freeze"
+immunity_chance = 0.2
+level_requirement = 1
+maximum_level = 1
+metadata/_custom_type_script = "uid://61vima2cfdax"
+
+[sub_resource type="Resource" id="Resource_akgoo"]
+script = ExtResource("2_akgoo")
+status_key = &"freeze"
+immunity_chance = 0.6
+level_requirement = 2
+maximum_level = 2
+metadata/_custom_type_script = "uid://61vima2cfdax"
+
+[sub_resource type="Resource" id="Resource_s8ub1"]
+script = ExtResource("2_akgoo")
+status_key = &"freeze"
+immunity_chance = 1.0
+level_requirement = 3
+maximum_level = 3
+metadata/_custom_type_script = "uid://61vima2cfdax"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjnly"]
+atlas = ExtResource("3_kjsrm")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("3_yjnly")
+equip_name = "Plaid Swatch"
+description = "A piece of wool taken from a well-loved blanket"
+equip_texture = SubResource("AtlasTexture_yjnly")
+enhancements = Array[ExtResource("2_kjsrm")]([])
+abilities = Array[ExtResource("1_aa1wg")]([SubResource("Resource_uaj1g"), SubResource("Resource_v0bja"), SubResource("Resource_akgoo"), SubResource("Resource_s8ub1")])
+element = 1
+element_percent = 0.5
+metadata/_custom_type_script = "uid://bflujnandibx1"

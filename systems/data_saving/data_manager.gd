@@ -42,7 +42,21 @@ var outfits: Dictionary[StringName, Dictionary] = {
 }
 
 var trinkets: Dictionary[StringName, Dictionary] = {
-	
+	&'red_berries': {
+		&'path': "res://entities/player/trinkets/red_berries.tres",
+		&'level': 1,
+		&'unlocked': true
+	},
+	&'plaid_swatch': {
+		&'path': "res://entities/player/trinkets/plaid_swatch.tres",
+		&'level': 1,
+		&'unlocked': true
+	},
+	&'revitalizing_stimulant': {
+		&'path': "res://entities/player/trinkets/revitalizing_stimulant.tres",
+		&'level': 1,
+		&'unlocked': true
+	}
 }
 
 var options := OptionsDataChunk.new()
