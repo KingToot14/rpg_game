@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://yupp16fi5ogw"]
 
 [ext_resource type="Texture2D" uid="uid://c4jxfb7lu2ahh" path="res://entities/enemies/forest/shrapling/attacks/acorn.png" id="1_5yiuc"]
-[ext_resource type="Script" path="res://entities/scripts/attack_object.gd" id="1_ph13w"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_qdwy4"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="4_ulhqx"]
+[ext_resource type="Script" uid="uid://g7ufa33srk06" path="res://entities/scripts/attack_object.gd" id="1_ph13w"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_qdwy4"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="4_ulhqx"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="5_di7yi"]
 
 [sub_resource type="Animation" id="Animation_s0k7l"]
@@ -97,8 +97,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yvn37"]
 _data = {
-"RESET": SubResource("Animation_s0k7l"),
-"do_attack": SubResource("Animation_yyrym")
+&"RESET": SubResource("Animation_s0k7l"),
+&"do_attack": SubResource("Animation_yyrym")
 }
 
 [sub_resource type="Curve" id="Curve_q74dy"]

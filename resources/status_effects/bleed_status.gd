@@ -13,14 +13,31 @@ func setup_signals() -> void:
 func set_status_info() -> void:
 	max_stack = 100
 	
+	icon_pos = Vector2(2, 0)
+	
 	match stage:
 		1:
+			name = "Pricked"
+			description = (
+				"Receieve minor neutral damage each turn\n" + 
+				"Healing is slightly reduced"
+			)
 			heal_mod = 0.90
 			dmg = 0.035
 		2:
+			name = "Bleeding"
+			description = (
+				"Receieve low neutral damage each turn\n" + 
+				"Healing is reduced"
+			)
 			heal_mod = 0.75
 			dmg = 0.050
 		3:
+			name = "Gushing"
+			description = (
+				"Receieve moderate neutral damage each turn\n" + 
+				"Healing is heavily reduced"
+			)
 			heal_mod = 0.50
 			dmg = 0.065
 

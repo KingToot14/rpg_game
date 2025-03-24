@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bkdxg3t6fevng"]
 
-[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="1_c58lv"]
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="1_c58lv"]
 
 [resource]
 script = ExtResource("1_c58lv")
@@ -12,6 +12,7 @@ timing_type = 0
 accuracy = 1.0
 crit_rate = 0.1
 randomness = 0.1
+attack_obj = ""
 name = "Slime Fling"
 animation_name = &"slime_fling"
 description = "Chucks slime balls at random"

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ChangeTurnTactic" load_steps=4 format=3 uid="uid://vvso3cyu67wy"]
 
 [ext_resource type="Texture2D" uid="uid://dhwgjwqne7e8k" path="res://entities/player/general/tactics.png" id="1_cqlyf"]
-[ext_resource type="Script" path="res://entities/scripts/actions/change_turn_tactic.gd" id="1_twyhv"]
+[ext_resource type="Script" uid="uid://dsveho0fhxsa2" path="res://entities/scripts/actions/change_turn_tactic.gd" id="1_twyhv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03y43"]
 atlas = ExtResource("1_cqlyf")

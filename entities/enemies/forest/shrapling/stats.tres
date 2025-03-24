@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityStats" load_steps=2 format=3 uid="uid://cd2cnqdci7pfr"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity_stats.gd" id="1_wgcil"]
+[ext_resource type="Script" uid="uid://c7mw44wxhfbqb" path="res://entities/scripts/entity_stats.gd" id="1_wgcil"]
 
 [resource]
 script = ExtResource("1_wgcil")

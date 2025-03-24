@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://cp08dhthrsm5i"]
 
-[ext_resource type="Script" path="res://entities/scripts/animation_exposer.gd" id="1_31dej"]
+[ext_resource type="Script" uid="uid://cmoqox6tngsxr" path="res://entities/scripts/animation_exposer.gd" id="1_31dej"]
 [ext_resource type="Texture2D" uid="uid://ngwtsqhdmtxa" path="res://attacks/environment/falling_objects/forest/bush.png" id="2_dsk88"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_xv5ry"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_xv5ry"]
 [ext_resource type="Texture2D" uid="uid://bwb7tvvrda46a" path="res://attacks/environment/falling_objects/forest/log.png" id="3_3yeod"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="3_oktuw"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="3_oktuw"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_gw5a4"]
 [ext_resource type="Texture2D" uid="uid://bhe421bw64756" path="res://attacks/environment/falling_objects/forest/stone.png" id="5_5ip14"]
 [ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_j12au"]
@@ -395,10 +395,10 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80f1w"]
 _data = {
-"RESET": SubResource("Animation_a6tpu"),
-"fall_heavy": SubResource("Animation_ungsm"),
-"fall_light": SubResource("Animation_pbbex"),
-"fall_normal": SubResource("Animation_n13et")
+&"RESET": SubResource("Animation_a6tpu"),
+&"fall_heavy": SubResource("Animation_ungsm"),
+&"fall_light": SubResource("Animation_pbbex"),
+&"fall_normal": SubResource("Animation_n13et")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c402"]

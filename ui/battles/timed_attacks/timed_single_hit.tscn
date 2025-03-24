@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://4ws5v52gxy05"]
 
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_o5hxe"]
-[ext_resource type="Script" path="res://ui/battles/timed_attacks/timed_single_hit.gd" id="1_qq41b"]
-[ext_resource type="Shader" path="res://ui/battles/timed_attacks/timed_ring.gdshader" id="6_3pvoj"]
+[ext_resource type="Script" uid="uid://dgv2w1rlqm7iu" path="res://ui/battles/timed_attacks/timed_single_hit.gd" id="1_qq41b"]
+[ext_resource type="Shader" uid="uid://6ckartack6wg" path="res://ui/battles/timed_attacks/timed_ring.gdshader" id="6_3pvoj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kym5u"]
 shader = ExtResource("6_3pvoj")

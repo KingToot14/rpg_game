@@ -1,26 +1,26 @@
 [gd_scene load_steps=50 format=3 uid="uid://bkl611ne6go1c"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_eo7om"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_7aq5w"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="3_8y87o"]
-[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="4_p1b55"]
-[ext_resource type="Script" path="res://entities/enemies/forest/shrapling/shrapling_brain.gd" id="5_1um4v"]
+[ext_resource type="Script" uid="uid://carm5apfibw25" path="res://entities/scripts/entity.gd" id="1_eo7om"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_7aq5w"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="3_8y87o"]
+[ext_resource type="Script" uid="uid://c5rqyawt03qvq" path="res://entities/scripts/components/animation_manager.gd" id="4_p1b55"]
+[ext_resource type="Script" uid="uid://eigwcfp2r68j" path="res://entities/enemies/forest/shrapling/shrapling_brain.gd" id="5_1um4v"]
 [ext_resource type="Resource" uid="uid://cu844qfp84jyw" path="res://entities/enemies/forest/shrapling/attacks/thorns.tres" id="6_u7t3r"]
-[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="6_v635f"]
-[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="7_i0nxd"]
-[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="8_d04j3"]
-[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="8_hybdl"]
+[ext_resource type="Script" uid="uid://bss12olo3ap1k" path="res://entities/scripts/components/hp_manager.gd" id="6_v635f"]
+[ext_resource type="Script" uid="uid://kubovfe0sidv" path="res://entities/scripts/components/action_manager.gd" id="7_i0nxd"]
+[ext_resource type="Script" uid="uid://ua3eql38s1yg" path="res://entities/scripts/components/targeting_manager.gd" id="8_d04j3"]
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="8_hybdl"]
 [ext_resource type="Resource" uid="uid://bbbqoruql4r6v" path="res://entities/enemies/forest/shrapling/attacks/acorn_spit.tres" id="9_3dl0s"]
-[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="9_6nys3"]
+[ext_resource type="Script" uid="uid://r6nu8sgp3kah" path="res://entities/scripts/components/stat_manager.gd" id="9_6nys3"]
 [ext_resource type="Resource" uid="uid://xobhte6qn0qv" path="res://entities/enemies/forest/shrapling/attacks/vines.tres" id="10_jg6rs"]
-[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="11_f5sgl"]
+[ext_resource type="Script" uid="uid://d3dhsmivgac88" path="res://entities/scripts/components/status_effect_manager.gd" id="11_f5sgl"]
 [ext_resource type="Resource" uid="uid://cd2cnqdci7pfr" path="res://entities/enemies/forest/shrapling/stats.tres" id="12_igp2r"]
-[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="12_nddbl"]
-[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="13_0vmjq"]
-[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="16_5gqq2"]
+[ext_resource type="Script" uid="uid://q5nyqrny1klx" path="res://entities/scripts/components/turn_manager.gd" id="12_nddbl"]
+[ext_resource type="Script" uid="uid://dc8jqb03i65iv" path="res://entities/scripts/components/loot_manager.gd" id="13_0vmjq"]
+[ext_resource type="Shader" uid="uid://cjl7x3y7pui2p" path="res://shaders/entities/flash.gdshader" id="16_5gqq2"]
 [ext_resource type="Texture2D" uid="uid://b4pwfsxmohl25" path="res://entities/enemies/forest/shrapling/base.png" id="17_3lc6r"]
 [ext_resource type="Texture2D" uid="uid://cd6cs8wsw3nnp" path="res://entities/enemies/forest/shrapling/bark_1.png" id="18_b763r"]
-[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="18_u0624"]
+[ext_resource type="Script" uid="uid://byf67r66p1hh4" path="res://entities/scripts/entity_ui.gd" id="18_u0624"]
 [ext_resource type="Texture2D" uid="uid://7iwu7gj56fge" path="res://entities/enemies/forest/shrapling/bark_2.png" id="19_7nwsa"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="19_k3e40"]
 [ext_resource type="Texture2D" uid="uid://1w3w7y2xoe0a" path="res://entities/enemies/forest/shrapling/bark_3.png" id="20_577er"]
@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://isnudlc2bnho" path="res://entities/enemies/forest/shrapling/bark_4.png" id="21_mqbh4"]
 [ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="21_xeg2c"]
 [ext_resource type="Texture2D" uid="uid://tvqv7mq4xjj1" path="res://entities/enemies/forest/shrapling/face.png" id="22_lbnby"]
-[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="22_tbq5g"]
+[ext_resource type="Script" uid="uid://cmya6h7vx3cjj" path="res://ui/battles/status_effect_button.gd" id="22_tbq5g"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="23_o04yh"]
 [ext_resource type="Texture2D" uid="uid://p1ckkc2udw31" path="res://entities/enemies/forest/shrapling/bark_particle.png" id="25_orj3i"]
 
@@ -547,12 +547,12 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6dnli"]
 _data = {
-"RESET": SubResource("Animation_thbi3"),
-"acorn_spit": SubResource("Animation_auyxa"),
-"call_vines": SubResource("Animation_ni35k"),
-"enter_battle": SubResource("Animation_wuegc"),
-"idle": SubResource("Animation_2cpd7"),
-"take_damage": SubResource("Animation_5ebpo")
+&"RESET": SubResource("Animation_thbi3"),
+&"acorn_spit": SubResource("Animation_auyxa"),
+&"call_vines": SubResource("Animation_ni35k"),
+&"enter_battle": SubResource("Animation_wuegc"),
+&"idle": SubResource("Animation_2cpd7"),
+&"take_damage": SubResource("Animation_5ebpo")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2nmom"]

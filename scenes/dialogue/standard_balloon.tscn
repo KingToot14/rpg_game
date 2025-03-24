@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://bsgjeltgr4wl4"]
 
-[ext_resource type="Script" path="res://scenes/dialogue/standard_balloon.gd" id="1_fqa6c"]
+[ext_resource type="Script" uid="uid://hye1gs5vjoy5" path="res://scenes/dialogue/standard_balloon.gd" id="1_fqa6c"]
 [ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="2_203ak"]
 [ext_resource type="Texture2D" uid="uid://joasmiva6fp6" path="res://scenes/forest/campsite/ranger/portrait.png" id="4_4xkuu"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="4_ohcf5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="5_53xaa"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="5_tdnb8"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="6_frked"]
-[ext_resource type="Script" path="res://ui/theme_setter.gd" id="6_ioycr"]
-[ext_resource type="Script" path="res://scenes/dialogue/components/quest_container.gd" id="7_2bf51"]
+[ext_resource type="Script" uid="uid://2w8aorkr7uby" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="6_frked"]
+[ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="6_ioycr"]
+[ext_resource type="Script" uid="uid://bc8o4t21y0wbw" path="res://scenes/dialogue/components/quest_container.gd" id="7_2bf51"]
 [ext_resource type="PackedScene" uid="uid://dbasqqwej8pvy" path="res://scenes/dialogue/components/item_info.tscn" id="8_s3owf"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="11_d7fxb"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="11_d7fxb"]
 
 [node name="standard_balloon" type="CanvasLayer"]
 layer = 10

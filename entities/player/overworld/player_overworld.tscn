@@ -1,18 +1,18 @@
 [gd_scene load_steps=30 format=3 uid="uid://dsd56x7sbosdr"]
 
-[ext_resource type="Script" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
+[ext_resource type="Script" uid="uid://cffetityxcr2s" path="res://entities/player/overworld/overworld_controller.gd" id="1_a5lqh"]
+[ext_resource type="Shader" uid="uid://be3b4ft437jbj" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_6y3vp"]
 [ext_resource type="AudioStream" uid="uid://bvnkf37ta2cp7" path="res://environment/forest/sfx/dirt_footsteps/dirt_footsteps.tres" id="2_vpofr"]
 [ext_resource type="AudioStream" uid="uid://cat7a4ir3k7np" path="res://environment/forest/sfx/grass_footsteps/grass_foosteps.tres" id="3_5cn0t"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="5_mrf4t"]
-[ext_resource type="Script" path="res://entities/player/overworld/footstep_sfx.gd" id="5_nfabf"]
-[ext_resource type="Script" path="res://entities/player/overworld/fsm/player_control_state.gd" id="6_t3gle"]
-[ext_resource type="Script" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
-[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_hawyb"]
-[ext_resource type="Script" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="5_mrf4t"]
+[ext_resource type="Script" uid="uid://b404g3m5e7vdr" path="res://entities/player/overworld/footstep_sfx.gd" id="5_nfabf"]
+[ext_resource type="Script" uid="uid://bu4naw1i2hl13" path="res://entities/player/overworld/fsm/player_control_state.gd" id="6_t3gle"]
+[ext_resource type="Script" uid="uid://bkedmhfuc3h8f" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
+[ext_resource type="Script" uid="uid://dq7wutcpquw3o" path="res://scripts/hide_in_editor.gd" id="8_hawyb"]
+[ext_resource type="Script" uid="uid://cin7515taujss" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="9_04vui"]
 [ext_resource type="Texture2D" uid="uid://dcraejj1058hf" path="res://entities/player/melee/overworld.png" id="9_e8d1h"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="9_ue010"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="9_ue010"]
 
 [sub_resource type="Animation" id="Animation_slxnh"]
 length = 0.001
@@ -136,13 +136,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0l7iv"]
 _data = {
-"RESET": SubResource("Animation_slxnh"),
-"idle_down": SubResource("Animation_inny8"),
-"idle_right": SubResource("Animation_lysfl"),
-"idle_up": SubResource("Animation_jrkuy"),
-"walk_down": SubResource("Animation_hykb4"),
-"walk_right": SubResource("Animation_3yjlw"),
-"walk_up": SubResource("Animation_usa2s")
+&"RESET": SubResource("Animation_slxnh"),
+&"idle_down": SubResource("Animation_inny8"),
+&"idle_right": SubResource("Animation_lysfl"),
+&"idle_up": SubResource("Animation_jrkuy"),
+&"walk_down": SubResource("Animation_hykb4"),
+&"walk_right": SubResource("Animation_3yjlw"),
+&"walk_up": SubResource("Animation_usa2s")
 }
 
 [sub_resource type="Resource" id="Resource_a8xs5"]
@@ -174,18 +174,18 @@ noise = SubResource("FastNoiseLite_8rp7f")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2iktr"]
 shader = ExtResource("2_6y3vp")
 shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_gv1cs")
 shader_parameter/wind_speed = -0.25
 shader_parameter/texture_height = 10.0
 shader_parameter/offset = 0.0
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_gv1cs")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3wkh"]
 shader = ExtResource("2_6y3vp")
 shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_gv1cs")
 shader_parameter/wind_speed = -0.25
 shader_parameter/texture_height = 2.0
 shader_parameter/offset = -2.0
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_gv1cs")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l0mef"]
 radius = 6.0

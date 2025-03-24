@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://xbtbuccjygtu"]
 
-[ext_resource type="Script" path="res://attacks/environment/falling_objects/falling_objects.gd" id="1_m7lm1"]
+[ext_resource type="Script" uid="uid://c1irp0ge6l0le" path="res://attacks/environment/falling_objects/falling_objects.gd" id="1_m7lm1"]
 [ext_resource type="PackedScene" uid="uid://cp08dhthrsm5i" path="res://attacks/environment/falling_objects/falling_object.tscn" id="2_2ydr4"]
 
 [node name="falling_objects" type="Node2D"]

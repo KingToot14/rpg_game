@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://bmn1f41l88x48"]
 
 [ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="1_a620d"]
-[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="2_yrjsm"]
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="2_yrjsm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcxdd"]
 atlas = ExtResource("1_a620d")

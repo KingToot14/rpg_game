@@ -37,7 +37,7 @@ func _on_turn_ended() -> void:
 			await timer.timeout
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
-	var effect = get_effect(key)
+	var effect = Globals.load_status_effect(key).new(parent)
 	
 	var params = {
 		&'key': key,
@@ -56,13 +56,12 @@ func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
 		var mod = randi_range(1, 2)
 		params[&'stacks'] = max(params[&'stacks'] + mod * sign(params[&'stacks_odds']), 0)
 	
-	# add to current effect if it exists
 	if effect:
+		# add to current effect if it exists
 		effect.add_stacks(params[&'stacks'], params[&'stage'])
 	else:
-	# create new effect instance
-		effect = StatusEffectHelper.get_effect(params[&'key']).effect_class.new(parent, params[&'stacks'], params[&'stage'])
-		effect.key = params[&'key']
+		# create new effect instance
+		effect = Globals.load_status_effect(params[&'key']).new(parent, params[&'stacks'], params[&'stage'])
 		status_effects.append(effect)
 	
 	effect_changed.emit()

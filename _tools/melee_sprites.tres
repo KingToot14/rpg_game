@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AsepriteImporter" load_steps=2 format=3 uid="uid://cobylaiahhnuq"]
 
-[ext_resource type="Script" path="res://_tools/aseprite_importer.gd" id="1_3ubfj"]
+[ext_resource type="Script" uid="uid://tofx150sf33v" path="res://_tools/aseprite_importer.gd" id="1_3ubfj"]
 
 [resource]
 script = ExtResource("1_3ubfj")

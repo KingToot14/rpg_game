@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6wj8dnpapaki"]
 
-[ext_resource type="Shader" path="res://entities/player/bodies/color_setter.gdshader" id="1_fqu63"]
-[ext_resource type="Script" path="res://ui/options/option_slider.gd" id="2_w1pmp"]
+[ext_resource type="Shader" uid="uid://cm0h7falmi2yu" path="res://entities/player/bodies/color_setter.gdshader" id="1_fqu63"]
+[ext_resource type="Script" uid="uid://bf547kjvdpxgt" path="res://ui/options/option_slider.gd" id="2_w1pmp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mq5v"]
 shader = ExtResource("1_fqu63")

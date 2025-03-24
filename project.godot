@@ -14,7 +14,7 @@ config/name="RPG Game"
 run/main_scene="res://scenes/overworld_root.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="KingToot/RPG/"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -28,7 +28,6 @@ TransitionManager="*res://ui/transitions/transition_manager.tscn"
 OptionsMenu="*res://ui/options/options_menu.tscn"
 Tooltip="*res://ui/tooltip/tooltip.tscn"
 SaveManager="*res://systems/data_saving/save_manager.gd"
-StatusEffectHelper="*res://resources/status_effects/helper/status_effect_helper.tscn"
 ScreenshotManager="*res://scripts/autoloads/screenshot_manager.gd"
 
 [debug]

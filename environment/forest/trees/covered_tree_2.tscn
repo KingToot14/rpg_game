@@ -1,13 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://dsg0j1xqf3dyy"]
+[gd_scene load_steps=17 format=3 uid="uid://dsg0j1xqf3dyy"]
 
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_vcd26"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_vcd26"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_rbo58"]
 [ext_resource type="Texture2D" uid="uid://du2xm58vm4akg" path="res://environment/forest/trees/tree_2.png" id="3_vdoa7"]
-[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="4_k4iv6"]
-[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="5_vgi0m"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass_cover.gdshader" id="6_wn8jv"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="7_xv46x"]
-[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="8_xelf6"]
+[ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="4_k4iv6"]
+[ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="5_vgi0m"]
+[ext_resource type="Shader" uid="uid://be3b4ft437jbj" path="res://environment/shaders/grass/grass_cover.gdshader" id="6_wn8jv"]
+[ext_resource type="Shader" uid="uid://q2ijypxleyc1" path="res://shaders/environment/foliage_wave.gdshader" id="7_xv46x"]
+[ext_resource type="Script" uid="uid://dq7wutcpquw3o" path="res://scripts/hide_in_editor.gd" id="8_xelf6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
 radius = 7.5
@@ -36,18 +36,10 @@ noise = SubResource("FastNoiseLite_24p63")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hkyyd"]
 shader = ExtResource("6_wn8jv")
 shader_parameter/grass_size = Vector2(480, 270)
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_wtfqx")
 shader_parameter/wind_speed = -0.25
 shader_parameter/texture_height = 12.0
 shader_parameter/offset = 4.0
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_wtfqx")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tp4f"]
-frequency = 0.0553
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t32mv"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_5tp4f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4ale"]
 resource_local_to_scene = true
@@ -55,8 +47,9 @@ shader = ExtResource("7_xv46x")
 shader_parameter/transparency = 0.0
 shader_parameter/wind_speed = 2.0
 shader_parameter/wind_threshold = 0.6
+shader_parameter/wind_offset = 0.0
 shader_parameter/wave_count = 3.0
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_t32mv")
+shader_parameter/wind_angle = 0.0
 shader_parameter/player_influence = 0.6
 shader_parameter/radius = 0.05
 

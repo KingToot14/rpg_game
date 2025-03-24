@@ -1,27 +1,27 @@
 [gd_scene load_steps=39 format=3 uid="uid://gvcga8n1fk3x"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_4aisw"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="8_ikcrw"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="9_jvc28"]
-[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="10_ftucf"]
+[ext_resource type="Script" uid="uid://carm5apfibw25" path="res://entities/scripts/entity.gd" id="1_4aisw"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="8_ikcrw"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="9_jvc28"]
+[ext_resource type="Script" uid="uid://c5rqyawt03qvq" path="res://entities/scripts/components/animation_manager.gd" id="10_ftucf"]
 [ext_resource type="Resource" uid="uid://ct5ccbu6gqnvu" path="res://entities/enemies/testing/training_dummy/stats.tres" id="10_wl5l7"]
-[ext_resource type="Script" path="res://entities/enemies/testing/training_dummy/training_dummy_brain.gd" id="11_0cuik"]
-[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="12_j77v3"]
-[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="13_msebo"]
-[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="17_7t0kq"]
-[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="18_vlq5x"]
-[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="20_xh1vk"]
-[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="21_4o02o"]
-[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="22_3ojyy"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="24_6qixb"]
+[ext_resource type="Script" uid="uid://by53kggbk3uih" path="res://entities/enemies/testing/training_dummy/training_dummy_brain.gd" id="11_0cuik"]
+[ext_resource type="Script" uid="uid://bss12olo3ap1k" path="res://entities/scripts/components/hp_manager.gd" id="12_j77v3"]
+[ext_resource type="Script" uid="uid://kubovfe0sidv" path="res://entities/scripts/components/action_manager.gd" id="13_msebo"]
+[ext_resource type="Script" uid="uid://ua3eql38s1yg" path="res://entities/scripts/components/targeting_manager.gd" id="17_7t0kq"]
+[ext_resource type="Script" uid="uid://r6nu8sgp3kah" path="res://entities/scripts/components/stat_manager.gd" id="18_vlq5x"]
+[ext_resource type="Script" uid="uid://d3dhsmivgac88" path="res://entities/scripts/components/status_effect_manager.gd" id="20_xh1vk"]
+[ext_resource type="Script" uid="uid://q5nyqrny1klx" path="res://entities/scripts/components/turn_manager.gd" id="21_4o02o"]
+[ext_resource type="Script" uid="uid://dc8jqb03i65iv" path="res://entities/scripts/components/loot_manager.gd" id="22_3ojyy"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="24_6qixb"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="25_yg16m"]
-[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="26_76jbk"]
+[ext_resource type="Shader" uid="uid://cjl7x3y7pui2p" path="res://shaders/entities/flash.gdshader" id="26_76jbk"]
 [ext_resource type="Texture2D" uid="uid://cdqutv8lxu7so" path="res://entities/enemies/testing/training_dummy/battle.png" id="27_7tjc7"]
-[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="31_ovg84"]
+[ext_resource type="Script" uid="uid://byf67r66p1hh4" path="res://entities/scripts/entity_ui.gd" id="31_ovg84"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="32_6uiu5"]
 [ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="33_kkqni"]
 [ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="34_onvyk"]
-[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="35_0a6sp"]
+[ext_resource type="Script" uid="uid://cmya6h7vx3cjj" path="res://ui/battles/status_effect_button.gd" id="35_0a6sp"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="37_b1urw"]
 
 [sub_resource type="Animation" id="Animation_65bge"]
@@ -108,11 +108,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8r1uf"]
 _data = {
-"RESET": SubResource("Animation_65bge"),
-"death": SubResource("Animation_gxvim"),
-"enter_battle": SubResource("Animation_nltwh"),
-"idle": SubResource("Animation_afkov"),
-"take_damage": SubResource("Animation_hqjld")
+&"RESET": SubResource("Animation_65bge"),
+&"death": SubResource("Animation_gxvim"),
+&"enter_battle": SubResource("Animation_nltwh"),
+&"idle": SubResource("Animation_afkov"),
+&"take_damage": SubResource("Animation_hqjld")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hrj3q"]

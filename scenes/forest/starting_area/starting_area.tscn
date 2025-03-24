@@ -1,17 +1,17 @@
 [gd_scene load_steps=41 format=3 uid="uid://bu0ktqr3wancy"]
 
-[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
-[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
+[ext_resource type="Script" uid="uid://cs7c4obpv71ga" path="res://systems/scene_loading/area_information.gd" id="1_1mvng"]
+[ext_resource type="Script" uid="uid://wenbnlih62gl" path="res://scripts/environment/wind_manager.gd" id="2_3vw15"]
 [ext_resource type="Texture2D" uid="uid://cunv1b1igjby7" path="res://scenes/forest/starting_area/terrain_map.png" id="3_y6x5q"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="4_2b0eb"]
+[ext_resource type="Shader" uid="uid://q2ijypxleyc1" path="res://shaders/environment/foliage_wave.gdshader" id="4_2b0eb"]
 [ext_resource type="Texture2D" uid="uid://ckkx3p3ftue44" path="res://scenes/forest/starting_area/ground_map.png" id="5_kkqjl"]
 [ext_resource type="Texture2D" uid="uid://boiegj21n7buq" path="res://scenes/forest/starting_area/shader_map.png" id="7_8ik0f"]
-[ext_resource type="Script" path="res://scripts/world_setter.gd" id="9_oox87"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="10_opdin"]
-[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="11_dy5jm"]
+[ext_resource type="Script" uid="uid://bmb5sstqvtptt" path="res://scripts/world_setter.gd" id="9_oox87"]
+[ext_resource type="Shader" uid="uid://clacng5ifhila" path="res://environment/shaders/grass/grass.gdshader" id="10_opdin"]
+[ext_resource type="Shader" uid="uid://bdbuj3jwpcmk" path="res://environment/shaders/water/water.gdshader" id="11_dy5jm"]
 [ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="11_rfhvx"]
 [ext_resource type="PackedScene" uid="uid://biqmftnd6r3i6" path="res://environment/forest/trees/covered_tree.tscn" id="12_1ywg2"]
-[ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="12_23mxx"]
+[ext_resource type="Shader" uid="uid://cwmil0ufo6kes" path="res://environment/shaders/trail/trail.gdshader" id="12_23mxx"]
 [ext_resource type="PackedScene" uid="uid://x3sh11ejtmsd" path="res://environment/forest/trees/forest_tree.tscn" id="12_ct6eb"]
 [ext_resource type="PackedScene" uid="uid://dsg0j1xqf3dyy" path="res://environment/forest/trees/covered_tree_2.tscn" id="12_wgao2"]
 [ext_resource type="Texture2D" uid="uid://h10t0hha8h5p" path="res://scenes/forest/starting_area/bottom_fence.png" id="14_op7tu"]
@@ -68,11 +68,11 @@ noise = SubResource("FastNoiseLite_8rp7f")
 resource_local_to_scene = true
 shader = ExtResource("10_opdin")
 shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
-shader_parameter/patch_intensity = 0.05
-shader_parameter/patch_threshold = 0.65
 shader_parameter/side_gradient = SubResource("GradientTexture1D_31djs")
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_lh1yk")
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_vci3i")
+shader_parameter/patch_intensity = 0.05
+shader_parameter/patch_threshold = 0.65
 shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
@@ -114,19 +114,19 @@ viewport_path = NodePath("environment/reflection_viewport")
 resource_local_to_scene = true
 shader = ExtResource("11_dy5jm")
 shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/reflection_intensity = 0.25
 shader_parameter/reflection_texture = SubResource("ViewportTexture_nkhw3")
+shader_parameter/reflection_intensity = 0.25
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_58x1a")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_gd1w6")
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_gd1w6")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
-shader_parameter/foam_speed = -0.25
 shader_parameter/foam_noise = SubResource("NoiseTexture2D_0avi3")
+shader_parameter/foam_speed = -0.25
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjn1h"]
 shader = ExtResource("12_23mxx")
@@ -134,8 +134,8 @@ shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/trail_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/shadow_color = Color(0.611765, 0.305882, 0.0862745, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.25
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_0avi3")
+shader_parameter/wind_speed = -0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31i3j"]
 size = Vector2(20, 270)

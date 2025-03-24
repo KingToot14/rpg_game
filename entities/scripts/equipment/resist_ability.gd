@@ -7,8 +7,8 @@ extends EquipmentAbility
 @export var stacks_base := 0.25
 @export var stacks_increase := 0.25
 
-var element_resists: Attack.Element
-var status_resists: Globals.StatusType
+var element_resists: int
+var status_resists: int
 
 # --- Functions --- #
 @warning_ignore("int_as_enum_without_cast")

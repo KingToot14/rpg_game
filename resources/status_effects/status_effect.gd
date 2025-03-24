@@ -4,6 +4,10 @@ extends Resource
 # --- Variables --- #
 var entity: Entity = null
 
+var name = "Effect"
+var description = "Description"
+var icon_pos = Vector2(0, 0)
+
 var key: StringName = &'key'
 var status_type: Globals.StatusType = Globals.StatusType.EMPTY
 
@@ -27,12 +31,16 @@ func _init(init_entity: Entity = null, init_stacks: int = 1, init_stage: int = 1
 	setup_signals()
 	set_status_info()
 
+#region Status Info
 func setup_signals() -> void:
 	entity.turn_ended.connect(decrement_stacks)
 
 func set_status_info() -> void:
 	return
 
+#endregion
+
+#region Stacks
 func set_stacks(new_stacks: int) -> void:
 	stacks = clamp(new_stacks, 0, max_stack)
 
@@ -56,8 +64,10 @@ func add_stacks(new_stacks: int = 1, new_stage: int = 1) -> void:
 	
 	set_status_info()
 
+#endregion
+
 func remove_status() -> void:
 	entity.status_effects.remove_effect(key)
 
 func get_icon() -> Texture2D:
-	return null
+	return Globals.load_status_effect_icon(icon_pos.x * 10, icon_pos.y * 10)

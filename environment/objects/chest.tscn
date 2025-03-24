@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c50i2fe4sv0xd"]
 
-[ext_resource type="Script" path="res://scripts/interactable_objects/loot_object.gd" id="1_ha7r0"]
+[ext_resource type="Script" uid="uid://dxl482jgavfq0" path="res://scripts/interactable_objects/loot_object.gd" id="1_ha7r0"]
 [ext_resource type="Texture2D" uid="uid://cumi34awat1dy" path="res://environment/objects/object_tiles.png" id="1_iihi6"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="3_31f1d"]
 [ext_resource type="Texture2D" uid="uid://di85enawspwml" path="res://ui/overworld/interactions/general_icon.png" id="3_bf7je"]

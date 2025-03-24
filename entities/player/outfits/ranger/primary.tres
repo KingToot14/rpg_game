@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="OutfitEquipment" load_steps=11 format=3 uid="uid://diab5q1c0e7eh"]
 
-[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_rrktf"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_1wjqj"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/resist_ability.gd" id="2_3wgpb"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/outfit_equipment.gd" id="3_01rtu"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/weak_ability.gd" id="3_7kher"]
+[ext_resource type="Script" uid="uid://cttjskqwemo3e" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_rrktf"]
+[ext_resource type="Script" uid="uid://l1d134oxae84" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_1wjqj"]
+[ext_resource type="Script" uid="uid://c0thf31es5si1" path="res://entities/scripts/equipment/resist_ability.gd" id="2_3wgpb"]
+[ext_resource type="Script" uid="uid://d04kppballabu" path="res://entities/scripts/equipment/outfit_equipment.gd" id="3_01rtu"]
+[ext_resource type="Script" uid="uid://dy6ode75vpuen" path="res://entities/scripts/equipment/weak_ability.gd" id="3_7kher"]
 [ext_resource type="Texture2D" uid="uid://c4d01ke71j1b0" path="res://entities/player/outfits/outfit_icons.png" id="5_am4v1"]
 [ext_resource type="Texture2D" uid="uid://dyir6g0xk0rr3" path="res://entities/player/outfits/ranger/melee-primary.png" id="5_hlwse"]
 

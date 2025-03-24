@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d0xmq7d64ts63"]
 
-[ext_resource type="Script" path="res://entities/scripts/attack_object.gd" id="1_6nsvp"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_ou85y"]
+[ext_resource type="Script" uid="uid://g7ufa33srk06" path="res://entities/scripts/attack_object.gd" id="1_6nsvp"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_ou85y"]
 [ext_resource type="Texture2D" uid="uid://c76mugkmwen0v" path="res://attacks/environment/forest/vines/vines_bottom.png" id="3_ksraj"]
 [ext_resource type="Texture2D" uid="uid://3jsp2tfj7678" path="res://attacks/environment/forest/vines/vines_top.png" id="4_1fiji"]
 
@@ -123,8 +123,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvtbc"]
 _data = {
-"RESET": SubResource("Animation_oukl0"),
-"do_attack": SubResource("Animation_dpdlb")
+&"RESET": SubResource("Animation_oukl0"),
+&"do_attack": SubResource("Animation_dpdlb")
 }
 
 [node name="vines" type="Node2D" node_paths=PackedStringArray("animator")]

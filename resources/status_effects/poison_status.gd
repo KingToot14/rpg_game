@@ -15,8 +15,30 @@ func setup_signals() -> void:
 func set_status_info() -> void:
 	max_stack = 100
 	
-	if stage != 3:
-		turns = 1
+	icon_pos = Vector2(2, 1)
+	
+	match stage:
+		1:
+			name = "Poisoned"
+			description = (
+				"Receives minor nature damage each turn" 
+			)
+			turns = 1
+		2:
+			name = "Contagious"
+			description = (
+				"Receives minor nature damage each turn\n" +
+				"Has a chance to spread to either side" 
+			)
+			turns = 1
+		3:
+			name = "Irradiated"
+			description = (
+				"Receives nature damage each turn\n" +
+				"Damage increases each turn\n" +
+				"Has a chance to spread to either side" 
+			)
+			pass
 
 func _on_turn_ended(_params: Dictionary) -> void:
 	# increase irradiated damage

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dakitx3m6wiho"]
 
-[ext_resource type="Script" path="res://scripts/interactable_objects/dialogue_object.gd" id="1_5825x"]
+[ext_resource type="Script" uid="uid://c5shp38d4xuvg" path="res://scripts/interactable_objects/dialogue_object.gd" id="1_5825x"]
 [ext_resource type="AudioStream" uid="uid://1k6c3t5ov47b" path="res://scenes/forest/campsite/ranger/sfx/hehefarbt_02.wav" id="2_oy7ov"]
 [ext_resource type="Texture2D" uid="uid://cmso4sdfr0vcy" path="res://ui/overworld/interactions/read_icon.png" id="3_ebu2j"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_mmnl4"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="4_mmnl4"]
 [ext_resource type="Texture2D" uid="uid://8odp7ogkiott" path="res://scenes/forest/campsite/ranger/overworld.png" id="5_nb3vp"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="6_yst05"]
 

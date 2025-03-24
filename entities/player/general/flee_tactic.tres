@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FleeTactic" load_steps=4 format=3 uid="uid://b6dixk683scj1"]
 
-[ext_resource type="Script" path="res://entities/scripts/actions/flee_tactic.gd" id="1_33r6r"]
+[ext_resource type="Script" uid="uid://luyv8xmia6eb" path="res://entities/scripts/actions/flee_tactic.gd" id="1_33r6r"]
 [ext_resource type="Texture2D" uid="uid://dhwgjwqne7e8k" path="res://entities/player/general/tactics.png" id="1_ctuv0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwn3x"]

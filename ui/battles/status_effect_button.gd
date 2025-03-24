@@ -3,7 +3,6 @@ extends TextureRect
 
 # --- Variables --- #
 var effect: StatusEffect
-var info: StatusEffectInfo
 
 # --- References --- #
 @onready var stacks_label := $"stacks" as RichTextLabel
@@ -18,8 +17,8 @@ func _on_mouse_entered() -> void:
 		return
 	
 	Tooltip.set_width(100)
-	Tooltip.set_title_text(info.get_effect_name(effect.stage))
-	Tooltip.set_body_text(info.get_description(effect.stage))
+	Tooltip.set_title_text(effect.name)
+	Tooltip.set_body_text(effect.description)
 	Tooltip.show_tooltip()
 
 func _on_mouse_exited() -> void:
@@ -31,7 +30,7 @@ func _on_mouse_exited() -> void:
 func set_effect(new_effect: StatusEffect) -> void:
 	# clear tooltip if just removed
 	if effect and not new_effect:
-		if Tooltip.has_title(StatusEffectHelper.get_effect(effect.key).get_effect_name(effect.stage)):
+		if Tooltip.has_title(effect.name):
 			Tooltip.hide_tooltip()
 	
 	effect = new_effect
@@ -41,9 +40,7 @@ func set_effect(new_effect: StatusEffect) -> void:
 	if not effect:
 		return
 	
-	info = StatusEffectHelper.get_effect(effect.key)
-	
-	texture = info.small_icon
+	texture = effect.get_icon()
 	
 	if effect.max_stack > 1:
 		stacks_label.text = " " + str(effect.stacks)

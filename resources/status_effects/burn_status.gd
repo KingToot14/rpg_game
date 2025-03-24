@@ -14,15 +14,35 @@ func setup_signals() -> void:
 func set_status_info() -> void:
 	max_stack = 100
 	
+	icon_pos = Vector2(3, 0)
+	
 	dmg = 0.020 + 0.015 * stage
 	
 	match stage:
 		1:
+			name = "Overheating"
+			description = (
+				"Receieve minor fire damage each turn\n" +
+				"Receives less damage from nature and ice damage\n" +
+				"Removed by water damage"
+			)
 			dmg_mod = 0.90
 		2:
-			dmg_mod = 0.50
+			name = "Burning"
+			description = (
+				"Receieve low fire damage each turn\n" +
+				"Receives less damage from nature and ice damage\n" +
+				"Removed by water damage"
+			)
+			dmg_mod = 0.70
 		3:
-			dmg_mod = 0.20
+			name = "Scoarching"
+			description = (
+				"Receieve moderate fire damage each turn\n" +
+				"Receives less damage from nature and ice damage\n" +
+				"Removed by water damage"
+			)
+			dmg_mod = 0.50
 
 func _on_turn_ended(_params: Dictionary) -> void:
 	entity.hp.take_damage({

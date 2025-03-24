@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="1_hknxx"]
 [ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="1_so7n1"]
-[ext_resource type="Script" path="res://ui/overworld/chest_ui/item_info.gd" id="2_k10cv"]
+[ext_resource type="Script" uid="uid://bigtd04hv3vkf" path="res://ui/overworld/chest_ui/item_info.gd" id="2_k10cv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ladmy"]
 atlas = ExtResource("1_hknxx")

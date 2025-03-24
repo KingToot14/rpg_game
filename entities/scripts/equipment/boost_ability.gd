@@ -4,8 +4,8 @@ extends EquipmentAbility
 # --- Variables --- #
 @export var boosts: String
 
-var element_boosts: Attack.Element
-var status_boosts: Globals.StatusType
+var element_boosts: int
+var status_boosts: int
 var healing_boost := false
 
 # --- Constants --- #

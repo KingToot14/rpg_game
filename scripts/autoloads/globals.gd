@@ -73,7 +73,33 @@ var timing_mods: Array[StringName] = []
 
 var turn_fsm: TurnFSM
 
+# --- Resources --- #
+var status_effect_icons := "res://ui/icons/effects.png"
+
+var status_effects: Dictionary[StringName, String] = {
+	&'burn': "res://resources/status_effects/burn_status.gd",
+	&'haste': "res://resources/status_effects/haste_status.gd",
+	&'bleed': "res://resources/status_effects/bleed_status.gd",
+	&'defend': "res://resources/status_effects/defending_status.gd",
+	&'charge': "res://resources/status_effects/blank_status.gd",
+	&'wet': "res://resources/status_effects/wet_status.gd",
+	&'poison': "res://resources/status_effects/poison_status.gd",
+}
+
 # --- Functions --- #
 func _ready() -> void:
 	# load default preset
 	set_preset(load("res://resources/theme_presets/blue_preset.tres"))
+
+#region Status Effects
+func load_status_effect(key: StringName) -> GDScript:
+	return load(status_effects.get(key))
+
+func load_status_effect_icon(x: int, y: int) -> Texture2D:
+	var texture := AtlasTexture.new()
+	texture.atlas = load(status_effect_icons)
+	texture.region = Rect2(x, y, 10, 10)
+	
+	return texture
+
+#endregion

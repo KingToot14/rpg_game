@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_v4y3h"]
 [ext_resource type="Texture2D" uid="uid://cqspr0lipeg5n" path="res://ui/battles/health/health_background.png" id="2_12wij"]
-[ext_resource type="Script" path="res://ui/battles/health/hp_bar.gd" id="2_byne6"]
+[ext_resource type="Script" uid="uid://dto6pkl7f3mas" path="res://ui/battles/health/hp_bar.gd" id="2_byne6"]
 [ext_resource type="Texture2D" uid="uid://bhamvuv6scbht" path="res://ui/battles/health/health_slider.png" id="4_ca7na"]
 
 [node name="player_hp" type="Control" node_paths=PackedStringArray("cover_rect", "hp_label", "special_label")]

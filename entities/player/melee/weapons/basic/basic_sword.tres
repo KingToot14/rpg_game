@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MeleeWeaponEquipment" load_steps=10 format=3 uid="uid://bd7jpjhr4fwfy"]
 
-[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_hiwhy"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_jlhyo"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/boost_ability.gd" id="2_njae0"]
-[ext_resource type="Script" path="res://entities/scripts/equipment/melee_weapon_equipment.gd" id="3_fwp6j"]
+[ext_resource type="Script" uid="uid://cttjskqwemo3e" path="res://entities/scripts/equipment/equipment_ability.gd" id="1_hiwhy"]
+[ext_resource type="Script" uid="uid://l1d134oxae84" path="res://entities/scripts/equipment/equipment_enhancement.gd" id="2_jlhyo"]
+[ext_resource type="Script" uid="uid://c4tbphytfxqq2" path="res://entities/scripts/equipment/boost_ability.gd" id="2_njae0"]
+[ext_resource type="Script" uid="uid://dic5f2xwxrkh1" path="res://entities/scripts/equipment/melee_weapon_equipment.gd" id="3_fwp6j"]
 [ext_resource type="Texture2D" uid="uid://bupd7car786l7" path="res://entities/player/melee/weapons/basic/shield.png" id="4_52ega"]
 [ext_resource type="Texture2D" uid="uid://0sjrlhyqsk70" path="res://entities/player/melee/weapon_icons.png" id="4_phelx"]
 [ext_resource type="Texture2D" uid="uid://88e38w8v7ncj" path="res://entities/player/melee/weapons/basic/sword.png" id="5_ekuov"]

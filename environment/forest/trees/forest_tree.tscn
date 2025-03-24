@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://x3sh11ejtmsd"]
 
-[ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_gh2p6"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="1_sumql"]
+[ext_resource type="Script" uid="uid://usdqa33u7njx" path="res://scripts/textures/texture_variant.gd" id="1_gh2p6"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_sumql"]
 [ext_resource type="Texture2D" uid="uid://bde66qvxtguvd" path="res://environment/forest/trees/leaf_variations.png" id="2_05wv8"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_kji2a"]
-[ext_resource type="Shader" path="res://shaders/object_hider.gdshader" id="2_tet37"]
+[ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="2_tet37"]
 [ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="3_hj56p"]
-[ext_resource type="Script" path="res://scripts/environment/object_revealer.gd" id="4_jcd0y"]
-[ext_resource type="Shader" path="res://shaders/environment/foliage_wave.gdshader" id="5_qdvdd"]
-[ext_resource type="Script" path="res://scripts/hide_in_editor.gd" id="7_dbka7"]
+[ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="4_jcd0y"]
+[ext_resource type="Shader" uid="uid://q2ijypxleyc1" path="res://shaders/environment/foliage_wave.gdshader" id="5_qdvdd"]
+[ext_resource type="Script" uid="uid://dq7wutcpquw3o" path="res://scripts/hide_in_editor.gd" id="7_dbka7"]
 [ext_resource type="Texture2D" uid="uid://7ndbkqnh3206" path="res://environment/forest/leaf_particle.png" id="9_bmovq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_785ak"]
@@ -44,8 +44,7 @@ radius = 31.0
 height = 80.0
 
 [sub_resource type="Curve" id="Curve_xtfay"]
-min_value = -5.0
-max_value = 5.0
+_limits = [-5.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.139665, 5), 0.0, 0.0, 0, 0, Vector2(0.385475, -5), 0.0, 0.0, 0, 0, Vector2(0.642458, 5), 0.0, 0.0, 0, 0, Vector2(0.888268, -5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 6
 

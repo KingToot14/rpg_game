@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cba066mfmy60o" path="res://ui/battles/timed_attacks/mash.png" id="1_ax2sv"]
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_h6e8n"]
-[ext_resource type="Script" path="res://ui/battles/timed_attacks/mash_timing.gd" id="2_diplx"]
+[ext_resource type="Script" uid="uid://cpcsfexlihhhl" path="res://ui/battles/timed_attacks/mash_timing.gd" id="2_diplx"]
 
 [node name="mash_timing" type="Control"]
 layout_mode = 3

@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ThemePreset" load_steps=2 format=3 uid="uid://dvd8lo326nhds"]
 
-[ext_resource type="Script" path="res://resources/scripts/theme_preset.gd" id="1_mdvv2"]
+[ext_resource type="Script" uid="uid://jrw30cdwhdak" path="res://resources/scripts/theme_preset.gd" id="1_mdvv2"]
 
 [resource]
 script = ExtResource("1_mdvv2")
+color_scale = Array[Color]([])
 light_color = Color(0.831373, 0.666667, 0.505882, 1)
 normal_color = Color(0.741176, 0.447059, 0.207843, 1)
 dark_color = Color(0.611765, 0.301961, 0.109804, 1)

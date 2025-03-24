@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://k01qlajn0pie"]
 
 [ext_resource type="Theme" uid="uid://fupny5sldap3" path="res://resources/themes/overworld.tres" id="1_cequ7"]
-[ext_resource type="Script" path="res://ui/overworld/chest_ui/item_info.gd" id="2_exkml"]
+[ext_resource type="Script" uid="uid://bigtd04hv3vkf" path="res://ui/overworld/chest_ui/item_info.gd" id="2_exkml"]
 [ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="2_og5e1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ladmy"]

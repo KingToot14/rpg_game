@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtoff1ugyxk58"]
 
 [ext_resource type="Texture2D" uid="uid://oxba0tl6wivg" path="res://environment/objects/tent.png" id="1_fs3w0"]
-[ext_resource type="Script" path="res://scripts/textures/texture_variant.gd" id="1_xxwe8"]
+[ext_resource type="Script" uid="uid://usdqa33u7njx" path="res://scripts/textures/texture_variant.gd" id="1_xxwe8"]
 
 [node name="tent" type="StaticBody2D" node_paths=PackedStringArray("sprite")]
 z_index = 100

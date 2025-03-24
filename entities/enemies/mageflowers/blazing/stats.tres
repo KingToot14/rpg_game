@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="EntityStats" load_steps=2 format=3 uid="uid://swt053wv4iqx"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity_stats.gd" id="1_47hk4"]
+[ext_resource type="Script" uid="uid://c7mw44wxhfbqb" path="res://entities/scripts/entity_stats.gd" id="1_47hk4"]
 
 [resource]
 script = ExtResource("1_47hk4")
 max_hp = 164
 p_attack = 2.0
-p_defense = 3.0
 m_attack = 7.0
+p_defense = 3.0
 m_defense = 3.0
 accuracy = 8.0
 evasion = 2.0

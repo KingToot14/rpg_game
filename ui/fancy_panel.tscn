@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqd3w8n85wxa1"]
 
-[ext_resource type="Script" path="res://ui/theme_setter.gd" id="1_3x7v8"]
+[ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="1_3x7v8"]
 [ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="2_x182l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_73hj6"]

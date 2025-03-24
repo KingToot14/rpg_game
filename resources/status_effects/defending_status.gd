@@ -11,6 +11,11 @@ func setup_signals() -> void:
 
 func set_status_info() -> void:
 	additive = false
+	
+	icon_pos = Vector2(3, 1)
+	
+	name = "Defending"
+	description = "Receives less damage for one turn"
 
 func _on_turn_started(params: Dictionary) -> void:
 	if not params.get(&'visited_before', false):

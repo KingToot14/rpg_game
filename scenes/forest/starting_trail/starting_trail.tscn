@@ -1,11 +1,11 @@
 [gd_scene load_steps=39 format=3 uid="uid://dpsc3mtp7w6ob"]
 
-[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_u6rmh"]
-[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="2_joetf"]
+[ext_resource type="Script" uid="uid://cs7c4obpv71ga" path="res://systems/scene_loading/area_information.gd" id="1_u6rmh"]
+[ext_resource type="Script" uid="uid://wenbnlih62gl" path="res://scripts/environment/wind_manager.gd" id="2_joetf"]
 [ext_resource type="Texture2D" uid="uid://bp7tf8mmgy82o" path="res://scenes/forest/starting_trail/terrain_map.png" id="3_cgfri"]
 [ext_resource type="Texture2D" uid="uid://bai4kv2w6xl6p" path="res://scenes/forest/starting_trail/grass_map.png" id="3_qwcog"]
-[ext_resource type="Script" path="res://scripts/world_setter.gd" id="4_w82d4"]
-[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="6_0twie"]
+[ext_resource type="Script" uid="uid://bmb5sstqvtptt" path="res://scripts/world_setter.gd" id="4_w82d4"]
+[ext_resource type="Shader" uid="uid://bdbuj3jwpcmk" path="res://environment/shaders/water/water.gdshader" id="6_0twie"]
 [ext_resource type="Texture2D" uid="uid://vbfo5kngm42q" path="res://scenes/forest/starting_trail/shader_map.png" id="6_ryxmw"]
 [ext_resource type="PackedScene" uid="uid://qd620tj3lpl0" path="res://environment/forest/plants/root.tscn" id="8_y1ps5"]
 [ext_resource type="PackedScene" uid="uid://d3prkucc0a80x" path="res://environment/forest/trees/forest_tree_2.tscn" id="9_5nj6s"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://didawtt43kmlk" path="res://environment/forest/trees/fallen_stump.tscn" id="12_e5feq"]
 [ext_resource type="PackedScene" uid="uid://c50i2fe4sv0xd" path="res://environment/objects/chest.tscn" id="12_hme3p"]
 [ext_resource type="PackedScene" uid="uid://cur7d1tqtfkvy" path="res://environment/objects/sign.tscn" id="13_4ac0x"]
-[ext_resource type="Script" path="res://resources/scripts/inventory_item.gd" id="13_kj3sv"]
+[ext_resource type="Script" uid="uid://dwl7lrgpu28ko" path="res://resources/scripts/inventory_item.gd" id="13_kj3sv"]
 [ext_resource type="PackedScene" uid="uid://db74y02nf5ra6" path="res://entities/enemies/encounter.tscn" id="14_cqxmu"]
 [ext_resource type="PackedScene" uid="uid://ch0ye1a575y33" path="res://environment/forest/plants/big_plant.tscn" id="16_0rojl"]
 [ext_resource type="Resource" uid="uid://cj8jvxquo51f4" path="res://resources/dialogue/sign_text.dialogue" id="16_kw7pf"]
@@ -58,19 +58,19 @@ viewport_path = NodePath("environment/reflection_viewport")
 resource_local_to_scene = true
 shader = ExtResource("6_0twie")
 shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/reflection_intensity = 0.25
 shader_parameter/reflection_texture = SubResource("ViewportTexture_lxx4b")
+shader_parameter/reflection_intensity = 0.25
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_27oty")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.25
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_vkyge")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
-shader_parameter/foam_speed = -0.25
 shader_parameter/foam_noise = SubResource("NoiseTexture2D_lvjxn")
+shader_parameter/foam_speed = -0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqsiw"]
 size = Vector2(20, 177)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://boxije6upv4im"]
 
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="1_2q2y5"]
-[ext_resource type="Script" path="res://ui/battles/victory_loss/player_xp_bar.gd" id="1_ksj7l"]
-[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_kfmdh"]
+[ext_resource type="Script" uid="uid://b8o8ohde8in06" path="res://ui/battles/victory_loss/player_xp_bar.gd" id="1_ksj7l"]
+[ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="2_kfmdh"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_65bb8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlkmq"]

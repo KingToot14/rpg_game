@@ -1,33 +1,34 @@
-[gd_scene load_steps=55 format=3 uid="uid://co7gfgpnhufh3"]
+[gd_scene load_steps=56 format=3 uid="uid://co7gfgpnhufh3"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_31smw"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
-[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="3_c5gs3"]
-[ext_resource type="Script" path="res://entities/enemies/mageflowers/mageflower_brain.gd" id="4_wvgnq"]
-[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="5_i58o0"]
-[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="6_gdl0r"]
+[ext_resource type="Script" uid="uid://carm5apfibw25" path="res://entities/scripts/entity.gd" id="1_31smw"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_jllwm"]
+[ext_resource type="Script" uid="uid://c5rqyawt03qvq" path="res://entities/scripts/components/animation_manager.gd" id="3_c5gs3"]
+[ext_resource type="Script" uid="uid://dsdpvv1to34wg" path="res://entities/enemies/mageflowers/mageflower_brain.gd" id="4_wvgnq"]
+[ext_resource type="Script" uid="uid://bss12olo3ap1k" path="res://entities/scripts/components/hp_manager.gd" id="5_i58o0"]
+[ext_resource type="Script" uid="uid://kubovfe0sidv" path="res://entities/scripts/components/action_manager.gd" id="6_gdl0r"]
 [ext_resource type="Resource" uid="uid://p4vc2pax2xo3" path="res://entities/enemies/mageflowers/blazing/attacks/big_bud.tres" id="7_5aqdt"]
-[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="7_xvjls"]
+[ext_resource type="Script" uid="uid://ua3eql38s1yg" path="res://entities/scripts/components/targeting_manager.gd" id="7_xvjls"]
 [ext_resource type="Resource" uid="uid://q3fhbyd0xm6u" path="res://entities/enemies/mageflowers/blazing/attacks/little_bud.tres" id="8_123sa"]
-[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="8_i0ftl"]
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="8_d1f3f"]
+[ext_resource type="Script" uid="uid://r6nu8sgp3kah" path="res://entities/scripts/components/stat_manager.gd" id="8_i0ftl"]
 [ext_resource type="Resource" uid="uid://cdwko24c0da0r" path="res://entities/enemies/mageflowers/blazing/attacks/flame_pillar.tres" id="9_5cjcm"]
-[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="9_fa008"]
+[ext_resource type="Script" uid="uid://d3dhsmivgac88" path="res://entities/scripts/components/status_effect_manager.gd" id="9_fa008"]
 [ext_resource type="Resource" uid="uid://swt053wv4iqx" path="res://entities/enemies/mageflowers/blazing/stats.tres" id="9_o52bj"]
-[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="10_h32kc"]
-[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="11_ossn0"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="12_6uoub"]
+[ext_resource type="Script" uid="uid://q5nyqrny1klx" path="res://entities/scripts/components/turn_manager.gd" id="10_h32kc"]
+[ext_resource type="Script" uid="uid://dc8jqb03i65iv" path="res://entities/scripts/components/loot_manager.gd" id="11_ossn0"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="12_6uoub"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="13_v3ha5"]
-[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="14_gii8q"]
+[ext_resource type="Shader" uid="uid://cjl7x3y7pui2p" path="res://shaders/entities/flash.gdshader" id="14_gii8q"]
 [ext_resource type="Texture2D" uid="uid://ccgo36j5clno" path="res://entities/enemies/mageflowers/blazing/blazing_mageflower.png" id="15_ubiup"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="16_bkchi"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="17_t6lud"]
 [ext_resource type="Texture2D" uid="uid://rjnjv23o7uir" path="res://entities/enemies/mageflowers/blazing/seed.png" id="19_rmbig"]
-[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="20_2lp82"]
+[ext_resource type="Script" uid="uid://byf67r66p1hh4" path="res://entities/scripts/entity_ui.gd" id="20_2lp82"]
 [ext_resource type="Texture2D" uid="uid://c04lrrw26mmvh" path="res://entities/enemies/mageflowers/blazing/fireball_particle.png" id="21_xwa8o"]
 [ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="22_wimn7"]
 [ext_resource type="Texture2D" uid="uid://yupfmu7j76c2" path="res://entities/enemies/mageflowers/blazing/little_bud.png" id="22_xy207"]
 [ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="23_4c2yw"]
-[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="24_y3x32"]
+[ext_resource type="Script" uid="uid://cmya6h7vx3cjj" path="res://ui/battles/status_effect_button.gd" id="24_y3x32"]
 [ext_resource type="Texture2D" uid="uid://rohlsvxy2gfv" path="res://entities/enemies/mageflowers/blazing/big_bud.png" id="25_eyv3e"]
 
 [sub_resource type="Animation" id="Animation_wwx0v"]
@@ -449,14 +450,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
-"RESET": SubResource("Animation_wwx0v"),
-"big_bud": SubResource("Animation_6lcpr"),
-"death": SubResource("Animation_46mwv"),
-"enter_battle": SubResource("Animation_rbvcc"),
-"flame_pillar": SubResource("Animation_c1ho8"),
-"idle": SubResource("Animation_6cwo8"),
-"little_bud": SubResource("Animation_deme8"),
-"take_damage": SubResource("Animation_b23y5")
+&"RESET": SubResource("Animation_wwx0v"),
+&"big_bud": SubResource("Animation_6lcpr"),
+&"death": SubResource("Animation_46mwv"),
+&"enter_battle": SubResource("Animation_rbvcc"),
+&"flame_pillar": SubResource("Animation_c1ho8"),
+&"idle": SubResource("Animation_6cwo8"),
+&"little_bud": SubResource("Animation_deme8"),
+&"take_damage": SubResource("Animation_b23y5")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4n2k"]
@@ -614,8 +615,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r8nti"]
 _data = {
-"RESET": SubResource("Animation_lvg33"),
-"do_attack": SubResource("Animation_r4drv")
+&"RESET": SubResource("Animation_lvg33"),
+&"do_attack": SubResource("Animation_r4drv")
 }
 
 [sub_resource type="Gradient" id="Gradient_lp0fy"]
@@ -749,8 +750,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u4jeu"]
 _data = {
-"RESET": SubResource("Animation_gqs8o"),
-"do_attack": SubResource("Animation_8jlfg")
+&"RESET": SubResource("Animation_gqs8o"),
+&"do_attack": SubResource("Animation_8jlfg")
 }
 
 [node name="mageflower" type="Area2D" node_paths=PackedStringArray("brain", "hp", "actions", "targeting", "stats", "status_effects", "turn", "animator", "front_marker") groups=["enemy", "entity"]]
@@ -797,7 +798,7 @@ script = ExtResource("5_i58o0")
 [node name="actions" type="Node" parent="managers"]
 script = ExtResource("6_gdl0r")
 default_attack = ExtResource("7_5aqdt")
-attack_pool = Array[Resource("res://entities/scripts/actions/attack.gd")]([ExtResource("8_123sa"), ExtResource("7_5aqdt"), ExtResource("9_5cjcm")])
+attack_pool = Array[ExtResource("8_d1f3f")]([ExtResource("8_123sa"), ExtResource("7_5aqdt"), ExtResource("9_5cjcm")])
 
 [node name="targeting" type="Node" parent="managers"]
 script = ExtResource("7_xvjls")

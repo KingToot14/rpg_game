@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dka6sdlieeto3"]
 
-[ext_resource type="Script" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
+[ext_resource type="Script" uid="uid://dx6egootpx0o8" path="res://scenes/dialogue/components/response_button.gd" id="1_td51a"]
 [ext_resource type="Theme" uid="uid://fq773hj8ga33" path="res://resources/themes/standard_dialogue.tres" id="1_uy2t3"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="2_56h58"]
-[ext_resource type="Script" path="res://ui/theme_setter.gd" id="2_gtr4y"]
+[ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="2_gtr4y"]
 
 [node name="response_example" type="BaseButton"]
 _import_path = NodePath("")

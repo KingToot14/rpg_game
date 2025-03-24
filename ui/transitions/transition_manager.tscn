@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxqjhvbkjmvos"]
 
-[ext_resource type="Script" path="res://ui/transitions/transition_manager.gd" id="1_08xaj"]
-[ext_resource type="Shader" path="res://ui/transitions/swipe.gdshader" id="2_bpy3a"]
-[ext_resource type="Shader" path="res://ui/transitions/circle_fade.gdshader" id="3_wvn0k"]
+[ext_resource type="Script" uid="uid://bv2m20uhxorxc" path="res://ui/transitions/transition_manager.gd" id="1_08xaj"]
+[ext_resource type="Shader" uid="uid://dc0ofobpxmkug" path="res://ui/transitions/swipe.gdshader" id="2_bpy3a"]
+[ext_resource type="Shader" uid="uid://d1dh4n7c484si" path="res://ui/transitions/circle_fade.gdshader" id="3_wvn0k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3htce"]
 shader = ExtResource("2_bpy3a")

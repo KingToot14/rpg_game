@@ -1,41 +1,41 @@
 [gd_scene load_steps=61 format=3 uid="uid://ty0c8f0laa02"]
 
-[ext_resource type="Script" path="res://entities/scripts/entity.gd" id="1_gt34u"]
+[ext_resource type="Script" uid="uid://carm5apfibw25" path="res://entities/scripts/entity.gd" id="1_gt34u"]
 [ext_resource type="AudioStream" uid="uid://ck7afm54jympr" path="res://entities/enemies/slimes/green_slime/sfx/slime_hit_01.wav" id="2_5162u"]
 [ext_resource type="Resource" uid="uid://0u3d4gabuamu" path="res://entities/enemies/slimes/green_slime/stats.tres" id="2_egcos"]
 [ext_resource type="Resource" uid="uid://bfpawiqlpgd8f" path="res://entities/enemies/slimes/green_slime/attacks/jump_attack.tres" id="2_uucff"]
 [ext_resource type="Resource" uid="uid://bkdxg3t6fevng" path="res://entities/enemies/slimes/green_slime/attacks/slime_fling.tres" id="3_8qkmm"]
 [ext_resource type="AudioStream" uid="uid://djtm4e5ddqlay" path="res://entities/sfx/mixkit-fast-sword-whoosh-2792.wav" id="3_a4xc3"]
 [ext_resource type="AudioStream" uid="uid://bnp0j4psg3qqb" path="res://entities/enemies/slimes/green_slime/sfx/bubble_pop_01.wav" id="3_h0ni0"]
-[ext_resource type="Script" path="res://entities/scripts/entity_loot.gd" id="3_wt1m1"]
+[ext_resource type="Script" uid="uid://n4glpx6d7rhc" path="res://entities/scripts/entity_loot.gd" id="3_wt1m1"]
 [ext_resource type="AudioStream" uid="uid://dsng1jbxhaae8" path="res://entities/enemies/slimes/green_slime/sfx/slime_hit_02.wav" id="4_3vjsh"]
-[ext_resource type="Script" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
-[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="4_p24fg"]
-[ext_resource type="Script" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
-[ext_resource type="Shader" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="4_h60i5"]
+[ext_resource type="Script" uid="uid://cim4d47nbe3sa" path="res://scripts/sfx_player.gd" id="4_p24fg"]
+[ext_resource type="Script" uid="uid://r05tk1nh5pwl" path="res://entities/enemies/slimes/green_slime/green_slime_brain.gd" id="4_xr6bx"]
+[ext_resource type="Shader" uid="uid://cjl7x3y7pui2p" path="res://shaders/entities/flash.gdshader" id="5_317s2"]
 [ext_resource type="AudioStream" uid="uid://bvg3q3tlfmokn" path="res://entities/enemies/slimes/green_slime/sfx/slime_jump_1.wav" id="5_21131"]
 [ext_resource type="AudioStream" uid="uid://ifbs6cwm85py" path="res://environment/forest/sfx/dirt_footsteps/dirt_footstep_2.ogg" id="6_6mdyb"]
-[ext_resource type="Script" path="res://entities/scripts/components/animation_manager.gd" id="6_vxjld"]
-[ext_resource type="Script" path="res://entities/scripts/components/action_manager.gd" id="7_8ki07"]
-[ext_resource type="Script" path="res://entities/scripts/components/hp_manager.gd" id="8_keams"]
+[ext_resource type="Script" uid="uid://c5rqyawt03qvq" path="res://entities/scripts/components/animation_manager.gd" id="6_vxjld"]
+[ext_resource type="Script" uid="uid://kubovfe0sidv" path="res://entities/scripts/components/action_manager.gd" id="7_8ki07"]
+[ext_resource type="Script" uid="uid://bss12olo3ap1k" path="res://entities/scripts/components/hp_manager.gd" id="8_keams"]
 [ext_resource type="Texture2D" uid="uid://v3vpfe1gmp8g" path="res://entities/enemies/slimes/green_slime/green_battle.png" id="8_qwy3a"]
-[ext_resource type="Script" path="res://entities/scripts/components/stat_manager.gd" id="9_2whdx"]
-[ext_resource type="Script" path="res://entities/scripts/components/targeting_manager.gd" id="9_qxfbx"]
-[ext_resource type="Script" path="res://scripts/textures/texture_randomizer.gd" id="10_rxi4p"]
-[ext_resource type="Script" path="res://entities/scripts/components/status_effect_manager.gd" id="10_y1b1x"]
-[ext_resource type="Script" path="res://entities/scripts/components/turn_manager.gd" id="12_8hcav"]
-[ext_resource type="Shader" path="res://shaders/entities/spot_shadow.gdshader" id="12_8s6gd"]
+[ext_resource type="Script" uid="uid://r6nu8sgp3kah" path="res://entities/scripts/components/stat_manager.gd" id="9_2whdx"]
+[ext_resource type="Script" uid="uid://ua3eql38s1yg" path="res://entities/scripts/components/targeting_manager.gd" id="9_qxfbx"]
+[ext_resource type="Script" uid="uid://buk5r1tjj17cb" path="res://scripts/textures/texture_randomizer.gd" id="10_rxi4p"]
+[ext_resource type="Script" uid="uid://d3dhsmivgac88" path="res://entities/scripts/components/status_effect_manager.gd" id="10_y1b1x"]
+[ext_resource type="Script" uid="uid://q5nyqrny1klx" path="res://entities/scripts/components/turn_manager.gd" id="12_8hcav"]
+[ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="12_8s6gd"]
 [ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="13_lq1o0"]
 [ext_resource type="Texture2D" uid="uid://q7sxdemqiacw" path="res://ui/battles/indicators/enemy_targeting.png" id="14_0nx2n"]
-[ext_resource type="Script" path="res://entities/scripts/components/loot_manager.gd" id="14_8ej3a"]
+[ext_resource type="Script" uid="uid://dc8jqb03i65iv" path="res://entities/scripts/components/loot_manager.gd" id="14_8ej3a"]
 [ext_resource type="PackedScene" uid="uid://cmbq1u4yd64bw" path="res://entities/enemies/slimes/green_slime/attacks/slime_ball.tscn" id="15_8nkit"]
-[ext_resource type="Script" path="res://entities/scripts/actions/attack.gd" id="15_k66bo"]
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="15_k66bo"]
 [ext_resource type="Texture2D" uid="uid://blaf7nf4uuxw3" path="res://entities/enemies/slimes/green_slime/slime_particles.png" id="22_1q445"]
 [ext_resource type="PackedScene" uid="uid://bu8yreah8gela" path="res://ui/battles/health/damage_marker.tscn" id="22_ct680"]
-[ext_resource type="Script" path="res://entities/scripts/entity_ui.gd" id="22_wvsd5"]
+[ext_resource type="Script" uid="uid://byf67r66p1hh4" path="res://entities/scripts/entity_ui.gd" id="22_wvsd5"]
 [ext_resource type="Theme" uid="uid://vwccas6yn07u" path="res://resources/themes/entity.tres" id="24_qxeqc"]
 [ext_resource type="Texture2D" uid="uid://c4lx6su5dune" path="res://ui/icons/effects.png" id="25_t8axw"]
-[ext_resource type="Script" path="res://ui/battles/status_effect_button.gd" id="26_0e6nk"]
+[ext_resource type="Script" uid="uid://cmya6h7vx3cjj" path="res://ui/battles/status_effect_button.gd" id="26_0e6nk"]
 [ext_resource type="Texture2D" uid="uid://c4w6p66e8j8cq" path="res://entities/enemies/slimes/green_slime/deco_leaf.png" id="28_pmd0r"]
 [ext_resource type="Texture2D" uid="uid://ccknc4tabc2a2" path="res://entities/enemies/slimes/green_slime/deco_flower.png" id="30_b8nl1"]
 
@@ -1266,13 +1266,13 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_25d6s"]
 _data = {
-"RESET": SubResource("Animation_wwx0v"),
-"death": SubResource("Animation_iyow3"),
-"enter_battle": SubResource("Animation_rbvcc"),
-"idle": SubResource("Animation_6cwo8"),
-"jump_attack": SubResource("Animation_yw2to"),
-"slime_fling": SubResource("Animation_dik6w"),
-"take_damage": SubResource("Animation_b23y5")
+&"RESET": SubResource("Animation_wwx0v"),
+&"death": SubResource("Animation_iyow3"),
+&"enter_battle": SubResource("Animation_rbvcc"),
+&"idle": SubResource("Animation_6cwo8"),
+&"jump_attack": SubResource("Animation_yw2to"),
+&"slime_fling": SubResource("Animation_dik6w"),
+&"take_damage": SubResource("Animation_b23y5")
 }
 
 [sub_resource type="Resource" id="Resource_ofl8g"]

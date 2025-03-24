@@ -1,29 +1,21 @@
-[gd_scene load_steps=42 format=3 uid="uid://b32m072wft65q"]
+[gd_scene load_steps=40 format=3 uid="uid://b32m072wft65q"]
 
-[ext_resource type="Script" path="res://systems/scene_loading/area_information.gd" id="1_83bmk"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/short_grass.gdshader" id="3_8bnfp"]
-[ext_resource type="Script" path="res://scripts/environment/wind_manager.gd" id="3_35ikv"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass_wind.gdshader" id="4_xtl5h"]
+[ext_resource type="Script" uid="uid://cs7c4obpv71ga" path="res://systems/scene_loading/area_information.gd" id="1_83bmk"]
+[ext_resource type="Shader" uid="uid://b28y6biy8wktd" path="res://environment/shaders/grass/short_grass.gdshader" id="3_8bnfp"]
+[ext_resource type="Script" uid="uid://wenbnlih62gl" path="res://scripts/environment/wind_manager.gd" id="3_35ikv"]
+[ext_resource type="Shader" uid="uid://b1fxgo3u4214b" path="res://environment/shaders/grass/grass_wind.gdshader" id="4_xtl5h"]
 [ext_resource type="TileSet" uid="uid://rmc5k4fi41mq" path="res://environment/shaders/grass/grass_tiles.tres" id="5_hjijo"]
 [ext_resource type="TileSet" uid="uid://ciq6olswrcdfy" path="res://environment/shaders/water/water.tres" id="6_dspum"]
-[ext_resource type="Shader" path="res://environment/shaders/trail/trail_patch.gdshader" id="7_bg6q2"]
+[ext_resource type="Shader" uid="uid://mdhj7813xoij" path="res://environment/shaders/trail/trail_patch.gdshader" id="7_bg6q2"]
 [ext_resource type="TileSet" uid="uid://thbxl7l3cgo2" path="res://environment/shaders/trail/trail_tiles.tres" id="8_w3i64"]
-[ext_resource type="Script" path="res://scripts/world_setter.gd" id="9_sxlq1"]
+[ext_resource type="Script" uid="uid://bmb5sstqvtptt" path="res://scripts/world_setter.gd" id="9_sxlq1"]
 [ext_resource type="TileSet" uid="uid://c3tsvb4ivgjbh" path="res://environment/forest/forest_tiles.tres" id="10_5fmg3"]
-[ext_resource type="Shader" path="res://environment/shaders/grass/grass.gdshader" id="11_yyrhm"]
-[ext_resource type="Shader" path="res://environment/shaders/water/water.gdshader" id="12_o11n4"]
-[ext_resource type="Shader" path="res://environment/shaders/trail/trail.gdshader" id="13_bn261"]
+[ext_resource type="Shader" uid="uid://clacng5ifhila" path="res://environment/shaders/grass/grass.gdshader" id="11_yyrhm"]
+[ext_resource type="Shader" uid="uid://bdbuj3jwpcmk" path="res://environment/shaders/water/water.gdshader" id="12_o11n4"]
+[ext_resource type="Shader" uid="uid://cwmil0ufo6kes" path="res://environment/shaders/trail/trail.gdshader" id="13_bn261"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_evhjs"]
 viewport_path = NodePath("environment/shader_viewport")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_khc1v"]
-seed = 555
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kqfts"]
-width = 480
-height = 270
-noise = SubResource("FastNoiseLite_khc1v")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f2gtx"]
 frequency = 0.2
@@ -36,11 +28,10 @@ noise = SubResource("FastNoiseLite_f2gtx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mffv"]
 shader = ExtResource("3_8bnfp")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_o752k")
 shader_parameter/wind_speed = -0.5
 shader_parameter/normal_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/patch_color = Color(0.454902, 0.713726, 0.352941, 1)
-shader_parameter/patch_noise = SubResource("NoiseTexture2D_kqfts")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_o752k")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qxnm8"]
 frequency = 0.1
@@ -52,8 +43,8 @@ noise = SubResource("FastNoiseLite_qxnm8")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgccq"]
 shader = ExtResource("4_xtl5h")
 shader_parameter/wind_speed = 0.5
-shader_parameter/noise_size = Vector2(512, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_0ob3s")
+shader_parameter/noise_size = Vector2(512, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xyh2k"]
 frequency = 0.0221
@@ -67,8 +58,8 @@ noise = SubResource("FastNoiseLite_xyh2k")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_osway"]
 shader = ExtResource("7_bg6q2")
 shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/patch_threshold = 0.15
 shader_parameter/patch_nosie = SubResource("NoiseTexture2D_310da")
+shader_parameter/patch_threshold = 0.15
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s2df2"]
 frequency = 0.0145
@@ -98,9 +89,10 @@ width = 8
 resource_local_to_scene = true
 shader = ExtResource("11_yyrhm")
 shader_parameter/tip_color = Color(0.52549, 0.901961, 0.352941, 1)
-shader_parameter/patch_intensity = 0.05
 shader_parameter/side_gradient = SubResource("GradientTexture1D_408jn")
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_qygkk")
+shader_parameter/patch_intensity = 0.05
+shader_parameter/patch_threshold = 0.5
 shader_parameter/wind_intensity = 0.6
 shader_parameter/wind_speed = 0.5
 shader_parameter/wind_direction = Vector2(-1, -1)
@@ -145,19 +137,19 @@ viewport_path = NodePath("environment/reflection_viewport")
 resource_local_to_scene = true
 shader = ExtResource("12_o11n4")
 shader_parameter/texture_size = Vector2(480, 270)
-shader_parameter/reflection_intensity = 0.25
 shader_parameter/reflection_texture = SubResource("ViewportTexture_gnavs")
+shader_parameter/reflection_intensity = 0.25
 shader_parameter/water_color = Color(0.435294, 0.835294, 0.968627, 1)
 shader_parameter/dark_color = Color(0.407843, 0.815686, 0.94902, 1)
 shader_parameter/patch_noise = SubResource("NoiseTexture2D_hdj20")
 shader_parameter/dirt_color = Color(0.670588, 0.356863, 0.101961, 1)
 shader_parameter/dirt_darkness = 0.05
+shader_parameter/dirt_noise = SubResource("NoiseTexture2D_707g8")
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
 shader_parameter/wind_speed = -0.5
-shader_parameter/dirt_noise = SubResource("NoiseTexture2D_707g8")
 shader_parameter/foam_color = Color(0.760784, 0.956863, 1, 1)
-shader_parameter/foam_speed = -0.25
 shader_parameter/foam_noise = SubResource("NoiseTexture2D_icnh7")
+shader_parameter/foam_speed = -0.25
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_u4t1i"]
 viewport_path = NodePath("environment/shader_viewport")
@@ -168,8 +160,8 @@ shader_parameter/texture_size = Vector2(480, 270)
 shader_parameter/trail_color = Color(0.901961, 0.705882, 0.415686, 1)
 shader_parameter/shadow_color = Color(0.85098, 0.635294, 0.372549, 1)
 shader_parameter/grass_color = Color(0.501961, 0.788235, 0.388235, 1)
-shader_parameter/wind_speed = -0.5
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_icnh7")
+shader_parameter/wind_speed = -0.5
 
 [node name="area_root" type="Node2D"]
 visibility_layer = 7
