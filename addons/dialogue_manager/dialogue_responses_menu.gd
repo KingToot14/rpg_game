@@ -1,24 +1,21 @@
 @icon("./assets/responses_menu.svg")
 
 ## A [Container] for dialogue responses provided by [b]Dialogue Manager[/b].
-class_name DialogueResponsesMenu 
-extends Container
+class_name DialogueResponsesMenu extends Container
 
-# --- Signals --- #
+
 ## Emitted when a response is selected.
 signal response_selected(response)
 
-# --- Variables --- #
+
 ## Optionally specify a control to duplicate for each response
 @export var response_template: Control
 
 ## The action for accepting a response (is possibly overridden by parent dialogue balloon).
 @export var next_action: StringName = &""
 
-# --- Reference --- #
-@onready var response_timer := %'response_timer' as Timer
-
-var response_scene = preload("res://scenes/dialogue/components/response_button.tscn")
+## Hide any responses where [code]is_allowed[/code] is false
+@export var hide_failed_responses: bool = false
 
 ## The list of dialogue responses.
 var responses: Array = []:
@@ -29,7 +26,7 @@ var responses: Array = []:
 
 		# Remove any current items
 		for item in get_children():
-			#if item == response_template: continue
+			if item == response_template: continue
 
 			remove_child(item)
 			item.queue_free()
@@ -37,62 +34,44 @@ var responses: Array = []:
 		# Add new items
 		if responses.size() > 0:
 			for response in responses:
+				if hide_failed_responses and not response.is_allowed: continue
+
 				var item: Control
-				if response_scene:
-					item = response_scene.instantiate()
-				elif is_instance_valid(response_template):
+				if is_instance_valid(response_template):
 					item = response_template.duplicate(DUPLICATE_GROUPS | DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS)
 					item.show()
 				else:
 					item = Button.new()
 				item.name = "Response%d" % get_child_count()
 				if not response.is_allowed:
-					item.name = String(item.name) + "Disallowed"
+					item.name = item.name + &"Disallowed"
 					item.disabled = true
-				
-				add_child(item)
-				
+
 				# If the item has a response property then use that
-				if "set_response" in item:
-					item.set_response(response)
+				if "response" in item:
+					item.response = response
 				# Otherwise assume we can just set the text
-				elif "text" in item:
-					item.text = response.text
 				else:
-					item.get_node("text").text = response.text
+					item.text = response.text
 
 				item.set_meta("response", response)
 
+				add_child(item)
+
 			_configure_focus()
 
-# --- Functions --- #
+
 func _ready() -> void:
 	visibility_changed.connect(func():
 		if visible and get_menu_items().size() > 0:
-			get_menu_items()[0].grab_focus()
+			var first_item: Control = get_menu_items()[0]
+			if first_item.is_inside_tree():
+				first_item.grab_focus()
 	)
-	
+
 	if is_instance_valid(response_template):
 		response_template.hide()
 
-func show_responses() -> void:
-	show()
-	
-	for item in get_children():
-		item.hide()
-	
-	var items = get_children()
-	items.reverse()
-	
-	for item in items:
-		item.show()
-		var tween = create_tween().set_parallel()
-		
-		tween.tween_property(item, ^'position:x', item.curr_pos, 0.25).from(item.curr_pos + 8)
-		tween.tween_property(item, ^'modulate:a', 1.0, 0.25).from(0.0)
-		
-		response_timer.start()
-		await response_timer.timeout
 
 ## Get the selectable items in the menu.
 func get_menu_items() -> Array:
@@ -104,11 +83,9 @@ func get_menu_items() -> Array:
 
 	return items
 
-## [b]DEPRECATED[/b]. Do not use.
-func set_responses(next_responses: Array) -> void:
-	self.responses = next_responses
 
 #region Internal
+
 
 # Prepare the menu for keyboard and mouse navigation.
 func _configure_focus() -> void:
@@ -145,19 +122,22 @@ func _configure_focus() -> void:
 
 #region Signals
 
+
 func _on_response_mouse_entered(item: Control) -> void:
 	if "Disallowed" in item.name: return
 
 	item.grab_focus()
 
+
 func _on_response_gui_input(event: InputEvent, item: Control, response) -> void:
 	if "Disallowed" in item.name: return
 
-	get_viewport().set_input_as_handled()
-
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		get_viewport().set_input_as_handled()
 		response_selected.emit(response)
 	elif event.is_action_pressed(&"ui_accept" if next_action.is_empty() else next_action) and item in get_menu_items():
+		get_viewport().set_input_as_handled()
 		response_selected.emit(response)
+
 
 #endregion

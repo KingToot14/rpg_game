@@ -101,17 +101,17 @@ func load_player(player: PlayerDataChunk) -> void:
 	%'environment_value'.text = get_status_resistance(entity, Globals.StatusType.ENVIRONMENT)
 	
 	# load gear icons
-	%'weapon_icon'.texture = player.weapon.equip_texture
-	%'primary_icon'.texture = player.outfit_primary.equip_texture
-	%'secondary_icon'.texture = player.outfit_secondary.equip_texture
+	%'weapon_holder'.load_equipment(player.weapon)
+	%'primary_holder'.load_equipment(player.outfit_primary)
+	%'secondary_holder'.load_equipment(player.outfit_secondary)
 	
 	# load trinket icons
 	if player.trinket1:
-		%'trinket1_icon'.texture = player.trinket1.texture
+		%'trinket1_holder'.load_equipment(player.trinket1)
 	if player.trinket2:
-		%'trinket2_icon'.texture = player.trinket2.texture
+		%'trinket2_holder'.load_equipment(player.trinket2)
 	if player.trinket3:
-		%'trinket3_icon'.texture = player.trinket3.texture
+		%'trinket3_holder'.load_equipment(player.trinket3)
 
 func set_fill_size(fill: Control, value: float) -> void:
 	var max_width = fill.get_parent().size.x - 4

@@ -20,20 +20,20 @@ func _on_mouse_entered() -> void:
 	show_outline()
 	
 	# show tooltip
-	if 'remaining_cooldown' in item and item.remaining_cooldown > 0:
-		Tooltip.set_title_text("On Cooldown")
-		if item.remaining_cooldown != 1:
-			Tooltip.set_body_text("Recharges in " + str(item.remaining_cooldown) + " turns")
-		else:
-			Tooltip.set_body_text("Recharges in " + str(item.remaining_cooldown) + " turn")
-		
-		Tooltip.show_tooltip()
+	#if 'remaining_cooldown' in item and item.remaining_cooldown > 0:
+		#Tooltip.set_title_text("On Cooldown")
+		#if item.remaining_cooldown != 1:
+			#Tooltip.set_body_text("Recharges in " + str(item.remaining_cooldown) + " turns")
+		#else:
+			#Tooltip.set_body_text("Recharges in " + str(item.remaining_cooldown) + " turn")
+		#
+		#Tooltip.show_tooltip()
 
 func _on_mouse_exited() -> void:
 	hide_outline()
 	
 	# hide tooltip
-	Tooltip.hide_tooltip()
+	#Tooltip.hide_tooltip()
 
 func show_outline() -> void:
 	backing.visible = true

@@ -70,4 +70,3 @@ func load_items(items) -> void:
 			child.set_menu_item(null)
 		
 		index += 1
-

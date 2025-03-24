@@ -10,6 +10,41 @@ var quests = {}
 
 @export var inventory: Array[ItemDataChunk] = []
 
+# - Equipment
+var weapons: Dictionary[StringName, Dictionary] = {
+	&'basic_sword': {
+		&'path': "res://entities/player/melee/weapons/basic/basic_sword.tres",
+		&'role': PlayerDataChunk.PlayerRole.MELEE,
+		&'level': 1,
+		&'unlocked': true
+	},
+	&'pitchfork': {
+		&'path': "res://entities/player/melee/weapons/pitchfork/pitchfork.tres",
+		&'role': PlayerDataChunk.PlayerRole.MELEE,
+		&'level': 1,
+		&'unlocked': true
+	}
+}
+
+var outfits: Dictionary[StringName, Dictionary] = {
+	&'ranger': {
+		&'primary': {
+			&'path': "res://entities/player/outfits/ranger/primary.tres",
+			&'level': 1,
+			&'unlocked': true
+		},
+		&'secondary': {
+			&'path': "res://entities/player/outfits/ranger/secondary.tres",
+			&'level': 1,
+			&'unlocked': true
+		}
+	}
+}
+
+var trinkets: Dictionary[StringName, Dictionary] = {
+	
+}
+
 var options := OptionsDataChunk.new()
 
 # --- Functions --- #
@@ -56,6 +91,11 @@ func get_save_data() -> Dictionary:
 		inventory_data.append(item.get_save_data())
 	
 	data['inventory'] = inventory_data
+	
+	# Equipment
+	data['weapons'] = weapons
+	data['outfits'] = outfits
+	data['trinkets'] = trinkets
 	
 	return data
 
@@ -111,6 +151,14 @@ func load_from_save() -> void:
 	
 	for item in inventory_data:
 		add_to_inventory(InventoryItem.new(item.get('key', &"twig"), item.get('quantity', 0)))
+	
+	# - Equipment
+	if data.get('weapons'):
+		weapons = data.get('weapons', {})
+	if data.get('outfits'):
+		outfits = data.get('outfits', {})
+	if data.get('trinkets'):
+		trinkets = data.get('trinkets', {})
 
 func swap_players(index_1: int, index_2: int) -> void:
 	if not players[index_1] or not players[index_2]:
@@ -256,4 +304,67 @@ func get_quest_status(key: StringName) -> bool:
 func set_quest_status(key: StringName, val: bool) -> void:
 	if key in quests:
 		quests[key].set_status(val)
+#endregion
+
+#region Equipment
+func unlock_weapon(key: StringName) -> void:
+	var weapon = weapons.get(key)
+	if not weapon:
+		return
+	
+	weapon.unlocked = true
+
+func set_weapon_level(key: StringName, level: int) -> void:
+	var weapon = weapons.get(key)
+	if not weapon:
+		return
+	
+	weapon.level = level
+
+func equip_weapon(player_index: int, key: StringName) -> void:
+	var weapon = weapons.get(key)
+	if not weapon:
+		return
+	
+	if weapon[&'role'] != players[player_index].role:
+		return
+	
+	players[player_index].weapon = load(weapon.get(&'path'))
+
+func unlock_outfit(key: StringName, primary: bool) -> void:
+	var outfit = outfits.get(key)
+	if not outfit:
+		return
+	
+	if primary:
+		outfit[&'primary'].unlocked = true
+	else:
+		outfit[&'secondary'].unlocked = true
+
+func set_outfit_level(key: StringName, level: int, primary: bool) -> void:
+	var outfit = outfits.get(key)
+	if not outfit:
+		return
+	
+	if primary:
+		outfit[&'primary'].level = level
+	else:
+		outfit[&'secondary'].level = level
+
+func equip_outfit(player_index: int, key: StringName, primary: bool) -> void:
+	var outfit = outfits.get(key)
+	if not outfit:
+		return
+	
+	if primary:
+		players[player_index].outfit_primary = load(outfit[&'primary'].get(&'path'))
+	else:
+		players[player_index].outfit_secondary = load(outfit[&'secondary'].get(&'path'))
+
+func unlock_trinket(key: StringName) -> void:
+	pass
+
+func set_trinket_level(key: StringName, level: int) -> void:
+	pass
+
 #endregion

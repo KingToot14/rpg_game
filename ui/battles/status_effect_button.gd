@@ -16,22 +16,22 @@ func _on_mouse_entered() -> void:
 	if not effect:
 		return
 	
-	Tooltip.set_width(100)
-	Tooltip.set_title_text(effect.name)
-	Tooltip.set_body_text(effect.description)
-	Tooltip.show_tooltip()
+	#Tooltip.set_width(100)
+	#Tooltip.set_title_text(effect.name)
+	#Tooltip.set_body_text(effect.description)
+	#Tooltip.show_tooltip()
 
 func _on_mouse_exited() -> void:
 	if not effect:
 		return
 	
-	Tooltip.hide_tooltip()
+	#Tooltip.hide_tooltip()
 
 func set_effect(new_effect: StatusEffect) -> void:
 	# clear tooltip if just removed
-	if effect and not new_effect:
-		if Tooltip.has_title(effect.name):
-			Tooltip.hide_tooltip()
+	#if effect and not new_effect:
+		#if Tooltip.has_title(effect.name):
+			#Tooltip.hide_tooltip()
 	
 	effect = new_effect
 	

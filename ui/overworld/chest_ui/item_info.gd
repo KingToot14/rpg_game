@@ -47,9 +47,10 @@ func show_tooltip() -> void:
 	if not item_data:
 		return
 	
-	Tooltip.set_title_text(item_data.name)
-	Tooltip.set_body_text(item_data.description)
-	Tooltip.show_tooltip()
+	#Tooltip.set_title_text(item_data.name)
+	#Tooltip.set_body_text(item_data.description)
+	#Tooltip.show_tooltip()
 
 func hide_tooltip() -> void:
-	Tooltip.hide_tooltip()
+	return
+	#Tooltip.hide_tooltip()

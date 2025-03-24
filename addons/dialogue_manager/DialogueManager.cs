@@ -16,13 +16,15 @@ namespace DialogueManagerRuntime
         PO
     }
 
-    public partial class DialogueManager : Node
+    public partial class DialogueManager : RefCounted
     {
+        public delegate void DialogueStartedEventHandler(Resource dialogueResource);
         public delegate void PassedTitleEventHandler(string title);
         public delegate void GotDialogueEventHandler(DialogueLine dialogueLine);
         public delegate void MutatedEventHandler(Dictionary mutation);
         public delegate void DialogueEndedEventHandler(Resource dialogueResource);
 
+        public static DialogueStartedEventHandler? DialogueStarted;
         public static PassedTitleEventHandler? PassedTitle;
         public static GotDialogueEventHandler? GotDialogue;
         public static MutatedEventHandler? Mutated;
@@ -38,6 +40,7 @@ namespace DialogueManagerRuntime
                 if (instance == null)
                 {
                     instance = Engine.GetSingleton("DialogueManager");
+                    instance.Connect("bridge_dialogue_started", Callable.From((Resource dialogueResource) => DialogueStarted?.Invoke(dialogueResource)));
                 }
                 return instance;
             }
@@ -78,12 +81,12 @@ namespace DialogueManagerRuntime
         }
 
 
-        public void Prepare()
+        public static void Prepare(GodotObject instance)
         {
-            Instance.Connect("passed_title", Callable.From((string title) => PassedTitle?.Invoke(title)));
-            Instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
-            Instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
-            Instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
+            instance.Connect("passed_title", Callable.From((string title) => PassedTitle?.Invoke(title)));
+            instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
+            instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
+            instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
         }
 
 
@@ -111,10 +114,18 @@ namespace DialogueManagerRuntime
             return instance;
         }
 
+        public static Resource CreateResourceFromText(string text)
+        {
+            return (Resource)Instance.Call("create_resource_from_text", text);
+        }
+
         public static async Task<DialogueLine?> GetNextDialogueLine(Resource dialogueResource, string key = "", Array<Variant>? extraGameStates = null)
         {
-            Instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
-            var result = await Instance.ToSignal(Instance, "bridge_get_next_dialogue_line_completed");
+            var instance = (Node)Instance.Call("_bridge_get_new_instance");
+            Prepare(instance);
+            instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
+            var result = await instance.ToSignal(instance, "bridge_get_next_dialogue_line_completed");
+            instance.QueueFree();
 
             if ((RefCounted)result[0] == null) return null;
 
@@ -157,16 +168,32 @@ namespace DialogueManagerRuntime
         }
 
 
-        public bool ThingHasMethod(GodotObject thing, string method)
+        public bool ThingHasMethod(GodotObject thing, string method, Array<Variant> args)
         {
-            MethodInfo? info = thing.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
-            return info != null;
+            var methodInfos = thing.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            foreach (var methodInfo in methodInfos)
+            {
+                if (methodInfo.Name == method && args.Count == methodInfo.GetParameters().Length)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 
         public async void ResolveThingMethod(GodotObject thing, string method, Array<Variant> args)
         {
-            MethodInfo? info = thing.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
+            MethodInfo? info = null;
+            var methodInfos = thing.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            foreach (var methodInfo in methodInfos)
+            {
+                if (methodInfo.Name == method && args.Count == methodInfo.GetParameters().Length)
+                {
+                    info = methodInfo;
+                }
+            }
 
             if (info == null) return;
 
@@ -176,9 +203,18 @@ namespace DialogueManagerRuntime
             object[] _args = new object[argTypes.Length];
             for (int i = 0; i < argTypes.Length; i++)
             {
+                // check if args is assignable from derived type
                 if (i < args.Count && args[i].Obj != null)
                 {
-                    _args[i] = Convert.ChangeType(args[i].Obj, argTypes[i].ParameterType);
+                    if (argTypes[i].ParameterType.IsAssignableFrom(args[i].Obj.GetType()))
+                    {
+                        _args[i] = args[i].Obj;
+                    }
+                    // fallback to assigning primitive types
+                    else
+                    {
+                        _args[i] = Convert.ChangeType(args[i].Obj, argTypes[i].ParameterType);
+                    }
                 }
                 else if (argTypes[i].DefaultValue != null)
                 {
@@ -189,15 +225,25 @@ namespace DialogueManagerRuntime
             // Add a single frame wait in case the method returns before signals can listen
             await ToSignal(Engine.GetMainLoop(), SceneTree.SignalName.ProcessFrame);
 
-            if (info.ReturnType == typeof(Task))
+            // invoke method and handle the result based on return type
+            object result = info.Invoke(thing, _args);
+
+            if (result is Task taskResult)
             {
-                await (Task)info.Invoke(thing, _args);
-                EmitSignal(SignalName.Resolved, null);
+                await taskResult;
+                try
+                {
+                    Variant value = (Variant)taskResult.GetType().GetProperty("Result").GetValue(taskResult);
+                    EmitSignal(SignalName.Resolved, value);
+                }
+                catch (Exception err)
+                {
+                    EmitSignal(SignalName.Resolved);
+                }
             }
             else
             {
-                var value = (Variant)info.Invoke(thing, _args);
-                EmitSignal(SignalName.Resolved, value);
+                EmitSignal(SignalName.Resolved, (Variant)result);
             }
         }
 #nullable enable
@@ -278,7 +324,17 @@ namespace DialogueManagerRuntime
             get => inline_mutations;
         }
 
+        private Array<DialogueLine> concurrent_lines = new Array<DialogueLine>();
+        public Array<DialogueLine> ConcurrentLines
+        {
+            get => concurrent_lines;
+        }
+
         private Array<Variant> extra_game_states = new Array<Variant>();
+        public Array<Variant> ExtraGameStates
+        {
+            get => extra_game_states;
+        }
 
         private Array<string> tags = new Array<string>();
         public Array<string> Tags
@@ -298,6 +354,11 @@ namespace DialogueManagerRuntime
             inline_mutations = (Array<Godot.Collections.Array>)data.Get("inline_mutations");
             time = (string)data.Get("time");
             tags = (Array<string>)data.Get("tags");
+
+            foreach (var concurrent_line_data in (Array<RefCounted>)data.Get("concurrent_lines"))
+            {
+                concurrent_lines.Add(new DialogueLine(concurrent_line_data));
+            }
 
             foreach (var response in (Array<RefCounted>)data.Get("responses"))
             {

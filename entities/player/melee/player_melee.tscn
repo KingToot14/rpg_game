@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://dlw0lggslkmg6" path="res://entities/player/melee/attacks/falling_objects.tres" id="4_opsxa"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="5_218u3"]
 [ext_resource type="Resource" uid="uid://bnt1sbgk7fkkn" path="res://entities/player/melee/attacks/fury.tres" id="5_wff5c"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="6_ac2aa"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="6_ac2aa"]
 [ext_resource type="Script" uid="uid://kubovfe0sidv" path="res://entities/scripts/components/action_manager.gd" id="6_k1p5g"]
 [ext_resource type="Script" uid="uid://c62nyrcx1qod5" path="res://entities/player/general/player_brain.gd" id="6_wki05"]
 [ext_resource type="Script" uid="uid://bss12olo3ap1k" path="res://entities/scripts/components/hp_manager.gd" id="8_7ebs2"]

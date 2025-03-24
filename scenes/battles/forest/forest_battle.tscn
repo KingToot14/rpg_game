@@ -608,6 +608,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -718,6 +719,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -824,6 +826,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -944,7 +947,6 @@ offset_bottom = 8.0
 texture = SubResource("AtlasTexture_di2ji")
 stretch_mode = 2
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/power_holder"]
 layout_mode = 1
@@ -1009,7 +1011,6 @@ offset_bottom = 8.0
 texture = SubResource("AtlasTexture_op7a0")
 stretch_mode = 2
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/accuracy_holder"]
 layout_mode = 1
@@ -1042,7 +1043,6 @@ offset_bottom = 8.0
 texture = SubResource("AtlasTexture_vctt4")
 stretch_mode = 2
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/crit_rate"]
 layout_mode = 1
@@ -1075,7 +1075,6 @@ offset_bottom = 8.0
 texture = SubResource("AtlasTexture_r5o7i")
 stretch_mode = 2
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/cooldown"]
 layout_mode = 1
@@ -1184,26 +1183,31 @@ alignment = 1
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="attack_row3" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
@@ -1213,26 +1217,31 @@ alignment = 1
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="attack_row2" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
@@ -1242,26 +1251,31 @@ alignment = 1
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="attack_row" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
 layout_mode = 2
@@ -1271,26 +1285,31 @@ alignment = 1
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 
 [node name="items_menu" type="Control" parent="ui/action_holder/action_bar" groups=["action_menu"]]
 unique_name_in_owner = true
@@ -1359,7 +1378,6 @@ offset_right = 8.0
 offset_bottom = 8.0
 texture = SubResource("AtlasTexture_k5po2")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/items_menu/defense_info/info/defend_power"]
 layout_mode = 1
@@ -1463,24 +1481,28 @@ metadata/_edit_group_ = true
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="tactics_menu" type="Control" parent="ui/action_holder/action_bar" groups=["action_menu"]]
@@ -1594,24 +1616,28 @@ metadata/_edit_group_ = true
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
+tooltip_auto_translate_mode = 0
 item = ExtResource("35_d0j81")
 
 [node name="cancel_button" type="BaseButton" parent="ui/action_holder"]
@@ -1662,6 +1688,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -2006,7 +2033,6 @@ theme_type_variation = &"Description"
 text = "Level 3"
 scroll_active = false
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="stats_panel" parent="ui/entity_info/panels" instance=ExtResource("29_7enty")]
 custom_minimum_size = Vector2(0, 42)
@@ -2028,7 +2054,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_curyc")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="hp_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/hp"]
 unique_name_in_owner = true
@@ -2061,7 +2086,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_axsxp")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="p_attack_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/p_attack"]
 unique_name_in_owner = true
@@ -2093,7 +2117,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_fyej0")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="m_attack_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/m_attack"]
 unique_name_in_owner = true
@@ -2125,7 +2148,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_klefq")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="p_defense_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/p_defense"]
 unique_name_in_owner = true
@@ -2157,7 +2179,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_38j8v")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="m_defense_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/m_defense"]
 unique_name_in_owner = true
@@ -2189,7 +2210,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_8d2wy")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="accuracy_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/accuracy"]
 unique_name_in_owner = true
@@ -2221,7 +2241,6 @@ offset_bottom = 8.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_0j0jn")
 script = ExtResource("34_ujwxc")
-key = &"accent"
 
 [node name="evasion_label" type="RichTextLabel" parent="ui/entity_info/panels/stats_panel/evasion"]
 unique_name_in_owner = true
@@ -2624,7 +2643,6 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 script = ExtResource("34_ujwxc")
-key = &"normal"
 
 [node name="xp_label" type="RichTextLabel" parent="ui/victory_panel/essence_panel"]
 unique_name_in_owner = true
@@ -2713,6 +2731,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -2737,8 +2756,6 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("53_1x413")
 outline_rect = NodePath("backing/fill")
-normal_key = &"dark"
-hover_key = &"normal"
 
 [node name="backing" type="ColorRect" parent="ui/victory_panel/return_button"]
 self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
@@ -2750,7 +2767,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("34_ujwxc")
-key = &"light"
 
 [node name="fill" type="ColorRect" parent="ui/victory_panel/return_button/backing" groups=["theme_setter"]]
 self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
@@ -2766,7 +2782,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("34_ujwxc")
-key = &"dark"
 
 [node name="fill" parent="ui/victory_panel/return_button" instance=ExtResource("29_7enty")]
 layout_mode = 1
@@ -2835,7 +2850,6 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 script = ExtResource("34_ujwxc")
-key = &"normal"
 metadata/_edit_group_ = true
 
 [node name="label" type="RichTextLabel" parent="ui/loss_panel/title_panel"]
@@ -2900,6 +2914,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")
@@ -2940,7 +2955,6 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 script = ExtResource("34_ujwxc")
-key = &"normal"
 
 [node name="label" type="RichTextLabel" parent="ui/loss_panel/return_button"]
 layout_mode = 1

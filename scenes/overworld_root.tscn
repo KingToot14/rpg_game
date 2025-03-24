@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bl5a17q4ye86x"]
+[gd_scene load_steps=71 format=3 uid="uid://bl5a17q4ye86x"]
 
 [ext_resource type="Script" uid="uid://dtxttak8jhql3" path="res://systems/scene_loading/overworld_manager.gd" id="1_36e4g"]
 [ext_resource type="Script" uid="uid://klmerg6tyc3" path="res://systems/scene_loading/transition_zone.gd" id="1_j1v7d"]
@@ -23,7 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="16_4exyq"]
 [ext_resource type="Texture2D" uid="uid://dwgdq3k5xdko0" path="res://ui/overworld/inventory/item_slots.png" id="16_5l4gb"]
 [ext_resource type="Texture2D" uid="uid://bbmbw2vxmu5gt" path="res://ui/overworld/inventory/tabs.png" id="16_ji43i"]
+[ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="18_2iw4c"]
 [ext_resource type="Script" uid="uid://ugeytcialnuq" path="res://ui/overworld/menus/player_stats_menu.gd" id="18_3o0mk"]
+[ext_resource type="Script" uid="uid://cr4oifcf3prja" path="res://ui/overworld/equipment/equipment_button.gd" id="18_kxwtt"]
+[ext_resource type="Script" uid="uid://bpv1qao5mpgpj" path="res://ui/overworld/equipment/equip_select_tooltip.gd" id="19_j833s"]
 [ext_resource type="Texture2D" uid="uid://ca0joglfc3q6w" path="res://ui/overworld/chest_ui/main_panel.png" id="20_kcaw1"]
 [ext_resource type="Texture2D" uid="uid://dixv4de6142ck" path="res://ui/overworld/chest_ui/button.png" id="21_dwufm"]
 
@@ -152,6 +155,14 @@ region = Rect2(20, 20, 10, 10)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3c40"]
 atlas = ExtResource("16_4exyq")
 region = Rect2(8, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxwtt"]
+atlas = ExtResource("18_2iw4c")
+region = Rect2(8, 0, 8, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iw4c"]
+atlas = ExtResource("18_2iw4c")
+region = Rect2(0, 0, 8, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v3iv"]
 atlas = ExtResource("16_ji43i")
@@ -4008,9 +4019,9 @@ scroll_active = false
 script = ExtResource("15_ncx5y")
 color_key = 1
 
-[node name="weapon_holder" type="BaseButton" parent="ui/party_panel/gear_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="weapon_holder" type="BaseButton" parent="ui/party_panel/gear_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -4079,9 +4090,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/gear_panel/weapon_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4097,8 +4106,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="weapon_icon" type="TextureRect" parent="ui/party_panel/gear_panel/weapon_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/gear_panel/weapon_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -4219,9 +4227,9 @@ texture = SubResource("AtlasTexture_k3c40")
 script = ExtResource("15_ncx5y")
 color_key = 2
 
-[node name="primary_holder" type="BaseButton" parent="ui/party_panel/gear_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="primary_holder" type="BaseButton" parent="ui/party_panel/gear_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -4290,9 +4298,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/gear_panel/primary_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4308,8 +4314,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="primary_icon" type="TextureRect" parent="ui/party_panel/gear_panel/primary_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/gear_panel/primary_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -4430,9 +4435,9 @@ texture = SubResource("AtlasTexture_k3c40")
 script = ExtResource("15_ncx5y")
 color_key = 2
 
-[node name="secondary_holder" type="BaseButton" parent="ui/party_panel/gear_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="secondary_holder" type="BaseButton" parent="ui/party_panel/gear_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -4501,9 +4506,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/gear_panel/secondary_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4519,8 +4522,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="secondary_icon" type="TextureRect" parent="ui/party_panel/gear_panel/secondary_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/gear_panel/secondary_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -4679,9 +4681,9 @@ scroll_active = false
 script = ExtResource("15_ncx5y")
 color_key = 1
 
-[node name="trinket1_holder" type="BaseButton" parent="ui/party_panel/tool_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="trinket1_holder" type="BaseButton" parent="ui/party_panel/tool_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -4750,9 +4752,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket1_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4768,8 +4768,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="trinket1_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket1_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket1_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -4890,9 +4889,9 @@ texture = SubResource("AtlasTexture_k3c40")
 script = ExtResource("15_ncx5y")
 color_key = 2
 
-[node name="trinket2_holder" type="BaseButton" parent="ui/party_panel/tool_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="trinket2_holder" type="BaseButton" parent="ui/party_panel/tool_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -4961,9 +4960,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket2_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -4979,8 +4976,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="trinket2_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket2_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket2_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -5101,9 +5097,9 @@ texture = SubResource("AtlasTexture_k3c40")
 script = ExtResource("15_ncx5y")
 color_key = 2
 
-[node name="trinket3_holder" type="BaseButton" parent="ui/party_panel/tool_panel" node_paths=PackedStringArray("outline_rect")]
+[node name="trinket3_holder" type="BaseButton" parent="ui/party_panel/tool_panel"]
 _import_path = NodePath("")
-unique_name_in_owner = false
+unique_name_in_owner = true
 process_mode = 0
 process_priority = 0
 process_physics_priority = 0
@@ -5172,9 +5168,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("8_40l3n")
-outline_rect = NodePath("backing")
-normal_key = 4
+script = ExtResource("18_kxwtt")
 
 [node name="backing" parent="ui/party_panel/tool_panel/trinket3_holder" instance=ExtResource("5_7bpw0")]
 self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
@@ -5190,8 +5184,7 @@ offset_right = -1.0
 offset_bottom = -1.0
 color_key = 4
 
-[node name="trinket3_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket3_holder"]
-unique_name_in_owner = true
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/tool_panel/trinket3_holder"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -5311,6 +5304,467 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_k3c40")
 script = ExtResource("15_ncx5y")
 color_key = 2
+
+[node name="equip_select" type="Control" parent="ui/party_panel" node_paths=PackedStringArray("pointer")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_left = -26.0
+offset_top = 36.0
+offset_right = 61.0
+offset_bottom = 123.0
+script = ExtResource("19_j833s")
+pointer = NodePath("pointer")
+metadata/_custom_type_script = "uid://r81wb7h3nxwt"
+
+[node name="shadow" parent="ui/party_panel/equip_select" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0, 0, 0, 0.196078)
+layout_mode = 1
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+script = null
+
+[node name="select_panel" parent="ui/party_panel/equip_select" instance=ExtResource("11_220tp")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 87.0
+offset_bottom = 87.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="backing" parent="ui/party_panel/equip_select" instance=ExtResource("5_7bpw0")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+
+[node name="equip_1" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_1" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_2" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -21.0
+offset_right = 42.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_2" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_3" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -21.0
+offset_right = 63.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_3" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="equip_4" type="BaseButton" parent="ui/party_panel/equip_select"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = -21.0
+offset_right = 84.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 0
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("18_kxwtt")
+metadata/_custom_type_script = "uid://cr4oifcf3prja"
+
+[node name="backing" parent="ui/party_panel/equip_select/equip_4" instance=ExtResource("5_7bpw0")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+color_key = 4
+
+[node name="equip_icon" type="TextureRect" parent="ui/party_panel/equip_select/equip_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pointer" type="TextureRect" parent="ui/party_panel/equip_select"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -3.5
+offset_top = -2.0
+offset_right = 4.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_kxwtt")
+script = ExtResource("15_ncx5y")
+color_key = 6
+
+[node name="fill" type="TextureRect" parent="ui/party_panel/equip_select/pointer"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_2iw4c")
+script = ExtResource("15_ncx5y")
+color_key = 1
 
 [node name="item_panel" type="Control" parent="ui" node_paths=PackedStringArray("tab_parent") groups=["overworld_panel"]]
 visible = false
@@ -8510,6 +8964,16 @@ scroll_active = false
 [connection signal="pressed" from="ui/bottom_holder/main_panel/item_button" to="ui" method="set_panel" binds= ["item"]]
 [connection signal="pressed" from="ui/bottom_holder/main_panel/party_button" to="ui" method="set_panel" binds= ["party"]]
 [connection signal="visibility_changed" from="ui/party_panel" to="ui/party_panel/stat_loader" method="reload_panel"]
+[connection signal="pressed" from="ui/party_panel/gear_panel/weapon_holder" to="ui/party_panel/gear_panel/weapon_holder" method="show_gear_select" binds= [&"weapon"]]
+[connection signal="pressed" from="ui/party_panel/gear_panel/primary_holder" to="ui/party_panel/gear_panel/primary_holder" method="show_gear_select" binds= [&"primary"]]
+[connection signal="pressed" from="ui/party_panel/gear_panel/secondary_holder" to="ui/party_panel/gear_panel/secondary_holder" method="show_gear_select" binds= [&"secondary"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket1_holder" to="ui/party_panel/tool_panel/trinket1_holder" method="show_gear_select" binds= [&"trinket"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket2_holder" to="ui/party_panel/tool_panel/trinket2_holder" method="show_gear_select" binds= [&"trinket"]]
+[connection signal="pressed" from="ui/party_panel/tool_panel/trinket3_holder" to="ui/party_panel/tool_panel/trinket3_holder" method="show_gear_select" binds= [&"trinket"]]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_1" to="ui/party_panel/equip_select/equip_1" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_2" to="ui/party_panel/equip_select/equip_2" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_3" to="ui/party_panel/equip_select/equip_3" method="equip_current"]
+[connection signal="pressed" from="ui/party_panel/equip_select/equip_4" to="ui/party_panel/equip_select/equip_4" method="equip_current"]
 [connection signal="pressed" from="ui/item_panel/tabs/materials_tab" to="ui/item_panel" method="set_tab" binds= ["materials"]]
 [connection signal="pressed" from="ui/item_panel/tabs/food_tab" to="ui/item_panel" method="set_tab" binds= ["food"]]
 [connection signal="pressed" from="ui/item_panel/tabs/special_tab" to="ui/item_panel" method="set_tab" binds= ["special"]]
