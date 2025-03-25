@@ -25,5 +25,5 @@ description = "A heavy slash
  - Element based on weapon
  - Deals damage to neighboring enemies"
 side = 2
-targeting = 1
+targeting = 2
 cooldown = 1

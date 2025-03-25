@@ -17,5 +17,5 @@ name = "Vines"
 animation_name = &"call_vines"
 description = "Summons Vines to attack the target"
 side = 1
-targeting = 3
+targeting = 8
 cooldown = 0

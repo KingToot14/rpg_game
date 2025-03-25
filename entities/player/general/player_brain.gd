@@ -2,7 +2,7 @@ class_name PlayerBrain
 extends EntityBrain
 
 # --- Variables --- #
-
+var targeting_all := false
 
 # --- Functions --- #
 func _on_turn_started(_params := {}) -> void:
@@ -23,7 +23,7 @@ func _on_action_selected(new_action: Resource) -> void:
 	
 	# show targeting highlights
 	if action:
-		action.highlight_targets()
+		action.highlight_targets(parent)
 
 func _on_entity_selected(entity: Entity) -> void:
 	# check if it is currently this player's turn
@@ -34,15 +34,16 @@ func _on_entity_selected(entity: Entity) -> void:
 	if not action:
 		return
 	
+	targeting_all = not entity
+	
 	# make sure the target is actually targetable
-	if not action.can_target(entity):
+	if not targeting_all and not action.can_target(entity):
 		return
 	
 	selected_target = entity
 	
 	# disable highlighting
-	for e in get_tree().get_nodes_in_group(&'entity'):
-		e.targeting.set_targetable(false)
+	TargetingHelper.disable_highlights()
 	
 	# show timing
 	if action is Attack:

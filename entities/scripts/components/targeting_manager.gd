@@ -32,7 +32,9 @@ func _on_mouse_exited() -> void:
 	is_mouse_over = false
 
 func select() -> void:
-	#selected.emit(parent)
+	if not targetable:
+		return
+	
 	for entity: Entity in get_tree().get_nodes_in_group(&'entity'):
 		entity.brain._on_entity_selected(parent)
 

@@ -2,8 +2,20 @@ class_name ActionResource
 extends Resource
 
 # --- Enums --- #
-enum TargetSide { PLAYER = 1, ENEMY = 2, BOTH = PLAYER | ENEMY }
-enum TargetingMode { SINGLE, AOE, ALL, RANDOM }
+enum TargetSide {
+	PLAYER = 1,
+	ENEMY = 2,
+	BOTH = PLAYER | ENEMY
+}
+enum TargetingMode {
+	SINGLE = 1,
+	AOE = 2,
+	ALL = 4,
+	SINGLE_OR_ALL = SINGLE | ALL,
+	RANDOM = 8,
+	CASTER = 16,
+	NOT_CASTER = 32
+}
 
 # --- Variables --- #
 @export var name: String
@@ -25,20 +37,32 @@ func perform_action(_target: Entity) -> void:
 func can_target(target: Entity) -> bool:
 	return (side & TargetSide.ENEMY != 0 and not target.is_player()) or (side & TargetSide.PLAYER != 0 and target.is_player())
 
-func highlight_targets() -> void:
-	if side & TargetSide.ENEMY:
-		var enemies = TargetingHelper.get_entities(&'enemy')
-		
-		for enemy in enemies:
-			enemy.targeting.set_targetable(true)
-	if side & TargetSide.PLAYER:
-		var players = TargetingHelper.get_entities(&'player')
-		
-		for player in players:
-			player.targeting.set_targetable(true)
+func highlight_targets(caster: Entity = null) -> void:
+	var targets = TargetingHelper.get_entities(get_side_string())
+	
+	match targeting:
+		TargetingMode.ALL:
+			if side & TargetSide.PLAYER:
+				TargetingHelper.show_all_targeting(&'player_all')
+			if side & TargetSide.ENEMY:
+				TargetingHelper.show_all_targeting(&'enemy_all')
+		TargetingMode.CASTER:
+			for target in targets:
+				target.targeting.set_targetable(target == caster)
+		TargetingMode.NOT_CASTER:
+			for target in targets:
+				target.targeting.set_targetable(target != caster)
+		TargetingMode.SINGLE_OR_ALL:
+			for target in targets:
+				target.targeting.set_targetable(true)
+		_:
+			for target in targets:
+				target.targeting.set_targetable(true)
 
 func get_side_string() -> StringName:
-	if side & TargetSide.ENEMY:
+	if side & TargetSide.PLAYER and side & TargetSide.ENEMY:
+		return &'entity'
+	elif side & TargetSide.ENEMY:
 		return &'enemy'
 	else:
 		return &'player'

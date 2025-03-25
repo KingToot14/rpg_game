@@ -6,4 +6,4 @@ extends Tactic
 
 # --- Functions --- #
 func perform_action(target: Entity) -> void:
-	Globals.turn_fsm.set_entity(target)
+	target.turn.end_turn()

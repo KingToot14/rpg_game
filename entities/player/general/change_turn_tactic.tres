@@ -14,5 +14,5 @@ animation_name = &""
 icon = SubResource("AtlasTexture_03y43")
 description = "Passes control to another guardian who can still act"
 side = 1
-targeting = 0
+targeting = 32
 cooldown = 0

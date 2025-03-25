@@ -63,12 +63,17 @@ func set_target() -> void:
 	var action = entity.brain.action
 	
 	match action.targeting:
-		Attack.TargetingMode.SINGLE, Attack.TargetingMode.AOE:
-			target = entity.brain.selected_target
 		Attack.TargetingMode.ALL:
 			target = TargetingHelper.get_entities(action.get_side_string())
 		Attack.TargetingMode.RANDOM:
 			target = TargetingHelper.get_random_entity(action.get_side_string())
+		Attack.TargetingMode.SINGLE_OR_ALL:
+			if entity.brain.targeting_all:
+				target = entity.brain.selected_target
+			else:
+				target = TargetingHelper.get_entities(action.get_side_string())
+		_:
+			target = entity.brain.selected_target
 
 func target_neighbors(depth := 1, include_self := false) -> void:
 	if not target:

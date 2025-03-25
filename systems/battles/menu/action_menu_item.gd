@@ -44,19 +44,20 @@ func set_menu_item(new_item: Resource) -> void:
 		icon_rect.texture = item.icon
 	
 	# cooldown
+	if item is ItemDataChunk:
+		cooldown_label.text = " %d" % item.quantity
+		return
+	
 	if not (item and 'remaining_cooldown' in item):
 		cooldown_label.text = ""
 		return
 	
-	if item is ItemDataChunk:
-		cooldown_label.text = " %d" % item.quantity
+	if item.remaining_cooldown > 0:
+		icon_rect.material.set_shader_parameter('intensity', 0.5)
+		cooldown_label.text = " " + str(item.remaining_cooldown)
 	else:
-		if item.remaining_cooldown > 0:
-			icon_rect.material.set_shader_parameter('intensity', 0.5)
-			cooldown_label.text = " " + str(item.remaining_cooldown)
-		else:
-			icon_rect.material.set_shader_parameter('intensity', 0.0)
-			cooldown_label.text = ""
+		icon_rect.material.set_shader_parameter('intensity', 0.0)
+		cooldown_label.text = ""
 
 func set_item() -> void:
 	if item is Attack and item.remaining_cooldown > 0:

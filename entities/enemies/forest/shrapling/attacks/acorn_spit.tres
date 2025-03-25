@@ -17,5 +17,5 @@ name = "Acorn Spit"
 animation_name = &"acorn_spit"
 description = "Spits multiple acorns at random targets"
 side = 1
-targeting = 3
+targeting = 8
 cooldown = 0

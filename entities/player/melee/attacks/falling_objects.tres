@@ -26,5 +26,5 @@ description = "Thrust a sword into the ground, causing objects to fall from the 
  - Random damage
  - No Element"
 side = 2
-targeting = 2
+targeting = 4
 cooldown = 3

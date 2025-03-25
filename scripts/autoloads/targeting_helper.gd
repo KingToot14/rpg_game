@@ -51,3 +51,9 @@ func disable_highlights() -> void:
 	
 	for entity in entities:
 		entity.targeting.set_targetable(false)
+	
+	get_tree().get_nodes_in_group(&'player_all')[0].hide()
+	get_tree().get_nodes_in_group(&'enemy_all')[0].hide()
+
+func show_all_targeting(group: StringName) -> void:
+	get_tree().get_nodes_in_group(group)[0].show()

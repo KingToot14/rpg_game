@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=92 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" uid="uid://bj8l68ts43cdg" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" uid="uid://bwpfec1fatmq4" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -40,6 +40,8 @@
 [ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="34_ujwxc"]
 [ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="41_ej23r"]
 [ext_resource type="PackedScene" uid="uid://cuchs4266ic3t" path="res://ui/battles/timed_attacks/mash_timing.tscn" id="45_gvyev"]
+[ext_resource type="Script" uid="uid://da0vf44w637ae" path="res://ui/battles/indicators/all_targeting.gd" id="46_fmcgt"]
+[ext_resource type="Texture2D" uid="uid://djphnlpmntyj7" path="res://ui/battles/indicators/all_targeting.png" id="46_o0ftn"]
 [ext_resource type="Script" uid="uid://ca5mtc2t7n6gx" path="res://ui/battles/entity_info_ui.gd" id="48_cd7b1"]
 [ext_resource type="Script" uid="uid://btxv74g0rvfx6" path="res://ui/battles/victory_loss/victory_panel.gd" id="51_pokc6"]
 [ext_resource type="Script" uid="uid://bd4fn3x2ll74l" path="res://ui/overworld/overworld_button.gd" id="53_1x413"]
@@ -245,6 +247,22 @@ region = Rect2(20, 20, 10, 10)
 [sub_resource type="AtlasTexture" id="AtlasTexture_unuyt"]
 atlas = ExtResource("33_8otb5")
 region = Rect2(0, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmcgt"]
+atlas = ExtResource("46_o0ftn")
+region = Rect2(15, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrwxw"]
+atlas = ExtResource("46_o0ftn")
+region = Rect2(15, 16, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix46l"]
+atlas = ExtResource("46_o0ftn")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_125wl"]
+atlas = ExtResource("46_o0ftn")
+region = Rect2(0, 16, 15, 16)
 
 [node name="battle_root" type="Node2D"]
 y_sort_enabled = true
@@ -3311,6 +3329,187 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "[center]Continue[/center]"
 scroll_active = false
+
+[node name="enemy_all_targeting" type="BaseButton" parent="ui" groups=["enemy_all"]]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 68.0
+offset_top = -109.0
+offset_right = 116.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("46_fmcgt")
+normal_texture = SubResource("AtlasTexture_fmcgt")
+hovered_texture = SubResource("AtlasTexture_nrwxw")
+metadata/_custom_type_script = "uid://da0vf44w637ae"
+
+[node name="texture" type="TextureRect" parent="ui/enemy_all_targeting" groups=["enemy_all"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 15.0
+offset_bottom = 8.0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fmcgt")
+
+[node name="player_all_targeting2" type="BaseButton" parent="ui" groups=["player_all"]]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -109.0
+offset_right = -68.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("46_fmcgt")
+start_pos = 124
+tween_pos = 128
+normal_texture = SubResource("AtlasTexture_ix46l")
+hovered_texture = SubResource("AtlasTexture_125wl")
+metadata/_custom_type_script = "uid://da0vf44w637ae"
+
+[node name="texture" type="TextureRect" parent="ui/player_all_targeting2" groups=["enemy_all"]]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_ix46l")
 
 [node name="enemy_positions" type="Node2D" parent="."]
 unique_name_in_owner = true

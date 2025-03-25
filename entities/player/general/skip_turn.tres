@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SkipTurnTactic" load_steps=4 format=3 uid="uid://bijevqx4m0ykm"]
+
+[ext_resource type="Script" uid="uid://d22hth37s0ea1" path="res://entities/scripts/actions/skip_turn_tactic.gd" id="1_08a2b"]
+[ext_resource type="Texture2D" uid="uid://dhwgjwqne7e8k" path="res://entities/player/general/tactics.png" id="1_dwwh1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxlha"]
+atlas = ExtResource("1_dwwh1")
+region = Rect2(0, 0, 20, 20)
+
+[resource]
+script = ExtResource("1_08a2b")
+name = "Skip Turn"
+animation_name = &""
+icon = SubResource("AtlasTexture_vxlha")
+description = "Gives up the current turn"
+side = 1
+targeting = 16
+cooldown = 0
+metadata/_custom_type_script = "uid://d22hth37s0ea1"
