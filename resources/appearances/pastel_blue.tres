@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PlayerAppearance" load_steps=2 format=3 uid="uid://08a23hewprqv"]
-
-[ext_resource type="Script" uid="uid://b3ryqr60sndjb" path="res://resources/scripts/player_appearance.gd" id="1_1x7jt"]
-
-[resource]
-script = ExtResource("1_1x7jt")
-outline_color = Color(0.878431, 0.894118, 1, 1)
-normal_color = Color(0.592157, 0.670588, 0.941176, 1)
-shadow_color = Color(0.529412, 0.592157, 0.878431, 1)

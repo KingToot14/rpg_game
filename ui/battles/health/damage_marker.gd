@@ -1,5 +1,5 @@
 class_name DamageMarker
-extends Node
+extends Node2D
 
 # --- Variables --- #
 @export var wait_time: float = 0.5
@@ -12,10 +12,12 @@ extends Node
 @export var heal_color := Color.WHITE
 
 var tween: Tween
+var origin: Vector2
 
 # --- Functions --- #
 func _ready() -> void:
 	dmg_label.clip_contents = false
+	origin = position
 
 func _on_lost_health(dmg_chunk: Dictionary) -> void:
 	dmg_label.text = "[center]"
@@ -27,7 +29,7 @@ func _on_lost_health(dmg_chunk: Dictionary) -> void:
 		return
 	
 	# display crits
-	var crits = dmg_chunk.get(&'crits_hit')
+	var crits = dmg_chunk.get(&'crits_hit', 0)
 	if crits > 0:
 		if crits == 1:
 			dmg_label.text += "Crit!"
@@ -49,6 +51,12 @@ func _on_lost_health(dmg_chunk: Dictionary) -> void:
 		dmg_label.text += "[color=%s]" % heal_color.to_html()
 	
 	dmg_label.text += "%d" % dmg_chunk[&'damage']
+	
+	# randomize position
+	position = Vector2(
+		origin.x + randi_range(-2, 2),
+		origin.y + randi_range(-2, 2)
+	)
 	
 	# show marker
 	start_fade()

@@ -3,6 +3,7 @@ extends Node
 
 # --- Signals --- #
 signal lost_health(dmg_chunk: Dictionary)
+signal heal_health(dmg_chunk: Dictionary)
 signal died()
 
 # --- Variables --- #
@@ -19,6 +20,9 @@ func setup(entity: Entity) -> void:
 	parent = entity
 	
 	parent.entity_setup.connect(load_hp)
+	
+	lost_health.connect(%'damage_marker'._on_lost_health)
+	heal_health.connect(%'damage_marker'._on_lost_health)
 
 func load_hp() -> void:
 	if load_max_hp:
@@ -55,6 +59,16 @@ func take_damage(dmg_chunk: Dictionary) -> void:
 			alive = false
 	
 	lost_health.emit(dmg_chunk)
+
+func heal(heal_chunk := {}) -> void:
+	if heal_chunk.get(&'allow_overflow', false):
+		curr_hp += heal_chunk[&'damage']
+	else:
+		curr_hp = min(curr_hp + heal_chunk[&'damage'], parent.stats.get_max_hp())
+	
+	heal_chunk[&'element_mod'] = 2.0
+	
+	heal_health.emit(heal_chunk)
 
 func do_death() -> void:
 	died.emit()

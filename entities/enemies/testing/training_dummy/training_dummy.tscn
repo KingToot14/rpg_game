@@ -325,6 +325,7 @@ position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_k62pd")
 
 [node name="damage_marker" parent="." instance=ExtResource("37_b1urw")]
+unique_name_in_owner = true
 position = Vector2(31, -52)
 
 [node name="front_marker" type="Marker2D" parent="."]
@@ -341,7 +342,6 @@ vframes = 2
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
 [connection signal="died" from="managers/hp" to="damage_marker" method="detatch"]
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
-[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

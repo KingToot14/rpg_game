@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cthpngydpydqw"]
+[gd_scene load_steps=55 format=3 uid="uid://cthpngydpydqw"]
 
 [ext_resource type="Script" uid="uid://hj1tsc58sylr" path="res://systems/data_saving/data_manager.gd" id="1_bh6xq"]
 [ext_resource type="Script" uid="uid://dyul3c6vi0p44" path="res://systems/data_saving/item_data_chunk.gd" id="2_1bh6r"]
 [ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="2_ql6q5"]
+[ext_resource type="Resource" uid="uid://480da4ldkv7w" path="res://resources/items/healing/blessing_minor/blessing_minor.tres" id="4_pe5ut"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvmfr"]
 atlas = ExtResource("2_ql6q5")
@@ -13,6 +14,7 @@ script = ExtResource("2_1bh6r")
 name = "Twig"
 key = &"twig"
 description = "Stick !!!!"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_mvmfr")
 quantity = 0
@@ -26,6 +28,7 @@ script = ExtResource("2_1bh6r")
 name = "Petal"
 key = &"petal"
 description = "Picked from an elegant flower"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_rqfnw")
 quantity = 0
@@ -39,6 +42,7 @@ script = ExtResource("2_1bh6r")
 name = "Thread"
 key = &"thread"
 description = "Spun from the finest silk"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_7wr7n")
 quantity = 0
@@ -52,6 +56,7 @@ script = ExtResource("2_1bh6r")
 name = "Red Gem"
 key = &"red_gem"
 description = "A fierce gem with a powerful aura"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_v5ps6")
 quantity = 0
@@ -65,6 +70,7 @@ script = ExtResource("2_1bh6r")
 name = "Green Gem"
 key = &"green_gem"
 description = "A sharp gem with a skillful aura"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_kfxj6")
 quantity = 0
@@ -78,6 +84,7 @@ script = ExtResource("2_1bh6r")
 name = "Purple Gem"
 key = &"purple_gem"
 description = "A magical gem with an mystical aura"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_1um80")
 quantity = 0
@@ -91,6 +98,7 @@ script = ExtResource("2_1bh6r")
 name = "Blue Gem"
 key = &"blue_gem"
 description = "A soothing gem with a resoring aura"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_3ku8t")
 quantity = 0
@@ -104,6 +112,7 @@ script = ExtResource("2_1bh6r")
 name = "Diamond"
 key = &"diamond"
 description = "A unique gem with a unifying aura"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_ngfhy")
 quantity = 0
@@ -117,6 +126,7 @@ script = ExtResource("2_1bh6r")
 name = "Copper"
 key = &"copper"
 description = "An abandoned copper bracelet. Easily scrapped"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_0nhnf")
 quantity = 0
@@ -130,6 +140,7 @@ script = ExtResource("2_1bh6r")
 name = "Silver"
 key = &"silver"
 description = "An elegant locket. Easily scrapped"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_1ybvo")
 quantity = 0
@@ -143,6 +154,7 @@ script = ExtResource("2_1bh6r")
 name = "Gold"
 key = &"gold"
 description = "A regal golden ring. Easily scrapped"
+in_battle = false
 inventory = &"item"
 icon = SubResource("AtlasTexture_3yrbe")
 quantity = 0
@@ -156,10 +168,207 @@ script = ExtResource("2_1bh6r")
 name = "Goop"
 key = &"goop"
 description = ""
-inventory = &""
+in_battle = false
+inventory = &"item"
 icon = SubResource("AtlasTexture_xbsj2")
 quantity = 0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogb8u"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(0, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_pe5ut"]
+script = ExtResource("2_1bh6r")
+name = "Minor Blessing"
+key = &"blessing_minor"
+description = "A bright ball of solidified blessings. Restores a minor amount of health"
+in_battle = true
+attack = ExtResource("4_pe5ut")
+inventory = &"item"
+icon = SubResource("AtlasTexture_ogb8u")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe5ut"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(20, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_syk4r"]
+script = ExtResource("2_1bh6r")
+name = "Small Blessing"
+key = &"blessing_small"
+description = "A bright ball of solidified blessings. Restores a small amount of health"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_pe5ut")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syk4r"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(40, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_mjxw8"]
+script = ExtResource("2_1bh6r")
+name = "Blessing"
+key = &"blessing_medium"
+description = "A bright ball of solidified blessings. Restores a moderate amount of health"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_syk4r")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjxw8"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(60, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_hqxqx"]
+script = ExtResource("2_1bh6r")
+name = "Major Blessing"
+key = &"blessing_major"
+description = "A bright ball of solidified blessings. Restores a large amount of health"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_mjxw8")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqxqx"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(80, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_7adml"]
+script = ExtResource("2_1bh6r")
+name = "Grand Blessing"
+key = &"blessing_grand"
+description = "A bright ball of solidified blessings. Fully restores health"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_hqxqx")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7adml"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(0, 100, 20, 20)
+
+[sub_resource type="Resource" id="Resource_v65c3"]
+script = ExtResource("2_1bh6r")
+name = "Condensed Vitality"
+key = &"condensed_vitality"
+description = "A highly condensed form of health. Temporarily buffs maximum HP"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_7adml")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v65c3"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(20, 100, 20, 20)
+
+[sub_resource type="Resource" id="Resource_emnhx"]
+script = ExtResource("2_1bh6r")
+name = "Condensed Vigor"
+key = &"condensed_vigor"
+description = "A highly condensed form of strength. Temporarily buffs attack power"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_v65c3")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emnhx"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(40, 100, 20, 20)
+
+[sub_resource type="Resource" id="Resource_4egpb"]
+script = ExtResource("2_1bh6r")
+name = "Condensed Resillience"
+key = &"condensed_resillience"
+description = "A highly condensed form of might. Temporarily buffs defensive power"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_emnhx")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4egpb"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(60, 100, 20, 20)
+
+[sub_resource type="Resource" id="Resource_ogb8u"]
+script = ExtResource("2_1bh6r")
+name = "Condensed Awareness"
+key = &"condensed_awareness"
+description = "A highly condensed form of sight. Temporarily buffs accuracy"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_4egpb")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp58w"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(80, 100, 20, 20)
+
+[sub_resource type="Resource" id="Resource_vp58w"]
+script = ExtResource("2_1bh6r")
+name = "Condensed Reaction"
+key = &"condensed_reaction"
+description = "A highly condensed form of foresight. Temporarily buffs evasion"
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_vp58w")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k7es"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(100, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_t1hep"]
+script = ExtResource("2_1bh6r")
+name = "Bottled Embers"
+key = &"bottled_embers"
+description = "A bottle of tightly sealed embers. Deals moderate fire damage and burns target."
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_2k7es")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktr8x"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(120, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_hjqj6"]
+script = ExtResource("2_1bh6r")
+name = "Bottled Bolts"
+key = &"bottled_bolts"
+description = "A bottle of tightly sealed bolts. Deals moderate electric damage and stuns target."
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_ktr8x")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22bsi"]
+atlas = ExtResource("2_ql6q5")
+region = Rect2(140, 80, 20, 20)
+
+[sub_resource type="Resource" id="Resource_nyimm"]
+script = ExtResource("2_1bh6r")
+name = "Bottled Toxin"
+key = &"bottled_toxin "
+description = "A bottle of tightly sealed toxins. Deals moderate nature damage and poisons target."
+in_battle = true
+inventory = &"item"
+icon = SubResource("AtlasTexture_22bsi")
+quantity = 0
+metadata/_custom_type_script = "uid://dyul3c6vi0p44"
+
 [node name="data_manager" type="Node"]
 script = ExtResource("1_bh6xq")
-inventory = Array[ExtResource("2_1bh6r")]([SubResource("Resource_wdjsp"), SubResource("Resource_ywjv4"), SubResource("Resource_cfixh"), SubResource("Resource_h24sn"), SubResource("Resource_p8g5u"), SubResource("Resource_27rko"), SubResource("Resource_idt5s"), SubResource("Resource_5uqb3"), SubResource("Resource_p1bbr"), SubResource("Resource_cynph"), SubResource("Resource_infet"), SubResource("Resource_2dw5n")])
+inventory = Array[ExtResource("2_1bh6r")]([SubResource("Resource_wdjsp"), SubResource("Resource_ywjv4"), SubResource("Resource_cfixh"), SubResource("Resource_h24sn"), SubResource("Resource_p8g5u"), SubResource("Resource_27rko"), SubResource("Resource_idt5s"), SubResource("Resource_5uqb3"), SubResource("Resource_p1bbr"), SubResource("Resource_cynph"), SubResource("Resource_infet"), SubResource("Resource_2dw5n"), SubResource("Resource_pe5ut"), SubResource("Resource_syk4r"), SubResource("Resource_mjxw8"), SubResource("Resource_hqxqx"), SubResource("Resource_7adml"), SubResource("Resource_v65c3"), SubResource("Resource_emnhx"), SubResource("Resource_4egpb"), SubResource("Resource_ogb8u"), SubResource("Resource_vp58w"), SubResource("Resource_t1hep"), SubResource("Resource_hjqj6"), SubResource("Resource_nyimm")])

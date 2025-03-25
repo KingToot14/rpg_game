@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cscu03l72k158"]
+
+[ext_resource type="Script" uid="uid://g7ufa33srk06" path="res://entities/scripts/attack_object.gd" id="1_4k0q0"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_vcn1b"]
+
+[sub_resource type="Animation" id="Animation_vcn1b"]
+resource_name = "do_attack"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [0.05, 25],
+"method": &"heal_target"
+}, {
+"args": [0.05, 25],
+"method": &"heal_target"
+}, {
+"args": [0.05, 25],
+"method": &"heal_target"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bw508"]
+_data = {
+&"do_attack": SubResource("Animation_vcn1b")
+}
+
+[node name="blessing_minor" type="Node2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("1_4k0q0")
+animator = NodePath("animator")
+metadata/_custom_type_script = "uid://g7ufa33srk06"
+
+[node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
+libraries = {
+&"": SubResource("AnimationLibrary_bw508")
+}
+script = ExtResource("2_vcn1b")
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://bnpfh5qc4r7pt"

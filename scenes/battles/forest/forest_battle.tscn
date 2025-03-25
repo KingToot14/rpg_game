@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=101 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" uid="uid://bj8l68ts43cdg" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" uid="uid://bwpfec1fatmq4" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://b6g6qi1b53uuw" path="res://ui/battles/action_menu/cancel_button.png" id="32_a24v6"]
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="33_8otb5"]
 [ext_resource type="Script" uid="uid://dsje32l3slm" path="res://ui/battles/action_menu/defense_menu.gd" id="33_84n05"]
+[ext_resource type="Resource" uid="uid://480da4ldkv7w" path="res://resources/items/healing/blessing_minor/blessing_minor.tres" id="33_ej23r"]
 [ext_resource type="Script" uid="uid://cdub5a0dmaf8l" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/icons/element_icons_small.png" id="34_oquq2"]
 [ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="34_ujwxc"]
@@ -1344,9 +1345,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -109.0
+offset_left = -121.0
 offset_top = -77.0
-offset_right = -9.0
+offset_right = 3.0
 offset_bottom = 23.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -1455,9 +1456,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
+offset_left = -62.0
 offset_top = -28.0
-offset_right = 50.0
+offset_right = 62.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1477,9 +1478,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -48.0
+offset_left = -59.0
 offset_top = -26.0
-offset_right = 48.0
+offset_right = 59.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -1491,28 +1492,35 @@ physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
 tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = ExtResource("33_ej23r")
 
 [node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
 tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = ExtResource("33_ej23r")
 
 [node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
 tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = ExtResource("33_ej23r")
 
 [node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
 physics_interpolation_mode = 2
 auto_translate_mode = 1
 layout_mode = 2
 tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = ExtResource("33_ej23r")
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
+physics_interpolation_mode = 2
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_auto_translate_mode = 0
+item = ExtResource("33_ej23r")
 
 [node name="tactics_menu" type="Control" parent="ui/action_holder/action_bar" groups=["action_menu"]]
 unique_name_in_owner = true

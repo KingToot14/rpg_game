@@ -27,6 +27,16 @@ func do_damage(modifier: float = 1.0) -> void:
 	if len(Globals.timing_mods) > 0:
 		Globals.timing_mods.pop_front()
 
+func heal_target(percent := 0.15, min_heal := 80) -> void:
+	if target is Array:
+		pass
+	elif is_instance_valid(target):
+		var heal = max(target.stats.get_max_hp() * percent, min_heal)
+		
+		target.hp.heal({
+			&'damage': heal
+		})
+
 func perform_action() -> void:
 	entity.brain.action.perform_action(target)
 

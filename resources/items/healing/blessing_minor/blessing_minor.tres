@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://480da4ldkv7w"]
+
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="1_m0txh"]
+[ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="1_njpyk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co0nw"]
+atlas = ExtResource("1_njpyk")
+region = Rect2(0, 80, 20, 20)
+
+[resource]
+script = ExtResource("1_m0txh")
+power = 0.0
+element = 1
+element_percent = 0.0
+damage_type = 0
+timing_type = 0
+accuracy = 100.0
+crit_rate = 0.1
+randomness = 0.1
+attack_obj = "uid://cscu03l72k158"
+name = "Minor Blessing"
+animation_name = &"use_item"
+icon = SubResource("AtlasTexture_co0nw")
+description = "A bright ball of solidified blessings. Restores a minor amount of health"
+side = 1
+targeting = 0
+cooldown = 0
+metadata/_custom_type_script = "uid://cctsanfechtc4"

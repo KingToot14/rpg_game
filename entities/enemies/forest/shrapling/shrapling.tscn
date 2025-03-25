@@ -633,7 +633,7 @@ front_marker = NodePath("front_marker")
 
 [node name="animator" type="AnimationPlayer" parent="managers" node_paths=PackedStringArray("parent")]
 libraries = {
-"": SubResource("AnimationLibrary_6dnli")
+&"": SubResource("AnimationLibrary_6dnli")
 }
 script = ExtResource("2_7aq5w")
 parent = NodePath("../..")
@@ -713,11 +713,11 @@ hframes = 14
 unique_name_in_owner = true
 emitting = false
 amount = 14
-process_material = SubResource("ParticleProcessMaterial_xf3bi")
 texture = ExtResource("25_orj3i")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xf3bi")
 
 [node name="ui" type="Node2D" parent="."]
 z_index = 200
@@ -813,6 +813,7 @@ position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_k62pd")
 
 [node name="damage_marker" parent="." instance=ExtResource("23_o04yh")]
+unique_name_in_owner = true
 position = Vector2(31, -52)
 
 [node name="front_marker" type="Marker2D" parent="."]
@@ -829,7 +830,6 @@ vframes = 2
 [connection signal="mouse_exited" from="." to="managers/targeting" method="_on_mouse_exited"]
 [connection signal="died" from="managers/hp" to="damage_marker" method="detatch"]
 [connection signal="lost_health" from="managers/hp" to="managers/animation_manager" method="play_damage_anim"]
-[connection signal="lost_health" from="managers/hp" to="damage_marker" method="_on_lost_health"]
 [connection signal="targetable_set" from="managers/targeting" to="ui" method="_on_targetable_set"]
 [connection signal="mouse_entered" from="ui/top_holder" to="ui" method="_on_ui_entered"]
 [connection signal="mouse_exited" from="ui/top_holder" to="ui" method="_on_ui_exited"]

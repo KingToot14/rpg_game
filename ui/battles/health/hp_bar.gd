@@ -21,6 +21,7 @@ func set_entity(e: Entity) -> void:
 	
 	if entity:
 		entity.hp.lost_health.connect(update_health)
+		entity.hp.heal_health.connect(update_health)
 	
 	update_health()
 

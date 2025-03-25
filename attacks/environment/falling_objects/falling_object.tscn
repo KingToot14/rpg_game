@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_xv5ry"]
 [ext_resource type="Texture2D" uid="uid://bwb7tvvrda46a" path="res://attacks/environment/falling_objects/forest/log.png" id="3_3yeod"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="3_oktuw"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_gw5a4"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="4_gw5a4"]
 [ext_resource type="Texture2D" uid="uid://bhe421bw64756" path="res://attacks/environment/falling_objects/forest/stone.png" id="5_5ip14"]
 [ext_resource type="Texture2D" uid="uid://di18d6tjl8f5m" path="res://environment/forest/falling_objects.png" id="5_j12au"]
 
@@ -415,7 +415,7 @@ sprite = NodePath("sprite")
 
 [node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
 libraries = {
-"": SubResource("AnimationLibrary_80f1w")
+&"": SubResource("AnimationLibrary_80f1w")
 }
 script = ExtResource("2_xv5ry")
 parent = NodePath("..")

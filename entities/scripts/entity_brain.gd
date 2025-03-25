@@ -38,6 +38,7 @@ func _on_entity_selected(entity: Entity) -> void:
 	
 	selected_target = entity
 
+#region Actions
 func setup_and_perform(new_action: ActionResource, target: Entity) -> void:
 	action = new_action
 	selected_target = target
@@ -73,6 +74,9 @@ func perform_action(cooldown := true) -> void:
 	# perform action
 	await parent.animator.play_action_anim(action.animation_name)
 
+#endregion
+
+#region Attack Objects
 func load_object(path: String) -> void:
 	var loader = AsyncLoader.new(path, func(scn: PackedScene): attack_obj = scn)
 	await loader.done_loading
@@ -89,6 +93,9 @@ func activate_object(target) -> void:
 		})
 		obj.perform_attack()
 
+#endregion
+
+#region Damage
 func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	var attack := action as Attack
 	
@@ -112,3 +119,5 @@ func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	
 	# set target
 	target.hp.take_damage(dmg_chunk)
+
+#endregion
