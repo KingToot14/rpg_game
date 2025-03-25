@@ -8,7 +8,7 @@ signal action_started()
 # --- Variables --- #
 @export var animator: AnimationPlayer
 
-@export var overrideable_anims := ['idle', 'take_damage']
+@export var overrideable_anims := ['idle', 'take_damage', 'dodge']
 @export var main_sprite: Sprite2D
 
 # --- References --- #
@@ -33,10 +33,16 @@ func play_enter_anim() -> void:
 func _on_animation_finished(_anim_name: StringName) -> void:
 	animator.play(&'idle')
 
-func play_damage_anim(_dmg_chunk: Dictionary) -> void:
+func play_damage_anim(dmg_chunk: Dictionary) -> void:
 	# if currently acting, play a simple flash
 	if animator.current_animation != "" and animator.current_animation not in overrideable_anims:
 		simple_flash()
+		return
+	
+	# check if move missed
+	if not dmg_chunk.get(&'move_hit', true) and animator.has_animation(&'dodge'):
+		animator.stop()
+		animator.play(&'dodge')
 		return
 	
 	if parent.hp.alive:

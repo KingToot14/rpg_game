@@ -20,6 +20,12 @@ func _ready() -> void:
 func _on_lost_health(dmg_chunk: Dictionary) -> void:
 	dmg_label.text = "[center]"
 	
+	# check if move missed
+	if not dmg_chunk.get(&'move_hit', true):
+		dmg_label.text = "[color=%s]Missed!" % resist_color.to_html()
+		start_fade()
+		return
+	
 	# display crits
 	var crits = dmg_chunk.get(&'crits_hit')
 	if crits > 0:

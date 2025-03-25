@@ -55,6 +55,13 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 		(1.0 - target.stats.get_resistance(dmg_chunk[&'element'])))
 	)
 	
+	# check if the move hit
+	var falloff_factor = 2
+	var hit_odds = accuracy * min((attacker.stats.get_accuracy() / 
+		target.stats.get_evasion())**falloff_factor, 1.0)
+	
+	dmg_chunk[&'move_hit'] = randf() <= hit_odds
+	
 	# randomizer
 	dmg_chunk[&'damage'] *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)
 	
