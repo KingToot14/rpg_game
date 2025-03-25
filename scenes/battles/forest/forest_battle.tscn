@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=100 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" uid="uid://bj8l68ts43cdg" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" uid="uid://bwpfec1fatmq4" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -40,6 +40,7 @@
 [ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
 [ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
 [ext_resource type="Script" uid="uid://bn10m48sogxlc" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
+[ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="41_ej23r"]
 [ext_resource type="Resource" uid="uid://b6dixk683scj1" path="res://entities/player/general/flee_tactic.tres" id="41_u0bu5"]
 [ext_resource type="Resource" uid="uid://vvso3cyu67wy" path="res://entities/player/general/change_turn_tactic.tres" id="42_68b6r"]
 [ext_resource type="Texture2D" uid="uid://dv81q67jbw74x" path="res://entities/player/general/defense.png" id="42_dhx3q"]
@@ -214,6 +215,14 @@ description = "Tense up in preparation for a heavy attack
 side = 1
 targeting = 0
 cooldown = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73hj6"]
+atlas = ExtResource("41_ej23r")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4c4f"]
+atlas = ExtResource("41_ej23r")
+region = Rect2(0, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_curyc"]
 atlas = ExtResource("33_8otb5")
@@ -1752,54 +1761,168 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
+offset_left = 1.0
 offset_top = -54.0
 offset_right = 100.0
-offset_bottom = 1.0
+offset_bottom = -1.0
 grow_vertical = 0
 theme = ExtResource("6_66gh2")
 
-[node name="panel" parent="ui/player_hp" instance=ExtResource("27_e31mb")]
+[node name="fancy_panel" type="ColorRect" parent="ui/player_hp"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="ColorRect" parent="ui/player_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="decorator_tl" type="TextureRect" parent="ui/player_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/player_hp/fancy_panel/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/player_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/player_hp/fancy_panel/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="ui/player_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/player_hp/fancy_panel/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_br" type="TextureRect" parent="ui/player_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/player_hp/fancy_panel/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
 
 [node name="hp_section" parent="ui/player_hp" instance=ExtResource("30_308vx")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 99.0
-offset_bottom = 14.0
-grow_horizontal = 1
+layout_mode = 1
+offset_left = -48.5
+offset_top = 1.0
+offset_right = 48.5
 
 [node name="hp_section2" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
 offset_left = -48.5
-offset_top = 15.0
+offset_top = 14.0
 offset_right = 48.5
-offset_bottom = 27.0
+offset_bottom = 26.0
 
 [node name="hp_section3" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
 offset_left = -48.5
-offset_top = 28.0
+offset_top = 27.0
 offset_right = 48.5
-offset_bottom = 40.0
+offset_bottom = 39.0
 
 [node name="hp_section4" parent="ui/player_hp" instance=ExtResource("30_308vx")]
 layout_mode = 1
 offset_left = -49.0
-offset_top = 41.0
+offset_top = 40.0
 offset_right = 48.0
-offset_bottom = 53.0
+offset_bottom = 52.0
 
 [node name="enemy_hp" type="Control" parent="ui"]
 unique_name_in_owner = true
@@ -1811,112 +1934,392 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -100.0
 offset_top = -67.0
-offset_right = 1.0
-offset_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("6_66gh2")
 
-[node name="panel" parent="ui/enemy_hp" instance=ExtResource("27_e31mb")]
+[node name="fancy_panel" type="ColorRect" parent="ui/enemy_hp"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="ColorRect" parent="ui/enemy_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="decorator_tl" type="TextureRect" parent="ui/enemy_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/enemy_hp/fancy_panel/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/enemy_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/enemy_hp/fancy_panel/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="ui/enemy_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/enemy_hp/fancy_panel/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_br" type="TextureRect" parent="ui/enemy_hp/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/enemy_hp/fancy_panel/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
 
 [node name="hp_section" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 99.0
-offset_bottom = 14.0
-grow_horizontal = 1
+layout_mode = 1
+offset_left = -48.5
+offset_top = 1.0
+offset_right = 48.5
 
 [node name="hp_section2" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_top = 15.0
-offset_bottom = 27.0
+offset_left = -48.5
+offset_top = 14.0
+offset_right = 48.5
+offset_bottom = 26.0
 
 [node name="hp_section3" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
 offset_left = -48.5
-offset_top = 28.0
+offset_top = 27.0
 offset_right = 48.5
-offset_bottom = 40.0
+offset_bottom = 39.0
 
 [node name="hp_section4" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_top = 41.0
-offset_bottom = 53.0
+offset_left = -48.5
+offset_top = 40.0
+offset_right = 48.5
+offset_bottom = 52.0
 
 [node name="hp_section5" parent="ui/enemy_hp" instance=ExtResource("31_gv80f")]
 layout_mode = 1
-offset_top = 54.0
-offset_bottom = 66.0
+offset_left = -48.5
+offset_top = 53.0
+offset_right = 48.5
+offset_bottom = 65.0
 
 [node name="encounter_info" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 23.0
+offset_left = -102.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 24.0
 grow_horizontal = 0
 
-[node name="panel" parent="ui/encounter_info" instance=ExtResource("27_e31mb")]
+[node name="fancy_panel" type="ColorRect" parent="ui/encounter_info"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="ColorRect" parent="ui/encounter_info/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="decorator_tl" type="TextureRect" parent="ui/encounter_info/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/encounter_info/fancy_panel/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/encounter_info/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/encounter_info/fancy_panel/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="ui/encounter_info/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/encounter_info/fancy_panel/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_br" type="TextureRect" parent="ui/encounter_info/fancy_panel"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/encounter_info/fancy_panel/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
 
 [node name="wave_panel" parent="ui/encounter_info" instance=ExtResource("29_7enty")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
 layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -12.0
+color_key = 4
+
+[node name="wave_title" type="RichTextLabel" parent="ui/encounter_info/wave_panel"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -12.0
+offset_right = 42.0
+offset_bottom = 10.0
+theme = ExtResource("6_66gh2")
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[right]Wave[/right]"
+scroll_active = false
+script = ExtResource("34_ujwxc")
+color_key = 2
+
+[node name="label_fill" parent="ui/encounter_info/wave_panel" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 45.0
 
 [node name="wave_label" type="RichTextLabel" parent="ui/encounter_info/wave_panel"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 2.0
+offset_left = 47.0
 offset_top = 2.0
 offset_right = 95.0
 offset_bottom = 10.0
 theme = ExtResource("6_66gh2")
 theme_type_variation = &"Medium"
-text = "Wave: 1/2"
+text = "1/2"
 scroll_active = false
 
 [node name="condition_panel" parent="ui/encounter_info" instance=ExtResource("29_7enty")]
+self_modulate = Color(0.180392, 0.537255, 0.788235, 1)
 layout_mode = 1
-offset_left = 2.0
-offset_top = 13.0
-offset_right = -2.0
+offset_left = 1.0
+offset_top = 12.0
+offset_right = -1.0
 offset_bottom = -1.0
+color_key = 4
+
+[node name="condition_title" type="RichTextLabel" parent="ui/encounter_info/condition_panel"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 42.0
+offset_bottom = 10.0
+theme = ExtResource("6_66gh2")
+theme_type_variation = &"Medium"
+bbcode_enabled = true
+text = "[right]Condition[/right]"
+scroll_active = false
+script = ExtResource("34_ujwxc")
+color_key = 2
+
+[node name="label_fill" parent="ui/encounter_info/condition_panel" instance=ExtResource("29_7enty")]
+layout_mode = 1
+offset_left = 45.0
 
 [node name="condition_label" type="RichTextLabel" parent="ui/encounter_info/condition_panel"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 2.0
+offset_left = 47.0
 offset_top = 2.0
 offset_right = 95.0
 offset_bottom = 10.0
 theme = ExtResource("6_66gh2")
 theme_type_variation = &"Medium"
-text = "Condition: Normal"
+text = "Normal"
 scroll_active = false
 
 [node name="timed_single_hit" parent="ui" instance=ExtResource("23_n5437")]

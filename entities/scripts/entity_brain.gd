@@ -94,9 +94,6 @@ func do_damage(target: Entity, damage_mod := 1.0) -> void:
 	
 	var dmg_chunk := attack.calculate_damage(parent, target) as Dictionary
 	
-	# call deal damage effects
-	parent.deal_damage.emit(dmg_chunk)
-	
 	# apply timing mods
 	if parent.is_player() and len(Globals.timing_mods) > 0:
 		var timing_mod = Globals.timing_mods.pop_front()
@@ -107,6 +104,9 @@ func do_damage(target: Entity, damage_mod := 1.0) -> void:
 			dmg_chunk[&'damage'] *= GOOD_MOD
 		else:
 			dmg_chunk[&'damage'] *= POOR_MOD
+	
+	# call deal damage effects
+	parent.deal_damage.emit(dmg_chunk)
 	
 	dmg_chunk[&'damage'] *= damage_mod
 	

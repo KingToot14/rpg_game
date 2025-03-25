@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://e66bllhh4l3o" path="res://entities/enemies/slimes/green_slime/attacks/slime_ball.png" id="2_t7ts4"]
 [ext_resource type="Script" uid="uid://fyusrdoocmww" path="res://shaders/entities/effect_manager.gd" id="3_mtude"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="4_33dt4"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="5_sjqd0"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="5_sjqd0"]
 
 [sub_resource type="Animation" id="Animation_0vi6p"]
 resource_name = "do_fling"
@@ -156,7 +156,7 @@ animator = NodePath("animator")
 
 [node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
 libraries = {
-"": SubResource("AnimationLibrary_bm884")
+&"": SubResource("AnimationLibrary_bm884")
 }
 script = ExtResource("1_4wrvq")
 parent = NodePath("..")

@@ -39,6 +39,10 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 		&'target': target
 	}
 	
+	# load weapon
+	if element == Element.USE_WEAPON and attacker.is_player():
+		dmg_chunk[&'element'] = attacker.get_weapon_element()
+	
 	# Formula: (Power * Attack/Defense) * Elemental Mod
 	var use_magic = damage_type == DamageType.MAGICAL
 	
@@ -46,7 +50,9 @@ func calculate_damage(attacker: Entity, target: Entity) -> Dictionary:
 	dmg_chunk[&'damage'] = power * (attacker.stats.get_attack(use_magic) / target.stats.get_defense(use_magic))
 	
 	# elemental mod
-	dmg_chunk[&'damage'] *= (1.0 - element_percent) + (element_percent * (1.0 - target.stats.get_resistance(element)))
+	dmg_chunk[&'damage'] *= ((1.0 - element_percent) + (element_percent * 
+		(1.0 - target.stats.get_resistance(dmg_chunk[&'element'])))
+	)
 	
 	# randomizer
 	dmg_chunk[&'damage'] *= randf_range(1.0 - randomness / 2, 1.0 + randomness / 2)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_aqfid"]
 [ext_resource type="Shader" uid="uid://be3b4ft437jbj" path="res://environment/shaders/grass/grass_cover.gdshader" id="2_d645o"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_djuvn"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="2_djuvn"]
 [ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="4_cryho"]
 [ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="6_37ctl"]
 [ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="8_8feqt"]

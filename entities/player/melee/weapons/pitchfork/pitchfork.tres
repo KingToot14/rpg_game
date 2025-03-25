@@ -20,5 +20,5 @@ description = "A simple farmer's tool passed down for generations. You can feel 
 equip_texture = SubResource("AtlasTexture_wyvt3")
 enhancements = Array[ExtResource("3_buo2h")]([null, null, null])
 abilities = Array[ExtResource("1_wta2j")]([null, null, null])
-element = 1
-element_percent = 0.5
+element = 256
+element_percent = 0.7

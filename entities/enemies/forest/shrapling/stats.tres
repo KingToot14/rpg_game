@@ -11,6 +11,9 @@ p_defense = 5.0
 m_defense = 4.0
 accuracy = 7.0
 evasion = 2.0
-resistances = {}
-new_element = 0
-new_mod = 0.0
+resistances = Dictionary[int, float]({
+4: -0.5,
+8: 1.0,
+32: 1.25,
+512: 1.25
+})

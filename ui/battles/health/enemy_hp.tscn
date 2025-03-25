@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://be34gqw0yq7ao" path="res://resources/themes/battle.tres" id="1_j3pug"]
 [ext_resource type="Script" uid="uid://dto6pkl7f3mas" path="res://ui/battles/health/hp_bar.gd" id="2_4d464"]
-[ext_resource type="Texture2D" uid="uid://cqspr0lipeg5n" path="res://ui/battles/health/health_background.png" id="3_28j0e"]
+[ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="3_b22hr"]
 [ext_resource type="Texture2D" uid="uid://bhamvuv6scbht" path="res://ui/battles/health/health_slider.png" id="4_gwgdv"]
 
 [node name="enemy_hp" type="Control" node_paths=PackedStringArray("cover_rect", "hp_label")]
@@ -19,18 +19,21 @@ script = ExtResource("2_4d464")
 cover_rect = NodePath("hp_fill/hp_cover")
 hp_label = NodePath("hp_value")
 
-[node name="background" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 97.0
-offset_bottom = 13.0
-texture = ExtResource("3_28j0e")
+[node name="background" parent="." instance=ExtResource("3_b22hr")]
+self_modulate = Color(0.137255, 0.454902, 0.729412, 1)
+layout_mode = 1
+color_key = 5
+
+[node name="fill" parent="." instance=ExtResource("3_b22hr")]
+layout_mode = 1
+offset_bottom = -5.0
 
 [node name="hp_value" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 2.0
-offset_top = 2.0
+offset_top = 1.0
 offset_right = 100.0
-offset_bottom = 25.0
+offset_bottom = 24.0
 theme_type_variation = &"HpLabel"
 bbcode_enabled = true
 text = "10,000,000|10,000,000"

@@ -32,18 +32,15 @@ func update_health(_dmg_chunk: Dictionary = {}) -> void:
 	show()
 	
 	cover_rect.custom_minimum_size.x = cover_size * clamp(entity.hp.get_hp_percent(), 0.0, 1.0)
-	hp_label.text = str(entity.hp.curr_hp) + "/" + str(entity.stats.get_max_hp())
+	hp_label.text = "%d/%d" % [entity.hp.curr_hp, entity.stats.get_max_hp()]
 	
 	if entity.special:
-		special_label.clear()
-		special_label.append_text("[right]")
-		
-		# spacer
-		special_label.push_color(spacing_color)
-		special_label.add_text("|")
-		special_label.pop()
-		
-		# special charge
-		special_label.push_color(special_color)
-		special_label.add_text(str(floor(entity.special.curr_special)) + "%")
-		special_label.pop()
+		if entity.special.curr_special >= 100:
+			$'special_fill'.show()
+		else:
+			$'special_fill'.hide()
+			special_label.clear()
+			special_label.append_text("[right]")
+			special_label.push_color(special_color)
+			special_label.add_text("%d%%" % entity.special.curr_special)
+			special_label.pop_all()

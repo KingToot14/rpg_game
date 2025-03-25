@@ -32,12 +32,8 @@ func take_damage(dmg_chunk: Dictionary) -> void:
 	
 	parent.took_damage.emit(dmg_chunk)
 	
-	# calculate damage
-	var dmg = dmg_chunk.get(&'damage', 0)
-	var percent = dmg_chunk.get(&'element_percent', 0)
-	dmg *= (1.0 - percent) + percent * (1.0 - dmg_chunk.get(&'element_mod', 1.0))
-	
-	curr_hp = max(curr_hp - roundi(dmg), 0)
+	# take damage
+	curr_hp = max(curr_hp - roundi(dmg_chunk[&'damage']), 0)
 	
 	if curr_hp <= 0:
 		alive = false

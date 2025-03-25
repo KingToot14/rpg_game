@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://usdqa33u7njx" path="res://scripts/textures/texture_variant.gd" id="1_gh2p6"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_sumql"]
 [ext_resource type="Texture2D" uid="uid://bde66qvxtguvd" path="res://environment/forest/trees/leaf_variations.png" id="2_05wv8"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_kji2a"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="2_kji2a"]
 [ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="2_tet37"]
 [ext_resource type="Texture2D" uid="uid://d3mqfr1xkf3y4" path="res://environment/forest/trees/tree.png" id="3_hj56p"]
 [ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="4_jcd0y"]
@@ -119,9 +119,9 @@ position = Vector2(0, 12)
 z_index = 5
 position = Vector2(-11, -22)
 amount = 6
+texture = ExtResource("9_bmovq")
 lifetime = 10.0
 preprocess = 3.0
-texture = ExtResource("9_bmovq")
 emission_shape = 1
 emission_sphere_radius = 16.0
 direction = Vector2(1, 0.6)

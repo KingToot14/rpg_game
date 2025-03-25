@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dsg0j1xqf3dyy"]
 
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_vcd26"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_rbo58"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="2_rbo58"]
 [ext_resource type="Texture2D" uid="uid://du2xm58vm4akg" path="res://environment/forest/trees/tree_2.png" id="3_vdoa7"]
 [ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="4_k4iv6"]
 [ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="5_vgi0m"]

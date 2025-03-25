@@ -23,7 +23,7 @@ func handle_process(_delta: float) -> void:
 	var collided = player.move_and_slide()
 	
 	# get position delta
-	var pos_delta = get_parent().prev_position - get_parent().position
+	var _pos_delta = get_parent().prev_position - get_parent().position
 	
 	# play/pause footsteps
 	if not collided and footstep_timer.paused and player.direction != Vector2.ZERO:

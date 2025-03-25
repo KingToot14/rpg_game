@@ -12,6 +12,7 @@
 script = ExtResource("2_njae0")
 boosts = "fire"
 level_requirement = 1
+maximum_level = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qcqdm"]
 atlas = ExtResource("4_phelx")
@@ -26,5 +27,5 @@ description = "Bestowed upon the guardian of the forest. Imbued with the forest 
 equip_texture = SubResource("AtlasTexture_qcqdm")
 enhancements = Array[ExtResource("2_jlhyo")]([null, null, null])
 abilities = Array[ExtResource("1_hiwhy")]([SubResource("Resource_gd5j8"), null, null])
-element = 16
+element = 1
 element_percent = 0.5

@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://q5nyqrny1klx" path="res://entities/scripts/components/turn_manager.gd" id="21_4o02o"]
 [ext_resource type="Script" uid="uid://dc8jqb03i65iv" path="res://entities/scripts/components/loot_manager.gd" id="22_3ojyy"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="24_6qixb"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="25_yg16m"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="25_yg16m"]
 [ext_resource type="Shader" uid="uid://cjl7x3y7pui2p" path="res://shaders/entities/flash.gdshader" id="26_76jbk"]
 [ext_resource type="Texture2D" uid="uid://cdqutv8lxu7so" path="res://entities/enemies/testing/training_dummy/battle.png" id="27_7tjc7"]
 [ext_resource type="Script" uid="uid://byf67r66p1hh4" path="res://entities/scripts/entity_ui.gd" id="31_ovg84"]
@@ -177,7 +177,7 @@ front_marker = NodePath("front_marker")
 
 [node name="animator" type="AnimationPlayer" parent="managers" node_paths=PackedStringArray("parent")]
 libraries = {
-"": SubResource("AnimationLibrary_8r1uf")
+&"": SubResource("AnimationLibrary_8r1uf")
 }
 script = ExtResource("8_ikcrw")
 parent = NodePath("../..")

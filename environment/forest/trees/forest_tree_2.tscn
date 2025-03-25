@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="1_h8wdw"]
 [ext_resource type="Script" uid="uid://usdqa33u7njx" path="res://scripts/textures/texture_variant.gd" id="1_ns2hw"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="2_2ib4m"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="2_2ib4m"]
 [ext_resource type="Texture2D" uid="uid://du2xm58vm4akg" path="res://environment/forest/trees/tree_2.png" id="2_t5e58"]
 [ext_resource type="Shader" uid="uid://fvqfredwoqyv" path="res://shaders/object_hider.gdshader" id="4_pg1f6"]
 [ext_resource type="Script" uid="uid://cxo7omnfiqo3h" path="res://scripts/environment/object_revealer.gd" id="6_2qgj7"]
@@ -114,9 +114,9 @@ debug_color = Color(0, 0.596078, 0.701961, 0)
 z_index = 5
 position = Vector2(-3, -28)
 amount = 4
+texture = ExtResource("9_hnrod")
 lifetime = 10.0
 preprocess = 3.0
-texture = ExtResource("9_hnrod")
 emission_shape = 1
 emission_sphere_radius = 10.0
 direction = Vector2(1, 0.6)

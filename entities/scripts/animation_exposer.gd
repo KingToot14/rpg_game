@@ -19,8 +19,8 @@ func _ready() -> void:
 func play_animation(anim_name: StringName) -> void:
 	animator.play(anim_name)
 
-func set_entity(entity: Entity) -> void:
-	entity = entity
+func set_entity(new_entity: Entity) -> void:
+	entity = new_entity
 	animator.entity = entity
 
 func set_target(target: Entity) -> void:

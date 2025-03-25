@@ -94,8 +94,14 @@ func store_data() -> void:
 func is_player() -> bool:
 	return is_in_group(&'player')
 
+#region Player Equipment
 func reload_equips() -> void:
 	$'managers/equipment'.reload()
+
+func get_weapon_element() -> Attack.Element:
+	return $'managers/equipment'.weapon.element
+
+#endregion
 
 func remove_from_battle() -> void:
 	Globals.encounter_manager.remove_from_battle(self, spawn_index)

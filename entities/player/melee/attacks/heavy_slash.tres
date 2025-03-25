@@ -10,8 +10,8 @@ region = Rect2(20, 0, 20, 20)
 [resource]
 script = ExtResource("2_yrjsm")
 power = 50.0
-element = 0
-element_percent = 0.0
+element = 2
+element_percent = 0.7
 damage_type = 0
 timing_type = 0
 accuracy = 1.0

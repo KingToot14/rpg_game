@@ -10,7 +10,7 @@ region = Rect2(40, 0, 20, 20)
 [resource]
 script = ExtResource("2_acttd")
 power = 25.0
-element = 0
+element = 1
 element_percent = 0.0
 damage_type = 0
 timing_type = 0

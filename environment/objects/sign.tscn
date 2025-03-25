@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cumi34awat1dy" path="res://environment/objects/object_tiles.png" id="2_wab3p"]
 [ext_resource type="PackedScene" uid="uid://dokdunuxwvycx" path="res://ui/overworld/interactions/interaction_box.tscn" id="3_0hp87"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="3_nnbgu"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="4_2smeg"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="4_2smeg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nn0o6"]
 shader = ExtResource("3_nnbgu")

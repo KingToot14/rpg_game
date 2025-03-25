@@ -109,10 +109,10 @@ func load_player_action(entity: Entity) -> void:
 #endregion
 
 func update_wave_counter(curr: int, wave_count: int) -> void:
-	%'wave_label'.text = "Wave: " + str(curr) + "/" + str(wave_count)
+	%'wave_label'.text = "%d/%d" % [curr, wave_count]
 
 func update_condition(condition: String) -> void:
-	%'condition_label'.text = "Condition: " + condition
+	%'condition_label'.text = condition
 
 #region Panels
 func set_loss_panel(val: bool) -> void:

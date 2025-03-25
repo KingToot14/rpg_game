@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bkedmhfuc3h8f" path="res://entities/player/overworld/fsm/moving_control_state.gd" id="7_2n4je"]
 [ext_resource type="Script" uid="uid://dq7wutcpquw3o" path="res://scripts/hide_in_editor.gd" id="8_hawyb"]
 [ext_resource type="Script" uid="uid://cin7515taujss" path="res://entities/player/overworld/fsm/dialogue_control_state.gd" id="8_tra4j"]
-[ext_resource type="Texture2D" uid="uid://brncxgl0h2wgt" path="res://icon.svg" id="9_04vui"]
+[ext_resource type="Texture2D" uid="uid://cio7gtw6n3rb5" path="res://icon.svg" id="9_04vui"]
 [ext_resource type="Texture2D" uid="uid://dcraejj1058hf" path="res://entities/player/melee/overworld.png" id="9_e8d1h"]
 [ext_resource type="Shader" uid="uid://gotbkxap5g8g" path="res://shaders/entities/spot_shadow.gdshader" id="9_ue010"]
 
@@ -202,7 +202,7 @@ sprite = NodePath("sprite_group/sprite")
 [node name="animator" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_0l7iv")
+&"": SubResource("AnimationLibrary_0l7iv")
 }
 
 [node name="idle_state" type="Node" parent="."]

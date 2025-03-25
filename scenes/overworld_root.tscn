@@ -1018,6 +1018,7 @@ text = " 1,000,000"
 scroll_active = false
 
 [node name="party_panel" type="Control" parent="ui"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -5312,6 +5313,7 @@ color_key = 2
 
 [node name="equip_select" type="Control" parent="ui/party_panel" node_paths=PackedStringArray("pointer")]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_left = -26.0
 offset_top = 36.0
