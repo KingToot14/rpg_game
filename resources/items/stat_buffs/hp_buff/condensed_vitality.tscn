@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://s017jhdejq4i"]
+
+[ext_resource type="Script" uid="uid://g7ufa33srk06" path="res://entities/scripts/attack_object.gd" id="1_e1itr"]
+[ext_resource type="Script" uid="uid://bnpfh5qc4r7pt" path="res://entities/scripts/attack_animator.gd" id="2_qj7ke"]
+
+[sub_resource type="Animation" id="Animation_qj7ke"]
+resource_name = "do_attack"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("animator")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"set_target"
+}, {
+"args": [&"hp_mod", 50, 1],
+"method": &"add_effect"
+}, {
+"args": [0.34, 0],
+"method": &"heal_target"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu4ar"]
+_data = {
+&"do_attack": SubResource("Animation_qj7ke")
+}
+
+[node name="condensed_vitality" type="Node2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("1_e1itr")
+animator = NodePath("animator")
+metadata/_custom_type_script = "uid://g7ufa33srk06"
+
+[node name="animator" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent")]
+libraries = {
+&"": SubResource("AnimationLibrary_fu4ar")
+}
+script = ExtResource("2_qj7ke")
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://bnpfh5qc4r7pt"

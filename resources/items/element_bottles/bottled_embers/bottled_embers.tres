@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=4 format=3 uid="uid://bb7ssxshqc0jb"]
+
+[ext_resource type="Script" uid="uid://cctsanfechtc4" path="res://entities/scripts/actions/attack.gd" id="1_gw4j7"]
+[ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="1_nings"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k7es"]
+atlas = ExtResource("1_nings")
+region = Rect2(100, 80, 20, 20)
+
+[resource]
+script = ExtResource("1_gw4j7")
+power = 40.0
+element = 4
+element_percent = 1.0
+damage_type = 0
+timing_type = 0
+accuracy = 1.0
+crit_rate = 0.1
+randomness = 0.1
+attack_obj = "uid://w7krkh668yu0"
+name = "Bottled Embers"
+animation_name = &"use_item"
+icon = SubResource("AtlasTexture_2k7es")
+description = "A bottle of tightly sealed embers. Deals moderate fire damage and burns target."
+side = 3
+targeting = 0
+cooldown = 0
+metadata/_custom_type_script = "uid://cctsanfechtc4"

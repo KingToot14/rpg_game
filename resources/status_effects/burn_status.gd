@@ -8,6 +8,8 @@ var dmg_mod := 0.90
 #yg uk niuytds nuras nuts
 # --- Functions --- #
 func setup_signals() -> void:
+	entity.turn_ended.connect(_root_turn_ended)
+	
 	entity.turn_ended.connect(_on_turn_ended)
 	entity.took_damage.connect(_on_take_damage)
 
@@ -15,6 +17,8 @@ func set_status_info() -> void:
 	max_stack = 100
 	
 	icon_pos = Vector2(3, 0)
+	
+	key = &'burn'
 	
 	dmg = 0.020 + 0.015 * stage
 	

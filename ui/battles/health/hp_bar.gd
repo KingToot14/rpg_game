@@ -20,6 +20,10 @@ func set_entity(e: Entity) -> void:
 	entity = e
 	
 	if entity:
+		entity.turn_ended.connect(func(_p):
+			await get_tree().process_frame
+			update_health()
+		)
 		entity.hp.lost_health.connect(update_health)
 		entity.hp.heal_health.connect(update_health)
 	

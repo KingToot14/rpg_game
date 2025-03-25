@@ -24,8 +24,6 @@ func setup(params: Dictionary) -> void:
 	attack = entity.brain.action as Attack
 
 func perform_attack() -> void:
-	#var animator := get_node_or_null(^'animator') as AttackAnimator
-	
 	if not animator:
 		return
 	

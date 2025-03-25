@@ -1,9 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://cthpngydpydqw"]
+[gd_scene load_steps=57 format=3 uid="uid://cthpngydpydqw"]
 
 [ext_resource type="Script" uid="uid://hj1tsc58sylr" path="res://systems/data_saving/data_manager.gd" id="1_bh6xq"]
 [ext_resource type="Script" uid="uid://dyul3c6vi0p44" path="res://systems/data_saving/item_data_chunk.gd" id="2_1bh6r"]
 [ext_resource type="Texture2D" uid="uid://gscgaikcptkn" path="res://ui/items/item_icons.png" id="2_ql6q5"]
 [ext_resource type="Resource" uid="uid://480da4ldkv7w" path="res://resources/items/healing/blessing_minor/blessing_minor.tres" id="4_pe5ut"]
+[ext_resource type="Resource" uid="uid://b20kgnwhrnawp" path="res://resources/items/stat_buffs/hp_buff/condensed_vitality.tres" id="5_syk4r"]
+[ext_resource type="Resource" uid="uid://bb7ssxshqc0jb" path="res://resources/items/element_bottles/bottled_embers/bottled_embers.tres" id="6_mjxw8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvmfr"]
 atlas = ExtResource("2_ql6q5")
@@ -259,6 +261,7 @@ name = "Condensed Vitality"
 key = &"condensed_vitality"
 description = "A highly condensed form of health. Temporarily buffs maximum HP"
 in_battle = true
+attack = ExtResource("5_syk4r")
 inventory = &"item"
 icon = SubResource("AtlasTexture_7adml")
 quantity = 0
@@ -334,6 +337,7 @@ name = "Bottled Embers"
 key = &"bottled_embers"
 description = "A bottle of tightly sealed embers. Deals moderate fire damage and burns target."
 in_battle = true
+attack = ExtResource("6_mjxw8")
 inventory = &"item"
 icon = SubResource("AtlasTexture_2k7es")
 quantity = 0

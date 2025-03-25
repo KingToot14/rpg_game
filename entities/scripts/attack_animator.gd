@@ -46,13 +46,15 @@ func activate_object() -> void:
 #endregion
 
 func add_effect(key: StringName, stacks := 1, stage := 1) -> void:
+	stacks
+	
 	var params = {
 		&'key': key,
 		&'stacks': stacks,
 		&'stage': stage
 	}
 	
-	parent.gave_status.emit(params)
+	entity.gave_status.emit(params)
 	
 	target.status_effects.add_effect(params[&'key'], params[&'stacks'], params[&'stage'])
 

@@ -11,6 +11,7 @@ func setup_signals() -> void:
 func set_status_info() -> void:
 	icon_pos = Vector2(0, 2)
 	
+	key = &'haste'
 	name = "Haste"
 	description = "Takes an extra turn after this one"
 

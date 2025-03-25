@@ -84,6 +84,9 @@ var status_effects: Dictionary[StringName, String] = {
 	&'charge': "res://resources/status_effects/blank_status.gd",
 	&'wet': "res://resources/status_effects/wet_status.gd",
 	&'poison': "res://resources/status_effects/poison_status.gd",
+	
+	# - Stat Mods - #
+	&'hp_mod': "res://resources/status_effects/stat_modification/hp_mod_status.gd",
 }
 
 # --- Functions --- #

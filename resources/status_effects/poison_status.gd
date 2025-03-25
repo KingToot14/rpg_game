@@ -10,6 +10,8 @@ var spread_stacks := 2
 
 # --- Functions --- #
 func setup_signals() -> void:
+	entity.turn_ended.connect(_root_turn_ended)
+	
 	entity.turn_ended.connect(_on_turn_ended)
 
 func set_status_info() -> void:
@@ -17,6 +19,7 @@ func set_status_info() -> void:
 	
 	icon_pos = Vector2(2, 1)
 	
+	key = &'poison'
 	match stage:
 		1:
 			name = "Poisoned"
