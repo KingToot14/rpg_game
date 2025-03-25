@@ -11,7 +11,39 @@ var tween: Tween
 func _ready() -> void:
 	origin = position.y
 	
+	reload_items()
 	hide_menu()
+
+func reload_items() -> void:
+	var item_count = 0
+	
+	for row in $'grid'.get_children():
+		for child: ActionMenuItem in row.get_children():
+			child.set_menu_item(child.item)
+			if child.visible:
+				item_count += 1
+	
+	$'backing'.size.y = 24 * (floor(item_count / 5.0) + 1) + 4
+	$'backing'.position.y = 100 - $'backing'.size.y
+
+func load_items(items) -> void:
+	var index = 0
+	var item_count = len(items)
+	
+	for row in $'grid'.get_children():
+		var children = row.get_children()
+		row.visible = index < item_count
+		
+		for child: ActionMenuItem in children:
+			if index < item_count:
+				child.set_menu_item(items[index])
+			else:
+				child.set_menu_item(null)
+			
+			index += 1
+	
+	$'backing'.size.y = 24 * (floor(item_count / 5.0) + 1) + 4
+	$'backing'.position.y = 100 - $'backing'.size.y
 
 func toggle_menu() -> void:
 	if mouse_filter == Control.MOUSE_FILTER_IGNORE:

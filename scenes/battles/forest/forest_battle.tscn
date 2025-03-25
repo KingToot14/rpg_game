@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://i4fdaoyskv5o"]
+[gd_scene load_steps=86 format=3 uid="uid://i4fdaoyskv5o"]
 
 [ext_resource type="Script" uid="uid://bj8l68ts43cdg" path="res://systems/battles/encounter_manager.gd" id="1_qxbbg"]
 [ext_resource type="Script" uid="uid://bwpfec1fatmq4" path="res://systems/battles/turn_fsm/turn_fsm.gd" id="2_eejpv"]
@@ -22,30 +22,23 @@
 [ext_resource type="Shader" uid="uid://cwmil0ufo6kes" path="res://environment/shaders/trail/trail.gdshader" id="19_tppcg"]
 [ext_resource type="Shader" uid="uid://bdbuj3jwpcmk" path="res://environment/shaders/water/water.gdshader" id="20_x1pqv"]
 [ext_resource type="Texture2D" uid="uid://bqnecq38bnoey" path="res://ui/battles/action_menu/melee_icons/items_melee.png" id="21_nutgo"]
+[ext_resource type="Script" uid="uid://j2briu1kk221" path="res://ui/battles/action_menu/action_menu.gd" id="23_ej23r"]
 [ext_resource type="PackedScene" uid="uid://4ws5v52gxy05" path="res://ui/battles/timed_attacks/timed_single_hit.tscn" id="23_n5437"]
 [ext_resource type="PackedScene" uid="uid://bk0wwacwjncj7" path="res://ui/battles/action_menu/menu_button.tscn" id="27_2rlq4"]
-[ext_resource type="Script" uid="uid://dxt6n3t6nogco" path="res://ui/battles/action_menu/attack_menu.gd" id="27_53322"]
 [ext_resource type="PackedScene" uid="uid://bid4lugwt1f6c" path="res://ui/panel.tscn" id="27_e31mb"]
+[ext_resource type="Script" uid="uid://qe1bvaxqc7v8" path="res://ui/battles/action_menu/item_menu.gd" id="27_fl77x"]
+[ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="27_om7ft"]
+[ext_resource type="Resource" uid="uid://vvso3cyu67wy" path="res://entities/player/general/change_turn_tactic.tres" id="28_fl77x"]
 [ext_resource type="PackedScene" uid="uid://u8ci3rbwkevj" path="res://ui/pannel_inner.tscn" id="29_7enty"]
+[ext_resource type="Resource" uid="uid://b6dixk683scj1" path="res://entities/player/general/flee_tactic.tres" id="29_o0ftn"]
 [ext_resource type="PackedScene" uid="uid://d2wjs7ohttbr2" path="res://ui/battles/health/player_hp.tscn" id="30_308vx"]
-[ext_resource type="Texture2D" uid="uid://1l1dvpdw35fk" path="res://entities/player/melee/attacks.png" id="30_xb3b8"]
 [ext_resource type="PackedScene" uid="uid://brcinflau5f5x" path="res://ui/battles/health/enemy_hp.tscn" id="31_gv80f"]
 [ext_resource type="Texture2D" uid="uid://b6g6qi1b53uuw" path="res://ui/battles/action_menu/cancel_button.png" id="32_a24v6"]
 [ext_resource type="Texture2D" uid="uid://c4ibj5tpwctt1" path="res://ui/icons/stat_icons.png" id="33_8otb5"]
-[ext_resource type="Script" uid="uid://dsje32l3slm" path="res://ui/battles/action_menu/defense_menu.gd" id="33_84n05"]
-[ext_resource type="Resource" uid="uid://480da4ldkv7w" path="res://resources/items/healing/blessing_minor/blessing_minor.tres" id="33_ej23r"]
 [ext_resource type="Script" uid="uid://cdub5a0dmaf8l" path="res://ui/battles/battle_button.gd" id="33_lna74"]
 [ext_resource type="Texture2D" uid="uid://cuc011gnsq385" path="res://ui/icons/element_icons_small.png" id="34_oquq2"]
 [ext_resource type="Script" uid="uid://c3sry6qu7lorh" path="res://ui/theme_setter.gd" id="34_ujwxc"]
-[ext_resource type="Script" uid="uid://cshim655el0qw" path="res://entities/scripts/actions/tactic.gd" id="35_78wpl"]
-[ext_resource type="Resource" uid="uid://bapxo0eaeroh3" path="res://entities/player/general/basic_defense.tres" id="35_d0j81"]
-[ext_resource type="Texture2D" uid="uid://b8dtnan6pbkox" path="res://entities/player/melee/defense.png" id="38_06ocl"]
-[ext_resource type="Script" uid="uid://bn10m48sogxlc" path="res://ui/battles/action_menu/tactic_menu.gd" id="40_44v6f"]
 [ext_resource type="Texture2D" uid="uid://bg1xttk07vrw" path="res://ui/panel_decorators.png" id="41_ej23r"]
-[ext_resource type="Resource" uid="uid://b6dixk683scj1" path="res://entities/player/general/flee_tactic.tres" id="41_u0bu5"]
-[ext_resource type="Resource" uid="uid://vvso3cyu67wy" path="res://entities/player/general/change_turn_tactic.tres" id="42_68b6r"]
-[ext_resource type="Texture2D" uid="uid://dv81q67jbw74x" path="res://entities/player/general/defense.png" id="42_dhx3q"]
-[ext_resource type="Script" uid="uid://drjt6iau55bh5" path="res://entities/scripts/actions/defense.gd" id="43_2knp5"]
 [ext_resource type="PackedScene" uid="uid://cuchs4266ic3t" path="res://ui/battles/timed_attacks/mash_timing.tscn" id="45_gvyev"]
 [ext_resource type="Script" uid="uid://ca5mtc2t7n6gx" path="res://ui/battles/entity_info_ui.gd" id="48_cd7b1"]
 [ext_resource type="Script" uid="uid://btxv74g0rvfx6" path="res://ui/battles/victory_loss/victory_panel.gd" id="51_pokc6"]
@@ -169,59 +162,19 @@ region = Rect2(0, 0, 62, 22)
 atlas = ExtResource("6_a4ney")
 region = Rect2(0, 22, 62, 22)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_di2ji"]
-atlas = ExtResource("33_8otb5")
-region = Rect2(0, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6mrea"]
-atlas = ExtResource("34_oquq2")
-region = Rect2(0, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_op7a0"]
-atlas = ExtResource("33_8otb5")
-region = Rect2(0, 24, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vctt4"]
-atlas = ExtResource("33_8otb5")
-region = Rect2(8, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r5o7i"]
-atlas = ExtResource("33_8otb5")
-region = Rect2(0, 32, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trvi3"]
-atlas = ExtResource("30_xb3b8")
-region = Rect2(0, 0, 20, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k5po2"]
-atlas = ExtResource("33_8otb5")
-region = Rect2(0, 16, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5e26k"]
-atlas = ExtResource("38_06ocl")
-region = Rect2(0, 0, 20, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nvl3m"]
-atlas = ExtResource("42_dhx3q")
-region = Rect2(0, 0, 20, 20)
-
-[sub_resource type="Resource" id="Resource_sc3fj"]
-script = ExtResource("43_2knp5")
-defense_value = 0.5
-name = "Defend"
-animation_name = &"defend"
-icon = SubResource("AtlasTexture_nvl3m")
-description = "Tense up in preparation for a heavy attack
- - Reduces damage taken for 1 turn"
-side = 1
-targeting = 0
-cooldown = 0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_73hj6"]
 atlas = ExtResource("41_ej23r")
 region = Rect2(8, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4c4f"]
+atlas = ExtResource("41_ej23r")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej23r"]
+atlas = ExtResource("41_ej23r")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsp0d"]
 atlas = ExtResource("41_ej23r")
 region = Rect2(0, 8, 8, 8)
 
@@ -910,416 +863,227 @@ offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-script = ExtResource("27_53322")
+script = ExtResource("23_ej23r")
 
-[node name="attack_info" parent="ui/action_holder/action_bar/attack_menu" instance=ExtResource("27_e31mb")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = -99.0
-offset_right = 0.0
-offset_bottom = 1.0
-grow_horizontal = 2
-
-[node name="info" parent="ui/action_holder/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -61.0
-
-[node name="name" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-layout_mode = 1
-anchors_preset = 15
+[node name="backing" type="ColorRect" parent="ui/action_holder/action_bar/attack_menu"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 3.0
-offset_right = -2.0
-offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Attack Name"
-scroll_active = false
-
-[node name="power_holder" type="Control" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-anchors_preset = 0
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 54.0
-offset_bottom = 24.0
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/power_holder"]
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-texture = SubResource("AtlasTexture_di2ji")
-stretch_mode = 2
 script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/power_holder"]
+[node name="inner" type="ColorRect" parent="ui/action_holder/action_bar/attack_menu/backing"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
+offset_left = 1.0
 offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "100"
-scroll_active = false
-
-[node name="element_holder" type="Control" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-anchors_preset = 0
-offset_left = 56.0
-offset_top = 16.0
-offset_right = 86.0
-offset_bottom = 24.0
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/element_holder"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 9.0
-offset_bottom = 9.0
-texture = SubResource("AtlasTexture_6mrea")
-stretch_mode = 2
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/element_holder"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "100"
-scroll_active = false
-
-[node name="accuracy_holder" type="Control" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-anchors_preset = 0
-offset_left = 24.0
-offset_top = 26.0
-offset_right = 54.0
-offset_bottom = 34.0
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/accuracy_holder"]
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-texture = SubResource("AtlasTexture_op7a0")
-stretch_mode = 2
-script = ExtResource("34_ujwxc")
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/accuracy_holder"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "100"
-scroll_active = false
-
-[node name="crit_rate" type="Control" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-anchors_preset = 0
-offset_left = 56.0
-offset_top = 26.0
-offset_right = 86.0
-offset_bottom = 34.0
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/crit_rate"]
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-texture = SubResource("AtlasTexture_vctt4")
-stretch_mode = 2
-script = ExtResource("34_ujwxc")
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/crit_rate"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "100"
-scroll_active = false
-
-[node name="cooldown" type="Control" parent="ui/action_holder/action_bar/attack_menu/attack_info/info"]
-anchors_preset = 0
-offset_left = 88.0
-offset_top = 26.0
-offset_right = 118.0
-offset_bottom = 34.0
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/cooldown"]
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-texture = SubResource("AtlasTexture_r5o7i")
-stretch_mode = 2
-script = ExtResource("34_ujwxc")
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/cooldown"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "1"
-scroll_active = false
-
-[node name="icon_frame" parent="ui/action_holder/action_bar/attack_menu/attack_info/info" instance=ExtResource("29_7enty")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
-offset_left = 2.0
-offset_top = -3.5
-offset_right = 22.0
-offset_bottom = 16.5
-grow_horizontal = 1
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/attack_info/info/icon_frame"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_trvi3")
-expand_mode = 1
-
-[node name="description" parent="ui/action_holder/action_bar/attack_menu/attack_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 40.0
-offset_right = -2.0
-offset_bottom = -2.0
-metadata/_edit_group_ = true
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/attack_menu/attack_info/description"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
+offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "Description"
-scroll_active = false
+script = ExtResource("34_ujwxc")
 
-[node name="grid_backing" parent="ui/action_holder/action_bar/attack_menu" instance=ExtResource("27_e31mb")]
+[node name="decorator_tl" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -100.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="panel_inner" parent="ui/action_holder/action_bar/attack_menu/grid_backing" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
 
-[node name="attack_grid" type="VBoxContainer" parent="ui/action_holder/action_bar/attack_menu"]
+[node name="decorator_bl" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -98.0
-offset_right = 122.0
-offset_bottom = -2.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
 grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_br" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/attack_menu/backing/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="grid" type="VBoxContainer" parent="ui/action_holder/action_bar/attack_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -97.0
+offset_right = 121.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_type_variation = &"ActionMenu"
 alignment = 2
 
-[node name="attack_row4" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
+[node name="attack_row4" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/grid"]
 layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
 
-[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row4" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="attack_row3" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
+[node name="attack_row3" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/grid"]
 layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
 
-[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row3" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="attack_row2" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
+[node name="attack_row2" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/grid"]
 layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
 
-[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row2" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="attack_row" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/attack_grid"]
+[node name="attack_row" type="HBoxContainer" parent="ui/action_holder/action_bar/attack_menu/grid"]
 layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
 
-[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
-[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/attack_grid/attack_row" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button5" parent="ui/action_holder/action_bar/attack_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
 
 [node name="items_menu" type="Control" parent="ui/action_holder/action_bar" groups=["action_menu"]]
 unique_name_in_owner = true
@@ -1330,197 +1094,234 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -59.0
-offset_top = -131.0
-offset_right = 59.0
-offset_bottom = -31.0
+offset_left = -62.0
+offset_top = -132.0
+offset_right = 62.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("33_84n05")
+mouse_filter = 2
+script = ExtResource("27_fl77x")
 
-[node name="defense_info" parent="ui/action_holder/action_bar/items_menu" instance=ExtResource("27_e31mb")]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -121.0
-offset_top = -77.0
-offset_right = 3.0
-offset_bottom = 23.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="info" parent="ui/action_holder/action_bar/items_menu/defense_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -61.0
-
-[node name="name" type="RichTextLabel" parent="ui/action_holder/action_bar/items_menu/defense_info/info"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -23.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Defense Name"
-scroll_active = false
-
-[node name="defend_power" type="Control" parent="ui/action_holder/action_bar/items_menu/defense_info/info"]
-anchors_preset = 0
-offset_left = 26.0
-offset_top = 21.0
-offset_right = 56.0
-offset_bottom = 29.0
-metadata/_edit_group_ = true
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/defense_info/info/defend_power"]
-self_modulate = Color(0.568627, 0.807843, 0.929412, 1)
+[node name="backing" type="ColorRect" parent="ui/action_holder/action_bar/items_menu"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-texture = SubResource("AtlasTexture_k5po2")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/items_menu/defense_info/info/defend_power"]
+[node name="inner" type="ColorRect" parent="ui/action_holder/action_bar/items_menu/backing"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
+offset_left = 1.0
 offset_top = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "50"
-scroll_active = false
-
-[node name="icon_frame" parent="ui/action_holder/action_bar/items_menu/defense_info/info" instance=ExtResource("29_7enty")]
-self_modulate = Color(0.129412, 0.407843, 0.639216, 1)
-layout_mode = 1
-offset_left = 2.0
-offset_top = 14.0
-offset_right = -72.0
-offset_bottom = -2.0
-
-[node name="icon" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/defense_info/info/icon_frame"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_5e26k")
-expand_mode = 1
-
-[node name="description" parent="ui/action_holder/action_bar/items_menu/defense_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 40.0
-offset_right = -2.0
-offset_bottom = -2.0
-metadata/_edit_group_ = true
-
-[node name="label" type="RichTextLabel" parent="ui/action_holder/action_bar/items_menu/defense_info/description"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
+offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "Description"
-scroll_active = false
+script = ExtResource("34_ujwxc")
 
-[node name="grid_backing" parent="ui/action_holder/action_bar/items_menu" instance=ExtResource("27_e31mb")]
+[node name="decorator_tl" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -62.0
-offset_top = -28.0
-offset_right = 62.0
-offset_bottom = 0.0
-grow_horizontal = 2
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
 grow_vertical = 0
-metadata/_edit_group_ = true
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="panel_inner" parent="ui/action_holder/action_bar/items_menu/grid_backing" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
 
-[node name="defense_grid" type="HBoxContainer" parent="ui/action_holder/action_bar/items_menu"]
+[node name="decorator_br" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -59.0
-offset_top = -26.0
-offset_right = 59.0
-offset_bottom = -2.0
-grow_horizontal = 2
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
 grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/items_menu/backing/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="grid" type="VBoxContainer" parent="ui/action_holder/action_bar/items_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -97.0
+offset_right = 121.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_type_variation = &"ActionMenu"
+alignment = 2
+
+[node name="attack_row4" type="HBoxContainer" parent="ui/action_holder/action_bar/items_menu/grid"]
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
-metadata/_edit_group_ = true
 
-[node name="menu_button" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/items_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("33_ej23r")
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("33_ej23r")
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("33_ej23r")
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("33_ej23r")
 
-[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/defense_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("33_ej23r")
+
+[node name="attack_row3" type="HBoxContainer" parent="ui/action_holder/action_bar/items_menu/grid"]
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/items_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_row2" type="HBoxContainer" parent="ui/action_holder/action_bar/items_menu/grid"]
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/items_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="attack_row" type="HBoxContainer" parent="ui/action_holder/action_bar/items_menu/grid"]
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/items_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/items_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/items_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/items_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/items_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
 
 [node name="tactics_menu" type="Control" parent="ui/action_holder/action_bar" groups=["action_menu"]]
 unique_name_in_owner = true
@@ -1531,131 +1332,261 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -59.0
-offset_top = -131.0
-offset_right = 59.0
-offset_bottom = -31.0
+offset_left = -62.0
+offset_top = -132.0
+offset_right = 62.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("40_44v6f")
-tactics = Array[ExtResource("35_78wpl")]([SubResource("Resource_sc3fj"), ExtResource("42_68b6r"), ExtResource("41_u0bu5")])
+mouse_filter = 2
+script = ExtResource("23_ej23r")
 
-[node name="tactic_info" parent="ui/action_holder/action_bar/tactics_menu" instance=ExtResource("27_e31mb")]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -44.0
-offset_right = -9.0
-offset_bottom = 23.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="info" parent="ui/action_holder/action_bar/tactics_menu/tactic_info" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-metadata/_edit_group_ = true
-
-[node name="name" type="RichTextLabel" parent="ui/action_holder/action_bar/tactics_menu/tactic_info/info"]
+[node name="backing" type="ColorRect" parent="ui/action_holder/action_bar/tactics_menu"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -47.0
+offset_top = 72.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Tactic Name"
-scroll_active = false
+script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="description" type="RichTextLabel" parent="ui/action_holder/action_bar/tactics_menu/tactic_info/info"]
+[node name="inner" type="ColorRect" parent="ui/action_holder/action_bar/tactics_menu/backing"]
+self_modulate = Color(0.243137, 0.639216, 0.870588, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 17.0
-offset_right = -2.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"Medium"
-text = "Description"
-scroll_active = false
+script = ExtResource("34_ujwxc")
 
-[node name="grid_backing" parent="ui/action_holder/action_bar/tactics_menu" instance=ExtResource("27_e31mb")]
+[node name="decorator_tl" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing/decorator_tl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_tr" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_73hj6")
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing/decorator_tr"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="decorator_bl" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -28.0
-offset_right = 50.0
-offset_bottom = 0.0
-grow_horizontal = 2
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
 grow_vertical = 0
-metadata/_edit_group_ = true
+texture = SubResource("AtlasTexture_73hj6")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
 
-[node name="panel_inner" parent="ui/action_holder/action_bar/tactics_menu/grid_backing" instance=ExtResource("29_7enty")]
-layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing/decorator_bl"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_h = true
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
 
-[node name="tactic_grid" type="HBoxContainer" parent="ui/action_holder/action_bar/tactics_menu"]
+[node name="decorator_br" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing"]
+self_modulate = Color(0.0745098, 0.27451, 0.470588, 1)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -26.0
-offset_right = 48.0
-offset_bottom = -2.0
-grow_horizontal = 2
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
 grow_vertical = 0
+texture = SubResource("AtlasTexture_73hj6")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 6
+
+[node name="inner" type="TextureRect" parent="ui/action_holder/action_bar/tactics_menu/backing/decorator_br"]
+self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_q4c4f")
+flip_v = true
+script = ExtResource("34_ujwxc")
+color_key = 1
+
+[node name="grid" type="VBoxContainer" parent="ui/action_holder/action_bar/tactics_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -97.0
+offset_right = 121.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_type_variation = &"ActionMenu"
+alignment = 2
+
+[node name="attack_row4" type="HBoxContainer" parent="ui/action_holder/action_bar/tactics_menu/grid"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
 alignment = 1
-metadata/_edit_group_ = true
 
-[node name="menu_button" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = null
 
-[node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = null
 
-[node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = null
 
-[node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/tactic_grid" instance=ExtResource("27_2rlq4")]
-physics_interpolation_mode = 2
-auto_translate_mode = 1
+[node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
 layout_mode = 2
-tooltip_auto_translate_mode = 0
-item = ExtResource("35_d0j81")
+item = null
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row4" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="attack_row3" type="HBoxContainer" parent="ui/action_holder/action_bar/tactics_menu/grid"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row3" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="attack_row2" type="HBoxContainer" parent="ui/action_holder/action_bar/tactics_menu/grid"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row2" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = null
+
+[node name="attack_row" type="HBoxContainer" parent="ui/action_holder/action_bar/tactics_menu/grid"]
+layout_mode = 2
+theme_type_variation = &"ActionMenu"
+alignment = 1
+
+[node name="menu_button" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("27_om7ft")
+
+[node name="menu_button2" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("28_fl77x")
+
+[node name="menu_button3" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+layout_mode = 2
+item = ExtResource("29_o0ftn")
+
+[node name="menu_button4" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+visible = false
+layout_mode = 2
+item = null
+
+[node name="menu_button5" parent="ui/action_holder/action_bar/tactics_menu/grid/attack_row" instance=ExtResource("27_2rlq4")]
+visible = false
+layout_mode = 2
+item = null
 
 [node name="cancel_button" type="BaseButton" parent="ui/action_holder"]
 _import_path = NodePath("")
@@ -1809,7 +1740,7 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 7.0
 offset_bottom = 7.0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -1819,7 +1750,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -1835,7 +1766,7 @@ offset_top = -1.0
 offset_right = 1.0
 offset_bottom = 7.0
 grow_horizontal = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 script = ExtResource("34_ujwxc")
 color_key = 6
 
@@ -1844,7 +1775,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 script = ExtResource("34_ujwxc")
 color_key = 1
 
@@ -1859,7 +1790,7 @@ offset_top = -7.0
 offset_right = 7.0
 offset_bottom = 1.0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -1870,7 +1801,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -1890,7 +1821,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -1900,7 +1831,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -1981,7 +1912,7 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 7.0
 offset_bottom = 7.0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -1991,7 +1922,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -2007,7 +1938,7 @@ offset_top = -1.0
 offset_right = 1.0
 offset_bottom = 7.0
 grow_horizontal = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 script = ExtResource("34_ujwxc")
 color_key = 6
 
@@ -2016,7 +1947,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 script = ExtResource("34_ujwxc")
 color_key = 1
 
@@ -2031,7 +1962,7 @@ offset_top = -7.0
 offset_right = 7.0
 offset_bottom = 1.0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -2042,7 +1973,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -2062,7 +1993,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -2072,7 +2003,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -2154,7 +2085,7 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 7.0
 offset_bottom = 7.0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -2164,7 +2095,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -2180,7 +2111,7 @@ offset_top = -1.0
 offset_right = 1.0
 offset_bottom = 7.0
 grow_horizontal = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 script = ExtResource("34_ujwxc")
 color_key = 6
 
@@ -2189,7 +2120,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 script = ExtResource("34_ujwxc")
 color_key = 1
 
@@ -2204,7 +2135,7 @@ offset_top = -7.0
 offset_right = 7.0
 offset_bottom = 1.0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -2215,7 +2146,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_h = true
 flip_v = true
 script = ExtResource("34_ujwxc")
@@ -2235,7 +2166,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = SubResource("AtlasTexture_73hj6")
+texture = SubResource("AtlasTexture_ej23r")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 6
@@ -2245,7 +2176,7 @@ self_modulate = Color(0.858824, 0.937255, 0.980392, 1)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = SubResource("AtlasTexture_q4c4f")
+texture = SubResource("AtlasTexture_qsp0d")
 flip_v = true
 script = ExtResource("34_ujwxc")
 color_key = 1
@@ -2364,6 +2295,7 @@ vertical_alignment = 1
 
 [node name="entity_info" type="Control" parent="ui"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 8

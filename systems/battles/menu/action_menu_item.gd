@@ -6,7 +6,7 @@ extends BaseButton
 
 # --- References --- #
 @onready var icon_rect := $"icon" as TextureRect
-@onready var backing := $"backing" as Control
+@onready var backing := $"backing" as ThemeSetter
 @onready var cooldown_label := $"cooldown_label" as RichTextLabel
 
 # --- Functions --- #
@@ -17,7 +17,7 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 
 func _on_mouse_entered() -> void:
-	show_outline()
+	backing.update_theme(ThemePreset.ColorValue.LIGHT)
 	
 	# show tooltip
 	#if 'remaining_cooldown' in item and item.remaining_cooldown > 0:
@@ -30,16 +30,10 @@ func _on_mouse_entered() -> void:
 		#Tooltip.show_tooltip()
 
 func _on_mouse_exited() -> void:
-	hide_outline()
+	backing.update_theme(ThemePreset.ColorValue.SHADED)
 	
 	# hide tooltip
 	#Tooltip.hide_tooltip()
-
-func show_outline() -> void:
-	backing.visible = true
-
-func hide_outline() -> void:
-	backing.visible = false
 
 func set_menu_item(new_item: Resource) -> void:
 	item = new_item
@@ -54,18 +48,24 @@ func set_menu_item(new_item: Resource) -> void:
 		cooldown_label.text = ""
 		return
 	
-	if item.remaining_cooldown > 0:
-		icon_rect.material.set_shader_parameter('intensity', 0.5)
-		cooldown_label.text = " " + str(item.remaining_cooldown)
+	if item is ItemDataChunk:
+		cooldown_label.text = " %d" % item.quantity
 	else:
-		icon_rect.material.set_shader_parameter('intensity', 0.0)
-		cooldown_label.text = ""
+		if item.remaining_cooldown > 0:
+			icon_rect.material.set_shader_parameter('intensity', 0.5)
+			cooldown_label.text = " " + str(item.remaining_cooldown)
+		else:
+			icon_rect.material.set_shader_parameter('intensity', 0.0)
+			cooldown_label.text = ""
 
 func set_item() -> void:
 	if item is Attack and item.remaining_cooldown > 0:
 		return
 	
 	for entity: Entity in get_tree().get_nodes_in_group(&'player'):
-		entity.brain._on_action_selected(item)
+		if item is ItemDataChunk:
+			entity.brain._on_action_selected(item.attack)
+		else:
+			entity.brain._on_action_selected(item)
 	
 	release_focus()

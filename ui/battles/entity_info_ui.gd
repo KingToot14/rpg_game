@@ -32,11 +32,12 @@ extends Control
 
 # --- Functions --- #
 func _ready() -> void:
-	modulate.a = 0.0
+	modulate.a = 1.0
+	hide()
 
 func show_entity(entity: Entity) -> void:
 	if not entity:
-		modulate.a = 0.0
+		hide()
 		return
 	
 	# basic info
@@ -82,7 +83,7 @@ func show_entity(entity: Entity) -> void:
 	dark_label.theme_type_variation = get_resistance_variation(entity.stats.get_resistance(Attack.Element.DARK))
 	
 	# show
-	modulate.a = 1.0
+	show()
 
 func get_resistance_text(value: float) -> String:
 	return "[center] " + str(round(abs(value) * 100))
@@ -98,4 +99,4 @@ func get_resistance_variation(value: float) -> StringName:
 		return &'ElementNone'
 
 func hide_info() -> void:
-	modulate.a = 0.0
+	hide()

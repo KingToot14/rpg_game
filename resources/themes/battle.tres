@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://duxbtjs5ehguw" path="res://ui/font/rpg_pixel_4x6.ttf" id="4_1mfxp"]
 
 [resource]
+ActionMenu/base_type = &"VBoxContainer"
+ActionMenu/constants/separation = 2
 AttackButton/base_type = &"Label"
 AttackButton/colors/font_color = Color(0.941176, 0.160784, 0.160784, 1)
 BlockButton/base_type = &"Label"
