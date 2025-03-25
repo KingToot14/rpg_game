@@ -32,6 +32,21 @@ func take_damage(dmg_chunk: Dictionary) -> void:
 	
 	parent.took_damage.emit(dmg_chunk)
 	
+	# calculate crit
+	var crit_rate = dmg_chunk.get(&'crit_rate', 0.0)
+	dmg_chunk[&'crits_hit'] = floori(crit_rate)
+	
+	# every 100% guarantees a crit
+	var crit_boost = floori(crit_rate) * 0.50
+	crit_rate -= floori(crit_rate)
+	
+	if randf() <= crit_rate:
+		crit_boost += 0.5
+		dmg_chunk[&'crits_hit'] += 1
+	
+	# apply boost
+	dmg_chunk[&'damage'] *= 1.0 + crit_boost
+	
 	# take damage
 	curr_hp = max(curr_hp - roundi(dmg_chunk[&'damage']), 0)
 	
